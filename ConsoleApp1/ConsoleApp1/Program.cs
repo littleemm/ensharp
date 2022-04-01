@@ -26,7 +26,7 @@ namespace ConsoleApp1
                 int pyramidNumber;
                 Console.Write("원하시는 메뉴의 번호를 입력하세요: ");
                 String unknownNumber = Console.ReadLine();
-                bool checkPyramidNumber = int.TryParse(unknownNumber, out pyramidNumber); // 정수인지 체크하고 저장시키기 위한 변수
+                bool isPyramidNumber = int.TryParse(unknownNumber, out pyramidNumber); // 정수인지 체크하고 저장시키기 위한 변수
 
                 if (pyramidNumber == 1 || pyramidNumber == 2 || pyramidNumber == 3 || pyramidNumber == 4)
                 {
@@ -36,10 +36,10 @@ namespace ConsoleApp1
 
                     Console.Write("1 이상의 줄 수를 입력하세요: ");
                     String unknownRow = Console.ReadLine();
-                    bool checkNumber = int.TryParse(unknownRow, out row); // 정수인지 체크하고 저장시키기 위한 변수 
+                    bool isRow = int.TryParse(unknownRow, out row); // 정수인지 체크하고 저장시키기 위한 변수 
                     Console.WriteLine();
 
-                    if (checkNumber == false || row <= 0)
+                    if (isRow == false || row <= 0)
                     {
                         Console.WriteLine("피라미드를 만들 수 없습니다! 처음으로 돌아갑니다. . .");
                         Console.WriteLine();
