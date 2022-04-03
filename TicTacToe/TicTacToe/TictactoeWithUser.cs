@@ -4,11 +4,11 @@ using System.Text;
 
 namespace TicTacToe
 {
-    class TicTacToeWithUser
+    class TictactoeWithUser
     {
         GameTictactoe gameWithUser = new GameTictactoe();
         char[] signArray = { 'X', 'O'};
-        public void StartGameWithUser(int checkedSequenceNumber)
+        public void StartGameWithUser()
         {
             int userSequenceNumber = 0; // 할당?
 
@@ -43,6 +43,6 @@ namespace TicTacToe
                 gameWithUser.PlayOfUser(signArray[1]);
             }
         }
-}
+
     }
 }

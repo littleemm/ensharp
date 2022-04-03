@@ -8,16 +8,16 @@ namespace TicTacToe
     {
         GameTictactoe gameWithComputer = new GameTictactoe();
         char[] signArray = { 'X', 'O' };
-        public void StartGameWithComputer(int checkedSequenceNumber)
+        public void StartGameWithComputer()
         {
             int userSequenceNumber = 0; // 할당?
 
             gameWithComputer.ChooseOX();
             gameWithComputer.CheckUserNumber(userSequenceNumber);
-            progressGame(userSequenceNumber);
+            progressGameWithComputer(userSequenceNumber);
 
         }
-        public void progressGame (int userSequenceNumber)
+        public void progressGameWithComputer (int userSequenceNumber)
         {
             switch (userSequenceNumber)
             {

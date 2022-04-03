@@ -23,7 +23,7 @@ namespace TicTacToe
         }
         public void CheckUserNumber(int checkedSequenceNumber)
         {
-            char[] sequenceNumbers = { '1', '2' }; // 메뉴 번호를 배열에 저장 후 CheckNumber 함수에서 번호 확인할 때 사용
+            string[] sequenceNumbers = { "1", "2" }; // 메뉴 번호를 배열에 저장 후 CheckNumber 함수에서 번호 확인할 때 사용
             bool isSequenceNumber = false; // 메뉴 번호를 제대로 입력받았는지 확인을 위한 변수
             string unknownSequenceNumber = "";
             ScanAndPrint scanAndPrint = new ScanAndPrint();
