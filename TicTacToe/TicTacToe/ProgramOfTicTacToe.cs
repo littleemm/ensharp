@@ -2,11 +2,11 @@
 
 namespace TicTacToe
 {
-    class Program
+    class ProgramOfTicTacToe
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            
         }
     }
 }

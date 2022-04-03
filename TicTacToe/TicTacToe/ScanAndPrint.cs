@@ -30,12 +30,12 @@ namespace TicTacToe
             {
                 Console.Write("원하시는 메뉴의 번호를 입력해주세요 : ");
                 unknownNumber = Console.ReadLine();
-                CheckNumber(isMenuNumber, menuNumberArray, unknownNumber);
+                CheckMenuNumber(isMenuNumber, menuNumberArray, unknownNumber);
             }
 
             checkedMenuNumber = int.Parse(unknownNumber);
         }
-        public void CheckNumber(bool isMenuNumber, char[] menuNumberArray, string unknownNumber) // 메뉴 번호가 맞는지 확인하는 함수
+        public void CheckMenuNumber(bool isMenuNumber, char[] menuNumberArray, string unknownNumber) // 메뉴 번호가 맞는지 확인하는 함수
         {
             for (int menuNumberIndex = 0; menuNumberIndex < menuNumberArray.Length; menuNumberIndex++)
             {
@@ -43,7 +43,21 @@ namespace TicTacToe
                 {
                     isMenuNumber = true;
                 }
+                else
+                {
+                    
+                }
             }
+        }
+        public void CheckAndPrintMore(string unknownNumber)
+        {
+            string[] reasonOfLoop = { };
+            char[] smallAlphabet = { };
+            char[] bigAlphabet = { };
+        }
+        public void ChooseOX()
+        {
+            Console.WriteLine("O와 X 중 하나를 고르세요!")
         }
     }
 }
