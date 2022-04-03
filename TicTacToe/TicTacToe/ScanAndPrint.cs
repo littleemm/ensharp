@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TicTacToe
 {
-    class ScanAndPrint
+    class ScanAndPrintBasic
     {
         public void PrintMenu() // TicTacToe 메인 메뉴 프린트
          {
@@ -18,6 +18,7 @@ namespace TicTacToe
             Console.WriteLine("    3: Score Board");
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("----------------------------------------------------------------------");
+            Console.WriteLine();
         }
         public void ScanMenuNumber() // 메뉴 번호 입력받기
         {
@@ -28,7 +29,7 @@ namespace TicTacToe
 
             while (isMenuNumber == true)
             {
-                Console.Write("원하시는 메뉴의 번호를 입력해주세요 : ");
+                Console.Write("원하시는 메뉴의 번호를 입력하세요 : ");
                 unknownNumber = Console.ReadLine();
                 CheckMenuNumber(isMenuNumber, menuNumberArray, unknownNumber);
             }
@@ -55,9 +56,9 @@ namespace TicTacToe
             char[] smallAlphabet = { };
             char[] bigAlphabet = { };
         }
-        public void ChooseOX()
+        public void ScanOX()
         {
-            Console.WriteLine("O와 X 중 하나를 고르세요!")
+
         }
     }
 }
