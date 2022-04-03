@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TicTacToe
 {
-    class ScanAndPrintBasic
+    class ScanAndPrint
     {
         public void PrintMenu() // TicTacToe 메인 메뉴 프린트
          {

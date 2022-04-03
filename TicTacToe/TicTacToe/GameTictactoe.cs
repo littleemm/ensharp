@@ -48,16 +48,16 @@ namespace TicTacToe
 
             while (isUserMatrixNumber == true)
             {
-                
+                CheckUserMatrixNumber(userMatrixNumber, isUserMatrixNumber);
             }
 
             gameArray[int.Parse(userMatrixNumber) - 1] = choosedSign;
+            PrintGameMatrix();
 
         }
-        public void CheckUserNumber(string userMatrixNumber, bool isUserMatrixNumber)
+        public void CheckUserMatrixNumber(string userMatrixNumber, bool isUserMatrixNumber)
         {
-            if ()
-
+            
             if (gameArray[int.Parse(userMatrixNumber) - 1] == int.Parse(userMatrixNumber))
             {
                 isUserMatrixNumber = true;
@@ -79,7 +79,8 @@ namespace TicTacToe
             {
                 randomMatrixNumber = makeRandomNumber.Next(1, 9);
             }
-            gameArray[randomMatrixNumber - 1] = computerSign; 
+            gameArray[randomMatrixNumber - 1] = computerSign;
+            PrintGameMatrix();
 
         }
         public void CheckRandomNumber(int randomMatrixNumber, bool isComputerMatrixNumber)
@@ -90,5 +91,25 @@ namespace TicTacToe
             }
         }
 
+        public void PrintGameMatrix()
+        {
+            Console.WriteLine("_________________________________");
+            Console.WriteLine();
+            for (int matrixIndex = 0;matrixIndex < 3;matrixIndex++)
+            {
+                Console.Write(gameArray[matrixIndex] + "   ");
+            }
+            Console.WriteLine("_________________________________");
+            for (int matrixIndex = 3; matrixIndex < 6; matrixIndex++)
+            {
+                Console.Write(gameArray[matrixIndex] + "   ");
+            }
+            Console.WriteLine("_________________________________");
+            for (int matrixIndex = 6; matrixIndex < 9; matrixIndex++)
+            {
+                Console.Write(gameArray[matrixIndex] + "   ");
+            }
+            Console.WriteLine("_________________________________");
+        }
     }
 }
