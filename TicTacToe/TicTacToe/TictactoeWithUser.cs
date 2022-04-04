@@ -13,7 +13,7 @@ namespace TicTacToe
             int userSequenceNumber = 0; // 할당?
 
             gameWithUser.ChooseOX();
-            gameWithUser.CheckUserNumber(userSequenceNumber);
+            userSequenceNumber = gameWithUser.CheckUserNumber(userSequenceNumber);
             progressGameWithUser(userSequenceNumber);
 
         }
@@ -24,12 +24,14 @@ namespace TicTacToe
                 case 1:
                     {
                         Console.WriteLine("순서 번호를 입력한 사람이 먼저 시작합니다.");
+                        gameWithUser.PrintGameMatrix();
                         LoopGameWithUser();
                         break;
                     }
                 case 2:
                     {
                         Console.WriteLine("순서 번호를 입력하지 않은 사람이 먼저 시작합니다.");
+                        gameWithUser.PrintGameMatrix();
                         LoopGameWithUser();
                         break;
                     }

@@ -13,7 +13,7 @@ namespace TicTacToe
             int userSequenceNumber = 0; // 할당?
 
             gameWithComputer.ChooseOX();
-            gameWithComputer.CheckUserNumber(userSequenceNumber);
+            userSequenceNumber = gameWithComputer.CheckUserNumber(userSequenceNumber);
             progressGameWithComputer(userSequenceNumber);
 
         }
@@ -24,6 +24,7 @@ namespace TicTacToe
                 case 1:
                     {
                         Console.WriteLine("당신이 먼저 시작합니다.");
+                        gameWithComputer.PrintGameMatrix();
                         for (int countGame = 0; countGame < 9 / 2; countGame++)
                         {
                             gameWithComputer.PlayOfUser(signArray[0]);
@@ -34,6 +35,7 @@ namespace TicTacToe
                 case 2:
                     {
                         Console.WriteLine("컴퓨터가 먼저 시작합니다.");
+                        gameWithComputer.PrintGameMatrix();
                         for (int countGame = 0; countGame < 9 / 2; countGame++)
                         {
                             gameWithComputer.PlayOfComputer(signArray[0]);
