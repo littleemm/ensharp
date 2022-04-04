@@ -6,11 +6,11 @@ namespace TicTacToe
 {
     class ShowScoreboard
     {
-        List<int> scoreListComputerX = new List<int>();
-        List<int> scoreListComputerO = new List<int>();
-        List<int> scoreListUserX = new List<int>();
-        List<int> scoreListUserO = new List<int>();
-
+        static List<int> scoreListComputerX = new List<int>();
+        static List<int> scoreListComputerO = new List<int>();
+        static List<int> scoreListUserX = new List<int>();
+        static List<int> scoreListUserO = new List<int>();
+        private static int countGame = 0;
         public void PrintScoreBoard()
         {
             Console.WriteLine("----------------------------------------------------------------------");
@@ -27,6 +27,7 @@ namespace TicTacToe
             Console.WriteLine("                           사용자와 사용자                             ");
             Console.WriteLine("----------------------------------------------------------------------");
             PrintScoreBoardWithUser();
+            OffScoreBoard();
         }
         public void PrintScoreBoardWithComputer()
         {
@@ -51,11 +52,13 @@ namespace TicTacToe
                 Console.Write(" " + list[sequence] + " ");
                 sum += list[sequence];
             }
+            Console.WriteLine();
             return sum;
 
         }
         public void CountScoreWithComputer(char sign)
         {
+            countGame++;
             switch(sign)
             {
                 case 'X':
@@ -75,6 +78,7 @@ namespace TicTacToe
         }
         public void CountScoreWithUser(char sign)
         {
+            countGame++;
             switch (sign)
             {
                 case 'X':
@@ -91,6 +95,57 @@ namespace TicTacToe
                     }
 
             }
+        }
+        public void DrawGameWithComputer()
+        {
+            countGame++;
+            Console.WriteLine("무승부 입니다!");
+            scoreListComputerO.Add(0);
+            scoreListComputerX.Add(0);
+        }
+        public void DrawGameWithUser()
+        {
+            countGame++;
+            Console.WriteLine("무승부 입니다!");
+            scoreListUserO.Add(0);
+            scoreListUserX.Add(0);
+        }
+        public void OffScoreBoard()
+        {
+            ScanAndPrint scanAndPrintBoard = new ScanAndPrint();
+            GameTictactoe tictactoeScoreBoard = new GameTictactoe();
+            string[] offMenuNumberArray = { "1", "2" };
+            PrintOffBoardMenu();
+            int checkedOffNumber = scanAndPrintBoard.ScanMenuNumber(offMenuNumberArray);
+            if (checkedOffNumber == 1)
+            {
+                switch (countGame)
+                {
+                    case 0:
+                        {
+                            scanAndPrintBoard.ShowMain();
+                            break;
+                        }
+                    default:
+                        {
+                            scanAndPrintBoard.ShowMainAgain();
+                            break;
+                        }
+                }
+            }
+            else
+            {
+                Console.WriteLine("종료합니다. . .");
+            }
+        }
+        public void PrintOffBoardMenu()
+        {
+            Console.WriteLine("----------------------------------------------------------------------");
+            Console.WriteLine("----------------------------------------------------------------------");
+            Console.WriteLine("                             1: 메인 메뉴로");
+            Console.WriteLine("                             2: 종료");
+            Console.WriteLine("----------------------------------------------------------------------");
+            Console.WriteLine("----------------------------------------------------------------------");
         }
     }
 }

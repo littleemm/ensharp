@@ -9,8 +9,16 @@ namespace TicTacToe
         public void ShowMain()
         {
             PrintMenu();
-            ScanMenuNumber();
-
+            string[] menuNumberArray = { "1", "2", "3" }; // 메뉴 번호를 배열에 저장 후 CheckNumber 함수에서 번호 확인할 때 사용
+            int checkedMenuNumber = ScanMenuNumber(menuNumberArray);
+            SelectMenu(checkedMenuNumber);
+        }
+        public void ShowMainAgain()
+        {
+            PrintMenu();
+            string[] menuNumberArray = { "1", "2", "3" }; // 메뉴 번호를 배열에 저장 후 CheckNumber 함수에서 번호 확인할 때 사용
+            int checkedMenuNumber = ScanMenuNumber(menuNumberArray);
+            SelectMenuAgain(checkedMenuNumber);
         }
         public void PrintMenu() // TicTacToe 메인 메뉴 프린트
          {
@@ -26,12 +34,11 @@ namespace TicTacToe
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine();
         }
-        public void ScanMenuNumber() // 메뉴 번호 입력받기
+        public int ScanMenuNumber(string[] menuNumberArray) // 메뉴 번호 입력받기
         {
-            string[] menuNumberArray = { "1", "2", "3" }; // 메뉴 번호를 배열에 저장 후 CheckNumber 함수에서 번호 확인할 때 사용
+            
             bool isMenuNumber = false; // 메뉴 번호를 제대로 입력받았는지 확인을 위한 변수
             string unknownNumber = "";
-            int checkedMenuNumber;
 
             while (isMenuNumber == false)
             {
@@ -40,8 +47,7 @@ namespace TicTacToe
                 Console.WriteLine();
                 isMenuNumber = CheckMenuNumber(isMenuNumber, menuNumberArray, unknownNumber);
             }
-            checkedMenuNumber = int.Parse(unknownNumber);
-            SelectMenu(checkedMenuNumber);
+            return int.Parse(unknownNumber);
         }
         public bool CheckMenuNumber(bool isMenuNumber, string[] menuNumberArray, string unknownNumber) // 메뉴 번호가 맞는지 확인하는 함수
         {
@@ -96,9 +102,37 @@ namespace TicTacToe
                     }
                 case 3:
                     {
+                        ShowScoreboard showScoreboard = new ShowScoreboard();
+                        showScoreboard.PrintScoreBoard();
                         break;
                     }
             }
         }
+        public void SelectMenuAgain(int checkedMenuNumber)
+        {
+            switch (checkedMenuNumber)
+            {
+                case 1:
+                    {
+                        TictactoeWithComputer tictactoeWithComputer = new TictactoeWithComputer();
+                        tictactoeWithComputer.StartGameWithComputerAgain();
+                        break;
+                    }
+                case 2:
+                    {
+                        TictactoeWithUser tictactoeWithUser = new TictactoeWithUser();
+                        tictactoeWithUser.StartGameWithUserAgain();
+                        break;
+                    }
+                case 3:
+                    {
+                        ShowScoreboard showScoreboard = new ShowScoreboard();
+                        showScoreboard.PrintScoreBoard();
+                        break;
+                    }
+            }
+        }
+
+
     }
 }

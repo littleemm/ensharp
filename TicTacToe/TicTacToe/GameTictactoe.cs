@@ -6,7 +6,7 @@ namespace TicTacToe
 {
     class GameTictactoe
     {
-        char[] gameArray = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+        public char[] gameArray = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
         
         public void ChooseOX()
         {
@@ -91,6 +91,7 @@ namespace TicTacToe
 
             if (CheckWin() == 1)
             {
+                PrintGameMatrix();
                 Console.WriteLine("컴퓨터가 이겼습니다!");
             }
 
@@ -202,7 +203,8 @@ namespace TicTacToe
                     return 1;
                 }
             }
-            matrixIndexToCheck += 2;
+            matrixIndexToCheck = 2;
+            semiWinCount = 0;
             for (int loopCount = matrixIndexToCheck + 2; loopCount < 5; loopCount += 2)
             {
                 if (gameArray[matrixIndexToCheck] == gameArray[loopCount]) semiWinCount++;
@@ -212,6 +214,37 @@ namespace TicTacToe
                 }
             }
             return 0;
+        }
+        public void ClearArray()
+        {
+            for (int arrayIndex = 0; arrayIndex < 9; arrayIndex++) 
+            {
+                string temporaryString = (arrayIndex + 1).ToString();
+                gameArray[arrayIndex] = temporaryString[0];
+            }
+        }
+        public void PrintGoMenu()
+        {
+            Console.WriteLine("----------------------------------------------------------------------");
+            Console.WriteLine("----------------------------------------------------------------------");
+            Console.WriteLine("                     1: 같은 게임을 다시 시작합니다.");
+            Console.WriteLine("                     2: 메인 메뉴로 돌아갑니다.");
+            Console.WriteLine("                     3: 게임을 종료합니다.");
+            Console.WriteLine("----------------------------------------------------------------------");
+            Console.WriteLine("----------------------------------------------------------------------");
+        }
+        public void PrintOffMenu()
+        {
+            Console.WriteLine("----------------------------------------------------------------------");
+            Console.WriteLine("----------------------------------------------------------------------");
+            Console.WriteLine("                               종료할까요?");
+            Console.WriteLine("----------------------------------------------------------------------");
+            Console.WriteLine("----------------------------------------------------------------------");
+            Console.WriteLine("                               1: 종료");
+            Console.WriteLine("                               2: 취소");
+            Console.WriteLine("----------------------------------------------------------------------");
+            Console.WriteLine("----------------------------------------------------------------------");
+
         }
     }
 }
