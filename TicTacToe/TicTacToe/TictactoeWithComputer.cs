@@ -38,7 +38,7 @@ namespace TicTacToe
                 case 1:
                     {
                         Console.WriteLine("당신이 먼저 시작합니다.");
-
+                        Console.WriteLine();
                         gameWithComputer.PlayOfUser(signArray[0]);
                         for (int count = 0; count < 9 / 2; count++)
                         {
@@ -66,6 +66,7 @@ namespace TicTacToe
                 case 2:
                     {
                         Console.WriteLine("컴퓨터가 먼저 시작합니다.");
+                        Console.WriteLine();
                         gameWithComputer.PlayOfComputer(signArray[0]);
                         for (int count = 0; count < 9 / 2; count++)
                         {
@@ -103,6 +104,7 @@ namespace TicTacToe
                 case 1:
                     {
                         Console.WriteLine("게임을 다시 시작합니다. . .");
+                        Console.WriteLine();
                         StartGameWithComputerAgain();
                         break;
                     }
@@ -119,6 +121,7 @@ namespace TicTacToe
                         if (checkedOffNumber == 1)
                         {
                             Console.WriteLine("종료합니다. . .");
+                            Console.WriteLine();
                             break;
                         }
                         else

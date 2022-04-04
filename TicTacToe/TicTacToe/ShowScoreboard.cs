@@ -100,6 +100,7 @@ namespace TicTacToe
         {
             countGame++;
             Console.WriteLine("무승부 입니다!");
+            Console.WriteLine();
             scoreListComputerO.Add(0);
             scoreListComputerX.Add(0);
         }
@@ -107,6 +108,7 @@ namespace TicTacToe
         {
             countGame++;
             Console.WriteLine("무승부 입니다!");
+            Console.WriteLine();
             scoreListUserO.Add(0);
             scoreListUserX.Add(0);
         }
@@ -135,7 +137,22 @@ namespace TicTacToe
             }
             else
             {
-                Console.WriteLine("종료합니다. . .");
+                tictactoeScoreBoard.PrintOffMenu();
+                checkedOffNumber = scanAndPrintBoard.ScanMenuNumber(offMenuNumberArray);
+                switch(checkedOffNumber)
+                {
+                    case 1:
+                        {
+                            Console.WriteLine("종료합니다. . .");
+                            Console.WriteLine();
+                            break;
+                        }
+                    case 2:
+                        {
+                            PrintScoreBoard();
+                            break;
+                        }
+                }
             }
         }
         public void PrintOffBoardMenu()

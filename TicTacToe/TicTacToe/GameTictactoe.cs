@@ -7,7 +7,8 @@ namespace TicTacToe
     class GameTictactoe
     {
         public char[] gameArray = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-        
+        ScanAndPrint scanAndPrint = new ScanAndPrint();
+
         public void ChooseOX()
         {
             Console.WriteLine("----------------------------------------------------------------------");
@@ -26,12 +27,14 @@ namespace TicTacToe
             string[] sequenceNumbers = { "1", "2" }; // 메뉴 번호를 배열에 저장 후 CheckNumber 함수에서 번호 확인할 때 사용
             bool isSequenceNumber = false; // 메뉴 번호를 제대로 입력받았는지 확인을 위한 변수
             string unknownSequenceNumber = "";
-            ScanAndPrint scanAndPrint = new ScanAndPrint();
 
             while (isSequenceNumber == false)
             {
-                Console.Write("원하시는 순서의 번호를 입력하세요 : ");
+                Console.WriteLine();
+                Console.WriteLine("----------------------------------------------------------------------");
+                Console.Write("              원하시는 순서의 번호를 입력하세요 : ");
                 unknownSequenceNumber = Console.ReadLine();
+                Console.WriteLine("----------------------------------------------------------------------");
                 Console.WriteLine();
                 isSequenceNumber = scanAndPrint.CheckMenuNumber(isSequenceNumber, sequenceNumbers, unknownSequenceNumber);
             }
@@ -44,15 +47,25 @@ namespace TicTacToe
             Console.WriteLine("                              " + choosedSign + "의 차례");
             Console.WriteLine("----------------------------------------------------------------------");
             PrintGameMatrix();
+            string[] matrixNumberToCompare = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
             string userMatrixNumber = "";
             bool isUserMatrixNumber = false;
-            Console.WriteLine();
-            Console.Write("원하시는 칸의 번호를 입력하세요 : ");
+            bool isCorrectNumber = false;
 
             while (isUserMatrixNumber == false)
             {
+                Console.WriteLine();
+                Console.WriteLine("----------------------------------------------------------------------");
+                Console.Write("                 원하시는 칸의 번호를 입력하세요 : ");
                 userMatrixNumber = Console.ReadLine();
-                isUserMatrixNumber = CheckUserMatrixNumber(userMatrixNumber, isUserMatrixNumber);
+                Console.WriteLine("----------------------------------------------------------------------");
+                Console.WriteLine();
+                isCorrectNumber = scanAndPrint.CheckMenuNumber(isCorrectNumber, matrixNumberToCompare, userMatrixNumber);
+                if (isCorrectNumber == true)
+                {
+                    isUserMatrixNumber = CheckUserMatrixNumber(userMatrixNumber, isUserMatrixNumber);
+                    isCorrectNumber = false; // 오류 방지
+                }
             }
 
             gameArray[int.Parse(userMatrixNumber) - 1] = choosedSign;
@@ -63,6 +76,7 @@ namespace TicTacToe
             }
 
         }
+        
         public bool CheckUserMatrixNumber(string userMatrixNumber, bool isUserMatrixNumber)
         {
             if (gameArray[int.Parse(userMatrixNumber) - 1] - '0' == int.Parse(userMatrixNumber))
@@ -71,7 +85,8 @@ namespace TicTacToe
             }
             else
             {
-                Console.Write("이미 표시된 칸입니다. 다른 칸의 번호를 선택하세요. : ");
+                Console.Write("         이미 표시된 칸입니다. 다른 칸의 번호를 선택하세요!");
+                Console.WriteLine();
             }
             return isUserMatrixNumber;
 
@@ -93,6 +108,7 @@ namespace TicTacToe
             {
                 PrintGameMatrix();
                 Console.WriteLine("컴퓨터가 이겼습니다!");
+                Console.WriteLine();
             }
 
         }
