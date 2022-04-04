@@ -7,6 +7,7 @@ namespace TicTacToe
     class TictactoeWithUser
     {
         GameTictactoe gameWithUser = new GameTictactoe();
+        ShowScoreboard scoreCountWithUser = new ShowScoreboard();
         char[] signArray = { 'X', 'O'};
         public void StartGameWithUser()
         {
@@ -19,30 +20,26 @@ namespace TicTacToe
         }
         public void progressGameWithUser(int userSequenceNumber)
         {
-            switch (userSequenceNumber)
-            {
-                case 1:
-                    {
-                        Console.WriteLine("순서 번호를 입력한 사람이 먼저 시작합니다.");
-                        gameWithUser.PrintGameMatrix();
-                        LoopGameWithUser();
-                        break;
-                    }
-                case 2:
-                    {
-                        Console.WriteLine("순서 번호를 입력하지 않은 사람이 먼저 시작합니다.");
-                        gameWithUser.PrintGameMatrix();
-                        LoopGameWithUser();
-                        break;
-                    }
-            }
+            Console.WriteLine("X가 먼저 시작합니다.");
+            LoopGameWithUser();
         }
         public void LoopGameWithUser()
         {
+            gameWithUser.PlayOfUser(signArray[0]);
             for (int countGame = 0; countGame < 9 / 2; countGame++)
-            {
-                gameWithUser.PlayOfUser(signArray[0]);
+            { 
                 gameWithUser.PlayOfUser(signArray[1]);
+                if (gameWithUser.CheckWin() == 1)
+                {
+                    scoreCountWithUser.CountScoreWithUser(signArray[1]);
+                    break;
+                }
+                gameWithUser.PlayOfUser(signArray[0]);
+                if (gameWithUser.CheckWin() == 1)
+                {
+                    scoreCountWithUser.CountScoreWithUser(signArray[0]);
+                    break;
+                }
             }
         }
 

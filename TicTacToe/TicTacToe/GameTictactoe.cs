@@ -40,6 +40,10 @@ namespace TicTacToe
         }
         public void PlayOfUser(char choosedSign) // 유저 게임 버전
         {
+            Console.WriteLine("----------------------------------------------------------------------");
+            Console.WriteLine("                              " + choosedSign + "의 차례");
+            Console.WriteLine("----------------------------------------------------------------------");
+            PrintGameMatrix();
             string userMatrixNumber = "";
             bool isUserMatrixNumber = false;
             Console.WriteLine();
@@ -52,7 +56,11 @@ namespace TicTacToe
             }
 
             gameArray[int.Parse(userMatrixNumber) - 1] = choosedSign;
-            PrintGameMatrix();
+            if(CheckWin() == 1)
+            {
+                PrintGameMatrix();
+                Console.WriteLine(choosedSign + "가 이겼습니다!");
+            }
 
         }
         public bool CheckUserMatrixNumber(string userMatrixNumber, bool isUserMatrixNumber)
@@ -80,12 +88,16 @@ namespace TicTacToe
                 isComputerMatrixNumber = CheckRandomNumber(randomMatrixNumber, isComputerMatrixNumber);
             }
             gameArray[randomMatrixNumber - 1] = computerSign;
-            PrintGameMatrix();
+
+            if (CheckWin() == 1)
+            {
+                Console.WriteLine("컴퓨터가 이겼습니다!");
+            }
 
         }
         public bool CheckRandomNumber(int randomMatrixNumber, bool isComputerMatrixNumber)
         {
-            if (gameArray[randomMatrixNumber - 1] == randomMatrixNumber)
+            if (gameArray[randomMatrixNumber - 1] - '0' == randomMatrixNumber)
             {
                 isComputerMatrixNumber = true;
             }
@@ -94,28 +106,29 @@ namespace TicTacToe
 
         public void PrintGameMatrix() // 게임 화면 출력
         {
-            Console.WriteLine("_________________________________");
+            Console.WriteLine("______________________");
             Console.WriteLine();
             for (int matrixIndex = 0;matrixIndex < 3;matrixIndex++)
             {
                 Console.Write("   " + gameArray[matrixIndex] + "   ");
             }
             Console.WriteLine();
-            Console.WriteLine("_________________________________");
+            Console.WriteLine("______________________");
             Console.WriteLine();
             for (int matrixIndex = 3; matrixIndex < 6; matrixIndex++)
             {
                 Console.Write("   " + gameArray[matrixIndex] + "   ");
             }
             Console.WriteLine();
-            Console.WriteLine("_________________________________");
+            Console.WriteLine("______________________");
             Console.WriteLine();
             for (int matrixIndex = 6; matrixIndex < 9; matrixIndex++)
             {
                 Console.Write("   " + gameArray[matrixIndex] + "   ");
             }
             Console.WriteLine();
-            Console.WriteLine("_________________________________");
+            Console.WriteLine("______________________");
+            Console.WriteLine();
         }
         public int CheckWin() // 이겼는지 측정하는 함수
         {
