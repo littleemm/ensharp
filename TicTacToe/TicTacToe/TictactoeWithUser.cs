@@ -4,39 +4,26 @@ using System.Text;
 
 namespace TicTacToe
 {
-    class TictactoeWithUser
+    class TictactoeWithUser // 유저끼리 게임할 때
     {
         GameTictactoe gameWithUser = new GameTictactoe();
         ShowScoreboard scoreCountWithUser = new ShowScoreboard();
         char[] signArray = { 'X', 'O' };
-        private static int userSequenceNumber = 0;
 
         public void StartGameWithUser()
         {
-            gameWithUser.ChooseOX();
-            userSequenceNumber = gameWithUser.CheckUserNumber(userSequenceNumber);
-            progressGameWithUser(userSequenceNumber);
+            LoopGameWithUser();
             gameWithUser.ClearArray();
             GoMenuUser();
 
         }
         public void StartGameWithUserAgain()
         {
-            if (userSequenceNumber == 0)
-            {
-                gameWithUser.ChooseOX();
-                userSequenceNumber = gameWithUser.CheckUserNumber(userSequenceNumber);
-            }
-            progressGameWithUser(userSequenceNumber);
+            LoopGameWithUser();
             gameWithUser.ClearArray();
             GoMenuUser();
         }
-        public void progressGameWithUser(int userSequenceNumber)
-        {
-            Console.WriteLine("X가 먼저 시작합니다.");
-            LoopGameWithUser();
-        }
-        public void LoopGameWithUser()
+        private void LoopGameWithUser()
         {
             int countGame = 0;
             gameWithUser.PlayOfUser(signArray[0]);
@@ -58,10 +45,10 @@ namespace TicTacToe
             }
             if (countGame == 8)
             {
-                scoreCountWithUser.DrawGameWithComputer();
+                scoreCountWithUser.DrawGameWithUser();
             }
         }
-        public void GoMenuUser()
+        private void GoMenuUser()
         {
             ScanAndPrint scanAndPrintMiniMenu = new ScanAndPrint();
             string[] miniMenuNumberArray = { "1", "2", "3" };
@@ -71,20 +58,22 @@ namespace TicTacToe
             {
                 case 1:
                     {
-                        Console.WriteLine("게임을 다시 시작합니다. . .");
                         StartGameWithUserAgain();
                         break;
                     }
                 case 2:
                     {
+                        Console.Clear();
                         scanAndPrintMiniMenu.ShowMainAgain();
                         break;
                     }
                 case 3:
                     {
+                        Console.Clear();
                         gameWithUser.PrintOffMenu();
                         string[] offMenuNumberArray = { "1", "2" };
                         int checkedOffNumber = scanAndPrintMiniMenu.ScanMenuNumber(offMenuNumberArray);
+                        Console.Clear();
                         if (checkedOffNumber == 1)
                         {
                             Console.WriteLine("종료합니다. . .");

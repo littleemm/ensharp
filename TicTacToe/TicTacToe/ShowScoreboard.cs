@@ -13,6 +13,7 @@ namespace TicTacToe
         private static int countGame = 0;
         public void PrintScoreBoard()
         {
+            Console.Clear();
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("                             SCOREBOARD                               ");
@@ -35,7 +36,7 @@ namespace TicTacToe
             int sumOfScoreO = 0;
             sumOfScoreX = PrintScoreBoard(scoreListComputerX, 'X', sumOfScoreX);
             sumOfScoreO = PrintScoreBoard(scoreListComputerO, 'O', sumOfScoreO);
-            
+            CompareScore(sumOfScoreX, sumOfScoreO);
         }
         public void PrintScoreBoardWithUser()
         {
@@ -43,6 +44,7 @@ namespace TicTacToe
             int sumOfScoreO = 0;
             sumOfScoreX = PrintScoreBoard(scoreListUserX, 'X', sumOfScoreX);
             sumOfScoreO = PrintScoreBoard(scoreListUserO, 'O', sumOfScoreO);
+            CompareScore(sumOfScoreX, sumOfScoreO);
         }
         public int PrintScoreBoard(List<int> list, char sign, int sum)
         {
@@ -112,13 +114,33 @@ namespace TicTacToe
             scoreListUserO.Add(0);
             scoreListUserX.Add(0);
         }
-        public void OffScoreBoard()
+        private void CompareScore(int sumOfX, int sumOfO) 
+        {
+            Console.WriteLine("----------------------------------------------------------------------");
+            int compareSum = sumOfX - sumOfO;
+            switch (compareSum)
+            {
+                case 0:
+                    {
+                        Console.WriteLine("X : O = - : -");
+                        break;
+                    }
+                default:
+                    {
+                        Console.WriteLine("X : O = " + sumOfX + " : " + sumOfO);
+                        break;
+                    }
+            }
+            Console.WriteLine("----------------------------------------------------------------------");
+        }
+        private void OffScoreBoard()
         {
             ScanAndPrint scanAndPrintBoard = new ScanAndPrint();
             GameTictactoe tictactoeScoreBoard = new GameTictactoe();
             string[] offMenuNumberArray = { "1", "2" };
             PrintOffBoardMenu();
             int checkedOffNumber = scanAndPrintBoard.ScanMenuNumber(offMenuNumberArray);
+            Console.Clear();
             if (checkedOffNumber == 1)
             {
                 switch (countGame)
@@ -139,6 +161,7 @@ namespace TicTacToe
             {
                 tictactoeScoreBoard.PrintOffMenu();
                 checkedOffNumber = scanAndPrintBoard.ScanMenuNumber(offMenuNumberArray);
+                Console.Clear();
                 switch(checkedOffNumber)
                 {
                     case 1:
@@ -155,14 +178,14 @@ namespace TicTacToe
                 }
             }
         }
-        public void PrintOffBoardMenu()
+        private void PrintOffBoardMenu()
         {
-            Console.WriteLine("----------------------------------------------------------------------");
+            Console.WriteLine();
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("                             1: 메인 메뉴로");
             Console.WriteLine("                             2: 종료");
             Console.WriteLine("----------------------------------------------------------------------");
-            Console.WriteLine("----------------------------------------------------------------------");
+            Console.WriteLine();
         }
     }
 }

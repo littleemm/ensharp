@@ -4,23 +4,23 @@ using System.Text;
 
 namespace TicTacToe
 {
-    class ScanAndPrint
+    class ScanAndPrint // 메인에 표시되는 내용 위주를 담은 클래스
     {
-        public void ShowMain()
+        public void ShowMain() // 초기에 메인에 표시되는 함수
         {
             PrintMenu();
             string[] menuNumberArray = { "1", "2", "3" }; // 메뉴 번호를 배열에 저장 후 CheckNumber 함수에서 번호 확인할 때 사용
             int checkedMenuNumber = ScanMenuNumber(menuNumberArray);
             SelectMenu(checkedMenuNumber);
         }
-        public void ShowMainAgain()
+        public void ShowMainAgain() // 한번이라도 게임을 실행한 적이 있을 때 ShowMain()이 아닌 이 함수에 들어온다
         {
             PrintMenu();
             string[] menuNumberArray = { "1", "2", "3" }; // 메뉴 번호를 배열에 저장 후 CheckNumber 함수에서 번호 확인할 때 사용
             int checkedMenuNumber = ScanMenuNumber(menuNumberArray);
             SelectMenuAgain(checkedMenuNumber);
         }
-        public void PrintMenu() // TicTacToe 메인 메뉴 프린트
+        private void PrintMenu() // TicTacToe 메인 메뉴 프린트
          {
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("----------------------------------------------------------------------");
@@ -38,7 +38,7 @@ namespace TicTacToe
         {
             
             bool isMenuNumber = false; // 메뉴 번호를 제대로 입력받았는지 확인을 위한 변수
-            string unknownNumber = "";
+            string unknownNumber = ""; // 입력될 메뉴 번호 (다른 문자가 입력될 수 있어 string)
 
             while (isMenuNumber == false)
             {
@@ -53,6 +53,10 @@ namespace TicTacToe
         {
             for (int menuNumberIndex = 0; menuNumberIndex < menuNumberArray.Length; menuNumberIndex++)
             {
+                if (string.IsNullOrEmpty(unknownNumber?.Trim())) // ctrl+Z 입력되어도 오류 방지
+                {
+                    break;
+                }
                 if (unknownNumber.Equals(menuNumberArray[menuNumberIndex]))
                 {
                     isMenuNumber = true;
@@ -61,46 +65,32 @@ namespace TicTacToe
 
             if (isMenuNumber == false)
             {
-                Console.WriteLine("다시 입력해주세요!");
+                Console.WriteLine("----------------------------------------------------------------------");
+                Console.WriteLine("                          다시 입력해주세요!                           ");
+                Console.WriteLine("----------------------------------------------------------------------");
+                Console.WriteLine();
             }
 
             return isMenuNumber;
         }
-        public void CheckAndPrintMore(string unknownNumber)
-        {
-            string[] reasonOfLoop = { };
-            char[] smallAlphabet = { };
-            char[] bigAlphabet = { };
-            int wordIndex = 0;
-
-            for (char word = 'a'; word <= 'z'; word++)
-            {
-                smallAlphabet[wordIndex++] = word;
-            }
-            wordIndex = 0;
-            for (char word = 'A'; word <= 'Z'; word++)
-            {
-                bigAlphabet[wordIndex++] = word;
-            }
-
-        }
-        public void SelectMenu(int checkedMenuNumber)
+           
+        private void SelectMenu(int checkedMenuNumber) // 초기에 메뉴를 고르게 하는 함수
         {
             switch(checkedMenuNumber)
             {
-                case 1:
+                case 1: // 컴퓨터와 게임
                     {
                         TictactoeWithComputer tictactoeWithComputer = new TictactoeWithComputer();
                         tictactoeWithComputer.StartGameWithComputer();
                         break;
                     }
-                case 2:
+                case 2: // 유저끼리 게임
                     {
                         TictactoeWithUser tictactoeWithUser = new TictactoeWithUser();
                         tictactoeWithUser.StartGameWithUser();
                         break;
                     }
-                case 3:
+                case 3: // 점수판으로 이동
                     {
                         ShowScoreboard showScoreboard = new ShowScoreboard();
                         showScoreboard.PrintScoreBoard();
@@ -108,7 +98,7 @@ namespace TicTacToe
                     }
             }
         }
-        public void SelectMenuAgain(int checkedMenuNumber)
+        private void SelectMenuAgain(int checkedMenuNumber) // 게임을 두번 이상 했을 경우 메뉴를 고르게 하는 함수
         {
             switch (checkedMenuNumber)
             {

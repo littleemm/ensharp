@@ -4,13 +4,14 @@ using System.Text;
 
 namespace TicTacToe
 {
-    class GameTictactoe
+    class GameTictactoe // 게임에 필요한 요소를 담은 클래스 (공통되는 경우가 많음)
     {
         public char[] gameArray = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
         ScanAndPrint scanAndPrint = new ScanAndPrint();
 
-        public void ChooseOX()
+        public void ChooseOX() // 컴퓨터와 대결할 경우 순서를 골라야한다
         {
+            Console.Clear();
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("                       O 와 X 중 하나를 고르세요!                       ");
@@ -43,6 +44,7 @@ namespace TicTacToe
         }
         public void PlayOfUser(char choosedSign) // 유저 게임 버전
         {
+            Console.Clear();
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("                              " + choosedSign + "의 차례");
             Console.WriteLine("----------------------------------------------------------------------");
@@ -69,18 +71,21 @@ namespace TicTacToe
             }
 
             gameArray[int.Parse(userMatrixNumber) - 1] = choosedSign;
-            if(CheckWin() == 1)
+            if(CheckWin() == 1) // 이겼는지 체크
             {
+                Console.Clear();
                 PrintGameMatrix();
+                Console.WriteLine();
                 Console.WriteLine(choosedSign + "가 이겼습니다!");
+                Console.WriteLine();
             }
 
         }
         
-        public bool CheckUserMatrixNumber(string userMatrixNumber, bool isUserMatrixNumber)
+        public bool CheckUserMatrixNumber(string userMatrixNumber, bool isUserMatrixNumber) // 게임에서 중복된 칸을 선택할 수 없으므로 그것을 판별하는 함수
         {
             if (gameArray[int.Parse(userMatrixNumber) - 1] - '0' == int.Parse(userMatrixNumber))
-            {
+            { // 칸 안에 숫자(인 문자)가 들어있을 경우, 칸 선택이 가능하다
                 isUserMatrixNumber = true;
             }
             else
@@ -93,20 +98,22 @@ namespace TicTacToe
         }
         public void PlayOfComputer(char computerSign) // 컴퓨터 게임 버전
         {
-            Random makeRandomNumber = new Random();
+            Random makeRandomNumber = new Random(); // 난수를 만들어야 하기 때문
             bool isComputerMatrixNumber = false;
-            int randomMatrixNumber = 0; // 할당?
-
+            int randomMatrixNumber = 0; 
+            Console.Clear();
             while (isComputerMatrixNumber == false)
             {
-                randomMatrixNumber = makeRandomNumber.Next(1, 9);
+                randomMatrixNumber = makeRandomNumber.Next(1, 9); // 난수
                 isComputerMatrixNumber = CheckRandomNumber(randomMatrixNumber, isComputerMatrixNumber);
             }
             gameArray[randomMatrixNumber - 1] = computerSign;
 
             if (CheckWin() == 1)
             {
+                Console.Clear();
                 PrintGameMatrix();
+                Console.WriteLine();
                 Console.WriteLine("컴퓨터가 이겼습니다!");
                 Console.WriteLine();
             }
@@ -121,7 +128,7 @@ namespace TicTacToe
             return isComputerMatrixNumber;
         }
 
-        public void PrintGameMatrix() // 게임 화면 출력
+        public void PrintGameMatrix() // 게임 화면에 출력되는 게임 화면
         {
             Console.WriteLine("______________________");
             Console.WriteLine();
@@ -155,7 +162,7 @@ namespace TicTacToe
             int matrixIndexToCheck = 0; // 칸의 인덱스 시작점을 나타내는 변수
             int semiWinCount = 0; // 우승횟수 측정을 위한 count 변수
             checkWinGame = CheckRowWin(matrixIndexToCheck, semiWinCount);
-            if (checkWinGame == 1) return 1;
+            if (checkWinGame == 1) return 1; // 이기면 바로 1 반환
 
             //세로
             matrixIndexToCheck = 0;
@@ -171,7 +178,7 @@ namespace TicTacToe
 
             return 0; // 하나도 못 이긴 상황
         }
-        public int CheckRowWin (int matrixIndexToCheck, int semiWinCount) // 가로 줄 체크
+        private int CheckRowWin (int matrixIndexToCheck, int semiWinCount) // 가로 줄 체크
         {
             for (int count = 0; count < 3; count++)
             { // 가로는 3줄이므로 3번 반복
@@ -190,7 +197,7 @@ namespace TicTacToe
 
             return 0;
         }
-        public int CheckColumnWin(int matrixIndexToCheck, int semiWinCount)
+        private int CheckColumnWin(int matrixIndexToCheck, int semiWinCount) // 세로 줄 체크
         {
             for (int count = 0; count < 3; count++)
             { // 세로는 3줄이므로 3번 반복
@@ -209,7 +216,7 @@ namespace TicTacToe
 
             return 0;
         }
-        public int CheckDiagonalWin(int matrixIndexToCheck, int semiWinCount)
+        private int CheckDiagonalWin(int matrixIndexToCheck, int semiWinCount) // 대각선 체크
         {
             for (int loopCount = matrixIndexToCheck + 4; loopCount < 9; loopCount += 4)
             {
@@ -221,7 +228,7 @@ namespace TicTacToe
             }
             matrixIndexToCheck = 2;
             semiWinCount = 0;
-            for (int loopCount = matrixIndexToCheck + 2; loopCount < 5; loopCount += 2)
+            for (int loopCount = matrixIndexToCheck + 2; loopCount < 7; loopCount += 2)
             {
                 if (gameArray[matrixIndexToCheck] == gameArray[loopCount]) semiWinCount++;
                 if (semiWinCount == 2) // 2번 비교해서 대각선 한줄의 문자가 모두 같을 경우
@@ -231,7 +238,7 @@ namespace TicTacToe
             }
             return 0;
         }
-        public void ClearArray()
+        public void ClearArray() // 한 세트가 끝나면 다음 게임을 위해 배열을 처음으로 돌려놓는 함수
         {
             for (int arrayIndex = 0; arrayIndex < 9; arrayIndex++) 
             {
@@ -239,7 +246,7 @@ namespace TicTacToe
                 gameArray[arrayIndex] = temporaryString[0];
             }
         }
-        public void PrintGoMenu()
+        public void PrintGoMenu() // 게임이 끝난 직후의 메뉴 출력
         {
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("----------------------------------------------------------------------");
@@ -249,7 +256,7 @@ namespace TicTacToe
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("----------------------------------------------------------------------");
         }
-        public void PrintOffMenu()
+        public void PrintOffMenu() // 게임을 종료하기 전에 메뉴 출력
         {
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("----------------------------------------------------------------------");
