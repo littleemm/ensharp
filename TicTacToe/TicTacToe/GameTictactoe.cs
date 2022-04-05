@@ -9,7 +9,7 @@ namespace TicTacToe
         public char[] gameArray = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
         ScanAndPrint scanAndPrint = new ScanAndPrint();
 
-        public void ChooseOX() // 컴퓨터와 대결할 경우 순서를 골라야한다
+        public void ChooseOX() // 컴퓨터와 대결할 경우 순서 고르는 함수
         {
             Console.Clear();
             Console.WriteLine("----------------------------------------------------------------------");
@@ -37,7 +37,7 @@ namespace TicTacToe
                 unknownSequenceNumber = Console.ReadLine();
                 Console.WriteLine("----------------------------------------------------------------------");
                 Console.WriteLine();
-                isSequenceNumber = scanAndPrint.CheckMenuNumber(isSequenceNumber, sequenceNumbers, unknownSequenceNumber);
+                isSequenceNumber = scanAndPrint.IsMenuNumber(isSequenceNumber, sequenceNumbers, unknownSequenceNumber);
             }
 
             return int.Parse(unknownSequenceNumber);
@@ -62,10 +62,10 @@ namespace TicTacToe
                 userMatrixNumber = Console.ReadLine();
                 Console.WriteLine("----------------------------------------------------------------------");
                 Console.WriteLine();
-                isCorrectNumber = scanAndPrint.CheckMenuNumber(isCorrectNumber, matrixNumberToCompare, userMatrixNumber);
+                isCorrectNumber = scanAndPrint.IsMenuNumber(isCorrectNumber, matrixNumberToCompare, userMatrixNumber);
                 if (isCorrectNumber == true)
                 {
-                    isUserMatrixNumber = CheckUserMatrixNumber(userMatrixNumber, isUserMatrixNumber);
+                    isUserMatrixNumber = IsUserMatrixNumber(userMatrixNumber, isUserMatrixNumber);
                     isCorrectNumber = false; // 오류 방지
                 }
             }
@@ -76,13 +76,13 @@ namespace TicTacToe
                 Console.Clear();
                 PrintGameMatrix();
                 Console.WriteLine();
-                Console.WriteLine(choosedSign + "가 이겼습니다!");
+                Console.WriteLine("                        " + choosedSign + "가 이겼습니다!");
                 Console.WriteLine();
             }
 
         }
         
-        public bool CheckUserMatrixNumber(string userMatrixNumber, bool isUserMatrixNumber) // 게임에서 중복된 칸을 선택할 수 없으므로 그것을 판별하는 함수
+        public bool IsUserMatrixNumber(string userMatrixNumber, bool isUserMatrixNumber) // 게임에서 중복된 칸을 선택할 수 없으므로 그것을 판별하는 함수
         {
             if (gameArray[int.Parse(userMatrixNumber) - 1] - '0' == int.Parse(userMatrixNumber))
             { // 칸 안에 숫자(인 문자)가 들어있을 경우, 칸 선택이 가능하다
@@ -107,7 +107,7 @@ namespace TicTacToe
                 computerMatrixNumber = CheckComputerNumberToGame(computerSign);
                 if (computerMatrixNumber > 0)
                 {
-                    isComputerMatrixNumber = CheckComputrMatrixNumber(computerMatrixNumber, isComputerMatrixNumber);
+                    isComputerMatrixNumber = IsComputerMatrixNumber(computerMatrixNumber, isComputerMatrixNumber);
 
                 }
                 if (isComputerMatrixNumber == true) break;
@@ -115,19 +115,19 @@ namespace TicTacToe
                 computerMatrixNumber = CheckComputerNumberToGame(userSign);
                 if (computerMatrixNumber > 0)
                 {
-                    isComputerMatrixNumber = CheckComputrMatrixNumber(computerMatrixNumber, isComputerMatrixNumber);
+                    isComputerMatrixNumber = IsComputerMatrixNumber(computerMatrixNumber, isComputerMatrixNumber);
                 }
                 if (isComputerMatrixNumber == true) break;
 
                 computerMatrixNumber = CheckCompuerNumberTogame2(computerSign);
                 if (computerMatrixNumber > 0)
                 {
-                    isComputerMatrixNumber = CheckComputrMatrixNumber(computerMatrixNumber, isComputerMatrixNumber);
+                    isComputerMatrixNumber = IsComputerMatrixNumber(computerMatrixNumber, isComputerMatrixNumber);
                 }
                 if (isComputerMatrixNumber == true) break;
 
                 computerMatrixNumber = makeRandomNumber.Next(1, 10); // 굳이 이기기 위해 놓을 곳이 없을 때 난수 발생
-                isComputerMatrixNumber = CheckComputrMatrixNumber(computerMatrixNumber, isComputerMatrixNumber);
+                isComputerMatrixNumber = IsComputerMatrixNumber(computerMatrixNumber, isComputerMatrixNumber);
             }
             gameArray[computerMatrixNumber - 1] = computerSign;
 
@@ -136,80 +136,10 @@ namespace TicTacToe
                 Console.Clear();
                 PrintGameMatrix();
                 Console.WriteLine();
-                Console.WriteLine("컴퓨터가 이겼습니다!");
+                Console.WriteLine("                         컴퓨터가 이겼습니다!");
                 Console.WriteLine();
             }
 
-        }
-        public int CheckCompuerNumberTogame2(char sign) // 이길 수 있는 가능성이 있는 곳에 기호를 표시하기 위한 함수
-        {
-            Random makeRandomNumber2 = new Random();
-            int randomNumberIndex;
-            for (int matrixIndex = 0;matrixIndex < 9;matrixIndex++)
-            {
-                if (gameArray[matrixIndex] == sign)
-                {
-                    switch (matrixIndex)
-                    {
-                        case 0:
-                            {
-                                int [] array = { 1, 2, 3, 4, 5, 7, 9 };
-                                randomNumberIndex = makeRandomNumber2.Next(0, 7);
-                                return array[randomNumberIndex];
-                            }
-                        case 1:
-                            {
-                                int[] array = { 1, 2, 3, 5, 8};
-                                randomNumberIndex = makeRandomNumber2.Next(0, 5);
-                                return array[randomNumberIndex];
-                            }
-                        case 2:
-                            {
-                                int[] array = { 1, 2, 3, 5, 6, 7, 9 };
-                                randomNumberIndex = makeRandomNumber2.Next(0, 7);
-                                return array[randomNumberIndex];
-                            }
-                        case 3:
-                            {
-                                int[] array = { 1, 4, 5, 6, 7};
-                                randomNumberIndex = makeRandomNumber2.Next(0, 5);
-                                return array[randomNumberIndex];
-                            }
-                        case 5:
-                            {
-                                int[] array = { 3, 4, 5, 6, 9};
-                                randomNumberIndex = makeRandomNumber2.Next(0, 5);
-                                return array[randomNumberIndex];
-                            }
-                        case 6:
-                            {
-                                int[] array = { 1, 3, 4, 5, 7, 8, 9 };
-                                randomNumberIndex = makeRandomNumber2.Next(0, 7);
-                                return array[randomNumberIndex];
-                            }
-                        case 7:
-                            {
-                                int[] array = { 2, 5, 7, 8, 9 };
-                                randomNumberIndex = makeRandomNumber2.Next(0, 5);
-                                return array[randomNumberIndex];
-                            }
-                        case 8:
-                            {
-                                int[] array = { 1, 3, 5, 6, 7, 8, 9 };
-                                randomNumberIndex = makeRandomNumber2.Next(0, 7);
-                                return array[randomNumberIndex];
-                            }
-                        case 4:
-                            {
-                                int[] array = { 1, 2, 3, 5, 6, 7, 8, 9 };
-                                randomNumberIndex = makeRandomNumber2.Next(0, 8);
-                                return array[randomNumberIndex];
-                            }
-
-                    }
-                } 
-            }
-            return 0;
         }
         public int CheckComputerNumberToGame(char sign)
         {
@@ -302,8 +232,77 @@ namespace TicTacToe
             }
             return 0;
         }
+        public int CheckCompuerNumberTogame2(char sign) // 이길 수 있는 가능성이 있는 곳에 기호를 표시하기 위한 함수
+        {
+            Random makeRandomNumber2 = new Random();
+            int randomNumberIndex;
+            for (int matrixIndex = 0; matrixIndex < 9; matrixIndex++)
+            {
+                if (gameArray[matrixIndex] == sign)
+                {
+                    switch (matrixIndex)
+                    {
+                        case 0:
+                            {
+                                int[] array = { 1, 2, 3, 4, 5, 7, 9 };
+                                randomNumberIndex = makeRandomNumber2.Next(0, 7);
+                                return array[randomNumberIndex];
+                            }
+                        case 1:
+                            {
+                                int[] array = { 1, 2, 3, 5, 8 };
+                                randomNumberIndex = makeRandomNumber2.Next(0, 5);
+                                return array[randomNumberIndex];
+                            }
+                        case 2:
+                            {
+                                int[] array = { 1, 2, 3, 5, 6, 7, 9 };
+                                randomNumberIndex = makeRandomNumber2.Next(0, 7);
+                                return array[randomNumberIndex];
+                            }
+                        case 3:
+                            {
+                                int[] array = { 1, 4, 5, 6, 7 };
+                                randomNumberIndex = makeRandomNumber2.Next(0, 5);
+                                return array[randomNumberIndex];
+                            }
+                        case 5:
+                            {
+                                int[] array = { 3, 4, 5, 6, 9 };
+                                randomNumberIndex = makeRandomNumber2.Next(0, 5);
+                                return array[randomNumberIndex];
+                            }
+                        case 6:
+                            {
+                                int[] array = { 1, 3, 4, 5, 7, 8, 9 };
+                                randomNumberIndex = makeRandomNumber2.Next(0, 7);
+                                return array[randomNumberIndex];
+                            }
+                        case 7:
+                            {
+                                int[] array = { 2, 5, 7, 8, 9 };
+                                randomNumberIndex = makeRandomNumber2.Next(0, 5);
+                                return array[randomNumberIndex];
+                            }
+                        case 8:
+                            {
+                                int[] array = { 1, 3, 5, 6, 7, 8, 9 };
+                                randomNumberIndex = makeRandomNumber2.Next(0, 7);
+                                return array[randomNumberIndex];
+                            }
+                        case 4:
+                            {
+                                int[] array = { 1, 2, 3, 5, 6, 7, 8, 9 };
+                                randomNumberIndex = makeRandomNumber2.Next(0, 8);
+                                return array[randomNumberIndex];
+                            }
 
-        public bool CheckComputrMatrixNumber(int randomMatrixNumber, bool isComputerMatrixNumber)
+                    }
+                }
+            }
+            return 0;
+        }
+        public bool IsComputerMatrixNumber(int randomMatrixNumber, bool isComputerMatrixNumber)
         {
             if (gameArray[randomMatrixNumber - 1] - '0' == randomMatrixNumber)
             {
@@ -314,28 +313,31 @@ namespace TicTacToe
 
         public void PrintGameMatrix() // 게임 화면에 출력되는 게임 화면
         {
-            Console.WriteLine("______________________");
+            Console.WriteLine("                        ______________________");
             Console.WriteLine();
+            Console.Write("                        ");
             for (int matrixIndex = 0;matrixIndex < 3;matrixIndex++)
             {
                 Console.Write("   " + gameArray[matrixIndex] + "   ");
             }
             Console.WriteLine();
-            Console.WriteLine("______________________");
+            Console.WriteLine("                        ______________________");
             Console.WriteLine();
+            Console.Write("                        ");
             for (int matrixIndex = 3; matrixIndex < 6; matrixIndex++)
             {
                 Console.Write("   " + gameArray[matrixIndex] + "   ");
             }
             Console.WriteLine();
-            Console.WriteLine("______________________");
+            Console.WriteLine("                        ______________________");
             Console.WriteLine();
+            Console.Write("                        ");
             for (int matrixIndex = 6; matrixIndex < 9; matrixIndex++)
             {
                 Console.Write("   " + gameArray[matrixIndex] + "   ");
             }
             Console.WriteLine();
-            Console.WriteLine("______________________");
+            Console.WriteLine("                        ______________________");
             Console.WriteLine();
         }
         public int CheckWin() // 이겼는지 측정하는 함수

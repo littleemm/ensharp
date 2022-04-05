@@ -6,12 +6,13 @@ namespace TicTacToe
 {
     class ShowScoreboard
     {
+
         static List<int> scoreListComputerX = new List<int>();
         static List<int> scoreListComputerO = new List<int>();
         static List<int> scoreListUserX = new List<int>();
         static List<int> scoreListUserO = new List<int>();
         private static int countGame = 0;
-        public void PrintScoreBoard()
+        public void PrintScoreBoard() // 스코어보드 켜자마자 나오는 화면
         {
             Console.Clear();
             Console.WriteLine("----------------------------------------------------------------------");
@@ -30,7 +31,7 @@ namespace TicTacToe
             PrintScoreBoardWithUser();
             OffScoreBoard();
         }
-        public void PrintScoreBoardWithComputer()
+        public void PrintScoreBoardWithComputer() // 컴퓨터와 대결 결과 출력
         {
             int sumOfScoreX = 0;
             int sumOfScoreO = 0;
@@ -38,7 +39,7 @@ namespace TicTacToe
             sumOfScoreO = PrintScoreBoard(scoreListComputerO, 'O', sumOfScoreO);
             CompareScore(sumOfScoreX, sumOfScoreO);
         }
-        public void PrintScoreBoardWithUser()
+        public void PrintScoreBoardWithUser() // 유저끼리 대결 결과 출력
         {
             int sumOfScoreX = 0;
             int sumOfScoreO = 0;
@@ -46,7 +47,7 @@ namespace TicTacToe
             sumOfScoreO = PrintScoreBoard(scoreListUserO, 'O', sumOfScoreO);
             CompareScore(sumOfScoreX, sumOfScoreO);
         }
-        public int PrintScoreBoard(List<int> list, char sign, int sum)
+        public int PrintScoreBoard(List<int> list, char sign, int sum) // 대결 결과 출력
         {
             Console.Write(sign + " :");
             for (int sequence = 0; sequence < list.Count; sequence++)
@@ -58,50 +59,10 @@ namespace TicTacToe
             return sum;
 
         }
-        public void CountScoreWithComputer(char sign)
-        {
-            countGame++;
-            switch(sign)
-            {
-                case 'X':
-                    {
-                        scoreListComputerX.Add(1);
-                        scoreListComputerO.Add(0);
-                        break;
-                    }
-                case 'O':
-                    {
-                        scoreListComputerO.Add(1);
-                        scoreListComputerX.Add(0);
-                        break;
-                    }
-
-            }
-        }
-        public void CountScoreWithUser(char sign)
-        {
-            countGame++;
-            switch (sign)
-            {
-                case 'X':
-                    {
-                        scoreListUserX.Add(1);
-                        scoreListUserO.Add(0);
-                        break;
-                    }
-                case 'O':
-                    {
-                        scoreListUserO.Add(1);
-                        scoreListUserX.Add(0);
-                        break;
-                    }
-
-            }
-        }
         public void DrawGameWithComputer()
         {
             countGame++;
-            Console.WriteLine("무승부 입니다!");
+            Console.WriteLine("                        무승부 입니다!");
             Console.WriteLine();
             scoreListComputerO.Add(0);
             scoreListComputerX.Add(0);
@@ -109,12 +70,12 @@ namespace TicTacToe
         public void DrawGameWithUser()
         {
             countGame++;
-            Console.WriteLine("무승부 입니다!");
+            Console.WriteLine("                        무승부 입니다!");
             Console.WriteLine();
             scoreListUserO.Add(0);
             scoreListUserX.Add(0);
         }
-        private void CompareScore(int sumOfX, int sumOfO) 
+        private void CompareScore(int sumOfX, int sumOfO) // 점수 비교 후 바로 출력
         {
             Console.WriteLine("----------------------------------------------------------------------");
             int compareSum = sumOfX - sumOfO;
@@ -133,7 +94,16 @@ namespace TicTacToe
             }
             Console.WriteLine("----------------------------------------------------------------------");
         }
-        private void OffScoreBoard()
+        private void PrintOffBoardMenu() // 스코어 보드 맨 밑 출력
+        {
+            Console.WriteLine();
+            Console.WriteLine("----------------------------------------------------------------------");
+            Console.WriteLine("                             1: 메인 메뉴로");
+            Console.WriteLine("                             2: 종료");
+            Console.WriteLine("----------------------------------------------------------------------");
+            Console.WriteLine();
+        }
+        private void OffScoreBoard() // 종료 키를 누른 후 한번 더 물어보는 항목
         {
             ScanAndPrint scanAndPrintBoard = new ScanAndPrint();
             GameTictactoe tictactoeScoreBoard = new GameTictactoe();
@@ -178,14 +148,45 @@ namespace TicTacToe
                 }
             }
         }
-        private void PrintOffBoardMenu()
+        public void CountScoreWithComputer(char sign)
         {
-            Console.WriteLine();
-            Console.WriteLine("----------------------------------------------------------------------");
-            Console.WriteLine("                             1: 메인 메뉴로");
-            Console.WriteLine("                             2: 종료");
-            Console.WriteLine("----------------------------------------------------------------------");
-            Console.WriteLine();
+            countGame++;
+            switch (sign)
+            {
+                case 'X':
+                    {
+                        scoreListComputerX.Add(1);
+                        scoreListComputerO.Add(0);
+                        break;
+                    }
+                case 'O':
+                    {
+                        scoreListComputerO.Add(1);
+                        scoreListComputerX.Add(0);
+                        break;
+                    }
+
+            }
+        }
+        public void CountScoreWithUser(char sign)
+        {
+            countGame++;
+            switch (sign)
+            {
+                case 'X':
+                    {
+                        scoreListUserX.Add(1);
+                        scoreListUserO.Add(0);
+                        break;
+                    }
+                case 'O':
+                    {
+                        scoreListUserO.Add(1);
+                        scoreListUserX.Add(0);
+                        break;
+                    }
+
+            }
         }
     }
 }

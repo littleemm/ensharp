@@ -8,13 +8,15 @@ namespace TicTacToe
     {
         GameTictactoe gameWithComputer = new GameTictactoe();
         ShowScoreboard scoreCountWithComputer = new ShowScoreboard();
+        ScanAndPrint scanAndPrintMiniMenu = new ScanAndPrint();
         char[] signArray = { 'X', 'O' };
         private static int userSequenceNumber = 0; // 게임 횟수 측정을 위한 static 변수
+
         public void StartGameWithComputer() // 초기 게임 시작
         {
             gameWithComputer.ChooseOX();
             userSequenceNumber = gameWithComputer.CheckUserNumber(userSequenceNumber);
-            progressGameWithComputer(userSequenceNumber);
+            ProgressGameWithComputer(userSequenceNumber);
             gameWithComputer.ClearArray();
             GoMenuComputer();
 
@@ -26,11 +28,11 @@ namespace TicTacToe
                 gameWithComputer.ChooseOX();
                 userSequenceNumber = gameWithComputer.CheckUserNumber(userSequenceNumber);
             }
-            progressGameWithComputer(userSequenceNumber);
+            ProgressGameWithComputer(userSequenceNumber);
             gameWithComputer.ClearArray();
             GoMenuComputer();
         }
-        private void progressGameWithComputer (int userSequenceNumber) // 게임을 진행시키는 함수
+        private void ProgressGameWithComputer (int userSequenceNumber) // 게임을 진행시키는 함수
         {
             int countGame = 0;
             switch (userSequenceNumber)
@@ -93,7 +95,6 @@ namespace TicTacToe
         }
         private void GoMenuComputer() // 게임이 끝났으므로 다음 행동을 위해 메뉴를 불러오는 함수
         {
-            ScanAndPrint scanAndPrintMiniMenu = new ScanAndPrint();
             string[] miniMenuNumberArray = { "1", "2", "3" };
             gameWithComputer.PrintGoMenu();
             int checkedMiniMenuNumber = scanAndPrintMiniMenu.ScanMenuNumber(miniMenuNumberArray);

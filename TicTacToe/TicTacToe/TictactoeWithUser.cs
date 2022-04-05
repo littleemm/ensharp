@@ -8,22 +8,17 @@ namespace TicTacToe
     {
         GameTictactoe gameWithUser = new GameTictactoe();
         ShowScoreboard scoreCountWithUser = new ShowScoreboard();
+        ScanAndPrint scanAndPrintMiniMenu = new ScanAndPrint();
         char[] signArray = { 'X', 'O' };
 
         public void StartGameWithUser()
         {
-            LoopGameWithUser();
+            ProgressGameWithUser();
             gameWithUser.ClearArray();
             GoMenuUser();
 
         }
-        public void StartGameWithUserAgain()
-        {
-            LoopGameWithUser();
-            gameWithUser.ClearArray();
-            GoMenuUser();
-        }
-        private void LoopGameWithUser()
+        private void ProgressGameWithUser()
         {
             int countGame = 0;
             gameWithUser.PlayOfUser(signArray[0]);
@@ -50,7 +45,6 @@ namespace TicTacToe
         }
         private void GoMenuUser()
         {
-            ScanAndPrint scanAndPrintMiniMenu = new ScanAndPrint();
             string[] miniMenuNumberArray = { "1", "2", "3" };
             gameWithUser.PrintGoMenu();
             int checkedMiniMenuNumber = scanAndPrintMiniMenu.ScanMenuNumber(miniMenuNumberArray);
@@ -58,7 +52,7 @@ namespace TicTacToe
             {
                 case 1:
                     {
-                        StartGameWithUserAgain();
+                        StartGameWithUser();
                         break;
                     }
                 case 2:
