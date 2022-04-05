@@ -96,18 +96,40 @@ namespace TicTacToe
             return isUserMatrixNumber;
 
         }
-        public void PlayOfComputer(char computerSign) // 컴퓨터 게임 버전
+        public void PlayOfComputer(char computerSign, char userSign) // 컴퓨터 게임 버전
         {
             Random makeRandomNumber = new Random(); // 난수를 만들어야 하기 때문
             bool isComputerMatrixNumber = false;
-            int randomMatrixNumber = 0; 
+            int computerMatrixNumber = 0; // 컴퓨터가 표시하고자 하는 곳의 숫자
             Console.Clear();
             while (isComputerMatrixNumber == false)
             {
-                randomMatrixNumber = makeRandomNumber.Next(1, 9); // 난수
-                isComputerMatrixNumber = CheckRandomNumber(randomMatrixNumber, isComputerMatrixNumber);
+                computerMatrixNumber = CheckComputerNumberToGame(computerSign);
+                if (computerMatrixNumber > 0)
+                {
+                    isComputerMatrixNumber = CheckComputrMatrixNumber(computerMatrixNumber, isComputerMatrixNumber);
+
+                }
+                if (isComputerMatrixNumber == true) break;
+
+                computerMatrixNumber = CheckComputerNumberToGame(userSign);
+                if (computerMatrixNumber > 0)
+                {
+                    isComputerMatrixNumber = CheckComputrMatrixNumber(computerMatrixNumber, isComputerMatrixNumber);
+                }
+                if (isComputerMatrixNumber == true) break;
+
+                computerMatrixNumber = CheckCompuerNumberTogame2(computerSign);
+                if (computerMatrixNumber > 0)
+                {
+                    isComputerMatrixNumber = CheckComputrMatrixNumber(computerMatrixNumber, isComputerMatrixNumber);
+                }
+                if (isComputerMatrixNumber == true) break;
+
+                computerMatrixNumber = makeRandomNumber.Next(1, 10); // 굳이 이기기 위해 놓을 곳이 없을 때 난수 발생
+                isComputerMatrixNumber = CheckComputrMatrixNumber(computerMatrixNumber, isComputerMatrixNumber);
             }
-            gameArray[randomMatrixNumber - 1] = computerSign;
+            gameArray[computerMatrixNumber - 1] = computerSign;
 
             if (CheckWin() == 1)
             {
@@ -119,7 +141,169 @@ namespace TicTacToe
             }
 
         }
-        public bool CheckRandomNumber(int randomMatrixNumber, bool isComputerMatrixNumber)
+        public int CheckCompuerNumberTogame2(char sign) // 이길 수 있는 가능성이 있는 곳에 기호를 표시하기 위한 함수
+        {
+            Random makeRandomNumber2 = new Random();
+            int randomNumberIndex;
+            for (int matrixIndex = 0;matrixIndex < 9;matrixIndex++)
+            {
+                if (gameArray[matrixIndex] == sign)
+                {
+                    switch (matrixIndex)
+                    {
+                        case 0:
+                            {
+                                int [] array = { 1, 2, 3, 4, 5, 7, 9 };
+                                randomNumberIndex = makeRandomNumber2.Next(0, 7);
+                                return array[randomNumberIndex];
+                            }
+                        case 1:
+                            {
+                                int[] array = { 1, 2, 3, 5, 8};
+                                randomNumberIndex = makeRandomNumber2.Next(0, 5);
+                                return array[randomNumberIndex];
+                            }
+                        case 2:
+                            {
+                                int[] array = { 1, 2, 3, 5, 6, 7, 9 };
+                                randomNumberIndex = makeRandomNumber2.Next(0, 7);
+                                return array[randomNumberIndex];
+                            }
+                        case 3:
+                            {
+                                int[] array = { 1, 4, 5, 6, 7};
+                                randomNumberIndex = makeRandomNumber2.Next(0, 5);
+                                return array[randomNumberIndex];
+                            }
+                        case 5:
+                            {
+                                int[] array = { 3, 4, 5, 6, 9};
+                                randomNumberIndex = makeRandomNumber2.Next(0, 5);
+                                return array[randomNumberIndex];
+                            }
+                        case 6:
+                            {
+                                int[] array = { 1, 3, 4, 5, 7, 8, 9 };
+                                randomNumberIndex = makeRandomNumber2.Next(0, 7);
+                                return array[randomNumberIndex];
+                            }
+                        case 7:
+                            {
+                                int[] array = { 2, 5, 7, 8, 9 };
+                                randomNumberIndex = makeRandomNumber2.Next(0, 5);
+                                return array[randomNumberIndex];
+                            }
+                        case 8:
+                            {
+                                int[] array = { 1, 3, 5, 6, 7, 8, 9 };
+                                randomNumberIndex = makeRandomNumber2.Next(0, 7);
+                                return array[randomNumberIndex];
+                            }
+                        case 4:
+                            {
+                                int[] array = { 1, 2, 3, 5, 6, 7, 8, 9 };
+                                randomNumberIndex = makeRandomNumber2.Next(0, 8);
+                                return array[randomNumberIndex];
+                            }
+
+                    }
+                } 
+            }
+            return 0;
+        }
+        public int CheckComputerNumberToGame(char sign)
+        {
+            int checkedMatrixNumber = 0;
+
+            int matrixIndexToCheck = 0; 
+            int countSign = 0;
+            checkedMatrixNumber = CheckComputerNumberRow(sign, matrixIndexToCheck, countSign);
+            if (checkedMatrixNumber > 0) return checkedMatrixNumber;
+
+            matrixIndexToCheck = 0;
+            countSign = 0;
+            checkedMatrixNumber = CheckComputerNumberColumn(sign, matrixIndexToCheck, countSign);
+            if (checkedMatrixNumber > 0) return checkedMatrixNumber;
+
+            matrixIndexToCheck = 0;
+            countSign = 0;
+            checkedMatrixNumber = CheckComputerNumberDiagonal(sign, matrixIndexToCheck, countSign);
+            if (checkedMatrixNumber > 0) return checkedMatrixNumber;
+
+            return 0; // 상대방을 굳이 막을 필요없거나 이길 기미가 아직은 안보이는 상태
+        }
+        private int CheckComputerNumberRow(char sign, int matrixIndexToCheck, int countSign)
+        {
+            int index = 0;
+            for (int count = 0; count < 3; count++)
+            { // 가로는 3줄이므로 3번 반복
+                for (int loopCount = matrixIndexToCheck; loopCount < matrixIndexToCheck + 3; loopCount++)
+                {
+                    if (gameArray[loopCount] == sign) countSign++;
+                    else index = loopCount; 
+                }
+
+                if (countSign == 2) // 가로 한줄에 같은 문자 두개가 있을 경우
+                {
+                    return index + 1;
+                }
+                matrixIndexToCheck += 3;
+                countSign = 0; // 횟수 측정을 위한 count 변수를 0으로 초기화
+            }
+
+            return 0;
+        }
+        private int CheckComputerNumberColumn(char sign, int matrixIndexToCheck, int countSign) // 세로 줄 체크
+        {
+            int index = 0;
+            for (int count = 0; count < 3; count++)
+            { // 세로는 3줄이므로 3번 반복
+                for (int loopCount = matrixIndexToCheck; loopCount < matrixIndexToCheck + 7; loopCount += 3)
+                {
+                    if (gameArray[loopCount] == sign) countSign++;
+                    else index = loopCount;
+                }
+
+                if (countSign == 2)
+                {
+                    return index + 1;
+                }
+                matrixIndexToCheck += 1;
+                countSign = 0; 
+            }
+
+            return 0;
+        }
+        private int CheckComputerNumberDiagonal(char sign, int matrixIndexToCheck, int countSign) // 대각선 체크
+        {
+            int index = 0;
+            for (int loopCount = matrixIndexToCheck; loopCount < 9; loopCount += 4)
+            {
+                if (gameArray[loopCount] == sign) countSign++;
+                else index = loopCount;
+            }
+            
+            if (countSign == 2) // 2번 비교해서 대각선 한줄의 문자가 모두 같을 경우
+            {
+                return index + 1;
+            }
+
+            matrixIndexToCheck = 2;
+            countSign = 0;
+            for (int loopCount = matrixIndexToCheck; loopCount < 7; loopCount += 2)
+            {
+                if (gameArray[loopCount] == sign) countSign++;
+                else index = loopCount;
+            }
+            
+            if (countSign == 2) 
+            {
+                return index + 1;
+            }
+            return 0;
+        }
+
+        public bool CheckComputrMatrixNumber(int randomMatrixNumber, bool isComputerMatrixNumber)
         {
             if (gameArray[randomMatrixNumber - 1] - '0' == randomMatrixNumber)
             {

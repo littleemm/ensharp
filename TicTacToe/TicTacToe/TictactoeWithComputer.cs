@@ -42,7 +42,7 @@ namespace TicTacToe
                         gameWithComputer.PlayOfUser(signArray[0]);
                         for (int count = 0; count < 9 / 2; count++)
                         {
-                            gameWithComputer.PlayOfComputer(signArray[1]);
+                            gameWithComputer.PlayOfComputer(signArray[1], signArray[0]);
                             if (gameWithComputer.CheckWin() == 1)
                             {
                                 scoreCountWithComputer.CountScoreWithComputer(signArray[1]);
@@ -65,7 +65,7 @@ namespace TicTacToe
                     }
                 case 2:
                     {
-                        gameWithComputer.PlayOfComputer(signArray[0]);
+                        gameWithComputer.PlayOfComputer(signArray[0], signArray[1]);
                         for (int count = 0; count < 9 / 2; count++)
                         {
                             gameWithComputer.PlayOfUser(signArray[1]);
@@ -74,7 +74,7 @@ namespace TicTacToe
                                 scoreCountWithComputer.CountScoreWithComputer(signArray[1]);
                                 break;
                             }
-                            gameWithComputer.PlayOfComputer(signArray[0]);
+                            gameWithComputer.PlayOfComputer(signArray[0], signArray[1]);
                             if (gameWithComputer.CheckWin() == 1)
                             {
                                 scoreCountWithComputer.CountScoreWithComputer(signArray[0]);
