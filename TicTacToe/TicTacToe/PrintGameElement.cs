@@ -53,6 +53,7 @@ namespace TicTacToe
             Console.WriteLine("                        ----------------------");
             Console.WriteLine();
             Console.WriteLine();
+            Console.WriteLine();
         }
         public void PrintGoMenu() // 게임이 끝난 직후의 메뉴 출력
         {

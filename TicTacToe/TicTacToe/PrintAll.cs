@@ -27,7 +27,9 @@ namespace TicTacToe
         {
             ClearLine(3);
             Console.WriteLine("----------------------------------------------------------------------");
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("                          다시 입력해주세요!                           ");
+            Console.ResetColor();
             Console.WriteLine("----------------------------------------------------------------------");
         }
     

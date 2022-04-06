@@ -79,7 +79,9 @@ namespace TicTacToe
             {
                 ClearLine(3);
                 Console.WriteLine("----------------------------------------------------------------------");
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("         이미 표시된 칸입니다. 다른 칸의 번호를 선택하세요!               ");
+                Console.ResetColor();
                 Console.WriteLine("----------------------------------------------------------------------");
             }
             return isUserMatrixNumber;

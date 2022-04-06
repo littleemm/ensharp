@@ -7,6 +7,8 @@ namespace TicTacToe
     class ShowFirst // 메인에 표시되는 내용 위주를 담은 클래스
     {
         PrintAll printAll = new PrintAll();
+        PrintGameElement printElement = new PrintGameElement();
+        string[] offMenuNumberArray = { "1", "2" };
         string[] menuNumberArray = { "1", "2", "3", "4" }; // 메뉴 번호를 배열에 저장 후 CheckNumber 함수에서 번호 확인할 때 사용
         public void ShowMain() // 초기에 메인에 표시되는 함수
         {
@@ -83,7 +85,19 @@ namespace TicTacToe
                 case 4:
                     {
                         Console.Clear();
-                        Console.Write("          종료합니다. . .");
+                        printElement.PrintOffMenu();
+                        int checkedOffNumber = ScanMenuNumber(offMenuNumberArray);
+                        Console.Clear();
+                        if (checkedOffNumber == 1)
+                        {
+                            Console.WriteLine("종료합니다. . .");
+                            Console.WriteLine();
+                            break;
+                        }
+                        else
+                        {
+                            ShowMain();
+                        }
                         break;
                     }
             }
@@ -113,7 +127,19 @@ namespace TicTacToe
                 case 4:
                     {
                         Console.Clear();
-                        Console.Write("          종료합니다. . .");
+                        printElement.PrintOffMenu();
+                        int checkedOffNumber = ScanMenuNumber(offMenuNumberArray);
+                        Console.Clear();
+                        if (checkedOffNumber == 1)
+                        {
+                            Console.WriteLine("종료합니다. . .");
+                            Console.WriteLine();
+                            break;
+                        }
+                        else
+                        {
+                            ShowMainAgain();
+                        }
                         break;
                     }
             }
