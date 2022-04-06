@@ -9,12 +9,13 @@ namespace TicTacToe
         GameTictactoe gameWithComputer = new GameTictactoe();
         ShowScoreboard scoreCountWithComputer = new ShowScoreboard();
         ScanAndPrint scanAndPrintMiniMenu = new ScanAndPrint();
+        PrintGameElement printComputerElement = new PrintGameElement();
         char[] signArray = { 'X', 'O' };
         private static int userSequenceNumber = 0; // 게임 횟수 측정을 위한 static 변수
 
         public void StartGameWithComputer() // 초기 게임 시작
         {
-            gameWithComputer.ChooseOX();
+            printComputerElement.ChooseOX();
             userSequenceNumber = gameWithComputer.CheckUserNumber(userSequenceNumber);
             ProgressGameWithComputer(userSequenceNumber);
             gameWithComputer.ClearArray();
@@ -25,7 +26,7 @@ namespace TicTacToe
         {
             if (userSequenceNumber == 0) // 한번이라도 컴퓨터와 게임을 한 적이 없는 경우 이 과정을 거쳐 순서를 정해야 한다.
             {
-                gameWithComputer.ChooseOX();
+                printComputerElement.ChooseOX();
                 userSequenceNumber = gameWithComputer.CheckUserNumber(userSequenceNumber);
             }
             ProgressGameWithComputer(userSequenceNumber);
@@ -96,7 +97,7 @@ namespace TicTacToe
         private void GoMenuComputer() // 게임이 끝났으므로 다음 행동을 위해 메뉴를 불러오는 함수
         {
             string[] miniMenuNumberArray = { "1", "2", "3" };
-            gameWithComputer.PrintGoMenu();
+            printComputerElement.PrintGoMenu();
             int checkedMiniMenuNumber = scanAndPrintMiniMenu.ScanMenuNumber(miniMenuNumberArray);
             switch (checkedMiniMenuNumber)
             {
@@ -116,7 +117,7 @@ namespace TicTacToe
                 case 3:
                     {
                         Console.Clear();
-                        gameWithComputer.PrintOffMenu();
+                        printComputerElement.PrintOffMenu();
                         string[] offMenuNumberArray = { "1", "2" };
                         int checkedOffNumber = scanAndPrintMiniMenu.ScanMenuNumber(offMenuNumberArray);
                         Console.Clear();

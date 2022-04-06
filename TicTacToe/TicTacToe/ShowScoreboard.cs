@@ -8,6 +8,7 @@ namespace TicTacToe
     {
         ScanAndPrint scanAndPrintBoard = new ScanAndPrint();
         GameTictactoe tictactoeScoreBoard = new GameTictactoe();
+        PrintGameElement printElement = new PrintGameElement();
 
         static List<int> scoreListComputerX = new List<int>();
         static List<int> scoreListComputerO = new List<int>();
@@ -129,7 +130,7 @@ namespace TicTacToe
             }
             else
             {
-                tictactoeScoreBoard.PrintOffMenu();
+                printElement.PrintOffMenu();
                 checkedOffNumber = scanAndPrintBoard.ScanMenuNumber(offMenuNumberArray);
                 Console.Clear();
                 switch(checkedOffNumber)

@@ -9,6 +9,7 @@ namespace TicTacToe
         GameTictactoe gameWithUser = new GameTictactoe();
         ShowScoreboard scoreCountWithUser = new ShowScoreboard();
         ScanAndPrint scanAndPrintMiniMenu = new ScanAndPrint();
+        PrintGameElement printUserElement = new PrintGameElement();
         char[] signArray = { 'X', 'O' };
 
         public void StartGameWithUser()
@@ -46,7 +47,7 @@ namespace TicTacToe
         private void GoMenuUser()
         {
             string[] miniMenuNumberArray = { "1", "2", "3" };
-            gameWithUser.PrintGoMenu();
+            printUserElement.PrintGoMenu();
             int checkedMiniMenuNumber = scanAndPrintMiniMenu.ScanMenuNumber(miniMenuNumberArray);
             switch (checkedMiniMenuNumber)
             {
@@ -64,7 +65,7 @@ namespace TicTacToe
                 case 3:
                     {
                         Console.Clear();
-                        gameWithUser.PrintOffMenu();
+                        printUserElement.PrintOffMenu();
                         string[] offMenuNumberArray = { "1", "2" };
                         int checkedOffNumber = scanAndPrintMiniMenu.ScanMenuNumber(offMenuNumberArray);
                         Console.Clear();

@@ -8,21 +8,8 @@ namespace TicTacToe
     {
         public char[] gameArray = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
         ScanAndPrint scanAndPrint = new ScanAndPrint();
+        PrintGameElement printGameElement = new PrintGameElement();
 
-        public void ChooseOX() // 컴퓨터와 대결할 경우 순서 고르는 함수
-        {
-            Console.Clear();
-            Console.WriteLine("----------------------------------------------------------------------");
-            Console.WriteLine("----------------------------------------------------------------------");
-            Console.WriteLine("                       O 와 X 중 하나를 고르세요!                       ");
-            Console.WriteLine("                      게임은 'X'가 먼저 시작합니다.                     ");
-            Console.WriteLine("----------------------------------------------------------------------");
-            Console.WriteLine("----------------------------------------------------------------------");
-            Console.WriteLine("                              1: X 선택                               ");
-            Console.WriteLine("                              2: O 선택                               ");
-            Console.WriteLine("----------------------------------------------------------------------");
-            Console.WriteLine("----------------------------------------------------------------------");
-        }
         public int CheckUserNumber(int checkedSequenceNumber) // 순서 입력 받기
         {
             string[] sequenceNumbers = { "1", "2" }; // 메뉴 번호를 배열에 저장 후 CheckNumber 함수에서 번호 확인할 때 사용
@@ -48,7 +35,7 @@ namespace TicTacToe
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("                              " + choosedSign + "의 차례");
             Console.WriteLine("----------------------------------------------------------------------");
-            PrintGameMatrix();
+            printGameElement.PrintGameMatrix(gameArray);
             string[] matrixNumberToCompare = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
             string userMatrixNumber = "";
             bool isUserMatrixNumber = false;
@@ -74,7 +61,7 @@ namespace TicTacToe
             if (CheckWin() == 1) // 이겼는지 체크
             {
                 Console.Clear();
-                PrintGameMatrix();
+                printGameElement.PrintGameMatrix(gameArray);
                 Console.WriteLine();
                 Console.WriteLine("                        " + choosedSign + "가 이겼습니다!");
                 Console.WriteLine();
@@ -134,7 +121,7 @@ namespace TicTacToe
             if (CheckWin() == 1)
             {
                 Console.Clear();
-                PrintGameMatrix();
+                printGameElement.PrintGameMatrix(gameArray);
                 Console.WriteLine();
                 Console.WriteLine("                         컴퓨터가 이겼습니다!");
                 Console.WriteLine();
@@ -310,39 +297,6 @@ namespace TicTacToe
             }
             return isComputerMatrixNumber;
         }
-
-        public void PrintGameMatrix() // 게임 화면에 출력되는 게임 화면
-        {
-            Console.WriteLine("                        ----------------------");
-            Console.WriteLine("                        |      |      |      |");
-            Console.Write("                        |");
-            for (int matrixIndex = 0; matrixIndex < 3; matrixIndex++)
-            {
-                Console.Write("  " + gameArray[matrixIndex] + "   |");
-            }
-            Console.WriteLine("                        |      |      |      |");
-            Console.WriteLine("                        |      |      |      |");
-            Console.WriteLine("                        ----------------------");
-            Console.WriteLine("                        |      |      |      |");
-            Console.Write("                        |");
-            for (int matrixIndex = 3; matrixIndex < 6; matrixIndex++)
-            {
-                Console.Write("  " + gameArray[matrixIndex] + "   |");
-            }
-            Console.WriteLine("                        |      |      |      |");
-            Console.WriteLine("                        |      |      |      |");
-            Console.WriteLine("                        ----------------------");
-            Console.WriteLine("                        |      |      |      |");
-            Console.Write("                        |");
-            for (int matrixIndex = 6; matrixIndex < 9; matrixIndex++)
-            {
-                Console.Write("  " + gameArray[matrixIndex] + "   |");
-            }
-            Console.WriteLine("                        |      |      |      |");
-            Console.WriteLine("                        |      |      |      |");
-            Console.WriteLine("                        ----------------------");
-            Console.WriteLine();
-        }
         public int CheckWin() // 이겼는지 측정하는 함수
         {
             int checkWinGame;
@@ -434,29 +388,6 @@ namespace TicTacToe
                 string temporaryString = (arrayIndex + 1).ToString();
                 gameArray[arrayIndex] = temporaryString[0];
             }
-        }
-        public void PrintGoMenu() // 게임이 끝난 직후의 메뉴 출력
-        {
-            Console.WriteLine("----------------------------------------------------------------------");
-            Console.WriteLine("----------------------------------------------------------------------");
-            Console.WriteLine("                     1: 같은 게임을 다시 시작합니다.");
-            Console.WriteLine("                     2: 메인 메뉴로 돌아갑니다.");
-            Console.WriteLine("                     3: 게임을 종료합니다.");
-            Console.WriteLine("----------------------------------------------------------------------");
-            Console.WriteLine("----------------------------------------------------------------------");
-        }
-        public void PrintOffMenu() // 게임을 종료하기 전에 메뉴 출력
-        {
-            Console.WriteLine("----------------------------------------------------------------------");
-            Console.WriteLine("----------------------------------------------------------------------");
-            Console.WriteLine("                               종료할까요?");
-            Console.WriteLine("----------------------------------------------------------------------");
-            Console.WriteLine("----------------------------------------------------------------------");
-            Console.WriteLine("                               1: 종료");
-            Console.WriteLine("                               2: 취소");
-            Console.WriteLine("----------------------------------------------------------------------");
-            Console.WriteLine("----------------------------------------------------------------------");
-
         }
     }
 }
