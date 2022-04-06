@@ -313,31 +313,34 @@ namespace TicTacToe
 
         public void PrintGameMatrix() // 게임 화면에 출력되는 게임 화면
         {
-            Console.WriteLine("                        ______________________");
-            Console.WriteLine();
-            Console.Write("                        ");
+            Console.WriteLine("                        ----------------------");
+            Console.WriteLine("                        |      |      |      |");
+            Console.Write("                        |");
             for (int matrixIndex = 0; matrixIndex < 3; matrixIndex++)
             {
-                Console.Write("   " + gameArray[matrixIndex] + "   ");
+                Console.Write("  " + gameArray[matrixIndex] + "   |");
             }
-            Console.WriteLine();
-            Console.WriteLine("                        ______________________");
-            Console.WriteLine();
-            Console.Write("                        ");
+            Console.WriteLine("                        |      |      |      |");
+            Console.WriteLine("                        |      |      |      |");
+            Console.WriteLine("                        ----------------------");
+            Console.WriteLine("                        |      |      |      |");
+            Console.Write("                        |");
             for (int matrixIndex = 3; matrixIndex < 6; matrixIndex++)
             {
-                Console.Write("   " + gameArray[matrixIndex] + "   ");
+                Console.Write("  " + gameArray[matrixIndex] + "   |");
             }
-            Console.WriteLine();
-            Console.WriteLine("                        ______________________");
-            Console.WriteLine();
-            Console.Write("                        ");
+            Console.WriteLine("                        |      |      |      |");
+            Console.WriteLine("                        |      |      |      |");
+            Console.WriteLine("                        ----------------------");
+            Console.WriteLine("                        |      |      |      |");
+            Console.Write("                        |");
             for (int matrixIndex = 6; matrixIndex < 9; matrixIndex++)
             {
-                Console.Write("   " + gameArray[matrixIndex] + "   ");
+                Console.Write("  " + gameArray[matrixIndex] + "   |");
             }
-            Console.WriteLine();
-            Console.WriteLine("                        ______________________");
+            Console.WriteLine("                        |      |      |      |");
+            Console.WriteLine("                        |      |      |      |");
+            Console.WriteLine("                        ----------------------");
             Console.WriteLine();
         }
         public int CheckWin() // 이겼는지 측정하는 함수
