@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TicTacToe
 {
-    class ScanAndPrint // 메인에 표시되는 내용 위주를 담은 클래스
+    class ShowFirst // 메인에 표시되는 내용 위주를 담은 클래스
     {
         PrintAll printAll = new PrintAll();
         string[] menuNumberArray = { "1", "2", "3", "4" }; // 메뉴 번호를 배열에 저장 후 CheckNumber 함수에서 번호 확인할 때 사용
@@ -52,6 +52,7 @@ namespace TicTacToe
                 Console.Write("                원하시는 메뉴의 번호를 입력하세요 : ");
                 unknownNumber = Console.ReadLine();
                 Console.WriteLine();
+                printAll.ClearLine(2);
                 isMenuNumber = IsMenuNumber(isMenuNumber, menuNumberArray, unknownNumber);
             }
             return int.Parse(unknownNumber);

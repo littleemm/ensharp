@@ -6,7 +6,7 @@ namespace TicTacToe
 {
     class ShowScoreboard
     {
-        ScanAndPrint scanAndPrintBoard = new ScanAndPrint();
+        ShowFirst showFirstBoard = new ShowFirst();
         GameTictactoe tictactoeScoreBoard = new GameTictactoe();
         PrintGameElement printElement = new PrintGameElement();
 
@@ -19,15 +19,14 @@ namespace TicTacToe
         {
             Console.Clear();
             Console.WriteLine("----------------------------------------------------------------------");
-            Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("                             SCOREBOARD                               ");
-            Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine();
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("                           사용자와 컴퓨터                             ");
             Console.WriteLine("----------------------------------------------------------------------");
             PrintScoreBoardWithComputer();
+            Console.WriteLine();
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("                           사용자와 사용자                             ");
             Console.WriteLine("----------------------------------------------------------------------");
@@ -105,12 +104,13 @@ namespace TicTacToe
             Console.WriteLine("                             2: 종료");
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine();
+            Console.WriteLine();
         }
         private void OffScoreBoard() // 종료 키를 누른 후 한번 더 물어보는 항목
         {
             string[] offMenuNumberArray = { "1", "2" };
             PrintOffBoardMenu();
-            int checkedOffNumber = scanAndPrintBoard.ScanMenuNumber(offMenuNumberArray);
+            int checkedOffNumber = showFirstBoard.ScanMenuNumber(offMenuNumberArray);
             Console.Clear();
             if (checkedOffNumber == 1)
             {
@@ -118,12 +118,12 @@ namespace TicTacToe
                 {
                     case 0:
                         {
-                            scanAndPrintBoard.ShowMain();
+                            showFirstBoard.ShowMain();
                             break;
                         }
                     default:
                         {
-                            scanAndPrintBoard.ShowMainAgain();
+                            showFirstBoard.ShowMainAgain();
                             break;
                         }
                 }
@@ -131,7 +131,7 @@ namespace TicTacToe
             else
             {
                 printElement.PrintOffMenu();
-                checkedOffNumber = scanAndPrintBoard.ScanMenuNumber(offMenuNumberArray);
+                checkedOffNumber = showFirstBoard.ScanMenuNumber(offMenuNumberArray);
                 Console.Clear();
                 switch(checkedOffNumber)
                 {

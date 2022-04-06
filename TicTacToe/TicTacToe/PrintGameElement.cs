@@ -19,6 +19,7 @@ namespace TicTacToe
             Console.WriteLine("                              2: O 선택                               ");
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("----------------------------------------------------------------------");
+            Console.WriteLine();
         }
         public void PrintGameMatrix(char[] gameArray) // 게임 화면에 출력되는 게임 화면
         {
@@ -51,6 +52,7 @@ namespace TicTacToe
             Console.WriteLine("                        |      |      |      |");
             Console.WriteLine("                        ----------------------");
             Console.WriteLine();
+            Console.WriteLine();
         }
         public void PrintGoMenu() // 게임이 끝난 직후의 메뉴 출력
         {
@@ -61,6 +63,7 @@ namespace TicTacToe
             Console.WriteLine("                     3: 게임을 종료합니다.");
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("----------------------------------------------------------------------");
+            Console.WriteLine();
         }
         public void PrintOffMenu() // 게임을 종료하기 전에 메뉴 출력
         {
@@ -73,6 +76,9 @@ namespace TicTacToe
             Console.WriteLine("                               2: 취소");
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("----------------------------------------------------------------------");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
 
         }
     }

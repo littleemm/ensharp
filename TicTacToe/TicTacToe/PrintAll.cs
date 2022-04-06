@@ -20,14 +20,22 @@ namespace TicTacToe
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine();
+            Console.WriteLine();
         }
 
         public void PrintToScanAgain() // 잘못 입력했을 경우 출력되는 문구
         {
+            ClearLine(3);
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("                          다시 입력해주세요!                           ");
             Console.WriteLine("----------------------------------------------------------------------");
-            Console.WriteLine();
+        }
+    
+        public void ClearLine(int line)
+        {
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(0, Console.CursorTop - line);
         }
     }
 }

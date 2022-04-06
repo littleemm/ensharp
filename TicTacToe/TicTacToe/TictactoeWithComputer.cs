@@ -8,7 +8,7 @@ namespace TicTacToe
     {
         GameTictactoe gameWithComputer = new GameTictactoe();
         ShowScoreboard scoreCountWithComputer = new ShowScoreboard();
-        ScanAndPrint scanAndPrintMiniMenu = new ScanAndPrint();
+        ShowFirst showMiniMenu = new ShowFirst();
         PrintGameElement printComputerElement = new PrintGameElement();
         char[] signArray = { 'X', 'O' };
         private static int userSequenceNumber = 0; // 게임 횟수 측정을 위한 static 변수
@@ -98,7 +98,7 @@ namespace TicTacToe
         {
             string[] miniMenuNumberArray = { "1", "2", "3" };
             printComputerElement.PrintGoMenu();
-            int checkedMiniMenuNumber = scanAndPrintMiniMenu.ScanMenuNumber(miniMenuNumberArray);
+            int checkedMiniMenuNumber = showMiniMenu.ScanMenuNumber(miniMenuNumberArray);
             switch (checkedMiniMenuNumber)
             {
                 case 1:
@@ -111,7 +111,7 @@ namespace TicTacToe
                 case 2:
                     {
                         Console.Clear();
-                        scanAndPrintMiniMenu.ShowMainAgain();
+                        showMiniMenu.ShowMainAgain();
                         break;
                     }
                 case 3:
@@ -119,7 +119,7 @@ namespace TicTacToe
                         Console.Clear();
                         printComputerElement.PrintOffMenu();
                         string[] offMenuNumberArray = { "1", "2" };
-                        int checkedOffNumber = scanAndPrintMiniMenu.ScanMenuNumber(offMenuNumberArray);
+                        int checkedOffNumber = showMiniMenu.ScanMenuNumber(offMenuNumberArray);
                         Console.Clear();
                         if (checkedOffNumber == 1)
                         {

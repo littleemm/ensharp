@@ -6,7 +6,7 @@ namespace TicTacToe
     {
         static void Main(string[] args)
         {
-            ScanAndPrint scanAndPrint = new ScanAndPrint();
+            ShowFirst scanAndPrint = new ShowFirst();
             scanAndPrint.ShowMain();
         }
     }

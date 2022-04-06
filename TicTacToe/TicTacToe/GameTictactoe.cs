@@ -7,7 +7,7 @@ namespace TicTacToe
     class GameTictactoe // 게임에 필요한 요소를 담은 클래스 (공통되는 경우가 많음)
     {
         public char[] gameArray = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-        ScanAndPrint scanAndPrint = new ScanAndPrint();
+        ShowFirst showFirst = new ShowFirst();
         PrintGameElement printGameElement = new PrintGameElement();
 
         public int CheckUserNumber(int checkedSequenceNumber) // 순서 입력 받기
@@ -18,17 +18,18 @@ namespace TicTacToe
 
             while (isSequenceNumber == false)
             {
-                Console.WriteLine();
+
                 Console.WriteLine("----------------------------------------------------------------------");
                 Console.Write("              원하시는 순서의 번호를 입력하세요 : ");
                 unknownSequenceNumber = Console.ReadLine();
                 Console.WriteLine("----------------------------------------------------------------------");
-                Console.WriteLine();
-                isSequenceNumber = scanAndPrint.IsMenuNumber(isSequenceNumber, sequenceNumbers, unknownSequenceNumber);
+                ClearLine(3);
+                isSequenceNumber = showFirst.IsMenuNumber(isSequenceNumber, sequenceNumbers, unknownSequenceNumber);
             }
 
             return int.Parse(unknownSequenceNumber);
         }
+        
         public void PlayOfUser(char choosedSign) // 유저 게임 버전
         {
             Console.Clear();
@@ -48,8 +49,8 @@ namespace TicTacToe
                 Console.Write("                 원하시는 칸의 번호를 입력하세요 : ");
                 userMatrixNumber = Console.ReadLine();
                 Console.WriteLine("----------------------------------------------------------------------");
-                Console.WriteLine();
-                isCorrectNumber = scanAndPrint.IsMenuNumber(isCorrectNumber, matrixNumberToCompare, userMatrixNumber);
+                ClearLine(4);
+                isCorrectNumber = showFirst.IsMenuNumber(isCorrectNumber, matrixNumberToCompare, userMatrixNumber);
                 if (isCorrectNumber == true)
                 {
                     isUserMatrixNumber = IsUserMatrixNumber(userMatrixNumber, isUserMatrixNumber);
@@ -68,7 +69,6 @@ namespace TicTacToe
             }
 
         }
-
         public bool IsUserMatrixNumber(string userMatrixNumber, bool isUserMatrixNumber) // 게임에서 중복된 칸을 선택할 수 없으므로 그것을 판별하는 함수
         {
             if (gameArray[int.Parse(userMatrixNumber) - 1] - '0' == int.Parse(userMatrixNumber))
@@ -77,12 +77,15 @@ namespace TicTacToe
             }
             else
             {
-                Console.Write("         이미 표시된 칸입니다. 다른 칸의 번호를 선택하세요!");
-                Console.WriteLine();
+                ClearLine(3);
+                Console.WriteLine("----------------------------------------------------------------------");
+                Console.WriteLine("         이미 표시된 칸입니다. 다른 칸의 번호를 선택하세요!               ");
+                Console.WriteLine("----------------------------------------------------------------------");
             }
             return isUserMatrixNumber;
 
         }
+        
         public void PlayOfComputer(char computerSign, char userSign) // 컴퓨터 게임 버전
         {
             Random makeRandomNumber = new Random(); // 난수를 만들어야 하기 때문
@@ -297,6 +300,7 @@ namespace TicTacToe
             }
             return isComputerMatrixNumber;
         }
+        
         public int CheckWin() // 이겼는지 측정하는 함수
         {
             int checkWinGame;
@@ -381,6 +385,7 @@ namespace TicTacToe
             }
             return 0;
         }
+        
         public void ClearArray() // 한 세트가 끝나면 다음 게임을 위해 배열을 처음으로 돌려놓는 함수
         {
             for (int arrayIndex = 0; arrayIndex < 9; arrayIndex++)
@@ -388,6 +393,12 @@ namespace TicTacToe
                 string temporaryString = (arrayIndex + 1).ToString();
                 gameArray[arrayIndex] = temporaryString[0];
             }
+        }
+        private void ClearLine(int line)
+        {
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(0, Console.CursorTop - line);
         }
     }
 }
