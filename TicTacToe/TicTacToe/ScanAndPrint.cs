@@ -59,7 +59,7 @@ namespace TicTacToe
 
         private void SelectMenu(int checkedMenuNumber) // 초기에 메뉴를 고르게 하는 함수
         {
-            switch(checkedMenuNumber)
+            switch (checkedMenuNumber)
             {
                 case 1: // 컴퓨터와 게임
                     {

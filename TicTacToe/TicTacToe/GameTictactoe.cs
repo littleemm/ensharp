@@ -71,7 +71,7 @@ namespace TicTacToe
             }
 
             gameArray[int.Parse(userMatrixNumber) - 1] = choosedSign;
-            if(CheckWin() == 1) // 이겼는지 체크
+            if (CheckWin() == 1) // 이겼는지 체크
             {
                 Console.Clear();
                 PrintGameMatrix();
@@ -81,7 +81,7 @@ namespace TicTacToe
             }
 
         }
-        
+
         public bool IsUserMatrixNumber(string userMatrixNumber, bool isUserMatrixNumber) // 게임에서 중복된 칸을 선택할 수 없으므로 그것을 판별하는 함수
         {
             if (gameArray[int.Parse(userMatrixNumber) - 1] - '0' == int.Parse(userMatrixNumber))
@@ -145,7 +145,7 @@ namespace TicTacToe
         {
             int checkedMatrixNumber = 0;
 
-            int matrixIndexToCheck = 0; 
+            int matrixIndexToCheck = 0;
             int countSign = 0;
             checkedMatrixNumber = CheckComputerNumberRow(sign, matrixIndexToCheck, countSign);
             if (checkedMatrixNumber > 0) return checkedMatrixNumber;
@@ -170,7 +170,7 @@ namespace TicTacToe
                 for (int loopCount = matrixIndexToCheck; loopCount < matrixIndexToCheck + 3; loopCount++)
                 {
                     if (gameArray[loopCount] == sign) countSign++;
-                    else index = loopCount; 
+                    else index = loopCount;
                 }
 
                 if (countSign == 2) // 가로 한줄에 같은 문자 두개가 있을 경우
@@ -199,7 +199,7 @@ namespace TicTacToe
                     return index + 1;
                 }
                 matrixIndexToCheck += 1;
-                countSign = 0; 
+                countSign = 0;
             }
 
             return 0;
@@ -212,7 +212,7 @@ namespace TicTacToe
                 if (gameArray[loopCount] == sign) countSign++;
                 else index = loopCount;
             }
-            
+
             if (countSign == 2) // 2번 비교해서 대각선 한줄의 문자가 모두 같을 경우
             {
                 return index + 1;
@@ -225,8 +225,8 @@ namespace TicTacToe
                 if (gameArray[loopCount] == sign) countSign++;
                 else index = loopCount;
             }
-            
-            if (countSign == 2) 
+
+            if (countSign == 2)
             {
                 return index + 1;
             }
@@ -316,7 +316,7 @@ namespace TicTacToe
             Console.WriteLine("                        ______________________");
             Console.WriteLine();
             Console.Write("                        ");
-            for (int matrixIndex = 0;matrixIndex < 3;matrixIndex++)
+            for (int matrixIndex = 0; matrixIndex < 3; matrixIndex++)
             {
                 Console.Write("   " + gameArray[matrixIndex] + "   ");
             }
@@ -343,7 +343,7 @@ namespace TicTacToe
         public int CheckWin() // 이겼는지 측정하는 함수
         {
             int checkWinGame;
-            
+
             //가로
             int matrixIndexToCheck = 0; // 칸의 인덱스 시작점을 나타내는 변수
             int semiWinCount = 0; // 우승횟수 측정을 위한 count 변수
@@ -364,7 +364,7 @@ namespace TicTacToe
 
             return 0; // 하나도 못 이긴 상황
         }
-        private int CheckRowWin (int matrixIndexToCheck, int semiWinCount) // 가로 줄 체크
+        private int CheckRowWin(int matrixIndexToCheck, int semiWinCount) // 가로 줄 체크
         {
             for (int count = 0; count < 3; count++)
             { // 가로는 3줄이므로 3번 반복
@@ -426,7 +426,7 @@ namespace TicTacToe
         }
         public void ClearArray() // 한 세트가 끝나면 다음 게임을 위해 배열을 처음으로 돌려놓는 함수
         {
-            for (int arrayIndex = 0; arrayIndex < 9; arrayIndex++) 
+            for (int arrayIndex = 0; arrayIndex < 9; arrayIndex++)
             {
                 string temporaryString = (arrayIndex + 1).ToString();
                 gameArray[arrayIndex] = temporaryString[0];

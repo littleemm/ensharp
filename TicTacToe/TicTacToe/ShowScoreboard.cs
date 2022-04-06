@@ -6,6 +6,8 @@ namespace TicTacToe
 {
     class ShowScoreboard
     {
+        ScanAndPrint scanAndPrintBoard = new ScanAndPrint();
+        GameTictactoe tictactoeScoreBoard = new GameTictactoe();
 
         static List<int> scoreListComputerX = new List<int>();
         static List<int> scoreListComputerO = new List<int>();
@@ -105,8 +107,6 @@ namespace TicTacToe
         }
         private void OffScoreBoard() // 종료 키를 누른 후 한번 더 물어보는 항목
         {
-            ScanAndPrint scanAndPrintBoard = new ScanAndPrint();
-            GameTictactoe tictactoeScoreBoard = new GameTictactoe();
             string[] offMenuNumberArray = { "1", "2" };
             PrintOffBoardMenu();
             int checkedOffNumber = scanAndPrintBoard.ScanMenuNumber(offMenuNumberArray);
