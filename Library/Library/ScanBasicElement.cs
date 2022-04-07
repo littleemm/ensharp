@@ -10,13 +10,13 @@ namespace Library
         string menuNumber;
         string[] menuNumberArray = { "1", "2", "3" };
 
-        public ScanBasicElement()
-        {
-            isMenuNumber = false; // 메뉴 번호를 제대로 입력받았는지 확인을 위한 변수
-            menuNumber = ""; // 입력될 메뉴 번호 (다른 문자가 입력될 수 있어 string)
+        public ScanBasicElement() 
+        { // 생성자
+            isMenuNumber = false; // 메뉴 번호 확인 변수
+            menuNumber = ""; // 입력될 메뉴 번호
         }
-        public int SelectMenu() // 메뉴 입력
-        {
+        public int SelectMenu()
+        { // 메뉴 입력
             while (isMenuNumber == false)
             {
                 Console.Write("           원하시는 기능의 번호를 입력하세요 : ");
@@ -51,7 +51,7 @@ namespace Library
             return isMenuNumber;
         }
         public void ClearLine(int line)
-        {
+        { // 라인 한줄씩 청소
             Console.SetCursorPosition(0, Console.CursorTop);
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(0, Console.CursorTop - line);
