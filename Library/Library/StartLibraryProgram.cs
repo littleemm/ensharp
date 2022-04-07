@@ -2,11 +2,12 @@
 
 namespace Library
 {
-    class Program
+    class StartLibraryProgram
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ShowMain showMain = new ShowMain();
+            showMain.ShowPage();
         }
     }
 }
