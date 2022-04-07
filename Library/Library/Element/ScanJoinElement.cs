@@ -45,18 +45,18 @@ namespace Library
 
         public void ScanBirth()
         {
-            Console.Write("               BIRTH(YYYYMMDD) : ");
+            Console.Write("            BIRTH(YYYYMMDD) : ");
             birth = Console.ReadLine();
         }
         public void ScanPhoneNumber()
         {
-            Console.Write("               PHONE NUMBER('-' 제외) : ");
+            Console.Write("            PHONE NUMBER('-' 제외) : ");
             phoneNumber = Console.ReadLine();
         }
 
         public void ScanAddress()
         {
-            Console.Write("            ADDRESS(ex. 서울시 광진구) : ");
+            Console.Write("         ADDRESS(ex. 서울시 광진구) : ");
             address = Console.ReadLine();
         }
     }
