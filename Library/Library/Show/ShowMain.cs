@@ -8,6 +8,7 @@ namespace Library
     {
         ScanBasicElement scanElement = new ScanBasicElement();
         PrintBasicElement printElement = new PrintBasicElement();
+        ShowLogin showLogin = new ShowLogin();
         int realMenuNumber;
         public ShowMain()
         {
@@ -22,7 +23,7 @@ namespace Library
             {
                 case 1:
                     {
-
+                        showLogin.showLoginPage();
                         break;
                     }
                 case 2:

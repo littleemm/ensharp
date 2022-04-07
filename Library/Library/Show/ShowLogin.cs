@@ -6,5 +6,32 @@ namespace Library
 {
     class ShowLogin
     {
+        ScanLoginElement scanLoginElement = new ScanLoginElement();
+        public ShowLogin()
+        { // 생성자
+
+        }
+        public void showLoginPage()
+        {
+            Console.Clear();
+            PrintLoginPage();
+            scanLoginElement.ScanInformation();
+        }
+        public void PrintLoginPage()
+        {
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("           *                 *                 *            ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine(" *                  *                  *                  * ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("                      W E L C O M E T O                      ");
+            Console.WriteLine("                      L O G I N P A G E                      ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine(" *                  *                  *                  * ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("           *                 *                 *            ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("                                                           ");
+        }
     }
 }
