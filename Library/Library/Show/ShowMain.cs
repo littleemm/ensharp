@@ -9,6 +9,7 @@ namespace Library
         ScanBasicElement scanElement = new ScanBasicElement();
         PrintBasicElement printElement = new PrintBasicElement();
         ShowLogin showLogin = new ShowLogin();
+        ShowJoin showJoin = new ShowJoin();
         int realMenuNumber;
         public ShowMain()
         {
@@ -23,11 +24,12 @@ namespace Library
             {
                 case 1:
                     {
-                        showLogin.showLoginPage();
+                        showLogin.ShowLoginPage();
                         break;
                     }
                 case 2:
                     {
+                        showJoin.ShowJoinPage();
                         break;
                     }
                 case 3:

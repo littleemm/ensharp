@@ -15,7 +15,7 @@ namespace Library
             password = "";
         }
         
-        public void ScanInformation()
+        public void ScanInformation() // 로그인
         {
             Console.Write("                    ID : ");
             id = Console.ReadLine();
