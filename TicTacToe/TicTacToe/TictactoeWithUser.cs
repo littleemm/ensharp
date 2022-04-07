@@ -11,6 +11,8 @@ namespace TicTacToe
         ShowFirst showUserMiniMenu = new ShowFirst();
         PrintGameElement printUserElement = new PrintGameElement();
         char[] signArray = { 'X', 'O' };
+        public const int LOOPGAMES = 4;
+        public const int DRAWGAMES = 8;
 
         public void StartGameWithUser()
         {
@@ -23,7 +25,7 @@ namespace TicTacToe
         {
             int countGame = 0;
             gameWithUser.PlayOfUser(signArray[0]);
-            for (int count = 0; count < 9 / 2; count++)
+            for (int count = 0; count < LOOPGAMES; count++)
             {
                 gameWithUser.PlayOfUser(signArray[1]);
                 if (gameWithUser.CheckWin() == 1)
@@ -39,7 +41,7 @@ namespace TicTacToe
                 }
                 countGame += 2;
             }
-            if (countGame == 8)
+            if (countGame == DRAWGAMES)
             {
                 scoreCountWithUser.DrawGameWithUser();
             }

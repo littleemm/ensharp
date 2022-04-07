@@ -12,6 +12,8 @@ namespace TicTacToe
         PrintGameElement printComputerElement = new PrintGameElement();
         char[] signArray = { 'X', 'O' };
         private static int userSequenceNumber = 0; // 게임 횟수 측정을 위한 static 변수
+        public const int LOOPGAMES = 4;
+        public const int DRAWGAMES = 8;
 
         public void StartGameWithComputer() // 초기 게임 시작
         {
@@ -43,7 +45,7 @@ namespace TicTacToe
                         Console.Clear();
 
                         gameWithComputer.PlayOfUser(signArray[0]);
-                        for (int count = 0; count < 9 / 2; count++)
+                        for (int count = 0; count < LOOPGAMES; count++)
                         {
                             gameWithComputer.PlayOfComputer(signArray[1], signArray[0]);
                             if (gameWithComputer.CheckWin() == 1)
@@ -60,7 +62,7 @@ namespace TicTacToe
                             countGame += 2;
                         }
 
-                        if (countGame == 8)
+                        if (countGame == DRAWGAMES)
                         {
                             scoreCountWithComputer.DrawGameWithComputer();
                         }
