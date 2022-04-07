@@ -6,16 +6,15 @@ namespace Library
 {
     class ScanBasicElement
     {
-        public bool isMenuNumber;
-        string menuNumber;
-        string[] menuNumberArray = { "1", "2", "3" };
+        private bool isMenuNumber;
+        private string menuNumber;
 
         public ScanBasicElement() 
         { // 생성자
             isMenuNumber = false; // 메뉴 번호 확인 변수
             menuNumber = ""; // 입력될 메뉴 번호
         }
-        public int SelectMenu()
+        public int SelectMenu(string[] menuNumberArray)
         { // 메뉴 입력
             while (isMenuNumber == false)
             {

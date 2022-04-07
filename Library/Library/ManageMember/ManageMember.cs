@@ -4,45 +4,34 @@ using System.Text;
 
 namespace Library
 {
-    class ManageBook
+    class ManageMember
     {
-        ScanBasicElement scanBookInformation = new ScanBasicElement();
-        RegisterBook registerBook = new RegisterBook();
-        EditBook editBook = new EditBook();
-        DeleteBook deleteBook = new DeleteBook();
-
-        private string[] menuNumberArray = { "1", "2", "3" };
         private int menuNumber;
 
-        public ManageBook()
+        public void ShowManageMember()
         {
-
-        }
-        public void ShowManageBook()
-        {
-            PrintManageBookMenu();
+            PrintManageMemberMenu();
             menuNumber = scanBookInformation.SelectMenu(menuNumberArray);
             switch (menuNumber)
             {
                 case 1:
                     {
-                        registerBook.RegisterNewBook();
+                        registerMember.RegisterNewBook();
                         break;
                     }
                 case 2:
                     {
-                        editBook.EditLibraryBook();
+                        editMember.EditLibraryBook();
                         break;
                     }
                 case 3:
                     {
-                        deleteBook.DeleteLibraryBook();
+                        deleteMember.DeleteLibraryBook();
                         break;
                     }
             }
         }
-
-        public void PrintManageBookMenu()
+        public void PrintManageMemberMenu()
         {
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
@@ -66,5 +55,4 @@ namespace Library
             Console.WriteLine("                                                           ");
         }
     }
-
 }

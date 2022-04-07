@@ -10,7 +10,10 @@ namespace Library
         PrintBasicElement printElement = new PrintBasicElement();
         ShowLogin showLogin = new ShowLogin();
         ShowJoin showJoin = new ShowJoin();
-        int realMenuNumber;
+        
+        private int realMenuNumber;
+        private string[] menuNumberArray = { "1", "2", "3" };
+
         public ShowMain()
         {
 
@@ -18,7 +21,7 @@ namespace Library
         public void ShowPage()
         {
             printElement.PrintLibraryMain();
-            realMenuNumber = scanElement.SelectMenu();
+            realMenuNumber = scanElement.SelectMenu(menuNumberArray);
             
             switch(realMenuNumber)
             {
