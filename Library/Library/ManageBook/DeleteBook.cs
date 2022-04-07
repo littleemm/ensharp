@@ -4,37 +4,35 @@ using System.Text;
 
 namespace Library
 {
-    class EditBook
+    class DeleteBook
     {
         BookVO bookVO = new BookVO();
-        FindBookInformation findEditBookInformation = new FindBookInformation();
+        FindBookInformation findDeleteBookInformation = new FindBookInformation();
         private bool isBookName; // 일치하는 책 제목인지 판별
         private int bookListIndex; // 책 제목에 따른 리스트 인덱스
         private string bookName; // 책 이름
 
-        public EditBook()
+        public DeleteBook()
         {
             isBookName = false;
             bookName = "";
         }
-
-        public void EditLibraryBook()
+        public void DeleteLibraryBook()
         {
             Console.Clear();
-            PrintEditBook();
-            bookName = findEditBookInformation.ScanFindBook(isBookName);
-            bookListIndex = findEditBookInformation.FindListIndex(bookName);
-            EditBookQuantity(bookListIndex);
-        }
+            PrintDeleteBook();
+            bookName = findDeleteBookInformation.ScanFindBook(isBookName);
+            bookListIndex = findDeleteBookInformation.FindListIndex(bookName);
 
-        public void PrintEditBook()
+        }
+        public void PrintDeleteBook()
         {
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
             Console.WriteLine("                                                           ");
-            Console.WriteLine("                     EDIT BOOK QUANTITY                     ");
+            Console.WriteLine("                     DELETE A BOOK T_T                     ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
             Console.WriteLine("                                                           ");
@@ -42,13 +40,9 @@ namespace Library
             Console.WriteLine("                                                           ");
             Console.WriteLine("                                                           ");
         }
-
-        public void EditBookQuantity(int listIndex) // 수량 변경
+        public void DeleteBookInformation(int listIndex)
         {
-            Console.Write("                  수량을 입력하세요 : ");
-            bookVO.Quantity = Console.ReadLine(); ///////// 예외처리
-
-            SetBookData.bookList[listIndex].Quantity = bookVO.Quantity;
+            SetBookData.bookList[listIndex] = null;
         }
     }
 }
