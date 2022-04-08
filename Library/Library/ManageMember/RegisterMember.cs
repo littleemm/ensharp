@@ -37,7 +37,7 @@ namespace Library
             Console.WriteLine("                                                           ");
         }
 
-        public void ScanRegisterBook()
+        public void ScanRegisterMember()
         {
             Console.Write("                   ID : ");
             memberVO.Id = Console.ReadLine();

@@ -24,7 +24,7 @@ namespace Library
             PrintEditMember();
             memberId = findEditMemberInformation.ScanFindMember(isMemberId);
             memberListIndex = findEditMemberInformation.FindListIndex(memberId);
-            EditBookQuantity(bookListIndex);
+            Edit(memberListIndex);
         }
         public void PrintEditMember()
         {

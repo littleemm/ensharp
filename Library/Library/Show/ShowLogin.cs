@@ -7,11 +7,15 @@ namespace Library
     class ShowLogin
     {
         ScanLoginElement scanLoginElement = new ScanLoginElement();
+        CheckLoginInformation checkLoginInformation = new CheckLoginInformation();
+        
+        bool isMemberInformation;
+
         public ShowLogin()
         { // 생성자
-
+            isMemberInformation = false;
         }
-        public void ShowLoginPage()
+        public void ShowLoginPage() // 로그인 페이지 실행
         {
             Console.Clear();
             PrintLoginPage();
