@@ -10,8 +10,9 @@ namespace Library
         RegisterMember registerMember = new RegisterMember();
         EditMember editMember = new EditMember();
         DeleteMember deleteMember = new DeleteMember();
+        PrintMemberList printMemberList = new PrintMemberList();
 
-        private string[] menuNumberArray = { "1", "2", "3" };
+        private string[] menuNumberArray = { "1", "2", "3", "4", "5" };
         private int menuNumber;
 
         public void ShowManageMember()
@@ -36,6 +37,15 @@ namespace Library
                         deleteMember.DeleteLibraryMember();
                         break;
                     }
+                case 4:
+                    {
+                        break;
+                    }
+                case 5:
+                    {
+                        printMemberList.PrintMemberMain();
+                        break;
+                    }
             }
         }
         public void PrintManageMemberMenu()
@@ -54,6 +64,8 @@ namespace Library
             Console.WriteLine("                     1. REGISTER MEMBER                    ");
             Console.WriteLine("                     2. EDIT MEMBER                        ");
             Console.WriteLine("                     3. DELETE MEMBER                      ");
+            Console.WriteLine("                     4. SEARCH MEMBER                      ");
+            Console.WriteLine("                     5. MEMBER LIST                      ");
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");

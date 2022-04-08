@@ -50,7 +50,6 @@ namespace Library
                 if (id.Equals(memberData.memberList[listIndex].Id))
                 {
                     memberListIndex = listIndex;
-                    Console.WriteLine(listIndex);
                     break;
                 }
             }

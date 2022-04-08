@@ -43,7 +43,7 @@ namespace Library
             { // 올바르지 않은 입력
                 ClearLine(2);
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("           1 ~ 3 사이의 정수로 다시 입력해주세요!");
+                Console.WriteLine("           메뉴에 해당하는 정수로 다시 입력해주세요!");
                 Console.ResetColor();
             }
 

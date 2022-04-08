@@ -10,8 +10,9 @@ namespace Library
         RegisterBook registerBook = new RegisterBook();
         EditBook editBook = new EditBook();
         DeleteBook deleteBook = new DeleteBook();
+        PrintBookList printBookList = new PrintBookList();
 
-        private string[] menuNumberArray = { "1", "2", "3" };
+        private string[] menuNumberArray = { "1", "2", "3", "4", "5" };
         private int menuNumber;
 
         public ManageBook()
@@ -41,6 +42,15 @@ namespace Library
                         deleteBook.DeleteLibraryBook();
                         break;
                     }
+                case 4:
+                    {
+                        break;
+                    }
+                case 5:
+                    {
+                        printBookList.PrintBookMain();
+                        break;
+                    }
             }
         }
 
@@ -60,6 +70,8 @@ namespace Library
             Console.WriteLine("                      1. REGISTER BOOK                    ");
             Console.WriteLine("                      2. EDIT BOOK                        ");
             Console.WriteLine("                      3. DELETE BOOK                      ");
+            Console.WriteLine("                      4. SEARCH BOOK                      ");
+            Console.WriteLine("                      5. BOOK LIST                      ");
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");

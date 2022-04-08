@@ -47,7 +47,6 @@ namespace Library
         {
             memberData.memberList.RemoveAt(listIndex);
             Console.WriteLine("                 성공적으로 처리되었습니다 ");
-            Console.WriteLine(memberData.memberList.Count);
         }
     }
 }
