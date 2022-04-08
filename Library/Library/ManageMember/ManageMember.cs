@@ -6,27 +6,33 @@ namespace Library
 {
     class ManageMember
     {
+        ScanBasicElement scanMemberInformation = new ScanBasicElement();
+        RegisterMember registerMember = new RegisterMember();
+        EditMember editMember = new EditMember();
+        DeleteMember deleteMember = new DeleteMember();
+
+        private string[] menuNumberArray = { "1", "2", "3" };
         private int menuNumber;
 
         public void ShowManageMember()
         {
             PrintManageMemberMenu();
-            menuNumber = scanBookInformation.SelectMenu(menuNumberArray);
+            menuNumber = scanMemberInformation.SelectMenu(menuNumberArray);
             switch (menuNumber)
             {
                 case 1:
                     {
-                        registerMember.RegisterNewBook();
+                        registerMember.RegisterNewMember();
                         break;
                     }
                 case 2:
                     {
-                        editMember.EditLibraryBook();
+                        editMember.EditLibraryMember();
                         break;
                     }
                 case 3:
                     {
-                        deleteMember.DeleteLibraryBook();
+                        deleteMember.DeleteLibraryMember();
                         break;
                     }
             }

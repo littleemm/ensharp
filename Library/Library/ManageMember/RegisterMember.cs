@@ -13,6 +13,14 @@ namespace Library
         {
             size = (SetMemberData.memberList).Count;
         }
+
+        public void RegisterNewMember()
+        {
+            Console.Clear();
+            PrintRegisterMember();
+            ScanRegisterMember();
+        }
+
         public void PrintRegisterMember()
         {
             Console.WriteLine("                                                           ");
