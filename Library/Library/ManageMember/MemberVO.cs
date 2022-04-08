@@ -45,6 +45,12 @@ namespace Library
             get { return name; }
             set { name = value; }
         }
+        public string Birth
+        {
+            get { return birth; }
+            set { birth = value; }
+        }
+
 
         public string PhoneNumber
         {
