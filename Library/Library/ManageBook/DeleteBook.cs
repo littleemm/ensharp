@@ -24,7 +24,7 @@ namespace Library
             PrintDeleteBook();
             bookName = findDeleteBookInformation.ScanFindBook(isBookName);
             bookListIndex = findDeleteBookInformation.FindListIndex(bookName);
-
+            DeleteBookInformation(bookListIndex);
         }
         public void PrintDeleteBook()
         {
@@ -43,7 +43,8 @@ namespace Library
         }
         public void DeleteBookInformation(int listIndex)
         {
-            bookData.bookList[listIndex] = null;
+            bookData.bookList.RemoveAt(listIndex);
+            Console.WriteLine("                 성공적으로 처리되었습니다 ");
         }
     }
 }

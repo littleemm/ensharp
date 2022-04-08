@@ -7,11 +7,11 @@ namespace Library
     class RegisterMember
     {
         MemberVO memberVO = new MemberVO();
-        int size;
+        SetMemberData memberData = new SetMemberData();
         
         public RegisterMember()
         {
-            size = (SetMemberData.memberList).Count;
+
         }
 
         public void RegisterNewMember()
@@ -52,7 +52,7 @@ namespace Library
             Console.Write("                   ADDRESS(ex. 서울시 광진구) : ");
             memberVO.Address = Console.ReadLine(); ///////// 예외처리
 
-            SetMemberData.memberList[++size] = new MemberVO(memberVO.Id, memberVO.Password, memberVO.Name, memberVO.Birth, memberVO.PhoneNumber, memberVO.Address);
+            memberData.memberList.Add(new MemberVO(memberVO.Id, memberVO.Password, memberVO.Name, memberVO.Birth, memberVO.PhoneNumber, memberVO.Address));
         }
     }
 }

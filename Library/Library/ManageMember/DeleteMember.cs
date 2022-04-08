@@ -7,9 +7,11 @@ namespace Library
     class DeleteMember
     {
         MemberVO memberVO = new MemberVO();
+        SetMemberData memberData = new SetMemberData();
         FindMemberInformation findDeleteMemberInformation = new FindMemberInformation();
+        
         private bool isMemberId; // 일치하는 회원 id인지 판별
-        private int bookListIndex; // 회원 리스트 인덱스
+        private int memberListIndex; // 회원 리스트 인덱스
         private string memberId; // 회원 id
 
         public DeleteMember()
@@ -22,7 +24,8 @@ namespace Library
             Console.Clear();
             PrintDeleteMember();
             memberId = findDeleteMemberInformation.ScanFindMember(isMemberId);
-            bookListIndex = findDeleteMemberInformation.FindListIndex(memberId);
+            memberListIndex = findDeleteMemberInformation.FindListIndex(memberId);
+            DeleteMemberInformation(memberListIndex);
         }
 
         public void PrintDeleteMember()
@@ -40,9 +43,11 @@ namespace Library
             Console.WriteLine("                                                           ");
             Console.WriteLine("                                                           ");
         }
-        public void DeleteBookInformation(int listIndex)
+        public void DeleteMemberInformation(int listIndex)
         {
-            SetMemberData.memberList[listIndex] = null;
+            memberData.memberList.RemoveAt(listIndex);
+            Console.WriteLine("                 성공적으로 처리되었습니다 ");
+            Console.WriteLine(memberData.memberList.Count);
         }
     }
 }

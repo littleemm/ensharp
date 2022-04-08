@@ -7,6 +7,7 @@ namespace Library
     class CheckLoginInformation
     {
         MemberVO administratorVersion;
+        SetMemberData memberData = new SetMemberData();
         ShowAdministratorPage showAdministratorPage;
 
         bool isAdministratorValue;
@@ -56,11 +57,11 @@ namespace Library
 
         public bool IsMember(string inputId, string inputPassword) // 회원인지 체크
         {
-            for (int i = 0; i < (SetMemberData.memberList).Count; i++) 
+            for (int i = 0; i < (memberData.memberList).Count; i++) 
             {
-                if (inputId.Equals(SetMemberData.memberList[i].Id))
+                if (inputId.Equals(memberData.memberList[i].Id))
                 {
-                    if (inputPassword.Equals(SetMemberData.memberList[i].Password))
+                    if (inputPassword.Equals(memberData.memberList[i].Password))
                     {
                         return true;
                     }

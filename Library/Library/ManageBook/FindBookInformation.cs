@@ -18,8 +18,7 @@ namespace Library
         {
             while (isBookName == false)
             {
-                Console.WriteLine((bookData.bookList).Count);
-                Console.Write("                    책의 제목을 입력하세요 : ");
+                Console.Write("              책 제목을 입력하세요 : ");
                 bookVO.Name = Console.ReadLine();
                 isBookName = IsBookName(isBookName, bookVO.Name);
             }
@@ -38,7 +37,7 @@ namespace Library
 
             if (isBookName == false)
             {
-                Console.WriteLine("            일치하는 책 제목이 없습니다! 다시 입력하세요.         ");
+                Console.WriteLine("        일치하는 책 제목이 없습니다! 다시 입력하세요.         ");
             }
 
             return isBookName;

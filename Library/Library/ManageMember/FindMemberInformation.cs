@@ -7,6 +7,7 @@ namespace Library
     class FindMemberInformation
     {
         MemberVO memberVO = new MemberVO();
+        SetMemberData memberData = new SetMemberData();
         private int memberListIndex;
 
         public FindMemberInformation()
@@ -17,18 +18,18 @@ namespace Library
         {
             while (isMemberId == false)
             {
-                Console.Write("                    회원 ID를 입력하세요 : ");
+                Console.Write("                 회원 ID를 입력하세요 : ");
                 memberVO.Id = Console.ReadLine();
                 isMemberId = IsMemberId(isMemberId, memberVO.Id);
             }
 
-            return memberVO.Name;
+            return memberVO.Id;
         }
         public bool IsMemberId(bool isMemberId, string id)
         {
-            for (int listIndex = 0; listIndex < SetMemberData.memberList.Count; listIndex++)
+            for (int listIndex = 0; listIndex < memberData.memberList.Count; listIndex++)
             {
-                if (id.Equals(SetMemberData.memberList[listIndex].Id))
+                if (id.Equals(memberData.memberList[listIndex].Id))
                 {
                     isMemberId = true;
                 }
@@ -44,11 +45,12 @@ namespace Library
 
         public int FindListIndex(string id)
         {
-            for (int listIndex = 0; listIndex < SetMemberData.memberList.Count; listIndex++)
+            for (int listIndex = 0; listIndex < memberData.memberList.Count; listIndex++)
             {
-                if (id.Equals(SetMemberData.memberList[listIndex].Id))
+                if (id.Equals(memberData.memberList[listIndex].Id))
                 {
                     memberListIndex = listIndex;
+                    Console.WriteLine(listIndex);
                     break;
                 }
             }
