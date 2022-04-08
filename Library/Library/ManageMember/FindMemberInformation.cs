@@ -28,7 +28,7 @@ namespace Library
         {
             for (int listIndex = 0; listIndex < SetMemberData.memberList.Count; listIndex++)
             {
-                if (id.Equals(SetBookData.bookList[listIndex].Id))
+                if (id.Equals(SetMemberData.memberList[listIndex].Id))
                 {
                     isMemberId = true;
                 }

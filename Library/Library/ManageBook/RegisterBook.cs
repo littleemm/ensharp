@@ -7,11 +7,12 @@ namespace Library
     class RegisterBook
     {
         BookVO bookVO = new BookVO();
+        SetBookData bookData = new SetBookData();
         int size;
 
         public RegisterBook()
         { // 생성자
-            size = (SetBookData.bookList).Count;
+            size = (bookData.bookList).Count;
         }
 
         public void RegisterNewBook()
@@ -51,7 +52,7 @@ namespace Library
             Console.Write("                   수량 : ");
             bookVO.Quantity = Console.ReadLine(); ///////// 예외처리
 
-            SetBookData.bookList[++size] = new BookVO(bookVO.Name, bookVO.Id, bookVO.Publisher, bookVO.Author, bookVO.Price, bookVO.Quantity);
+            bookData.bookList[++size] = new BookVO(bookVO.Name, bookVO.Id, bookVO.Publisher, bookVO.Author, bookVO.Price, bookVO.Quantity);
         }
     }
 }

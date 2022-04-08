@@ -52,7 +52,7 @@ namespace Library
             Console.Write("                   ADDRESS(ex. 서울시 광진구) : ");
             memberVO.Address = Console.ReadLine(); ///////// 예외처리
 
-            SetBookData.bookList[++size] = new BookVO(memberVO.Id, memberVO.Password, memberVO.Name, memberVO.Birth, memberVO.PhoneNumber, memberVO.Address);
+            SetMemberData.memberList[++size] = new MemberVO(memberVO.Id, memberVO.Password, memberVO.Name, memberVO.Birth, memberVO.PhoneNumber, memberVO.Address);
         }
     }
 }

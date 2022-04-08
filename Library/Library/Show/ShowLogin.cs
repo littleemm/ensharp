@@ -8,12 +8,10 @@ namespace Library
     {
         ScanLoginElement scanLoginElement = new ScanLoginElement();
         CheckLoginInformation checkLoginInformation = new CheckLoginInformation();
-        
-        bool isMemberInformation;
 
         public ShowLogin()
         { // 생성자
-            isMemberInformation = false;
+            
         }
         public void ShowLoginPage() // 로그인 페이지 실행
         {

@@ -7,6 +7,7 @@ namespace Library
     class FindBookInformation
     {
         BookVO bookVO = new BookVO();
+        SetBookData bookData = new SetBookData();
         private int bookListIndex;
 
         public FindBookInformation()
@@ -17,7 +18,7 @@ namespace Library
         {
             while (isBookName == false)
             {
-                Console.WriteLine((SetBookData.bookList).Count);
+                Console.WriteLine((bookData.bookList).Count);
                 Console.Write("                    책의 제목을 입력하세요 : ");
                 bookVO.Name = Console.ReadLine();
                 isBookName = IsBookName(isBookName, bookVO.Name);
@@ -27,9 +28,9 @@ namespace Library
         }
         public bool IsBookName(bool isBookName, string name)
         {
-            for (int listIndex = 0; listIndex < (SetBookData.bookList).Count; listIndex++)
+            for (int listIndex = 0; listIndex < (bookData.bookList).Count; listIndex++)
             {
-                if (name.Equals(SetBookData.bookList[listIndex].Name))
+                if (name.Equals(bookData.bookList[listIndex].Name))
                 {
                     isBookName = true;
                 }
@@ -45,9 +46,9 @@ namespace Library
 
         public int FindListIndex(string name)
         {
-            for (int listIndex = 0; listIndex < SetBookData.bookList.Count; listIndex++)
+            for (int listIndex = 0; listIndex < bookData.bookList.Count; listIndex++)
             {
-                if (name.Equals(SetBookData.bookList[listIndex].Name))
+                if (name.Equals(bookData.bookList[listIndex].Name))
                 {
                     bookListIndex = listIndex;
                     break;

@@ -7,6 +7,7 @@ namespace Library
     class EditBook
     {
         BookVO bookVO = new BookVO();
+        SetBookData bookData = new SetBookData();
         FindBookInformation findEditBookInformation = new FindBookInformation();
         private bool isBookName; // 일치하는 책 제목인지 판별
         private int bookListIndex; // 책 제목에 따른 리스트 인덱스
@@ -48,7 +49,7 @@ namespace Library
             Console.Write("                  수량을 입력하세요 : ");
             bookVO.Quantity = Console.ReadLine(); ///////// 예외처리
 
-            SetBookData.bookList[listIndex].Quantity = bookVO.Quantity;
+            bookData.bookList[listIndex].Quantity = bookVO.Quantity;
         }
     }
 }

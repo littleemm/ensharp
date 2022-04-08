@@ -7,6 +7,7 @@ namespace Library
     class DeleteBook
     {
         BookVO bookVO = new BookVO();
+        SetBookData bookData = new SetBookData();
         FindBookInformation findDeleteBookInformation = new FindBookInformation();
         private bool isBookName; // 일치하는 책 제목인지 판별
         private int bookListIndex; // 책 제목에 따른 리스트 인덱스
@@ -42,7 +43,7 @@ namespace Library
         }
         public void DeleteBookInformation(int listIndex)
         {
-            SetBookData.bookList[listIndex] = null;
+            bookData.bookList[listIndex] = null;
         }
     }
 }
