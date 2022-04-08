@@ -17,6 +17,7 @@ namespace Library
         {
             while (isBookName == false)
             {
+                Console.WriteLine((SetBookData.bookList).Count);
                 Console.Write("                    책의 제목을 입력하세요 : ");
                 bookVO.Name = Console.ReadLine();
                 isBookName = IsBookName(isBookName, bookVO.Name);
@@ -26,7 +27,7 @@ namespace Library
         }
         public bool IsBookName(bool isBookName, string name)
         {
-            for (int listIndex = 0; listIndex < SetBookData.bookList.Count; listIndex++)
+            for (int listIndex = 0; listIndex < (SetBookData.bookList).Count; listIndex++)
             {
                 if (name.Equals(SetBookData.bookList[listIndex].Name))
                 {

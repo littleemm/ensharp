@@ -21,6 +21,7 @@ namespace Library
 
         public void ShowManageBook()
         {
+            Console.Clear();
             PrintManageBookMenu();
             menuNumber = scanBookInformation.SelectMenu(menuNumberArray);
             switch (menuNumber)

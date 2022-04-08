@@ -16,6 +16,7 @@ namespace Library
 
         public void ShowManageMember()
         {
+            Console.Clear();
             PrintManageMemberMenu();
             menuNumber = scanMemberInformation.SelectMenu(menuNumberArray);
             switch (menuNumber)
