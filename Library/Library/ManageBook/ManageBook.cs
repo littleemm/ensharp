@@ -10,6 +10,7 @@ namespace Library
         RegisterBook registerBook = new RegisterBook();
         EditBook editBook = new EditBook();
         DeleteBook deleteBook = new DeleteBook();
+        SearchBook searchBook = new SearchBook();
         PrintBookList printBookList = new PrintBookList();
 
         private string[] menuNumberArray = { "1", "2", "3", "4", "5" };
@@ -44,6 +45,7 @@ namespace Library
                     }
                 case 4:
                     {
+                        searchBook.ShowBookSearching();
                         break;
                     }
                 case 5:

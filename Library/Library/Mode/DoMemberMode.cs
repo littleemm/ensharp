@@ -7,16 +7,20 @@ namespace Library
     class DoMemberMode
     {
         ScanBasicElement scanMiniMenuElement;
+        SearchBook searchBook;
+        PrintBookList printBooks;
 
         private int menuNumber;
-        private string[] menuNumberArray = { "1", "2" };
+        private string[] menuNumberArray = { "1", "2", "3", "4", "5" };
 
         public DoMemberMode()
         {
             scanMiniMenuElement = new ScanBasicElement();
+            searchBook = new SearchBook();
+            printBooks = new PrintBookList();
         }
 
-        public void ShowAdministratorMode()
+        public void ShowMemberMode()
         {
             Console.Clear();
             PrintMemberMode();
@@ -26,10 +30,23 @@ namespace Library
             {
                 case 1:
                     {
-                      
+                        searchBook.ShowBookSearching();
                         break;
                     }
                 case 2:
+                    {
+                        printBooks.PrintBookMain();
+                        break;
+                    }
+                case 3:
+                    {
+                        break;
+                    }
+                case 4:
+                    {
+                        break;
+                    }
+                case 5:
                     {
                         break;
                     }
@@ -50,9 +67,10 @@ namespace Library
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine("                     1. SEARCH BOOK                        ");
-            Console.WriteLine("                     2. CHECK OUT BOOK                     ");
-            Console.WriteLine("                     3. RETURN BOOK                        ");
-            Console.WriteLine("                     4. MY PAGE                            ");
+            Console.WriteLine("                     2. BOOK LIST                          ");
+            Console.WriteLine("                     3. CHECK OUT BOOK                     ");
+            Console.WriteLine("                     4. RETURN BOOK                        ");
+            Console.WriteLine("                     5. MY PAGE                            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");

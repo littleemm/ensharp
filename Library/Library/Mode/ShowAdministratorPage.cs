@@ -4,43 +4,45 @@ using System.Text;
 
 namespace Library
 {
-    class DoAdministratorMode
-    {
-        ScanBasicElement scanMiniElement;
-        ManageBook manageBook;
-        ManageMember manageMember;
+    class ShowAdministratorPage
+    { // 관리자 로그인 성공 후 페이지 내부
 
+        ScanBasicElement scanAdministratorElement;
+        DoAdministratorMode doAdministratorMode;
+        DoMemberMode doMemberMode;
         private int menuNumber;
         private string[] menuNumberArray = { "1", "2" };
 
-        public DoAdministratorMode()
-        {
-            scanMiniElement = new ScanBasicElement();
-            manageBook = new ManageBook();
-            manageMember = new ManageMember();
+        public ShowAdministratorPage()
+        { // 생성자
+            scanAdministratorElement = new ScanBasicElement();
+            doAdministratorMode = new DoAdministratorMode();
+            doMemberMode = new DoMemberMode();
+            menuNumber = 0;
         }
         
-        public void ShowAdministratorMode()
+        public void ShowAdministrator()
         {
             Console.Clear();
-            PrintAdministratorMode();
-            menuNumber = scanMiniElement.SelectMenu(menuNumberArray);
+            PrintAdministrator();
+            menuNumber = scanAdministratorElement.SelectMenu(menuNumberArray);
 
             switch (menuNumber)
             {
                 case 1:
                     {
-                        manageBook.ShowManageBook();
+                        doAdministratorMode.ShowAdministratorMode();
                         break;
                     }
                 case 2:
                     {
-                        manageMember.ShowManageMember();
+                        doMemberMode.ShowMemberMode();
                         break;
                     }
             }
         }
-        public void PrintAdministratorMode()
+        
+        public void PrintAdministrator()
         {
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
@@ -48,14 +50,14 @@ namespace Library
             Console.WriteLine(" *                  *                  *                  * ");
             Console.WriteLine("                                                           ");
             Console.WriteLine("                      W E L C O M E T O                    ");
-            Console.WriteLine("                      ADMINISTRATOR MODE                   ");
+            Console.WriteLine("                      ADMINISTRATOR PAGE                   ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
-            Console.WriteLine("                      1. MANAGE BOOK                        ");
-            Console.WriteLine("                      2. MANAGE MEMBER                      ");
+            Console.WriteLine("                    1. ADMINISTRATOR MODE                  ");
+            Console.WriteLine("                       2. MEMBER MODE                      ");
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
@@ -63,5 +65,7 @@ namespace Library
             Console.WriteLine("                                                           ");
             Console.WriteLine("                                                           ");
         }
+
+
     }
 }

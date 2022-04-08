@@ -4,29 +4,28 @@ using System.Text;
 
 namespace Library
 {
-    class SearchMember
+    class SearchBook
     {
-        MemberVO memberVO = new MemberVO();
-        SetMemberData memberData = new SetMemberData();
-        FindMemberInformation findSearchMemberInformation = new FindMemberInformation();
+        BookVO bookVO = new BookVO();
+        SetBookData bookData = new SetBookData();
+        FindBookInformation findSearchBookInformation = new FindBookInformation();
+        
+        private bool isBookName; // 일치하는 책 제목인지 판별
+        private int bookListIndex; // 책 제목에 따른 리스트 인덱스
+        private string bookName; // 책 이름
 
-        private bool isMemberId; //
-        private int memberListIndex; // 
-        private string memberId; // 
-
-        public SearchMember()
+        public SearchBook()
         {
-            isMemberId = false;
-            memberId = "";
+            isBookName = false;
+            bookName = "";
         }
-
-        public void ShowMemberSearching()
+        public void ShowBookSearching()
         {
             Console.Clear();
             PrintSearchBook();
-            memberId = findSearchMemberInformation.ScanFindMember(isMemberId);
-            memberListIndex = findSearchMemberInformation.FindListIndex(memberId);
-            SearchMemberInformation(memberListIndex);
+            bookName = findSearchBookInformation.ScanFindBook(isBookName);
+            bookListIndex = findSearchBookInformation.FindListIndex(bookName);
+            SearchBookInformation(bookListIndex);
         }
 
         public void PrintSearchBook()
@@ -36,7 +35,7 @@ namespace Library
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
             Console.WriteLine("                                                           ");
-            Console.WriteLine("                        SEARCH MEMBER                       ");
+            Console.WriteLine("                         SEARCH BOOK                       ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
             Console.WriteLine("                                                           ");
@@ -45,14 +44,14 @@ namespace Library
             Console.WriteLine("                                                           ");
         }
 
-        public void SearchMemberInformation(int memberListIndex)
+        public void SearchBookInformation(int bookListIndex)
         {
             Console.WriteLine("=============================================================");
-            Console.WriteLine("       아  이  디 : " + memberData.memberList[memberListIndex].Id);
-            Console.WriteLine("       이      름 : " + memberData.memberList[memberListIndex].Name);
-            Console.WriteLine("       출  생  일 : " + memberData.memberList[memberListIndex].Birth);
-            Console.WriteLine("       주      소 : " + memberData.memberList[memberListIndex].Address);
-            Console.WriteLine("       폰  번  호 : " + memberData.memberList[memberListIndex].PhoneNumber);
+            Console.WriteLine("       책  제  목 : " + bookData.bookList[bookListIndex].Name);
+            Console.WriteLine("       저  자  명 : " + bookData.bookList[bookListIndex].Author);
+            Console.WriteLine("       출  간  일 : " + bookData.bookList[bookListIndex].Id);
+            Console.WriteLine("       출  판  사 : " + bookData.bookList[bookListIndex].Publisher);
+            Console.WriteLine("       가      격 : " + bookData.bookList[bookListIndex].Price);
             Console.WriteLine("=============================================================");
         }
     }

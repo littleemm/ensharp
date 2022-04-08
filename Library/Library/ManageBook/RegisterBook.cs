@@ -52,7 +52,8 @@ namespace Library
             Console.Write("                   수량 : ");
             bookVO.Quantity = Console.ReadLine(); ///////// 예외처리
 
-            bookData.bookList[++size] = new BookVO(bookVO.Name, bookVO.Id, bookVO.Publisher, bookVO.Author, bookVO.Price, bookVO.Quantity);
+            bookData.bookList.Add(new BookVO(bookVO.Name, bookVO.Id, bookVO.Publisher, bookVO.Author, bookVO.Price, bookVO.Quantity));
+            Console.WriteLine(bookData.bookList[size].Name);
         }
     }
 }

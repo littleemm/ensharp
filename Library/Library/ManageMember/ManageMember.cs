@@ -10,6 +10,7 @@ namespace Library
         RegisterMember registerMember = new RegisterMember();
         EditMember editMember = new EditMember();
         DeleteMember deleteMember = new DeleteMember();
+        SearchMember searchMember = new SearchMember();
         PrintMemberList printMemberList = new PrintMemberList();
 
         private string[] menuNumberArray = { "1", "2", "3", "4", "5" };
@@ -39,6 +40,7 @@ namespace Library
                     }
                 case 4:
                     {
+                        searchMember.ShowMemberSearching();
                         break;
                     }
                 case 5:

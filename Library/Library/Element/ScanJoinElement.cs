@@ -6,6 +6,9 @@ namespace Library
 {
     class ScanJoinElement
     {
+        MemberVO memberVO = new MemberVO();
+        SetMemberData memberData = new SetMemberData();
+
         private string id;
         private string password;
         private string name;
@@ -29,35 +32,35 @@ namespace Library
         public void ScanId()
         {
             Console.Write("                    ID : ");
-            id = Console.ReadLine();
+            memberVO.Id = Console.ReadLine();
         }
         public void ScanPassword()
         {
             Console.Write("                    PW : ");
-            password = Console.ReadLine();
+            memberVO.Password = Console.ReadLine();
         }
 
         public void ScanName()
         {
             Console.Write("                  NAME : ");
-            name = Console.ReadLine();
+            memberVO.Name = Console.ReadLine();
         }
 
         public void ScanBirth()
         {
             Console.Write("            BIRTH(YYYYMMDD) : ");
-            birth = Console.ReadLine();
+            memberVO.Birth = Console.ReadLine();
         }
         public void ScanPhoneNumber()
         {
             Console.Write("            PHONE NUMBER('-' 제외) : ");
-            phoneNumber = Console.ReadLine();
+            memberVO.PhoneNumber = Console.ReadLine();
         }
 
         public void ScanAddress()
         {
             Console.Write("         ADDRESS(ex. 서울시 광진구) : ");
-            address = Console.ReadLine();
+            memberVO.Address = Console.ReadLine();
         }
     }
 

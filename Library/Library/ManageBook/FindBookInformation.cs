@@ -9,6 +9,7 @@ namespace Library
         BookVO bookVO = new BookVO();
         SetBookData bookData = new SetBookData();
         private int bookListIndex;
+        private string bookName;
 
         public FindBookInformation()
         {
@@ -25,6 +26,7 @@ namespace Library
 
             return bookVO.Name;
         }
+  
         public bool IsBookName(bool isBookName, string name)
         {
             for (int listIndex = 0; listIndex < (bookData.bookList).Count; listIndex++)

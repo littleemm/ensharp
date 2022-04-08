@@ -9,6 +9,7 @@ namespace Library
         MemberVO administratorVersion;
         SetMemberData memberData = new SetMemberData();
         ShowAdministratorPage showAdministratorPage;
+        DoMemberMode doMemberMode;
 
         bool isAdministratorValue;
         bool isMemberValue;
@@ -17,6 +18,7 @@ namespace Library
         {
             administratorVersion = new MemberVO("Administrator1", "1234", "관리자", "20000328", "알 수 없음", "01012345678");
             showAdministratorPage = new ShowAdministratorPage();
+            doMemberMode = new DoMemberMode();
             isMemberValue = false;
         }
         
@@ -38,6 +40,7 @@ namespace Library
 
             if (isMemberValue == true) // 회원 정보 확인 -> 성공 -> 넘어감
             {
+                doMemberMode.ShowMemberMode();
                 return true;
             }
 
