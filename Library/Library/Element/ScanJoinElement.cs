@@ -4,8 +4,8 @@ namespace Library
 {
     class ScanJoinElement
     {
-        MemberVO memberVO = new MemberVO();
-        SetMemberData memberData = new SetMemberData();
+        MemberVO memberVO;
+        SetMemberData memberData;
 
         private string id;
         private string password;
@@ -16,7 +16,8 @@ namespace Library
 
         public ScanJoinElement()
         {
-
+            memberVO = new MemberVO();
+            memberData = new SetMemberData();
         }
         public void ScanJoinInformation()
         {
@@ -26,7 +27,7 @@ namespace Library
             memberVO.Birth = ScanBirth();
             memberVO.PhoneNumber = ScanPhoneNumber();
             memberVO.Address = ScanAddress();
-            memberData.memberList.Add(new MemberVO(memberVO.Id, memberVO.Password, memberVO.Name, memberVO.Birth, memberVO.PhoneNumber, memberVO.Address));
+            memberData.memberList.Add(new MemberVO(memberVO.Id, memberVO.Password, memberVO.Name, memberVO.Birth, memberVO.PhoneNumber, memberVO.Address, ""));
         }
         public string ScanId()
         {

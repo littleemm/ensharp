@@ -6,10 +6,10 @@ namespace Library
 {
     class PrintBookList
     {
-        SetBookData printBookData = new SetBookData();
+        SetBookData printBookData;
         public PrintBookList()
         {
-
+            printBookData = new SetBookData();
         }
         public void PrintBookMain()
         {

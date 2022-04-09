@@ -6,15 +6,19 @@ namespace Library
 {
     class EditBook
     {
-        BookVO bookVO = new BookVO();
-        SetBookData bookData = new SetBookData();
-        FindBookInformation findEditBookInformation = new FindBookInformation();
+        BookVO bookVO;
+        SetBookData bookData;
+        FindBookInformation findEditBookInformation;
         private bool isBookName; // 일치하는 책 제목인지 판별
         private int bookListIndex; // 책 제목에 따른 리스트 인덱스
         private string bookName; // 책 이름
 
         public EditBook()
         {
+            bookVO = new BookVO();
+            bookData = new SetBookData();
+            findEditBookInformation = new FindBookInformation();
+
             isBookName = false;
             bookName = "";
         }

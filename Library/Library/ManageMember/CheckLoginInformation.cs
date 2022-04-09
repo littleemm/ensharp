@@ -20,6 +20,7 @@ namespace Library
             administratorVersion = new MemberVO("Administrator1", "1234", "관리자", "20000328", "알 수 없음", "01012345678", " ");
             showAdministratorPage = new ShowAdministratorPage();
             doMemberMode = new DoMemberMode();
+
             isMemberValue = false;
         }
         
@@ -41,7 +42,8 @@ namespace Library
 
             if (isMemberValue == true) // 회원 정보 확인 -> 성공 -> 넘어감
             {
-                doMemberMode.ShowMemberMode();
+                listIndex = IsListIndex(id, password); 
+                doMemberMode.ShowMemberMode(listIndex);
                 return true;
             }
 
@@ -67,7 +69,6 @@ namespace Library
                 {
                     if (inputPassword.Equals(memberData.memberList[i].Password))
                     {
-                        listIndex = i;
                         return true;
                     }
                 }
@@ -76,9 +77,21 @@ namespace Library
             return false;
         }
 
-        public int returnList()
+        public int IsListIndex(string inputId, string inputPassword)
         {
-            return listIndex;
+            for (int i = 0; i < (memberData.memberList).Count; i++)
+            {
+                if (inputId.Equals(memberData.memberList[i].Id))
+                {
+                    if (inputPassword.Equals(memberData.memberList[i].Password))
+                    {
+                        return i; // 인덱스
+                    }
+                }
+            }
+
+            return SetMagicNumber.NORETURN; // 사실상 리턴값이 인덱스로 나오지 않는 경우는 존재하지 않게 설계
         }
+
     }
 }

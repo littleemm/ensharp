@@ -6,7 +6,7 @@ namespace Library
 {
     class ScanLoginElement : ScanBasicElement // 로그인 입력 받기
     {
-        CheckLoginInformation checkLoginInformation = new CheckLoginInformation();
+        CheckLoginInformation checkLoginInformation;
 
         string id;
         string password;
@@ -14,6 +14,8 @@ namespace Library
 
         public ScanLoginElement()
         {
+            checkLoginInformation = new CheckLoginInformation();
+
             id = "";
             password = "";
             isLoginSuccess = false;

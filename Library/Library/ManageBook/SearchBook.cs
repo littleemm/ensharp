@@ -6,9 +6,9 @@ namespace Library
 {
     class SearchBook
     {
-        BookVO bookVO = new BookVO();
-        SetBookData bookData = new SetBookData();
-        FindBookInformation findSearchBookInformation = new FindBookInformation();
+        BookVO bookVO;
+        SetBookData bookData;
+        FindBookInformation findSearchBookInformation;
         
         private bool isBookName; // 일치하는 책 제목인지 판별
         private int bookListIndex; // 책 제목에 따른 리스트 인덱스
@@ -16,6 +16,10 @@ namespace Library
 
         public SearchBook()
         {
+            bookVO = new BookVO();
+            bookData = new SetBookData();
+            findSearchBookInformation = new FindBookInformation();
+
             isBookName = false;
             bookName = "";
         }

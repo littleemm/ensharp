@@ -4,51 +4,40 @@ using System.Text;
 
 namespace Library
 {
-    class DeleteBook
+    class ShowMyPage
     {
-        BookVO bookVO;
-        SetBookData bookData;
-        FindBookInformation findDeleteBookInformation;
-        private bool isBookName; // 일치하는 책 제목인지 판별
-        private int bookListIndex; // 책 제목에 따른 리스트 인덱스
-        private string bookName; // 책 이름
+        MemberVO memberVO;
+        SetMemberData memberData;
 
-        public DeleteBook()
+        public ShowMyPage()
         {
-            bookVO = new BookVO();
-            bookData = new SetBookData();
-            findDeleteBookInformation = new FindBookInformation();
-
-            isBookName = false;
-            bookName = "";
+            memberVO = new MemberVO();
+            memberData = new SetMemberData();
         }
-        public void DeleteLibraryBook()
+
+        public void PrintMyPage(int listIndex)
         {
             Console.Clear();
-            PrintDeleteBook();
-            bookName = findDeleteBookInformation.ScanFindBook(isBookName);
-            bookListIndex = findDeleteBookInformation.FindListIndex(bookName);
-            DeleteBookInformation(bookListIndex);
-        }
-        public void PrintDeleteBook()
-        {
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
             Console.WriteLine("                                                           ");
-            Console.WriteLine("                     DELETE A BOOK T_T                     ");
+            Console.WriteLine("                           MY PAGE                         ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine("                                                           ");
-        }
-        public void DeleteBookInformation(int listIndex)
-        {
-            bookData.bookList.RemoveAt(listIndex);
-            Console.WriteLine("                 성공적으로 처리되었습니다 ");
+            Console.WriteLine("=============================================================");
+            Console.WriteLine("       아  이  디 : " + memberData.memberList[listIndex].Id);
+            Console.WriteLine("       이      름 : " + memberData.memberList[listIndex].Name);
+            Console.WriteLine("       출  생  일 : " + memberData.memberList[listIndex].Birth);
+            Console.WriteLine("       주      소 : " + memberData.memberList[listIndex].Address);
+            Console.WriteLine("       폰  번  호 : " + memberData.memberList[listIndex].PhoneNumber);
+            Console.WriteLine("       빌  린  책 : " + memberData.memberList[listIndex].Book);
+            Console.WriteLine("=============================================================");
         }
     }
 }

@@ -6,12 +6,13 @@ namespace Library
 {
     class ShowLogin
     {
-        ScanLoginElement scanLoginElement = new ScanLoginElement();
-        CheckLoginInformation checkLoginInformation = new CheckLoginInformation();
+        ScanLoginElement scanLoginElement;
+        CheckLoginInformation checkLoginInformation;
 
         public ShowLogin()
         { // 생성자
-            
+            scanLoginElement = new ScanLoginElement();
+            checkLoginInformation = new CheckLoginInformation();
         }
         public void ShowLoginPage() // 로그인 페이지 실행
         {

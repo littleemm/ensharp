@@ -11,10 +11,11 @@ namespace Library
         ManageMember manageMember;
 
         private int menuNumber;
-        private string[] menuNumberArray = { "1", "2" };
+        private string[] menuNumberArray;
 
         public DoAdministratorMode()
         {
+            menuNumberArray = new string[] { "1", "2" };
             scanMiniElement = new ScanBasicElement();
             manageBook = new ManageBook();
             manageMember = new ManageMember();

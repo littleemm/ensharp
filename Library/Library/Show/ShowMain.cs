@@ -6,17 +6,22 @@ namespace Library
 {
     class ShowMain
     {
-        ScanBasicElement scanElement = new ScanBasicElement();
-        PrintBasicElement printElement = new PrintBasicElement();
-        ShowLogin showLogin = new ShowLogin();
-        ShowJoin showJoin = new ShowJoin();
+        ScanBasicElement scanElement;
+        PrintBasicElement printElement;
+        ShowLogin showLogin;
+        ShowJoin showJoin;
         
         private int realMenuNumber;
-        private string[] menuNumberArray = { "1", "2", "3" };
+        private string[] menuNumberArray;
 
         public ShowMain()
         {
+            scanElement = new ScanBasicElement();
+            printElement = new PrintBasicElement();
+            showLogin = new ShowLogin();
+            showJoin = new ShowJoin();
 
+            menuNumberArray = new string[] { "1", "2", "3" };
         }
         public void ShowPage()
         {

@@ -25,13 +25,13 @@ namespace Library
             isBookName = false;
         }
 
-        public void ShowReturnBook()
+        public void ShowReturnBook(int memberListIndex)
         {
             Console.Clear();
             PrintCheckOutBook();
             bookName = ScanFindBook(isBookName);
             bookListIndex = FindListIndex(bookName);
-            SuccessReturnBook(bookListIndex);
+            SucceedReturnBook(bookListIndex, memberListIndex);
         }
 
         public void PrintCheckOutBook()
@@ -50,10 +50,11 @@ namespace Library
             Console.WriteLine("                                                           ");
         }
 
-        public void SuccessReturnBook(int bookListIndex)
+        public void SucceedReturnBook(int bookListIndex, int memberListIndex)
         {
+            ClearLine(2);
+            Console.WriteLine("                성공적으로 처리되었습니다!");
             setBookData.bookList[bookListIndex].Quantity = "1";
-            Console.WriteLine(setBookData.bookList[bookListIndex].Quantity);
         }
     }
 }

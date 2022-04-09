@@ -6,12 +6,13 @@ namespace Library
 {
     class RegisterBook
     {
-        BookVO bookVO = new BookVO();
-        SetBookData bookData = new SetBookData();
+        BookVO bookVO;
+        SetBookData bookData;
 
         public RegisterBook()
         { // 생성자
-
+            bookVO = new BookVO();
+            bookData = new SetBookData();
         }
 
         public void RegisterNewBook()

@@ -6,16 +6,27 @@ namespace Library
 {
     class ManageMember
     {
-        ScanBasicElement scanMemberInformation = new ScanBasicElement();
-        RegisterMember registerMember = new RegisterMember();
-        EditMember editMember = new EditMember();
-        DeleteMember deleteMember = new DeleteMember();
-        SearchMember searchMember = new SearchMember();
-        PrintMemberList printMemberList = new PrintMemberList();
+        ScanBasicElement scanMemberInformation;
+        RegisterMember registerMember;
+        EditMember editMember;
+        DeleteMember deleteMember;
+        SearchMember searchMember;
+        PrintMemberList printMemberList;
 
-        private string[] menuNumberArray = { "1", "2", "3", "4", "5" };
+        private string[] menuNumberArray;
         private int menuNumber;
 
+        public ManageMember()
+        {
+            scanMemberInformation = new ScanBasicElement();
+            registerMember = new RegisterMember();
+            editMember = new EditMember();
+            deleteMember = new DeleteMember();
+            searchMember = new SearchMember();
+            printMemberList = new PrintMemberList();
+
+            menuNumberArray = new string[]{ "1", "2", "3", "4", "5" };
+        }
         public void ShowManageMember()
         {
             Console.Clear();

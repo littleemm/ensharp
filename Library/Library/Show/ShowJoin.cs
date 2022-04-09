@@ -6,7 +6,12 @@ namespace Library
 {
     class ShowJoin
     {
-        ScanJoinElement scanJoinElement = new ScanJoinElement();
+        ScanJoinElement scanJoinElement;
+
+        public ShowJoin()
+        {
+            scanJoinElement = new ScanJoinElement();
+        }
         public void ShowJoinPage()
         {
             Console.Clear();

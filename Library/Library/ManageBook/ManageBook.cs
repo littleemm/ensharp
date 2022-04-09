@@ -6,19 +6,26 @@ namespace Library
 {
     class ManageBook
     {
-        ScanBasicElement scanBookInformation = new ScanBasicElement();
-        RegisterBook registerBook = new RegisterBook();
-        EditBook editBook = new EditBook();
-        DeleteBook deleteBook = new DeleteBook();
-        SearchBook searchBook = new SearchBook();
-        PrintBookList printBookList = new PrintBookList();
+        ScanBasicElement scanBookInformation;
+        RegisterBook registerBook;
+        EditBook editBook;
+        DeleteBook deleteBook;
+        SearchBook searchBook;
+        PrintBookList printBookList;
 
-        private string[] menuNumberArray = { "1", "2", "3", "4", "5" };
+        private string[] menuNumberArray;
         private int menuNumber;
 
         public ManageBook()
         {
+            scanBookInformation = new ScanBasicElement();
+            registerBook = new RegisterBook();
+            editBook = new EditBook();
+            deleteBook = new DeleteBook();
+            searchBook = new SearchBook();
+            printBookList = new PrintBookList();
 
+            menuNumberArray = new string[] { "1", "2", "3", "4", "5" };
         }
 
         public void ShowManageBook()

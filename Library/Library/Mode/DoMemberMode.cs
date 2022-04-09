@@ -11,9 +11,10 @@ namespace Library
         PrintBookList printBooks;
         CheckOutBook checkOutBook;
         ReturnBook returnBook;
+        ShowMyPage showPage;
 
         private int menuNumber;
-        private string[] menuNumberArray = { "1", "2", "3", "4", "5" };
+        private string[] menuNumberArray;
 
         public DoMemberMode()
         {
@@ -22,9 +23,12 @@ namespace Library
             printBooks = new PrintBookList();
             checkOutBook = new CheckOutBook();
             returnBook = new ReturnBook();
+            showPage = new ShowMyPage();
+
+            menuNumberArray = new string[] { "1", "2", "3", "4", "5" };
         }
 
-        public void ShowMemberMode()
+        public void ShowMemberMode(int listIndex)
         {
             Console.Clear();
             PrintMemberMode();
@@ -44,16 +48,17 @@ namespace Library
                     }
                 case 3:
                     {
-                        checkOutBook.ShowCheckOutBook();
+                        checkOutBook.ShowCheckOutBook(listIndex);
                         break;
                     }
                 case 4:
                     {
-                        returnBook.ShowReturnBook();
+                        returnBook.ShowReturnBook(listIndex);
                         break;
                     }
                 case 5:
                     {
+                        showPage.PrintMyPage(listIndex);
                         break;
                     }
             }

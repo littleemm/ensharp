@@ -6,14 +6,15 @@ namespace Library
 {
     class FindBookInformation
     {
-        BookVO bookVO = new BookVO();
-        SetBookData bookData = new SetBookData();
+        BookVO bookVO;
+        SetBookData bookData;
         private int bookListIndex;
         private string bookName;
 
         public FindBookInformation()
         {
-
+            bookVO = new BookVO();
+            bookData = new SetBookData();
         }
         public string ScanFindBook(bool isBookName)
         {
