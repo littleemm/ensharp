@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Library
 {
@@ -22,45 +20,52 @@ namespace Library
         }
         public void ScanJoinInformation()
         {
-            ScanId();
-            ScanPassword();
-            ScanName();
-            ScanBirth();
-            ScanPhoneNumber();
-            ScanAddress();
+            memberVO.Id = ScanId();
+            memberVO.Password = ScanPassword();
+            memberVO.Name = ScanName();
+            memberVO.Birth = ScanBirth();
+            memberVO.PhoneNumber = ScanPhoneNumber();
+            memberVO.Address = ScanAddress();
+            memberData.memberList.Add(new MemberVO(memberVO.Id, memberVO.Password, memberVO.Name, memberVO.Birth, memberVO.PhoneNumber, memberVO.Address));
         }
-        public void ScanId()
+        public string ScanId()
         {
             Console.Write("                    ID : ");
-            memberVO.Id = Console.ReadLine();
+            id = Console.ReadLine();
+            return id;
         }
-        public void ScanPassword()
+        public string ScanPassword()
         {
             Console.Write("                    PW : ");
-            memberVO.Password = Console.ReadLine();
+            password = Console.ReadLine();
+            return password;
         }
 
-        public void ScanName()
+        public string ScanName()
         {
             Console.Write("                  NAME : ");
-            memberVO.Name = Console.ReadLine();
+            name = Console.ReadLine();
+            return name;
         }
 
-        public void ScanBirth()
+        public string ScanBirth()
         {
             Console.Write("            BIRTH(YYYYMMDD) : ");
-            memberVO.Birth = Console.ReadLine();
+            birth = Console.ReadLine();
+            return birth;
         }
-        public void ScanPhoneNumber()
+        public string ScanPhoneNumber()
         {
             Console.Write("            PHONE NUMBER('-' 제외) : ");
-            memberVO.PhoneNumber = Console.ReadLine();
+            phoneNumber = Console.ReadLine();
+            return phoneNumber;
         }
 
-        public void ScanAddress()
+        public string ScanAddress()
         {
             Console.Write("         ADDRESS(ex. 서울시 광진구) : ");
-            memberVO.Address = Console.ReadLine();
+            address = Console.ReadLine();
+            return address;
         }
     }
 

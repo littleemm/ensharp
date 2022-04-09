@@ -4,38 +4,44 @@ using System.Text;
 
 namespace Library
 {
-    class EditBook
+    class ReturnBook : FindBookInformation
     {
-        BookVO bookVO = new BookVO();
-        SetBookData bookData = new SetBookData();
-        FindBookInformation findEditBookInformation = new FindBookInformation();
-        private bool isBookName; // 일치하는 책 제목인지 판별
-        private int bookListIndex; // 책 제목에 따른 리스트 인덱스
-        private string bookName; // 책 이름
+        BookVO bookVO;
+        SearchBook searchYourBook;
+        PrintBookList printYourBook;
+        SetBookData setBookData;
 
-        public EditBook()
+
+        private bool isBookName;
+        private string bookName;
+        private int bookListIndex;
+
+        public ReturnBook()
         {
+            bookVO = new BookVO();
+            searchYourBook = new SearchBook();
+            printYourBook = new PrintBookList();
+            setBookData = new SetBookData();
             isBookName = false;
-            bookName = "";
         }
 
-        public void EditLibraryBook() // 수량 수정
+        public void ShowReturnBook()
         {
             Console.Clear();
-            PrintEditBook();
-            bookName = findEditBookInformation.ScanFindBook(isBookName);
-            bookListIndex = findEditBookInformation.FindListIndex(bookName);
-            EditBookQuantity(bookListIndex);
+            PrintCheckOutBook();
+            bookName = ScanFindBook(isBookName);
+            bookListIndex = FindListIndex(bookName);
+            SuccessReturnBook(bookListIndex);
         }
 
-        public void PrintEditBook()
+        public void PrintCheckOutBook()
         {
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
             Console.WriteLine("                                                           ");
-            Console.WriteLine("                     EDIT BOOK QUANTITY                     ");
+            Console.WriteLine("                    YOU CAN RETURN A BOOK                  ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
             Console.WriteLine("                                                           ");
@@ -44,12 +50,10 @@ namespace Library
             Console.WriteLine("                                                           ");
         }
 
-        public void EditBookQuantity(int listIndex) // 수량 변경
+        public void SuccessReturnBook(int bookListIndex)
         {
-            Console.Write("                  수량을 입력하세요 : ");
-            bookVO.Quantity = Console.ReadLine(); ///////// 예외처리
-
-            bookData.bookList[listIndex].Quantity = bookVO.Quantity;       
+            setBookData.bookList[bookListIndex].Quantity = "1";
+            Console.WriteLine(setBookData.bookList[bookListIndex].Quantity);
         }
     }
 }

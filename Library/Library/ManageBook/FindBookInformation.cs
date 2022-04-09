@@ -39,7 +39,10 @@ namespace Library
 
             if (isBookName == false)
             {
+                ClearLine(2);
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("        일치하는 책 제목이 없습니다! 다시 입력하세요.         ");
+                Console.ResetColor();
             }
 
             return isBookName;
@@ -57,6 +60,13 @@ namespace Library
             }
 
             return bookListIndex;
+        }
+
+        public void ClearLine(int line)
+        { // 라인 한줄씩 청소
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(0, Console.CursorTop - line);
         }
     }
 }

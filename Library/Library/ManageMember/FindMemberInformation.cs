@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Library
 {
-    class FindMemberInformation
+    class FindMemberInformation // 멤버 정보 받고 찾기 위한 클래스
     {
         MemberVO memberVO = new MemberVO();
         SetMemberData memberData = new SetMemberData();
@@ -37,7 +37,10 @@ namespace Library
 
             if (isMemberId == false)
             {
+                ClearLine(2);
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("            일치하는 회원 정보가 없습니다! 다시 입력하세요.         ");
+                Console.ResetColor();
             }
 
             return isMemberId;
@@ -55,6 +58,12 @@ namespace Library
             }
 
             return memberListIndex;
+        }
+        public void ClearLine(int line)
+        { // 라인 한줄씩 청소
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(0, Console.CursorTop - line);
         }
     }
 }

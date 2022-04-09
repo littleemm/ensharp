@@ -13,10 +13,11 @@ namespace Library
 
         bool isAdministratorValue;
         bool isMemberValue;
+        int listIndex;
 
         public CheckLoginInformation()
         {
-            administratorVersion = new MemberVO("Administrator1", "1234", "관리자", "20000328", "알 수 없음", "01012345678");
+            administratorVersion = new MemberVO("Administrator1", "1234", "관리자", "20000328", "알 수 없음", "01012345678", " ");
             showAdministratorPage = new ShowAdministratorPage();
             doMemberMode = new DoMemberMode();
             isMemberValue = false;
@@ -66,12 +67,18 @@ namespace Library
                 {
                     if (inputPassword.Equals(memberData.memberList[i].Password))
                     {
+                        listIndex = i;
                         return true;
                     }
                 }
             }
 
             return false;
+        }
+
+        public int returnList()
+        {
+            return listIndex;
         }
     }
 }

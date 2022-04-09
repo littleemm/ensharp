@@ -10,4 +10,7 @@ namespace Library
             showMain.ShowPage();
         }
     }
+    
+    // 관리자 id = Administrator1
+    // 관리자 pw = 1234
 }

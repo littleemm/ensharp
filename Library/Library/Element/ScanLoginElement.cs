@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Library
 {
-    class ScanLoginElement // 로그인 입력 받기
+    class ScanLoginElement : ScanBasicElement // 로그인 입력 받기
     {
         CheckLoginInformation checkLoginInformation = new CheckLoginInformation();
 
@@ -31,7 +31,11 @@ namespace Library
                 isLoginSuccess = checkLoginInformation.IsLogin(id, password);
                 if (isLoginSuccess == false)
                 {
+                    ClearLine(3);
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("        일치하는 회원 정보가 없습니다. 다시 로그인하세요! ");
+                    Console.ResetColor();
+
                 }
             }
         }

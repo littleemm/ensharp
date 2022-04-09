@@ -37,6 +37,8 @@ namespace Library
                     }
                 case 3:
                     {
+                        Console.Clear();
+                        printElement.PrintExit();
                         break;
                     }
             }

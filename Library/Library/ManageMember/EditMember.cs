@@ -20,7 +20,7 @@ namespace Library
             memberId = "";
         }
 
-        public void EditLibraryMember()
+        public void EditLibraryMember() // 정보 수정
         {
             Console.Clear();
             PrintEditMember();
@@ -35,7 +35,7 @@ namespace Library
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
             Console.WriteLine("                                                           ");
-            Console.WriteLine("                    EDIT ADDRESS & TEL.                     ");
+            Console.WriteLine("                        EDIT ADDRESS                     ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
             Console.WriteLine("                                                           ");

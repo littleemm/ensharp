@@ -12,15 +12,14 @@ namespace Library
         private string birth;
         private string address;
         private string phoneNumber;
-        private string[] book1; // 빌린 책 1
-        private string[] book2; // 빌린 책 2
+        private string book;
 
         public MemberVO()
         {
 
         }
 
-        public MemberVO(string id, string password, string name, string birth, string address, string phoneNumber)
+        public MemberVO(string id, string password, string name, string birth, string address, string phoneNumber, string book)
         {
             this.id = id;
             this.password = password;
@@ -28,6 +27,7 @@ namespace Library
             this.birth = birth;
             this.address = address;
             this.phoneNumber = phoneNumber;
+            this.book = book;
         }
 
         public string Id
@@ -65,5 +65,12 @@ namespace Library
             get { return address; }
             set { address = value; }
         }
+
+        public string Book
+        {
+            get { return book; }
+            set { book = value; }
+        }
+
     }
 }

@@ -9,6 +9,8 @@ namespace Library
         ScanBasicElement scanMiniMenuElement;
         SearchBook searchBook;
         PrintBookList printBooks;
+        CheckOutBook checkOutBook;
+        ReturnBook returnBook;
 
         private int menuNumber;
         private string[] menuNumberArray = { "1", "2", "3", "4", "5" };
@@ -18,6 +20,8 @@ namespace Library
             scanMiniMenuElement = new ScanBasicElement();
             searchBook = new SearchBook();
             printBooks = new PrintBookList();
+            checkOutBook = new CheckOutBook();
+            returnBook = new ReturnBook();
         }
 
         public void ShowMemberMode()
@@ -40,10 +44,12 @@ namespace Library
                     }
                 case 3:
                     {
+                        checkOutBook.ShowCheckOutBook();
                         break;
                     }
                 case 4:
                     {
+                        returnBook.ShowReturnBook();
                         break;
                     }
                 case 5:
