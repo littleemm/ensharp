@@ -9,14 +9,18 @@ namespace Library
         MemberVO memberVO = new MemberVO();
         SetMemberData memberData = new SetMemberData();
         FindMemberInformation findEditMemberInformation = new FindMemberInformation();
+        FindJoinException findException;
 
         private bool isMemberId; // 일치하는 책 제목인지 판별
+        private bool isValue; // 입력이 맞는지 판별
         private int memberListIndex; // 책 제목에 따른 리스트 인덱스
         private string memberId; // 책 이름
 
         public EditMember()
         {
+            findException = new FindJoinException();
             isMemberId = false;
+            isValue = false;
             memberId = "";
         }
 
@@ -35,7 +39,7 @@ namespace Library
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
             Console.WriteLine("                                                           ");
-            Console.WriteLine("                        EDIT ADDRESS                     ");
+            Console.WriteLine("                EDIT ADDRESS / PHONE NUMBER                     ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
             Console.WriteLine("                                                           ");
@@ -46,10 +50,23 @@ namespace Library
 
         public void Edit(int listIndex) // 주소 변경
         {
-            Console.Write("                  주소를 입력하세요 : ");
-            memberVO.Address = Console.ReadLine(); ///////// 예외처리
+            while (isValue == false)
+            {
+                Console.Write("                  주소를 입력하세요 : ");
+                memberVO.Address = Console.ReadLine(); ///////// 예외처리
+                isValue = findException.IsAddress(memberVO.Address);
+            }
+            isValue = false;
+
+            while (isValue == false)
+            {
+                Console.Write("                  번호를 입력하세요 : ");
+                memberVO.PhoneNumber = Console.ReadLine(); ///////// 예외처리
+                isValue = findException.IsPhoneNumber(memberVO.PhoneNumber);
+            }
 
             memberData.memberList[listIndex].Address = memberVO.Address;
+            memberData.memberList[listIndex].PhoneNumber = memberVO.PhoneNumber;
         }
     }
 }

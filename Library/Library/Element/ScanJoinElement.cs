@@ -40,7 +40,7 @@ namespace Library
             {
                 Console.Write("                  ID (8자 이내) : ");
                 id = Console.ReadLine();
-                isValue = findException.CheckId(id);
+                isValue = findException.IsId(id);
  
             }
             isValue = false;
@@ -52,7 +52,7 @@ namespace Library
             {
                 Console.Write("                  PW (5자 이내) : ");
                 password = Console.ReadLine();
-                isValue = findException.CheckPassword(password);
+                isValue = findException.IsPassword(password);
             }
             isValue = false;
             return password;
@@ -72,7 +72,7 @@ namespace Library
             {
                 Console.Write("               BIRTH(YYYYMMDD) : ");
                 birth = Console.ReadLine();
-                isValue = findException.CheckBirth(birth);
+                isValue = findException.IsBirth(birth);
             }
             isValue = false;
             return birth;
@@ -83,7 +83,7 @@ namespace Library
             {
                 Console.Write("            PHONE NUMBER(ex. 01000000000) : ");
                 phoneNumber = Console.ReadLine();
-                isValue = findException.CheckPhoneNumber(phoneNumber);
+                isValue = findException.IsPhoneNumber(phoneNumber);
             }
             isValue = false;
             return phoneNumber;
@@ -95,7 +95,7 @@ namespace Library
             {
                 Console.Write("         ADDRESS(ex. 서울시 광진구) : ");
                 address = Console.ReadLine();
-                isValue = findException.CheckAddress(address);
+                isValue = findException.IsAddress(address);
             }
             isValue = false;
             return address;
@@ -103,7 +103,7 @@ namespace Library
 
         private void PrintSuccess()
         {
-            Console.WriteLine("     가입이 완료되었습니다! 로그인 창에서 로그인해주세요.");
+            Console.WriteLine("             회원 등록이 완료되었습니다!");
             keyInfo = Console.ReadKey();
             if (keyInfo.Key == ConsoleKey.Escape)
             {

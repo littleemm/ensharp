@@ -53,9 +53,9 @@ namespace Library
             Console.WriteLine("=============================================================");
             Console.WriteLine("       책  제  목 : " + bookData.bookList[bookListIndex].Name);
             Console.WriteLine("       저  자  명 : " + bookData.bookList[bookListIndex].Author);
-            Console.WriteLine("       출  간  일 : " + bookData.bookList[bookListIndex].Id);
             Console.WriteLine("       출  판  사 : " + bookData.bookList[bookListIndex].Publisher);
             Console.WriteLine("       가      격 : " + bookData.bookList[bookListIndex].Price);
+            Console.WriteLine("       출  간  일 : " + bookData.bookList[bookListIndex].Id);
             Console.WriteLine("=============================================================");
         }
     }

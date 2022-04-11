@@ -15,7 +15,7 @@ namespace Library
             countNumber = 0;
         }
 
-        public bool CheckId(string id)
+        public bool IsId(string id)
         {
             if (id.Length > 8)
             {
@@ -30,7 +30,7 @@ namespace Library
             return true;
         }
 
-        public bool CheckPassword(string password)
+        public bool IsPassword(string password)
         {
             if (password.Length > 5)
             {
@@ -44,7 +44,7 @@ namespace Library
             return true;
         }
 
-        public bool CheckBirth(string birth)
+        public bool IsBirth(string birth)
         {
             for (int i = 0; i < birth.Length; i++)
             {
@@ -78,7 +78,7 @@ namespace Library
             return true;
         }
 
-        public bool CheckPhoneNumber(string phoneNumber)
+        public bool IsPhoneNumber(string phoneNumber)
         {
             for (int i = 0; i < phoneNumber.Length; i++) 
             {
@@ -111,7 +111,7 @@ namespace Library
             return true;
         }
 
-        public bool CheckAddress(string address)
+        public bool IsAddress(string address)
         {
             for (int i = 0; i < address.Length; i++)
             {
