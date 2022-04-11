@@ -7,6 +7,7 @@ namespace Library
     class ManageMember
     {
         ScanBasicElement scanMemberInformation;
+        ScanJoinElement scanJoinElement;
         RegisterMember registerMember;
         EditMember editMember;
         DeleteMember deleteMember;
@@ -19,6 +20,7 @@ namespace Library
         public ManageMember()
         {
             scanMemberInformation = new ScanBasicElement();
+            scanJoinElement = new ScanJoinElement();
             registerMember = new RegisterMember();
             editMember = new EditMember();
             deleteMember = new DeleteMember();
@@ -36,7 +38,9 @@ namespace Library
             {
                 case 1:
                     {
-                        registerMember.RegisterNewMember();
+                        Console.Clear();
+                        PrintRegisterMember();
+                        scanJoinElement.ScanJoinInformation();
                         break;
                     }
                 case 2:
@@ -83,6 +87,22 @@ namespace Library
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("                                                           ");
+        }
+
+        public void PrintRegisterMember()
+        {
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("           *                 *                 *            ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine(" *                  *                  *                  * ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("                      REGISTER MEMBER                      ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine(" *                  *                  *                  * ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine("                                                           ");
         }

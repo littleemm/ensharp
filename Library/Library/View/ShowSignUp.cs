@@ -7,6 +7,7 @@ namespace Library
     class ShowSignUp
     {
         ScanJoinElement scanJoinElement;
+        private ConsoleKeyInfo keyInfo;
 
         public ShowSignUp()
         {
@@ -17,8 +18,9 @@ namespace Library
             Console.Clear();
             PrintJoinPage();
             scanJoinElement.ScanJoinInformation();
+            PrintSuccess();
         }
-        public void PrintJoinPage() // 회원가입 페이지 메인
+        private void PrintJoinPage() // 회원가입 페이지 메인
         {
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
@@ -33,6 +35,20 @@ namespace Library
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine("                                                           ");
+        }
+        private void PrintSuccess()
+        {
+            Console.WriteLine("     가입이 완료되었습니다! 로그인 창에서 로그인해주세요.");
+            keyInfo = Console.ReadKey();
+            if (keyInfo.Key == ConsoleKey.Escape)
+            {
+                Console.Clear();
+                Console.WriteLine("종료합니다. . .");
+            }
+            else if (keyInfo.Key == ConsoleKey.F1)
+            {
+
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ namespace Library
     {
         MemberVO memberVO;
         private SetMemberData memberData;
+        private FindJoinException findException;
 
         private string id;
         private string password;
@@ -13,11 +14,14 @@ namespace Library
         private string birth;
         private string phoneNumber;
         private string address;
+        private bool isValue;
         private ConsoleKeyInfo keyInfo;
         public ScanJoinElement()
         {
             memberVO = new MemberVO();
             memberData = new SetMemberData();
+            findException = new FindJoinException();
+            isValue = false;
         }
         public void ScanJoinInformation()
         {
@@ -33,15 +37,27 @@ namespace Library
 
         private string ScanId()
         {
-            Console.Write("                    ID : ");
-            id = Console.ReadLine();
+            while (isValue == false)
+            {
+                Console.Write("                  ID (8자 이내) : ");
+                id = Console.ReadLine();
+                isValue = findException.CheckId(id);
+ 
+            }
+            isValue = false;
             return id;
         }
         private string ScanPassword()
         {
-            Console.Write("                    PW : ");
-            password = Console.ReadLine();
+            while (isValue == false)
+            {
+                Console.Write("                  PW (5자 이내) : ");
+                password = Console.ReadLine();
+                isValue = findException.CheckPassword(password);
+            }
+            isValue = false;
             return password;
+
         }
 
         private string ScanName()
@@ -53,31 +69,47 @@ namespace Library
 
         private string ScanBirth()
         {
-            Console.Write("            BIRTH(YYYYMMDD) : ");
-            birth = Console.ReadLine();
+            while (isValue == false)
+            {
+                Console.Write("               BIRTH(YYYYMMDD) : ");
+                birth = Console.ReadLine();
+                isValue = findException.CheckBirth(birth);
+            }
+            isValue = false;
             return birth;
         }
         private string ScanPhoneNumber()
         {
-            Console.Write("            PHONE NUMBER('-' 제외) : ");
-            phoneNumber = Console.ReadLine();
+            while (isValue == false)
+            {
+                Console.Write("            PHONE NUMBER(ex. 01000000000) : ");
+                phoneNumber = Console.ReadLine();
+                isValue = findException.CheckPhoneNumber(phoneNumber);
+            }
+            isValue = false;
             return phoneNumber;
         }
 
         private string ScanAddress()
         {
-            Console.Write("         ADDRESS(ex. 서울시 광진구) : ");
-            address = Console.ReadLine();
+            while (isValue == false)
+            {
+                Console.Write("         ADDRESS(ex. 서울시 광진구) : ");
+                address = Console.ReadLine();
+                isValue = findException.CheckAddress(address);
+            }
+            isValue = false;
             return address;
         }
 
         private void PrintSuccess()
         {
-            Console.WriteLine("       가입이 완료되었습니다! 로그인 창에서 로그인해주세요 ^______^");
+            Console.WriteLine("     가입이 완료되었습니다! 로그인 창에서 로그인해주세요.");
             keyInfo = Console.ReadKey();
             if (keyInfo.Key == ConsoleKey.Escape)
             {
-                Console.WriteLine("      료합니다. . .");
+                Console.Clear();
+                Console.WriteLine("종료합니다. . .");
             }
             else if (keyInfo.Key == ConsoleKey.F1)
             {
