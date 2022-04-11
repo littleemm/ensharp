@@ -5,7 +5,7 @@ namespace Library
     class ScanJoinElement
     {
         MemberVO memberVO;
-        SetMemberData memberData;
+        private SetMemberData memberData;
 
         private string id;
         private string password;
@@ -13,7 +13,7 @@ namespace Library
         private string birth;
         private string phoneNumber;
         private string address;
-
+        private ConsoleKeyInfo keyInfo;
         public ScanJoinElement()
         {
             memberVO = new MemberVO();
@@ -28,45 +28,61 @@ namespace Library
             memberVO.PhoneNumber = ScanPhoneNumber();
             memberVO.Address = ScanAddress();
             memberData.memberList.Add(new MemberVO(memberVO.Id, memberVO.Password, memberVO.Name, memberVO.Birth, memberVO.PhoneNumber, memberVO.Address, ""));
+            PrintSuccess();
         }
-        public string ScanId()
+
+        private string ScanId()
         {
             Console.Write("                    ID : ");
             id = Console.ReadLine();
             return id;
         }
-        public string ScanPassword()
+        private string ScanPassword()
         {
             Console.Write("                    PW : ");
             password = Console.ReadLine();
             return password;
         }
 
-        public string ScanName()
+        private string ScanName()
         {
             Console.Write("                  NAME : ");
             name = Console.ReadLine();
             return name;
         }
 
-        public string ScanBirth()
+        private string ScanBirth()
         {
             Console.Write("            BIRTH(YYYYMMDD) : ");
             birth = Console.ReadLine();
             return birth;
         }
-        public string ScanPhoneNumber()
+        private string ScanPhoneNumber()
         {
             Console.Write("            PHONE NUMBER('-' 제외) : ");
             phoneNumber = Console.ReadLine();
             return phoneNumber;
         }
 
-        public string ScanAddress()
+        private string ScanAddress()
         {
             Console.Write("         ADDRESS(ex. 서울시 광진구) : ");
             address = Console.ReadLine();
             return address;
+        }
+
+        private void PrintSuccess()
+        {
+            Console.WriteLine("       가입이 완료되었습니다! 로그인 창에서 로그인해주세요 ^______^");
+            keyInfo = Console.ReadKey();
+            if (keyInfo.Key == ConsoleKey.Escape)
+            {
+                Console.WriteLine("      료합니다. . .");
+            }
+            else if (keyInfo.Key == ConsoleKey.F1)
+            {
+                
+            }
         }
     }
 
