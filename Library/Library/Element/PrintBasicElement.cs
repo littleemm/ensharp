@@ -25,9 +25,9 @@ namespace Library
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
-            Console.WriteLine("                        1. L O G I N                       ");
-            Console.WriteLine("                       2. J O I N U S                      ");
-            Console.WriteLine("                         3. E X I T                         ");
+            Console.WriteLine("                    1. ADMINISTRATOR MODE                  ");
+            Console.WriteLine("                    2. MEMBER MODE                         ");
+            Console.WriteLine("                    3. EXIT                                ");
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");

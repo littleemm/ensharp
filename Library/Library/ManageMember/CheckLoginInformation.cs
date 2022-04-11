@@ -8,7 +8,7 @@ namespace Library
     {
         MemberVO administratorVersion;
         SetMemberData memberData = new SetMemberData();
-        ShowAdministratorPage showAdministratorPage;
+        DoAdministratorMode doAdministratorMode;
         DoMemberMode doMemberMode;
 
         bool isAdministratorValue;
@@ -18,7 +18,7 @@ namespace Library
         public CheckLoginInformation()
         {
             administratorVersion = new MemberVO("Administrator1", "1234", "관리자", "20000328", "알 수 없음", "01012345678", " ");
-            showAdministratorPage = new ShowAdministratorPage();
+            doAdministratorMode = new DoAdministratorMode();
             doMemberMode = new DoMemberMode();
 
             isMemberValue = false;
@@ -34,7 +34,7 @@ namespace Library
 
             if (isAdministratorValue == true) // 관리자 정보 확인 -> 성공 -> 넘어감
             {
-                showAdministratorPage.ShowAdministrator();
+                doAdministratorMode.ShowAdministratorMode();
                 return true;
             }
 
@@ -51,7 +51,7 @@ namespace Library
 
         }
 
-        public bool IsAdministrator(string inputValue, string administratorValue) // 관리자인지 체크
+        private bool IsAdministrator(string inputValue, string administratorValue) // 관리자인지 체크
         {
             if (administratorValue.Equals(inputValue))
             {
@@ -61,23 +61,20 @@ namespace Library
             return false;
         }
 
-        public bool IsMember(string inputId, string inputPassword) // 회원인지 체크
+        private bool IsMember(string inputId, string inputPassword) // 회원인지 체크
         {
             for (int i = 0; i < (memberData.memberList).Count; i++) 
             {
-                if (inputId.Equals(memberData.memberList[i].Id))
+                if (inputId.Equals(memberData.memberList[i].Id) || inputPassword.Equals(memberData.memberList[i].Password))
                 {
-                    if (inputPassword.Equals(memberData.memberList[i].Password))
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
 
             return false;
         }
 
-        public int IsListIndex(string inputId, string inputPassword)
+        private int IsListIndex(string inputId, string inputPassword)
         {
             for (int i = 0; i < (memberData.memberList).Count; i++)
             {

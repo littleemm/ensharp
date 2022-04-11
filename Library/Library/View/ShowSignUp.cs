@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Library
 {
-    class ShowJoin
+    class ShowSignUp
     {
         ScanJoinElement scanJoinElement;
 
-        public ShowJoin()
+        public ShowSignUp()
         {
             scanJoinElement = new ScanJoinElement();
         }

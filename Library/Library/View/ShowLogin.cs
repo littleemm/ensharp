@@ -20,7 +20,7 @@ namespace Library
             PrintLoginPage();
             scanLoginElement.ScanInformation();
         }
-        public void PrintLoginPage() // 로그인 페이지 메인
+        private void PrintLoginPage() // 로그인 페이지 메인
         {
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");

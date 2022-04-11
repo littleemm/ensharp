@@ -9,7 +9,7 @@ namespace Library
         ScanBasicElement scanElement;
         PrintBasicElement printElement;
         ShowLogin showLogin;
-        ShowJoin showJoin;
+        ShowMemberPage showMemberPage;
         
         private int realMenuNumber;
         private string[] menuNumberArray;
@@ -19,7 +19,7 @@ namespace Library
             scanElement = new ScanBasicElement();
             printElement = new PrintBasicElement();
             showLogin = new ShowLogin();
-            showJoin = new ShowJoin();
+            showMemberPage = new ShowMemberPage();
 
             menuNumberArray = new string[] { "1", "2", "3" };
         }
@@ -37,7 +37,7 @@ namespace Library
                     }
                 case 2:
                     {
-                        showJoin.ShowJoinPage();
+                        showMemberPage.ShowMemberMain();
                         break;
                     }
                 case 3:
