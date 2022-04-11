@@ -7,11 +7,13 @@ namespace Library
     class ShowSignUp
     {
         ScanJoinElement scanJoinElement;
+        private ShowMemberPage showMemberPage;
         private ConsoleKeyInfo keyInfo;
 
         public ShowSignUp()
         {
             scanJoinElement = new ScanJoinElement();
+            showMemberPage = new ShowMemberPage();
         }
         public void ShowJoinPage()
         {
@@ -47,7 +49,7 @@ namespace Library
             }
             else if (keyInfo.Key == ConsoleKey.F1)
             {
-
+                showMemberPage.ShowMemberMain();
             }
         }
     }

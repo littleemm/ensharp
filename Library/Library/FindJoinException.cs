@@ -140,11 +140,11 @@ namespace Library
                 }
             }
 
-            if (address.Length > 12)
+            if (address.Length > 12 || address.Length < 7)
             {
                 ClearLine(2);
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("주소가 너무 깁니다. 다시 입력하세요!(ex. 세종시 조치원읍");
+                Console.WriteLine("     올바른 주소로 다시 입력하세요!(ex. 세종시 조치원읍");
                 Console.ResetColor();
                 return false;
             }

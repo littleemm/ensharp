@@ -32,7 +32,6 @@ namespace Library
             memberVO.PhoneNumber = ScanPhoneNumber();
             memberVO.Address = ScanAddress();
             memberData.memberList.Add(new MemberVO(memberVO.Id, memberVO.Password, memberVO.Name, memberVO.Birth, memberVO.PhoneNumber, memberVO.Address, ""));
-            PrintSuccess();
         }
 
         private string ScanId()
@@ -109,7 +108,7 @@ namespace Library
             if (keyInfo.Key == ConsoleKey.Escape)
             {
                 Console.Clear();
-                Console.WriteLine("종료합니다. . .");
+                Console.WriteLine(" 종료합니다. . .");
             }
             else if (keyInfo.Key == ConsoleKey.F1)
             {
