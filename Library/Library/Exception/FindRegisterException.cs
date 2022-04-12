@@ -34,7 +34,7 @@ namespace Library
 
             ClearLine(2);
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("                   숫자로 된 아이디를 입력하세요!");
+            Console.WriteLine("             숫자로 된 아이디를 입력하세요!");
             Console.ResetColor();
             return false;
         }
@@ -60,7 +60,7 @@ namespace Library
 
             ClearLine(2);
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("                 0이 아닌 정수 가격으로 다시 입력하세요!");
+            Console.WriteLine("           0이 아닌 정수 가격으로 다시 입력하세요!");
             Console.ResetColor();
 
             return false;

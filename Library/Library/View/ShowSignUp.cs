@@ -7,13 +7,12 @@ namespace Library
     class ShowSignUp
     {
         ScanJoinElement scanJoinElement;
-        private ShowMemberPage showMemberPage;
+    
         private ConsoleKeyInfo keyInfo;
 
         public ShowSignUp()
         {
             scanJoinElement = new ScanJoinElement();
-            showMemberPage = new ShowMemberPage();
         }
         public void ShowJoinPage()
         {
@@ -41,11 +40,12 @@ namespace Library
         private void PrintSuccess()
         {
             Console.WriteLine("                 회원 등록이 완료되었습니다!");
+            Console.WriteLine("                 ESC 키를 누르면 종료합니다 ");
+
             keyInfo = Console.ReadKey();
             if (keyInfo.Key == ConsoleKey.Escape)
             {
                 Console.Clear();
-                Console.WriteLine("종료합니다. . .");
             }
             else if (keyInfo.Key == ConsoleKey.F1)
             {

@@ -55,16 +55,12 @@ namespace Library
 
         private string ScanName()
         {
-            while (isValue == false)
-            {
-                Console.Write("                 책 이름 : ");
-                bookVO.Name = Console.ReadLine();
-                isValue = IsId(bookVO.Name);
-
-            }
+            Console.Write("                 책 이름 : ");
+            bookVO.Name = Console.ReadLine();
             isValue = false;
             return bookVO.Name;
         }
+
         private string ScanId()
         {
             while (isValue == false)

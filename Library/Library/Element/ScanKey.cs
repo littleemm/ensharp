@@ -13,13 +13,14 @@ namespace Library
 
         }
 
-        private void ExitProgram()
+        public void ExitProgram()
         {
+            Console.WriteLine("               ESC키를 누르면 종료합니다");
             keyInfo = Console.ReadKey();
+
             if (keyInfo.Key == ConsoleKey.Escape)
             {
                 Console.Clear();
-                Console.WriteLine(" 종료합니다. . .");
             }
     
         }

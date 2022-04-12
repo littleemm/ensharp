@@ -9,6 +9,7 @@ namespace Library
         ScanBasicElement scanMiniElement;
         ShowSignUp showSignUp;
         ShowLogin showMemberLogin;
+        ScanKey scanKey;
 
         private int menuNumber;
         private string[] menuNumberArray;
@@ -16,7 +17,9 @@ namespace Library
         {
             scanMiniElement = new ScanBasicElement();
             showMemberLogin = new ShowLogin();
-            showSignUp = new ShowSignUp(); 
+            showSignUp = new ShowSignUp();
+            scanKey = new ScanKey();
+
             menuNumberArray = new string[] { "1", "2" };
         }
 
@@ -39,6 +42,8 @@ namespace Library
                         break;
                     }
             }
+
+            scanKey.ExitProgram();
         }
 
         private void PrintMemberPage()
