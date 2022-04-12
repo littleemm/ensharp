@@ -34,7 +34,7 @@ namespace Library
         {
             Console.Clear();
             PrintCheckOutBook();
-            bookName = ScanFindBook(isBookName);
+            bookName = ScanFindBookByName(isBookName);
             bookListIndex = FindListIndex(bookName);
             SucceedCheckOutBook(bookListIndex, memberListIndex);
         }

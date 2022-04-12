@@ -6,9 +6,9 @@ namespace Library
 {
     class EditMember
     {
-        MemberVO memberVO = new MemberVO();
-        SetMemberData memberData = new SetMemberData();
-        FindMemberInformation findEditMemberInformation = new FindMemberInformation();
+        MemberVO memberVO;
+        SetMemberData memberData;
+        FindMemberInformation findEditMemberInformation;
         FindJoinException findException;
 
         private bool isMemberId; // 일치하는 책 제목인지 판별
@@ -18,6 +18,9 @@ namespace Library
 
         public EditMember()
         {
+            memberVO = new MemberVO();
+            memberData = new SetMemberData();
+            findEditMemberInformation = new FindMemberInformation();
             findException = new FindJoinException();
             isMemberId = false;
             isValue = false;

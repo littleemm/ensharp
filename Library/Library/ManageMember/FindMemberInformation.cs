@@ -59,7 +59,7 @@ namespace Library
 
             return memberListIndex;
         }
-        public void ClearLine(int line)
+        private void ClearLine(int line)
         { // 라인 한줄씩 청소
             Console.SetCursorPosition(0, Console.CursorTop);
             Console.Write(new string(' ', Console.WindowWidth));

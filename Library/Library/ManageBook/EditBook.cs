@@ -27,7 +27,7 @@ namespace Library
         {
             Console.Clear();
             PrintEditBook();
-            bookName = findEditBookInformation.ScanFindBook(isBookName);
+            bookName = findEditBookInformation.ScanFindBookByName(isBookName);
             bookListIndex = findEditBookInformation.FindListIndex(bookName);
             EditBookQuantity(bookListIndex);
         }

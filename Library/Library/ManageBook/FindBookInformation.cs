@@ -9,14 +9,13 @@ namespace Library
         BookVO bookVO;
         SetBookData bookData;
         private int bookListIndex;
-        private string bookName;
 
         public FindBookInformation()
         {
             bookVO = new BookVO();
             bookData = new SetBookData();
         }
-        public string ScanFindBook(bool isBookName)
+        public string ScanFindBookByName(bool isBookName)
         {
             while (isBookName == false)
             {
@@ -27,7 +26,29 @@ namespace Library
 
             return bookVO.Name;
         }
-  
+        public string ScanFindBookByPublisher(bool isBookPublisher)
+        {
+            while (isBookPublisher == false)
+            {
+                Console.Write("             출판사명을 입력하세요 : ");
+                bookVO.Publisher = Console.ReadLine();
+                isBookPublisher = IsBookPublisher(isBookPublisher, bookVO.Publisher);
+            }
+
+            return bookVO.Publisher;
+        }
+        public string ScanFindBookByAuthor(bool isBookAuthor)
+        {
+            while (isBookAuthor == false)
+            {
+                Console.Write("              저자 이름을 입력하세요 : ");
+                bookVO.Author = Console.ReadLine();
+                isBookAuthor = IsBookAuthor(isBookAuthor, bookVO.Author);
+            }
+
+            return bookVO.Author;
+        }
+
         public bool IsBookName(bool isBookName, string name)
         {
             for (int listIndex = 0; listIndex < (bookData.bookList).Count; listIndex++)
@@ -47,6 +68,48 @@ namespace Library
             }
 
             return isBookName;
+        }
+
+        public bool IsBookPublisher(bool isBookPublisher, string publisher)
+        {
+            for (int listIndex = 0; listIndex < (bookData.bookList).Count; listIndex++)
+            {
+                if (publisher.Equals(bookData.bookList[listIndex].Publisher))
+                {
+                    isBookPublisher = true;
+                }
+            }
+
+            if (isBookPublisher == false)
+            {
+                ClearLine(2);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("        일치하는 출판사가 없습니다! 다시 입력하세요.         ");
+                Console.ResetColor();
+            }
+
+            return isBookPublisher;
+        }
+
+        public bool IsBookAuthor(bool isBookAuthor, string author)
+        {
+            for (int listIndex = 0; listIndex < (bookData.bookList).Count; listIndex++)
+            {
+                if (author.Equals(bookData.bookList[listIndex].Author))
+                {
+                    isBookAuthor = true;
+                }
+            }
+
+            if (isBookAuthor == false)
+            {
+                ClearLine(2);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("        일치하는 저자가 없습니다! 다시 입력하세요.         ");
+                Console.ResetColor();
+            }
+
+            return isBookAuthor;
         }
 
         public int FindListIndex(string name)

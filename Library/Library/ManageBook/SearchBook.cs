@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Library
+namespace Library 
 {
-    class SearchBook
+    class SearchBook : ScanBasicElement
     {
         BookVO bookVO;
         SetBookData bookData;
         FindBookInformation findSearchBookInformation;
         
-        private bool isBookName; // 일치하는 책 제목인지 판별
+        private bool isBookValue; // 일치하는 책 제목인지 판별
         private int bookListIndex; // 책 제목에 따른 리스트 인덱스
-        private string bookName; // 책 이름
+        private string bookValue; // 책 이름
+        private string[] menuNumberArray;
+        private int menuNumber;
 
         public SearchBook()
         {
@@ -20,16 +22,38 @@ namespace Library
             bookData = new SetBookData();
             findSearchBookInformation = new FindBookInformation();
 
-            isBookName = false;
-            bookName = "";
+            isBookValue = false;
+            bookValue = "";
+            menuNumberArray = new string[] { "1", "2", "3"};
         }
         public void ShowBookSearching()
         {
             Console.Clear();
             PrintSearchBook();
-            bookName = findSearchBookInformation.ScanFindBook(isBookName);
-            bookListIndex = findSearchBookInformation.FindListIndex(bookName);
+            menuNumber = SelectMenu(menuNumberArray);
+
+            switch (menuNumber)
+            {
+                case 1:
+                    {
+                        bookListIndex = FindIndexByName();
+                        break;
+                    }
+                case 2:
+                    {
+                        bookListIndex = FindIndexByPublisher();
+                        break;
+                    }
+                case 3:
+                    {
+                        bookListIndex = FindIndexByAuthor();
+                        break;
+                    }
+            }
+
             SearchBookInformation(bookListIndex);
+
+            
         }
 
         public void PrintSearchBook()
@@ -45,7 +69,37 @@ namespace Library
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
+            Console.WriteLine("                        1. NAME                            ");
+            Console.WriteLine("                        2. PUBLISHER                       ");
+            Console.WriteLine("                        3. AUTHOR                          ");
             Console.WriteLine("                                                           ");
+            Console.WriteLine("           *                 *                 *            ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine(" *                  *                  *                  * ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("                                                           ");
+        }
+
+        public int FindIndexByName()
+        {
+            bookValue = findSearchBookInformation.ScanFindBookByName(isBookValue);
+            bookListIndex = findSearchBookInformation.FindListIndex(bookValue);
+            return bookListIndex;
+        }
+
+        public int FindIndexByPublisher()
+        {
+            bookValue = findSearchBookInformation.ScanFindBookByPublisher(isBookValue);
+            bookListIndex = findSearchBookInformation.FindListIndex(bookValue);
+            return bookListIndex;
+        }
+
+        public int FindIndexByAuthor()
+        {
+            bookValue = findSearchBookInformation.ScanFindBookByAuthor(isBookValue);
+            bookListIndex = findSearchBookInformation.FindListIndex(bookValue);
+            return bookListIndex;
         }
 
         public void SearchBookInformation(int bookListIndex)

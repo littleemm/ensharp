@@ -6,9 +6,9 @@ namespace Library
 {
     class RegisterBook
     {
-        BookVO bookVO;
-        SetBookData bookData;
-        FindRegisterException findException;
+        private BookVO bookVO;
+        private SetBookData bookData;
+        private FindRegisterException findException;
 
         private bool isValue;
 

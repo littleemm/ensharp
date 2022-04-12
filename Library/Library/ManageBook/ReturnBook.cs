@@ -28,13 +28,13 @@ namespace Library
         public void ShowReturnBook(int memberListIndex)
         {
             Console.Clear();
-            PrintCheckOutBook();
-            bookName = ScanFindBook(isBookName);
+            PrintReturnBook();
+            bookName = ScanFindBookByName(isBookName);
             bookListIndex = FindListIndex(bookName);
             SucceedReturnBook(bookListIndex, memberListIndex);
         }
 
-        public void PrintCheckOutBook()
+        private void PrintReturnBook()
         {
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");

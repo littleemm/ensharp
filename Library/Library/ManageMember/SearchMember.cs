@@ -6,9 +6,9 @@ namespace Library
 {
     class SearchMember
     {
-        MemberVO memberVO;
-        SetMemberData memberData;
-        FindMemberInformation findSearchMemberInformation;
+        private MemberVO memberVO;
+        private SetMemberData memberData;
+        private FindMemberInformation findSearchMemberInformation;
 
         private bool isMemberId; //
         private int memberListIndex; // 

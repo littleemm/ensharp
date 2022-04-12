@@ -26,7 +26,7 @@ namespace Library
         {
             Console.Clear();
             PrintDeleteBook();
-            bookName = findDeleteBookInformation.ScanFindBook(isBookName);
+            bookName = findDeleteBookInformation.ScanFindBookByName(isBookName);
             bookListIndex = findDeleteBookInformation.FindListIndex(bookName);
             DeleteBookInformation(bookListIndex);
         }

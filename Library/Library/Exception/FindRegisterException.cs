@@ -47,13 +47,13 @@ namespace Library
                 {
                     if (price[i] == number)
                     {
-                        countId++;
+                        countPrice++;
                         break;
                     }
                 }
             }
 
-            if (price.Length == countId && int.Parse(price) != 0)
+            if (price.Length == countPrice && int.Parse(price) != 0)
             {
                 return true;
             }
