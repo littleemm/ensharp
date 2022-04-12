@@ -2,11 +2,10 @@
 
 namespace Library
 {
-    class ScanJoinElement
+    class ScanJoinElement : FindJoinException
     {
         MemberVO memberVO;
-        private SetMemberData memberData;
-        private FindJoinException findException;
+        SetMemberData memberData;
 
         private string id;
         private string password;
@@ -20,7 +19,6 @@ namespace Library
         {
             memberVO = new MemberVO();
             memberData = new SetMemberData();
-            findException = new FindJoinException();
             isValue = false;
         }
         public void ScanJoinInformation()
@@ -40,7 +38,7 @@ namespace Library
             {
                 Console.Write("                  ID (8자 이내) : ");
                 id = Console.ReadLine();
-                isValue = findException.IsId(id);
+                isValue = IsId(id);
  
             }
             isValue = false;
@@ -52,7 +50,7 @@ namespace Library
             {
                 Console.Write("                  PW (5자 이내) : ");
                 password = Console.ReadLine();
-                isValue = findException.IsPassword(password);
+                isValue = IsPassword(password);
             }
             isValue = false;
             return password;
@@ -72,7 +70,7 @@ namespace Library
             {
                 Console.Write("               BIRTH(YYYYMMDD) : ");
                 birth = Console.ReadLine();
-                isValue = findException.IsBirth(birth);
+                isValue = IsBirth(birth);
             }
             isValue = false;
             return birth;
@@ -83,7 +81,7 @@ namespace Library
             {
                 Console.Write("            PHONE NUMBER(ex. 01000000000) : ");
                 phoneNumber = Console.ReadLine();
-                isValue = findException.IsPhoneNumber(phoneNumber);
+                isValue = IsPhoneNumber(phoneNumber);
             }
             isValue = false;
             return phoneNumber;
@@ -95,7 +93,7 @@ namespace Library
             {
                 Console.Write("         ADDRESS(ex. 서울시 광진구) : ");
                 address = Console.ReadLine();
-                isValue = findException.IsAddress(address);
+                isValue = IsAddress(address);
             }
             isValue = false;
             return address;

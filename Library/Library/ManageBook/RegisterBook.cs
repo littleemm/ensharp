@@ -4,11 +4,10 @@ using System.Text;
 
 namespace Library
 {
-    class RegisterBook
+    class RegisterBook : FindRegisterException
     {
-        private BookVO bookVO;
-        private SetBookData bookData;
-        private FindRegisterException findException;
+        BookVO bookVO;
+        SetBookData bookData;
 
         private bool isValue;
 
@@ -16,7 +15,6 @@ namespace Library
         { // 생성자
             bookVO = new BookVO();
             bookData = new SetBookData();
-            findException = new FindRegisterException();
 
             isValue = false;
         }
@@ -27,7 +25,7 @@ namespace Library
             PrintRegisterBook();
             ScanRegisterBook();
         }
-        public void PrintRegisterBook()
+        private void PrintRegisterBook()
         {
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
@@ -43,7 +41,7 @@ namespace Library
             Console.WriteLine("                                                           ");
         }
 
-        public void ScanRegisterBook()
+        private void ScanRegisterBook()
         {
             bookVO.Name = ScanName();
             bookVO.Id = ScanId(); 
@@ -61,7 +59,7 @@ namespace Library
             {
                 Console.Write("                 책 이름 : ");
                 bookVO.Name = Console.ReadLine();
-                isValue = findException.IsId(bookVO.Name);
+                isValue = IsId(bookVO.Name);
 
             }
             isValue = false;
@@ -73,7 +71,7 @@ namespace Library
             {
                 Console.Write("                  아이디 : ");
                 bookVO.Id = Console.ReadLine();
-                isValue = findException.IsId(bookVO.Id);
+                isValue = IsId(bookVO.Id);
             }
             isValue = false;
             return bookVO.Id;
@@ -100,7 +98,7 @@ namespace Library
             {
                 Console.Write("                   가격 : ");
                 bookVO.Price = Console.ReadLine();
-                isValue = findException.IsPrice(bookVO.Price);
+                isValue = IsPrice(bookVO.Price);
             }
             isValue = false;
             return bookVO.Price;

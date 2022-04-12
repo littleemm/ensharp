@@ -6,13 +6,7 @@ namespace Library
 {
     class CheckOutBook : FindBookInformation // 도서 대출
     {
-        BookVO bookVO;
-        MemberVO memberVO;
-        SearchBook searchYourBook;
-        PrintBookList printYourBook;
         SetBookData setBookData;
-        SetMemberData setMemberData;
-
 
         private bool isBookName;
         private string bookName;
@@ -20,12 +14,7 @@ namespace Library
 
         public CheckOutBook()
         {
-            bookVO = new BookVO();
-            memberVO = new MemberVO();
-            searchYourBook = new SearchBook();
-            printYourBook = new PrintBookList();
             setBookData = new SetBookData();
-            setMemberData = new SetMemberData();
 
             isBookName = false;
         }

@@ -38,9 +38,7 @@ namespace Library
             {
                 case 1:
                     {
-                        Console.Clear();
-                        PrintRegisterMember();
-                        scanJoinElement.ScanJoinInformation();
+                        registerMember.RegisterNewMember();
                         break;
                     }
                 case 2:
@@ -91,20 +89,5 @@ namespace Library
             Console.WriteLine("                                                           ");
         }
 
-        public void PrintRegisterMember()
-        {
-            Console.WriteLine("                                                           ");
-            Console.WriteLine("           *                 *                 *            ");
-            Console.WriteLine("                                                           ");
-            Console.WriteLine(" *                  *                  *                  * ");
-            Console.WriteLine("                                                           ");
-            Console.WriteLine("                      REGISTER MEMBER                      ");
-            Console.WriteLine("                                                           ");
-            Console.WriteLine(" *                  *                  *                  * ");
-            Console.WriteLine("                                                           ");
-            Console.WriteLine("           *                 *                 *            ");
-            Console.WriteLine("                                                           ");
-            Console.WriteLine("                                                           ");
-        }
     }
 }

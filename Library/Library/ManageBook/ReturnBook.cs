@@ -7,8 +7,6 @@ namespace Library
     class ReturnBook : FindBookInformation
     {
         BookVO bookVO;
-        SearchBook searchYourBook;
-        PrintBookList printYourBook;
         SetBookData setBookData;
 
 
@@ -19,8 +17,6 @@ namespace Library
         public ReturnBook()
         {
             bookVO = new BookVO();
-            searchYourBook = new SearchBook();
-            printYourBook = new PrintBookList();
             setBookData = new SetBookData();
             isBookName = false;
         }

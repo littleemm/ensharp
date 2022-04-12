@@ -18,7 +18,7 @@ namespace Library
             PrintBooks();
         }
 
-        public void InformBookList()
+        private void InformBookList()
         {
             Console.WriteLine("=============================================================");
             Console.WriteLine("                       B O O K L I S T                      ");
@@ -26,7 +26,7 @@ namespace Library
             Console.WriteLine();
 
         }
-        public void PrintBooks()
+        private void PrintBooks()
         {
             for (int i = 0; i < printBookData.bookList.Count; i++) 
             {

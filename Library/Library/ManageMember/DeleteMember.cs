@@ -6,9 +6,8 @@ namespace Library
 {
     class DeleteMember
     {
-        MemberVO memberVO = new MemberVO();
-        SetMemberData memberData = new SetMemberData();
-        FindMemberInformation findDeleteMemberInformation = new FindMemberInformation();
+        SetMemberData memberData;
+        FindMemberInformation findDeleteMemberInformation;
         
         private bool isMemberId; // 일치하는 회원 id인지 판별
         private int memberListIndex; // 회원 리스트 인덱스
@@ -16,6 +15,9 @@ namespace Library
 
         public DeleteMember()
         {
+            memberData = new SetMemberData();
+            findDeleteMemberInformation = new FindMemberInformation();
+
             isMemberId = false;
             memberId = "";
         }

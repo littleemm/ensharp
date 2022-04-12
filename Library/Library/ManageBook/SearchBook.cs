@@ -4,11 +4,12 @@ using System.Text;
 
 namespace Library 
 {
-    class SearchBook : ScanBasicElement
+    class SearchBook
     {
         BookVO bookVO;
         SetBookData bookData;
-        FindBookInformation findSearchBookInformation;
+        private ScanBasicElement scanBasicElement;
+        private FindBookInformation findSearchBookInformation;
         
         private bool isBookValue; // 일치하는 책 제목인지 판별
         private int bookListIndex; // 책 제목에 따른 리스트 인덱스
@@ -20,6 +21,7 @@ namespace Library
         {
             bookVO = new BookVO();
             bookData = new SetBookData();
+            scanBasicElement = new ScanBasicElement();
             findSearchBookInformation = new FindBookInformation();
 
             isBookValue = false;
@@ -30,7 +32,7 @@ namespace Library
         {
             Console.Clear();
             PrintSearchBook();
-            menuNumber = SelectMenu(menuNumberArray);
+            menuNumber = scanBasicElement.SelectMenu(menuNumberArray);
 
             switch (menuNumber)
             {
@@ -81,35 +83,35 @@ namespace Library
             Console.WriteLine("                                                           ");
         }
 
-        public int FindIndexByName()
+        private int FindIndexByName()
         {
             bookValue = findSearchBookInformation.ScanFindBookByName(isBookValue);
             bookListIndex = findSearchBookInformation.FindListIndex(bookValue);
             return bookListIndex;
         }
 
-        public int FindIndexByPublisher()
+        private int FindIndexByPublisher()
         {
             bookValue = findSearchBookInformation.ScanFindBookByPublisher(isBookValue);
             bookListIndex = findSearchBookInformation.FindListIndex(bookValue);
             return bookListIndex;
         }
 
-        public int FindIndexByAuthor()
+        private int FindIndexByAuthor()
         {
             bookValue = findSearchBookInformation.ScanFindBookByAuthor(isBookValue);
             bookListIndex = findSearchBookInformation.FindListIndex(bookValue);
             return bookListIndex;
         }
 
-        public void SearchBookInformation(int bookListIndex)
+        private void SearchBookInformation(int bookListIndex)
         {
             Console.WriteLine("=============================================================");
             Console.WriteLine("       책  제  목 : " + bookData.bookList[bookListIndex].Name);
             Console.WriteLine("       저  자  명 : " + bookData.bookList[bookListIndex].Author);
             Console.WriteLine("       출  판  사 : " + bookData.bookList[bookListIndex].Publisher);
             Console.WriteLine("       가      격 : " + bookData.bookList[bookListIndex].Price);
-            Console.WriteLine("       출  간  일 : " + bookData.bookList[bookListIndex].Id);
+            Console.WriteLine("       아  이  디 : " + bookData.bookList[bookListIndex].Id);
             Console.WriteLine("=============================================================");
         }
     }

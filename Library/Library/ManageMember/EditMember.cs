@@ -51,7 +51,7 @@ namespace Library
             Console.WriteLine("                                                           ");
         }
 
-        public void Edit(int listIndex) // 주소 변경
+        private void Edit(int listIndex) // 주소 변경
         {
             while (isValue == false)
             {
