@@ -16,7 +16,7 @@ namespace LectureTimeTable
             isPersonalInformation = false;
         }
 
-        public void CheckPersonalInformation(int x, int y, string myInformation) // 입력 및 정보 체크
+        public int CheckPersonalInformation(int x, int y, string myInformation) // 입력 및 정보 체크
         {
             Console.SetCursorPosition(x, y);
 
@@ -24,7 +24,7 @@ namespace LectureTimeTable
 
                 information = Console.ReadLine();
 
-                if (information == myInformation)
+                if (information == myInformation) /////// 입력 제한 예외처리 하자
                 {
                     isPersonalInformation = true;
                 }
@@ -37,9 +37,11 @@ namespace LectureTimeTable
             }
 
             isPersonalInformation = false;
+
+            return myInformation.Length;
         }
 
-        public void ClearLine(int line, int width)
+        private void ClearLine(int line, int width)
         { 
             Console.SetCursorPosition(width, Console.CursorTop - line);
             Console.Write(new string(' ', Console.WindowWidth));

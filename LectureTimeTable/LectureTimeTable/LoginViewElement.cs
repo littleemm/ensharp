@@ -44,13 +44,34 @@ namespace LectureTimeTable
             Console.WriteLine();
             Console.WriteLine("                                 § 관심과목 담기 §                             ");
             Console.WriteLine();
-            Console.WriteLine("                               ① 관심과목 분야별 검색                                 ");
-            Console.WriteLine("                               ② 관심과목 목록                                    ");
-            Console.WriteLine("                               ③ 예상시간표                                         ");
-            Console.WriteLine("                               ④ 관심과목 삭제                                    ");
+            Console.WriteLine("                            ① 관심과목 분야별 검색 및 추가                                 ");
+            Console.WriteLine("                            ② 관심과목 목록                                    ");
+            Console.WriteLine("                            ③ 예상시간표                                         ");
+            Console.WriteLine("                            ④ 관심과목 삭제                                    ");
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("  =============================================================================== ");
+        }
+
+        public void PrintInterestedSubject()
+        {
+            Console.WriteLine("  ============================== SEJONG UNIVERSITY ============================== ");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("                                   § 수강 신청 §                             ");
+            Console.WriteLine();
+            Console.WriteLine("                          ① 과목 분야별 검색 및 추가                                ");
+            Console.WriteLine("                          ② 신청 과목 (재)조회                                    ");
+            Console.WriteLine("                          ③ 예상시간표                                         ");
+            Console.WriteLine("                          ④ 신청 과목 삭제                                    ");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("  =============================================================================== ");
+        }
+
+        public void Print(string form)
+        {
+
         }
     }
 }

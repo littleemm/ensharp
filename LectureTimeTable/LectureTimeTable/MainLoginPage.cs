@@ -10,6 +10,7 @@ namespace LectureTimeTable
     {
         private LoginViewElement loginViewElement;
         private LoginAdministrationPage administrationPage;
+        private int passwordLength;
 
         public MainLoginPage()
         {
@@ -20,10 +21,13 @@ namespace LectureTimeTable
         public void ShowLoginPage()
         {
             loginViewElement.PrintMainPage();
-            administrationPage.CheckPersonalInformation(40, 5, "20010501");
-            administrationPage.CheckPersonalInformation(40, 6, "1234");
+            administrationPage.CheckPersonalInformation(Constant.LOGIN_WIDTH, Constant.ID_POSITION, "20010501");
+            passwordLength = administrationPage.CheckPersonalInformation(Constant.LOGIN_WIDTH, Constant.PASSWORD_POSITION, "1234");
 
-
+            if (passwordLength == 4)
+            {
+                
+            }
 
         }
 
