@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LectureTimeTable
 {
-    class CourseOfInterestPage // 관심 과목 담기 선택 후 진입한 페이지 (visible)
+    class CourseOfInterestPage // '관심 과목 담기' 선택 후 (visible)
     {
         private int loopCount;
         private string[] array;
@@ -27,12 +27,10 @@ namespace LectureTimeTable
         {
             Console.Clear();
             viewElement.PrintCourseOfInterest();
-            numberChecking.CheckMenuNumber(array, viewElement);
+            number = numberChecking.CheckMenuNumber(array, viewElement);
+            courseOfInterestController.SelectMenu(int.Parse(number));
 
-            while(loopCount == 3)
-            {
-                //courseOfInterestController.CheckMenuNumber(array ,viewElement);
-            }
+
 
         }
     }

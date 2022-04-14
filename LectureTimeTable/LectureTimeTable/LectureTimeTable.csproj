@@ -48,11 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CourseOfInterestPage.cs" />
-    <Compile Include="CourseOfInterestViewElement.cs" />
+    <Compile Include="View\MiniViewElement.cs" />
     <Compile Include="Model\Constant.cs" />
     <Compile Include="CourseOfInterestController.cs" />
     <Compile Include="Model\CourseVO.cs" />
-    <Compile Include="SelectionController.cs" />
+    <Compile Include="Controller\SelectionController.cs" />
     <Compile Include="View\FirstMenuPage.cs" />
     <Compile Include="LectureTimeTableProgram.cs" />
     <Compile Include="Controller\LoginAdministrationPage.cs" />

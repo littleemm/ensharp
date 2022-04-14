@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LectureTimeTable
 {
-    class CourseOfInterestViewElement
+    class MiniViewElement
     {
         public void PrintCourseSearching()
         {
@@ -16,7 +16,8 @@ namespace LectureTimeTable
             Console.WriteLine();
             Console.WriteLine("                         § 관심과목 분야별 검색 및 추가 §                           ");
             Console.WriteLine();
-            Console.WriteLine("        ● 개설학과     ①컴퓨터공학과 ②소프트웨어학과 ③지능기전공학부 ④기계항공우주공학부                               ");
+            Console.WriteLine();
+            Console.WriteLine("        ● 개설학과     ①컴퓨터공학과 ②소프트웨어학과 ③지능기전공학부                               ");
             Console.WriteLine("        ● 이수 구분    ①교양필수 ②전공필수 ③전공선택                                ");
             Console.WriteLine("        ● 학년 선택    ①1학년 ②2학년 ③3학년 ④4학년                           ");
             Console.WriteLine("        ● 교과목명                                          ");
