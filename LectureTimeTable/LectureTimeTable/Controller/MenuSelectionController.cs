@@ -9,12 +9,6 @@ namespace LectureTimeTable
     class MenuSelectionController
     {
         private string number;
-        private string[] numberArray;
-
-        public MenuSelectionController()
-        {
-            numberArray = new string[] { "1", "2", "3", "4"};
-        }
 
         public string ScanMenuNumber(int x, int y)
         {
@@ -25,7 +19,7 @@ namespace LectureTimeTable
             return number;
         }
 
-        public bool IsMenuNumber(string number)
+        public bool IsMenuNumber(string number, string[] NumberArray)
         {
             for (int arrayIndex = 0; arrayIndex < numberArray.Length; arrayIndex++)
             {
@@ -50,6 +44,7 @@ namespace LectureTimeTable
             {
                 case Constant.COURSE_TIME_INQUIRY: // 강의시간표 조회
                     {
+                        
                         break;
                     }
                 case Constant.COURSE_OF_INTEREST: // 관심과목 담기

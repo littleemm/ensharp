@@ -8,5 +8,10 @@ namespace LectureTimeTable
 {
     class CourseOfInterestController
     {
+
+        public void SearchCourseOfInterest()
+        {
+
+        }
     }
 }

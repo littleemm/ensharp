@@ -10,6 +10,7 @@ namespace LectureTimeTable
     {
         private bool isMenuNumber;
         private string menuNumber;
+        private string[] numberArray;
 
         private MenuSelectionController menuSelectionController;
         private LoginViewElement loginViewElement;
@@ -17,6 +18,8 @@ namespace LectureTimeTable
         public FirstMenuPage()
         {
             isMenuNumber = false;
+
+            numberArray = new string[] { "1", "2", "3", "4" };
             menuSelectionController = new MenuSelectionController();
             loginViewElement = new LoginViewElement();
         }
@@ -29,7 +32,7 @@ namespace LectureTimeTable
             while (isMenuNumber == false)
             {
                 menuNumber = menuSelectionController.ScanMenuNumber(55, 16);
-                isMenuNumber = menuSelectionController.IsMenuNumber(menuNumber);
+                isMenuNumber = menuSelectionController.IsMenuNumber(menuNumber, numberArray);
 
                 if (isMenuNumber == false)
                 {

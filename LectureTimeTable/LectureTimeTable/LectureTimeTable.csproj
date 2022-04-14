@@ -47,8 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constant.cs" />
+    <Compile Include="Model\Constant.cs" />
     <Compile Include="CourseOfInterestController.cs" />
+    <Compile Include="Model\CourseVO.cs" />
     <Compile Include="View\FirstMenuPage.cs" />
     <Compile Include="LectureTimeTableProgram.cs" />
     <Compile Include="Controller\LoginAdministrationPage.cs" />
@@ -61,8 +62,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
