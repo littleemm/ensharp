@@ -19,4 +19,8 @@ namespace LectureTimeTable
             mainLoginPage.ShowLoginPage();
         }
     }
+
+    // 로그인 가능 계정
+    // ID: 20010501
+    // PW: 1234
 }

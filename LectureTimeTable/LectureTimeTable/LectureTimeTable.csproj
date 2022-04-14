@@ -48,12 +48,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constant.cs" />
-    <Compile Include="FirstMenuPage.cs" />
+    <Compile Include="CourseOfInterestController.cs" />
+    <Compile Include="View\FirstMenuPage.cs" />
     <Compile Include="LectureTimeTableProgram.cs" />
     <Compile Include="Controller\LoginAdministrationPage.cs" />
     <Compile Include="View\LoginViewElement.cs" />
     <Compile Include="View\MainLoginPage.cs" />
-    <Compile Include="MenuSelectionController.cs" />
+    <Compile Include="Controller\MenuSelectionController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
