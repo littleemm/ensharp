@@ -9,8 +9,39 @@ namespace LectureTimeTable
     class MenuSelectionController
     {
         private string number;
+        private bool isMenuNumber;
 
-        public string ScanMenuNumber(int x, int y)
+        private CourseOfInterestPage courseOfInterestPage;
+        private ViewElement viewElement;
+
+        public MenuSelectionController()
+        {
+            courseOfInterestPage = new CourseOfInterestPage();
+            viewElement = new ViewElement();
+        }
+
+        public void CheckMenuNumber(string[] numberArray) // 체크해서 넘어가는 로직
+        {
+            viewElement.PrintSystemPage();
+
+            while (isMenuNumber == false)
+            {
+                number = ScanMenuNumber(55, 16);
+                isMenuNumber = IsMenuNumber(number, numberArray);
+
+                if (isMenuNumber == false)
+                {
+                    viewElement.ClearLine(1, 55);
+                    Console.SetCursorPosition(55, 16);
+                    viewElement.PrintWarning(1, 14);
+                }
+            }
+
+            isMenuNumber = false;
+            SelectMenu(int.Parse(number), viewElement);
+        }
+
+        public string ScanMenuNumber(int x, int y) // 읽기
         {
             Console.SetCursorPosition(x, y);
 
@@ -19,7 +50,7 @@ namespace LectureTimeTable
             return number;
         }
 
-        public bool IsMenuNumber(string number, string[] NumberArray)
+        public bool IsMenuNumber(string number, string[] numberArray) // 제한된 범위의 숫자가 입력됐는지 체크
         {
             for (int arrayIndex = 0; arrayIndex < numberArray.Length; arrayIndex++)
             {
@@ -38,7 +69,7 @@ namespace LectureTimeTable
             return false;
         }
 
-        public void SelectMenu(int number)
+        public void SelectMenu(int number, ViewElement viewElement) // 다음 메뉴 고르기
         {
             switch(number)
             {
@@ -49,6 +80,7 @@ namespace LectureTimeTable
                     }
                 case Constant.COURSE_OF_INTEREST: // 관심과목 담기
                     {
+                        courseOfInterestPage.ShowCourseOfInterestPage(viewElement);
                         break;
                     }
                 case Constant.COURSE_REGISTRATION: // 수강신청

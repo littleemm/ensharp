@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LectureTimeTable
 {
-    class LoginViewElement // 로그인 요소 관련 프린트
+    class ViewElement // 요소 관련 프린트
     {
         public void PrintMainPage()
         {
@@ -50,6 +50,7 @@ namespace LectureTimeTable
 
         public void PrintCourseOfInterest()
         {
+            Console.WriteLine();
             Console.WriteLine("  ============================== SEJONG UNIVERSITY ============================== ");
             Console.WriteLine();
             Console.WriteLine();
@@ -74,6 +75,7 @@ namespace LectureTimeTable
 
         public void PrintCourseSearching()
         {
+            Console.WriteLine();
             Console.WriteLine("  ============================== SEJONG UNIVERSITY ============================== ");
             Console.WriteLine();
             Console.WriteLine();

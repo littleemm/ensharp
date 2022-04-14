@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace LectureTimeTable
 {
-    class CourseOfInterestController
+    class CourseOfInterestController : MenuSelectionController
     {
 
-        public void SearchCourseOfInterest()
+        public void SelectCondition(int x, int y)
         {
-
+            Console.SetCursorPosition(5, 7);
+            Console.BackgroundColor = ConsoleColor.Blue;
+            ScanMenuNumber(58, 16);
         }
     }
 }

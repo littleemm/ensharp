@@ -8,7 +8,7 @@ namespace LectureTimeTable
 {
     class MainLoginPage // 로그인 페이지 (Visible)
     {
-        private LoginViewElement loginViewElement;
+        private ViewElement loginViewElement;
         private LoginAdministrationPage administrationPage;
         private FirstMenuPage firstMenuPage;
 
@@ -16,7 +16,7 @@ namespace LectureTimeTable
 
         public MainLoginPage()
         {
-            loginViewElement = new LoginViewElement();
+            loginViewElement = new ViewElement();
             administrationPage = new LoginAdministrationPage();
             firstMenuPage = new FirstMenuPage();
         }
