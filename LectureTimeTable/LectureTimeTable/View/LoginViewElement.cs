@@ -23,10 +23,11 @@ namespace LectureTimeTable
 
         public void PrintSystemPage()
         {
+            Console.WriteLine();
             Console.WriteLine("  ============================== SEJONG UNIVERSITY ============================== ");
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("                              § 강좌 조회 및 수강신청 §                             ");
+            Console.WriteLine("                             § 강좌 조회 및 수강신청 §                             ");
             Console.WriteLine();
             Console.WriteLine("                               ① 강의시간표 조회                                  ");
             Console.WriteLine("                               ② 관심과목 담기                                    ");
@@ -35,9 +36,17 @@ namespace LectureTimeTable
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("  =============================================================================== ");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("                   원하시는 기능의 번호를 입력하세요 : ");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("  =============================================================================== ");
         }
 
-        public void PrintInterestedSubject()
+        public void PrintCourseOfInterest()
         {
             Console.WriteLine("  ============================== SEJONG UNIVERSITY ============================== ");
             Console.WriteLine();
@@ -51,9 +60,25 @@ namespace LectureTimeTable
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("  =============================================================================== ");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("                   원하시는 기능의 번호를 입력하세요 : ");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("  =============================================================================== ");
         }
 
-        public void PrintInterestedSubject()
+        public void PrintWarning(int x, int y)
+        {
+            Console.SetCursorPosition(x, y);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("              [메뉴에 나와있는 번호만 입력 가능합니다. 다시 입력하세요.]              ");
+            Console.ResetColor();
+        }
+
+        public void PrintCourseRegistration()
         {
             Console.WriteLine("  ============================== SEJONG UNIVERSITY ============================== ");
             Console.WriteLine();

@@ -10,12 +10,15 @@ namespace LectureTimeTable
     {
         private LoginViewElement loginViewElement;
         private LoginAdministrationPage administrationPage;
+        private FirstMenuPage firstMenuPage;
+
         private int passwordLength;
 
         public MainLoginPage()
         {
             loginViewElement = new LoginViewElement();
             administrationPage = new LoginAdministrationPage();
+            firstMenuPage = new FirstMenuPage();
         }
 
         public void ShowLoginPage()
@@ -26,9 +29,8 @@ namespace LectureTimeTable
 
             if (passwordLength == 4)
             {
-                
+                firstMenuPage.ShowMenuSelection();
             }
-
         }
 
 

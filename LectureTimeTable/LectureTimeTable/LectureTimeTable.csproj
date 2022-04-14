@@ -48,10 +48,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constant.cs" />
+    <Compile Include="FirstMenuPage.cs" />
     <Compile Include="LectureTimeTableProgram.cs" />
-    <Compile Include="LoginAdministrationPage.cs" />
-    <Compile Include="LoginViewElement.cs" />
-    <Compile Include="MainLoginPage.cs" />
+    <Compile Include="Controller\LoginAdministrationPage.cs" />
+    <Compile Include="View\LoginViewElement.cs" />
+    <Compile Include="View\MainLoginPage.cs" />
+    <Compile Include="MenuSelectionController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -59,9 +61,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controller\" />
     <Folder Include="Model\" />
-    <Folder Include="View\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
