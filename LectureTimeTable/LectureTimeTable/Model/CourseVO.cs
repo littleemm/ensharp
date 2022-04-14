@@ -13,14 +13,18 @@ namespace LectureTimeTable
         private string nameOfCourse;
         private string nameOfProfessor;
         private string grade;
+        private string number;
+        private string numberClass;
 
-        public CourseVO(string major, string division, string nameOfCourse, string nameOfProfessor, string grade)
+        public CourseVO(string major, string division, string nameOfCourse, string nameOfProfessor, string grade, string number, string numberClass)
         {
             this.major = major;
             this.division = division;
             this.nameOfCourse = nameOfCourse;
             this.nameOfProfessor = nameOfProfessor;
             this.grade = grade;
+            this.number = number;
+            this.numberClass = numberClass;
         }
 
         public string Major
@@ -51,6 +55,16 @@ namespace LectureTimeTable
         {
             get { return grade; }
             set { grade = value; }
+        }
+        public string Number
+        {
+            get { return number; }
+            set { number = value; }
+        }
+        public string NumberClass
+        {
+            get { return numberClass; }
+            set { numberClass = value; }
         }
     }
 }

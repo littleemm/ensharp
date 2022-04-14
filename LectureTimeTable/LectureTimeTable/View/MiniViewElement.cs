@@ -22,6 +22,7 @@ namespace LectureTimeTable
             Console.WriteLine("        ● 학년 선택    ①1학년 ②2학년 ③3학년 ④4학년                           ");
             Console.WriteLine("        ● 교과목명                                          ");
             Console.WriteLine("        ● 교수명                                    ");
+            Console.WriteLine("        ● 학수번호 / 분반                          ");
             Console.WriteLine("        ● 조회                                    ");
             Console.WriteLine();
             Console.WriteLine();
@@ -34,6 +35,12 @@ namespace LectureTimeTable
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("  =============================================================================== ");
+        }
+
+        public void PrintNumberSentence()
+        {
+            Console.WriteLine("                  학수 번호(ENTER 누르면 전체 선택)  : ");
+            Console.WriteLine("                  분     반  :")
         }
     }
 }

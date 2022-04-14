@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 namespace LectureTimeTable
 {
     class CourseOfInterestPage // '관심 과목 담기' 선택 후 (visible)
-    {
-        private int loopCount;
+    {   
         private string[] array;
         private string number;
 
@@ -16,7 +15,6 @@ namespace LectureTimeTable
 
         public CourseOfInterestPage()
         {
-            loopCount = 0;
             array = new string[] { "1", "2", "3", "4" };
 
             courseOfInterestController = new CourseOfInterestController(58, 16);
@@ -28,9 +26,7 @@ namespace LectureTimeTable
             Console.Clear();
             viewElement.PrintCourseOfInterest();
             number = numberChecking.CheckMenuNumber(array, viewElement);
-            courseOfInterestController.SelectMenu(int.Parse(number));
-
-
+            courseOfInterestController.SelectMenu(int.Parse(number), viewElement);
 
         }
     }
