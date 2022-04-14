@@ -18,6 +18,8 @@ namespace LectureTimeTable
             Console.WriteLine("                           ID(8자리) : ");
             Console.WriteLine("                           PW(4자리) : ");
             Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
             Console.WriteLine("  =============================================================================== ");
         }
 
@@ -27,7 +29,7 @@ namespace LectureTimeTable
             Console.WriteLine("  ============================== SEJONG UNIVERSITY ============================== ");
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("                             § 강좌 조회 및 수강신청 §                             ");
+            Console.WriteLine("                            § 강좌 조회 및 수강신청 §                             ");
             Console.WriteLine();
             Console.WriteLine("                               ① 강의시간표 조회                                  ");
             Console.WriteLine("                               ② 관심과목 담기                                    ");
@@ -74,7 +76,7 @@ namespace LectureTimeTable
         {
             Console.SetCursorPosition(x, y);
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("              [메뉴에 나와있는 번호만 입력 가능합니다. 다시 입력하세요.]              ");
+            Console.WriteLine("            [메뉴에 나와있는 번호만 입력 가능합니다. 다시 입력하세요.]              ");
             Console.ResetColor();
         }
 
@@ -97,6 +99,13 @@ namespace LectureTimeTable
         public void Print(string form)
         {
 
+        }
+
+        public void ClearLine(int line, int width)
+        {
+            Console.SetCursorPosition(width, Console.CursorTop - line);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(0, Console.CursorTop - line);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LectureTimeTable
 {
-    class FirstMenuPage
+    class FirstMenuPage // 로그인 성공 후 메뉴 첫페이지 (visible)
     {
         private bool isMenuNumber;
         private string menuNumber;
@@ -21,7 +21,7 @@ namespace LectureTimeTable
             loginViewElement = new LoginViewElement();
         }
 
-        public void ShowMenuSelection()
+        public void ShowMenuSelection() 
         {
             Console.Clear();
             loginViewElement.PrintSystemPage();
@@ -33,7 +33,9 @@ namespace LectureTimeTable
 
                 if (isMenuNumber == false)
                 {
-                    loginViewElement.PrintWarning(40, 7);
+                    loginViewElement.ClearLine(1, 55);
+                    Console.SetCursorPosition(55, 16);
+                    loginViewElement.PrintWarning(1, 14);
                 }
             }
 
