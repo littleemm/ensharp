@@ -8,9 +8,31 @@ namespace LectureTimeTable
 {
     class CourseOfInterestPage // 관심 과목 담기 선택 후 진입한 페이지 (visible)
     {
-        public void ShowCourseOfInterestPage(ViewElement viewElement)
+        private int loopCount;
+        private string[] array;
+        private string number;
+
+        private CourseOfInterestController courseOfInterestController;
+
+        public CourseOfInterestPage()
         {
+            loopCount = 0;
+            array = new string[] { "1", "2", "3", "4" };
+
+            courseOfInterestController = new CourseOfInterestController(58, 16);
+             // 58,  16
+        }
+
+        public void ShowCourseOfInterestPage(ViewElement viewElement, NumberCheckingController numberChecking)
+        {
+            Console.Clear();
             viewElement.PrintCourseOfInterest();
+            numberChecking.CheckMenuNumber(array, viewElement);
+
+            while(loopCount == 3)
+            {
+                //courseOfInterestController.CheckMenuNumber(array ,viewElement);
+            }
 
         }
     }

@@ -48,15 +48,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CourseOfInterestPage.cs" />
+    <Compile Include="CourseOfInterestViewElement.cs" />
     <Compile Include="Model\Constant.cs" />
     <Compile Include="CourseOfInterestController.cs" />
     <Compile Include="Model\CourseVO.cs" />
+    <Compile Include="SelectionController.cs" />
     <Compile Include="View\FirstMenuPage.cs" />
     <Compile Include="LectureTimeTableProgram.cs" />
     <Compile Include="Controller\LoginAdministrationPage.cs" />
     <Compile Include="View\ViewElement.cs" />
     <Compile Include="View\MainLoginPage.cs" />
-    <Compile Include="Controller\MenuSelectionController.cs" />
+    <Compile Include="Controller\NumberCheckingController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

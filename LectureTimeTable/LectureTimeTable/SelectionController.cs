@@ -6,27 +6,17 @@ using System.Threading.Tasks;
 
 namespace LectureTimeTable
 {
-    class CourseOfInterestController 
+    class SelectionController
     {
-        int positionX;
-        int positionY;
-        
-        public CourseOfInterestController(int positionX, int positionY) 
-        {
-            this.positionX = positionX;
-            this.positionY = positionY;
-        }
+        CourseOfInterestPage courseOfInterestPage;
 
-        public void SelectCondition(int x, int y)
+        public SelectionController()
         {
-            Console.SetCursorPosition(5, 7);
-            Console.BackgroundColor = ConsoleColor.Blue;
-            //ScanMenuNumber(58, 16);
+            courseOfInterestPage = new CourseOfInterestPage();
         }
-
-        public void SelectMenu(int number) 
+        public void SelectMenu(int number, ViewElement viewElement, NumberCheckingController numberChecking) // 다음 메뉴 고르기
         {
-            switch (number) ///// 매직넘버 수정하ㅏ기
+            switch (number)
             {
                 case Constant.COURSE_TIME_INQUIRY: // 강의시간표 조회
                     {
@@ -35,7 +25,7 @@ namespace LectureTimeTable
                     }
                 case Constant.COURSE_OF_INTEREST: // 관심과목 담기
                     {
-                        
+                        courseOfInterestPage.ShowCourseOfInterestPage(viewElement, numberChecking);
                         break;
                     }
                 case Constant.COURSE_REGISTRATION: // 수강신청
@@ -47,6 +37,6 @@ namespace LectureTimeTable
                         break;
                     }
             }
-        } 
+        }
     }
 }
