@@ -14,7 +14,7 @@ namespace LectureTimeTable
             Console.WriteLine("  ============================== SEJONG UNIVERSITY ============================== ");
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("                         § 관심과목 분야별 검색 및 추가 §                           ");
+            Console.WriteLine("                                 § 강의시간표 검색  §                           ");
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("        ● 개설학과     ①컴퓨터공학과 ②소프트웨어학과 ③지능기전공학부                               ");
@@ -22,7 +22,6 @@ namespace LectureTimeTable
             Console.WriteLine("        ● 학년 선택    ①1학년 ②2학년 ③3학년 ④4학년                           ");
             Console.WriteLine("        ● 교과목명                                          ");
             Console.WriteLine("        ● 교수명                                    ");
-            Console.WriteLine("        ● 학수번호 / 분반                          ");
             Console.WriteLine("        ● 조회                                    ");
             Console.WriteLine();
             Console.WriteLine();
@@ -39,8 +38,8 @@ namespace LectureTimeTable
 
         public void PrintNumberSentence()
         {
-            Console.WriteLine("                  학수 번호(ENTER 누르면 전체 선택)  : ");
-            Console.WriteLine("                  분     반  :")
+            Console.WriteLine("                  학수 번호(ENTER 누르면 전체 선택) :         ");
+            Console.WriteLine("                  분     반                        :");
         }
     }
 }

@@ -17,7 +17,7 @@ namespace LectureTimeTable
         {
             array = new string[] { "1", "2", "3", "4" };
 
-            courseOfInterestController = new CourseOfInterestController(58, 16);
+            courseOfInterestController = new CourseOfInterestController(81, 20);
              // 58,  16
         }
 

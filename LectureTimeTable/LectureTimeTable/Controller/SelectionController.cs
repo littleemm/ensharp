@@ -8,10 +8,12 @@ namespace LectureTimeTable
 {
     class SelectionController
     {
+        CoursePlanPage coursePlanPage;
         CourseOfInterestPage courseOfInterestPage;
 
         public SelectionController()
         {
+            coursePlanPage = new CoursePlanPage();
             courseOfInterestPage = new CourseOfInterestPage();
         }
         public void SelectMenu(int number, ViewElement viewElement, NumberCheckingController numberChecking) // 다음 메뉴 고르기
@@ -20,7 +22,7 @@ namespace LectureTimeTable
             {
                 case Constant.COURSE_TIME_INQUIRY: // 강의시간표 조회
                     {
-
+                        coursePlanPage.ShowCoursePlanSearchingPage(viewElement);
                         break;
                     }
                 case Constant.COURSE_OF_INTEREST: // 관심과목 담기

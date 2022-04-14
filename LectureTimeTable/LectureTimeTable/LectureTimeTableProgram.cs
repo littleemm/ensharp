@@ -14,7 +14,7 @@ namespace LectureTimeTable
 
         static void Main(string[] args)
         {
-            Console.SetWindowSize(84, 28);
+            Console.SetWindowSize(120, 28);
             MainLoginPage mainLoginPage = new MainLoginPage();
             mainLoginPage.ShowLoginPage();
         }

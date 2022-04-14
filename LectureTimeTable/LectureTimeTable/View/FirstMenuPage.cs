@@ -18,7 +18,7 @@ namespace LectureTimeTable
         public FirstMenuPage()
         {
             numberArray = new string[] { "1", "2", "3", "4" };
-            menuNumberCheckingController = new NumberCheckingController(55, 16);
+            menuNumberCheckingController = new NumberCheckingController(74, 16);
             selectionController = new SelectionController();
             viewElement = new ViewElement();
         }

@@ -48,6 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CourseOfInterestPage.cs" />
+    <Compile Include="CoursePlanPage.cs" />
+    <Compile Include="CoursePlanSearchingController.cs" />
     <Compile Include="View\MiniViewElement.cs" />
     <Compile Include="Model\Constant.cs" />
     <Compile Include="CourseOfInterestController.cs" />
