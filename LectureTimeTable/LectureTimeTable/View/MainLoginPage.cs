@@ -29,7 +29,7 @@ namespace LectureTimeTable
 
             if (passwordLength == 4)
             {
-                firstMenuPage.ShowMenuSelection();
+                firstMenuPage.ShowMenuSelection(firstMenuPage);
             }
         }
 

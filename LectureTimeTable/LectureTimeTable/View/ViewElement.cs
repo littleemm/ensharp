@@ -52,7 +52,7 @@ namespace LectureTimeTable
         {
             Console.WriteLine();
             Console.WriteLine("                      ============================== SEJONG UNIVERSITY ============================== ");
-            Console.WriteLine();
+            Console.WriteLine("                       F1: 뒤로가기                                                      ESC: 로그아웃");
             Console.WriteLine();
             Console.WriteLine("                                                     § 관심과목 담기 §                             ");
             Console.WriteLine();
@@ -76,7 +76,7 @@ namespace LectureTimeTable
         public void PrintCourseRegistration()
         {
             Console.WriteLine("                      ============================== SEJONG UNIVERSITY ============================== ");
-            Console.WriteLine();
+            Console.WriteLine("                       F1: 뒤로가기                                                      ESC: 로그아웃");
             Console.WriteLine();
             Console.WriteLine("                                                       § 수강 신청 §                             ");
             Console.WriteLine();

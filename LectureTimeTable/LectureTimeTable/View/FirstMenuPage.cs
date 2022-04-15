@@ -18,17 +18,17 @@ namespace LectureTimeTable
         public FirstMenuPage()
         {
             numberArray = new string[] { "1", "2", "3", "4" };
-            menuNumberCheckingController = new NumberCheckingController(74, 16);
+            menuNumberCheckingController = new NumberCheckingController(75, 16);
             selectionController = new SelectionController();
             viewElement = new ViewElement();
         }
 
-        public void ShowMenuSelection() 
+        public void ShowMenuSelection(FirstMenuPage firstMenuPage) 
         {
             Console.Clear();
             viewElement.PrintSystemPage();
             number = menuNumberCheckingController.CheckMenuNumber(numberArray, viewElement);
-            selectionController.SelectMenu(int.Parse(number), viewElement, menuNumberCheckingController);
+            selectionController.SelectMenu(int.Parse(number), viewElement, menuNumberCheckingController, firstMenuPage);
         }
     }
 }

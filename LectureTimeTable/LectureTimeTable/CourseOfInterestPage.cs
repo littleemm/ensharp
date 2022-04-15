@@ -17,8 +17,9 @@ namespace LectureTimeTable
         {
             array = new string[] { "1", "2", "3", "4" };
 
-            courseOfInterestController = new CourseOfInterestController(81, 20);
-             // 58,  16
+            courseOfInterestController = new CourseOfInterestController(83, 19);
+            // 58,  16
+           
         }
 
         public void ShowCourseOfInterestPage(ViewElement viewElement, NumberCheckingController numberChecking)
@@ -27,7 +28,7 @@ namespace LectureTimeTable
             viewElement.PrintCourseOfInterest();
             number = numberChecking.CheckMenuNumber(array, viewElement);
             courseOfInterestController.SelectMenu(int.Parse(number), viewElement);
-
+            
         }
     }
 }

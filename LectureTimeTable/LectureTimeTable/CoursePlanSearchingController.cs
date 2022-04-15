@@ -23,6 +23,7 @@ namespace LectureTimeTable
         private string[] array;
         private string[] longArray;
         private bool isNumber;
+        private ConsoleKeyInfo consoleKey;
 
         private MiniViewElement miniViewElement;
 
@@ -112,9 +113,22 @@ namespace LectureTimeTable
             return false;
         }
 
-        private void SearchCourse(ViewElement viewElement)
+        private void GobackOrGoExit(FirstMenuPage firstMenuPage)
+        {
+            Console.SetCursorPosition(positionX, positionY);
+            consoleKey = Console.ReadKey(true);
+            if (consoleKey.Key == ConsoleKey.F1)
+            {
+                firstMenuPage.ShowMenuSelection(firstMenuPage);
+            }
+            Console.SetCursorPosition(positionX, positionY);
+        }
+
+        private void SearchCourse(ViewElement viewElement, FirstMenuPage firstMenuPage)
         {
             miniViewElement.PrintCourseSearching();
+
+            GobackOrGoExit(firstMenuPage);
 
             nextIndex = CheckDivisionNumber(array, viewElement);
             if (nextIndex > 0)
@@ -122,11 +136,15 @@ namespace LectureTimeTable
                 courseVO.Major = major[nextIndex - 1];
             }
 
+            GobackOrGoExit(firstMenuPage);
+
             nextIndex = CheckDivisionNumber(array, viewElement);
             if (nextIndex > 0)
             {
                 courseVO.Division = courseDivision[nextIndex - 1];
             }
+
+            GobackOrGoExit(firstMenuPage);
 
             nextIndex = CheckDivisionNumber(longArray, viewElement);
             if (nextIndex > 0)
@@ -134,11 +152,16 @@ namespace LectureTimeTable
                 courseVO.Grade = grade[nextIndex - 1];
             }
 
+            GobackOrGoExit(firstMenuPage);
+
             courseVO.NameOfCourse = CheckDivisionName(viewElement);
+
+            GobackOrGoExit(firstMenuPage);
             courseVO.NameOfProfessor = CheckDivisionName(viewElement);
+            GobackOrGoExit(firstMenuPage);
         }
 
-        private void SearchUserCourse(ViewElement viewElement)
+        private void SearchUserCourse(ViewElement viewElement, FirstMenuPage firstMenuPage)
         {
             Console.Clear();
             try
@@ -196,12 +219,14 @@ namespace LectureTimeTable
             {
                 Console.WriteLine(e.Message);
             }
+            Console.SetCursorPosition(0, 0);
+            GobackOrGoExit(firstMenuPage);
         }
 
-        public void SearchCourseBasic(ViewElement viewElement)
+        public void SearchCourseBasic(ViewElement viewElement, FirstMenuPage firstMenuPage)
         {
-            SearchCourse(viewElement);
-            SearchUserCourse(viewElement);
+            SearchCourse(viewElement, firstMenuPage);
+            SearchUserCourse(viewElement, firstMenuPage);
         }
     }
 }
