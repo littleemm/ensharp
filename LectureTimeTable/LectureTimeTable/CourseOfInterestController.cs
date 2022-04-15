@@ -48,17 +48,11 @@ namespace LectureTimeTable
             miniViewElement = new MiniViewElement();
         }
 
-        public int CheckDivisionNumber(string[] numberArray, ViewElement viewElement) // 번호 입력
+        private int CheckNumber(string[] numberArray, ViewElement viewElement) // 번호 입력
         {
-            Console.ResetColor();
             while (isNumber == false)
             {
                 number = ScanDivision(positionX, positionY);
-
-                if(number.Length == 0)
-                {
-                    return 0;
-                } // ENTER 쳤음
 
                 isNumber = IsMenuNumber(number, numberArray, viewElement);
 
@@ -75,7 +69,7 @@ namespace LectureTimeTable
             return int.Parse(number);
         }
 
-        public string CheckDivisionName(ViewElement viewElement) // 이름 입력
+        private string CheckName(ViewElement viewElement) // 이름 입력
         {
             division = ScanDivision(positionX, positionY);
             if (division.Length == 0)
@@ -116,7 +110,7 @@ namespace LectureTimeTable
             }
         }
 
-        public string ScanDivision(int inputPositionX, int inputPositionY) // 숫자 혹은 엔터를 입력 받는 함수
+        public string ScanDivision(int inputPositionX, int inputPositionY) // 숫자를 입력 받는 함수
         {
             Console.SetCursorPosition(inputPositionX, inputPositionY);
             division = Console.ReadLine();
@@ -146,28 +140,8 @@ namespace LectureTimeTable
 
         private void SearchInterestCourse(ViewElement viewElement) 
         {
-            miniViewElement.PrintCourseSearching();
-
-            nextIndex = CheckDivisionNumber(array, viewElement);
-            if (nextIndex > 0)
-            {
-                courseVO.Major = major[nextIndex - 1];
-            }
-
-            nextIndex = CheckDivisionNumber(array, viewElement);
-            if (nextIndex > 0)
-            {
-                courseVO.Division = courseDivision[nextIndex - 1];
-            }
-
-            nextIndex = CheckDivisionNumber(longArray, viewElement);
-            if (nextIndex > 0)
-            {
-                courseVO.Grade = grade[nextIndex - 1];
-            }
-
-            courseVO.NameOfCourse = CheckDivisionName(viewElement);
-            courseVO.NameOfProfessor = CheckDivisionName(viewElement);
+            miniViewElement.PrintInterestCourseSearching();
+            CheckNumber(array, viewElement);
         }
 
         private void SearchUserInterestCourse()
