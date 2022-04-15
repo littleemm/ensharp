@@ -27,6 +27,10 @@ namespace LectureTimeTable
 
         private MiniViewElement miniViewElement;
 
+        private Excel.Application application;
+        private Excel.Workbook workbook;
+        private Excel.Sheets sheets;
+        private Excel.Worksheet worksheet;
 
         public CoursePlanSearchingController(int positionX, int positionY)
         {
@@ -42,6 +46,7 @@ namespace LectureTimeTable
             this.positionY = positionY;
 
             miniViewElement = new MiniViewElement();
+            application = new Excel.Application();
         }
 
         public int CheckDivisionNumber(string[] numberArray, ViewElement viewElement) // 번호 입력
@@ -128,15 +133,11 @@ namespace LectureTimeTable
         {
             miniViewElement.PrintCourseSearching();
 
-            GobackOrGoExit(firstMenuPage);
-
             nextIndex = CheckDivisionNumber(array, viewElement);
             if (nextIndex > 0)
             {
                 courseVO.Major = major[nextIndex - 1];
             }
-
-            GobackOrGoExit(firstMenuPage);
 
             nextIndex = CheckDivisionNumber(array, viewElement);
             if (nextIndex > 0)
@@ -144,84 +145,72 @@ namespace LectureTimeTable
                 courseVO.Division = courseDivision[nextIndex - 1];
             }
 
-            GobackOrGoExit(firstMenuPage);
-
             nextIndex = CheckDivisionNumber(longArray, viewElement);
             if (nextIndex > 0)
             {
                 courseVO.Grade = grade[nextIndex - 1];
             }
 
-            GobackOrGoExit(firstMenuPage);
 
             courseVO.NameOfCourse = CheckDivisionName(viewElement);
-
-            GobackOrGoExit(firstMenuPage);
             courseVO.NameOfProfessor = CheckDivisionName(viewElement);
+
             GobackOrGoExit(firstMenuPage);
         }
 
         private void SearchUserCourse(ViewElement viewElement, FirstMenuPage firstMenuPage)
         {
             Console.Clear();
-            try
+
+            Excel.Workbook workbook = application.Workbooks.Open(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\2022년도 1학기 강의시간표.xlsx");
+            Excel.Sheets sheets = workbook.Sheets;
+            Excel.Worksheet worksheet = sheets["Sheet1"] as Excel.Worksheet;
+
+            Excel.Range cellRange1 = worksheet.get_Range("A1", "E185") as Excel.Range;
+            Excel.Range cellRange2 = worksheet.get_Range("F1", "J185") as Excel.Range;
+            Excel.Range cellRange3 = worksheet.get_Range("K1", "L185") as Excel.Range;
+
+            Array data1 = cellRange1.Cells.Value2;
+            Array data2 = cellRange2.Cells.Value2;
+            Array data3 = cellRange3.Cells.Value2;
+
+            miniViewElement.PrintListSign();
+
+            for (int j = 1; j < 5; j++)
             {
-                Excel.Application application = new Excel.Application();
+                Console.Write(" " + data1.GetValue(1, j) + " ");
+            }
+            Console.Write("   " + data1.GetValue(1, 5) + "       " + data2.GetValue(1, 1) + "   " + data2.GetValue(1, 2) + " " + data2.GetValue(1, 3) + " " + data2.GetValue(1, 4) + "  " + data2.GetValue(1, 5) + "  " + data3.GetValue(1, 1) + " " + data3.GetValue(1, 2));
+            Console.WriteLine();
 
-                Excel.Workbook workbook = application.Workbooks.Open(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\2022년도 1학기 강의시간표.xlsx");
-
-                Excel.Sheets sheets = workbook.Sheets;
-
-                Excel.Worksheet worksheet = sheets["Sheet1"] as Excel.Worksheet;
-
-                Excel.Range cellRange1 = worksheet.get_Range("A1", "E5") as Excel.Range;
-                Excel.Range cellRange2 = worksheet.get_Range("F1", "J5") as Excel.Range;
-                Excel.Range cellRange3 = worksheet.get_Range("K1", "L5") as Excel.Range;
-
-                Array data1 = cellRange1.Cells.Value2;
-                Array data2 = cellRange2.Cells.Value2;
-                Array data3 = cellRange3.Cells.Value2;
-
-                for (int j = 1; j < 5; j++)
+            // 데이터 출력
+            for (int i = 2; i < 186; i++)
+            {
+                for (int j = 1; j < 6; j++)
                 {
-                    Console.Write(" " + data1.GetValue(1, j) + " ");
+                    Console.Write(" " + data1.GetValue(i, j) + "  ");
                 }
-                Console.Write("   " + data1.GetValue(1, 5) + "       " + data2.GetValue(1, 1) + "   " + data2.GetValue(1, 2) + " " + data2.GetValue(1, 3) + " " + data2.GetValue(1, 4) + "  " + data2.GetValue(1, 5) + "  " + data3.GetValue(1, 1) + " " + data3.GetValue(1, 2));
+
+                for (int j = 1; j < 6; j++)
+                {
+                    Console.Write(" " + data2.GetValue(i, j) + "  ");
+                }
+
+                for (int j = 1; j < 3; j++)
+                {
+                    Console.Write(" " + data3.GetValue(i, j) + "  ");
+                }
                 Console.WriteLine();
-
-                // 데이터 출력
-                for (int i = 2; i < 6; i++)
-                {
-                    for (int j = 1; j < 6; j++)
-                    {
-                        Console.Write(" " + data1.GetValue(i, j) + "  ");
-                    }
-
-                    for (int j = 1; j < 6; j++)
-                    {
-                        Console.Write(" " + data2.GetValue(i, j) + "  ");
-                    }
-
-                    for (int j = 1; j < 3; j++)
-                    {
-                        Console.Write(" " + data3.GetValue(i, j) + "  ");
-                    }
-                    Console.WriteLine();
-                }
-
-                // 모든 워크북 닫기
-                application.Workbooks.Close();
-
-                // application 종료
-                application.Quit();
             }
-            catch (SystemException e)
-            {
-                Console.WriteLine(e.Message);
-            }
+
+            application.Workbooks.Close();
+            application.Quit();
+
+
             Console.SetCursorPosition(0, 0);
             GobackOrGoExit(firstMenuPage);
         }
+     
 
         public void SearchCourseBasic(ViewElement viewElement, FirstMenuPage firstMenuPage)
         {

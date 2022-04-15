@@ -10,9 +10,11 @@ namespace LectureTimeTable
     {
         private string information;
         private bool isPersonalInformation;
+        private ConsoleKeyInfo consoleKey;
 
         public LoginAdministrationPage()
         {
+            information = "";
             isPersonalInformation = false;
         }
 
@@ -24,7 +26,7 @@ namespace LectureTimeTable
 
                 information = Console.ReadLine();
 
-                if (information == myInformation) /////// 입력 제한 예외처리 하자
+                if (information == myInformation) 
                 {
                     isPersonalInformation = true;
                 }
@@ -37,8 +39,54 @@ namespace LectureTimeTable
             }
 
             isPersonalInformation = false;
+            information = "";
 
             return myInformation.Length;
+        }
+
+        public int CheckPassword(int x, int y, string password)
+        {
+            Console.SetCursorPosition(x, y);
+
+            while (isPersonalInformation == false)
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    consoleKey = Console.ReadKey(true);
+
+                    if (consoleKey.Key == ConsoleKey.Enter)
+                    {
+                        Console.WriteLine();
+                        break;
+                    }
+                    if (consoleKey.Key == ConsoleKey.Backspace)
+                    {
+
+                    }
+                    else
+                    {
+                        information += consoleKey.KeyChar.ToString();
+                        Console.Write("*");
+                    }
+
+                }
+                Console.WriteLine();
+                if (information == password)
+                {
+                    isPersonalInformation = true;
+                }
+                else
+                {
+                    ClearLine(1, x);
+                    Console.SetCursorPosition(x, y);
+                }
+
+            }
+
+            isPersonalInformation = false;
+            information = "";
+
+            return password.Length;
         }
 
         private void ClearLine(int line, int width)

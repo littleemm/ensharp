@@ -20,6 +20,22 @@ namespace LectureTimeTable
             viewElement.PrintCourseRegistration();
             number = numberChecking.CheckMenuNumber(array, viewElement);
             courseRegistrationController.SelectMenu(int.Parse(number), viewElement);
+
+            while (isKey == false)
+            {
+                consoleKey = Console.ReadKey();
+                if (consoleKey.Key == ConsoleKey.F1)
+                {
+                    ShowCourseRegistrationPage(viewElement, numberChecking);
+                    break;
+                }
+                if (consoleKey.Key == ConsoleKey.Escape) // 종료
+                {
+                    break;
+                }
+
+                isKey = false;
+            }
         }
     }
 }

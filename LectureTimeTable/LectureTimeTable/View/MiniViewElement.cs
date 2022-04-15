@@ -227,7 +227,12 @@ namespace LectureTimeTable
             Console.WriteLine("                    ============================== 2022년 1학기 강의 목록 ============================== ");
             Console.WriteLine();
         }
-
+        public void PrintListSign()
+        {
+            Console.WriteLine();
+            Console.WriteLine("                    ============================== 2022년 1학기 강의 목록 ============================== ");
+            Console.WriteLine();
+        }
 
         public void PrintSelectedCourseOfInterest()
         {

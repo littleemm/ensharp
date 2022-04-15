@@ -54,20 +54,28 @@ namespace LectureTimeTable
                         break;
                     }
             }
+
+            if (menuNumber == 1)
+            {
+                
+            }
+            else
+            {
+                SearchUserCourse(viewElement);
+            }
         }
 
         public new void SelectMenu(int number, ViewElement viewElement) // 관심과목 담기 관련 메뉴 집합
         {
             Console.Clear();
-            switch (number) ///// 매직넘버 수정하ㅏ기
+            switch (number) ///// 매직넘버 수정하기
             {
-                case Constant.COURSE_TIME_INQUIRY: // 관심과목 검색 및 추가
+                case Constant.COURSE_TIME_INQUIRY: // 과목 검색 및 추가
                     {
                         SearchRegistrationCourse(viewElement);
-
                         break;
                     }
-                case Constant.COURSE_OF_INTEREST: // 관심과목 목록
+                case Constant.COURSE_OF_INTEREST: // 신청 과목 조회
                     {
 
                         break;

@@ -25,8 +25,8 @@ namespace LectureTimeTable
         protected Regex regex;
         protected Regex regexNumber;
 
-        protected Excel.Application application;
-        protected Excel.Application courseOfInterestApplication;
+        public Excel.Application application;
+        public Excel.Application courseOfInterestApplication;
         protected Excel.Workbook workbook;
         protected Excel.Workbook courseWorkbook;
         protected Excel.Sheets sheets;
@@ -235,7 +235,7 @@ namespace LectureTimeTable
 
         }
 
-        private void SearchUserInterestCourse(ViewElement viewElement) // 검색 기반 
+        protected void SearchUserCourse(ViewElement viewElement) // 검색 기반 
         {
             Console.Clear();
             workbook = application.Workbooks.Open(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\2022년도 1학기 강의시간표.xlsx");
@@ -418,12 +418,12 @@ namespace LectureTimeTable
         public void SelectMenu(int number, ViewElement viewElement) // 관심과목 담기 메인 메뉴
         {
             Console.Clear();
-            switch (number) ///// 매직넘버 수정하ㅏ기
+            switch (number) ///// 매직넘버 수정하기
             {
                 case Constant.COURSE_TIME_INQUIRY: // 관심과목 검색 및 추가
                     {
                         SearchInterestCourse(viewElement);
-                        SearchUserInterestCourse(viewElement);
+                        SearchUserCourse(viewElement);
                         break;
                     }
                 case Constant.COURSE_OF_INTEREST: // 관심과목 목록

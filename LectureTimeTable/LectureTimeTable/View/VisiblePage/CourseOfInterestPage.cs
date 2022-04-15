@@ -12,8 +12,8 @@ namespace LectureTimeTable
         protected string number;
 
         private CourseOfInterestController courseOfInterestController;
-        private ConsoleKeyInfo consoleKey;
-        private bool isKey;
+        protected ConsoleKeyInfo consoleKey;
+        protected bool isKey;
 
         public CourseOfInterestPage()
         {
