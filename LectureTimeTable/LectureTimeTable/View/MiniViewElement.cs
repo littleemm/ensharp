@@ -44,7 +44,7 @@ namespace LectureTimeTable
 
         public void PrintInterestCourseSearching()
         {
-
+            Console.WriteLine();
             Console.WriteLine("                      ============================== SEJONG UNIVERSITY ============================== ");
             Console.WriteLine("                       F1: 뒤로가기                                                      ESC: 로그아웃");
             Console.WriteLine();
@@ -72,7 +72,7 @@ namespace LectureTimeTable
 
         public void PrintCourseRegistrationSearching()
         {
-
+            Console.WriteLine();
             Console.WriteLine("                      ============================== SEJONG UNIVERSITY ============================== ");
             Console.WriteLine("                       F1: 뒤로가기                                                      ESC: 로그아웃");
             Console.WriteLine();
@@ -84,7 +84,6 @@ namespace LectureTimeTable
             Console.WriteLine("                                                     ③ 학수번호 검색                            ");
             Console.WriteLine("                                                     ④ 교과목명 검색                            ");
             Console.WriteLine("                                                     ⑤ 강의교수 검색                            ");
-            Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();
@@ -101,7 +100,7 @@ namespace LectureTimeTable
 
         public void PrintCourseSearchingOfMajor()
         {
-
+            Console.WriteLine();
             Console.WriteLine("                      ============================== SEJONG UNIVERSITY ============================== ");
             Console.WriteLine("                       F1: 뒤로가기                                                      ESC: 로그아웃");
             Console.WriteLine();
@@ -129,7 +128,7 @@ namespace LectureTimeTable
 
         public void PrintCourseSearchingOfNumber()
         {
-
+            Console.WriteLine();
             Console.WriteLine("                      ============================== SEJONG UNIVERSITY ============================== ");
             Console.WriteLine("                       F1: 뒤로가기                                                      ESC: 로그아웃");
             Console.WriteLine();
@@ -137,10 +136,10 @@ namespace LectureTimeTable
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("                                         학수번호는 6자리 정수로 입력하십시오. (ex.662982)              ");
-            Console.WriteLine("                                           분반은 3자리 정수로 입력하십시오.  (ex.3분반 -> 003)         ");
+            Console.WriteLine("                                         분반은 3자리 정수로 입력하십시오.  (ex.3분반 -> 003)         ");
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("                                        ❗ 분반을 입력하지 않으면 검색할 수 없습니다. ❗");
+            Console.WriteLine("                                        ※ 분반을 입력하지 않으면 검색할 수 없습니다. ※");
             Console.ResetColor();
             Console.WriteLine();
             Console.WriteLine();
@@ -150,6 +149,7 @@ namespace LectureTimeTable
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("                                                   학수번호 : ");
+            Console.WriteLine();
             Console.WriteLine("                                                   분    반 : ");
             Console.WriteLine();
             Console.WriteLine();
@@ -159,7 +159,7 @@ namespace LectureTimeTable
 
         public void PrintCourseSearchingOfName()
         {
-
+            Console.WriteLine();
             Console.WriteLine("                      ============================== SEJONG UNIVERSITY ============================== ");
             Console.WriteLine("                       F1: 뒤로가기                                                      ESC: 로그아웃");
             Console.WriteLine();
@@ -188,7 +188,7 @@ namespace LectureTimeTable
 
         public void PrintCourseSearchingOfProfessor()
         {
-
+            Console.WriteLine();
             Console.WriteLine("                      ============================== SEJONG UNIVERSITY ============================== ");
             Console.WriteLine("                       F1: 뒤로가기                                                      ESC: 로그아웃");
             Console.WriteLine();

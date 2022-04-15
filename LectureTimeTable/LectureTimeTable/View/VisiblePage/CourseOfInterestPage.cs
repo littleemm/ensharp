@@ -8,8 +8,8 @@ namespace LectureTimeTable
 {
     class CourseOfInterestPage // '관심 과목 담기' 선택 후 (visible)
     {   
-        private string[] array;
-        private string number;
+        protected string[] array;
+        protected string number;
 
         private CourseOfInterestController courseOfInterestController;
 
@@ -17,8 +17,8 @@ namespace LectureTimeTable
         {
             array = new string[] { "1", "2", "3", "4" };
 
-            courseOfInterestController = new CourseOfInterestController(83, 19);
-            // 58,  16
+            courseOfInterestController = new CourseOfInterestController(70, 19);
+
            
         }
 

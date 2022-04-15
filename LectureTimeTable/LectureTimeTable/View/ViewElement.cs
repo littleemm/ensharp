@@ -13,9 +13,10 @@ namespace LectureTimeTable
             Console.WriteLine();
             Console.WriteLine("                      ============================== SEJONG UNIVERSITY ============================== ");
             Console.WriteLine();
-            Console.WriteLine("                                                         L O G I N                                    ");
+            Console.WriteLine("                                                | 학사정보시스템 |  LOGIN  |                                   ");
             Console.WriteLine();
             Console.WriteLine("                                               ID(8자리) : ");
+            Console.WriteLine();
             Console.WriteLine("                                               PW(4자리) : ");
             Console.WriteLine();
             Console.WriteLine();
@@ -75,6 +76,7 @@ namespace LectureTimeTable
 
         public void PrintCourseRegistration()
         {
+            Console.WriteLine();
             Console.WriteLine("                      ============================== SEJONG UNIVERSITY ============================== ");
             Console.WriteLine("                       F1: 뒤로가기                                                      ESC: 로그아웃");
             Console.WriteLine();
@@ -110,11 +112,27 @@ namespace LectureTimeTable
             Console.ResetColor();
         }
 
+        public void PrintWarningSentence(int x, int y)
+        {
+            Console.SetCursorPosition(x, y);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("                                            [조건에 맞춰서 다시 입력해주세요.]              ");
+            Console.ResetColor();
+        }
+
         public void ClearLine(int line, int width)
         {
             Console.SetCursorPosition(width, Console.CursorTop - line);
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(0, Console.CursorTop - line);
         }
+
+        public void ClearLineMore(int line, int cursor, int width)
+        {
+            Console.SetCursorPosition(width, cursor - line);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(width + 50, cursor - line);
+        }
+
     }
 }

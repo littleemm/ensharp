@@ -10,7 +10,7 @@ namespace LectureTimeTable
     {
         public const int LOGIN_WIDTH = 59; // + 19
         public const int ID_POSITION = 5;
-        public const int PASSWORD_POSITION = 6;
+        public const int PASSWORD_POSITION = 7;
         public const int PASSWORD_LENGTH = 4;
 
         public const int COURSE_TIME_INQUIRY = 1;

@@ -15,31 +15,24 @@ namespace LectureTimeTable
         int positionX;
         int positionY;
 
-        private int nextIndex;
-        private string division;
-        private string number;
-        private string[] courseDivision;
-        private string[] grade;
-        private string[] major;
-        private string[] array;
+        protected int nextIndex;
+        protected int menuNumber;
+        protected string division;
+        protected string number;
+        protected string[] major;
         private string[] longArray;
-        private bool isNumber;
-        private Regex regex;
-        private Regex regexNumber;
+        protected bool isNumber;
+        protected Regex regex;
+        protected Regex regexNumber;
 
-        private MiniViewElement miniViewElement;
+        protected MiniViewElement miniViewElement;
 
-        
         public CourseOfInterestController(int positionX, int positionY) 
         {
             courseVO = new CourseVO("", "", "", "", "", "", "");
             regex = new Regex(@"^[0-9]{6}$");
             regexNumber = new Regex(@"^[0-9]{3}$");
-            major = new string[] { "컴퓨터공학과", "소프트웨어학과", "지능기전공학부" };
-            grade = new string[] { "1", "2", "3", "4" };
-            courseDivision = new string[] { "공통교양필수", "전공필수", "전공선택" };
-
-            array = new string[] { "1", "2", "3" };
+            major = new string[] { "컴퓨터공학과", "소프트웨어학과", "지능기전공학부", "기계항공우주공학부" };
             longArray = new string[] { "1", "2", "3", "4" };
 
             this.positionX = positionX;
@@ -48,7 +41,7 @@ namespace LectureTimeTable
             miniViewElement = new MiniViewElement();
         }
 
-        private int CheckNumber(string[] numberArray, ViewElement viewElement) // 번호 입력
+        protected int CheckNumber(string[] numberArray, ViewElement viewElement) // 번호 입력
         {
             while (isNumber == false)
             {
@@ -69,48 +62,60 @@ namespace LectureTimeTable
             return int.Parse(number);
         }
 
-        private string CheckName(ViewElement viewElement) // 이름 입력
+        protected string CheckName(int x, int y, ViewElement viewElement) // 이름 입력
         {
-            division = ScanDivision(positionX, positionY);
+            division = ScanDivision(x, y);
             if (division.Length == 0)
             {
                 return "";
             }
 
-            viewElement.ClearLine(1, positionX);
-            Console.SetCursorPosition(positionX, positionY);
+            viewElement.ClearLine(1, x);
+            Console.SetCursorPosition(x, y);
 
             return division;
         }
 
-        public void CheckClassNumber(ViewElement viewElement) ///////////////// 고치기
+        protected void CheckClassNumber(ViewElement viewElement) // 학수 번호, 분반 입력 및 체크
         {
-            viewElement.ClearLine(1, positionX);
-            Console.SetCursorPosition(0, 20);
-            miniViewElement.PrintNumberSentence();
-            Console.SetCursorPosition(54, 20);
-            division = Console.ReadLine();
-
-            if (division.Length == 0)
+            while (isNumber == false)
             {
-                courseVO.Number = "";
-            }
+                Console.SetCursorPosition(62, 18);
+                courseVO.Number = Console.ReadLine();
 
-            else if (regex.IsMatch(division))
-            {
-                courseVO.Number = division;
-
-                Console.SetCursorPosition(54, 21);
-                division = Console.ReadLine();
-
-                if (regex.IsMatch(division))
+                if (regex.IsMatch(courseVO.Number)) // 학수번호
                 {
-                    courseVO.NumberClass = division;
+                    isNumber = true;
+                    break;
                 }
+
+                viewElement.ClearLine(1, 62);
+                Console.SetCursorPosition(62, 18 - 2);
+                viewElement.PrintWarningSentence(1, 18 - 2);
+
             }
+            viewElement.ClearLine(3, 16);
+            isNumber = false;
+
+            while (isNumber == false)
+            {
+                Console.SetCursorPosition(62, 20);
+                courseVO.NumberClass = Console.ReadLine();
+
+                if (regexNumber.IsMatch(courseVO.NumberClass)) // 분반
+                {
+                    isNumber = true;
+                    break;
+                }
+
+                viewElement.ClearLine(1, 62);
+                Console.SetCursorPosition(62, 20 - 3);
+                viewElement.PrintWarningSentence(1, 20 - 3);
+            }
+
         }
 
-        public string ScanDivision(int inputPositionX, int inputPositionY) // 숫자를 입력 받는 함수
+        private string ScanDivision(int inputPositionX, int inputPositionY) // 숫자를 입력 받는 함수
         {
             Console.SetCursorPosition(inputPositionX, inputPositionY);
             division = Console.ReadLine();
@@ -141,7 +146,35 @@ namespace LectureTimeTable
         private void SearchInterestCourse(ViewElement viewElement) 
         {
             miniViewElement.PrintInterestCourseSearching();
-            CheckNumber(array, viewElement);
+            menuNumber = CheckNumber(longArray, viewElement);
+            Console.Clear();
+            switch (menuNumber) {
+                case 1:
+                    {
+                        miniViewElement.PrintCourseSearchingOfMajor();
+                        nextIndex = CheckNumber(longArray, viewElement);
+                        courseVO.Major = major[nextIndex - 1];
+                        break;
+                    }
+                case 2:
+                    {
+                        miniViewElement.PrintCourseSearchingOfNumber();
+                        CheckClassNumber(viewElement);
+                        break;
+                    }
+                case 3:
+                    {
+                        miniViewElement.PrintCourseSearchingOfName();
+                        courseVO.NameOfCourse = CheckName(74, 20, viewElement);
+                        break;
+                    }
+                case 4:
+                    {
+                        miniViewElement.PrintCourseSearchingOfProfessor();
+                        courseVO.NameOfProfessor = CheckName(72, 20, viewElement);
+                        break;
+                    }
+            }
         }
 
         private void SearchUserInterestCourse()
@@ -204,7 +237,7 @@ namespace LectureTimeTable
             }
         }
 
-        public void SelectMenu(int number, ViewElement viewElement) 
+        public void SelectMenu(int number, ViewElement viewElement) // 관심과목 담기 관련 메뉴 집합
         {
             Console.Clear();
             switch (number) ///// 매직넘버 수정하ㅏ기

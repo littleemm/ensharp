@@ -47,19 +47,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CourseOfInterestPage.cs" />
-    <Compile Include="CoursePlanPage.cs" />
-    <Compile Include="CoursePlanSearchingController.cs" />
+    <Compile Include="CourseRegistrationController.cs" />
+    <Compile Include="CourseRegistrationPage.cs" />
+    <Compile Include="View\VisiblePage\CourseOfInterestPage.cs" />
+    <Compile Include="View\VisiblePage\CoursePlanPage.cs" />
+    <Compile Include="Controller\CoursePlanSearchingController.cs" />
     <Compile Include="View\MiniViewElement.cs" />
     <Compile Include="Model\Constant.cs" />
-    <Compile Include="CourseOfInterestController.cs" />
+    <Compile Include="Controller\CourseOfInterestController.cs" />
     <Compile Include="Model\CourseVO.cs" />
     <Compile Include="Controller\SelectionController.cs" />
-    <Compile Include="View\FirstMenuPage.cs" />
+    <Compile Include="View\VisiblePage\FirstMenuPage.cs" />
     <Compile Include="LectureTimeTableProgram.cs" />
     <Compile Include="Controller\LoginAdministrationPage.cs" />
     <Compile Include="View\ViewElement.cs" />
-    <Compile Include="View\MainLoginPage.cs" />
+    <Compile Include="View\VisiblePage\MainLoginPage.cs" />
     <Compile Include="Controller\NumberCheckingController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

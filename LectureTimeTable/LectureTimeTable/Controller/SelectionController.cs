@@ -8,13 +8,16 @@ namespace LectureTimeTable
 {
     class SelectionController
     {
-        CoursePlanPage coursePlanPage;
-        CourseOfInterestPage courseOfInterestPage;
+        private CoursePlanPage coursePlanPage;
+        private CourseOfInterestPage courseOfInterestPage;
+        private CourseRegistrationPage courseRegistrationPage;
 
         public SelectionController()
         {
             coursePlanPage = new CoursePlanPage();
             courseOfInterestPage = new CourseOfInterestPage();
+            courseRegistrationPage = new CourseRegistrationPage();
+            
         }
         public void SelectMenu(int number, ViewElement viewElement, NumberCheckingController numberChecking, FirstMenuPage firstMenuPage) // 다음 메뉴 고르기
         {
@@ -32,6 +35,7 @@ namespace LectureTimeTable
                     }
                 case Constant.COURSE_REGISTRATION: // 수강신청
                     {
+                        courseRegistrationPage.ShowCourseRegistrationPage(viewElement, numberChecking);
                         break;
                     }
                 case Constant.MY_COURSE: // 수강 내역
