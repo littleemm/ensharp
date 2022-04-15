@@ -127,12 +127,6 @@ namespace LectureTimeTable
             Console.SetCursorPosition(0, Console.CursorTop - line);
         }
 
-        public void ClearLineMore(int line, int cursor, int width)
-        {
-            Console.SetCursorPosition(width, cursor - line);
-            Console.Write(new string(' ', Console.WindowWidth));
-            Console.SetCursorPosition(width + 50, cursor - line);
-        }
 
     }
 }

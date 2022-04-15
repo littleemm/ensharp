@@ -251,6 +251,14 @@ namespace LectureTimeTable
             Console.ResetColor();
         }
 
+        public void PrintEmptyMessage(int x, int y)
+        {
+            Console.SetCursorPosition(x, y);
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("                                                   [일치하는 과목이 없습니다!] ");
+            Console.ResetColor();
+        }
+
         public void PrintFailMessage(int x, int y)
         {
             Console.SetCursorPosition(x, y);

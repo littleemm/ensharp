@@ -19,17 +19,26 @@ namespace LectureTimeTable
         protected int menuNumber;
         protected string division;
         protected string number;
+        protected string sheetNumber;
         protected string[] major;
-        private string memberData;
-        private int dataNumber;
-        private string dataClassNumber;
-        private string[] longArray;
         protected bool isNumber;
         protected Regex regex;
         protected Regex regexNumber;
 
         protected Excel.Application application;
+        protected Excel.Application courseOfInterestApplication;
+        protected Excel.Workbook workbook;
+        protected Excel.Workbook courseWorkbook;
+        protected Excel.Sheets sheets;
+        protected Excel.Sheets courseSheets;
+        protected Excel.Worksheet worksheet;
+        protected Excel.Worksheet courseWorksheet;
         protected MiniViewElement miniViewElement;
+
+        private int dataNumber;
+        private string memberData;
+        private string dataClassNumber;
+        private string[] longArray;
 
         public CourseOfInterestController(int positionX, int positionY)
         {
@@ -44,6 +53,7 @@ namespace LectureTimeTable
             this.positionX = positionX;
             this.positionY = positionY;
             application = new Excel.Application();
+            courseOfInterestApplication = new Excel.Application();
             miniViewElement = new MiniViewElement();
         }
 
@@ -228,9 +238,9 @@ namespace LectureTimeTable
         private void SearchUserInterestCourse(ViewElement viewElement) // 검색 기반 
         {
             Console.Clear();
-            Excel.Workbook workbook = application.Workbooks.Open(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\2022년도 1학기 강의시간표.xlsx");
-            Excel.Sheets sheets = workbook.Sheets;
-            Excel.Worksheet worksheet = sheets["Sheet1"] as Excel.Worksheet;
+            workbook = application.Workbooks.Open(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\2022년도 1학기 강의시간표.xlsx");
+            sheets = workbook.Sheets;
+            worksheet = sheets["Sheet1"] as Excel.Worksheet;
 
             Excel.Range cellRange1 = worksheet.get_Range("A1", "E185") as Excel.Range;
             Excel.Range cellRange2 = worksheet.get_Range("F1", "J185") as Excel.Range;
@@ -296,16 +306,29 @@ namespace LectureTimeTable
             dataNumber = 0;
             courseVO = new CourseVO("", "", "", "", "", "", "");
 
-            // 모든 워크북 닫기
-            application.Workbooks.Close();
+            Console.SetCursorPosition(45, 4);
+            sheetNumber = Console.ReadLine();
+            for (int i=0;i<186;i++)
+            {
+                if (sheetNumber.Equals(data1.GetValue(1,i)))
+                {
+                    AddUserCourseOfInterest(sheetNumber, i, data1, data2, data3);
+                    miniViewElement.PrintSuccessMessage(5, 6);
+                    break;
+                }
+                if (i == 185)
+                {
+                    miniViewElement.PrintEmptyMessage(5, 6);
+                }
+            }
 
-            // application 종료
+            application.Workbooks.Close();
             application.Quit();
         }
 
         private void PrintDataMajorOrCourse(int dataNumber, Array data1, Array data2, Array data3)
         { 
-            for (int i = 2; i < 185; i++)
+            for (int i = 2; i < 186; i++)
             {
                 if (data1.GetValue(i, dataNumber).Equals(memberData))
                 {
@@ -316,7 +339,7 @@ namespace LectureTimeTable
 
         private void PrintDataNumber(int dataNumber, Array data1, Array data2, Array data3)
         {
-            for (int i = 2; i < 185; i++)
+            for (int i = 2; i < 186; i++)
             {
                 if (data1.GetValue(i, dataNumber).Equals(memberData) && data1.GetValue(i, dataNumber).Equals(courseVO.NumberClass))
                 {
@@ -327,7 +350,7 @@ namespace LectureTimeTable
 
         private void PrintDataDivisionOrName(int dataNumber, Array data1, Array data2, Array data3)
         {
-            for (int i = 2; i < 185; i++)
+            for (int i = 2; i < 186; i++)
             {
                 if (data2.GetValue(i, dataNumber).Equals(memberData) || data3.GetValue(i, dataNumber).Equals(memberData))
                 {
@@ -355,9 +378,44 @@ namespace LectureTimeTable
 
             Console.WriteLine();
         }
-    
 
-        public void SelectMenu(int number, ViewElement viewElement) // 관심과목 담기 관련 메뉴 집합
+        public void AddUserCourseOfInterest(string courseNumber, int i, Array data1, Array data2, Array data3) // 관심과목 추가
+        {
+            if (data1.GetValue(i, 1).Equals(courseNumber))
+            {
+                courseWorkbook = courseOfInterestApplication.Workbooks.Open(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\관심과목목록.xlsx");
+                courseSheets = courseWorkbook.Sheets;
+                courseWorksheet = courseSheets["Sheet1"] as Excel.Worksheet;
+
+                Excel.Range cellRange1 = courseWorksheet.Range["A1", "E25"];
+                Excel.Range cellRange2 = courseWorksheet.Range["F1", "J25"];
+                Excel.Range cellRange3 = courseWorksheet.Range["K1", "L25"];
+
+                for (int row = 1; row < row + 1;row++)
+                {
+                    cellRange1[row, 1] = data1.GetValue(i, 1);
+                    cellRange1[row, 2] = data1.GetValue(i, 2);
+                    cellRange1[row, 3] = data1.GetValue(i, 3);
+                    cellRange1[row, 4] = data1.GetValue(i, 4);
+                    cellRange1[row, 5] = data1.GetValue(i, 5);
+
+                    cellRange2[row, 1] = data2.GetValue(i, 1);
+                    cellRange2[row, 2] = data2.GetValue(i, 2);
+                    cellRange2[row, 3] = data2.GetValue(i, 3);
+                    cellRange2[row, 4] = data2.GetValue(i, 4);
+                    cellRange2[row, 5] = data2.GetValue(i, 5);
+
+                    cellRange3[row, 1] = data3.GetValue(i, 1);
+                    cellRange2[row, 2] = data3.GetValue(i, 2);
+                }
+
+                courseWorkbook.Save();
+                courseOfInterestApplication.Workbooks.Close();
+                courseOfInterestApplication.Quit();
+            } 
+        }
+
+        public void SelectMenu(int number, ViewElement viewElement) // 관심과목 담기 메인 메뉴
         {
             Console.Clear();
             switch (number) ///// 매직넘버 수정하ㅏ기
