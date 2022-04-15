@@ -214,5 +214,65 @@ namespace LectureTimeTable
             Console.WriteLine();
             Console.WriteLine("                       =============================================================================== ");
         }
+
+        public void PrintCourseOfSearching()
+        {
+            Console.WriteLine();
+            Console.WriteLine("                      ============================== SEJONG UNIVERSITY ============================== ");
+            Console.WriteLine("                       F1: 뒤로가기                                                      ESC: 로그아웃");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("                    ============================== 2022년 1학기 강의 목록 ============================== ");
+            Console.WriteLine();
+        }
+
+
+        public void PrintSelectedCourseOfInterest()
+        {
+            Console.WriteLine();
+            Console.WriteLine("                      ============================== SEJONG UNIVERSITY ============================== ");
+            Console.WriteLine("                       F1: 관심과목 메인                                                 ESC: 로그아웃");
+            Console.WriteLine();
+            Console.WriteLine("                        강의 번호(NO) 입력 : ");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("                    ============================== 2022년 1학기 강의 목록 ============================== ");
+            Console.WriteLine();
+        }
+
+        public void PrintSuccessMessage(int x, int y)
+        {
+            Console.SetCursorPosition(x, y);
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("                                                  [관심과목으로 등록되었습니다!] ");
+            Console.ResetColor();
+        }
+
+        public void PrintFailMessage(int x, int y)
+        {
+            Console.SetCursorPosition(x, y);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("                                                 [동일 과목은 등록할 수 없습니다!] ");
+            Console.ResetColor();
+        }
+
+        public void PrintWarning(int x, int y)
+        {
+            Console.SetCursorPosition(x, y);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("                                                [강의 번호를 정확하게 입력해주세요!] ");
+            Console.ResetColor();
+        }
+
+        public void PrintDeleteMessage(int x, int y)
+        {
+            Console.SetCursorPosition(x, y);
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("                                                  [관심과목에서 삭제되었습니다!] ");
+            Console.ResetColor();
+        }
     }
 }

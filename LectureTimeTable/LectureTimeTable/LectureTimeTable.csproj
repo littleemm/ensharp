@@ -47,8 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CourseRegistrationController.cs" />
-    <Compile Include="CourseRegistrationPage.cs" />
+    <Compile Include="Controller\CourseRegistrationController.cs" />
+    <Compile Include="View\VisiblePage\CourseRegistrationPage.cs" />
     <Compile Include="View\VisiblePage\CourseOfInterestPage.cs" />
     <Compile Include="View\VisiblePage\CoursePlanPage.cs" />
     <Compile Include="Controller\CoursePlanSearchingController.cs" />

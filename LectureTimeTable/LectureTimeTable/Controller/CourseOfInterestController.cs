@@ -20,6 +20,8 @@ namespace LectureTimeTable
         protected string division;
         protected string number;
         protected string[] major;
+        private string memberData;
+        private int dataNumber;
         private string[] longArray;
         protected bool isNumber;
         protected Regex regex;
@@ -27,13 +29,14 @@ namespace LectureTimeTable
 
         protected MiniViewElement miniViewElement;
 
-        public CourseOfInterestController(int positionX, int positionY) 
+        public CourseOfInterestController(int positionX, int positionY)
         {
             courseVO = new CourseVO("", "", "", "", "", "", "");
             regex = new Regex(@"^[0-9]{6}$");
             regexNumber = new Regex(@"^[0-9]{3}$");
             major = new string[] { "컴퓨터공학과", "소프트웨어학과", "지능기전공학부", "기계항공우주공학부" };
             longArray = new string[] { "1", "2", "3", "4" };
+            isNumber = false;
 
             this.positionX = positionX;
             this.positionY = positionY;
@@ -142,9 +145,50 @@ namespace LectureTimeTable
             }
             return false;
         }
-
-        private void SearchInterestCourse(ViewElement viewElement) 
+        private int CheckFirstData(CourseVO courseVO)
         {
+            if (courseVO.Major.Length > 0)
+            {
+                memberData = courseVO.Major;
+                return 2; //courseVO.Major;
+            }
+            if (courseVO.Number.Length > 0)
+            {
+                memberData = courseVO.Number;
+                return 3; // courseVO.Number;
+            }
+            if (courseVO.NameOfCourse.Length > 0)
+            {
+                memberData = courseVO.NameOfCourse;
+                return 5; // courseVO.NameOfCourse;
+            }
+
+            return 0;
+        }
+
+        private int CheckSecondData(CourseVO courseVO)
+        {
+            if (courseVO.Division.Length > 0)
+            {
+                memberData = courseVO.Division;
+                return 1; // courseVO.Division;
+            }
+            return 0;
+        }
+
+        private int CheckThirdData(CourseVO courseVO)
+        {
+            if (courseVO.NameOfProfessor.Length > 0)
+            {
+                memberData = courseVO.NameOfProfessor;
+                return 1; // courseVO.NameOfProfessor;
+            }
+
+            return 0;
+        }
+        private void SearchInterestCourse(ViewElement viewElement)
+        {
+            Console.Clear();
             miniViewElement.PrintInterestCourseSearching();
             menuNumber = CheckNumber(longArray, viewElement);
             Console.Clear();
@@ -175,67 +219,83 @@ namespace LectureTimeTable
                         break;
                     }
             }
+
         }
 
-        private void SearchUserInterestCourse()
+        private void SearchUserInterestCourse(ViewElement viewElement)
         {
             Console.Clear();
-            try
+            Excel.Application application = new Excel.Application();
+            Excel.Workbook workbook = application.Workbooks.Open(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\2022년도 1학기 강의시간표.xlsx");
+            Excel.Sheets sheets = workbook.Sheets;
+            Excel.Worksheet worksheet = sheets["Sheet1"] as Excel.Worksheet;
+
+            Excel.Range cellRange1 = worksheet.get_Range("A1", "E185") as Excel.Range;
+            Excel.Range cellRange2 = worksheet.get_Range("F1", "J185") as Excel.Range;
+            Excel.Range cellRange3 = worksheet.get_Range("K1", "L185") as Excel.Range;
+
+            Array data1 = cellRange1.Cells.Value2;
+            Array data2 = cellRange2.Cells.Value2;
+            Array data3 = cellRange3.Cells.Value2;
+
+            miniViewElement.PrintSelectedCourseOfInterest();
+
+            if (CheckFirstData(courseVO) > 0)
             {
-                Excel.Application application = new Excel.Application();
+                dataNumber = CheckFirstData(courseVO);
+            }
+            if (CheckSecondData(courseVO) > 0)
+            {
+                dataNumber = CheckSecondData(courseVO);
+            }
+            if (CheckThirdData(courseVO) > 0)
+            {
+                dataNumber = CheckThirdData(courseVO);
+            }
 
-                Excel.Workbook workbook = application.Workbooks.Open(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\2022년도 1학기 강의시간표.xlsx");
+            for (int j = 1; j < 5; j++)
+            {
+                Console.Write(" " + data1.GetValue(1, j) + " ");
+            }
+            Console.Write("   " + data1.GetValue(1, 5) + "       " + data2.GetValue(1, 1) + "   " + data2.GetValue(1, 2) + " " + data2.GetValue(1, 3) + " " + data2.GetValue(1, 4) + "  " + data2.GetValue(1, 5) + "  " + data3.GetValue(1, 1) + " " + data3.GetValue(1, 2));
+            Console.WriteLine(); // 시트 맨위 출력
 
-                Excel.Sheets sheets = workbook.Sheets;
-
-                Excel.Worksheet worksheet = sheets["Sheet1"] as Excel.Worksheet;
-
-                Excel.Range cellRange1 = worksheet.get_Range("A1", "E5") as Excel.Range;
-                Excel.Range cellRange2 = worksheet.get_Range("F1", "J5") as Excel.Range;
-                Excel.Range cellRange3 = worksheet.get_Range("K1", "L5") as Excel.Range;
-
-                Array data1 = cellRange1.Cells.Value2;
-                Array data2 = cellRange2.Cells.Value2;
-                Array data3 = cellRange3.Cells.Value2;
-
-                for (int j = 1; j < 5; j++)
+            // 데이터 출력
+            for (int i = 2; i < 185; i++)
+            {
+                if (data1.GetValue(i, dataNumber).Equals(memberData) ||
+                    data2.GetValue(i, dataNumber).Equals(memberData) ||
+                    data3.GetValue(i, dataNumber).Equals(memberData))
                 {
-                    Console.Write(" " + data1.GetValue(1, j) + " ");
-                }
-                Console.Write("   " + data1.GetValue(1, 5) + "       " + data2.GetValue(1, 1) + "   " + data2.GetValue(1, 2) + " " + data2.GetValue(1, 3) + " " + data2.GetValue(1, 4) + "  " + data2.GetValue(1, 5) + "  " + data3.GetValue(1, 1) + " " + data3.GetValue(1, 2));
-                Console.WriteLine();
+                    Console.Write(" " + data1.GetValue(i, 1) + "  "); // NO
+                    Console.Write(" " + data1.GetValue(i, 2) + "  "); // 전공 <
+                    Console.Write(" " + data1.GetValue(i, 3) + "  "); // 학수번호 <
+                    Console.Write(" " + data1.GetValue(i, 4) + "  "); // 분반 <<
+                    Console.Write(" " + data1.GetValue(i, 5) + "  "); // 과목명 <
 
-                // 데이터 출력
-                for (int i = 2; i < 6; i++) 
-                {
-                    for (int j = 1; j < 6; j++) 
-                    {
-                        Console.Write(" " + data1.GetValue(i, j) + "  ");
-                    }
+                    Console.Write(" " + data2.GetValue(i, 1) + "  "); // 이수구분 <
+                    Console.Write(" " + data2.GetValue(i, 2) + "  "); // 학년
+                    Console.Write(" " + data2.GetValue(i, 3) + "  "); // 학점
+                    Console.Write(" " + data2.GetValue(i, 4) + "  "); // 시간
+                    Console.Write(" " + data2.GetValue(i, 5) + "  "); // 장소
 
-                    for (int j = 1; j < 6; j++)
-                    {
-                        Console.Write(" " + data2.GetValue(i, j) + "  ");
-                    }
+                    Console.Write(" " + data3.GetValue(i, 1) + "  "); // 교수명  <
+                    Console.Write(" " + data3.GetValue(i, 2) + "  "); // 언어
 
-                    for (int j = 1; j < 3; j++)
-                    {
-                        Console.Write(" " + data3.GetValue(i, j) + "  ");
-                    }
                     Console.WriteLine();
                 }
-
-                // 모든 워크북 닫기
-                application.Workbooks.Close();
-
-                // application 종료
-                application.Quit();
             }
-            catch (SystemException e)
-            {
-                Console.WriteLine(e.Message);
-            }
+
+            memberData = "";
+            courseVO = new CourseVO("", "", "", "", "", "", "");
+
+            // 모든 워크북 닫기
+            application.Workbooks.Close();
+
+            // application 종료
+            application.Quit();
         }
+    
 
         public void SelectMenu(int number, ViewElement viewElement) // 관심과목 담기 관련 메뉴 집합
         {
@@ -245,7 +305,7 @@ namespace LectureTimeTable
                 case Constant.COURSE_TIME_INQUIRY: // 관심과목 검색 및 추가
                     {
                         SearchInterestCourse(viewElement);
-                        SearchUserInterestCourse();
+                        SearchUserInterestCourse(viewElement);
                         break;
                     }
                 case Constant.COURSE_OF_INTEREST: // 관심과목 목록
@@ -263,5 +323,9 @@ namespace LectureTimeTable
                     }
             }
         } 
+
+        
+
+        
     }
 }
