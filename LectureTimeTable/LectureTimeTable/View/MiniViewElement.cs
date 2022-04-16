@@ -74,7 +74,7 @@ namespace LectureTimeTable
         {
             Console.WriteLine();
             Console.WriteLine("                      ============================== SEJONG UNIVERSITY ============================== ");
-            Console.WriteLine("                       F1: 뒤로가기                                                      ESC: 로그아웃");
+            Console.WriteLine("                                                                            ");
             Console.WriteLine();
             Console.WriteLine("                                                       § 검색 구분  §                           ");
             Console.WriteLine();
@@ -102,7 +102,7 @@ namespace LectureTimeTable
         {
             Console.WriteLine();
             Console.WriteLine("                      ============================== SEJONG UNIVERSITY ============================== ");
-            Console.WriteLine("                       F1: 뒤로가기                                                      ESC: 로그아웃");
+            Console.WriteLine("                                                                          ");
             Console.WriteLine();
             Console.WriteLine("                                                     § 개설학과 검색  §                           ");
             Console.WriteLine();
@@ -130,7 +130,7 @@ namespace LectureTimeTable
         {
             Console.WriteLine();
             Console.WriteLine("                      ============================== SEJONG UNIVERSITY ============================== ");
-            Console.WriteLine("                       F1: 뒤로가기                                                      ESC: 로그아웃");
+            Console.WriteLine("                                                                           ");
             Console.WriteLine();
             Console.WriteLine("                                                     § 학수번호 검색  §                               ");
             Console.WriteLine();
@@ -161,7 +161,7 @@ namespace LectureTimeTable
         {
             Console.WriteLine();
             Console.WriteLine("                      ============================== SEJONG UNIVERSITY ============================== ");
-            Console.WriteLine("                       F1: 뒤로가기                                                      ESC: 로그아웃");
+            Console.WriteLine("                                                                            ");
             Console.WriteLine();
             Console.WriteLine("                                                       § 교과목명 검색  §                           ");
             Console.WriteLine();
@@ -190,7 +190,7 @@ namespace LectureTimeTable
         {
             Console.WriteLine();
             Console.WriteLine("                      ============================== SEJONG UNIVERSITY ============================== ");
-            Console.WriteLine("                       F1: 뒤로가기                                                      ESC: 로그아웃");
+            Console.WriteLine("                                                                             ");
             Console.WriteLine();
             Console.WriteLine("                                                       § 강의교수 검색  §                           ");
             Console.WriteLine();

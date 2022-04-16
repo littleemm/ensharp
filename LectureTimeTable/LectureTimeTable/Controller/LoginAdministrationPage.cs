@@ -18,7 +18,7 @@ namespace LectureTimeTable
             isPersonalInformation = false;
         }
 
-        public int CheckPersonalInformation(int x, int y, string myInformation) // 입력 및 정보 체크
+        public void CheckPersonalInformation(int x, int y, string myInformation) // 입력 및 정보 체크
         {
             Console.SetCursorPosition(x, y);
 
@@ -40,8 +40,6 @@ namespace LectureTimeTable
 
             isPersonalInformation = false;
             information = "";
-
-            return myInformation.Length;
         }
 
         public int CheckPassword(int x, int y, string password)

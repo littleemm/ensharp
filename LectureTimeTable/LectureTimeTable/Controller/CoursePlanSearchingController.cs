@@ -32,7 +32,7 @@ namespace LectureTimeTable
         private Excel.Sheets sheets;
         private Excel.Worksheet worksheet;
 
-        public CoursePlanSearchingController(int positionX, int positionY)
+        public CoursePlanSearchingController(int positionX, int positionY) // 원하는 강의 목록 출력
         {
             courseVO = new CourseVO("", "", "", "", "", "", "");
             major = new string[] { "컴퓨터공학과", "소프트웨어학과", "지능기전공학부" };
@@ -166,6 +166,8 @@ namespace LectureTimeTable
             sheets = workbook.Sheets;
             worksheet = sheets["Sheet1"] as Excel.Worksheet;
 
+            miniViewElement.PrintCourseOfSearching();
+
             Excel.Range cellRange1 = worksheet.get_Range("A1", "E185") as Excel.Range;
             Excel.Range cellRange2 = worksheet.get_Range("F1", "J185") as Excel.Range;
             Excel.Range cellRange3 = worksheet.get_Range("K1", "L185") as Excel.Range;
@@ -174,7 +176,6 @@ namespace LectureTimeTable
             Array data2 = cellRange2.Cells.Value2;
             Array data3 = cellRange3.Cells.Value2;
 
-            miniViewElement.PrintListSign();
 
             for (int j = 1; j < 5; j++)
             {
@@ -223,6 +224,8 @@ namespace LectureTimeTable
 
                 Console.WriteLine();
             }
+
+            courseVO = new CourseVO("", "", "", "", "", "", "");
 
             application.Workbooks.Close();
             application.Quit();
