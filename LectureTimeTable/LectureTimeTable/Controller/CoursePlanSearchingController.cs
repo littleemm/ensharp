@@ -162,9 +162,9 @@ namespace LectureTimeTable
         {
             Console.Clear();
 
-            Excel.Workbook workbook = application.Workbooks.Open(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\2022년도 1학기 강의시간표.xlsx");
-            Excel.Sheets sheets = workbook.Sheets;
-            Excel.Worksheet worksheet = sheets["Sheet1"] as Excel.Worksheet;
+            workbook = application.Workbooks.Open(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\2022년도 1학기 강의시간표.xlsx");
+            sheets = workbook.Sheets;
+            worksheet = sheets["Sheet1"] as Excel.Worksheet;
 
             Excel.Range cellRange1 = worksheet.get_Range("A1", "E185") as Excel.Range;
             Excel.Range cellRange2 = worksheet.get_Range("F1", "J185") as Excel.Range;
@@ -186,23 +186,23 @@ namespace LectureTimeTable
             // 데이터 출력
             for (int i = 2; i < 186; i++)
             {
-                if (courseVO.Major.Equals(data1.GetValue(i, 2)) == false) 
+                if (courseVO.Major.Length > 0 && courseVO.Major.Equals(data1.GetValue(i, 2)) == false) 
                 {
                     continue;
                 }
-                if (courseVO.NameOfCourse.Equals(data1.GetValue(i, 5)) == false)
+                if (courseVO.NameOfCourse.Length > 0 && courseVO.NameOfCourse.Equals(data1.GetValue(i, 5)) == false)
                 {
                     continue;
                 }
-                if (courseVO.Division.Equals(data2.GetValue(i, 1)) == false)
+                if (courseVO.Division.Length > 0 && courseVO.Division.Equals(data2.GetValue(i, 1)) == false)
                 {
                     continue;
                 }
-                if (courseVO.Grade.Equals(data2.GetValue(i, 2)) == false)
+                if (courseVO.Grade.Length > 0 && courseVO.Grade.Equals(data2.GetValue(i, 2)) == false)
                 {
                     continue;
                 }
-                if (courseVO.NameOfProfessor.Equals(data3.GetValue(i, 1)) == false)
+                if (courseVO.NameOfProfessor.Length > 0 && courseVO.NameOfProfessor.Equals(data3.GetValue(i, 1)) == false)
                 {
                     continue;
                 }

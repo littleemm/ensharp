@@ -12,7 +12,6 @@ namespace LectureTimeTable
     {
         private CourseVO courseVO;
         private string[] array;
-        private ConsoleKeyInfo consoleKey;
 
         public CourseRegistrationController(int positionX, int positionY) : base(positionX, positionY)
         {
