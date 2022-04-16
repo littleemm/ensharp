@@ -186,20 +186,41 @@ namespace LectureTimeTable
             // 데이터 출력
             for (int i = 2; i < 186; i++)
             {
-                for (int j = 1; j < 6; j++)
+                if (courseVO.Major.Equals(data1.GetValue(i, 2)) == false) 
                 {
-                    Console.Write(" " + data1.GetValue(i, j) + "  ");
+                    continue;
                 }
+                if (courseVO.NameOfCourse.Equals(data1.GetValue(i, 5)) == false)
+                {
+                    continue;
+                }
+                if (courseVO.Division.Equals(data2.GetValue(i, 1)) == false)
+                {
+                    continue;
+                }
+                if (courseVO.Grade.Equals(data2.GetValue(i, 2)) == false)
+                {
+                    continue;
+                }
+                if (courseVO.NameOfProfessor.Equals(data3.GetValue(i, 1)) == false)
+                {
+                    continue;
+                }
+                Console.Write(" " + data1.GetValue(i, 1) + "  "); // NO
+                Console.Write(" " + data1.GetValue(i, 2) + "  "); // 전공 <
+                Console.Write(" " + data1.GetValue(i, 3) + "  "); // 학수번호 
+                Console.Write(" " + data1.GetValue(i, 4) + "  "); // 분반 
+                Console.Write(" " + data1.GetValue(i, 5) + "  "); // 과목명 <
 
-                for (int j = 1; j < 6; j++)
-                {
-                    Console.Write(" " + data2.GetValue(i, j) + "  ");
-                }
+                Console.Write(" " + data2.GetValue(i, 1) + "  "); // 이수구분 <
+                Console.Write(" " + data2.GetValue(i, 2) + "  "); // 학년 <
+                Console.Write(" " + data2.GetValue(i, 3) + "  "); // 학점
+                Console.Write(" " + data2.GetValue(i, 4) + "  "); // 시간
+                Console.Write(" " + data2.GetValue(i, 5) + "  "); // 장소
 
-                for (int j = 1; j < 3; j++)
-                {
-                    Console.Write(" " + data3.GetValue(i, j) + "  ");
-                }
+                Console.Write(" " + data3.GetValue(i, 1) + "  "); // 교수명  <
+                Console.Write(" " + data3.GetValue(i, 2) + "  "); // 언어
+
                 Console.WriteLine();
             }
 

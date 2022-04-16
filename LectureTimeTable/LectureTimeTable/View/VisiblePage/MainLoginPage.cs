@@ -25,7 +25,7 @@ namespace LectureTimeTable
         {
             loginViewElement.PrintMainPage();
             administrationPage.CheckPersonalInformation(Constant.LOGIN_WIDTH, Constant.ID_POSITION, "20010501");
-            passwordLength = administrationPage.CheckPersonalInformation(Constant.LOGIN_WIDTH, Constant.PASSWORD_POSITION, "1234");
+            passwordLength = administrationPage.CheckPassword(Constant.LOGIN_WIDTH, Constant.PASSWORD_POSITION, "1234");
 
             if (passwordLength == 4)
             {

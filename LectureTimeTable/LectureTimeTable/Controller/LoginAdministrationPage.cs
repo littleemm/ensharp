@@ -78,13 +78,13 @@ namespace LectureTimeTable
                 else
                 {
                     ClearLine(1, x);
+                    information = "";
                     Console.SetCursorPosition(x, y);
                 }
 
             }
 
             isPersonalInformation = false;
-            information = "";
 
             return password.Length;
         }
