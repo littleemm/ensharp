@@ -35,9 +35,9 @@ namespace LectureTimeTable
         protected Excel.Worksheet courseWorksheet;
         protected MiniViewElement miniViewElement;
 
-        private int dataNumber;
-        private string memberData;
-        private string dataClassNumber;
+        protected int dataNumber;
+        protected string memberData;
+        protected string dataClassNumber;
         private string[] longArray;
 
         public CourseOfInterestController(int positionX, int positionY)
@@ -158,7 +158,7 @@ namespace LectureTimeTable
             }
             return false;
         }
-        private int CheckFirstData(CourseVO courseVO) // 엑셀 기준 처음 부분 데이터 체크
+        protected int CheckFirstData(CourseVO courseVO) // 엑셀 기준 처음 부분 데이터 체크
         {
             if (courseVO.Major.Length > 0)
             {
@@ -179,7 +179,7 @@ namespace LectureTimeTable
             return 0;
         }
 
-        private int CheckSecondData(CourseVO courseVO) // 엑셀 기준 중반 부분 데이터 체크
+        protected int CheckSecondData(CourseVO courseVO) // 엑셀 기준 중반 부분 데이터 체크
         {
             if (courseVO.Division.Length > 0)
             {
@@ -189,7 +189,7 @@ namespace LectureTimeTable
             return 0;
         }
 
-        private int CheckThirdData(CourseVO courseVO) // 엑셀 기준 후반 부분 데이터 체크
+        protected int CheckThirdData(CourseVO courseVO) // 엑셀 기준 후반 부분 데이터 체크
         {
             if (courseVO.NameOfProfessor.Length > 0)
             {
@@ -310,7 +310,7 @@ namespace LectureTimeTable
             sheetNumber = Console.ReadLine();
             for (int i=0;i<186;i++)
             {
-                if (sheetNumber.Equals(data1.GetValue(1,i)))
+                if (sheetNumber.Equals(cellRange1[1,i].Value.ToString()))
                 {
                     AddUserCourseOfInterest(sheetNumber, i, data1, data2, data3);
                     miniViewElement.PrintSuccessMessage(5, 6);
@@ -326,7 +326,7 @@ namespace LectureTimeTable
             application.Quit();
         }
 
-        private void PrintDataMajorOrCourse(int dataNumber, Array data1, Array data2, Array data3)
+        protected void PrintDataMajorOrCourse(int dataNumber, Array data1, Array data2, Array data3)
         { 
             for (int i = 2; i < 186; i++)
             {
@@ -337,7 +337,7 @@ namespace LectureTimeTable
             }
         }
 
-        private void PrintDataNumber(int dataNumber, Array data1, Array data2, Array data3)
+        protected void PrintDataNumber(int dataNumber, Array data1, Array data2, Array data3)
         {
             for (int i = 2; i < 186; i++)
             {
@@ -348,7 +348,7 @@ namespace LectureTimeTable
             }
         }
 
-        private void PrintDataDivisionOrName(int dataNumber, Array data1, Array data2, Array data3)
+        protected void PrintDataDivisionOrName(int dataNumber, Array data1, Array data2, Array data3)
         {
             for (int i = 2; i < 186; i++)
             {
@@ -359,7 +359,7 @@ namespace LectureTimeTable
             }
         }
 
-        private void PrintData(int i, Array data1, Array data2, Array data3)
+        protected void PrintData(int i, Array data1, Array data2, Array data3)
         {
             Console.Write(" " + data1.GetValue(i, 1) + "  "); // NO
             Console.Write(" " + data1.GetValue(i, 2) + "  "); // 전공 <
@@ -379,7 +379,7 @@ namespace LectureTimeTable
             Console.WriteLine();
         }
 
-        public void AddUserCourseOfInterest(string courseNumber, int i, Array data1, Array data2, Array data3) // 관심과목 추가
+        protected void AddUserCourseOfInterest(string courseNumber, int i, Array data1, Array data2, Array data3) // 관심과목 추가
         {
             if (data1.GetValue(i, 1).Equals(courseNumber))
             {
@@ -393,20 +393,20 @@ namespace LectureTimeTable
 
                 for (int row = 1; row < row + 1;row++)
                 {
-                    cellRange1[row, 1] = data1.GetValue(i, 1);
-                    cellRange1[row, 2] = data1.GetValue(i, 2);
-                    cellRange1[row, 3] = data1.GetValue(i, 3);
-                    cellRange1[row, 4] = data1.GetValue(i, 4);
-                    cellRange1[row, 5] = data1.GetValue(i, 5);
+                    cellRange1[row, 1].Value = data1.GetValue(i, 1);
+                    cellRange1[row, 2].Value = data1.GetValue(i, 2);
+                    cellRange1[row, 3].Value = data1.GetValue(i, 3);
+                    cellRange1[row, 4].Value = data1.GetValue(i, 4);
+                    cellRange1[row, 5].Value = data1.GetValue(i, 5);
 
-                    cellRange2[row, 1] = data2.GetValue(i, 1);
-                    cellRange2[row, 2] = data2.GetValue(i, 2);
-                    cellRange2[row, 3] = data2.GetValue(i, 3);
-                    cellRange2[row, 4] = data2.GetValue(i, 4);
-                    cellRange2[row, 5] = data2.GetValue(i, 5);
+                    cellRange2[row, 1].Value = data2.GetValue(i, 1);
+                    cellRange2[row, 2].Value = data2.GetValue(i, 2);
+                    cellRange2[row, 3].Value = data2.GetValue(i, 3);
+                    cellRange2[row, 4].Value = data2.GetValue(i, 4);
+                    cellRange2[row, 5].Value = data2.GetValue(i, 5);
 
-                    cellRange3[row, 1] = data3.GetValue(i, 1);
-                    cellRange2[row, 2] = data3.GetValue(i, 2);
+                    cellRange3[row, 1].Value = data3.GetValue(i, 1);
+                    cellRange2[row, 2].Value = data3.GetValue(i, 2);
                 }
 
                 courseWorkbook.Save();
