@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Controller\CourseRegistrationController.cs" />
     <Compile Include="CourseOfInterestList.cs" />
+    <Compile Include="InterestTimeTable.cs" />
     <Compile Include="View\VisiblePage\CourseRegistrationPage.cs" />
     <Compile Include="View\VisiblePage\CourseOfInterestPage.cs" />
     <Compile Include="View\VisiblePage\CoursePlanPage.cs" />

@@ -287,5 +287,26 @@ namespace LectureTimeTable
             Console.WriteLine("                                                  [관심과목에서 삭제되었습니다!] ");
             Console.ResetColor();
         }
+
+        public void PrintInterestCourse()
+        {
+            Console.WriteLine();
+            Console.WriteLine("                      ============================== SEJONG UNIVERSITY ============================== ");
+            Console.WriteLine("                       F1: 관심과목 메인                                                 ESC: 로그아웃");
+            Console.WriteLine();
+            Console.WriteLine("                        강의 번호(NO) 입력 : ");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("                  ============================== 2022년 1학기 관심과목 목록 ============================== ");
+            Console.WriteLine();
+        }
+
+        public void PrintInterestCourseMessage()
+        {
+            Console.WriteLine();
+            Console.WriteLine("                  ============================== 2022년 1학기 관심과목 목록 ============================== ");
+            Console.WriteLine();
+        }
     }
 }

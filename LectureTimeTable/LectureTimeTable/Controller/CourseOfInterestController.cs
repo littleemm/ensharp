@@ -395,20 +395,70 @@ namespace LectureTimeTable
 
                 for (int row = courseWorksheet.UsedRange.Rows.Count + 1; row < row + 1; row++)
                 {
-                    cellRange1[row, 1] = data1.GetValue(i, 1).ToString();
-                    cellRange1[row, 2] = data1.GetValue(i, 2).ToString();
-                    cellRange1[row, 3] = data1.GetValue(i, 3).ToString();
-                    cellRange1[row, 4] = data1.GetValue(i, 4).ToString();
-                    cellRange1[row, 5] = data1.GetValue(i, 5).ToString();
+                    cellRange1[row, 1].Value = data1.GetValue(i, 1).ToString();
+                    cellRange1[row, 2].Value = data1.GetValue(i, 2).ToString();
+                    cellRange1[row, 3].Value = data1.GetValue(i, 3).ToString();
+                    cellRange1[row, 4].Value = data1.GetValue(i, 4).ToString();
+                    cellRange1[row, 5].Value = data1.GetValue(i, 5).ToString();
 
-                    cellRange2[row, 1] = data2.GetValue(i, 1).ToString();
-                    cellRange2[row, 2] = data2.GetValue(i, 2).ToString();
-                    cellRange2[row, 3] = data2.GetValue(i, 3).ToString();
-                    cellRange2[row, 4] = data2.GetValue(i, 4).ToString();
-                    cellRange2[row, 5] = data2.GetValue(i, 5).ToString();
+                    cellRange2[row, 1].Value = data2.GetValue(i, 1).ToString();
+                    cellRange2[row, 2].Value = data2.GetValue(i, 2).ToString();
+                    cellRange2[row, 3].Value = data2.GetValue(i, 3).ToString();
+                    cellRange2[row, 4].Value = data2.GetValue(i, 4).ToString();
+                    cellRange2[row, 5].Value = data2.GetValue(i, 5).ToString();
 
-                    cellRange3[row, 1] = data3.GetValue(i, 1).ToString();
-                    cellRange2[row, 2] = data3.GetValue(i, 2).ToString();
+                    cellRange3[row, 1].Value = data3.GetValue(i, 1).ToString();
+                    cellRange2[row, 2].Value = data3.GetValue(i, 2).ToString();
+                }
+
+                courseWorkbook.Save();
+                courseOfInterestApplication.Workbooks.Close();
+                courseOfInterestApplication.Quit();
+            }
+            catch (SystemException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+        
+        private void DeleteUserCourseOfInterest()
+        {
+            try
+            {
+                courseWorkbook = courseOfInterestApplication.Workbooks.Open(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\관심과목목록.xlsx");
+                courseSheets = courseWorkbook.Sheets;
+                courseWorksheet = courseSheets["Sheet1"] as Excel.Worksheet;
+
+                Excel.Range cellRange1 = courseWorksheet.Range["A1", "E25"];
+                Excel.Range cellRange2 = courseWorksheet.Range["F1", "J25"];
+                Excel.Range cellRange3 = courseWorksheet.Range["K1", "L25"];
+
+                miniViewElement.PrintInterestCourse();
+
+                Console.SetCursorPosition(45, 4);
+                string row = Console.ReadLine();
+
+                for (int i = 2; i <= courseWorksheet.UsedRange.Rows.Count; i++)
+                {
+                    if (cellRange1[i, 1].Value.ToString() == row)
+                    {
+                        cellRange1[row, 1].Value = "";
+                        cellRange1[row, 2].Value = "";
+                        cellRange1[row, 3].Value = "";
+                        cellRange1[row, 4].Value = "";
+                        cellRange1[row, 5].Value = "";
+
+                        cellRange2[row, 1].Value = "";
+                        cellRange2[row, 2].Value = "";
+                        cellRange2[row, 3].Value = "";
+                        cellRange2[row, 4].Value = "";
+                        cellRange2[row, 5].Value = "";
+
+                        cellRange3[row, 1].Value = "";
+                        cellRange2[row, 2].Value = "";
+
+                        break;
+                    }
                 }
 
                 courseWorkbook.Save();
@@ -434,15 +484,18 @@ namespace LectureTimeTable
                     }
                 case Constant.COURSE_OF_INTEREST: // 관심과목 목록
                     {
+                        miniViewElement.PrintInterestCourse();
                         courseOfInterestList.PrintCourseOfInterestList();
                         break;
                     }
                 case Constant.COURSE_REGISTRATION: // 예상시간표
                     {
+
                         break;
                     }
                 case Constant.MY_COURSE: // 선택 과목 삭제
                     {
+                        DeleteUserCourseOfInterest();
                         break;
                     }
             }
