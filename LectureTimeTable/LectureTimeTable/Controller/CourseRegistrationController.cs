@@ -29,7 +29,7 @@ namespace LectureTimeTable
                 case 1:
                     {
                         break;
-                    }
+                    }        
                 case 2:
                     {
                         miniViewElement.PrintCourseSearchingOfMajor();
@@ -144,15 +144,15 @@ namespace LectureTimeTable
                 sheetNumber = Console.ReadLine();
                 for (int i = 2; i < 186; i++)
                 {
-                    if (sheetNumber.Equals(cellRange1[1, i].Value2.ToString()))
+                    if (sheetNumber.Equals(data1.GetValue(i, 1).ToString())) 
                     {
                         AddUserCourseOfInterest(i, data1, data2, data3);
-                        miniViewElement.PrintSuccessMessage(5, 6);
+                        miniViewElement.PrintSuccessMessage(3, 6);
                         break;
                     }
                     if (i == 185)
                     {
-                        miniViewElement.PrintEmptyMessage(5, 6);
+                        miniViewElement.PrintEmptyMessage(3, 6);
                     }
                 }
 

@@ -393,23 +393,22 @@ namespace LectureTimeTable
                 Excel.Range cellRange2 = courseWorksheet.Range["F1", "J25"];
                 Excel.Range cellRange3 = courseWorksheet.Range["K1", "L25"];
 
-                for (int row = courseWorksheet.UsedRange.Rows.Count + 1; row < row + 1; row++)
-                {
-                    cellRange1[row, 1].Value = data1.GetValue(i, 1).ToString();
-                    cellRange1[row, 2].Value = data1.GetValue(i, 2).ToString();
-                    cellRange1[row, 3].Value = data1.GetValue(i, 3).ToString();
-                    cellRange1[row, 4].Value = data1.GetValue(i, 4).ToString();
-                    cellRange1[row, 5].Value = data1.GetValue(i, 5).ToString();
+                int row = courseWorksheet.UsedRange.Rows.Count + 1;
+                cellRange1[row, 1].Value = data1.GetValue(i, 1).ToString();
+                cellRange1[row, 2].Value = data1.GetValue(i, 2).ToString();
+                cellRange1[row, 3].Value = data1.GetValue(i, 3).ToString();
+                cellRange1[row, 4].Value = data1.GetValue(i, 4).ToString();
+                cellRange1[row, 5].Value = data1.GetValue(i, 5).ToString();
 
-                    cellRange2[row, 1].Value = data2.GetValue(i, 1).ToString();
-                    cellRange2[row, 2].Value = data2.GetValue(i, 2).ToString();
-                    cellRange2[row, 3].Value = data2.GetValue(i, 3).ToString();
-                    cellRange2[row, 4].Value = data2.GetValue(i, 4).ToString();
-                    cellRange2[row, 5].Value = data2.GetValue(i, 5).ToString();
+                cellRange2[row, 1].Value = data2.GetValue(i, 1).ToString();
+                cellRange2[row, 2].Value = data2.GetValue(i, 2).ToString();
+                cellRange2[row, 3].Value = data2.GetValue(i, 3).ToString();
+                cellRange2[row, 4].Value = data2.GetValue(i, 4).ToString();
+                cellRange2[row, 5].Value = data2.GetValue(i, 5).ToString();
 
-                    cellRange3[row, 1].Value = data3.GetValue(i, 1).ToString();
-                    cellRange2[row, 2].Value = data3.GetValue(i, 2).ToString();
-                }
+                cellRange3[row, 1].Value = data3.GetValue(i, 1).ToString();
+                cellRange2[row, 2].Value = data3.GetValue(i, 2).ToString();
+                
 
                 courseWorkbook.Save();
                 courseOfInterestApplication.Workbooks.Close();
