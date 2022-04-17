@@ -1,7 +1,7 @@
-C:\Users\ASUS\Desktop\en#\LectureTimeTable\LectureTimeTable\obj\Debug\LectureTimeTable.csproj.AssemblyReference.cache
-C:\Users\ASUS\Desktop\en#\LectureTimeTable\LectureTimeTable\obj\Debug\LectureTimeTable.csproj.CoreCompileInputs.cache
 C:\Users\ASUS\Desktop\en#\LectureTimeTable\LectureTimeTable\bin\Debug\LectureTimeTable.exe.config
 C:\Users\ASUS\Desktop\en#\LectureTimeTable\LectureTimeTable\bin\Debug\LectureTimeTable.exe
 C:\Users\ASUS\Desktop\en#\LectureTimeTable\LectureTimeTable\bin\Debug\LectureTimeTable.pdb
+C:\Users\ASUS\Desktop\en#\LectureTimeTable\LectureTimeTable\obj\Debug\LectureTimeTable.csproj.AssemblyReference.cache
+C:\Users\ASUS\Desktop\en#\LectureTimeTable\LectureTimeTable\obj\Debug\LectureTimeTable.csproj.CoreCompileInputs.cache
 C:\Users\ASUS\Desktop\en#\LectureTimeTable\LectureTimeTable\obj\Debug\LectureTimeTable.exe
 C:\Users\ASUS\Desktop\en#\LectureTimeTable\LectureTimeTable\obj\Debug\LectureTimeTable.pdb

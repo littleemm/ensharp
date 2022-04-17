@@ -146,7 +146,7 @@ namespace LectureTimeTable
                 {
                     if (sheetNumber.Equals(cellRange1[1, i].Value2.ToString()))
                     {
-                        AddUserCourseOfInterest(sheetNumber, i, data1, data2, data3);
+                        AddUserCourseOfInterest(i, data1, data2, data3);
                         miniViewElement.PrintSuccessMessage(5, 6);
                         break;
                     }

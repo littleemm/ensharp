@@ -11,6 +11,7 @@ namespace LectureTimeTable
     class CourseOfInterestController // 관심과목담기 관리 클래스
     {
         CourseVO courseVO;
+        private CourseOfInterestList courseOfInterestList;
 
         int positionX;
         int positionY;
@@ -55,6 +56,7 @@ namespace LectureTimeTable
             application = new Excel.Application();
             courseOfInterestApplication = new Excel.Application();
             miniViewElement = new MiniViewElement();
+            courseOfInterestList = new CourseOfInterestList();
         }
 
         protected int CheckNumber(string[] numberArray, ViewElement viewElement) // 번호 입력
@@ -311,15 +313,15 @@ namespace LectureTimeTable
             sheetNumber = Console.ReadLine();
             for (int i = 2; i < 186; i++)
             {
-                if (sheetNumber.Equals(data1.GetValue(i, 1)))
-                {
-                    AddUserCourseOfInterest(sheetNumber, i, data1, data2, data3);
-                    miniViewElement.PrintSuccessMessage(5, 6);
+                if (sheetNumber.Equals(data1.GetValue(i, 1).ToString()))
+                { // 관심과목 담기 성공
+                    AddUserCourseOfInterest(i, data1, data2, data3);
+                    miniViewElement.PrintSuccessMessage(3, 6);
                     break;
                 }
                 if (i == 185)
                 {
-                    miniViewElement.PrintEmptyMessage(5, 6);
+                    miniViewElement.PrintEmptyMessage(3, 6);
                 }
             }
 
@@ -380,10 +382,9 @@ namespace LectureTimeTable
             Console.WriteLine();
         }
 
-        protected void AddUserCourseOfInterest(string courseNumber, int i, Array data1, Array data2, Array data3) // 관심과목 추가
+        protected void AddUserCourseOfInterest(int i, Array data1, Array data2, Array data3) // 관심과목 추가
         {
-            if (data1.GetValue(i, 1).Equals(courseNumber))
-            {
+            try { 
                 courseWorkbook = courseOfInterestApplication.Workbooks.Open(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\관심과목목록.xlsx");
                 courseSheets = courseWorkbook.Sheets;
                 courseWorksheet = courseSheets["Sheet1"] as Excel.Worksheet;
@@ -394,25 +395,29 @@ namespace LectureTimeTable
 
                 for (int row = courseWorksheet.UsedRange.Rows.Count + 1; row < row + 1; row++)
                 {
-                    cellRange1[row, 1].Value = data1.GetValue(i, 1);
-                    cellRange1[row, 2].Value = data1.GetValue(i, 2);
-                    cellRange1[row, 3].Value = data1.GetValue(i, 3);
-                    cellRange1[row, 4].Value = data1.GetValue(i, 4);
-                    cellRange1[row, 5].Value = data1.GetValue(i, 5);
+                    cellRange1[row, 1] = data1.GetValue(i, 1).ToString();
+                    cellRange1[row, 2] = data1.GetValue(i, 2).ToString();
+                    cellRange1[row, 3] = data1.GetValue(i, 3).ToString();
+                    cellRange1[row, 4] = data1.GetValue(i, 4).ToString();
+                    cellRange1[row, 5] = data1.GetValue(i, 5).ToString();
 
-                    cellRange2[row, 1].Value = data2.GetValue(i, 1);
-                    cellRange2[row, 2].Value = data2.GetValue(i, 2);
-                    cellRange2[row, 3].Value = data2.GetValue(i, 3);
-                    cellRange2[row, 4].Value = data2.GetValue(i, 4);
-                    cellRange2[row, 5].Value = data2.GetValue(i, 5);
+                    cellRange2[row, 1] = data2.GetValue(i, 1).ToString();
+                    cellRange2[row, 2] = data2.GetValue(i, 2).ToString();
+                    cellRange2[row, 3] = data2.GetValue(i, 3).ToString();
+                    cellRange2[row, 4] = data2.GetValue(i, 4).ToString();
+                    cellRange2[row, 5] = data2.GetValue(i, 5).ToString();
 
-                    cellRange3[row, 1].Value = data3.GetValue(i, 1);
-                    cellRange2[row, 2].Value = data3.GetValue(i, 2);
+                    cellRange3[row, 1] = data3.GetValue(i, 1).ToString();
+                    cellRange2[row, 2] = data3.GetValue(i, 2).ToString();
                 }
 
                 courseWorkbook.Save();
                 courseOfInterestApplication.Workbooks.Close();
                 courseOfInterestApplication.Quit();
+            }
+            catch (SystemException e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
 
@@ -429,7 +434,7 @@ namespace LectureTimeTable
                     }
                 case Constant.COURSE_OF_INTEREST: // 관심과목 목록
                     {
-
+                        courseOfInterestList.PrintCourseOfInterestList();
                         break;
                     }
                 case Constant.COURSE_REGISTRATION: // 예상시간표
