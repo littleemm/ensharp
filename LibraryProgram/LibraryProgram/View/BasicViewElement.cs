@@ -134,6 +134,7 @@ namespace LibraryProgram
             Console.WriteLine("                                                           ");
             Console.WriteLine("                                                           ");
             Console.WriteLine();
+            Console.WriteLine();
             Console.WriteLine("       ID(8자리 이내, 영어, 숫자 가능) :                 ");
             Console.WriteLine();
             Console.WriteLine("       PW(5자리 이내, 숫자만 가능)        :                  ");

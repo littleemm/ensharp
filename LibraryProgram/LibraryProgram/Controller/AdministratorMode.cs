@@ -15,8 +15,8 @@ namespace LibraryProgram
 
         public AdministratorMode(BasicViewElement viewElement, MenuSelection menuSelection)
         {
-            bookAdministration = new BookAdministration();
-            memberAdministration = new MemberAdministration();
+            bookAdministration = new BookAdministration(viewElement, menuSelection);
+            memberAdministration = new MemberAdministration(viewElement, menuSelection);
 
             this.viewElement = viewElement;
             this.menuSelection = menuSelection;
@@ -32,21 +32,22 @@ namespace LibraryProgram
         private void SelectManagement()
         {
             string number = menuSelection.CheckMenuNumber(46, 22, Constant.ARRAY_THREE);
-            
+            Console.Clear();
             switch(int.Parse(number))
             {
                 case Constant.MEMBER_MANAGE:
-                    { 
-                        
+                    {
+                        memberAdministration.SelectMemberAdministration();
                         break;
                     }
                 case Constant.BOOK_MANAGE: 
                     {
-
+                        bookAdministration.SelectBookAdministration();
                         break;
                     }
                 case Constant.EXIT: 
                     {
+                        viewElement.PrintExit();
                         break;
                     }
             }

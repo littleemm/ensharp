@@ -8,6 +8,36 @@ namespace LibraryProgram
 {
     class BookViewElement
     {
+        public void PrintManageBookMenu()
+        {
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("           *                 *                 *            ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine(" *                  *                  *                  * ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("                        MANAGE BOOK                        ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine(" *                  *                  *                  * ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("           *                 *                 *            ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("                      1. REGISTER BOOK                    ");
+            Console.WriteLine("                      2. EDIT BOOK                        ");
+            Console.WriteLine("                      3. DELETE BOOK                      ");
+            Console.WriteLine("                      4. SEARCH BOOK                      ");
+            Console.WriteLine("                      5. BOOK LIST                      ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("           *                 *                 *            ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine(" *                  *                  *                  * ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine();
+            Console.WriteLine("          원하시는 기능의 번호를 입력하세요 :                  ");
+            Console.WriteLine();
+            Console.WriteLine("                                                           ");
+        }
+
         public void PrintRegistration()
         {
             Console.WriteLine("                                                           ");
