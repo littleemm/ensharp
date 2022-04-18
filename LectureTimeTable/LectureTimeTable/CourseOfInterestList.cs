@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,8 +15,11 @@ namespace LectureTimeTable
         {
             try
             {
+                var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
+                var path = Path.Combine(outPutDirectory, "Folder\\관심과목목록.xlsx");
+
                 Excel.Application application = new Excel.Application();
-                Excel.Workbook workbook = application.Workbooks.Open(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\관심과목목록.xlsx");
+                Excel.Workbook workbook = application.Workbooks.Open(path);
 
                 Excel.Sheets sheets = workbook.Sheets;
                 Excel.Worksheet worksheet = sheets["Sheet1"] as Excel.Worksheet;  

@@ -244,9 +244,9 @@ namespace LectureTimeTable
         {
             Console.Clear();
             var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
-            var iconPath = Path.Combine(outPutDirectory, "Folder\\2022년도 1학기 강의시간표.xlsx");
+            var path = Path.Combine(outPutDirectory, "Folder\\2022년도 1학기 강의시간표.xlsx");
 
-            workbook = application.Workbooks.Open(iconPath);
+            workbook = application.Workbooks.Open(path);
             sheets = workbook.Sheets;
             worksheet = sheets["Sheet1"] as Excel.Worksheet;
 
@@ -389,8 +389,11 @@ namespace LectureTimeTable
 
         protected void AddUserCourseOfInterest(int i, Array data1, Array data2, Array data3) // 관심과목 추가
         {
-            try { 
-                courseWorkbook = courseOfInterestApplication.Workbooks.Open(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\관심과목목록.xlsx");
+            try {
+                var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
+                var path = Path.Combine(outPutDirectory, "Folder\\관심과목목록.xlsx");
+
+                courseWorkbook = courseOfInterestApplication.Workbooks.Open(path);
                 courseSheets = courseWorkbook.Sheets;
                 courseWorksheet = courseSheets["Sheet1"] as Excel.Worksheet;
 
@@ -412,7 +415,7 @@ namespace LectureTimeTable
                 cellRange2[row, 5].Value = data2.GetValue(i, 5).ToString();
 
                 cellRange3[row, 1].Value = data3.GetValue(i, 1).ToString();
-                cellRange2[row, 2].Value = data3.GetValue(i, 2).ToString();
+                cellRange3[row, 2].Value = data3.GetValue(i, 2).ToString();
                 
 
                 courseWorkbook.Save();
@@ -475,6 +478,37 @@ namespace LectureTimeTable
             }
         }
 
+        private void AddToTimeTable(int i, Array data1, Array data2, Array data3)
+        {
+            string time = data2.GetValue(i, 4).ToString();
+            switch (time.Length)
+            {
+                case 13: // 하루 수업
+                    {
+                        
+                        break;
+                    }
+                case 15:
+                    {
+                        break;
+                    }
+                case 28:
+                    {
+                        break;
+                    }
+                case 0:
+                    {
+                        break;
+                    }
+            }
+
+        }
+
+        private void 
+        
+
+        }
+
         public void SelectMenu(int number, ViewElement viewElement) // 관심과목 담기 메인 메뉴
         {
             Console.Clear();
@@ -488,7 +522,7 @@ namespace LectureTimeTable
                     }
                 case Constant.COURSE_OF_INTEREST: // 관심과목 목록
                     {
-                        miniViewElement.PrintInterestCourse();
+                        miniViewElement.PrintInterestCourseMessage();
                         courseOfInterestList.PrintCourseOfInterestList();
                         break;
                     }
