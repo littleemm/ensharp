@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -241,7 +243,10 @@ namespace LectureTimeTable
         protected void SearchUserCourse(ViewElement viewElement) // 검색 기반 
         {
             Console.Clear();
-            workbook = application.Workbooks.Open(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\2022년도 1학기 강의시간표.xlsx");
+            var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
+            var iconPath = Path.Combine(outPutDirectory, "Folder\\2022년도 1학기 강의시간표.xlsx");
+
+            workbook = application.Workbooks.Open(iconPath);
             sheets = workbook.Sheets;
             worksheet = sheets["Sheet1"] as Excel.Worksheet;
 
