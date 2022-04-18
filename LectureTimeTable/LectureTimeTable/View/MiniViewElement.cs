@@ -280,6 +280,14 @@ namespace LectureTimeTable
             Console.ResetColor();
         }
 
+        public void PrintWarningMessage(int x, int y)
+        {
+            Console.SetCursorPosition(x, y);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("                                                 [존재하지 않는 과목 번호 입니다!] ");
+            Console.ResetColor();
+        }
+
         public void PrintDeleteMessage(int x, int y)
         {
             Console.SetCursorPosition(x, y);
@@ -308,5 +316,15 @@ namespace LectureTimeTable
             Console.WriteLine("                  ============================== 2022년 1학기 관심과목 목록 ============================== ");
             Console.WriteLine();
         }
+
+        public void PrintInterestTimeTableMessage()
+        {
+            Console.WriteLine();
+            Console.WriteLine("                   ============================== 2022년 1학기 예상 시간표 ============================== ");
+            Console.WriteLine();
+        }
+
+
+
     }
 }

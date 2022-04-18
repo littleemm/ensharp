@@ -14,6 +14,7 @@ namespace LectureTimeTable
     {
         CourseVO courseVO;
         private CourseOfInterestList courseOfInterestList;
+        private CourseOfInterestTimeTable courseOfInterestTimeTable;
 
         int positionX;
         int positionY;
@@ -59,6 +60,7 @@ namespace LectureTimeTable
             courseOfInterestApplication = new Excel.Application();
             miniViewElement = new MiniViewElement();
             courseOfInterestList = new CourseOfInterestList();
+            courseOfInterestTimeTable = new CourseOfInterestTimeTable();
         }
 
         protected int CheckNumber(string[] numberArray, ViewElement viewElement) // 번호 입력
@@ -318,7 +320,7 @@ namespace LectureTimeTable
             sheetNumber = Console.ReadLine();
             for (int i = 2; i < 186; i++)
             {
-                if (sheetNumber.Equals(data1.GetValue(i, 1).ToString()))
+                if (sheetNumber == data1.GetValue(i, 1).ToString())
                 { // 관심과목 담기 성공
                     AddUserCourseOfInterest(i, data1, data2, data3);
                     AddToTimeTable(i, data1, data2);
@@ -429,11 +431,14 @@ namespace LectureTimeTable
             }
         }
         
-        private void DeleteUserCourseOfInterest()
+        private void DeleteUserCourseOfInterest() // 관심과목 삭제
         {
             try
             {
-                courseWorkbook = courseOfInterestApplication.Workbooks.Open(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\관심과목목록.xlsx");
+                var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
+                var path = Path.Combine(outPutDirectory, "Folder\\관심과목목록.xlsx");
+
+                courseWorkbook = courseOfInterestApplication.Workbooks.Open(path);
                 courseSheets = courseWorkbook.Sheets;
                 courseWorksheet = courseSheets["Sheet1"] as Excel.Worksheet;
 
@@ -442,6 +447,7 @@ namespace LectureTimeTable
                 Excel.Range cellRange3 = courseWorksheet.Range["K1", "L25"];
 
                 miniViewElement.PrintInterestCourse();
+                courseOfInterestList.PrintCourseOfInterestList();
 
                 Console.SetCursorPosition(45, 4);
                 string row = Console.ReadLine();
@@ -463,9 +469,14 @@ namespace LectureTimeTable
                         cellRange2[row, 5].Value = "";
 
                         cellRange3[row, 1].Value = "";
-                        cellRange2[row, 2].Value = "";
+                        cellRange3[row, 2].Value = "";
 
+                        miniViewElement.PrintDeleteMessage(3, 6);
                         break;
+                    }
+                    if (i == courseWorksheet.UsedRange.Rows.Count)
+                    {
+                        miniViewElement.PrintWarningMessage(3, 6);
                     }
                 }
 
@@ -479,65 +490,76 @@ namespace LectureTimeTable
             }
         }
 
-        private void AddToTimeTable(int i, Array data1, Array data2)
+        private void AddToTimeTable(int i, Array data1, Array data2) // 시간표에 관심과목 추가
         {
-            var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
-            var path = Path.Combine(outPutDirectory, "Folder\\시간표.xlsx");
-
-            Excel.Workbook workbook = application.Workbooks.Open(path);
-            Excel.Sheets sheets = workbook.Sheets;
-            Excel.Worksheet worksheet = sheets["Sheet1"] as Excel.Worksheet;
-
-            Excel.Range cellRange1 = worksheet.get_Range("A1", "E51") as Excel.Range;
-            Excel.Range cellRange2 = worksheet.get_Range("F1", "J49") as Excel.Range;
-            Excel.Range cellRange3 = worksheet.get_Range("K1", "K49") as Excel.Range;
-
-            Array timeData1 = cellRange1.Cells.Value2;
-
-            string course = data1.GetValue(i, 5).ToString();
-            string lectureRoom = data2.GetValue(i, 5).ToString();
-            string time = data2.GetValue(i, 4).ToString();
-            int column = 0, startRow = 0, endRow = 0;
-            
-            switch (time.Length) // 
+            try
             {
-                case 13: // 하루 수업
-                    {
-                        column = ConfirmDay(time[0]);
-                        startRow = ConfirmTime(timeData1, time.Substring(2, 6), 0, 4);
-                        endRow = ConfirmTime(timeData1, time.Substring(8, 12), 6, 10);
-                        AddCourse(course, lectureRoom, column, startRow, endRow, cellRange1, cellRange2, cellRange3);
-                        break;
-                    }
-                case 15: // 주 2일 수업, 시간 같음
-                    {
-                        column = ConfirmDay(time[0]);
-                        startRow = ConfirmTime(timeData1, time.Substring(2, 6), 0, 4);
-                        endRow = ConfirmTime(timeData1, time.Substring(8, 12), 6, 10);
-                        AddCourse(course, lectureRoom, column, startRow, endRow, cellRange1, cellRange2, cellRange3);
-                        
-                        column = ConfirmDay(time[2]);
-                        AddCourse(course, lectureRoom, column, startRow, endRow, cellRange1, cellRange2, cellRange3);
-                        break;
-                    }
-                case 28: // 주 2일 수업, 시간 다름
-                    {
-                        column = ConfirmDay(time[0]);
-                        startRow = ConfirmTime(timeData1, time.Substring(2, 6), 0, 4);
-                        endRow = ConfirmTime(timeData1, time.Substring(8, 12), 6, 10);
-                        AddCourse(course, lectureRoom, column, startRow, endRow, cellRange1, cellRange2, cellRange3);
-                        
-                        column = ConfirmDay(time[15]);
-                        startRow = ConfirmTime(timeData1, time.Substring(17, 21), 0, 4);
-                        endRow = ConfirmTime(timeData1, time.Substring(23, 27), 6, 10);
-                        AddCourse(course, lectureRoom, column, startRow, endRow, cellRange1, cellRange2, cellRange3);
-                        break;
-                    }
-                case 0:
-                    {
-                        cellRange1[50, 1].Value = course;
-                        break;
-                    }
+                var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
+                var path = Path.Combine(outPutDirectory, "Folder\\시간표.xlsx");
+
+                Excel.Application applicationTimeTable = new Excel.Application();
+                Excel.Workbook workbookTimeTable = applicationTimeTable.Workbooks.Open(path);
+                Excel.Sheets sheetsTimeTable = workbookTimeTable.Sheets;
+                Excel.Worksheet worksheetTimeTable = sheetsTimeTable["Sheet1"] as Excel.Worksheet;
+
+                Excel.Range cellRange1 = worksheetTimeTable.get_Range("A1", "E51") as Excel.Range;
+                Excel.Range cellRange2 = worksheetTimeTable.get_Range("F1", "J51") as Excel.Range;
+                Excel.Range cellRange3 = worksheetTimeTable.get_Range("K1", "K51") as Excel.Range;
+
+                Array timeData1 = cellRange1.Cells.Value2;
+
+                string course = data1.GetValue(i, 5).ToString();
+                string lectureRoom = data2.GetValue(i, 5).ToString();
+                string time = data2.GetValue(i, 4).ToString();
+                int column, startRow, endRow;
+
+                switch (time.Length) // 
+                {
+                    case 13: // 하루 수업
+                        {
+                            column = ConfirmDay(time[0]);
+                            startRow = ConfirmTime(timeData1, time.Substring(2, 5), 0);
+                            endRow = ConfirmTime(timeData1, time.Substring(8, 5), 6);
+                            AddCourse(course, lectureRoom, column, startRow, endRow, cellRange1, cellRange2, cellRange3);
+                            break;
+                        }
+                    case 15: // 주 2일 수업, 시간 같음
+                        {
+                            column = ConfirmDay(time[0]);
+                            startRow = ConfirmTime(timeData1, time.Substring(2, 5), 0);
+                            endRow = ConfirmTime(timeData1, time.Substring(8, 5), 6);
+                            AddCourse(course, lectureRoom, column, startRow, endRow, cellRange1, cellRange2, cellRange3);
+
+                            column = ConfirmDay(time[2]);
+                            AddCourse(course, lectureRoom, column, startRow, endRow, cellRange1, cellRange2, cellRange3);
+                            break;
+                        }
+                    case 28: // 주 2일 수업, 시간 다름
+                        {
+                            column = ConfirmDay(time[0]);
+                            startRow = ConfirmTime(timeData1, time.Substring(2, 5), 0);
+                            endRow = ConfirmTime(timeData1, time.Substring(8, 5), 6);
+                            AddCourse(course, lectureRoom, column, startRow, endRow, cellRange1, cellRange2, cellRange3);
+
+                            column = ConfirmDay(time[15]);
+                            startRow = ConfirmTime(timeData1, time.Substring(17, 5), 0);
+                            endRow = ConfirmTime(timeData1, time.Substring(23, 5), 6);
+                            AddCourse(course, lectureRoom, column, startRow, endRow, cellRange1, cellRange2, cellRange3);
+                            break;
+                        }
+                    case 0:
+                        {
+                            cellRange1[50, 1].Value = course;
+                            break;
+                        }
+                }
+                workbookTimeTable.Save();
+                applicationTimeTable.Workbooks.Close();
+                applicationTimeTable.Quit();
+            }
+            catch (SystemException e)
+            {
+                Console.WriteLine(e.Message);
             }
 
         }
@@ -573,11 +595,11 @@ namespace LectureTimeTable
             }
         }
 
-        private int ConfirmTime(Array timeData, string time, int startString, int endString)
+        private int ConfirmTime(Array timeData, string time, int startString)
         { // 시간 체크
-            for (int i=2;i<=48;i++)
+            for (int i=2;i<=48;i+=2)
             {
-                if (timeData.GetValue(i, 1).ToString().Substring(startString, endString) == time) 
+                if (timeData.GetValue(i, 1).ToString().Substring(startString, 5) == time) 
                 {
                     return i;
                 }
@@ -648,7 +670,8 @@ namespace LectureTimeTable
                     }
                 case Constant.COURSE_REGISTRATION: // 예상시간표
                     {
-
+                        miniViewElement.PrintInterestTimeTableMessage();
+                        courseOfInterestTimeTable.PrintCourseOfInterestTimeTable();
                         break;
                     }
                 case Constant.MY_COURSE: // 선택 과목 삭제
