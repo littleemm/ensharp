@@ -8,8 +8,6 @@ namespace LibraryProgram
 {
     class MenuSelection
     {
-        int positionX;
-        int positionY;
 
         BasicViewElement viewElement;
 

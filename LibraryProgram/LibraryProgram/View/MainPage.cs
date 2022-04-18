@@ -17,7 +17,7 @@ namespace LibraryProgram
         {
             basicViewElement = new BasicViewElement();
             menuSelection = new MenuSelection(basicViewElement);
-            loginSystem = new LoginSystem(basicViewElement, modeSelection);
+            loginSystem = new LoginSystem(basicViewElement, menuSelection);
             modeSelection = new ModeSelection(menuSelection, loginSystem, basicViewElement);
         }
 

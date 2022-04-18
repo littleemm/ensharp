@@ -14,10 +14,10 @@ namespace LibraryProgram
         AdministratorMode administratorMode;
         BasicViewElement viewElement;
 
-        public LoginSystem(BasicViewElement viewElement, ModeSelection modeSelection)
+        public LoginSystem(BasicViewElement viewElement, MenuSelection menuSelection)
         {
             this.viewElement = viewElement;
-            administratorMode = new AdministratorMode(viewElement, modeSelection);
+            administratorMode = new AdministratorMode(viewElement, menuSelection);
         }
 
         public void LoginAdministratorMode()
