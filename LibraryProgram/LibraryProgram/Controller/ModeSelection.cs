@@ -6,31 +6,27 @@ using System.Threading.Tasks;
 
 namespace LibraryProgram
 {
-    class ModeSelection : MenuSelection
+    class ModeSelection 
     {
-        int positionX;
-        int positionY;
-
         BasicViewElement viewElement;
         LoginSystem loginPage;
+        MenuSelection menuSelection;
 
-        public ModeSelection(int positionX, int positionY, LoginSystem loginPage, BasicViewElement viewElement) : base(positionX, positionY)
+        public ModeSelection(MenuSelection menuSelection, LoginSystem loginPage, BasicViewElement viewElement)
         {
-            this.positionX = positionX;
-            this.positionY = positionY;
-
             this.viewElement = viewElement;
             this.loginPage = loginPage;
+            this.menuSelection = menuSelection;
         }
         
         public void SelectMode()
         {
-            string menuNumber = CheckMenuNumber(Constant.ARRAY_THREE, viewElement);
+            string menuNumber = menuSelection.CheckMenuNumber(46, 22, Constant.ARRAY_THREE);
             switch (int.Parse(menuNumber))
             {
                 case 1:
                     {
-                        loginPage.LoginAll();
+                        loginPage.LoginAdministratorMode();
                         break;
                     }
                 case 2:
@@ -49,19 +45,19 @@ namespace LibraryProgram
 
         private void SelectMemberMode()
         {
-            string menuNumber = CheckMenuNumber(Constant.ARRAY_THREE, viewElement);
+            string menuNumber = menuSelection.CheckMenuNumber(46, 22, Constant.ARRAY_THREE);
             Console.Clear();
             switch (int.Parse(menuNumber))
             {
                 case 1: // 로그인
                     {
-                        loginPage.LoginAll();
+                        loginPage.LoginMemberMode();
                         break;
                     }
                 case 2: // 회원가입
                     {
-                        
-                        
+
+                        loginPage.LoginMemberMode();
                         break;
                     }
                 case 3: // 나가기

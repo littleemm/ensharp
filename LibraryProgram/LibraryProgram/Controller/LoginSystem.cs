@@ -8,18 +8,42 @@ namespace LibraryProgram
 {
     class LoginSystem
     {
+        private string id;
+        private string password;
+
+        AdministratorMode administratorMode;
         BasicViewElement viewElement;
 
-        public LoginSystem(BasicViewElement viewElement)
+        public LoginSystem(BasicViewElement viewElement, ModeSelection modeSelection)
         {
             this.viewElement = viewElement;
+            administratorMode = new AdministratorMode(viewElement, modeSelection);
+        }
+
+        public void LoginAdministratorMode()
+        {
+            while (Constant.ID_AND_PW_UNCORRECT) {
+
+                LoginAll();
+
+                if (id == "AD1" && password == "1234")
+                {
+                    administratorMode.ShowAdministratorPage();
+                    break;
+                }
+
+                viewElement.PrintWarningSentence(4, 16);
+            }
+        }
+
+        public void LoginMemberMode() // database
+        {
+            LoginAll();
+
         }
 
         public void LoginAll()
         {
-            string id;
-            string password;
-
             Console.Clear();
             viewElement.PrintLoginPage();
             Console.SetCursorPosition(37, 14);
@@ -27,33 +51,6 @@ namespace LibraryProgram
 
             Console.SetCursorPosition(37, 16);
             password = Console.ReadLine();
-
-            if (id == "AD1")
-            {
-                LoginAdministratorMode(password);
-            }
-            else
-            {
-                LoginMemberMode(id, password);
-            }
-        }
-
-        public void LoginAdministratorMode(string password)
-        {
-            if (password == "1234")
-            {
-
-            }
-
-            else
-            {
-                viewElement.PrintWarningSentence(4, 16);
-            }
-        }
-
-        public void LoginMemberMode(string id, string password)
-        {
-
         }
     }
 }

@@ -39,6 +39,35 @@ namespace LibraryProgram
             Console.WriteLine("                                                           ");
         }
 
+        public void PrintAdministratorPage() // 관리자 모드 선택
+        {
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("           *                 *                 *            ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine(" *                  *                  *                  * ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("                      W E L C O M E T O                    ");
+            Console.WriteLine("                     ADMINISTRATOR PAGE                       ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine(" *                  *                  *                  * ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("           *                 *                 *            ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("                       1. MANAGE MEMBER                          ");
+            Console.WriteLine("                       2. MANAGE BOOK                            ");
+            Console.WriteLine("                       3. EXIT");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("           *                 *                 *            ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine(" *                  *                  *                  * ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("          원하시는 기능의 번호를 입력하세요 :                  ");
+            Console.WriteLine();
+            Console.WriteLine("                                                           ");
+        }
+
         public void PrintMemberPage() // 멤버모드에서만 선택
         {
             Console.WriteLine("                                                           ");

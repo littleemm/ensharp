@@ -86,9 +86,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BookAdministration.cs" />
+    <Compile Include="View\MemberViewElement.cs" />
+    <Compile Include="View\BookViewElement.cs" />
     <Compile Include="Controller\AdministratorMode.cs" />
     <Compile Include="Constant.cs" />
     <Compile Include="Controller\LoginSystem.cs" />
+    <Compile Include="MemberAdministration.cs" />
+    <Compile Include="MemberVO.cs" />
     <Compile Include="View\BasicViewElement.cs" />
     <Compile Include="LibraryProgram.cs" />
     <Compile Include="View\MainPage.cs" />

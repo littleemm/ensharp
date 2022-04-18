@@ -8,5 +8,32 @@ namespace LibraryProgram
 {
     class BookAdministration
     {
+        BookViewElement bookViewElement;
+
+        public BookAdministration()
+        {
+            bookViewElement = new BookViewElement();
+        }
+
+        public void RegisterBook()
+        {
+            bookViewElement.PrintRegistration();
+
+        }
+
+        public void EditBook()
+        {
+
+        }
+
+        public void SearchBook()
+        {
+
+        }
+
+        public void PrintList()
+        {
+
+        }
     }
 }

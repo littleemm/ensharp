@@ -11,27 +11,28 @@ namespace LibraryProgram
         int positionX;
         int positionY;
 
-        protected MenuSelection(int positionX, int positionY)
+        BasicViewElement viewElement;
+
+        public MenuSelection(BasicViewElement viewElement)
         {
-            this.positionX = positionX;
-            this.positionY = positionY;
+            this.viewElement = viewElement;
         }
 
-        protected string CheckMenuNumber(string[] numberArray, BasicViewElement viewElement) // 체크해서 넘어가는 로직
+        public string CheckMenuNumber(int x, int y, string[] numberArray) // 체크해서 넘어가는 로직
         {
             string number = "";
             bool isMenuNumber = false;
 
             while (isMenuNumber == false)
             {
-                number = ScanMenuNumber(positionX, positionY);
+                number = ScanMenuNumber(x, y);
                 isMenuNumber = IsMenuNumber(number, numberArray);
 
                 if (isMenuNumber == false)
                 {
-                    viewElement.ClearLine(1, positionX);
-                    Console.SetCursorPosition(positionX, positionY);
-                    viewElement.PrintWarningSentence(1, positionY - 2);
+                    viewElement.ClearLine(1, x);
+                    Console.SetCursorPosition(x, y);
+                    viewElement.PrintWarningSentence(1, y - 2);
                 }
             }
 
