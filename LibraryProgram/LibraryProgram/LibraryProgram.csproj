@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdministratorMode.cs" />
+    <Compile Include="Constant.cs" />
     <Compile Include="View\BasicViewElement.cs" />
     <Compile Include="LibraryProgram.cs" />
     <Compile Include="MainPage.cs" />

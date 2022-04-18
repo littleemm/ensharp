@@ -118,6 +118,19 @@ namespace LibraryProgram
 
         }
 
+        public void PrintWarningSentence(int x, int y)
+        {
+            Console.SetCursorPosition(x, y);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("             [조건에 맞춰서 다시 입력해주세요.]              ");
+            Console.ResetColor();
+        }
 
+        public void ClearLine(int line, int width)
+        {
+            Console.SetCursorPosition(width, Console.CursorTop - line);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(0, Console.CursorTop - line);
+        }
     }
 }

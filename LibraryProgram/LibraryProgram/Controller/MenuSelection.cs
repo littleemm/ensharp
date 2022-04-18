@@ -8,9 +8,24 @@ namespace LibraryProgram
 {
     class MenuSelection
     {
+        int positionX;
+        int positionY;
 
-        public string CheckMenuNumber(string[] numberArray, ViewElement viewElement) // 체크해서 넘어가는 로직
+        public MenuSelection(int positionX, int positionY)
         {
+            this.positionX = positionX;
+            this.positionY = positionY;
+        }
+
+        public void SelectMode() // 모드 선택
+        {
+
+        }
+        public string CheckMenuNumber(string[] numberArray, BasicViewElement viewElement) // 체크해서 넘어가는 로직
+        {
+            string number = "";
+            bool isMenuNumber = false;
+
             while (isMenuNumber == false)
             {
                 number = ScanMenuNumber(positionX, positionY);
@@ -20,7 +35,7 @@ namespace LibraryProgram
                 {
                     viewElement.ClearLine(1, positionX);
                     Console.SetCursorPosition(positionX, positionY);
-                    viewElement.PrintWarning(1, positionY - 2);
+                    viewElement.PrintWarningSentence(1, positionY - 2);
                 }
             }
 
@@ -31,6 +46,8 @@ namespace LibraryProgram
 
         private string ScanMenuNumber(int x, int y) // 읽기
         {
+            string number;
+
             Console.SetCursorPosition(x, y);
 
             number = Console.ReadLine();

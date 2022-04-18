@@ -9,16 +9,18 @@ namespace LibraryProgram
     class MainPage
     {
         BasicViewElement basicViewElement;
+        MenuSelection menuSelection;
 
         public MainPage()
         {
             basicViewElement = new BasicViewElement();
+            menuSelection = new MenuSelection(46, 22);
         }
 
         public void ShowMainPage()
         {
             basicViewElement.PrintLibraryMain();
-
+            menuSelection.CheckMenuNumber(Constant.arrayTwo, basicViewElement);
         }
     }
 }
