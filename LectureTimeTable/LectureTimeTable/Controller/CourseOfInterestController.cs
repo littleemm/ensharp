@@ -504,10 +504,13 @@ namespace LectureTimeTable
 
         }
 
-        private void 
-        
+        private void ConfirmDay()
+        {
 
         }
+        
+
+        
 
         public void SelectMenu(int number, ViewElement viewElement) // 관심과목 담기 메인 메뉴
         {
