@@ -39,7 +39,7 @@ namespace LibraryProgram
             Console.WriteLine("                                                           ");
         }
 
-        public void PrintMemberPage()
+        public void PrintMemberPage() // 멤버모드에서만 선택
         {
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
@@ -55,6 +55,7 @@ namespace LibraryProgram
             Console.WriteLine("                                                           ");
             Console.WriteLine("                         1. LOGIN                          ");
             Console.WriteLine("                         2. SIGN UP                        ");
+            Console.WriteLine("                         3. EXIT");
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
@@ -88,7 +89,7 @@ namespace LibraryProgram
             Console.WriteLine("                   PW (5자리 이내) :                              ");
         }
 
-        private void PrintJoinPage() // 회원가입 페이지 메인
+        private void PrintSignUpPage() // 회원가입 페이지 메인
         {
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
