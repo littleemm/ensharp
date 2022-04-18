@@ -11,17 +11,13 @@ namespace LibraryProgram
         int positionX;
         int positionY;
 
-        public MenuSelection(int positionX, int positionY)
+        protected MenuSelection(int positionX, int positionY)
         {
             this.positionX = positionX;
             this.positionY = positionY;
         }
 
-        public void SelectMode() // 모드 선택
-        {
-
-        }
-        public string CheckMenuNumber(string[] numberArray, BasicViewElement viewElement) // 체크해서 넘어가는 로직
+        protected string CheckMenuNumber(string[] numberArray, BasicViewElement viewElement) // 체크해서 넘어가는 로직
         {
             string number = "";
             bool isMenuNumber = false;

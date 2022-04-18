@@ -88,9 +88,10 @@
   <ItemGroup>
     <Compile Include="AdministratorMode.cs" />
     <Compile Include="Constant.cs" />
+    <Compile Include="LoginPage.cs" />
     <Compile Include="View\BasicViewElement.cs" />
     <Compile Include="LibraryProgram.cs" />
-    <Compile Include="MainPage.cs" />
+    <Compile Include="View\MainPage.cs" />
     <Compile Include="MemberMode.cs" />
     <Compile Include="Controller\MenuSelection.cs" />
     <Compile Include="Controller\ModeSelection.cs" />

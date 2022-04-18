@@ -9,18 +9,21 @@ namespace LibraryProgram
     class MainPage
     {
         BasicViewElement basicViewElement;
-        MenuSelection menuSelection;
+        ModeSelection modeSelection;
+        LoginPage loginPage;
+        AdministratorMode administratorMode;
+        MemberMode memberMode;
 
         public MainPage()
         {
             basicViewElement = new BasicViewElement();
-            menuSelection = new MenuSelection(46, 22);
+            modeSelection = new ModeSelection(46, 22, administratorMode, memberMode, basicViewElement);
         }
 
         public void ShowMainPage()
         {
             basicViewElement.PrintLibraryMain();
-            menuSelection.CheckMenuNumber(Constant.arrayTwo, basicViewElement);
+            modeSelection.SelectMode();
         }
     }
 }

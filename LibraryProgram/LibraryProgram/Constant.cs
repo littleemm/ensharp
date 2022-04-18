@@ -8,9 +8,9 @@ namespace LibraryProgram
 {
     class Constant
     {
-        public static string[] arrayTwo = { "1", "2" };
-        public string[] arrayThree = { "1,", "2", "3" };
-        public string[] arrayFour = { "1", "2", "3", "4" };
+        public static string[] ARRAY_TWO = { "1", "2" };
+        public static string[] ARRAY_THREE = { "1,", "2", "3" };
+        public static string[] ARRAY_FOUR = { "1", "2", "3", "4" };
 
 
     }

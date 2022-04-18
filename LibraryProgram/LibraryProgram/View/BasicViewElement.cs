@@ -118,6 +118,22 @@ namespace LibraryProgram
 
         }
 
+        public void PrintExit()
+        {
+            Console.WriteLine("                                                           ");
+            Console.WriteLine(" *                  *                  *                  * ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("           *                 *                 *            ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("                        G O O D B Y E                      ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("           *                 *                 *            ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine(" *                  *                  *                  * ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("                                                           ");
+        }
+
         public void PrintWarningSentence(int x, int y)
         {
             Console.SetCursorPosition(x, y);
