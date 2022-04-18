@@ -321,6 +321,7 @@ namespace LectureTimeTable
                 if (sheetNumber.Equals(data1.GetValue(i, 1).ToString()))
                 { // 관심과목 담기 성공
                     AddUserCourseOfInterest(i, data1, data2, data3);
+                    AddToTimeTable(i, data1, data2);
                     miniViewElement.PrintSuccessMessage(3, 6);
                     break;
                 }
@@ -478,36 +479,152 @@ namespace LectureTimeTable
             }
         }
 
-        private void AddToTimeTable(int i, Array data1, Array data2, Array data3)
+        private void AddToTimeTable(int i, Array data1, Array data2)
         {
+            var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
+            var path = Path.Combine(outPutDirectory, "Folder\\시간표.xlsx");
+
+            Excel.Workbook workbook = application.Workbooks.Open(path);
+            Excel.Sheets sheets = workbook.Sheets;
+            Excel.Worksheet worksheet = sheets["Sheet1"] as Excel.Worksheet;
+
+            Excel.Range cellRange1 = worksheet.get_Range("A1", "E51") as Excel.Range;
+            Excel.Range cellRange2 = worksheet.get_Range("F1", "J49") as Excel.Range;
+            Excel.Range cellRange3 = worksheet.get_Range("K1", "K49") as Excel.Range;
+
+            Array timeData1 = cellRange1.Cells.Value2;
+
+            string course = data1.GetValue(i, 5).ToString();
+            string lectureRoom = data2.GetValue(i, 5).ToString();
             string time = data2.GetValue(i, 4).ToString();
-            switch (time.Length)
+            int column = 0, startRow = 0, endRow = 0;
+            
+            switch (time.Length) // 
             {
                 case 13: // 하루 수업
                     {
+                        column = ConfirmDay(time[0]);
+                        startRow = ConfirmTime(timeData1, time.Substring(2, 6), 0, 4);
+                        endRow = ConfirmTime(timeData1, time.Substring(8, 12), 6, 10);
+                        AddCourse(course, lectureRoom, column, startRow, endRow, cellRange1, cellRange2, cellRange3);
+                        break;
+                    }
+                case 15: // 주 2일 수업, 시간 같음
+                    {
+                        column = ConfirmDay(time[0]);
+                        startRow = ConfirmTime(timeData1, time.Substring(2, 6), 0, 4);
+                        endRow = ConfirmTime(timeData1, time.Substring(8, 12), 6, 10);
+                        AddCourse(course, lectureRoom, column, startRow, endRow, cellRange1, cellRange2, cellRange3);
                         
+                        column = ConfirmDay(time[2]);
+                        AddCourse(course, lectureRoom, column, startRow, endRow, cellRange1, cellRange2, cellRange3);
                         break;
                     }
-                case 15:
+                case 28: // 주 2일 수업, 시간 다름
                     {
-                        break;
-                    }
-                case 28:
-                    {
+                        column = ConfirmDay(time[0]);
+                        startRow = ConfirmTime(timeData1, time.Substring(2, 6), 0, 4);
+                        endRow = ConfirmTime(timeData1, time.Substring(8, 12), 6, 10);
+                        AddCourse(course, lectureRoom, column, startRow, endRow, cellRange1, cellRange2, cellRange3);
+                        
+                        column = ConfirmDay(time[15]);
+                        startRow = ConfirmTime(timeData1, time.Substring(17, 21), 0, 4);
+                        endRow = ConfirmTime(timeData1, time.Substring(23, 27), 6, 10);
+                        AddCourse(course, lectureRoom, column, startRow, endRow, cellRange1, cellRange2, cellRange3);
                         break;
                     }
                 case 0:
                     {
+                        cellRange1[50, 1].Value = course;
                         break;
                     }
             }
 
         }
 
-        private void ConfirmDay()
+        private int ConfirmDay(char day) // 요일 체크
         {
-
+            switch(day)
+            {
+                case '월':
+                    {
+                        return 3;
+                    }
+                case '화':
+                    {
+                        return 5;
+                    }
+                case '수':
+                    {
+                        return 2;
+                    }
+                case '목':
+                    {
+                        return 4;
+                    }
+                case '금':
+                    {
+                        return 1;
+                    }
+                default:
+                    {
+                        return 0;
+                    }
+            }
         }
+
+        private int ConfirmTime(Array timeData, string time, int startString, int endString)
+        { // 시간 체크
+            for (int i=2;i<=48;i++)
+            {
+                if (timeData.GetValue(i, 1).ToString().Substring(startString, endString) == time) 
+                {
+                    return i;
+                }
+            }
+
+            return 0;
+        }
+
+        private void AddCourse(string course, string lectureRoom, int column, int startRow, int endRow, Excel.Range cellRange1, Excel.Range cellRange2, Excel.Range cellRange3)
+        {
+            if (column == 3 || column == 5) 
+            {
+                for (int i = startRow; i <= endRow; i += 2)
+                {
+                    cellRange1[i, column].Value = course; 
+                }
+                for (int i = startRow + 1; i <= endRow + 1; i += 2) 
+                {
+                    cellRange1[i, column].Value = lectureRoom;
+                }
+            }
+
+            else if (column == 2 || column == 4)
+            {
+                for (int i = startRow; i <= endRow; i += 2)
+                {
+                    cellRange2[i, column].Value = course;
+                }
+                for (int i = startRow + 1; i <= endRow + 1; i += 2)
+                {
+                    cellRange2[i, column].Value = lectureRoom;
+                }
+            }
+
+            else if (column == 1)
+            {
+                for (int i = startRow; i <= endRow; i += 2)
+                {
+                    cellRange3[i, column].Value = course;
+                }
+                for (int i = startRow + 1; i <= endRow + 1; i += 2)
+                {
+                    cellRange3[i, column].Value = lectureRoom;
+                }
+            }
+        } 
+
         
 
         
