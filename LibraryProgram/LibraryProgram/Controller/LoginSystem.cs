@@ -20,11 +20,12 @@ namespace LibraryProgram
             string id;
             string password;
 
+            Console.Clear();
             viewElement.PrintLoginPage();
-            Console.SetCursorPosition(30, 18);
+            Console.SetCursorPosition(37, 14);
             id = Console.ReadLine();
 
-            Console.SetCursorPosition(30, 20);
+            Console.SetCursorPosition(37, 16);
             password = Console.ReadLine();
 
             if (id == "AD1")

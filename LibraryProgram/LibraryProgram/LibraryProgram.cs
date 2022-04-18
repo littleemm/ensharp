@@ -17,3 +17,6 @@ namespace LibraryProgram
         }
     }
 }
+ // 관리자
+ // ID : AD1
+ // PW : 1234

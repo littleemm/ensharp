@@ -26,7 +26,6 @@ namespace LibraryProgram
         public void SelectMode()
         {
             string menuNumber = CheckMenuNumber(Constant.ARRAY_THREE, viewElement);
-            Console.Clear();
             switch (int.Parse(menuNumber))
             {
                 case 1:
@@ -36,12 +35,12 @@ namespace LibraryProgram
                     }
                 case 2:
                     {
+                        viewElement.PrintMemberPage();
                         SelectMemberMode();
                         break;
                     }
                 case 3:
                     {
-                        Console.Clear();
                         viewElement.PrintExit();
                         break;
                     }
@@ -54,18 +53,18 @@ namespace LibraryProgram
             Console.Clear();
             switch (int.Parse(menuNumber))
             {
-                case 1:
+                case 1: // 로그인
                     {
                         loginPage.LoginAll();
                         break;
                     }
-                case 2:
+                case 2: // 회원가입
                     {
                         
-                        loginPage.LoginAll();
+                        
                         break;
                     }
-                case 3:
+                case 3: // 나가기
                     {
                         Console.Clear();
                         viewElement.PrintExit();

@@ -10,12 +10,13 @@ namespace LibraryProgram
     {
         BasicViewElement basicViewElement;
         ModeSelection modeSelection;
-        LoginSystem loginPage;
+        LoginSystem loginSystem;
 
         public MainPage()
         {
             basicViewElement = new BasicViewElement();
-            modeSelection = new ModeSelection(46, 22, loginPage, basicViewElement);
+            loginSystem = new LoginSystem(basicViewElement);
+            modeSelection = new ModeSelection(46, 22, loginSystem, basicViewElement);
         }
 
         public void ShowMainPage()

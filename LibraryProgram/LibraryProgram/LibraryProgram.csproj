@@ -86,13 +86,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdministratorMode.cs" />
+    <Compile Include="Controller\AdministratorMode.cs" />
     <Compile Include="Constant.cs" />
-    <Compile Include="LoginSystem.cs" />
+    <Compile Include="Controller\LoginSystem.cs" />
     <Compile Include="View\BasicViewElement.cs" />
     <Compile Include="LibraryProgram.cs" />
     <Compile Include="View\MainPage.cs" />
-    <Compile Include="MemberMode.cs" />
+    <Compile Include="Controller\MemberMode.cs" />
     <Compile Include="Controller\MenuSelection.cs" />
     <Compile Include="Controller\ModeSelection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
