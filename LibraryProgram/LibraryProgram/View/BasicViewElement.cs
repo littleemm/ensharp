@@ -118,7 +118,7 @@ namespace LibraryProgram
             Console.WriteLine("                   PW (5자리 이내) :                              ");
         }
 
-        private void PrintSignUpPage() // 회원가입 페이지 메인
+        public void PrintSignUpPage() // 회원가입 페이지 메인
         {
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
@@ -203,6 +203,15 @@ namespace LibraryProgram
             Console.WriteLine("             [조건에 맞춰서 다시 입력해주세요.]              ");
             Console.ResetColor();
         }
+
+        public void PrintLoginWarning(int x, int y)
+        {
+            Console.SetCursorPosition(x, y);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("              [일치하는 회원정보가 없습니다!]              ");
+            Console.ResetColor();
+        }
+
 
         public void ClearLine(int line, int width)
         {

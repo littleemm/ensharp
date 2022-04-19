@@ -27,6 +27,8 @@ namespace LibraryProgram
 
         public void LoginAdministratorMode()
         {
+            Console.Clear();
+            viewElement.PrintLoginPage();
             while (Constant.ID_AND_PW_UNCORRECT) {
 
                 LoginAll();
@@ -37,24 +39,37 @@ namespace LibraryProgram
                     break;
                 }
 
-                viewElement.PrintWarningSentence(4, 16);
+                viewElement.ClearLine(1, 37);
+                Console.SetCursorPosition(37, 16);
+                viewElement.ClearLine(2, 37);
+                Console.SetCursorPosition(37, 14);
+                viewElement.PrintLoginWarning(2, 12);
             }
         }
 
         public void LoginMemberMode() // database
         {
+            Console.Clear();
             bool isIdAndPassword = false;
+            viewElement.PrintLoginPage();
             while (isIdAndPassword == false)
             {
                 LoginAll();
                 isIdAndPassword = databaseMember.SelectMember(4, id, password);
+                if (isIdAndPassword == false)
+                {
+                    viewElement.ClearLine(1, 37);
+                    Console.SetCursorPosition(37, 16);
+                    viewElement.ClearLine(2, 37);
+                    Console.SetCursorPosition(37, 14);
+                    viewElement.PrintLoginWarning(2, 12);
+                }
             }
+            
         }
 
         public void LoginAll()
         {
-            Console.Clear();
-            viewElement.PrintLoginPage();
             Console.SetCursorPosition(37, 14);
             id = Console.ReadLine();
 

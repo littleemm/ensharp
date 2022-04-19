@@ -11,6 +11,7 @@ namespace LibraryProgram
     class DatabaseMember
     {
         private static string stringConnection = "Server=localhost;Database=ensharpstudy;Uid=root;Pwd=0000;charset=utf8;";
+        
         MySqlConnection connection;
 
         public DatabaseMember()
@@ -39,12 +40,11 @@ namespace LibraryProgram
                 element[1].Add(dataReader["password"].ToString());
             }
 
-
             for (int i = 0; i < element[0].Count; i++)
             {
                 if (element[0][i].Contains(id))
                 {
-                    for (int j = 0; j < element[1].Count; i++)
+                    for (int j = 0; j < element[1].Count; j++)
                     {
                         if (element[1][i].Contains(pw))
                         {

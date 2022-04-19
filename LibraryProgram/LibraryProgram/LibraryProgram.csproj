@@ -86,18 +86,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BookAdministration.cs" />
-    <Compile Include="DatabaseMember.cs" />
+    <Compile Include="Controller\BookAdministration.cs" />
+    <Compile Include="Data\DatabaseMember.cs" />
+    <Compile Include="FormOfSignUp.cs" />
     <Compile Include="View\MemberViewElement.cs" />
     <Compile Include="View\BookViewElement.cs" />
     <Compile Include="Controller\AdministratorMode.cs" />
-    <Compile Include="Constant.cs" />
+    <Compile Include="Data\Constant.cs" />
     <Compile Include="Controller\LoginSystem.cs" />
-    <Compile Include="MemberAdministration.cs" />
-    <Compile Include="MemberVO.cs" />
+    <Compile Include="Controller\MemberAdministration.cs" />
+    <Compile Include="Data\MemberVO.cs" />
     <Compile Include="View\BasicViewElement.cs" />
     <Compile Include="LibraryProgram.cs" />
-    <Compile Include="View\MainPage.cs" />
+    <Compile Include="Controller\MainPage.cs" />
     <Compile Include="Controller\MemberMode.cs" />
     <Compile Include="Controller\MenuSelection.cs" />
     <Compile Include="Controller\ModeSelection.cs" />
