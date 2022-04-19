@@ -12,12 +12,17 @@ namespace LibraryProgram
         private string password;
 
         AdministratorMode administratorMode;
+        MemberMode memberMode;
         BasicViewElement viewElement;
+        DatabaseMember databaseMember;
 
-        public LoginSystem(BasicViewElement viewElement, MenuSelection menuSelection)
+        public LoginSystem(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember)
         {
             this.viewElement = viewElement;
+            this.databaseMember = databaseMember;
+            this.viewElement = viewElement;
             administratorMode = new AdministratorMode(viewElement, menuSelection);
+            memberMode = new MemberMode(viewElement, menuSelection);
         }
 
         public void LoginAdministratorMode()
@@ -38,8 +43,12 @@ namespace LibraryProgram
 
         public void LoginMemberMode() // database
         {
-            LoginAll();
-
+            bool isIdAndPassword = false;
+            while (isIdAndPassword == false)
+            {
+                LoginAll();
+                isIdAndPassword = databaseMember.SelectMember(1, id, password);
+            }
         }
 
         public void LoginAll()

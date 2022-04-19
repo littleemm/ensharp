@@ -149,6 +149,37 @@ namespace LibraryProgram
 
         }
 
+        public void PrintMemberMode()
+        {
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("           *                 *                 *            ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine(" *                  *                  *                  * ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("                      W E L C O M E T O                    ");
+            Console.WriteLine("                        L I B R A R Y                      ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine(" *                  *                  *                  * ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("           *                 *                 *            ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("                     1. SEARCH BOOK                        ");
+            Console.WriteLine("                     2. BOOK LIST                          ");
+            Console.WriteLine("                     3. CHECK OUT BOOK                     ");
+            Console.WriteLine("                     4. RETURN BOOK                        ");
+            Console.WriteLine("                     5. MY PAGE                            ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("           *                 *                 *            ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine(" *                  *                  *                  * ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine();
+            Console.WriteLine("          원하시는 기능의 번호를 입력하세요 :                  ");
+            Console.WriteLine();
+            Console.WriteLine("                                                           ");
+        }
+
         public void PrintExit()
         {
             Console.WriteLine("                                                           ");

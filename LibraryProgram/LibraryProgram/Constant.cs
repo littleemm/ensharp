@@ -24,6 +24,12 @@ namespace LibraryProgram
         public const int SEARCH = 4;
         public const int LIST = 5;
 
+        public const int SEARCH_BOOK = 1;
+        public const int BOOKLIST = 2;
+        public const int CHECKOUT = 3;
+        public const int RETURN = 4;
+        public const int MYPAGE = 5;
+
         public const bool ID_AND_PW_UNCORRECT = true;
     }
 }

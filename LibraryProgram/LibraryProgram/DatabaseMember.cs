@@ -11,28 +11,58 @@ namespace LibraryProgram
     class DatabaseMember
     {
         private static string stringConnection = "Server=localhost;Database=ensharpstudy;Uid=root;Pwd=0000;charset=utf8";
-        private static void ConnectDatabase()
+        MySqlConnection connection;
+
+        public DatabaseMember()
         {
-            
-            using (MySqlConnection connection = new MySqlConnection(stringConnection))
-            {
-                connection.Open();
-                string sql = "SELECT * FROM members";
-
-                MySqlCommand command = new MySqlCommand(sql, connection);
-
-                MySqlDataReader reader = command.ExecuteReader();
-
-                while(reader.Read())
-                {
-
-                }
-
-   
-            }
+            connection = new MySqlConnection(stringConnection);
         }
 
-     
+        public bool SelectMember(int count, string id, string pw)
+        {
+            connection.Open();
+            string query = "SELECT * FROM member";
+
+            List<string>[] element = new List<string>[count];
+
+            for (int index = 0; index < element.Length; index++)
+            {
+                element[index] = new List<string>();
+            }
+
+
+            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlDataReader dataReader = command.ExecuteReader();
+
+            while (dataReader.Read())
+            {
+                element[0].Add(dataReader["id"].ToString());
+                element[1].Add(dataReader["password"].ToString());
+            }
+
+
+            for (int i = 0; i < element[0].Count; i++)
+            {
+                if (element[0][i].Contains(id))
+                {
+                    for (int j = 0; j < element[1].Count; i++)
+                    {
+                        if (element[1][i].Contains(pw))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+
+            dataReader.Close();
+            connection.Close();
+
+            return false;
+        }
+
+
 
     }
 }
