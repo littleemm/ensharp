@@ -13,14 +13,16 @@ namespace LibraryProgram
         MenuSelection menuSelection;
         LoginSystem loginSystem;
         DatabaseMember databaseMember;
+        MemberVO memberVO;
 
         public MainPage()
         {
+            memberVO = new MemberVO("", "", "", "", "", "", "", "");
             basicViewElement = new BasicViewElement();
             databaseMember = new DatabaseMember();
             menuSelection = new MenuSelection(basicViewElement);
             loginSystem = new LoginSystem(basicViewElement, menuSelection, databaseMember);
-            modeSelection = new ModeSelection(menuSelection, loginSystem, basicViewElement);
+            modeSelection = new ModeSelection(menuSelection, loginSystem, basicViewElement, memberVO);
           
         }
 

@@ -13,13 +13,13 @@ namespace LibraryProgram
         MenuSelection menuSelection;
         FormOfSignUp formOfSignUp;
 
-        public ModeSelection(MenuSelection menuSelection, LoginSystem loginPage, BasicViewElement viewElement)
+        public ModeSelection(MenuSelection menuSelection, LoginSystem loginPage, BasicViewElement viewElement, MemberVO memberVO)
         {
             this.viewElement = viewElement;
             this.loginPage = loginPage;
             this.menuSelection = menuSelection;
 
-            formOfSignUp = new FormOfSignUp();
+            formOfSignUp = new FormOfSignUp(viewElement, memberVO);
         }
         
         public void SelectMode()
@@ -60,7 +60,7 @@ namespace LibraryProgram
                     }
                 case 2: // 회원가입
                     {
-                        formOfSignUp.ShowSignUpPage;
+                        formOfSignUp.ShowSignUpPage();
                         loginPage.LoginMemberMode();
                         break;
                     }

@@ -15,16 +15,18 @@ namespace LibraryProgram
         private string address;
         private string phoneNumber;
         private string book;
+        private string day;
 
-        public MemberVO(string id, string password, string name, string birth, string address, string phoneNumber, string book)
+        public MemberVO(string id, string password, string name, string birth, string phoneNumber, string address, string book, string day)
         {
             this.id = id;
             this.password = password;
             this.name = name;
             this.birth = birth;
-            this.address = address;
             this.phoneNumber = phoneNumber;
+            this.address = address;
             this.book = book;
+            this.day = day;
         }
 
         public string Id
@@ -67,6 +69,12 @@ namespace LibraryProgram
         {
             get { return book; }
             set { book = value; }
+        }
+
+        public string Day
+        {
+            get { return day; }
+            set { day = value; }
         }
     }
 }
