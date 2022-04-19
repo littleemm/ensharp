@@ -56,28 +56,35 @@ namespace LibraryProgram
                         break;
                     }
             }
+
+            ConsoleKeyInfo consoleKey = Console.ReadKey();
+            if (consoleKey.Key == ConsoleKey.Escape)
+            {
+                Console.Clear();
+                SelectMemberAdministration();
+            }
         }
 
         private void RegisterMember()
         {
             memberViewElement.PrintRegistration();
 
-            Console.SetCursorPosition(41, 15);
+            Console.SetCursorPosition(40, 13);
             memberVO.Id = Console.ReadLine();
 
-            Console.SetCursorPosition(41, 16);
+            Console.SetCursorPosition(40, 15);
             memberVO.Password = Console.ReadLine();
 
-            Console.SetCursorPosition(41, 17);
+            Console.SetCursorPosition(40, 17);
             memberVO.Name = Console.ReadLine();
 
-            Console.SetCursorPosition(41, 18);
+            Console.SetCursorPosition(40, 19);
             memberVO.Age = Console.ReadLine();
 
-            Console.SetCursorPosition(41, 19);
+            Console.SetCursorPosition(40, 21);
             memberVO.PhoneNumber = Console.ReadLine();
 
-            Console.SetCursorPosition(41, 20);
+            Console.SetCursorPosition(40, 23);
             memberVO.Address = Console.ReadLine();
 
             databaseMember.InsertMember(memberVO);
@@ -86,6 +93,7 @@ namespace LibraryProgram
         private void EditMember()
         {
             memberViewElement.PrintEditMember();
+
         }
 
         private void DeleteMember()
@@ -101,6 +109,10 @@ namespace LibraryProgram
         private void PrintList()
         {
             memberViewElement.InformMemberList();
+            Console.WriteLine();
+            Console.WriteLine("==============================================================================");
+            databaseMember.SelectMemberList();
+            Console.SetCursorPosition(0, 0);
         }
     }
 }

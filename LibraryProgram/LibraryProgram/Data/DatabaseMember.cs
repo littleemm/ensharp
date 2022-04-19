@@ -11,7 +11,7 @@ namespace LibraryProgram
     class DatabaseMember
     {
         private static string stringConnection = "Server=localhost;Database=ensharpstudy;Uid=root;Pwd=0000;charset=utf8;";
-        MySqlConnection connection;
+        private static MySqlConnection connection;
 
         public DatabaseMember()
         {
@@ -53,7 +53,6 @@ namespace LibraryProgram
                 }
             }
 
-
             dataReader.Close();
             connection.Close();
 
@@ -69,6 +68,39 @@ namespace LibraryProgram
             connection.Open();
             MySqlCommand command = new MySqlCommand(query, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
+
+            connection.Close();
+        }
+
+        public void SelectMemberList()
+        {
+            connection.Open();
+            string query = "SELECT * FROM member";
+
+            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlDataReader dataReader = command.ExecuteReader();
+
+            while (dataReader.Read())
+            {
+                Console.WriteLine("      ID      :  " +dataReader["id"].ToString());
+                Console.WriteLine("     NAME     :  " + dataReader["name"].ToString());
+                Console.WriteLine("      AGE     :  " + dataReader["age"].ToString() + "세");
+                Console.WriteLine("   ADDRESS    :  " + dataReader["address"].ToString());
+                Console.WriteLine(" PHONE NUMBER :  " + dataReader["phoneNumber"].ToString());
+                
+                if (dataReader["CheckOutBook"].ToString() == "")
+                {
+                    Console.WriteLine("  대출 도서   :  없음");
+                    Console.WriteLine("  반납까지 -  :  해당없음");
+
+                }
+                else
+                {
+                    Console.WriteLine("  대출 도서   :  " + dataReader["checkOutBook"].ToString());
+                    Console.WriteLine("  반납까지 -  :  " + dataReader["timeBOOk"].ToString());
+                }
+                Console.WriteLine("==============================================================================");
+            }
 
             connection.Close();
         }

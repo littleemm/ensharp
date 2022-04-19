@@ -66,6 +66,13 @@ namespace LibraryProgram
             Console.WriteLine("         주소 (ex. 서울시 광진구)    :                   ");
         }
 
+        public void PrintRegistrationSuccessMessage()
+        {
+            Console.WriteLine();
+            Console.WriteLine("                  [성공적으로 등록되었습니다.]");
+            Console.WriteLine();
+        }
+
         public void PrintEditMember()
         {
             Console.WriteLine("                                                           ");
