@@ -11,12 +11,16 @@ namespace LibraryProgram
         MemberViewElement memberViewElement;
         BasicViewElement viewElement;
         MenuSelection menuSelection;
+        DatabaseMember databaseMember;
+        MemberVO memberVO;
 
-        public MemberAdministration(BasicViewElement viewElement, MenuSelection menuSelection)
+        public MemberAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO)
         {
             memberViewElement = new MemberViewElement();
             this.viewElement = viewElement;
             this.menuSelection = menuSelection;
+            this.databaseMember = databaseMember;
+            this.memberVO = memberVO;
         }
 
         public void SelectMemberAdministration()
@@ -57,6 +61,26 @@ namespace LibraryProgram
         private void RegisterMember()
         {
             memberViewElement.PrintRegistration();
+
+            Console.SetCursorPosition(41, 15);
+            memberVO.Id = Console.ReadLine();
+
+            Console.SetCursorPosition(41, 16);
+            memberVO.Password = Console.ReadLine();
+
+            Console.SetCursorPosition(41, 17);
+            memberVO.Name = Console.ReadLine();
+
+            Console.SetCursorPosition(41, 18);
+            memberVO.Age = Console.ReadLine();
+
+            Console.SetCursorPosition(41, 19);
+            memberVO.PhoneNumber = Console.ReadLine();
+
+            Console.SetCursorPosition(41, 20);
+            memberVO.Address = Console.ReadLine();
+
+            databaseMember.InsertMember(memberVO);
         }
 
         private void EditMember()

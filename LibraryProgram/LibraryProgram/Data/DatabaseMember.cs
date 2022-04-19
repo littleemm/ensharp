@@ -11,7 +11,6 @@ namespace LibraryProgram
     class DatabaseMember
     {
         private static string stringConnection = "Server=localhost;Database=ensharpstudy;Uid=root;Pwd=0000;charset=utf8;";
-        
         MySqlConnection connection;
 
         public DatabaseMember()
@@ -59,6 +58,18 @@ namespace LibraryProgram
             connection.Close();
 
             return false;
+        }
+
+        public void InsertMember(MemberVO memberVO)
+        {
+            string query = "INSERT INTO member(id, password, name, age, phoneNumber, address)" +
+                "Value(" +  memberVO.Id + ", " + memberVO.Password + ", " + memberVO.Name + ", " +
+                memberVO.Age + ", " + memberVO.PhoneNumber + ", " + memberVO.Address + ");";
+
+            connection.Open();
+            MySqlCommand command = new MySqlCommand(query, connection);
+
+            connection.Close();
         }
 
 

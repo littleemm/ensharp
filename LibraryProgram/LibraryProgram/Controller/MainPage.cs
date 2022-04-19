@@ -21,8 +21,8 @@ namespace LibraryProgram
             basicViewElement = new BasicViewElement();
             databaseMember = new DatabaseMember();
             menuSelection = new MenuSelection(basicViewElement);
-            loginSystem = new LoginSystem(basicViewElement, menuSelection, databaseMember);
-            modeSelection = new ModeSelection(menuSelection, loginSystem, basicViewElement, memberVO);
+            loginSystem = new LoginSystem(basicViewElement, menuSelection, databaseMember, memberVO);
+            modeSelection = new ModeSelection(menuSelection, loginSystem, basicViewElement, memberVO, databaseMember);
           
         }
 

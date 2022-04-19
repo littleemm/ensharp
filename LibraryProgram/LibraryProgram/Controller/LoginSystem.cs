@@ -16,12 +16,12 @@ namespace LibraryProgram
         BasicViewElement viewElement;
         DatabaseMember databaseMember;
 
-        public LoginSystem(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember)
+        public LoginSystem(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO)
         {
             this.viewElement = viewElement;
             this.databaseMember = databaseMember;
             this.viewElement = viewElement;
-            administratorMode = new AdministratorMode(viewElement, menuSelection);
+            administratorMode = new AdministratorMode(viewElement, menuSelection, databaseMember, memberVO);
             memberMode = new MemberMode(viewElement, menuSelection);
         }
 
@@ -65,6 +65,8 @@ namespace LibraryProgram
                     viewElement.PrintLoginWarning(2, 12);
                 }
             }
+
+            memberMode.ShowMemberPage();
             
         }
 

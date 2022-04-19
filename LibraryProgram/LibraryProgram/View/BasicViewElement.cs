@@ -137,15 +137,15 @@ namespace LibraryProgram
             Console.WriteLine();
             Console.WriteLine("       ID(8자리 이내, 영어, 숫자 가능) :                 ");
             Console.WriteLine();
-            Console.WriteLine("       PW(5자리 이내, 숫자만 가능)        :                  ");
+            Console.WriteLine("         PW(5자리 이내, 숫자만 가능)   :                  ");
             Console.WriteLine();
-            Console.WriteLine("       이름(8자리 이내, 한글만)   :                  ");
+            Console.WriteLine("           이름(8자리 이내, 한글만)    :                  ");
             Console.WriteLine();
-            Console.WriteLine("       나이(0~150, 숫자만 입력)  :                  ");
+            Console.WriteLine("           나이(0~150, 숫자만 입력)    :                  ");
             Console.WriteLine();
-            Console.WriteLine("       휴대폰 번호(-제외)        :                  ");
+            Console.WriteLine("             휴대폰 번호(-제외)        :                  ");
             Console.WriteLine();
-            Console.WriteLine("       주소 (ex. 서울시 광진구)  :                   ");
+            Console.WriteLine("           주소 (ex. 서울시 광진구)    :                   ");
 
         }
 

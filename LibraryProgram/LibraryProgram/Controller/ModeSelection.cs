@@ -13,13 +13,13 @@ namespace LibraryProgram
         MenuSelection menuSelection;
         FormOfSignUp formOfSignUp;
 
-        public ModeSelection(MenuSelection menuSelection, LoginSystem loginPage, BasicViewElement viewElement, MemberVO memberVO)
+        public ModeSelection(MenuSelection menuSelection, LoginSystem loginPage, BasicViewElement viewElement, MemberVO memberVO, DatabaseMember databaseMember)
         {
             this.viewElement = viewElement;
             this.loginPage = loginPage;
             this.menuSelection = menuSelection;
 
-            formOfSignUp = new FormOfSignUp(viewElement, memberVO);
+            formOfSignUp = new FormOfSignUp(viewElement, memberVO, databaseMember);
         }
         
         public void SelectMode()
@@ -28,18 +28,18 @@ namespace LibraryProgram
             Console.Clear();
             switch (int.Parse(menuNumber))
             {
-                case 1:
+                case Constant.ADMINISTRATOR_MODE:
                     {
                         loginPage.LoginAdministratorMode();
                         break;
                     }
-                case 2:
+                case Constant.MEMBER_MODE:
                     {
                         viewElement.PrintMemberPage();
                         SelectMemberMode();
                         break;
                     }
-                case 3:
+                case Constant.EXIT:
                     {
                         viewElement.PrintExit();
                         break;
@@ -53,18 +53,18 @@ namespace LibraryProgram
             Console.Clear();
             switch (int.Parse(menuNumber))
             {
-                case 1: // 로그인
+                case Constant.LOGIN: 
                     {
                         loginPage.LoginMemberMode();
                         break;
                     }
-                case 2: // 회원가입
+                case Constant.SIGN_UP: 
                     {
                         formOfSignUp.ShowSignUpPage();
                         loginPage.LoginMemberMode();
                         break;
                     }
-                case 3: // 나가기
+                case Constant.EXIT:
                     {
                         Console.Clear();
                         viewElement.PrintExit();

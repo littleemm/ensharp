@@ -30,6 +30,12 @@ namespace LibraryProgram
         public const int RETURN = 4;
         public const int MYPAGE = 5;
 
+        public const int LOGIN = 1;
+        public const int SIGN_UP = 2;
+
+        public const int ADMINISTRATOR_MODE = 1;
+        public const int MEMBER_MODE = 2;
+
         public const bool ID_AND_PW_UNCORRECT = true;
     }
 }
