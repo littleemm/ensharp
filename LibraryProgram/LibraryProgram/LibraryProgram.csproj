@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BookAdministration.cs" />
+    <Compile Include="DatabaseMember.cs" />
     <Compile Include="View\MemberViewElement.cs" />
     <Compile Include="View\BookViewElement.cs" />
     <Compile Include="Controller\AdministratorMode.cs" />

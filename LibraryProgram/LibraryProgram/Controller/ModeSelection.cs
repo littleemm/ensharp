@@ -22,6 +22,7 @@ namespace LibraryProgram
         public void SelectMode()
         {
             string menuNumber = menuSelection.CheckMenuNumber(46, 22, Constant.ARRAY_THREE);
+            Console.Clear();
             switch (int.Parse(menuNumber))
             {
                 case 1:

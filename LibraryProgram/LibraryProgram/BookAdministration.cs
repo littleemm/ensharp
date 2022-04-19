@@ -22,6 +22,7 @@ namespace LibraryProgram
         public void SelectBookAdministration()
         {
             string number = menuSelection.CheckMenuNumber(46, 23, Constant.ARRAY_FIVE);
+            Console.Clear();
             switch(int.Parse(number))
             {
                 case Constant.REGISTRATION: 
