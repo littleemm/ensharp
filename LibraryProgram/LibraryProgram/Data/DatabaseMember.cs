@@ -18,12 +18,12 @@ namespace LibraryProgram
             connection = new MySqlConnection(stringConnection);
         }
 
-        public bool SelectMember(int row, string id, string pw)
+        public bool SelectMember(string id, string pw)
         {
             connection.Open();
             string query = "SELECT * FROM member";
 
-            List<string>[] element = new List<string>[row];
+            List<string>[] element = new List<string>[100];
 
             for (int index = 0; index < element.Length; index++)
             {
@@ -63,11 +63,12 @@ namespace LibraryProgram
         public void InsertMember(MemberVO memberVO)
         {
             string query = "INSERT INTO member(id, password, name, age, phoneNumber, address)" +
-                "Value(" +  memberVO.Id + ", " + memberVO.Password + ", " + memberVO.Name + ", " +
-                memberVO.Age + ", " + memberVO.PhoneNumber + ", " + memberVO.Address + ");";
+                "Value('" +  memberVO.Id + "', '" + memberVO.Password + "', '" + memberVO.Name + "', '" +
+                memberVO.Age + "', '" + memberVO.PhoneNumber + "', '" + memberVO.Address + "');";
 
             connection.Open();
             MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlDataReader dataReader = command.ExecuteReader();
 
             connection.Close();
         }
