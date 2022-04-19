@@ -47,7 +47,7 @@ namespace LibraryProgram
             while (isIdAndPassword == false)
             {
                 LoginAll();
-                isIdAndPassword = databaseMember.SelectMember(1, id, password);
+                isIdAndPassword = databaseMember.SelectMember(4, id, password);
             }
         }
 

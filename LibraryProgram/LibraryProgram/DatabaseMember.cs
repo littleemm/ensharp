@@ -10,7 +10,7 @@ namespace LibraryProgram
 {
     class DatabaseMember
     {
-        private static string stringConnection = "Server=localhost;Database=ensharpstudy;Uid=root;Pwd=0000;charset=utf8";
+        private static string stringConnection = "Server=localhost;Database=ensharpstudy;Uid=root;Pwd=0000;charset=utf8;";
         MySqlConnection connection;
 
         public DatabaseMember()
@@ -18,18 +18,17 @@ namespace LibraryProgram
             connection = new MySqlConnection(stringConnection);
         }
 
-        public bool SelectMember(int count, string id, string pw)
+        public bool SelectMember(int row, string id, string pw)
         {
             connection.Open();
             string query = "SELECT * FROM member";
 
-            List<string>[] element = new List<string>[count];
+            List<string>[] element = new List<string>[row];
 
             for (int index = 0; index < element.Length; index++)
             {
                 element[index] = new List<string>();
             }
-
 
             MySqlCommand command = new MySqlCommand(query, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
