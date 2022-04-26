@@ -23,7 +23,7 @@ namespace LibraryProgram
             connection.Open();
             string query = "SELECT * FROM member";
 
-            List<string>[] element = new List<string>[100];
+            List<string>[] element = new List<string>[2];
 
             for (int index = 0; index < element.Length; index++)
             {
@@ -38,7 +38,7 @@ namespace LibraryProgram
                 element[0].Add(dataReader["id"].ToString());
                 element[1].Add(dataReader["password"].ToString());
             }
-
+            
             for (int i = 0; i < element[0].Count; i++)
             {
                 if (element[0][i].Equals(id))
@@ -118,7 +118,7 @@ namespace LibraryProgram
 
             string query = "SELECT * FROM member";
 
-            List<string>[] element = new List<string>[100];
+            List<string>[] element = new List<string>[5];
 
             for (int index = 0; index < element.Length; index++)
             {
@@ -131,21 +131,25 @@ namespace LibraryProgram
             while (dataReader.Read())
             {
                 element[0].Add(dataReader["id"].ToString());
+                element[1].Add(dataReader["name"].ToString());
+                element[2].Add(dataReader["age"].ToString());
+                element[3].Add(dataReader["address"].ToString());
+                element[4].Add(dataReader["phoneNumber"].ToString());
             }
 
             for (int i = 0; i < element[0].Count; i++)
             {
                 if (element[0][i].Contains(id))
                 {
-                    Console.WriteLine("      ID      :  " + dataReader["id"].ToString());
-                    Console.WriteLine("     NAME     :  " + dataReader["name"].ToString());
-                    Console.WriteLine("      AGE     :  " + dataReader["age"].ToString() + "세");
-                    Console.WriteLine("   ADDRESS    :  " + dataReader["address"].ToString());
-                    Console.WriteLine(" PHONE NUMBER :  " + dataReader["phoneNumber"].ToString());
+                    Console.WriteLine("      ID      :  " + element[0][i]);
+                    Console.WriteLine("     NAME     :  " + element[1][i]);
+                    Console.WriteLine("      AGE     :  " + element[2][i] + "세");
+                    Console.WriteLine("   ADDRESS    :  " + element[3][i]);
+                    Console.WriteLine(" PHONE NUMBER :  " + element[4][i]);
                     Console.WriteLine("==============================================================================");
                 }
             }
-
+            
             dataReader.Close();
             connection.Close();
         }
