@@ -118,6 +118,13 @@ namespace LibraryProgram
             Console.WriteLine("                                                           ");
         }
 
+        public void PrintDeleteMemberForm()
+        {
+            Console.WriteLine();
+            Console.WriteLine("                 MEMBER ID  : ");
+            Console.WriteLine();
+        }
+
         public void InformMemberList()
         {
             Console.WriteLine("=============================================================");
@@ -149,6 +156,15 @@ namespace LibraryProgram
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("                 [수정 내용이 없습니다!]");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+
+        public void PrintDeleteSuccessMessage()
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("                [성공적으로 삭제되었습니다.]");
             Console.ResetColor();
             Console.WriteLine();
         }

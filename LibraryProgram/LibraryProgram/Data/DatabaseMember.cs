@@ -100,6 +100,18 @@ namespace LibraryProgram
             connection.Close();
         }
 
+        public void DeleteMember(string id) // 회원 삭제
+        {
+            string query = "DELETE FROM member WHERE id = '" + id + "';";
+
+            connection.Open();
+
+            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlDataReader dataReader = command.ExecuteReader();
+
+            connection.Close();
+        }
+
         public void SelectMemberList()
         {
             connection.Open();

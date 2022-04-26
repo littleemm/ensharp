@@ -123,6 +123,14 @@ namespace LibraryProgram
         private void DeleteMember()
         {
             memberViewElement.PrintDeleteMember();
+            memberViewElement.PrintDeleteMemberForm();
+
+            string memberId;
+            Console.SetCursorPosition(30, 13);
+            memberId = Console.ReadLine();
+
+            databaseMember.DeleteMember(memberId);
+            memberViewElement.PrintDeleteSuccessMessage();
         }
 
         private void SearchMember()
