@@ -94,6 +94,29 @@ namespace LibraryProgram
         private void EditMember()
         {
             memberViewElement.PrintEditMember();
+            memberViewElement.PrintEditMemberForm();
+
+            string memberId, memberAddress, memberNumber;
+
+            Console.SetCursorPosition(30, 13);
+            memberId = Console.ReadLine();
+
+            Console.SetCursorPosition(30, 15);
+            memberAddress = Console.ReadLine();
+
+            Console.SetCursorPosition(30, 17);
+            memberNumber = Console.ReadLine();
+
+            if (memberAddress.Length > 0 || memberNumber.Length > 0)
+            {
+                databaseMember.UpdateMember(memberAddress, memberNumber, memberId);
+                memberViewElement.PrintEditSuccessMessage();
+            }
+
+            else
+            {
+                memberViewElement.PrintEditFailMessage();
+            }
 
         }
 

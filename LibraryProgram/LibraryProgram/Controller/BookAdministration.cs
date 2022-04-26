@@ -26,6 +26,7 @@ namespace LibraryProgram
             Console.Clear();
             bookViewElement.PrintManageBookMenu();
             string number = menuSelection.CheckMenuNumber(46, 23, Constant.ARRAY_FIVE);
+            Console.Clear();
             switch(int.Parse(number))
             {
                 case Constant.REGISTRATION: 
@@ -60,25 +61,24 @@ namespace LibraryProgram
         private void RegisterBook()
         {
             bookViewElement.PrintRegistration();
-            Console.SetCursorPosition(40, 13);
+            Console.SetCursorPosition(31, 13);
             bookVO.Id = Console.ReadLine();
 
-            Console.SetCursorPosition(40, 15);
+            Console.SetCursorPosition(31, 15);
             bookVO.Name = Console.ReadLine();
 
-            Console.SetCursorPosition(40, 17);
+            Console.SetCursorPosition(31, 17);
             bookVO.Author = Console.ReadLine();
 
-            Console.SetCursorPosition(40, 19);
+            Console.SetCursorPosition(31, 19);
             bookVO.Publisher = Console.ReadLine();
 
-            Console.SetCursorPosition(40, 21);
+            Console.SetCursorPosition(31, 21);
             bookVO.Price = Console.ReadLine();
 
-            Console.SetCursorPosition(40, 23);
+            Console.SetCursorPosition(31, 23);
             bookVO.Quantity = Console.ReadLine();
 
-            databaseMember.InsertMember(memberVO);
             bookViewElement.PrintRegistrationSuccessMessage();
         }
 

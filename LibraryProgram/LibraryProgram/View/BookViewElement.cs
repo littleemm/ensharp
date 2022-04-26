@@ -54,11 +54,17 @@ namespace LibraryProgram
             Console.WriteLine("                                                           ");
             Console.WriteLine("                                                           ");
             Console.WriteLine("                        ID   : ");
+            Console.WriteLine();
             Console.WriteLine("                       NAME  : ");
+            Console.WriteLine();
             Console.WriteLine("                      AUTHOR : ");
+            Console.WriteLine();
             Console.WriteLine("                   PUBLISHER : ");
+            Console.WriteLine();
             Console.WriteLine("                      PRICE  : ");
+            Console.WriteLine();
             Console.WriteLine("                    QUANTITY : ");
+            Console.WriteLine();
         }
 
         public void PrintEditBook()
@@ -114,7 +120,7 @@ namespace LibraryProgram
         {
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("                  [성공적으로 등록되었습니다.]");
+            Console.WriteLine("                [성공적으로 등록되었습니다.]");
             Console.ResetColor();
             Console.WriteLine();
         }

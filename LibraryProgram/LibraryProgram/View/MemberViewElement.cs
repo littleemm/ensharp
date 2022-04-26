@@ -91,6 +91,17 @@ namespace LibraryProgram
             Console.WriteLine("                                                           ");
         }
 
+        public void PrintEditMemberForm()
+        {
+            Console.WriteLine();
+            Console.WriteLine("                 MEMBER ID  : ");
+            Console.WriteLine();
+            Console.WriteLine("                  ADDRESS   : ");
+            Console.WriteLine();
+            Console.WriteLine("               PHONE NUMBER : ");
+            Console.WriteLine();
+        }
+
         public void PrintDeleteMember()
         {
             Console.WriteLine(" ESC: 뒤로가기                                               ");
@@ -121,6 +132,24 @@ namespace LibraryProgram
         {
             Console.WriteLine();
             Console.WriteLine("        회원 ID : ");
+            Console.WriteLine();
+        }
+
+        public void PrintEditSuccessMessage()
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("                [성공적으로 수정되었습니다.]");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+
+        public void PrintEditFailMessage()
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("                 [수정 내용이 없습니다!]");
+            Console.ResetColor();
             Console.WriteLine();
         }
     }
