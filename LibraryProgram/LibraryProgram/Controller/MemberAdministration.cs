@@ -135,7 +135,23 @@ namespace LibraryProgram
 
         private void SearchMember()
         {
+            string memberId;
             memberViewElement.InformMemberList();
+            memberViewElement.SearchMember();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("==============================================================================");
+            databaseMember.SelectMemberList();
+            
+            Console.SetCursorPosition(18, 6);
+            memberId = Console.ReadLine();
+            viewElement.ClearButtomLine(11, 8);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("==============================================================================");
+            databaseMember.SelectMemberOfList(memberId);
+
+
         }
 
         private void PrintList()

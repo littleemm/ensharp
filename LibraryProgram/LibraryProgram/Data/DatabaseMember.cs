@@ -112,6 +112,44 @@ namespace LibraryProgram
             connection.Close();
         }
 
+        public void SelectMemberOfList(string id)
+        {
+            connection.Open();
+
+            string query = "SELECT * FROM member";
+
+            List<string>[] element = new List<string>[100];
+
+            for (int index = 0; index < element.Length; index++)
+            {
+                element[index] = new List<string>();
+            }
+
+            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlDataReader dataReader = command.ExecuteReader();
+
+            while (dataReader.Read())
+            {
+                element[0].Add(dataReader["id"].ToString());
+            }
+
+            for (int i = 0; i < element[0].Count; i++)
+            {
+                if (element[0][i].Contains(id))
+                {
+                    Console.WriteLine("      ID      :  " + dataReader["id"].ToString());
+                    Console.WriteLine("     NAME     :  " + dataReader["name"].ToString());
+                    Console.WriteLine("      AGE     :  " + dataReader["age"].ToString() + "세");
+                    Console.WriteLine("   ADDRESS    :  " + dataReader["address"].ToString());
+                    Console.WriteLine(" PHONE NUMBER :  " + dataReader["phoneNumber"].ToString());
+                    Console.WriteLine("==============================================================================");
+                }
+            }
+
+            dataReader.Close();
+            connection.Close();
+        }
+
         public void SelectMemberList()
         {
             connection.Open();

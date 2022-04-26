@@ -219,5 +219,15 @@ namespace LibraryProgram
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(0, Console.CursorTop - line);
         }
+
+        public void ClearButtomLine(int line, int againLine)
+        {
+            for (int i = line; i < 200; i++) 
+            {
+                Console.SetCursorPosition(0, i);
+                Console.Write(new string(' ', Console.WindowWidth));
+            }
+            Console.SetCursorPosition(0, againLine);
+        }
     }
 }
