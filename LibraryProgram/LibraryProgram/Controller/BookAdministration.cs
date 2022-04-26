@@ -11,18 +11,21 @@ namespace LibraryProgram
         BookViewElement bookViewElement;
         BasicViewElement viewElement;
         MenuSelection menuSelection;
+        BookVO bookVO;
 
         public BookAdministration(BasicViewElement viewElement, MenuSelection menuSelection)
         {
             bookViewElement = new BookViewElement();
+            bookVO = new BookVO("", "", "", "", "", "");
             this.viewElement = viewElement;
             this.menuSelection = menuSelection;
         }
 
         public void SelectBookAdministration()
         {
-            string number = menuSelection.CheckMenuNumber(46, 23, Constant.ARRAY_FIVE);
             Console.Clear();
+            bookViewElement.PrintManageBookMenu();
+            string number = menuSelection.CheckMenuNumber(46, 23, Constant.ARRAY_FIVE);
             switch(int.Parse(number))
             {
                 case Constant.REGISTRATION: 
@@ -57,6 +60,26 @@ namespace LibraryProgram
         private void RegisterBook()
         {
             bookViewElement.PrintRegistration();
+            Console.SetCursorPosition(40, 13);
+            bookVO.Id = Console.ReadLine();
+
+            Console.SetCursorPosition(40, 15);
+            bookVO.Name = Console.ReadLine();
+
+            Console.SetCursorPosition(40, 17);
+            bookVO.Author = Console.ReadLine();
+
+            Console.SetCursorPosition(40, 19);
+            bookVO.Publisher = Console.ReadLine();
+
+            Console.SetCursorPosition(40, 21);
+            bookVO.Price = Console.ReadLine();
+
+            Console.SetCursorPosition(40, 23);
+            bookVO.Quantity = Console.ReadLine();
+
+            databaseMember.InsertMember(memberVO);
+            bookViewElement.PrintRegistrationSuccessMessage();
         }
 
         private void EditBook()
@@ -69,12 +92,12 @@ namespace LibraryProgram
             bookViewElement.PrintDeleteBook();
         }
 
-        public void SearchBook()
+        private void SearchBook()
         {
             bookViewElement.InformBookList();
         }
 
-        public void PrintList()
+        private void PrintList()
         {
             bookViewElement.InformBookList();
         }

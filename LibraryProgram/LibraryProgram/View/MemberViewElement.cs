@@ -40,7 +40,7 @@ namespace LibraryProgram
 
         public void PrintRegistration()
         {
-            Console.WriteLine("                                                           ");
+            Console.WriteLine(" ESC: 뒤로가기                                               ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
@@ -69,13 +69,15 @@ namespace LibraryProgram
         public void PrintRegistrationSuccessMessage()
         {
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("                  [성공적으로 등록되었습니다.]");
+            Console.ResetColor();
             Console.WriteLine();
         }
 
         public void PrintEditMember()
         {
-            Console.WriteLine("                                                           ");
+            Console.WriteLine(" ESC: 뒤로가기                                               ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
@@ -91,7 +93,7 @@ namespace LibraryProgram
 
         public void PrintDeleteMember()
         {
-            Console.WriteLine("                                                           ");
+            Console.WriteLine(" ESC: 뒤로가기                                               ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");

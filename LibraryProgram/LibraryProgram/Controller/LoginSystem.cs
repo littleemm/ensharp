@@ -56,7 +56,7 @@ namespace LibraryProgram
             {
                 LoginAll();
                 isIdAndPassword = databaseMember.SelectMember(id, password);
-                if (isIdAndPassword == false)
+                if (isIdAndPassword == false)/////
                 {
                     viewElement.ClearLine(1, 37);
                     Console.SetCursorPosition(37, 16);

@@ -17,7 +17,7 @@ namespace LibraryProgram
 
         public MainPage()
         {
-            memberVO = new MemberVO("", "", "", "", "", "", "", "");
+            memberVO = new MemberVO("", "", "", "", "", "");
             basicViewElement = new BasicViewElement();
             databaseMember = new DatabaseMember();
             menuSelection = new MenuSelection(basicViewElement);

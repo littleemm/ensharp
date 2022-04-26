@@ -88,6 +88,7 @@ namespace LibraryProgram
             memberVO.Address = Console.ReadLine();
 
             databaseMember.InsertMember(memberVO);
+            memberViewElement.PrintRegistrationSuccessMessage();
         }
 
         private void EditMember()

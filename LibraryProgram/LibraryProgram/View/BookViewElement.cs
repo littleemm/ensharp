@@ -58,7 +58,7 @@ namespace LibraryProgram
             Console.WriteLine("                      AUTHOR : ");
             Console.WriteLine("                   PUBLISHER : ");
             Console.WriteLine("                      PRICE  : ");
-            Console.WriteLine("         QUANTITY(2 이상 불가): ");
+            Console.WriteLine("                    QUANTITY : ");
         }
 
         public void PrintEditBook()
@@ -107,6 +107,15 @@ namespace LibraryProgram
         {
             Console.WriteLine();
             Console.WriteLine("   책 제목 / 저자 / 출판사 : ");
+            Console.WriteLine();
+        }
+
+        public void PrintRegistrationSuccessMessage()
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("                  [성공적으로 등록되었습니다.]");
+            Console.ResetColor();
             Console.WriteLine();
         }
 
