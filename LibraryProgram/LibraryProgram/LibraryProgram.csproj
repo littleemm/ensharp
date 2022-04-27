@@ -86,8 +86,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BookVO.cs" />
+    <Compile Include="Data\BookVO.cs" />
     <Compile Include="Controller\BookAdministration.cs" />
+    <Compile Include="Data\DatabaseBook.cs" />
     <Compile Include="Data\DatabaseMember.cs" />
     <Compile Include="Controller\FormOfSignUp.cs" />
     <Compile Include="View\MemberViewElement.cs" />

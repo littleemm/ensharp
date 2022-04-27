@@ -16,12 +16,12 @@ namespace LibraryProgram
         BasicViewElement viewElement;
         DatabaseMember databaseMember;
 
-        public LoginSystem(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO)
+        public LoginSystem(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO, DatabaseBook databaseBook)
         {
             this.viewElement = viewElement;
             this.databaseMember = databaseMember;
             this.viewElement = viewElement;
-            administratorMode = new AdministratorMode(viewElement, menuSelection, databaseMember, memberVO);
+            administratorMode = new AdministratorMode(viewElement, menuSelection, databaseMember, memberVO, databaseBook);
             memberMode = new MemberMode(viewElement, menuSelection);
         }
 

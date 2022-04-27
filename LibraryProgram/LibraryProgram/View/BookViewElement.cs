@@ -83,6 +83,17 @@ namespace LibraryProgram
             Console.WriteLine("                                                           ");
         }
 
+        public void PrintEditBookForm()
+        {
+            Console.WriteLine();
+            Console.WriteLine("                  BOOK ID   : ");
+            Console.WriteLine();
+            Console.WriteLine("                   PRICE    : ");
+            Console.WriteLine();
+            Console.WriteLine("                 QUANTITY   : ");
+            Console.WriteLine();
+        }
+
         public void PrintDeleteBook()
         {
             Console.WriteLine("                                                           ");
@@ -97,6 +108,13 @@ namespace LibraryProgram
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine("                                                           ");
+        }
+
+        public void PrintDeleteMemberForm()
+        {
+            Console.WriteLine();
+            Console.WriteLine("                  BOOK ID   : ");
+            Console.WriteLine();
         }
 
         public void InformBookList()
@@ -125,5 +143,31 @@ namespace LibraryProgram
             Console.WriteLine();
         }
 
+        public void PrintEditSuccessMessage()
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("                [성공적으로 수정되었습니다.]");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+
+        public void PrintEditFailMessage()
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("                 [수정 내용이 없습니다!]");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+
+        public void PrintDeleteSuccessMessage()
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("                [성공적으로 삭제되었습니다.]");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
     }
 }

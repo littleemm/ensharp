@@ -13,6 +13,7 @@ namespace LibraryProgram
         MenuSelection menuSelection;
         LoginSystem loginSystem;
         DatabaseMember databaseMember;
+        DatabaseBook databaseBook;
         MemberVO memberVO;
 
         public MainPage()
@@ -20,8 +21,9 @@ namespace LibraryProgram
             memberVO = new MemberVO("", "", "", "", "", "");
             basicViewElement = new BasicViewElement();
             databaseMember = new DatabaseMember();
+            databaseBook = new DatabaseBook();
             menuSelection = new MenuSelection(basicViewElement);
-            loginSystem = new LoginSystem(basicViewElement, menuSelection, databaseMember, memberVO);
+            loginSystem = new LoginSystem(basicViewElement, menuSelection, databaseMember, memberVO, databaseBook);
             modeSelection = new ModeSelection(menuSelection, loginSystem, basicViewElement, memberVO, databaseMember);
           
         }

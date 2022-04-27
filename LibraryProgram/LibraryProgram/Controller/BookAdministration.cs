@@ -11,14 +11,16 @@ namespace LibraryProgram
         BookViewElement bookViewElement;
         BasicViewElement viewElement;
         MenuSelection menuSelection;
+        DatabaseBook databaseBook;
         BookVO bookVO;
 
-        public BookAdministration(BasicViewElement viewElement, MenuSelection menuSelection)
+        public BookAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseBook databaseBook)
         {
             bookViewElement = new BookViewElement();
             bookVO = new BookVO("", "", "", "", "", "");
             this.viewElement = viewElement;
             this.menuSelection = menuSelection;
+            this.databaseBook = databaseBook;
         }
 
         public void SelectBookAdministration()
@@ -56,6 +58,12 @@ namespace LibraryProgram
                     }
             }
 
+            ConsoleKeyInfo consoleKey = Console.ReadKey();
+            if (consoleKey.Key == ConsoleKey.Escape)
+            {
+                Console.Clear();
+                SelectBookAdministration();
+            }
         }
 
         private void RegisterBook()
@@ -79,27 +87,78 @@ namespace LibraryProgram
             Console.SetCursorPosition(31, 23);
             bookVO.Quantity = Console.ReadLine();
 
+            databaseBook.InsertBook(bookVO);
             bookViewElement.PrintRegistrationSuccessMessage();
         }
 
         private void EditBook()
         {
             bookViewElement.PrintEditBook();
+            bookViewElement.PrintEditBookForm();
+
+            string bookId, bookPrice, bookQuantity;
+
+            Console.SetCursorPosition(30, 13);
+            bookId = Console.ReadLine();
+
+            Console.SetCursorPosition(30, 15);
+            bookPrice = Console.ReadLine();
+
+            Console.SetCursorPosition(30, 17);
+            bookQuantity = Console.ReadLine();
+
+            if (bookPrice.Length > 0 || bookQuantity.Length > 0)
+            {
+                databaseBook.UpdateBook(bookPrice, bookQuantity, bookId);
+                bookViewElement.PrintEditSuccessMessage();
+            }
+
+            else
+            {
+                bookViewElement.PrintEditFailMessage();
+            }
         }
 
         private void DeleteBook()
         {
             bookViewElement.PrintDeleteBook();
+            bookViewElement.PrintDeleteMemberForm();
+
+            string bookId;
+            Console.SetCursorPosition(30, 13);
+            bookId = Console.ReadLine();
+
+            databaseBook.DeleteBook(bookId);
+            bookViewElement.PrintDeleteSuccessMessage();
         }
 
         private void SearchBook()
         {
             bookViewElement.InformBookList();
+            string bookValue;
+            bookViewElement.InformBookList();
+            bookViewElement.SearchBook();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("==============================================================================");
+            databaseBook.SelectBookList();
+
+            Console.SetCursorPosition(30, 11);
+            bookValue = Console.ReadLine();
+            viewElement.ClearButtomLine(11, 8);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("==============================================================================");
+            databaseBook.SelectBookOfList(bookValue);
         }
 
         private void PrintList()
         {
             bookViewElement.InformBookList();
+            Console.WriteLine();
+            Console.WriteLine("==============================================================================");
+            databaseBook.SelectBookList();
+            Console.SetCursorPosition(0, 0);
         }
     }
 }
