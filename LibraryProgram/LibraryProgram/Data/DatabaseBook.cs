@@ -103,9 +103,9 @@ namespace LibraryProgram
                 {
                     Console.WriteLine("      ID      :  " + element[0][i]);
                     Console.WriteLine("     NAME     :  " + element[1][i]);
-                    Console.WriteLine("    AUTHOR    :  " + element[2][i] + "\\");
+                    Console.WriteLine("    AUTHOR    :  " + element[2][i]);
                     Console.WriteLine("  PUBLISHER   :  " + element[3][i]);
-                    Console.WriteLine("    PRICE     :  " + element[4][i]);
+                    Console.WriteLine("    PRICE     :  " + element[4][i] + "\\");
                     Console.WriteLine("   QUANTITY   :  " + element[5][i]);
                     Console.WriteLine("==============================================================================");
                 }
@@ -114,9 +114,9 @@ namespace LibraryProgram
                 {
                     Console.WriteLine("      ID      :  " + element[0][i]);
                     Console.WriteLine("     NAME     :  " + element[1][i]);
-                    Console.WriteLine("    AUTHOR    :  " + element[2][i] + "\\");
+                    Console.WriteLine("    AUTHOR    :  " + element[2][i]);
                     Console.WriteLine("  PUBLISHER   :  " + element[3][i]);
-                    Console.WriteLine("    PRICE     :  " + element[4][i]);
+                    Console.WriteLine("    PRICE     :  " + element[4][i] + "\\");
                     Console.WriteLine("   QUANTITY   :  " + element[5][i]);
                     Console.WriteLine("==============================================================================");
                 }

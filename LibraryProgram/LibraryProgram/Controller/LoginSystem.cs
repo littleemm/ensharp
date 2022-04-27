@@ -22,7 +22,7 @@ namespace LibraryProgram
             this.databaseMember = databaseMember;
             this.viewElement = viewElement;
             administratorMode = new AdministratorMode(viewElement, menuSelection, databaseMember, memberVO, databaseBook);
-            memberMode = new MemberMode(viewElement, menuSelection);
+            memberMode = new MemberMode(viewElement, menuSelection, databaseBook);
         }
 
         public void LoginAdministratorMode()
