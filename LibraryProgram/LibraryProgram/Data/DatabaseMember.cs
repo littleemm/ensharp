@@ -46,6 +46,8 @@ namespace LibraryProgram
                     {
                         if (element[1][i].Equals(pw))
                         {
+                            dataReader.Close();
+                            connection.Close();
                             return true;
                         }
                     }
@@ -60,14 +62,15 @@ namespace LibraryProgram
 
         public void InsertMember(MemberVO memberVO) // 등록
         {
-            string query = "INSERT INTO member(id, password, name, age, phoneNumber, address)" +
+            string query = "INSERT INTO member(id, password, name, age, phoneNumber, address, bookCount)" +
                 "Value('" +  memberVO.Id + "', '" + memberVO.Password + "', '" + memberVO.Name + "', '" +
-                memberVO.Age + "', '" + memberVO.PhoneNumber + "', '" + memberVO.Address + "');";
+                memberVO.Age + "', '" + memberVO.PhoneNumber + "', '" + memberVO.Address + "', '" + "0');";
 
             connection.Open();
             MySqlCommand command = new MySqlCommand(query, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
+            dataReader.Close();
             connection.Close();
         }
 
@@ -96,6 +99,7 @@ namespace LibraryProgram
             MySqlCommand command = new MySqlCommand(query, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
+            dataReader.Close();
             connection.Close();
         }
 
@@ -108,6 +112,7 @@ namespace LibraryProgram
             MySqlCommand command = new MySqlCommand(query, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
+            dataReader.Close();
             connection.Close();
         }
 
@@ -174,6 +179,7 @@ namespace LibraryProgram
                 Console.WriteLine("==============================================================================");
             }
 
+            dataReader.Close();
             connection.Close();
         }
 

@@ -28,6 +28,7 @@ namespace LibraryProgram
             MySqlCommand command = new MySqlCommand(query, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
+            dataReader.Close();
             connection.Close();
         }
 
@@ -56,6 +57,7 @@ namespace LibraryProgram
             MySqlCommand command = new MySqlCommand(query, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
+            dataReader.Close();
             connection.Close();
         }
 
@@ -68,6 +70,7 @@ namespace LibraryProgram
             MySqlCommand command = new MySqlCommand(query, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
+            dataReader.Close();
             connection.Close();
         }
 
@@ -156,6 +159,7 @@ namespace LibraryProgram
                 Console.WriteLine("==============================================================================");
             }
 
+            dataReader.Close();
             connection.Close();
         }
     }

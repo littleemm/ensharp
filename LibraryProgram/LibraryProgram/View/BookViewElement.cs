@@ -198,7 +198,7 @@ namespace LibraryProgram
         {
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("        [대출이 완료되었습니다. 반납 기한은 " + date + " 입니다.]");
+            Console.WriteLine("   [대출이 완료되었습니다. 반납 기한은 " + date + " 입니다.]");
             Console.ResetColor();
             Console.WriteLine();
         }
@@ -206,8 +206,8 @@ namespace LibraryProgram
         public void PrintCountFailMessage()
         {
             Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("          [잔여 수량이 0권입니다. 다른 책 ID를 입력하세요.]");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("     [잔여 수량이 0권입니다. 다른 책 ID를 입력하세요.]");
             Console.ResetColor();
             Console.WriteLine();
         }
@@ -215,8 +215,8 @@ namespace LibraryProgram
         public void PrintCheckedOutFailMessage()
         {
             Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("    [같은 책은 2권 이상 대출할 수 없습니다. 다른 책 ID를 입력하세요.]");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(" [같은 책은 2권 이상 대출 불가합니다. 다른 ID를 입력하세요.]");
             Console.ResetColor();
             Console.WriteLine();
         }
