@@ -162,5 +162,35 @@ namespace LibraryProgram
             dataReader.Close();
             connection.Close();
         }
+
+        public bool IsBookId(string bookId)
+        {
+            string query = "SELECT * FROM book";
+            connection.Open();
+
+            List<string> element = new List<string>();
+
+            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlDataReader dataReader = command.ExecuteReader();
+
+            while (dataReader.Read())
+            {
+                element.Add(dataReader["id"].ToString());
+            }
+
+            for (int i=0;i<element.Count;i++)
+            {
+                if(element[i].Equals(bookId))
+                {
+                    dataReader.Close();
+                    connection.Close();
+                    return false;
+                }
+            }
+
+            dataReader.Close();
+            connection.Close();
+            return true;
+        }
     }
 }

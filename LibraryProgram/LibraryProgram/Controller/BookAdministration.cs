@@ -69,8 +69,23 @@ namespace LibraryProgram
         private void RegisterBook()
         {
             bookViewElement.PrintRegistration();
-            Console.SetCursorPosition(31, 13);
-            bookVO.Id = Console.ReadLine();
+            bool isBookValue = false;
+
+            while (isBookValue == false)
+            {
+                Console.SetCursorPosition(31, 13);
+                bookVO.Id = Console.ReadLine();
+                isBookValue = databaseBook.IsBookId(bookVO.Id);
+
+                if (isBookValue == false)
+                {
+                    Console.SetCursorPosition(25, 10);
+                    bookViewElement.PrintBookIdFailMessage();
+                    Console.SetCursorPosition(31, 13);
+                    viewElement.ClearLine(0, 31);
+                }
+            }
+            
 
             Console.SetCursorPosition(31, 15);
             bookVO.Name = Console.ReadLine();
