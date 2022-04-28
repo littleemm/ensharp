@@ -130,7 +130,7 @@ namespace LibraryProgram
         public void InformMemberBook(string id)
         {
             Console.WriteLine("=============================================================");
-            Console.WriteLine("                    " + id + "님의 대출 내역                     ");
+            Console.WriteLine("                       " + id + "님의 대출 내역                     ");
             Console.WriteLine("=============================================================");
             Console.WriteLine();
             Console.WriteLine();
@@ -203,11 +203,38 @@ namespace LibraryProgram
             Console.WriteLine();
         }
 
+        public void PrintCountFailMessage()
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("          [잔여 수량이 0권입니다. 다른 책 ID를 입력하세요.]");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+
+        public void PrintCheckedOutFailMessage()
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("    [같은 책은 2권 이상 대출할 수 없습니다. 다른 책 ID를 입력하세요.]");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+
         public void PrintReturnSuccessMessage()
         {
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("                  [반납이 완료되었습니다.]");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+
+        public void PrintBookIdFailMessage()
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("                  [Book ID를 다시 입력하세요.]");
             Console.ResetColor();
             Console.WriteLine();
         }

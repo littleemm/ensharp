@@ -12,6 +12,7 @@ namespace LibraryProgram
         MenuSelection menuSelection;
         BookViewElement bookViewElement;
         DatabaseBook databaseBook;
+        DatabaseMemberBook databaseMemberBook;
 
         public MemberMode(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseBook databaseBook)
         {
@@ -20,6 +21,7 @@ namespace LibraryProgram
             this.databaseBook = databaseBook;
 
             bookViewElement = new BookViewElement();
+            databaseMemberBook = new DatabaseMemberBook();
         }
 
         public void ShowMemberPage(string id)
@@ -47,7 +49,7 @@ namespace LibraryProgram
                     }
                 case Constant.CHECKOUT:
                     {
-                        CheckOutBook();
+                        CheckOutBook(id);
                         break;
                     }
                 case Constant.RETURN:
@@ -97,9 +99,11 @@ namespace LibraryProgram
             Console.SetCursorPosition(0, 0);
         }
 
-        private void CheckOutBook()
+        private void CheckOutBook(string id)
         {
-            string bookId;
+            string bookId = "";
+            bool isBook = false;
+            DateTime dueDate = DateTime.Today.AddDays(7);
 
             bookViewElement.InformBookList();
             bookViewElement.PrintCheckOutBookIdForm();
@@ -108,15 +112,91 @@ namespace LibraryProgram
             Console.WriteLine("==============================================================================");
             databaseBook.SelectBookList();
 
-            Console.SetCursorPosition(33, 6);
-            bookId = Console.ReadLine();
+            while (isBook == false)
+            {
+                Console.SetCursorPosition(33, 6);
+                bookId = Console.ReadLine();
+                viewElement.ClearLine(3, 29);
+
+                isBook = databaseMemberBook.IsBookId(bookId);
+                if (isBook == false)
+                {
+                    Console.SetCursorPosition(29, 3);
+                    bookViewElement.PrintBookIdFailMessage();
+                    Console.SetCursorPosition(33, 6);
+                    viewElement.ClearLine(0, 33);
+                    continue;
+                }
+                isBook = databaseMemberBook.IsBookCount(bookId);
+                if (isBook == false)
+                {
+                    Console.SetCursorPosition(29, 3);
+                    bookViewElement.PrintCountFailMessage();
+                    Console.SetCursorPosition(33, 6);
+                    viewElement.ClearLine(0, 33);
+                    continue;
+                }
+
+                isBook = databaseMemberBook.IsCheckedOutBook(bookId, id);
+                if (isBook == true)
+                {
+                    Console.SetCursorPosition(29, 3);
+                    bookViewElement.PrintCheckedOutFailMessage();
+                    Console.SetCursorPosition(33, 6);
+                    viewElement.ClearLine(0, 33);
+                }
+            }
+
+            databaseMemberBook.InsertMemberBook(bookId, id);
+
+            Console.SetCursorPosition(33, 4);
+            bookViewElement.PrintCheckOutSuccessMessage(dueDate.ToString());
+
         }
 
         private void ReturnBook(string id)
         {
-            string bookId;
+            string bookId = "";
+            bool isBook = false;
+
             bookViewElement.InformMemberBook(id);
-            
+            bookViewElement.PrintReturnBookIdForm();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("==============================================================================");
+            databaseMemberBook.SelectMemberBook(id);
+
+            while (isBook == false) 
+            {
+                Console.SetCursorPosition(33, 6);
+                bookId = Console.ReadLine();
+                viewElement.ClearLine(3, 29);
+
+                isBook = databaseMemberBook.IsBookId(bookId);
+                if (isBook == false)
+                {
+                    Console.SetCursorPosition(29, 3);
+                    bookViewElement.PrintBookIdFailMessage();
+                    Console.SetCursorPosition(33, 6);
+                    viewElement.ClearLine(0, 33);
+                    continue;
+                }
+
+                isBook = databaseMemberBook.IsCheckedOutBook(bookId, id);
+                if (isBook == true)
+                {
+                    Console.SetCursorPosition(29, 3);
+                    bookViewElement.PrintBookIdFailMessage();
+                    Console.SetCursorPosition(33, 6);
+                    viewElement.ClearLine(0, 33);
+                    isBook = false;
+                }
+            }
+
+            databaseMemberBook.DeleteMemberBook(bookId, id);
+
+            Console.SetCursorPosition(33, 4);
+            bookViewElement.PrintReturnSuccessMessage();
         }
 
     }
