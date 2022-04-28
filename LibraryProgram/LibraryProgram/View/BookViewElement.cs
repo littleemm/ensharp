@@ -110,7 +110,7 @@ namespace LibraryProgram
             Console.WriteLine("                                                           ");
         }
 
-        public void PrintDeleteMemberForm()
+        public void PrintBookIdForm()
         {
             Console.WriteLine();
             Console.WriteLine("                  BOOK ID   : ");
@@ -125,6 +125,30 @@ namespace LibraryProgram
             Console.WriteLine();
             Console.WriteLine();
 
+        }
+
+        public void InformMemberBook(string id)
+        {
+            Console.WriteLine("=============================================================");
+            Console.WriteLine("                 " + id + "님의 대출 내역                     ");
+            Console.WriteLine("=============================================================");
+            Console.WriteLine();
+            Console.WriteLine();
+
+        }
+
+        public void PrintCheckOutBookIdForm()
+        {
+            Console.WriteLine();
+            Console.WriteLine("                대출할 책 ID   : ");
+            Console.WriteLine();
+        }
+
+        public void PrintReturnBookIdForm()
+        {
+            Console.WriteLine();
+            Console.WriteLine("                반납할 책 ID   : ");
+            Console.WriteLine();
         }
 
         public void SearchBook()
@@ -166,6 +190,24 @@ namespace LibraryProgram
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("                [성공적으로 삭제되었습니다.]");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+
+        public void PrintCheckOutSuccessMessage(string date)
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("        [대출이 완료되었습니다. 반납 기한은 " + date + " 입니다.]");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+
+        public void PrintReturnSuccessMessage()
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("                  [반납이 완료되었습니다.]");
             Console.ResetColor();
             Console.WriteLine();
         }

@@ -37,7 +37,7 @@ namespace LibraryProgram
             {
                 case Constant.SEARCH_BOOK:
                     {
-                        searchBook();
+                        SearchBook();
                         break;
                     }
                 case Constant.BOOKLIST:
@@ -47,10 +47,12 @@ namespace LibraryProgram
                     }
                 case Constant.CHECKOUT:
                     {
+                        CheckOutBook();
                         break;
                     }
                 case Constant.RETURN:
                     {
+
                         break;
                     }
                 case Constant.MYPAGE:
@@ -67,9 +69,8 @@ namespace LibraryProgram
             }
         }
 
-        private void searchBook()
+        private void SearchBook()
         {
-            bookViewElement.InformBookList();
             string bookValue;
             bookViewElement.InformBookList();
             bookViewElement.SearchBook();
@@ -78,7 +79,7 @@ namespace LibraryProgram
             Console.WriteLine("==============================================================================");
             databaseBook.SelectBookList();
 
-            Console.SetCursorPosition(30, 11);
+            Console.SetCursorPosition(29, 6);
             bookValue = Console.ReadLine();
             viewElement.ClearButtomLine(11, 8);
             Console.WriteLine();
@@ -94,6 +95,28 @@ namespace LibraryProgram
             Console.WriteLine("==============================================================================");
             databaseBook.SelectBookList();
             Console.SetCursorPosition(0, 0);
+        }
+
+        private void CheckOutBook()
+        {
+            string bookId;
+
+            bookViewElement.InformBookList();
+            bookViewElement.PrintCheckOutBookIdForm();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("==============================================================================");
+            databaseBook.SelectBookList();
+
+            Console.SetCursorPosition(33, 6);
+            bookId = Console.ReadLine();
+        }
+
+        private void ReturnBook()
+        {
+            string bookId;
+
+            
         }
 
     }

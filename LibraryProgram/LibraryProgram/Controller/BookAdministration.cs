@@ -122,7 +122,7 @@ namespace LibraryProgram
         private void DeleteBook()
         {
             bookViewElement.PrintDeleteBook();
-            bookViewElement.PrintDeleteMemberForm();
+            bookViewElement.PrintBookIdForm();
 
             string bookId;
             Console.SetCursorPosition(30, 13);
@@ -134,7 +134,6 @@ namespace LibraryProgram
 
         private void SearchBook()
         {
-            bookViewElement.InformBookList();
             string bookValue;
             bookViewElement.InformBookList();
             bookViewElement.SearchBook();
@@ -143,7 +142,7 @@ namespace LibraryProgram
             Console.WriteLine("==============================================================================");
             databaseBook.SelectBookList();
 
-            Console.SetCursorPosition(30, 11);
+            Console.SetCursorPosition(29, 6);
             bookValue = Console.ReadLine();
             viewElement.ClearButtomLine(11, 8);
             Console.WriteLine();
