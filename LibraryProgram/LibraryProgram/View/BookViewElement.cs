@@ -130,7 +130,7 @@ namespace LibraryProgram
         public void InformMemberBook(string id)
         {
             Console.WriteLine("=============================================================");
-            Console.WriteLine("                 " + id + "님의 대출 내역                     ");
+            Console.WriteLine("                    " + id + "님의 대출 내역                     ");
             Console.WriteLine("=============================================================");
             Console.WriteLine();
             Console.WriteLine();

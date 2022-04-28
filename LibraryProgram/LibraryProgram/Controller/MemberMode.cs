@@ -22,14 +22,14 @@ namespace LibraryProgram
             bookViewElement = new BookViewElement();
         }
 
-        public void ShowMemberPage()
+        public void ShowMemberPage(string id)
         {
             Console.Clear();
             viewElement.PrintMemberMode();
-            SelectMenu();
+            SelectMenu(id);
         }
 
-        private void SelectMenu()
+        private void SelectMenu(string id)
         {
             string number = menuSelection.CheckMenuNumber(46, 24, Constant.ARRAY_FIVE);
             Console.Clear();
@@ -52,7 +52,7 @@ namespace LibraryProgram
                     }
                 case Constant.RETURN:
                     {
-
+                        ReturnBook(id);
                         break;
                     }
                 case Constant.MYPAGE:
@@ -65,7 +65,7 @@ namespace LibraryProgram
             if (consoleKey.Key == ConsoleKey.Escape)
             {
                 Console.Clear();
-                ShowMemberPage();
+                ShowMemberPage(id);
             }
         }
 
@@ -112,10 +112,10 @@ namespace LibraryProgram
             bookId = Console.ReadLine();
         }
 
-        private void ReturnBook()
+        private void ReturnBook(string id)
         {
             string bookId;
-
+            bookViewElement.InformMemberBook(id);
             
         }
 

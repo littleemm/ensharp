@@ -66,7 +66,7 @@ namespace LibraryProgram
                 }
             }
 
-            memberMode.ShowMemberPage();
+            memberMode.ShowMemberPage(id);
             
         }
 

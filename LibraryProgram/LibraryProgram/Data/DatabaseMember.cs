@@ -11,8 +11,7 @@ namespace LibraryProgram
     class DatabaseMember
     {
         private static string stringConnection = "Server=localhost;Database=김영림_library;Uid=root;Pwd=0000;charset=utf8;";
-        private static MySqlConnection connection;
-
+        private MySqlConnection connection;
         public DatabaseMember()
         {
             connection = new MySqlConnection(stringConnection);
@@ -118,7 +117,7 @@ namespace LibraryProgram
 
             string query = "SELECT * FROM member";
 
-            List<string>[] element = new List<string>[5];
+            List<string>[] element = new List<string>[6];
 
             for (int index = 0; index < element.Length; index++)
             {
@@ -135,6 +134,7 @@ namespace LibraryProgram
                 element[2].Add(dataReader["age"].ToString());
                 element[3].Add(dataReader["address"].ToString());
                 element[4].Add(dataReader["phoneNumber"].ToString());
+                element[5].Add(dataReader["bookCount"].ToString());
             }
 
             for (int i = 0; i < element[0].Count; i++)
@@ -146,6 +146,7 @@ namespace LibraryProgram
                     Console.WriteLine("      AGE     :  " + element[2][i] + "세");
                     Console.WriteLine("   ADDRESS    :  " + element[3][i]);
                     Console.WriteLine(" PHONE NUMBER :  " + element[4][i]);
+                    Console.WriteLine("  BOOK COUNT  :  " + element[5][i] + "권");
                     Console.WriteLine("==============================================================================");
                 }
             }
@@ -164,11 +165,12 @@ namespace LibraryProgram
 
             while (dataReader.Read())
             {
-                Console.WriteLine("      ID      :  " +dataReader["id"].ToString());
+                Console.WriteLine("      ID      :  " + dataReader["id"].ToString());
                 Console.WriteLine("     NAME     :  " + dataReader["name"].ToString());
                 Console.WriteLine("      AGE     :  " + dataReader["age"].ToString() + "세");
                 Console.WriteLine("   ADDRESS    :  " + dataReader["address"].ToString());
                 Console.WriteLine(" PHONE NUMBER :  " + dataReader["phoneNumber"].ToString());
+                Console.WriteLine("  BOOK COUNT  :  " + dataReader["bookCount"].ToString() + "권");
                 Console.WriteLine("==============================================================================");
             }
 
