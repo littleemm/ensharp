@@ -13,7 +13,7 @@ namespace LibraryProgram
         public static string[] ARRAY_FOUR = { "1", "2", "3", "4" };
         public static string[] ARRAY_FIVE = { "1", "2", "3", "4", "5" };
 
-        public static string STRING_CONNECTION = "Server=localhost;Database=김영림_library;Uid=root;Pwd=0000;charset=utf8;";
+        public static string STRING_CONNECTION = "Server=localhost;Database=younglim_library;Uid=root;Pwd=0000;charset=utf8;";
 
         public static string SELECT_QUERY_ADMIN = "SELECT * FROM administrator";
 
