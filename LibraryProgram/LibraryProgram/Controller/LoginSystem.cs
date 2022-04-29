@@ -10,6 +10,7 @@ namespace LibraryProgram
     {
         private string id;
         private string password;
+        private ConsoleKeyInfo keyInfo;
 
         AdministratorMode administratorMode;
         MemberMode memberMode;
@@ -18,11 +19,12 @@ namespace LibraryProgram
 
         public LoginSystem(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO, DatabaseBook databaseBook, DatabaseMemberBook databaseMemberBook, Exception exception)
         {
+            keyInfo = new ConsoleKeyInfo();
             this.viewElement = viewElement;
             this.databaseMember = databaseMember;
             this.viewElement = viewElement;
-            administratorMode = new AdministratorMode(viewElement, menuSelection, databaseMember, memberVO, databaseBook, databaseMemberBook, exception);
-            memberMode = new MemberMode(viewElement, menuSelection, databaseMember, databaseBook, databaseMemberBook, exception);
+            administratorMode = new AdministratorMode(viewElement, menuSelection, databaseMember, memberVO, databaseBook, exception);
+            memberMode = new MemberMode(viewElement, menuSelection, databaseMember, databaseBook, exception);
         }
 
         public void LoginAdministratorMode()
@@ -75,9 +77,10 @@ namespace LibraryProgram
             Console.SetCursorPosition(37, 16);
             password = "";
 
-            ConsoleKeyInfo keyInfo = Console.ReadKey(true); // 비밀번호 *처리
+             // 비밀번호 *처리
             while (keyInfo.Key != ConsoleKey.Enter)
             {
+                keyInfo = Console.ReadKey(true);
                 if (keyInfo.Key != ConsoleKey.Backspace && keyInfo.Key != ConsoleKey.Enter)
                 {
                     password += keyInfo.KeyChar.ToString();
@@ -88,7 +91,6 @@ namespace LibraryProgram
                     password = password.Substring(0, (password.Length - 1));
                     Console.Write("\b \b");
                 }
-                keyInfo = Console.ReadKey(true);
             }
         }
     }

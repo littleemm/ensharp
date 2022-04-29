@@ -40,7 +40,7 @@ namespace LibraryProgram
 
         public void PrintRegistration()
         {
-            Console.WriteLine("                                                           ");
+            Console.WriteLine("ESC: 뒤로가기                                                ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
@@ -69,7 +69,7 @@ namespace LibraryProgram
 
         public void PrintEditBook()
         {
-            Console.WriteLine("                                                           ");
+            Console.WriteLine("ESC: 뒤로가기                                               ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
@@ -96,7 +96,7 @@ namespace LibraryProgram
 
         public void PrintDeleteBook()
         {
-            Console.WriteLine("                                                           ");
+            Console.WriteLine("ESC: 뒤로가기                                               ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
@@ -120,7 +120,7 @@ namespace LibraryProgram
         public void InformBookList()
         {
             Console.WriteLine("=============================================================");
-            Console.WriteLine("                       B O O K L I S T                      ");
+            Console.WriteLine("ESC: 뒤로가기            B O O K L I S T                      ");
             Console.WriteLine("=============================================================");
             Console.WriteLine();
             Console.WriteLine();
@@ -132,7 +132,7 @@ namespace LibraryProgram
         public void InformMemberBook(string id)
         {
             Console.WriteLine("=============================================================");
-            Console.WriteLine("                       " + id + "님의 대출 내역                     ");
+            Console.WriteLine("ESC: 뒤로가기            " + id + "님의 대출 내역                     ");
             Console.WriteLine("=============================================================");
             Console.WriteLine();
             Console.WriteLine();

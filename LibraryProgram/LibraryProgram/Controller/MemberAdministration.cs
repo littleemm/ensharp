@@ -12,17 +12,15 @@ namespace LibraryProgram
         BasicViewElement viewElement;
         MenuSelection menuSelection;
         DatabaseMember databaseMember;
-        DatabaseMemberBook databaseMemberBook;
         MemberVO memberVO;
         Exception exception;
 
-        public MemberAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO, DatabaseMemberBook databaseMemberBook, Exception exception)
+        public MemberAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO, Exception exception)
         {
             memberViewElement = new MemberViewElement();
             this.viewElement = viewElement;
             this.menuSelection = menuSelection;
             this.databaseMember = databaseMember;
-            this.databaseMemberBook = databaseMemberBook;
             this.memberVO = memberVO;
             this.exception = exception;
         }
@@ -309,7 +307,7 @@ namespace LibraryProgram
                     PrintFalse(30, 13);
                 }
 
-                isMemberValue = databaseMemberBook.IsMemberCheckedOut(memberId, "memberId");
+                isMemberValue = DatabaseMemberBook.databaseMemberBook.IsMemberCheckedOut(memberId, "memberId");
                 if (isMemberValue == false)
                 {
                     memberViewElement.PrintDeleteWarningMessage(3, 11);

@@ -12,11 +12,10 @@ namespace LibraryProgram
         BasicViewElement viewElement;
         MenuSelection menuSelection;
         DatabaseBook databaseBook;
-        DatabaseMemberBook databaseMemberBook;
         BookVO bookVO;
         Exception exception;
 
-        public BookAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseBook databaseBook, DatabaseMemberBook databaseMemberBook, Exception exception)
+        public BookAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseBook databaseBook, Exception exception)
         {
             bookViewElement = new BookViewElement();
             bookVO = new BookVO("", "", "", "", "", "");
@@ -24,7 +23,6 @@ namespace LibraryProgram
             this.menuSelection = menuSelection;
             this.databaseBook = databaseBook;
             this.exception = exception;
-            this.databaseMemberBook = databaseMemberBook;
         }
 
         public void SelectBookAdministration()
@@ -34,7 +32,7 @@ namespace LibraryProgram
             string number = menuSelection.CheckMenuNumber(46, 23, Constant.ARRAY_FIVE);
             Console.Clear();
             switch(int.Parse(number))
-            {
+            { 
                 case Constant.REGISTRATION: 
                     {
                         RegisterBook();
@@ -311,7 +309,7 @@ namespace LibraryProgram
                     continue;
                 }
                 
-                isBookValue = databaseMemberBook.IsMemberCheckedOut(bookId, "bookId");
+                isBookValue = DatabaseMemberBook.databaseMemberBook.IsMemberCheckedOut(bookId, "bookId");
                 if (isBookValue == false)
                 {
                     bookViewElement.PrintDeleteWarningMessage(3, 11);

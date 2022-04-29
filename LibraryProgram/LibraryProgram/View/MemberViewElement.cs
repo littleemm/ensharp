@@ -136,7 +136,7 @@ namespace LibraryProgram
         public void InformMemberList()
         {
             Console.WriteLine("=============================================================");
-            Console.WriteLine("                     M E M B E R L I S T                      ");
+            Console.WriteLine("ESC: 뒤로가기        M E M B E R L I S T                      ");
             Console.WriteLine("=============================================================");
             Console.WriteLine();
             Console.WriteLine();

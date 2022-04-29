@@ -10,9 +10,10 @@ namespace LibraryProgram
     {
 
         BasicViewElement viewElement;
-
+        private ConsoleKeyInfo keyInfo;
         public MenuSelection(BasicViewElement viewElement)
         {
+            keyInfo = new ConsoleKeyInfo();
             this.viewElement = viewElement;
         }
 
@@ -38,6 +39,32 @@ namespace LibraryProgram
 
             return number;
         }
+        public string CheckMenuKey(int x, int y, string[] numberArray)
+        { // 키 체크
+            string number = "";
+            bool isMenuNumber = false;
+
+            while (isMenuNumber == false)
+            {
+                number = ScanMenuKey(x, y);
+                if (number == "0")
+                {
+                    return number;
+                }
+                isMenuNumber = IsMenuNumber(number, numberArray);
+
+                if (isMenuNumber == false)
+                {
+                    viewElement.ClearLine(1, x);
+                    Console.SetCursorPosition(x, y);
+                    viewElement.PrintWarningSentence(1, y - 2);
+                }
+            }
+
+            isMenuNumber = false;
+
+            return number;
+        }
 
         private string ScanMenuNumber(int x, int y) // 읽기
         {
@@ -46,6 +73,39 @@ namespace LibraryProgram
             Console.SetCursorPosition(x, y);
 
             number = Console.ReadLine();
+
+            return number;
+        }
+
+        private string ScanMenuKey(int x, int y) // 키 받을 함수
+        {
+            string number = "";
+            Console.SetCursorPosition(x, y);
+
+            while (keyInfo.Key != ConsoleKey.Enter)
+            {
+                keyInfo = Console.ReadKey(false);
+                if (keyInfo.Key != ConsoleKey.Backspace)
+                {
+                    number += keyInfo.KeyChar.ToString();
+                    Console.Write(number);
+                }
+                else if (keyInfo.Key == ConsoleKey.Backspace && number.Length > 0)
+                {
+                    number = number.Substring(0, (number.Length - 1));
+                    Console.Write("\b \b");
+                }
+                else if (keyInfo.Key == ConsoleKey.Escape)
+                {
+                    return "0";
+                }
+
+            }
+
+            if(number == "0")
+            {
+                ScanMenuKey(x, y);
+            }
 
             return number;
         }

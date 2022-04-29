@@ -10,11 +10,18 @@ namespace LibraryProgram
 {
     class DatabaseMemberBook
     {
+        static public DatabaseMemberBook databaseMemberBook = new DatabaseMemberBook();
         private MySqlConnection connection;
-        public DatabaseMemberBook()
+        private DatabaseMemberBook()
         {
             connection = new MySqlConnection(Constant.STRING_CONNECTION);
         }
+
+        public static DatabaseMemberBook getInstance()
+        {
+            return databaseMemberBook;
+        }
+
         public void SelectMemberBook(string memberId) // 자신이 빌린책 불러오기
         {
             connection.Open();

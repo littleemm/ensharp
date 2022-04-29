@@ -79,12 +79,12 @@ namespace LibraryProgram
             Console.Clear();
             switch (int.Parse(menuNumber))
             {
-                case (1):
+                case Constant.EXIT_REAL:
                     {
                         viewElement.PrintExit();
                         break;
                     }
-                case (2):
+                case Constant.GOBACK:
                     {
                         viewElement.PrintLibraryMain();
                         SelectMode();
@@ -100,12 +100,12 @@ namespace LibraryProgram
             Console.Clear();
             switch (int.Parse(menuNumber))
             {
-                case (1):
+                case Constant.EXIT_REAL:
                     {
                         viewElement.PrintExit();
                         break;
                     }
-                case (2):
+                case Constant.GOBACK:
                     {
                         SelectMemberMode();
                         break;

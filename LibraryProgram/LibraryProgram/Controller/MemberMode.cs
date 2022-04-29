@@ -14,16 +14,14 @@ namespace LibraryProgram
         MemberViewElement memberViewElement;
         DatabaseMember databaseMember;
         DatabaseBook databaseBook;
-        DatabaseMemberBook databaseMemberBook;
         Exception exception;
 
-        public MemberMode(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, DatabaseBook databaseBook, DatabaseMemberBook databaseMemberBook, Exception exception)
+        public MemberMode(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, DatabaseBook databaseBook, Exception exception)
         {
             this.viewElement = viewElement;
             this.menuSelection = menuSelection;
             this.databaseMember = databaseMember;
             this.databaseBook = databaseBook;
-            this.databaseMemberBook = databaseMemberBook;
             this.exception = exception;
 
             bookViewElement = new BookViewElement();
@@ -136,7 +134,7 @@ namespace LibraryProgram
                 bookId = Console.ReadLine();
                 viewElement.ClearLine(3, 25);
 
-                isBook = databaseMemberBook.IsBookId(bookId);
+                isBook = DatabaseMemberBook.databaseMemberBook.IsBookId(bookId);
                 if (isBook == false)
                 {
                     Console.SetCursorPosition(29, 3);
@@ -154,7 +152,7 @@ namespace LibraryProgram
                     viewElement.ClearLine(0, 33);
                     continue;
                 }
-                isBook = databaseMemberBook.IsBookCount(bookId);
+                isBook = DatabaseMemberBook.databaseMemberBook.IsBookCount(bookId);
                 if (isBook == false)
                 {
                     Console.SetCursorPosition(29, 3);
@@ -164,7 +162,7 @@ namespace LibraryProgram
                     continue;
                 }
 
-                isBook = databaseMemberBook.IsCheckedOutBook(bookId, id);
+                isBook = DatabaseMemberBook.databaseMemberBook.IsCheckedOutBook(bookId, id);
                 if (isBook == false)
                 {
                     Console.SetCursorPosition(29, 3);
@@ -175,7 +173,7 @@ namespace LibraryProgram
             }
 
             viewElement.ClearLineEasy(3, 29);
-            databaseMemberBook.InsertMemberBook(bookId, id);
+            DatabaseMemberBook.databaseMemberBook.InsertMemberBook(bookId, id);
 
             Console.SetCursorPosition(33, 3);
             bookViewElement.PrintCheckOutSuccessMessage(dueDate.ToString("yyyy-MM-dd"));
@@ -192,7 +190,7 @@ namespace LibraryProgram
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("==============================================================================");
-            databaseMemberBook.SelectMemberBook(id);
+            DatabaseMemberBook.databaseMemberBook.SelectMemberBook(id);
 
             while (isBook == false)
             {
@@ -200,7 +198,7 @@ namespace LibraryProgram
                 bookId = Console.ReadLine();
                 viewElement.ClearLine(3, 25);
 
-                isBook = databaseMemberBook.IsBookId(bookId);
+                isBook = DatabaseMemberBook.databaseMemberBook.IsBookId(bookId);
                 if (isBook == false)
                 {
                     Console.SetCursorPosition(29, 3);
@@ -224,7 +222,7 @@ namespace LibraryProgram
 
             while (isBook == true)
             {
-                isBook = databaseMemberBook.IsCheckedOutBook(bookId, id);
+                isBook = DatabaseMemberBook.databaseMemberBook.IsCheckedOutBook(bookId, id);
                 if (isBook == true)
                 {
                     Console.SetCursorPosition(29, 3);
@@ -240,7 +238,7 @@ namespace LibraryProgram
 
             viewElement.ClearLineEasy(3, 29);
 
-            databaseMemberBook.DeleteMemberBook(bookId, id);
+            DatabaseMemberBook.databaseMemberBook.DeleteMemberBook(bookId, id);
 
             Console.SetCursorPosition(33, 3);
             bookViewElement.PrintReturnSuccessMessage();

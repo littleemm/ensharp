@@ -13,10 +13,10 @@ namespace LibraryProgram
         BasicViewElement viewElement;
         MenuSelection menuSelection;
 
-        public AdministratorMode(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO, DatabaseBook databaseBook, DatabaseMemberBook databaseMemberBook, Exception exception)
+        public AdministratorMode(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO, DatabaseBook databaseBook, Exception exception)
         {
-            bookAdministration = new BookAdministration(viewElement, menuSelection, databaseBook, databaseMemberBook, exception);
-            memberAdministration = new MemberAdministration(viewElement, menuSelection, databaseMember, memberVO, databaseMemberBook, exception);
+            bookAdministration = new BookAdministration (viewElement, menuSelection, databaseBook, exception);
+            memberAdministration = new MemberAdministration(viewElement, menuSelection, databaseMember, memberVO, exception);
 
             this.viewElement = viewElement;
             this.menuSelection = menuSelection;
@@ -60,12 +60,12 @@ namespace LibraryProgram
             Console.Clear();
             switch (int.Parse(menuNumber))
             {
-                case (1):
+                case Constant.EXIT_REAL:
                     {
                         viewElement.PrintExit();
                         break;
                     }
-                case (2):
+                case Constant.GOBACK:
                     {
                         ShowAdministratorPage();
                         break;
