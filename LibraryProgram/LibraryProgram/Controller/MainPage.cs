@@ -24,6 +24,7 @@ namespace LibraryProgram
             basicViewElement = new BasicViewElement();
             databaseMember = new DatabaseMember();
             databaseBook = new DatabaseBook();
+            databaseMemberBook = new DatabaseMemberBook();
             exception = new Exception();
             menuSelection = new MenuSelection(basicViewElement);
             loginSystem = new LoginSystem(basicViewElement, menuSelection, databaseMember, memberVO, databaseBook, databaseMemberBook, exception);

@@ -220,12 +220,17 @@ namespace LibraryProgram
             Console.ResetColor();
         }
 
-
         public void ClearLine(int line, int width)
         {
             Console.SetCursorPosition(width, Console.CursorTop - line);
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(0, Console.CursorTop - line);
+        }
+
+        public void ClearLineEasy(int line, int width)
+        {
+            Console.SetCursorPosition(width, line);
+            ClearLine(0, line);
         }
 
         public void ClearButtomLine(int line, int againLine)

@@ -50,6 +50,7 @@ namespace LibraryProgram
             }
 
             isMemberValue = false;
+            viewElement.ClearLineEasy(12, 5);
 
             while (isMemberValue == false)
             {
@@ -64,6 +65,7 @@ namespace LibraryProgram
             }
 
             isMemberValue = false;
+            viewElement.ClearLineEasy(12, 5);
 
             while (isMemberValue == false)
             {
@@ -78,6 +80,7 @@ namespace LibraryProgram
             }
 
             isMemberValue = false;
+            viewElement.ClearLineEasy(12, 5);
 
             while (isMemberValue == false)
             {
@@ -92,6 +95,7 @@ namespace LibraryProgram
             }
 
             isMemberValue = false;
+            viewElement.ClearLineEasy(12, 5);
 
             while (isMemberValue == false)
             {
@@ -106,6 +110,7 @@ namespace LibraryProgram
             }
 
             isMemberValue = false;
+            viewElement.ClearLineEasy(12, 5);
 
             while (isMemberValue == false)
             {

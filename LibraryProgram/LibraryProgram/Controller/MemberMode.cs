@@ -134,6 +134,15 @@ namespace LibraryProgram
                     viewElement.ClearLine(0, 33);
                     continue;
                 }
+                isBook = exception.IsBookId(bookId);
+                if (isBook == false)
+                {
+                    Console.SetCursorPosition(29, 3);
+                    bookViewElement.PrintBookIdFailMessage();
+                    Console.SetCursorPosition(33, 6);
+                    viewElement.ClearLine(0, 33);
+                    continue;
+                }
                 isBook = databaseMemberBook.IsBookCount(bookId);
                 if (isBook == false)
                 {
@@ -154,6 +163,7 @@ namespace LibraryProgram
                 }
             }
 
+            viewElement.ClearLineEasy(3, 29);
             databaseMemberBook.InsertMemberBook(bookId, id);
 
             Console.SetCursorPosition(33, 3);
@@ -187,7 +197,19 @@ namespace LibraryProgram
                     Console.SetCursorPosition(33, 6);
                     viewElement.ClearLine(0, 33);
                 }
+
+                isBook = exception.IsBookId(bookId);
+                if (isBook == false)
+                {
+                    Console.SetCursorPosition(29, 3);
+                    bookViewElement.PrintBookIdFailMessage();
+                    Console.SetCursorPosition(33, 6);
+                    viewElement.ClearLine(0, 33);
+                    continue;
+                }
             }
+
+            viewElement.ClearLineEasy(3, 29);
 
             while (isBook == true)
             {
@@ -196,7 +218,6 @@ namespace LibraryProgram
                 {
                     Console.SetCursorPosition(29, 3);
                     bookViewElement.PrintBookIdFailMessage();
-                    Console.WriteLine("hi");
                     Console.SetCursorPosition(33, 6);
                     viewElement.ClearLine(0, 33);
 
@@ -205,7 +226,8 @@ namespace LibraryProgram
                     viewElement.ClearLine(3, 25);
                 }
             }
-              
+
+            viewElement.ClearLineEasy(3, 29);
 
             databaseMemberBook.DeleteMemberBook(bookId, id);
 
@@ -218,13 +240,51 @@ namespace LibraryProgram
             memberViewElement.PrintEditMember();
             memberViewElement.PrintEditMineForm();
 
-            string address, number;
+            string address = "", number = "";
+            bool isMemberValue = false;
 
-            Console.SetCursorPosition(30, 13);
-            address = Console.ReadLine();
+            while (isMemberValue == false)
+            {
+                Console.SetCursorPosition(30, 13);
+                address = Console.ReadLine();
 
-            Console.SetCursorPosition(30, 15);
-            number = Console.ReadLine();
+                if (address.Length == 0)
+                {
+                    break;
+                }
+
+                isMemberValue = exception.IsAddress(address);
+                if (isMemberValue == false)
+                {
+                    viewElement.PrintWarningSentence(8, 11);
+                    Console.SetCursorPosition(30, 13);
+                    viewElement.ClearLine(0, 30);
+                }
+            }
+
+            isMemberValue = false;
+            viewElement.ClearLineEasy(11, 8);
+
+            while (isMemberValue == false)
+            {
+                Console.SetCursorPosition(30, 15);
+                number = Console.ReadLine();
+
+                if (number.Length == 0)
+                {
+                    break;
+                }
+
+                isMemberValue = exception.IsPhoneNumber(number);
+                if (isMemberValue == false)
+                {
+                    viewElement.PrintWarningSentence(8, 11);
+                    Console.SetCursorPosition(30, 13);
+                    viewElement.ClearLine(0, 30);
+                }
+            }
+
+            viewElement.ClearLineEasy(11, 8);
 
             if (address.Length > 0 || number.Length > 0)
             {

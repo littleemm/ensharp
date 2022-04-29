@@ -191,7 +191,7 @@ namespace LibraryProgram
         {
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("                [성공적으로 삭제되었습니다.]");
+            Console.WriteLine("              [성공적으로 삭제되었습니다.]");
             Console.ResetColor();
             Console.WriteLine();
         }
@@ -236,7 +236,7 @@ namespace LibraryProgram
         {
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("                  [Book ID를 다시 입력하세요.]");
+            Console.WriteLine("                 [Book ID를 다시 입력하세요.]");
             Console.ResetColor();
             Console.WriteLine();
         }
@@ -255,7 +255,7 @@ namespace LibraryProgram
             Console.WriteLine();
             Console.SetCursorPosition(x, y);
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("               [대출중인 책은 삭제가 불가합니다.]");
+            Console.WriteLine("           [대출중인 책은 삭제가 불가합니다.]");
             Console.ResetColor();
             Console.WriteLine();
         }

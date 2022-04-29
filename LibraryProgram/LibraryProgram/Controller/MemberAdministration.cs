@@ -96,6 +96,7 @@ namespace LibraryProgram
                 }
             }
 
+            viewElement.ClearLineEasy(11, 6);
             isMemberValue = false;
 
             while (isMemberValue == false)
@@ -110,6 +111,7 @@ namespace LibraryProgram
                 }
             }
 
+            viewElement.ClearLineEasy(11, 6);
             isMemberValue = false;
 
             while (isMemberValue == false)
@@ -124,6 +126,7 @@ namespace LibraryProgram
                 }
             }
 
+            viewElement.ClearLineEasy(11, 6);
             isMemberValue = false;
 
             while (isMemberValue == false)
@@ -138,6 +141,7 @@ namespace LibraryProgram
                 }
             }
 
+            viewElement.ClearLineEasy(11, 6);
             isMemberValue = false;
 
             while (isMemberValue == false)
@@ -152,6 +156,7 @@ namespace LibraryProgram
                 }
             }
 
+            viewElement.ClearLineEasy(11, 6);
             isMemberValue = false;
 
             while (isMemberValue == false)
@@ -202,6 +207,7 @@ namespace LibraryProgram
             }
 
             isMemberValue = false;
+            viewElement.ClearLineEasy(11, 6);
 
             while (isMemberValue == false)
             {
@@ -221,6 +227,7 @@ namespace LibraryProgram
             }
 
             isMemberValue = false;
+            viewElement.ClearLineEasy(11, 6);
 
             while (isMemberValue == false)
             {
@@ -238,6 +245,8 @@ namespace LibraryProgram
                     PrintFalse(30, 17);
                 }
             }
+
+            viewElement.ClearLineEasy(11, 6);
 
             if (memberAddress.Length > 0 || memberNumber.Length > 0)
             {
@@ -284,7 +293,7 @@ namespace LibraryProgram
                 isMemberValue = databaseMemberBook.IsMemberCheckedOut(memberId, "memberId");
                 if (isMemberValue == false)
                 {
-                    memberViewElement.PrintDeleteWarningMessage(20, 10);
+                    memberViewElement.PrintDeleteWarningMessage(3, 11);
                     Console.SetCursorPosition(30, 13);
                     viewElement.ClearLine(0, 30);
                 }

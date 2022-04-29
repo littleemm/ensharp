@@ -98,6 +98,7 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
+            viewElement.ClearLineEasy(10, 25);
 
             while (isBookValue == false)
             {
@@ -112,6 +113,7 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
+            viewElement.ClearLineEasy(10, 25);
 
             while (isBookValue == false)
             {
@@ -126,6 +128,7 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
+            viewElement.ClearLineEasy(10, 25);
 
             while (isBookValue == false)
             {
@@ -140,6 +143,7 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
+            viewElement.ClearLineEasy(10, 25);
 
             while (isBookValue == false)
             {
@@ -154,6 +158,7 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
+            viewElement.ClearLineEasy(10, 25);
 
             while (isBookValue == false)
             {
@@ -203,6 +208,7 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
+            viewElement.ClearLineEasy(10, 25);
 
             while (isBookValue == false)
             {
@@ -222,6 +228,7 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
+            viewElement.ClearLineEasy(10, 25);
 
             while (isBookValue == false)
             {
@@ -282,11 +289,11 @@ namespace LibraryProgram
                     PrintFalse(30, 13);
                     continue;
                 }
-
+                
                 isBookValue = databaseMemberBook.IsMemberCheckedOut(bookId, "bookId");
                 if (isBookValue == false)
                 {
-                    bookViewElement.PrintDeleteWarningMessage(25, 10);
+                    bookViewElement.PrintDeleteWarningMessage(3, 11);
                     Console.SetCursorPosition(30, 13);
                     viewElement.ClearLine(0, 30);
                 }
