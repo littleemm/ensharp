@@ -53,7 +53,7 @@ namespace LibraryProgram
             Console.WriteLine();
             Console.WriteLine("                                                           ");
             Console.WriteLine("                                                           ");
-            Console.WriteLine("             ID (5자 이내, 숫자)   : ");
+            Console.WriteLine("         ID (5자 이내, 양의 정수)  : ");
             Console.WriteLine();
             Console.WriteLine("               NAME (20자 이내)    : ");
             Console.WriteLine();
@@ -237,6 +237,15 @@ namespace LibraryProgram
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("                  [Book ID를 다시 입력하세요.]");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+
+        public void PrintWarningMessage()
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("                [조건에 맞춰 다시 입력하세요!]");
             Console.ResetColor();
             Console.WriteLine();
         }

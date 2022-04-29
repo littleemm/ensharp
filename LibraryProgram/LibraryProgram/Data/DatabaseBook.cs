@@ -184,13 +184,13 @@ namespace LibraryProgram
                 {
                     dataReader.Close();
                     connection.Close();
-                    return false;
+                    return true;
                 }
             }
 
             dataReader.Close();
             connection.Close();
-            return true;
+            return false;
         }
     }
 }

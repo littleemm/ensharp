@@ -196,6 +196,14 @@ namespace LibraryProgram
             Console.WriteLine("                                                           ");
         }
 
+        public void PrintSameDataSentence(int x, int y)
+        {
+            Console.SetCursorPosition(x, y);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("           [이미 존재하는 아이디입니다.]              ");
+            Console.ResetColor();
+        }
+
         public void PrintWarningSentence(int x, int y)
         {
             Console.SetCursorPosition(x, y);

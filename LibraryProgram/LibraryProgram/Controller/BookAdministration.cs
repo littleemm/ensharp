@@ -79,30 +79,91 @@ namespace LibraryProgram
                 bookVO.Id = Console.ReadLine();
                 isBookValue = databaseBook.IsBookId(bookVO.Id);
 
-                if (isBookValue == false)
+                if (isBookValue == true)
                 {
-                    Console.SetCursorPosition(25, 10);
-                    bookViewElement.PrintBookIdFailMessage();
+                    viewElement.PrintSameDataSentence(25, 10);
                     Console.SetCursorPosition(37, 13);
-                    viewElement.ClearLine(0, 37);
+                    viewElement.ClearLine(0, 13);
+                    isBookValue = false;
+                    continue;
+                }
+
+                isBookValue = exception.IsBookId(bookVO.Id);
+                if (isBookValue  == false)
+                {
+                    PrintFalse(37, 13);
                 }
             }
-            
 
-            Console.SetCursorPosition(37, 15);
-            bookVO.Name = Console.ReadLine();
+            isBookValue = false;
 
-            Console.SetCursorPosition(37, 17);
-            bookVO.Author = Console.ReadLine();
+            while (isBookValue == false)
+            {
+                Console.SetCursorPosition(37, 15);
+                bookVO.Name = Console.ReadLine();
+                
+                isBookValue = exception.IsBookName(bookVO.Name);
+                if (isBookValue == false)
+                {
+                    PrintFalse(37, 15);
+                }
+            }
 
-            Console.SetCursorPosition(37, 19); 
-            bookVO.Publisher = Console.ReadLine();
+            isBookValue = false;
 
-            Console.SetCursorPosition(37, 21);
-            bookVO.Price = Console.ReadLine();
+            while (isBookValue == false)
+            {
+                Console.SetCursorPosition(37, 17);
+                bookVO.Author = Console.ReadLine();
+                
+                isBookValue = exception.IsBookAuthor(bookVO.Author);
+                if (isBookValue == false)
+                {
+                    PrintFalse(37, 17);
+                }
+            }
 
-            Console.SetCursorPosition(37, 23);
-            bookVO.Quantity = Console.ReadLine();
+            isBookValue = false;
+
+            while (isBookValue == false)
+            {
+                Console.SetCursorPosition(37, 19);
+                bookVO.Publisher = Console.ReadLine();
+                
+                isBookValue = exception.IsBookPublisher(bookVO.Publisher);
+                if (isBookValue == false)
+                {
+                    PrintFalse(37, 19);
+                }
+            }
+
+            isBookValue = false;
+
+            while (isBookValue == false)
+            {
+                Console.SetCursorPosition(37, 21);
+                bookVO.Price = Console.ReadLine();
+
+                isBookValue = exception.IsPrice(bookVO.Price);
+                if (isBookValue == false)
+                {
+                    PrintFalse(37, 21);
+                }
+            }
+
+            isBookValue = false;
+
+            while (isBookValue == false)
+            {
+                Console.SetCursorPosition(37, 23);
+                bookVO.Quantity = Console.ReadLine();
+
+                isBookValue = exception.IsQuantity(bookVO.Quantity);
+                if (isBookValue == false)
+                {
+                    PrintFalse(37, 23);
+                }
+            }
 
             databaseBook.InsertBook(bookVO);
             bookViewElement.PrintRegistrationSuccessMessage();
@@ -112,17 +173,70 @@ namespace LibraryProgram
         {
             bookViewElement.PrintEditBook();
             bookViewElement.PrintEditBookForm();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("==============================================================================");
+            databaseBook.SelectBookList();
 
-            string bookId, bookPrice, bookQuantity;
+            string bookId = "", bookPrice = "", bookQuantity = "";
+            bool isBookValue = false;
 
-            Console.SetCursorPosition(30, 13);
-            bookId = Console.ReadLine();
+            while (isBookValue == false)
+            {
+                Console.SetCursorPosition(30, 13);
+                bookId = Console.ReadLine();
+                isBookValue = databaseBook.IsBookId(bookId);
 
-            Console.SetCursorPosition(30, 15);
-            bookPrice = Console.ReadLine();
+                if (isBookValue == false)
+                {
+                    PrintFalse(30, 13);
+                    continue;
+                }
 
-            Console.SetCursorPosition(30, 17);
-            bookQuantity = Console.ReadLine();
+                isBookValue = exception.IsBookId(bookId);
+                if (isBookValue == false)
+                {
+                    PrintFalse(30, 13);
+                }
+            }
+
+            isBookValue = false;
+
+            while (isBookValue == false)
+            {
+                Console.SetCursorPosition(30, 15);
+                bookPrice = Console.ReadLine();
+
+                if(bookPrice.Length == 0)
+                {
+                    break;
+                }
+
+                isBookValue = exception.IsPrice(bookPrice);
+                if (isBookValue == false)
+                {
+                    PrintFalse(30, 15);
+                }
+            }
+
+            isBookValue = false;
+
+            while (isBookValue == false)
+            {
+                Console.SetCursorPosition(30, 17);
+                bookQuantity = Console.ReadLine();
+
+                if (bookQuantity.Length == 0)
+                {
+                    break;
+                }
+
+                isBookValue = exception.IsQuantity(bookQuantity);
+                if (isBookValue == false)
+                {
+                    PrintFalse(30, 17);
+                }
+            }
 
             if (bookPrice.Length > 0 || bookQuantity.Length > 0)
             {
@@ -140,10 +254,32 @@ namespace LibraryProgram
         {
             bookViewElement.PrintDeleteBook();
             bookViewElement.PrintBookIdForm();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("==============================================================================");
+            databaseBook.SelectBookList();
 
-            string bookId;
-            Console.SetCursorPosition(30, 13);
-            bookId = Console.ReadLine();
+            string bookId = "";
+            bool isBookValue = false;
+
+            while (isBookValue == false)
+            {
+                Console.SetCursorPosition(30, 13);
+                bookId = Console.ReadLine();
+                isBookValue = databaseBook.IsBookId(bookId);
+
+                if (isBookValue == false)
+                {
+                    PrintFalse(30, 13);
+                    continue;
+                }
+
+                isBookValue = exception.IsBookId(bookId);
+                if (isBookValue == false)
+                {
+                    PrintFalse(30, 13);
+                }
+            }
 
             databaseBook.DeleteBook(bookId);
             bookViewElement.PrintDeleteSuccessMessage();
@@ -175,6 +311,14 @@ namespace LibraryProgram
             Console.WriteLine("==============================================================================");
             databaseBook.SelectBookList();
             Console.SetCursorPosition(0, 0);
+        }
+
+        private void PrintFalse(int x, int y)
+        {
+            Console.SetCursorPosition(25, 10);
+            bookViewElement.PrintWarningMessage();
+            Console.SetCursorPosition(x, y);
+            viewElement.ClearLine(0, x);
         }
     }
 }

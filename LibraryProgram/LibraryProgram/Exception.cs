@@ -9,13 +9,8 @@ namespace LibraryProgram
 {
     class Exception
     {
-        Regex regex;
         string pattern;
         string patternAfter;
-        public Exception()
-        {
-
-        }
 
         public bool IsBookId(string bookId) // bookid 예외
         {
@@ -37,8 +32,11 @@ namespace LibraryProgram
 
         public bool IsBookName(string bookName) // 책제목 예외
         {
-            pattern = @"^[a-zA-Z가-힣.,+#]{1,20}$";
-
+            pattern = @"^[a-zA-Z가-힣0-9.,+#%@$&()-!?\s]{1,20}$";
+            if (IsWhiteSpace(bookName) == false)
+            {
+                return false;
+            }
             if (Regex.IsMatch(bookName, pattern))
             {
                 return true;
@@ -49,8 +47,13 @@ namespace LibraryProgram
 
         public bool IsBookAuthor(string bookAuthor) // 저자 예외
         {
-            pattern = @"^[a-zA-Z가-힣,]{1,15}$";
-            
+            pattern = @"^[a-zA-Z가-힣,.\s]{1,15}$";
+
+            if (IsWhiteSpace(bookAuthor) == false)
+            {
+                return false;
+            }
+
             if (Regex.IsMatch(bookAuthor, pattern))
             {
                 return true;
@@ -61,8 +64,13 @@ namespace LibraryProgram
 
         public bool IsBookPublisher(string bookPublisher) // 출판사 예외
         {
-            pattern = @"^[a-zA-Z가-힣#()]{1,10}$";
-            
+            pattern = @"^[a-zA-Z가-힣0-9#()\s]{1,10}$";
+
+            if (IsWhiteSpace(bookPublisher) == false)
+            {
+                return false;
+            }
+
             if (Regex.IsMatch(bookPublisher, pattern))
             {
                 return true;
@@ -104,7 +112,7 @@ namespace LibraryProgram
 
         public bool IsMemberId(string memberId) // 회원 아이디
         {
-            pattern = @"^[a-zA-Z0-9]{1,8}*$";
+            pattern = @"^[a-zA-Z0-9]{1,8}$";
             
             if (Regex.IsMatch(memberId, pattern))
             {
@@ -127,7 +135,12 @@ namespace LibraryProgram
 
         public bool IsMemberName(string name) // 이름 예외처리
         {
-            pattern = @"^[가-힣]{2,10}$";
+            pattern = @"^[가-힣\s]{2,10}$";
+
+            if (IsWhiteSpace(name) == false)
+            {
+                return false;
+            }
 
             if (Regex.IsMatch(name, pattern))
             {
@@ -172,31 +185,41 @@ namespace LibraryProgram
 
         public bool IsAddress(string address) // 주소 예외처리
         {
-            switch(address.Length)
+            if (IsWhiteSpace(address) == false)
             {
-                case (6):
-                    {
-                        return IsAddressFor6(address);
-                    }
-                case (7):
-                    {
-                        return IsAddressFor7(address);
-                    }
-                case (8):
-                    {
-                        return IsAddressFor8(address);
-                    }
-                default:
-                    {
-                        return false;
-                    }
+                return false;
             }
+
+            pattern = @"^[가-힣\s]{6,8}$";
+
+            if (Regex.IsMatch(address, pattern))
+            {
+                switch (address.Length)
+                {
+                    case (6):
+                        {
+                            return IsAddressFor6(address);
+                        }
+                    case (7):
+                        {
+                            return IsAddressFor7(address);
+                        }
+                    case (8):
+                        {
+                            return IsAddressFor8(address);
+                        }
+                }
+            }
+
+
+            return false;
+            
         }
 
         private bool IsAddressFor6(string address) // 서울시 중구
         {
             pattern = @"^[가-힣]{2}시$";
-            patternAfter = @"^[가-힣]{2}구$";
+            patternAfter = @"^[가-힣]{1}구$";
             if (Regex.IsMatch(address.Substring(0, 3), pattern) && Regex.IsMatch(address.Substring(4), patternAfter))
             {
                 return true;
@@ -207,11 +230,27 @@ namespace LibraryProgram
 
         private bool IsAddressFor7(string address) // 서울시 광진구, 경기도 부천시, 세종시 연서면, 세종시 도담동, 대구시 달성군
         {
-            pattern = @"^[가-힣]{2}시|도$";
-            patternAfter = @"^[가-힣]{2}구|시|군|면|동$";
-            if (Regex.IsMatch(address.Substring(0, 3), pattern) && Regex.IsMatch(address.Substring(4), patternAfter))
+            string[] addressAfter = { "구", "시", "군", "면", "동" };
+
+            pattern = @"^[가-힣]{2}시$";
+
+            for (int i = 0; i < addressAfter.Length; i++)
             {
-                return true;
+                patternAfter = @"^[가-힣]{2}" + addressAfter[i] + "$";
+                if (Regex.IsMatch(address.Substring(0, 3), pattern) && Regex.IsMatch(address.Substring(4), patternAfter))
+                {
+                    return true;
+                }
+            }
+            pattern = @"^[가-힣]{2}도$";
+
+            for (int i = 0; i < addressAfter.Length; i++)
+            {
+                patternAfter = @"^[가-힣]{2}" + addressAfter[i] + "$";
+                if (Regex.IsMatch(address.Substring(0, 3), pattern) && Regex.IsMatch(address.Substring(4), patternAfter))
+                {
+                    return true;
+                }
             }
 
             return false;
@@ -219,21 +258,39 @@ namespace LibraryProgram
 
         private bool IsAddressFor8(string address) // 서울시 영등포구, 세종시 조치원읍, 경기도 남양주시, 충청북도 괴산군 
         {
-            pattern = @"^[가-힣]{2}시|도$";
-            patternAfter = @"^[가-힣]{3}구|시|군|읍|면|동$";
-            if (Regex.IsMatch(address.Substring(0, 3), pattern) && Regex.IsMatch(address.Substring(4), patternAfter))
+            string[] addressAfter = { "구", "시", "군", "읍", "면", "동" };
+            pattern = @"^[가-힣]{2}시$";
+
+            for (int i = 0; i < addressAfter.Length; i++)
             {
-                return true;
+                patternAfter = @"^[가-힣]{2}" + addressAfter[i] + "$";
+                if (Regex.IsMatch(address.Substring(0, 3), pattern) && Regex.IsMatch(address.Substring(4), patternAfter))
+                {
+                    return true;
+                }
             }
 
             pattern = @"^[가-힣]{3}도$";
-            patternAfter = @"^[가-힣]{2}시|군|읍|면|동$";
-            if (Regex.IsMatch(address.Substring(0, 4), pattern) && Regex.IsMatch(address.Substring(5), patternAfter))
+
+            for (int i = 0; i < addressAfter.Length; i++)
             {
-                return true;
+                patternAfter = @"^[가-힣]{2}" + addressAfter[i] + "$";
+                if (Regex.IsMatch(address.Substring(0, 4), pattern) && Regex.IsMatch(address.Substring(5), patternAfter))
+                {
+                    return true;
+                }
             }
 
             return false;
+        }
+
+        private bool IsWhiteSpace(string input)
+        {
+            if (String.IsNullOrWhiteSpace(input))
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

@@ -107,7 +107,7 @@ namespace LibraryProgram
             Console.WriteLine();
             Console.WriteLine("                  ADDRESS   : ");
             Console.WriteLine();
-            Console.WriteLine("               PHONE NUMBER : ");
+            Console.WriteLine("               PHONE NUMBER :  ");
             Console.WriteLine();
         }
 
@@ -174,6 +174,15 @@ namespace LibraryProgram
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("                [성공적으로 삭제되었습니다.]");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+
+        public void PrintWarningMessage()
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("                [조건에 맞춰 다시 입력하세요!]");
             Console.ResetColor();
             Console.WriteLine();
         }

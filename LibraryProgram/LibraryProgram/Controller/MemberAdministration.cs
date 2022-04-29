@@ -70,25 +70,100 @@ namespace LibraryProgram
         private void RegisterMember()
         {
             memberViewElement.PrintRegistration();
+            bool isMemberValue = false;
 
-            Console.SetCursorPosition(40, 13);
-            memberVO.Id = Console.ReadLine();
+            while (isMemberValue == false)
+            {
+                Console.SetCursorPosition(40, 13);
+                memberVO.Id = Console.ReadLine();
+                isMemberValue = databaseMember.IsMemberId(memberVO.Id);
 
-            Console.SetCursorPosition(40, 15);
-            memberVO.Password = Console.ReadLine();
+                if (isMemberValue == true)
+                {
+                    viewElement.PrintSameDataSentence(6, 11);
+                    Console.SetCursorPosition(40, 13);
+                    viewElement.ClearLine(0, 40);
+                    isMemberValue = false;
+                    continue;
+                }
 
-            Console.SetCursorPosition(40, 17);
-            memberVO.Name = Console.ReadLine();
+                isMemberValue = exception.IsMemberId(memberVO.Id);
+                if (isMemberValue == false)
+                {
+                    PrintFalse(40, 13);
+                }
+            }
 
-            Console.SetCursorPosition(40, 19);
-            memberVO.Age = Console.ReadLine();
+            isMemberValue = false;
 
-            Console.SetCursorPosition(40, 21);
-            memberVO.PhoneNumber = Console.ReadLine();
+            while (isMemberValue == false)
+            {
+                Console.SetCursorPosition(40, 15);
+                memberVO.Password = Console.ReadLine();
 
-            Console.SetCursorPosition(40, 23);
-            memberVO.Address = Console.ReadLine();
+                isMemberValue = exception.IsPassword(memberVO.Password);
+                if (isMemberValue == false)
+                {
+                    PrintFalse(40, 15);
+                }
+            }
 
+            isMemberValue = false;
+
+            while (isMemberValue == false)
+            {
+                Console.SetCursorPosition(40, 17);
+                memberVO.Name = Console.ReadLine();
+
+                isMemberValue = exception.IsMemberName(memberVO.Name);
+                if (isMemberValue == false)
+                {
+                    PrintFalse(40, 17);
+                }
+            }
+
+            isMemberValue = false;
+
+            while (isMemberValue == false)
+            {
+                Console.SetCursorPosition(40, 19);
+                memberVO.Age = Console.ReadLine();
+
+                isMemberValue = exception.IsAge(memberVO.Age);
+                if (isMemberValue == false)
+                {
+                    PrintFalse(40, 19);
+                }
+            }
+
+            isMemberValue = false;
+
+            while (isMemberValue == false)
+            {
+                Console.SetCursorPosition(40, 21);
+                memberVO.PhoneNumber = Console.ReadLine();
+
+                isMemberValue = exception.IsPhoneNumber(memberVO.PhoneNumber);
+                if (isMemberValue == false)
+                {
+                    PrintFalse(40, 21);
+                }
+            }
+
+            isMemberValue = false;
+
+            while (isMemberValue == false)
+            {
+                Console.SetCursorPosition(40, 23);
+                memberVO.Address = Console.ReadLine();
+
+                isMemberValue = exception.IsAddress(memberVO.Address);
+                if (isMemberValue == false)
+                {
+                    PrintFalse(40, 23);
+                }
+            }
+            
             databaseMember.InsertMember(memberVO);
             memberViewElement.PrintRegistrationSuccessMessage();
         }
@@ -97,17 +172,70 @@ namespace LibraryProgram
         {
             memberViewElement.PrintEditMember();
             memberViewElement.PrintEditMemberForm();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("==============================================================================");
+            databaseMember.SelectMemberList();
 
-            string memberId, memberAddress, memberNumber;
+            string memberId = "", memberAddress = "", memberNumber = "";
+            bool isMemberValue = false;
 
-            Console.SetCursorPosition(30, 13);
-            memberId = Console.ReadLine();
+            while (isMemberValue == false)
+            {
+                Console.SetCursorPosition(30, 13);
+                memberId = Console.ReadLine();
+                isMemberValue = databaseMember.IsMemberId(memberId);
 
-            Console.SetCursorPosition(30, 15);
-            memberAddress = Console.ReadLine();
+                if (isMemberValue == false)
+                {
+                    PrintFalse(30, 13);
+                    continue;
+                }
 
-            Console.SetCursorPosition(30, 17);
-            memberNumber = Console.ReadLine();
+                isMemberValue = exception.IsMemberId(memberId);
+                if (isMemberValue == false)
+                {
+                    PrintFalse(30, 13);
+                }
+            }
+
+            isMemberValue = false;
+
+            while (isMemberValue == false)
+            {
+                Console.SetCursorPosition(30, 15);
+                memberAddress = Console.ReadLine();
+
+                if (memberAddress.Length == 0)
+                {
+                    break;
+                }
+
+                isMemberValue = exception.IsAddress(memberAddress);
+                if (isMemberValue == false)
+                {
+                    PrintFalse(30, 15);
+                }
+            }
+
+            isMemberValue = false;
+
+            while (isMemberValue == false)
+            {
+                Console.SetCursorPosition(30, 17);
+                memberNumber = Console.ReadLine();
+
+                if (memberNumber.Length == 0)
+                {
+                    break;
+                }
+
+                isMemberValue = exception.IsPhoneNumber(memberNumber);
+                if (isMemberValue == false)
+                {
+                    PrintFalse(30, 17);
+                }
+            }
 
             if (memberAddress.Length > 0 || memberNumber.Length > 0)
             {
@@ -126,11 +254,33 @@ namespace LibraryProgram
         {
             memberViewElement.PrintDeleteMember();
             memberViewElement.PrintDeleteMemberForm();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("==============================================================================");
+            databaseMember.SelectMemberList();
 
-            string memberId;
-            Console.SetCursorPosition(30, 13);
-            memberId = Console.ReadLine();
+            string memberId = "";
+            bool isMemberValue = false;
 
+            while (isMemberValue == false)
+            {
+                Console.SetCursorPosition(30, 13);
+                memberId = Console.ReadLine();
+                isMemberValue = databaseMember.IsMemberId(memberId);
+
+                if (isMemberValue == false)
+                {
+                    PrintFalse(30, 13);
+                    continue;
+                }
+
+                isMemberValue = exception.IsMemberId(memberId);
+                if (isMemberValue == false)
+                {
+                    PrintFalse(30, 13);
+                }
+            }
+            
             databaseMember.DeleteMember(memberId);
             memberViewElement.PrintDeleteSuccessMessage();
         }
@@ -163,6 +313,14 @@ namespace LibraryProgram
             Console.WriteLine("==============================================================================");
             databaseMember.SelectMemberList();
             Console.SetCursorPosition(0, 0);
+        }
+
+        private void PrintFalse(int x, int y)
+        {
+            Console.SetCursorPosition(20, 10);
+            memberViewElement.PrintWarningMessage();
+            Console.SetCursorPosition(x, y);
+            viewElement.ClearLine(0, x);
         }
     }
 }
