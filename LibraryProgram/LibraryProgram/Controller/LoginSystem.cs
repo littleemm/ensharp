@@ -15,7 +15,6 @@ namespace LibraryProgram
         MemberMode memberMode;
         BasicViewElement viewElement;
         DatabaseMember databaseMember;
-        DatabaseMemberBook databaseMemberBook;
 
         public LoginSystem(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO, DatabaseBook databaseBook, DatabaseMemberBook databaseMemberBook, Exception exception)
         {
@@ -29,34 +28,33 @@ namespace LibraryProgram
         public void LoginAdministratorMode()
         {
             Console.Clear();
+            bool isIdAndPassword = Constant.ID_AND_PW_UNCORRECT_NOW;
             viewElement.PrintLoginPage();
-            while (Constant.ID_AND_PW_UNCORRECT) {
+            while (isIdAndPassword == Constant.ID_AND_PW_UNCORRECT_NOW) {
 
                 LoginAll();
-
-                if (id == "AD1" && password == "1234")
+                isIdAndPassword = databaseMember.SelectMember(Constant.SELECT_QUERY_ADMIN, id, password);
+                if (isIdAndPassword == Constant.ID_AND_PW_UNCORRECT_NOW)
                 {
-                    administratorMode.ShowAdministratorPage();
-                    break;
+                    viewElement.ClearLine(0, 37);
+                    Console.SetCursorPosition(37, 14);
+                    viewElement.ClearLine(0, 37);
+                    viewElement.PrintLoginWarning(2, 12);
                 }
-
-                viewElement.ClearLine(0, 37);
-                Console.SetCursorPosition(37, 14);
-                viewElement.ClearLine(0, 37);
-                viewElement.PrintLoginWarning(2, 12);
             }
+            administratorMode.ShowAdministratorPage();
         }
 
-        public void LoginMemberMode() // database
+        public void LoginMemberMode() 
         {
             Console.Clear();
-            bool isIdAndPassword = false;
+            bool isIdAndPassword = Constant.ID_AND_PW_UNCORRECT_NOW;
             viewElement.PrintLoginPage();
-            while (isIdAndPassword == false)
+            while (isIdAndPassword == Constant.ID_AND_PW_UNCORRECT_NOW)
             {
                 LoginAll();
-                isIdAndPassword = databaseMember.SelectMember(id, password);
-                if (isIdAndPassword == false)/////
+                isIdAndPassword = databaseMember.SelectMember(Constant.SELECT_QUERY_MEMBER, id, password);
+                if (isIdAndPassword == Constant.ID_AND_PW_UNCORRECT_NOW)// 아이디 비밀번호 틀렸을 경우 <- 매직넘버 처리 
                 {
                     viewElement.ClearLine(0, 37);
                     Console.SetCursorPosition(37, 14);
@@ -77,7 +75,7 @@ namespace LibraryProgram
             Console.SetCursorPosition(37, 16);
             password = "";
 
-            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true); // 비밀번호 *처리
             while (keyInfo.Key != ConsoleKey.Enter)
             {
                 if (keyInfo.Key != ConsoleKey.Backspace && keyInfo.Key != ConsoleKey.Enter)

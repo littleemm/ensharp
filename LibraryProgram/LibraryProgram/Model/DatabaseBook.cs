@@ -10,17 +10,16 @@ namespace LibraryProgram
 {
     class DatabaseBook
     {
-        private static string stringConnection = "Server=localhost;Database=김영림_library;Uid=root;Pwd=0000;charset=utf8;";
         private static MySqlConnection connection;
 
         public DatabaseBook()
         {
-            connection = new MySqlConnection(stringConnection);
+            connection = new MySqlConnection(Constant.STRING_CONNECTION);
         }
 
         public void InsertBook(BookVO bookVO) // 등록
         {
-            string query = "INSERT INTO book(id, name, author, publisher, price, quantity)" +
+            string query = Constant.INSERT_QUERY_BOOK +
                 "Value('" + bookVO.Id + "', '" + bookVO.Name + "', '" + bookVO.Author + "', '" +
                 bookVO.Publisher + "', '" + bookVO.Price + "', '" + bookVO.Quantity + "');";
 
@@ -38,17 +37,17 @@ namespace LibraryProgram
 
             if (price.Length > 0 && quantity.Length > 0)
             {
-                query = "UPDATE book SET price = '" + price + "', " +
+                query = Constant.UPDATE_QUERY_BOOK + "SET price = '" + price + "', " +
                     "quantity = '" + quantity + "' WHERE id = '" + id + "';";
             }
             if (price.Length > 0 && quantity.Length == 0)
             {
-                query = "UPDATE book SET price = '" + price +
+                query = Constant.UPDATE_QUERY_BOOK + "SET price = '" + price +
                     "' WHERE id = '" + id + "';";
             }
             if (price.Length == 0 && quantity.Length > 0)
             {
-                query = "UPDATE book SET quantity = '" + quantity +
+                query = Constant.UPDATE_QUERY_BOOK + "SET quantity  = '" + quantity +
                     "' WHERE id = '" + id + "';";
             }
 
@@ -63,7 +62,7 @@ namespace LibraryProgram
 
         public void DeleteBook(string id) // 도서 삭제
         {
-            string query = "DELETE FROM book WHERE id = '" + id + "';";
+            string query = Constant.DELETE_QUERY_BOOK + "WHERE id = '" + id + "';";
 
             connection.Open();
 
@@ -78,8 +77,6 @@ namespace LibraryProgram
         {
             connection.Open();
 
-            string query = "SELECT * FROM book";
-
             List<string>[] element = new List<string>[6];
 
             for (int index = 0; index < element.Length; index++)
@@ -87,7 +84,7 @@ namespace LibraryProgram
                 element[index] = new List<string>();
             }
 
-            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_BOOK, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
             while (dataReader.Read())
@@ -143,9 +140,8 @@ namespace LibraryProgram
         public void SelectBookList()
         {
             connection.Open();
-            string query = "SELECT * FROM book";
-
-            MySqlCommand command = new MySqlCommand(query, connection);
+            
+            MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_BOOK, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
             while (dataReader.Read())
@@ -165,12 +161,11 @@ namespace LibraryProgram
 
         public bool IsBookId(string bookId)
         {
-            string query = "SELECT * FROM book";
             connection.Open();
 
             List<string> element = new List<string>();
 
-            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_BOOK, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
             while (dataReader.Read())

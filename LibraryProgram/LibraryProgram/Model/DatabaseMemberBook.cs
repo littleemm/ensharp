@@ -10,16 +10,14 @@ namespace LibraryProgram
 {
     class DatabaseMemberBook
     {
-        private static string stringConnection = "Server=localhost;Database=김영림_library;Uid=root;Pwd=0000;charset=utf8;";
         private MySqlConnection connection;
         public DatabaseMemberBook()
         {
-            connection = new MySqlConnection(stringConnection);
+            connection = new MySqlConnection(Constant.STRING_CONNECTION);
         }
         public void SelectMemberBook(string memberId) // 자신이 빌린책 불러오기
         {
             connection.Open();
-            string query = "SELECT * FROM memberbook";
 
             List<string>[] element = new List<string>[7];
 
@@ -28,7 +26,7 @@ namespace LibraryProgram
                 element[index] = new List<string>();
             }
 
-            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_MEMBERBOOK, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
             while (dataReader.Read())
@@ -62,7 +60,6 @@ namespace LibraryProgram
 
         public void InsertMemberBook(string bookId, string memberId) // 대출하기
         {
-            string query = "SELECT * FROM book";
             string bookName = "", bookPublisher = "";
 
             connection.Open();
@@ -74,7 +71,7 @@ namespace LibraryProgram
                 element[index] = new List<string>();
             }
 
-            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_BOOK, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
             while (dataReader.Read())
@@ -105,7 +102,7 @@ namespace LibraryProgram
             DateTime today = DateTime.Today;
             DateTime due = today.AddDays(7);
 
-            string query = "INSERT INTO memberbook(memberId, bookId, bookName, bookPublisher, checkOutDate, dueDate)" +
+            string query = Constant.INSERT_QUERY_MEMBERBOOK +
             "Value('" + memberId + "', '" + bookId + "', '" + bookName + "', '" + bookPublisher + "', '" +
             today.ToString("yyyy-MM-dd") + "', '" + due.ToString("yyyy-MM-dd") + "');";
 
@@ -124,8 +121,7 @@ namespace LibraryProgram
         public bool DeleteMemberBook(string bookId, string memberId) // 반납하기
         {
             connection.Open();
-            string query = "SELECT * FROM memberbook";
-
+            
             List<string>[] element = new List<string>[7];
 
             for (int index = 0; index < element.Length; index++)
@@ -133,7 +129,7 @@ namespace LibraryProgram
                 element[index] = new List<string>();
             }
 
-            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_MEMBERBOOK, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
             while (dataReader.Read())
@@ -149,7 +145,7 @@ namespace LibraryProgram
             {
                 if (element[0][i].Equals(memberId) && element[1][i].Equals(bookId))
                 {
-                    query = "DELETE FROM memberbook WHERE id = '" + element[2][i] + "';";
+                    string query = Constant.DELETE_QUERY_MEMBERBOOK + "WHERE id = '" + element[2][i] + "';";
                     command = new MySqlCommand(query, connection);
                     MySqlDataReader memberbookDataReader = command.ExecuteReader();
 
@@ -171,12 +167,11 @@ namespace LibraryProgram
 
         public bool IsBookId(string bookId) // 존재하는 bookId인지 확인
         {
-            string query = "SELECT * FROM book";
             connection.Open();
 
             List<string> element = new List<string>();
 
-            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_BOOK, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
             while (dataReader.Read())
@@ -201,7 +196,6 @@ namespace LibraryProgram
 
         public bool IsBookCount(string bookId) // 남아있는 권수 확인 (book에서)
         {
-            string query = "SELECT * FROM book";
             connection.Open();
 
             List<string>[] element = new List<string>[2];
@@ -211,7 +205,7 @@ namespace LibraryProgram
                 element[index] = new List<string>();
             }
 
-            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_BOOK, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
             while (dataReader.Read())
@@ -237,7 +231,6 @@ namespace LibraryProgram
 
         public bool IsCheckedOutBook(string bookId, string memberId) // 원래 빌렸던 책인지 확인 (memberBook에서)
         {
-            string query = "SELECT * FROM memberBook";
             connection.Open();
 
             List<string>[] element = new List<string>[2];
@@ -247,7 +240,7 @@ namespace LibraryProgram
                 element[index] = new List<string>();
             }
 
-            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_MEMBERBOOK, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
             while (dataReader.Read())
@@ -274,7 +267,6 @@ namespace LibraryProgram
         private void UpdateBookCount(string memberId, string condition) // 자신이 빌린 책의 권수 조정
         {
             int bookCount;
-            string query = "SELECT * FROM member";
 
             connection.Open();
             List<string>[] element = new List<string>[2];
@@ -284,7 +276,7 @@ namespace LibraryProgram
                 element[index] = new List<string>();
             }
 
-            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_MEMBER, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
             while (dataReader.Read())
@@ -295,13 +287,15 @@ namespace LibraryProgram
 
             dataReader.Close();
 
+            string query = "";
+
             for (int i = 0; i < element[1].Count; i++)
             {
                 if (element[1][i].Equals(memberId) && condition.Equals("CheckOut"))
                 { // 대출하는 경우
                     bookCount = int.Parse(element[0][i]);
                     bookCount++;
-                    query = "UPDATE member SET bookCount = '" + bookCount.ToString() +
+                    query = Constant.UPDATE_QUERY_MEMBER + "SET bookCount = '" + bookCount.ToString() +
                   "' WHERE id = '" + memberId + "';";
                     break;
                 }
@@ -310,7 +304,7 @@ namespace LibraryProgram
                 { // 반납하는 경우
                     bookCount = int.Parse(element[0][i]);
                     bookCount--;
-                    query = "UPDATE member SET bookCount = '" + bookCount.ToString() +
+                    query = Constant.UPDATE_QUERY_MEMBER + "SET bookCount = '" + bookCount.ToString() +
                   "' WHERE id = '" + memberId + "';";
                     break;
                 }
@@ -326,7 +320,6 @@ namespace LibraryProgram
         private void UpdateBookQuantity(string bookId, string condition) // 책의 잔여 수량 조정
         {
             int quantity;
-            string query = "SELECT * FROM book";
 
             connection.Open();
             List<string>[] element = new List<string>[2];
@@ -336,7 +329,7 @@ namespace LibraryProgram
                 element[index] = new List<string>();
             }
 
-            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_BOOK, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
             while (dataReader.Read())
@@ -347,13 +340,15 @@ namespace LibraryProgram
 
             dataReader.Close();
 
+            string query = "";
+
             for (int i = 0; i < element[1].Count; i++)
             {
                 if (element[1][i].Equals(bookId) && condition.Equals("CheckOut"))
                 { // 대출하는 경우
                     quantity = int.Parse(element[0][i]);
                     quantity--;
-                    query = "UPDATE book SET quantity = '" + quantity.ToString() +
+                    query = Constant.UPDATE_QUERY_BOOK + "SET quantity = '" + quantity.ToString() +
                   "' WHERE id = '" + bookId + "';";
                     break;
                 }
@@ -362,7 +357,7 @@ namespace LibraryProgram
                 { // 반납하는 경우
                     quantity = int.Parse(element[0][i]);
                     quantity++;
-                    query = "UPDATE book SET quantity = '" + quantity.ToString() +
+                    query = Constant.UPDATE_QUERY_BOOK + "SET quantity = '" + quantity.ToString() +
                   "' WHERE id = '" + bookId + "';";
                     break;
                 }
@@ -377,12 +372,11 @@ namespace LibraryProgram
 
         public bool IsMemberCheckedOut(string memberOrBookId, string id) // 빌린 내역 확인
         {
-            string query = "SELECT * FROM memberBook";
             connection.Open();
 
             List<string> element = new List<string>();
 
-            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_MEMBERBOOK, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
             while (dataReader.Read())

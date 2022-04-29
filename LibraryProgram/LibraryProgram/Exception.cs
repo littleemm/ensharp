@@ -14,6 +14,11 @@ namespace LibraryProgram
 
         public bool IsBookId(string bookId) // bookid 예외
         {
+            if(IsCtrlZ(bookId) == false)
+            {
+                return false;
+            }
+
             if (bookId.Equals("0"))
             {
                 return false;
@@ -32,6 +37,11 @@ namespace LibraryProgram
 
         public bool IsBookName(string bookName) // 책제목 예외
         {
+            if (IsCtrlZ(bookName) == false)
+            {
+                return false;
+            }
+
             pattern = @"^[a-zA-Z가-힣0-9.,+#%@$&()-!?\s]{1,20}$";
             if (IsWhiteSpace(bookName) == false)
             {
@@ -47,6 +57,10 @@ namespace LibraryProgram
 
         public bool IsBookAuthor(string bookAuthor) // 저자 예외
         {
+            if (IsCtrlZ(bookAuthor) == false)
+            {
+                return false;
+            }
             pattern = @"^[a-zA-Z가-힣,.\s]{1,15}$";
 
             if (IsWhiteSpace(bookAuthor) == false)
@@ -64,6 +78,10 @@ namespace LibraryProgram
 
         public bool IsBookPublisher(string bookPublisher) // 출판사 예외
         {
+            if (IsCtrlZ(bookPublisher) == false)
+            {
+                return false;
+            }
             pattern = @"^[a-zA-Z가-힣0-9#()\s]{1,10}$";
 
             if (IsWhiteSpace(bookPublisher) == false)
@@ -81,6 +99,10 @@ namespace LibraryProgram
 
         public bool IsPrice(string price) // 책 가격
         {
+            if (IsCtrlZ(price) == false)
+            {
+                return false;
+            }
             if (price.Equals("0"))
             {
                 return false;
@@ -98,6 +120,10 @@ namespace LibraryProgram
 
         public bool IsQuantity(string quantity) // 책 수량
         {
+            if (IsCtrlZ(quantity) == false)
+            {
+                return false;
+            }
             pattern = @"^[0-9]{1,5}$";
 
             if (Regex.IsMatch(quantity, pattern))
@@ -112,6 +138,10 @@ namespace LibraryProgram
 
         public bool IsMemberId(string memberId) // 회원 아이디
         {
+            if (IsCtrlZ(memberId) == false)
+            {
+                return false;
+            }
             pattern = @"^[a-zA-Z0-9]{1,8}$";
             
             if (Regex.IsMatch(memberId, pattern))
@@ -123,6 +153,10 @@ namespace LibraryProgram
 
         public bool IsPassword(string password) // 비밀번호 예외처리
         {
+            if (IsCtrlZ(password) == false)
+            {
+                return false;
+            }
             pattern = @"^[0-9]{2,5}$";
 
             if (Regex.IsMatch(password, pattern))
@@ -135,6 +169,10 @@ namespace LibraryProgram
 
         public bool IsMemberName(string name) // 이름 예외처리
         {
+            if (IsCtrlZ(name) == false)
+            {
+                return false;
+            }
             pattern = @"^[가-힣\s]{2,10}$";
 
             if (IsWhiteSpace(name) == false)
@@ -152,6 +190,10 @@ namespace LibraryProgram
 
         public bool IsAge(string age) // 나이 예외처리, 0~150세
         {
+            if (IsCtrlZ(age) == false)
+            {
+                return false;
+            }
             pattern = @"^[0-9]{1,3}$";
             if (Regex.IsMatch(age, pattern))
             {
@@ -173,6 +215,10 @@ namespace LibraryProgram
 
         public bool IsPhoneNumber(string phoneNumber) // 휴대전화 예외처리
         {
+            if (IsCtrlZ(phoneNumber) == false)
+            {
+                return false;
+            }
             pattern = @"^01[0-9]{9}$"; // 01XXXXXXXXX 형태로
 
             if (Regex.IsMatch(phoneNumber, pattern))
@@ -185,6 +231,10 @@ namespace LibraryProgram
 
         public bool IsAddress(string address) // 주소 예외처리
         {
+            if (IsCtrlZ(address) == false)
+            {
+                return false;
+            }
             if (IsWhiteSpace(address) == false)
             {
                 return false;
@@ -297,8 +347,17 @@ namespace LibraryProgram
 
         private bool IsWhiteSpace(string input)
         {
-            if (String.IsNullOrWhiteSpace(input))
+            if (string.IsNullOrWhiteSpace(input))
             {
+                return false;
+            }
+            return true;
+        }
+
+        private bool IsCtrlZ(string input)
+        {
+            if (string.IsNullOrEmpty(input?.Trim()))
+            { // ctrl + z 체크
                 return false;
             }
             return true;

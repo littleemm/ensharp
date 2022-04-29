@@ -10,18 +10,16 @@ namespace LibraryProgram
 {
     class DatabaseMember
     {
-        private static string stringConnection = "Server=localhost;Database=김영림_library;Uid=root;Pwd=0000;charset=utf8;";
         private MySqlConnection connection;
         public DatabaseMember()
         {
-            connection = new MySqlConnection(stringConnection);
+            connection = new MySqlConnection(Constant.STRING_CONNECTION);
         }
-
-        public bool SelectMember(string id, string pw) // 불러오기
+       
+        public bool SelectMember(string query, string id, string password) // 불러오기
         {
             connection.Open();
-            string query = "SELECT * FROM member";
-
+            
             List<string>[] element = new List<string>[2];
 
             for (int index = 0; index < element.Length; index++)
@@ -42,14 +40,11 @@ namespace LibraryProgram
             {
                 if (element[0][i].Equals(id))
                 {
-                    for (int j = 0; j < element[1].Count; j++)
-                    {
-                        if (element[1][i].Equals(pw))
-                        {
-                            dataReader.Close();
-                            connection.Close();
-                            return true;
-                        }
+                    if (element[0][i].Equals(id) && element[1][i].Equals(password))
+                {
+                        dataReader.Close();
+                        connection.Close();
+                        return true;
                     }
                 }
             }
@@ -62,7 +57,7 @@ namespace LibraryProgram
 
         public void InsertMember(MemberVO memberVO) // 등록
         {
-            string query = "INSERT INTO member(id, password, name, age, phoneNumber, address, bookCount)" +
+            string query = Constant.INSERT_QUERY_MEMBER +
                 "Value('" +  memberVO.Id + "', '" + memberVO.Password + "', '" + memberVO.Name + "', '" +
                 memberVO.Age + "', '" + memberVO.PhoneNumber + "', '" + memberVO.Address + "', '" + "0');";
 
@@ -80,17 +75,17 @@ namespace LibraryProgram
 
             if (phoneNumber.Length > 0 && address.Length > 0)
             {
-                query = "UPDATE member SET phoneNumber = '" + phoneNumber + "', " +
+                query = Constant.UPDATE_QUERY_MEMBER + "SET phoneNumber = '" + phoneNumber + "', " +
                     "address = '" + address + "' WHERE id = '" + id + "';";
             }
             if (phoneNumber.Length > 0 && address.Length == 0)
             {
-                query = "UPDATE member SET phoneNumber = '" + phoneNumber +
+                query = Constant.UPDATE_QUERY_MEMBER + "SET phoneNumber = '" + phoneNumber +
                     "' WHERE id = '" + id + "';";
             }
             if (phoneNumber.Length == 0 && address.Length > 0)
             {
-                query = "UPDATE member SET address = '" + address +
+                query = Constant.UPDATE_QUERY_MEMBER + "SET address = '" + address +
                     "' WHERE id = '" + id + "';";
             }
 
@@ -105,7 +100,7 @@ namespace LibraryProgram
 
         public void DeleteMember(string id) // 회원 삭제
         {
-            string query = "DELETE FROM member WHERE id = '" + id + "';";
+            string query = Constant.DELETE_QUERY_MEMBER + "WHERE id = '" + id + "';";
 
             connection.Open();
 
@@ -120,8 +115,6 @@ namespace LibraryProgram
         {
             connection.Open();
 
-            string query = "SELECT * FROM member";
-
             List<string>[] element = new List<string>[6];
 
             for (int index = 0; index < element.Length; index++)
@@ -129,7 +122,7 @@ namespace LibraryProgram
                 element[index] = new List<string>();
             }
 
-            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_MEMBER, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
             while (dataReader.Read())
@@ -163,9 +156,8 @@ namespace LibraryProgram
         public void SelectMemberList()
         {
             connection.Open();
-            string query = "SELECT * FROM member";
 
-            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_MEMBER, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
             while (dataReader.Read())
@@ -185,12 +177,11 @@ namespace LibraryProgram
 
         public bool IsMemberId(string memberId)
         {
-            string query = "SELECT * FROM member";
             connection.Open();
 
             List<string> element = new List<string>();
 
-            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_MEMBER, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
             while (dataReader.Read())
