@@ -263,7 +263,18 @@ namespace LibraryProgram
 
             for (int i = 0; i < addressAfter.Length; i++)
             {
-                patternAfter = @"^[가-힣]{2}" + addressAfter[i] + "$";
+                patternAfter = @"^[가-힣]{3}" + addressAfter[i] + "$";
+                if (Regex.IsMatch(address.Substring(0, 3), pattern) && Regex.IsMatch(address.Substring(4), patternAfter))
+                {
+                    return true;
+                }
+            }
+
+            pattern = @"^[가-힣]{2}도$";
+
+            for (int i = 0; i < addressAfter.Length; i++)
+            {
+                patternAfter = @"^[가-힣]{3}" + addressAfter[i] + "$";
                 if (Regex.IsMatch(address.Substring(0, 3), pattern) && Regex.IsMatch(address.Substring(4), patternAfter))
                 {
                     return true;

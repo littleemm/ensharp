@@ -189,9 +189,8 @@ namespace LibraryProgram
 
         public void PrintDeleteSuccessMessage()
         {
-            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("              [성공적으로 삭제되었습니다.]");
+            Console.WriteLine("               [성공적으로 삭제되었습니다.]");
             Console.ResetColor();
             Console.WriteLine();
         }

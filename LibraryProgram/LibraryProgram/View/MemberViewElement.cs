@@ -68,9 +68,8 @@ namespace LibraryProgram
 
         public void PrintRegistrationSuccessMessage()
         {
-            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("                  [성공적으로 등록되었습니다.]");
+            Console.WriteLine("                 [성공적으로 등록되었습니다.]");
             Console.ResetColor();
             Console.WriteLine();
         }
@@ -153,7 +152,6 @@ namespace LibraryProgram
 
         public void PrintEditSuccessMessage()
         {
-            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("                [성공적으로 수정되었습니다.]");
             Console.ResetColor();
@@ -162,7 +160,6 @@ namespace LibraryProgram
 
         public void PrintEditFailMessage()
         {
-            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("                 [수정 내용이 없습니다!]");
             Console.ResetColor();
@@ -171,9 +168,8 @@ namespace LibraryProgram
 
         public void PrintDeleteSuccessMessage()
         {
-            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("              [성공적으로 삭제되었습니다.]");
+            Console.WriteLine("                [성공적으로 삭제되었습니다.]");
             Console.ResetColor();
             Console.WriteLine();
         }

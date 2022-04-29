@@ -256,14 +256,14 @@ namespace LibraryProgram
                 isMemberValue = exception.IsAddress(address);
                 if (isMemberValue == false)
                 {
-                    viewElement.PrintWarningSentence(8, 11);
+                    viewElement.PrintWarningSentence(2, 11);
                     Console.SetCursorPosition(30, 13);
                     viewElement.ClearLine(0, 30);
                 }
             }
 
             isMemberValue = false;
-            viewElement.ClearLineEasy(11, 8);
+            viewElement.ClearLineEasy(11, 2);
 
             while (isMemberValue == false)
             {
@@ -278,17 +278,18 @@ namespace LibraryProgram
                 isMemberValue = exception.IsPhoneNumber(number);
                 if (isMemberValue == false)
                 {
-                    viewElement.PrintWarningSentence(8, 11);
+                    viewElement.PrintWarningSentence(2, 11);
                     Console.SetCursorPosition(30, 13);
                     viewElement.ClearLine(0, 30);
                 }
             }
 
-            viewElement.ClearLineEasy(11, 8);
+            viewElement.ClearLineEasy(11, 2);
 
             if (address.Length > 0 || number.Length > 0)
             {
                 databaseMember.UpdateMember(address, number, id);
+                Console.SetCursorPosition(1, 11);
                 memberViewElement.PrintEditSuccessMessage();
             }
 

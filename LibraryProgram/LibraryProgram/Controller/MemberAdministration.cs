@@ -170,7 +170,8 @@ namespace LibraryProgram
                     PrintFalse(40, 23);
                 }
             }
-            
+
+            viewElement.ClearLineEasy(11, 6);
             databaseMember.InsertMember(memberVO);
             memberViewElement.PrintRegistrationSuccessMessage();
         }
@@ -300,7 +301,8 @@ namespace LibraryProgram
 
 
             }
-            
+
+            viewElement.ClearLineEasy(11, 3);
             databaseMember.DeleteMember(memberId);
             memberViewElement.PrintDeleteSuccessMessage();
         }

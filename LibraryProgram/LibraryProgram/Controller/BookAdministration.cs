@@ -172,6 +172,8 @@ namespace LibraryProgram
                 }
             }
 
+            viewElement.ClearLineEasy(11, 8);
+
             databaseBook.InsertBook(bookVO);
             bookViewElement.PrintRegistrationSuccessMessage();
         }
@@ -246,6 +248,7 @@ namespace LibraryProgram
                     PrintFalse(30, 17);
                 }
             }
+            viewElement.ClearLineEasy(10, 25);
 
             if (bookPrice.Length > 0 || bookQuantity.Length > 0)
             {
@@ -299,6 +302,7 @@ namespace LibraryProgram
                 }
             }
 
+            viewElement.ClearLineEasy(11, 3);
             databaseBook.DeleteBook(bookId);
             bookViewElement.PrintDeleteSuccessMessage();
         }

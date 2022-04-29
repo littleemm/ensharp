@@ -123,7 +123,7 @@ namespace LibraryProgram
                     PrintFalse(41, 25);
                 }
             }
-
+            viewElement.ClearLineEasy(12, 5);
             databaseMember.InsertMember(memberVO);
 
         }
