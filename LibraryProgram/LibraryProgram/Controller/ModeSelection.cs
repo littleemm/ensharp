@@ -35,13 +35,12 @@ namespace LibraryProgram
                     }
                 case Constant.MEMBER_MODE:
                     {
-                        viewElement.PrintMemberPage();
                         SelectMemberMode();
                         break;
                     }
                 case Constant.EXIT:
                     {
-                        viewElement.PrintExit();
+                        AskExit();
                         break;
                     }
             }
@@ -49,6 +48,7 @@ namespace LibraryProgram
 
         private void SelectMemberMode()
         {
+            viewElement.PrintMemberPage();
             string menuNumber = menuSelection.CheckMenuNumber(46, 22, Constant.ARRAY_THREE);
             Console.Clear();
             switch (int.Parse(menuNumber))
@@ -66,8 +66,48 @@ namespace LibraryProgram
                     }
                 case Constant.EXIT:
                     {
-                        Console.Clear();
+                        AskExitMember();
+                        break;
+                    }
+            }
+        }
+
+        private void AskExit()
+        {
+            viewElement.PrintExitForm();
+            string menuNumber = menuSelection.CheckMenuNumber(46, 21, Constant.ARRAY_TWO);
+            Console.Clear();
+            switch (int.Parse(menuNumber))
+            {
+                case (1):
+                    {
                         viewElement.PrintExit();
+                        break;
+                    }
+                case (2):
+                    {
+                        viewElement.PrintLibraryMain();
+                        SelectMode();
+                        break;
+                    }
+            }
+        }
+
+        private void AskExitMember()
+        {
+            viewElement.PrintExitForm();
+            string menuNumber = menuSelection.CheckMenuNumber(46, 21, Constant.ARRAY_TWO);
+            Console.Clear();
+            switch (int.Parse(menuNumber))
+            {
+                case (1):
+                    {
+                        viewElement.PrintExit();
+                        break;
+                    }
+                case (2):
+                    {
+                        SelectMemberMode();
                         break;
                     }
             }

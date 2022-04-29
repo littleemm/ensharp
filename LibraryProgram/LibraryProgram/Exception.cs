@@ -246,21 +246,20 @@ namespace LibraryProgram
             {
                 switch (address.Length)
                 {
-                    case (6):
+                    case (Constant.ADDRESS_LENGTH_IS_6):
                         {
                             return IsAddressFor6(address);
                         }
-                    case (7):
+                    case (Constant.ADDRESS_LENGTH_IS_7):
                         {
                             return IsAddressFor7(address);
                         }
-                    case (8):
+                    case (Constant.ADDRESS_LENGTH_IS_8):
                         {
                             return IsAddressFor8(address);
                         }
                 }
             }
-
 
             return false;
             

@@ -47,7 +47,27 @@ namespace LibraryProgram
                     }
                 case Constant.EXIT: 
                     {
+                        AskExit();
+                        break;
+                    }
+            }
+        }
+
+        private void AskExit()
+        {
+            viewElement.PrintExitForm();
+            string menuNumber = menuSelection.CheckMenuNumber(46, 21, Constant.ARRAY_TWO);
+            Console.Clear();
+            switch (int.Parse(menuNumber))
+            {
+                case (1):
+                    {
                         viewElement.PrintExit();
+                        break;
+                    }
+                case (2):
+                    {
+                        ShowAdministratorPage();
                         break;
                     }
             }

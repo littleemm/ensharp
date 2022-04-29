@@ -204,6 +204,34 @@ namespace LibraryProgram
             Console.WriteLine("                                                           ");
         }
 
+        public void PrintExitForm()
+        {
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("           *                 *                 *            ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine(" *                  *                  *                  * ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("                        ARE YOU SURE ?                      ");
+            Console.WriteLine("                             T_T                           ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine(" *                  *                  *                  * ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("           *                 *                 *            ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("                           1. YES                          ");
+            Console.WriteLine("                           2. NO                           ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine("           *                 *                 *            ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine(" *                  *                  *                  * ");
+            Console.WriteLine("                                                           ");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("          원하시는 기능의 번호를 입력하세요 :                  ");
+            Console.WriteLine();
+            Console.WriteLine("                                                            ");
+        }
+
         public void PrintSameDataSentence(int x, int y)
         {
             Console.SetCursorPosition(x, y);
