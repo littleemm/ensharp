@@ -13,14 +13,16 @@ namespace LibraryProgram
         MenuSelection menuSelection;
         DatabaseBook databaseBook;
         BookVO bookVO;
+        Exception exception;
 
-        public BookAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseBook databaseBook)
+        public BookAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseBook databaseBook, Exception exception)
         {
             bookViewElement = new BookViewElement();
             bookVO = new BookVO("", "", "", "", "", "");
             this.viewElement = viewElement;
             this.menuSelection = menuSelection;
             this.databaseBook = databaseBook;
+            this.exception = exception;
         }
 
         public void SelectBookAdministration()
@@ -73,7 +75,7 @@ namespace LibraryProgram
 
             while (isBookValue == false)
             {
-                Console.SetCursorPosition(31, 13);
+                Console.SetCursorPosition(37, 13);
                 bookVO.Id = Console.ReadLine();
                 isBookValue = databaseBook.IsBookId(bookVO.Id);
 
@@ -81,25 +83,25 @@ namespace LibraryProgram
                 {
                     Console.SetCursorPosition(25, 10);
                     bookViewElement.PrintBookIdFailMessage();
-                    Console.SetCursorPosition(31, 13);
-                    viewElement.ClearLine(0, 31);
+                    Console.SetCursorPosition(37, 13);
+                    viewElement.ClearLine(0, 37);
                 }
             }
             
 
-            Console.SetCursorPosition(31, 15);
+            Console.SetCursorPosition(37, 15);
             bookVO.Name = Console.ReadLine();
 
-            Console.SetCursorPosition(31, 17);
+            Console.SetCursorPosition(37, 17);
             bookVO.Author = Console.ReadLine();
 
-            Console.SetCursorPosition(31, 19); 
+            Console.SetCursorPosition(37, 19); 
             bookVO.Publisher = Console.ReadLine();
 
-            Console.SetCursorPosition(31, 21);
+            Console.SetCursorPosition(37, 21);
             bookVO.Price = Console.ReadLine();
 
-            Console.SetCursorPosition(31, 23);
+            Console.SetCursorPosition(37, 23);
             bookVO.Quantity = Console.ReadLine();
 
             databaseBook.InsertBook(bookVO);

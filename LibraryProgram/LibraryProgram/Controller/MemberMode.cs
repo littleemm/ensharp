@@ -15,13 +15,15 @@ namespace LibraryProgram
         DatabaseMember databaseMember;
         DatabaseBook databaseBook;
         DatabaseMemberBook databaseMemberBook;
+        Exception exception;
 
-        public MemberMode(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, DatabaseBook databaseBook)
+        public MemberMode(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, DatabaseBook databaseBook, Exception exception)
         {
             this.viewElement = viewElement;
             this.menuSelection = menuSelection;
             this.databaseMember = databaseMember;
             this.databaseBook = databaseBook;
+            this.exception = exception;
 
             bookViewElement = new BookViewElement();
             memberViewElement = new MemberViewElement();

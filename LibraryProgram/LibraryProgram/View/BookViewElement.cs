@@ -53,17 +53,17 @@ namespace LibraryProgram
             Console.WriteLine();
             Console.WriteLine("                                                           ");
             Console.WriteLine("                                                           ");
-            Console.WriteLine("                        ID   : ");
+            Console.WriteLine("             ID (5자 이내, 숫자)   : ");
             Console.WriteLine();
-            Console.WriteLine("                       NAME  : ");
+            Console.WriteLine("               NAME (20자 이내)    : ");
             Console.WriteLine();
-            Console.WriteLine("                      AUTHOR : ");
+            Console.WriteLine("              AUTHOR (15자 이내)   : ");
             Console.WriteLine();
-            Console.WriteLine("                   PUBLISHER : ");
+            Console.WriteLine("           PUBLISHER (10자 이내)   : ");
             Console.WriteLine();
-            Console.WriteLine("                      PRICE  : ");
-            Console.WriteLine();
-            Console.WriteLine("                    QUANTITY : ");
+            Console.WriteLine("       PRICE (7자 이내, 양의 정수) : ");
+            Console.WriteLine(); 
+            Console.WriteLine("        QUANTITY (5자 이내, 숫자)  : ");
             Console.WriteLine();
         }
 
@@ -126,6 +126,8 @@ namespace LibraryProgram
             Console.WriteLine();
 
         }
+
+
 
         public void InformMemberBook(string id)
         {

@@ -13,13 +13,13 @@ namespace LibraryProgram
         MenuSelection menuSelection;
         FormOfSignUp formOfSignUp;
 
-        public ModeSelection(MenuSelection menuSelection, LoginSystem loginPage, BasicViewElement viewElement, MemberVO memberVO, DatabaseMember databaseMember)
+        public ModeSelection(MenuSelection menuSelection, LoginSystem loginPage, BasicViewElement viewElement, MemberVO memberVO, DatabaseMember databaseMember, Exception exception)
         {
             this.viewElement = viewElement;
             this.loginPage = loginPage;
             this.menuSelection = menuSelection;
 
-            formOfSignUp = new FormOfSignUp(viewElement, memberVO, databaseMember);
+            formOfSignUp = new FormOfSignUp(viewElement, memberVO, databaseMember, exception);
         }
         
         public void SelectMode()

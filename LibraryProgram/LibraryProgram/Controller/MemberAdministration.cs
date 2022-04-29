@@ -13,14 +13,16 @@ namespace LibraryProgram
         MenuSelection menuSelection;
         DatabaseMember databaseMember;
         MemberVO memberVO;
+        Exception exception;
 
-        public MemberAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO)
+        public MemberAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO, Exception exception)
         {
             memberViewElement = new MemberViewElement();
             this.viewElement = viewElement;
             this.menuSelection = menuSelection;
             this.databaseMember = databaseMember;
             this.memberVO = memberVO;
+            this.exception = exception;
         }
 
         public void SelectMemberAdministration()

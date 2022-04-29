@@ -15,6 +15,7 @@ namespace LibraryProgram
         DatabaseMember databaseMember;
         DatabaseBook databaseBook;
         MemberVO memberVO;
+        Exception exception;
 
         public MainPage()
         {
@@ -22,10 +23,10 @@ namespace LibraryProgram
             basicViewElement = new BasicViewElement();
             databaseMember = new DatabaseMember();
             databaseBook = new DatabaseBook();
+            exception = new Exception();
             menuSelection = new MenuSelection(basicViewElement);
-            loginSystem = new LoginSystem(basicViewElement, menuSelection, databaseMember, memberVO, databaseBook);
-            modeSelection = new ModeSelection(menuSelection, loginSystem, basicViewElement, memberVO, databaseMember);
-          
+            loginSystem = new LoginSystem(basicViewElement, menuSelection, databaseMember, memberVO, databaseBook, exception);
+            modeSelection = new ModeSelection(menuSelection, loginSystem, basicViewElement, memberVO, databaseMember, exception);
         }
 
         public void ShowMainPage()

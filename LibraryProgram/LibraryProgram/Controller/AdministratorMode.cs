@@ -13,10 +13,10 @@ namespace LibraryProgram
         BasicViewElement viewElement;
         MenuSelection menuSelection;
 
-        public AdministratorMode(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO, DatabaseBook databaseBook)
+        public AdministratorMode(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO, DatabaseBook databaseBook, Exception exception)
         {
-            bookAdministration = new BookAdministration(viewElement, menuSelection, databaseBook);
-            memberAdministration = new MemberAdministration(viewElement, menuSelection, databaseMember, memberVO);
+            bookAdministration = new BookAdministration(viewElement, menuSelection, databaseBook, exception);
+            memberAdministration = new MemberAdministration(viewElement, menuSelection, databaseMember, memberVO, exception);
 
             this.viewElement = viewElement;
             this.menuSelection = menuSelection;

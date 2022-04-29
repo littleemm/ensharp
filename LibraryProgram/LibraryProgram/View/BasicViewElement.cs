@@ -167,7 +167,7 @@ namespace LibraryProgram
             Console.WriteLine("                     2. BOOK LIST                          ");
             Console.WriteLine("                     3. CHECK OUT BOOK                     ");
             Console.WriteLine("                     4. RETURN BOOK                        ");
-            Console.WriteLine("                     5. MY PAGE                            ");
+            Console.WriteLine("                     5. EDIT ADDRESS / PHONE               ");
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");

@@ -92,6 +92,7 @@
     <Compile Include="Data\DatabaseMember.cs" />
     <Compile Include="Controller\FormOfSignUp.cs" />
     <Compile Include="Data\DatabaseMemberBook.cs" />
+    <Compile Include="Exception.cs" />
     <Compile Include="View\MemberViewElement.cs" />
     <Compile Include="View\BookViewElement.cs" />
     <Compile Include="Controller\AdministratorMode.cs" />

@@ -11,12 +11,14 @@ namespace LibraryProgram
         BasicViewElement viewElement;
         MemberVO memberVO;
         DatabaseMember databaseMember;
+        Exception exception;
 
-        public FormOfSignUp(BasicViewElement viewElement, MemberVO memberVO, DatabaseMember databaseMember)
+        public FormOfSignUp(BasicViewElement viewElement, MemberVO memberVO, DatabaseMember databaseMember, Exception exception)
         {
             this.viewElement = viewElement;
             this.memberVO = memberVO;
             this.databaseMember = databaseMember;
+            this.exception = exception;
         }
 
         public void ShowSignUpPage() // 회원가입 페이지
