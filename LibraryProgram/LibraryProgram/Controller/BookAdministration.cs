@@ -12,10 +12,11 @@ namespace LibraryProgram
         BasicViewElement viewElement;
         MenuSelection menuSelection;
         DatabaseBook databaseBook;
+        DatabaseMemberBook databaseMemberBook;
         BookVO bookVO;
         Exception exception;
 
-        public BookAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseBook databaseBook, Exception exception)
+        public BookAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseBook databaseBook, DatabaseMemberBook databaseMemberBook, Exception exception)
         {
             bookViewElement = new BookViewElement();
             bookVO = new BookVO("", "", "", "", "", "");
@@ -23,6 +24,7 @@ namespace LibraryProgram
             this.menuSelection = menuSelection;
             this.databaseBook = databaseBook;
             this.exception = exception;
+            this.databaseMemberBook = databaseMemberBook;
         }
 
         public void SelectBookAdministration()
@@ -278,6 +280,15 @@ namespace LibraryProgram
                 if (isBookValue == false)
                 {
                     PrintFalse(30, 13);
+                    continue;
+                }
+
+                isBookValue = databaseMemberBook.IsMemberCheckedOut(bookId, "bookId");
+                if (isBookValue == false)
+                {
+                    bookViewElement.PrintDeleteWarningMessage(25, 10);
+                    Console.SetCursorPosition(30, 13);
+                    viewElement.ClearLine(0, 30);
                 }
             }
 

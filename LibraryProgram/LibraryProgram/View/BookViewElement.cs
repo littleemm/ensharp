@@ -249,5 +249,15 @@ namespace LibraryProgram
             Console.ResetColor();
             Console.WriteLine();
         }
+
+        public void PrintDeleteWarningMessage(int x, int y)
+        {
+            Console.WriteLine();
+            Console.SetCursorPosition(x, y);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("               [대출중인 책은 삭제가 불가합니다.]");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
     }
 }

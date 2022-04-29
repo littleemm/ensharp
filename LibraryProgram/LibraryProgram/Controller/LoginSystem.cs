@@ -15,14 +15,15 @@ namespace LibraryProgram
         MemberMode memberMode;
         BasicViewElement viewElement;
         DatabaseMember databaseMember;
+        DatabaseMemberBook databaseMemberBook;
 
-        public LoginSystem(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO, DatabaseBook databaseBook, Exception exception)
+        public LoginSystem(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO, DatabaseBook databaseBook, DatabaseMemberBook databaseMemberBook, Exception exception)
         {
             this.viewElement = viewElement;
             this.databaseMember = databaseMember;
             this.viewElement = viewElement;
-            administratorMode = new AdministratorMode(viewElement, menuSelection, databaseMember, memberVO, databaseBook, exception);
-            memberMode = new MemberMode(viewElement, menuSelection, databaseMember, databaseBook, exception);
+            administratorMode = new AdministratorMode(viewElement, menuSelection, databaseMember, memberVO, databaseBook, databaseMemberBook, exception);
+            memberMode = new MemberMode(viewElement, menuSelection, databaseMember, databaseBook, databaseMemberBook, exception);
         }
 
         public void LoginAdministratorMode()

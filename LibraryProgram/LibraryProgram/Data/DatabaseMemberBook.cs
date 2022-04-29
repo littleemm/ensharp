@@ -84,7 +84,7 @@ namespace LibraryProgram
                 element[2].Add(dataReader["id"].ToString());
             }
 
-            for (int i=0;i<element[0].Count;i++)
+            for (int i = 0; i < element[0].Count; i++)
             {
                 if (element[2][i].Equals(bookId))
                 {
@@ -179,12 +179,12 @@ namespace LibraryProgram
             MySqlCommand command = new MySqlCommand(query, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
-            while (dataReader.Read()) 
+            while (dataReader.Read())
             {
-                element.Add(dataReader["id"].ToString()); 
+                element.Add(dataReader["id"].ToString());
             }
 
-            for (int i=0;i<element.Count;i++)
+            for (int i = 0; i < element.Count; i++)
             {
                 if (element[i].Equals(bookId))
                 {
@@ -295,7 +295,7 @@ namespace LibraryProgram
 
             dataReader.Close();
 
-            for (int i=0;i<element[1].Count;i++)
+            for (int i = 0; i < element[1].Count; i++)
             {
                 if (element[1][i].Equals(memberId) && condition.Equals("CheckOut"))
                 { // 대출하는 경우
@@ -375,5 +375,35 @@ namespace LibraryProgram
             connection.Close();
         }
 
+        public bool IsMemberCheckedOut(string memberOrBookId, string id) // 빌린 내역 확인
+        {
+            string query = "SELECT * FROM memberBook";
+            connection.Open();
+
+            List<string> element = new List<string>();
+
+            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlDataReader dataReader = command.ExecuteReader();
+
+            while (dataReader.Read())
+            {
+                element.Add(dataReader[id].ToString());
+            }
+
+            for (int i = 0; i < element.Count; i++)
+            {
+                if (element[i].Equals(memberOrBookId))
+                {
+                    dataReader.Close();
+                    connection.Close();
+                    return false;
+                }
+            }
+
+            dataReader.Close();
+            connection.Close();
+            return true;
+        }
     }
 }
+
