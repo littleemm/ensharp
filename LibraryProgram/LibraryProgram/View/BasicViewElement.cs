@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace LibraryProgram
 {
     class BasicViewElement
     {
+        [DllImport("kernel32.dll", ExactSpelling = true)]
+        private static extern IntPtr GetConsoleWindow();
+        private static IntPtr ProgramConsole = GetConsoleWindow();
+        [DllImport("user32.dll", EntryPoint = "SetWindowPos")]
+        public static extern IntPtr SetWindowPos(IntPtr intPtr, int value, int x, int y, int x2, int y2, int flag);
+        // 콘솔 창 위치 설정
         public void PrintLibraryMain()
         {
             Console.SetWindowSize(60, 28);
+            SetWindowPos(ProgramConsole, 0, 280, 100, 0, 0, 0x0001);
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
