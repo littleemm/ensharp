@@ -102,6 +102,15 @@ namespace LibraryProgram
             Console.WriteLine();
         }
 
+        public void PrintEditMineForm()
+        {
+            Console.WriteLine();
+            Console.WriteLine("                  ADDRESS   : ");
+            Console.WriteLine();
+            Console.WriteLine("               PHONE NUMBER : ");
+            Console.WriteLine();
+        }
+
         public void PrintDeleteMember()
         {
             Console.WriteLine(" ESC: 뒤로가기                                               ");

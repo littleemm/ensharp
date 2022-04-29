@@ -11,16 +11,20 @@ namespace LibraryProgram
         BasicViewElement viewElement;
         MenuSelection menuSelection;
         BookViewElement bookViewElement;
+        MemberViewElement memberViewElement;
+        DatabaseMember databaseMember;
         DatabaseBook databaseBook;
         DatabaseMemberBook databaseMemberBook;
 
-        public MemberMode(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseBook databaseBook)
+        public MemberMode(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, DatabaseBook databaseBook)
         {
             this.viewElement = viewElement;
             this.menuSelection = menuSelection;
+            this.databaseMember = databaseMember;
             this.databaseBook = databaseBook;
 
             bookViewElement = new BookViewElement();
+            memberViewElement = new MemberViewElement();
             databaseMemberBook = new DatabaseMemberBook();
         }
 
@@ -59,6 +63,7 @@ namespace LibraryProgram
                     }
                 case Constant.MYPAGE:
                     {
+                        EditMyInformation(id);
                         break;
                     }
             }
@@ -204,6 +209,31 @@ namespace LibraryProgram
 
             Console.SetCursorPosition(33, 3);
             bookViewElement.PrintReturnSuccessMessage();
+        }
+
+        private void EditMyInformation(string id)
+        {
+            memberViewElement.PrintEditMember();
+            memberViewElement.PrintEditMineForm();
+
+            string address, number;
+
+            Console.SetCursorPosition(30, 13);
+            address = Console.ReadLine();
+
+            Console.SetCursorPosition(30, 15);
+            number = Console.ReadLine();
+
+            if (address.Length > 0 || number.Length > 0)
+            {
+                databaseMember.UpdateMember(address, number, id);
+                memberViewElement.PrintEditSuccessMessage();
+            }
+
+            else
+            {
+                memberViewElement.PrintEditFailMessage();
+            }
         }
 
     }

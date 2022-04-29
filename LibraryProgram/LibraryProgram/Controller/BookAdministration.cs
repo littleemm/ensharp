@@ -93,7 +93,7 @@ namespace LibraryProgram
             Console.SetCursorPosition(31, 17);
             bookVO.Author = Console.ReadLine();
 
-            Console.SetCursorPosition(31, 19);
+            Console.SetCursorPosition(31, 19); 
             bookVO.Publisher = Console.ReadLine();
 
             Console.SetCursorPosition(31, 21);
