@@ -204,6 +204,35 @@ namespace LibraryProgram
             return false;
         }
 
+        public bool IsSearchedMemberId(string memberId)
+        {
+            connection.Open();
+
+            List<string> element = new List<string>();
+
+            MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_MEMBER, connection);
+            MySqlDataReader dataReader = command.ExecuteReader();
+
+            while (dataReader.Read())
+            {
+                element.Add(dataReader["id"].ToString());
+            }
+
+            for (int i = 0; i < element.Count; i++)
+            {
+                if (element[i].Contains(memberId))
+                {
+                    dataReader.Close();
+                    connection.Close();
+                    return true;
+                }
+            }
+
+            dataReader.Close();
+            connection.Close();
+            return false;
+        }
+
 
     }
 }

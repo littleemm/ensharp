@@ -55,5 +55,6 @@ namespace LibraryProgram
 
         public const bool ID_AND_PW_UNCORRECT = true;
         public const bool ID_AND_PW_UNCORRECT_NOW = false;
+        public const bool IS_CTRL_Z = true;
     }
 }

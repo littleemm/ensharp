@@ -215,6 +215,15 @@ namespace LibraryProgram
                 Console.SetCursorPosition(30, 15);
                 memberAddress = Console.ReadLine();
 
+                isMemberValue = exception.IsCtrlZ(memberAddress);
+                if (isMemberValue == false)
+                {
+                    viewElement.PrintWarningSentence(2, 11);
+                    Console.SetCursorPosition(30, 15);
+                    viewElement.ClearLine(0, 30);
+                    continue;
+                }
+
                 if (memberAddress.Length == 0)
                 {
                     break;
@@ -234,6 +243,15 @@ namespace LibraryProgram
             {
                 Console.SetCursorPosition(30, 17);
                 memberNumber = Console.ReadLine();
+
+                isMemberValue = exception.IsCtrlZ(memberNumber);
+                if (isMemberValue == false)
+                {
+                    viewElement.PrintWarningSentence(2, 11);
+                    Console.SetCursorPosition(30, 17);
+                    viewElement.ClearLine(0, 30);
+                    continue;
+                }
 
                 if (memberNumber.Length == 0)
                 {
@@ -309,16 +327,38 @@ namespace LibraryProgram
 
         private void SearchMember()
         {
-            string memberId;
+            string memberId = "";
+            bool isMemberId = false;
             memberViewElement.InformMemberList();
             memberViewElement.SearchMember();
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("==============================================================================");
             databaseMember.SelectMemberList();
-            
-            Console.SetCursorPosition(18, 6);
-            memberId = Console.ReadLine();
+
+            while (isMemberId == false)
+            {
+                Console.SetCursorPosition(18, 6);
+                memberId = Console.ReadLine();
+
+                isMemberId = databaseMember.IsSearchedMemberId(memberId);
+                if (isMemberId == false)
+                {
+                    memberViewElement.PrintSearchWarningMessage(9, 4);
+                    Console.SetCursorPosition(18, 6);
+                    viewElement.ClearLine(0, 18);
+                    continue;
+                }
+
+                isMemberId = exception.IsMemberId(memberId);
+                if (isMemberId == false)
+                {
+                    memberViewElement.PrintSearchWarningMessage(9, 4);
+                    Console.SetCursorPosition(18, 6);
+                    viewElement.ClearLine(0, 18);
+                }
+            }
+
             viewElement.ClearButtomLine(11, 8);
             Console.WriteLine();
             Console.WriteLine();

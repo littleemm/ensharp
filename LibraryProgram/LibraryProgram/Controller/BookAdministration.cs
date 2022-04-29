@@ -217,7 +217,16 @@ namespace LibraryProgram
                 Console.SetCursorPosition(30, 15);
                 bookPrice = Console.ReadLine();
 
-                if(bookPrice.Length == 0)
+                isBookValue = exception.IsCtrlZ(bookPrice);
+                if (isBookValue == false)
+                {
+                    viewElement.PrintWarningSentence(2, 11);
+                    Console.SetCursorPosition(30, 15);
+                    viewElement.ClearLine(0, 30);
+                    continue;
+                }
+
+                if (bookPrice.Length == 0)
                 {
                     break;
                 }
@@ -236,6 +245,15 @@ namespace LibraryProgram
             {
                 Console.SetCursorPosition(30, 17);
                 bookQuantity = Console.ReadLine();
+
+                isBookValue = exception.IsCtrlZ(bookQuantity);
+                if (isBookValue == false)
+                {
+                    viewElement.PrintWarningSentence(2, 11);
+                    Console.SetCursorPosition(30, 17);
+                    viewElement.ClearLine(0, 30);
+                    continue;
+                }
 
                 if (bookQuantity.Length == 0)
                 {
@@ -317,8 +335,20 @@ namespace LibraryProgram
             Console.WriteLine("==============================================================================");
             databaseBook.SelectBookList();
 
-            Console.SetCursorPosition(29, 6);
-            bookValue = Console.ReadLine();
+            while (Constant.IS_CTRL_Z)
+            {
+                Console.SetCursorPosition(29, 6);
+                bookValue = Console.ReadLine();
+                if (string.IsNullOrEmpty(bookValue?.Trim()))
+                { // ctrl + z 체크
+                    bookViewElement.PrintSearchWarningMessage(3, 4);
+                    Console.SetCursorPosition(29, 6);
+                    viewElement.ClearLine(0, 29);
+                    continue;
+                }
+                break;
+            }
+
             viewElement.ClearButtomLine(11, 8);
             Console.WriteLine();
             Console.WriteLine();

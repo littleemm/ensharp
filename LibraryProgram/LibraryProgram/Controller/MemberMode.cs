@@ -88,8 +88,19 @@ namespace LibraryProgram
             Console.WriteLine("==============================================================================");
             databaseBook.SelectBookList();
 
-            Console.SetCursorPosition(29, 6);
-            bookValue = Console.ReadLine();
+            while (Constant.IS_CTRL_Z)
+            {
+                Console.SetCursorPosition(29, 6);
+                bookValue = Console.ReadLine();
+                if (string.IsNullOrEmpty(bookValue?.Trim()))
+                { // ctrl + z 체크
+                    bookViewElement.PrintSearchWarningMessage(3, 4);
+                    Console.SetCursorPosition(29, 6);
+                    viewElement.ClearLine(0, 29);
+                    continue;
+                }
+                break;
+            }
             viewElement.ClearButtomLine(11, 8);
             Console.WriteLine();
             Console.WriteLine();
@@ -248,6 +259,15 @@ namespace LibraryProgram
                 Console.SetCursorPosition(30, 13);
                 address = Console.ReadLine();
 
+                isMemberValue = exception.IsCtrlZ(address);
+                if (isMemberValue == false)
+                {
+                    viewElement.PrintWarningSentence(2, 11);
+                    Console.SetCursorPosition(30, 13);
+                    viewElement.ClearLine(0, 30);
+                    continue;
+                }
+
                 if (address.Length == 0)
                 {
                     break;
@@ -270,6 +290,15 @@ namespace LibraryProgram
                 Console.SetCursorPosition(30, 15);
                 number = Console.ReadLine();
 
+                isMemberValue = exception.IsCtrlZ(number);
+                if (isMemberValue == false)
+                {
+                    viewElement.PrintWarningSentence(2, 11);
+                    Console.SetCursorPosition(30, 15);
+                    viewElement.ClearLine(0, 30);
+                    continue;
+                }
+
                 if (number.Length == 0)
                 {
                     break;
@@ -279,7 +308,7 @@ namespace LibraryProgram
                 if (isMemberValue == false)
                 {
                     viewElement.PrintWarningSentence(2, 11);
-                    Console.SetCursorPosition(30, 13);
+                    Console.SetCursorPosition(30, 15);
                     viewElement.ClearLine(0, 30);
                 }
             }
@@ -298,6 +327,6 @@ namespace LibraryProgram
                 memberViewElement.PrintEditFailMessage();
             }
         }
-
+       
     }
 }

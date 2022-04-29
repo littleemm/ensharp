@@ -192,5 +192,14 @@ namespace LibraryProgram
             Console.ResetColor();
             Console.WriteLine();
         }
+
+        public void PrintSearchWarningMessage(int x, int y)
+        {
+            Console.SetCursorPosition(x, y);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("    [올바른 아이디로 다시 입력하세요!]");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
     }
 }

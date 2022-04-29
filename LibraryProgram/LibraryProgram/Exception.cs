@@ -354,7 +354,7 @@ namespace LibraryProgram
             return true;
         }
 
-        private bool IsCtrlZ(string input)
+        public bool IsCtrlZ(string input)
         {
             if (string.IsNullOrEmpty(input?.Trim()))
             { // ctrl + z 체크
