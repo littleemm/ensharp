@@ -40,10 +40,9 @@ namespace LibraryProgram
                     break;
                 }
 
-                viewElement.ClearLine(1, 37);
-                Console.SetCursorPosition(37, 16);
-                viewElement.ClearLine(2, 37);
+                viewElement.ClearLine(0, 37);
                 Console.SetCursorPosition(37, 14);
+                viewElement.ClearLine(0, 37);
                 viewElement.PrintLoginWarning(2, 12);
             }
         }
@@ -59,10 +58,9 @@ namespace LibraryProgram
                 isIdAndPassword = databaseMember.SelectMember(id, password);
                 if (isIdAndPassword == false)/////
                 {
-                    viewElement.ClearLine(1, 37);
-                    Console.SetCursorPosition(37, 16);
-                    viewElement.ClearLine(2, 37);
+                    viewElement.ClearLine(0, 37);
                     Console.SetCursorPosition(37, 14);
+                    viewElement.ClearLine(0, 37);
                     viewElement.PrintLoginWarning(2, 12);
                 }
             }
@@ -77,7 +75,23 @@ namespace LibraryProgram
             id = Console.ReadLine();
 
             Console.SetCursorPosition(37, 16);
-            password = Console.ReadLine();
+            password = "";
+
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+            while (keyInfo.Key != ConsoleKey.Enter)
+            {
+                if (keyInfo.Key != ConsoleKey.Backspace && keyInfo.Key != ConsoleKey.Enter)
+                {
+                    password += keyInfo.KeyChar.ToString();
+                    Console.Write("*");
+                }
+                else if (keyInfo.Key == ConsoleKey.Backspace && password.Length > 0)
+                {
+                    password = password.Substring(0, (password.Length - 1));
+                    Console.Write("\b \b");
+                }
+                keyInfo = Console.ReadKey(true);
+            }
         }
     }
 }
