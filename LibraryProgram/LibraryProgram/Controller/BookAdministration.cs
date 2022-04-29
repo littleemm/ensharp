@@ -170,7 +170,7 @@ namespace LibraryProgram
                 }
             }
 
-            viewElement.ClearLineEasy(11, 8);
+            viewElement.ClearLineEasy(10, 8);
 
             databaseBook.InsertBook(bookVO);
             bookViewElement.PrintRegistrationSuccessMessage();
@@ -352,6 +352,7 @@ namespace LibraryProgram
             Console.WriteLine();
             Console.WriteLine("==============================================================================");
             databaseBook.SelectBookOfList(bookValue);
+            Console.SetCursorPosition(0, 0);
         }
 
         private void PrintList()

@@ -132,7 +132,7 @@ namespace LibraryProgram
         public void InformMemberBook(string id)
         {
             Console.WriteLine("=============================================================");
-            Console.WriteLine("ESC: 뒤로가기            " + id + "님의 대출 내역                     ");
+            Console.WriteLine("ESC: 뒤로가기          " + id + "님의 대출 내역                     ");
             Console.WriteLine("=============================================================");
             Console.WriteLine();
             Console.WriteLine();

@@ -42,7 +42,7 @@ namespace LibraryProgram
                 return false;
             }
 
-            pattern = @"^[a-zA-Z가-힣0-9.,+#%@$&()-!?\s]{1,20}$";
+            pattern = @"^[a-zA-Z가-힣0-9.,+#%@$&()!?\s]{1,20}$";
             if (IsWhiteSpace(bookName) == false)
             {
                 return false;
