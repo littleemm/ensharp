@@ -213,6 +213,11 @@ namespace LibraryProgram
                 Console.SetCursorPosition(30, 15);
                 memberAddress = Console.ReadLine();
 
+                if (memberAddress == "")
+                {
+                    break;
+                }
+
                 isMemberValue = exception.IsCtrlZ(memberAddress);
                 if (isMemberValue == false)
                 {
@@ -220,11 +225,6 @@ namespace LibraryProgram
                     Console.SetCursorPosition(30, 15);
                     viewElement.ClearLine(0, 30);
                     continue;
-                }
-
-                if (memberAddress.Length == 0)
-                {
-                    break;
                 }
 
                 isMemberValue = exception.IsAddress(memberAddress);

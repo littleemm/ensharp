@@ -12,6 +12,7 @@ namespace LibraryProgram
         public static string[] ARRAY_THREE = { "1", "2", "3" };
         public static string[] ARRAY_FOUR = { "1", "2", "3", "4" };
         public static string[] ARRAY_FIVE = { "1", "2", "3", "4", "5" };
+        public static string[] ARRAY_SIX = { "1", "2", "3", "4", "5", "6" };
 
         public static string STRING_CONNECTION = "Server=localhost;Database=younglim_library;Uid=root;Pwd=0000;charset=utf8;";
 
@@ -46,6 +47,7 @@ namespace LibraryProgram
         public const int CHECKOUT = 3;
         public const int RETURN = 4;
         public const int MYPAGE = 5;
+        public const int GO_BACK_TO_ADMIN = 6;
 
         public const int LOGIN = 1;
         public const int SIGN_UP = 2;

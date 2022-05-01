@@ -84,11 +84,11 @@ namespace LibraryProgram
 
             while (keyInfo.Key != ConsoleKey.Enter)
             {
-                keyInfo = Console.ReadKey(false);
+                keyInfo = Console.ReadKey(true);
                 if (keyInfo.Key != ConsoleKey.Backspace)
                 {
                     number += keyInfo.KeyChar.ToString();
-                    Console.Write(number);
+                    Console.Write(keyInfo.KeyChar.ToString());
                 }
                 else if (keyInfo.Key == ConsoleKey.Backspace && number.Length > 0)
                 {

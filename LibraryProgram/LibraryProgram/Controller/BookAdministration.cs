@@ -14,6 +14,7 @@ namespace LibraryProgram
         DatabaseBook databaseBook;
         BookVO bookVO;
         Exception exception;
+        
 
         public BookAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseBook databaseBook, Exception exception)
         {
@@ -23,6 +24,7 @@ namespace LibraryProgram
             this.menuSelection = menuSelection;
             this.databaseBook = databaseBook;
             this.exception = exception;
+
         }
 
         public void SelectBookAdministration()
@@ -32,7 +34,7 @@ namespace LibraryProgram
             string number = menuSelection.CheckMenuNumber(46, 23, Constant.ARRAY_FIVE);
             Console.Clear();
             switch(int.Parse(number))
-            { 
+            {
                 case Constant.REGISTRATION: 
                     {
                         RegisterBook();

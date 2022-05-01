@@ -17,7 +17,7 @@ namespace LibraryProgram
         BasicViewElement viewElement;
         DatabaseMember databaseMember;
 
-        public LoginSystem(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO, DatabaseBook databaseBook, DatabaseMemberBook databaseMemberBook, Exception exception)
+        public LoginSystem(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO, DatabaseBook databaseBook, Exception exception)
         {
             keyInfo = new ConsoleKeyInfo();
             this.viewElement = viewElement;

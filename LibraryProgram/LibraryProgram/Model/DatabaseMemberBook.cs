@@ -17,7 +17,7 @@ namespace LibraryProgram
             connection = new MySqlConnection(Constant.STRING_CONNECTION);
         }
 
-        public static DatabaseMemberBook getInstance()
+        public static DatabaseMemberBook getInstance() //써보기
         {
             return databaseMemberBook;
         }

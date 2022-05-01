@@ -35,7 +35,7 @@ namespace LibraryProgram
         {
             string query = "";
 
-            if (price.Length > 0 && quantity.Length > 0)
+            if (price.Length > 0 && quantity.Length > 0) // if - else if 로
             {
                 query = Constant.UPDATE_QUERY_BOOK + "SET price = '" + price + "', " +
                     "quantity = '" + quantity + "' WHERE id = '" + id + "';";
