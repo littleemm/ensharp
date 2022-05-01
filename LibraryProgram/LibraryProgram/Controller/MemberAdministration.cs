@@ -242,6 +242,11 @@ namespace LibraryProgram
                 Console.SetCursorPosition(30, 17);
                 memberNumber = Console.ReadLine();
 
+                if (memberNumber == "")
+                {
+                    break;
+                }
+
                 isMemberValue = exception.IsCtrlZ(memberNumber);
                 if (isMemberValue == false)
                 {
@@ -249,11 +254,6 @@ namespace LibraryProgram
                     Console.SetCursorPosition(30, 17);
                     viewElement.ClearLine(0, 30);
                     continue;
-                }
-
-                if (memberNumber.Length == 0)
-                {
-                    break;
                 }
 
                 isMemberValue = exception.IsPhoneNumber(memberNumber);

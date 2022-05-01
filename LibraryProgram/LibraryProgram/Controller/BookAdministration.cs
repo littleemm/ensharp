@@ -217,6 +217,11 @@ namespace LibraryProgram
                 Console.SetCursorPosition(30, 15);
                 bookPrice = Console.ReadLine();
 
+                if (bookPrice == "")
+                {
+                    break;
+                }
+
                 isBookValue = exception.IsCtrlZ(bookPrice);
                 if (isBookValue == false)
                 {
@@ -224,11 +229,6 @@ namespace LibraryProgram
                     Console.SetCursorPosition(30, 15);
                     viewElement.ClearLine(0, 30);
                     continue;
-                }
-
-                if (bookPrice.Length == 0)
-                {
-                    break;
                 }
 
                 isBookValue = exception.IsPrice(bookPrice);
@@ -246,6 +246,11 @@ namespace LibraryProgram
                 Console.SetCursorPosition(30, 17);
                 bookQuantity = Console.ReadLine();
 
+                if(bookQuantity == "")
+                {
+                    break;
+                }
+
                 isBookValue = exception.IsCtrlZ(bookQuantity);
                 if (isBookValue == false)
                 {
@@ -253,11 +258,6 @@ namespace LibraryProgram
                     Console.SetCursorPosition(30, 17);
                     viewElement.ClearLine(0, 30);
                     continue;
-                }
-
-                if (bookQuantity.Length == 0)
-                {
-                    break;
                 }
 
                 isBookValue = exception.IsQuantity(bookQuantity);

@@ -37,10 +37,16 @@ namespace LibraryProgram
 
         private void SelectMenu(string id)
         {
-            string number = menuSelection.CheckMenuNumber(46, 24, Constant.ARRAY_FIVE);
+            string number = menuSelection.CheckMenuNumber(46, 24, Constant.ARRAY_SIX);
             Console.Clear();
             switch (int.Parse(number))
             {
+                case Constant.NAVER_API:
+                    {
+                        NaverBookAPI naverBookAPI = new NaverBookAPI();
+                        naverBookAPI.OpenAPI();
+                        break;
+                    }
                 case Constant.SEARCH_BOOK:
                     {
                         SearchBook();

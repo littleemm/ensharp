@@ -28,3 +28,5 @@ C:\Users\ASUS\Desktop\en#\LibraryProgram\LibraryProgram\bin\Debug\System.Runtime
 C:\Users\ASUS\Desktop\en#\LibraryProgram\LibraryProgram\obj\Debug\LibraryProgram.csproj.CopyComplete
 C:\Users\ASUS\Desktop\en#\LibraryProgram\LibraryProgram\obj\Debug\LibraryProgram.exe
 C:\Users\ASUS\Desktop\en#\LibraryProgram\LibraryProgram\obj\Debug\LibraryProgram.pdb
+C:\Users\ASUS\Desktop\en#\LibraryProgram\LibraryProgram\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ASUS\Desktop\en#\LibraryProgram\LibraryProgram\bin\Debug\Newtonsoft.Json.xml

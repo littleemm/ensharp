@@ -42,11 +42,12 @@ namespace LibraryProgram
         public const int SEARCH = 4;
         public const int LIST = 5;
 
-        public const int SEARCH_BOOK = 1;
-        public const int BOOKLIST = 2;
-        public const int CHECKOUT = 3;
-        public const int RETURN = 4;
-        public const int MYPAGE = 5;
+        public const int NAVER_API = 1;
+        public const int SEARCH_BOOK = 2;
+        public const int BOOKLIST = 3;
+        public const int CHECKOUT = 4;
+        public const int RETURN = 5;
+        public const int MYPAGE = 6;
         public const int GO_BACK_TO_ADMIN = 6;
 
         public const int LOGIN = 1;
