@@ -284,6 +284,15 @@ namespace LibraryProgram
             Console.WriteLine();
         }
 
+        public void PrintIsbnFailMessage()
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("                                                      [ISBN을 다시 입력하세요.]");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+
         public void PrintWarningMessage()
         {
             Console.WriteLine();

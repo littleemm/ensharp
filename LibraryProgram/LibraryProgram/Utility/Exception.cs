@@ -346,6 +346,22 @@ namespace LibraryProgram
 
         public bool IsIsbn(string isbn)
         {
+            if (IsCtrlZ(isbn) == false)
+            {
+                return false;
+            }
+            pattern = @"^[0-9]{13}$";
+
+            if (IsWhiteSpace(isbn) == false)
+            {
+                return false;
+            }
+
+            if (Regex.IsMatch(isbn, pattern))
+            {
+                return true;
+            }
+
             return false;
         }
 

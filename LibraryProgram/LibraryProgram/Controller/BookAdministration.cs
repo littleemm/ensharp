@@ -406,6 +406,11 @@ namespace LibraryProgram
             while (isBookValue == false)
             {
                 isBookValue = IsIsbn(bookTitle, bookQuantity, isBookValue);
+                Console.SetCursorPosition(50, 4);
+                bookViewElement.PrintIsbnFailMessage();
+                Console.SetCursorPosition(37, 8);
+                viewElement.ClearLine(0, 37);
+
             }
             Console.SetCursorPosition(45, 4);
             bookViewElement.PrintRegistrationSuccessMessage();
@@ -434,9 +439,15 @@ namespace LibraryProgram
 
             Console.SetCursorPosition(37, 8);
             string isbn = Console.ReadLine();
-
+            if (exception.IsIsbn(isbn) == false)
+            {
+                return false;
+            }
             if (naverBookAPI.IsIsbnData(bookTitle, bookQuantity, isbn) == true)
             {
+                Console.SetCursorPosition(50, 5);
+                viewElement.ClearLine(0, 0);
+
                 Console.SetCursorPosition(0, 6);
                 viewElement.ClearLine(0, 0);
                 Console.SetCursorPosition(0, 8);
