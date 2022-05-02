@@ -367,6 +367,8 @@ namespace LibraryProgram
         private void SearchNaverBook()
         {
             string bookTitle = "", bookQuantity = "";
+            bool isBookValue = false;
+
             bookViewElement.InformNaverBookList();
             bookViewElement.SearchNaverBook();
 
@@ -387,9 +389,9 @@ namespace LibraryProgram
                 }
                 break;
             }
-            Console.SetCursorPosition(29, 7);
+            Console.SetCursorPosition(0, 7);
             viewElement.ClearLine(0, 0);
-            Console.SetCursorPosition(29, 6);
+            Console.SetCursorPosition(0, 6);
             viewElement.ClearLine(0, 0);
             Console.SetCursorPosition(0, 2);
             viewElement.ClearLine(0, 0);
@@ -418,6 +420,64 @@ namespace LibraryProgram
             bookViewElement.PrintWarningMessage();
             Console.SetCursorPosition(x, y);
             viewElement.ClearLine(0, x);
+        }
+
+        private void ScanIsbn(string bookTitle, string bookQuantity, bool isBookValue)
+        {
+            string bookId = "", bookCount = "";
+
+            Console.SetCursorPosition(29, 9);
+            string isbn = Console.ReadLine();
+
+            if (naverBookAPI.IsIsbnData(bookTitle, bookQuantity, isbn) == true)
+            {
+                Console.SetCursorPosition(0, 9);
+                viewElement.ClearLine(0, 0);
+                Console.SetCursorPosition(0, 8);
+                bookViewElement.PrintRegisterNaverBook();
+
+                while (isBookValue == false)
+                {
+                    Console.SetCursorPosition(29, 9);
+                    bookId = Console.ReadLine();
+                    isBookValue = databaseBook.IsBookId(bookId);
+
+                    if (isBookValue == false)
+                    {
+                        Console.SetCursorPosition(25, 7);
+                        bookViewElement.PrintWarningMessage();
+                        Console.SetCursorPosition(29, 9);
+                        viewElement.ClearLine(0, 29);
+                        continue;
+                    }
+
+                    isBookValue = exception.IsBookId(bookId);
+                    if (isBookValue == false)
+                    {
+                        Console.SetCursorPosition(25, 7);
+                        bookViewElement.PrintWarningMessage();
+                        Console.SetCursorPosition(29, 9);
+                        viewElement.ClearLine(0, 29);
+                    }
+                }
+                isBookValue = false;
+                viewElement.ClearLineEasy(7, 25);
+                while (isBookValue == false)
+                {
+                    Console.SetCursorPosition(29, 10);
+                    bookCount = Console.ReadLine();
+
+                    isBookValue = exception.IsQuantity(bookCount);
+                    if (isBookValue == false)
+                    {
+                        Console.SetCursorPosition(25, 7);
+                        bookViewElement.PrintWarningMessage();
+                        Console.SetCursorPosition(29, 10);
+                        viewElement.ClearLine(0, 29);
+                    }
+                }
+                viewElement.ClearLineEasy(7, 25);
+            }
         }
     }
 }
