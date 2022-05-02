@@ -17,11 +17,8 @@ namespace LibraryProgram
         private static string CLIENT_ID = "Gy_693vcZVxD7SqwKVzr";
         private static string CLIENT_SECRET = "SdGR7yh_9b";
 
-        private ApiBookVO apiBookVO;
-
         public NaverBookAPI()
         {
-            apiBookVO = new ApiBookVO("", "", "", "", "", "");
         }
 
         public void SearchNaverAPI(string title, string display)
@@ -73,6 +70,8 @@ namespace LibraryProgram
             {
                 book.Title = book.Title.Replace("<b>", "");
                 book.Title = book.Title.Replace("</b>", "");
+                book.Author = book.Author.Replace("<b>", "");
+                book.Author = book.Author.Replace("</b>", "");
                 Console.WriteLine("   TITLE   : " + book.Title);
                 Console.WriteLine("  AUTHOR   : " + book.Author);
                 Console.WriteLine(" PUBLISHER : " + book.Publisher);
@@ -96,6 +95,28 @@ namespace LibraryProgram
                 }
             }
             return false;
+        }
+
+        public BookVO SetBookVO(string title, string display, string isbn)
+        {
+            BookVO bookVO = new BookVO("", "", "", "", "" ,"");
+            List<ApiBookVO> bookList = FindBook(title, display);
+            foreach (ApiBookVO book in bookList)
+            {
+                if (isbn == book.Isbn)
+                {
+                    book.Title = book.Title.Replace("<b>", "");
+                    book.Title = book.Title.Replace("</b>", "");
+                    book.Author = book.Author.Replace("<b>", "");
+                    book.Author = book.Author.Replace("</b>", "");
+                    bookVO.Name = book.Title;
+                    bookVO.Price = book.Price;
+                    bookVO.Publisher = book.Publisher;
+                    bookVO.Author = book.Author;
+                }
+            }
+
+            return bookVO;
         }
     }
 }

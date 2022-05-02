@@ -32,6 +32,7 @@ namespace LibraryProgram
         public void SelectBookAdministration()
         {
             Console.Clear();
+            Console.SetWindowSize(60, 28);
             bookViewElement.PrintManageBookMenu();
             string number = menuSelection.CheckMenuNumber(46, 24, Constant.ARRAY_SIX);
             Console.Clear();
@@ -402,7 +403,12 @@ namespace LibraryProgram
             bookViewElement.InformNaverBookListAfter();
             bookViewElement.AddNaverBookForm();
             naverBookAPI.SearchNaverAPI(bookTitle, bookQuantity);
-
+            while (isBookValue == false)
+            {
+                isBookValue = IsIsbn(bookTitle, bookQuantity, isBookValue);
+            }
+            Console.SetCursorPosition(45, 4);
+            bookViewElement.PrintRegistrationSuccessMessage();
         }
 
         private void PrintList()
@@ -422,62 +428,78 @@ namespace LibraryProgram
             viewElement.ClearLine(0, x);
         }
 
-        private void ScanIsbn(string bookTitle, string bookQuantity, bool isBookValue)
+        private bool IsIsbn(string bookTitle, string bookQuantity, bool isBookValue)
         {
             string bookId = "", bookCount = "";
 
-            Console.SetCursorPosition(29, 9);
+            Console.SetCursorPosition(37, 8);
             string isbn = Console.ReadLine();
 
             if (naverBookAPI.IsIsbnData(bookTitle, bookQuantity, isbn) == true)
             {
-                Console.SetCursorPosition(0, 9);
+                Console.SetCursorPosition(0, 6);
                 viewElement.ClearLine(0, 0);
                 Console.SetCursorPosition(0, 8);
+                viewElement.ClearLine(0, 0);
+                Console.SetCursorPosition(0, 7);
                 bookViewElement.PrintRegisterNaverBook();
 
                 while (isBookValue == false)
                 {
-                    Console.SetCursorPosition(29, 9);
+                    Console.SetCursorPosition(37, 7);
                     bookId = Console.ReadLine();
                     isBookValue = databaseBook.IsBookId(bookId);
 
-                    if (isBookValue == false)
+                    if (isBookValue == true)
                     {
-                        Console.SetCursorPosition(25, 7);
+                        Console.SetCursorPosition(45, 4);
                         bookViewElement.PrintWarningMessage();
-                        Console.SetCursorPosition(29, 9);
-                        viewElement.ClearLine(0, 29);
+                        Console.SetCursorPosition(37, 7);
+                        viewElement.ClearLine(0, 37);
+                        isBookValue = false;
                         continue;
                     }
 
                     isBookValue = exception.IsBookId(bookId);
                     if (isBookValue == false)
                     {
-                        Console.SetCursorPosition(25, 7);
+                        Console.SetCursorPosition(45, 4);
                         bookViewElement.PrintWarningMessage();
-                        Console.SetCursorPosition(29, 9);
-                        viewElement.ClearLine(0, 29);
+                        Console.SetCursorPosition(37, 7);
+                        viewElement.ClearLine(0, 37);
                     }
                 }
+
                 isBookValue = false;
-                viewElement.ClearLineEasy(7, 25);
+                viewElement.ClearLineEasy(5, 25);
+
                 while (isBookValue == false)
                 {
-                    Console.SetCursorPosition(29, 10);
+                    Console.SetCursorPosition(37, 9);
                     bookCount = Console.ReadLine();
 
                     isBookValue = exception.IsQuantity(bookCount);
                     if (isBookValue == false)
                     {
-                        Console.SetCursorPosition(25, 7);
+                        Console.SetCursorPosition(45, 4);
                         bookViewElement.PrintWarningMessage();
-                        Console.SetCursorPosition(29, 10);
-                        viewElement.ClearLine(0, 29);
+                        Console.SetCursorPosition(37, 9);
+                        viewElement.ClearLine(0, 37);
                     }
                 }
-                viewElement.ClearLineEasy(7, 25);
+                viewElement.ClearLineEasy(5, 25);
+                ConnectDatabase(bookTitle, bookQuantity, isbn, bookId, bookCount);
+                return true;
             }
+            return false;
+        }
+
+        private void ConnectDatabase(string title, string display, string isbn, string id, string quantity)
+        {
+            BookVO bookVO = naverBookAPI.SetBookVO(title, display, isbn);
+            bookVO.Id = id;
+            bookVO.Quantity = quantity;
+            databaseBook.InsertBook(bookVO);
         }
     }
 }

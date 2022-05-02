@@ -193,13 +193,13 @@ namespace LibraryProgram
             Console.WriteLine();
             Console.WriteLine("    도서 목록에 추가할 도서의 ISBN : ");
             Console.WriteLine();
+            Console.WriteLine();
         }
 
         public void PrintRegisterNaverBook()
         {
+            Console.WriteLine("           등록할 도서의 ID        : ");
             Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("           등록할 도서의 ID       : ");
             Console.WriteLine("          등록할 도서의 수량       : ");
             Console.WriteLine();
         }
