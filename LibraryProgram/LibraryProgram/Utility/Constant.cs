@@ -32,6 +32,11 @@ namespace LibraryProgram
         public static string SELECT_QUERY_MEMBERBOOK = "SELECT * FROM memberbook";
         public static string DELETE_QUERY_MEMBERBOOK = "DELETE FROM memberbook ";
 
+        public static string INSERT_QUERY_LOG = "INSERT INTO log(date, time, user, history)";
+        public static string SELECT_QUERY_LOG = "SELECT * FROM log";
+        public static string DELETE_QUERY_LOG = "DELETE FROM log ";
+        public static string TRUNCATE_QUERY_LOG = "TRUNCATE log";
+
         public const int MEMBER_MANAGE = 1;
         public const int BOOK_MANAGE = 2;
         public const int LOG_MANAGE = 3;
@@ -51,6 +56,10 @@ namespace LibraryProgram
         public const int MYPAGE = 5;
         public const int GO_BACK_TO_ADMIN = 6;
 
+        public const int EDIT_LOG = 1;
+        public const int DELETE_LOG = 2;
+        public const int LOG_LIST = 3;
+
         public const int LOGIN = 1;
         public const int SIGN_UP = 2;
 
@@ -61,6 +70,7 @@ namespace LibraryProgram
         public const int ADDRESS_LENGTH_IS_7 = 7;
         public const int ADDRESS_LENGTH_IS_8 = 8;
 
+        public const int LOG_DELETE = 1;
         public const int EXIT_REAL = 1;
         public const int GOBACK = 2;
 

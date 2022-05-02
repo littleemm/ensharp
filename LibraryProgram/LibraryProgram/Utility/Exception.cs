@@ -205,7 +205,7 @@ namespace LibraryProgram
             }
 
             int intAge = int.Parse(age);
-            if(intAge >= 0 && intAge <= 150)
+            if(intAge >= 1 && intAge <= 150)
             {
                 return true;
             }

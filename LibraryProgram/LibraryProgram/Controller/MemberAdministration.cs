@@ -14,8 +14,10 @@ namespace LibraryProgram
         DatabaseMember databaseMember;
         MemberVO memberVO;
         Exception exception;
+        DatabaseLog databaseLog;
+        LogVO logVO;
 
-        public MemberAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO, Exception exception)
+        public MemberAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO, Exception exception, DatabaseLog databaseLog, LogVO logVO)
         {
             memberViewElement = new MemberViewElement();
             this.viewElement = viewElement;
@@ -23,6 +25,8 @@ namespace LibraryProgram
             this.databaseMember = databaseMember;
             this.memberVO = memberVO;
             this.exception = exception;
+            this.databaseLog = databaseLog;
+            this.logVO = logVO;
         }
 
         public void SelectMemberAdministration()
@@ -172,6 +176,10 @@ namespace LibraryProgram
             viewElement.ClearLineEasy(11, 6);
             databaseMember.InsertMember(memberVO);
             memberViewElement.PrintRegistrationSuccessMessage();
+
+            logVO.User = "관리자";
+            logVO.History = "ID ''" + memberVO.Id + "'' 회원 추가";
+            databaseLog.InsertLog(logVO);
         }
 
         private void EditMember()
@@ -269,6 +277,7 @@ namespace LibraryProgram
             {
                 databaseMember.UpdateMember(memberAddress, memberNumber, memberId);
                 memberViewElement.PrintEditSuccessMessage();
+                AddEditLogToDatabase(memberId, memberAddress, memberNumber);
             }
 
             else
@@ -321,6 +330,10 @@ namespace LibraryProgram
             viewElement.ClearLineEasy(11, 3);
             databaseMember.DeleteMember(memberId);
             memberViewElement.PrintDeleteSuccessMessage();
+
+            logVO.User = "관리자";
+            logVO.History = "ID ''" + memberId + "'' 회원 삭제";
+            databaseLog.InsertLog(logVO);
         }
 
         private void SearchMember()
@@ -363,7 +376,32 @@ namespace LibraryProgram
             Console.WriteLine("==============================================================================");
             databaseMember.SelectMemberOfList(memberId);
 
+            logVO.User = "관리자";
+            logVO.History = "ID ''" + memberId + "'' 회원 검색";
+            databaseLog.InsertLog(logVO);
+        }
 
+        private void AddEditLogToDatabase(string memberId, string address, string number)
+        {
+            logVO.User = "관리자";
+
+            if (address.Length > 0 && number.Length == 0)
+            {
+                logVO.History = "회원 ''" + memberId + "''의 주소를 ''" + address + "''(으)로 수정";
+            }
+
+            else if (address.Length == 0 && number.Length > 0)
+            {
+                logVO.History = "회원 ''" + memberId + "''의 전화번호를 ''" + number + "''(으)로 수정";
+            }
+
+            else if (address.Length > 0 && number.Length > 0)
+            {
+                logVO.History = "회원 ''" + memberId + "''의 주소를 ''" + address + "''(으)로 수정, " +
+                    "전화번호를 ''" + number + "''(으)로 수정";
+            }
+
+            databaseLog.InsertLog(logVO);
         }
 
         private void PrintList()

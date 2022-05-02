@@ -17,14 +17,14 @@ namespace LibraryProgram
         BasicViewElement viewElement;
         DatabaseMember databaseMember;
 
-        public LoginSystem(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO, DatabaseBook databaseBook, Exception exception)
+        public LoginSystem(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogVO logVO)
         {
             keyInfo = new ConsoleKeyInfo();
             this.viewElement = viewElement;
             this.databaseMember = databaseMember;
             this.viewElement = viewElement;
-            administratorMode = new AdministratorMode(viewElement, menuSelection, databaseMember, memberVO, databaseBook, exception);
-            memberMode = new MemberMode(viewElement, menuSelection, databaseMember, databaseBook, exception);
+            administratorMode = new AdministratorMode(viewElement, menuSelection, databaseMember, memberVO, databaseBook, exception, databaseLog, logVO);
+            memberMode = new MemberMode(viewElement, menuSelection, databaseMember, databaseBook, exception, databaseLog, logVO);
         }
 
         public void LoginAdministratorMode()

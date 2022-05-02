@@ -16,17 +16,21 @@ namespace LibraryProgram
         DatabaseBook databaseBook;
         MemberVO memberVO;
         Exception exception;
+        DatabaseLog databaseLog;
+        LogVO logVO;
 
         public MainPage()
         {
             memberVO = new MemberVO("", "", "", "", "", "");
+            logVO = new LogVO("", "", "", "");
             basicViewElement = new BasicViewElement();
             databaseMember = new DatabaseMember();
             databaseBook = new DatabaseBook();
             exception = new Exception();
+            databaseLog = new DatabaseLog();
             menuSelection = new MenuSelection(basicViewElement);
-            loginSystem = new LoginSystem(basicViewElement, menuSelection, databaseMember, memberVO, databaseBook, exception);
-            modeSelection = new ModeSelection(menuSelection, loginSystem, basicViewElement, memberVO, databaseMember, exception);
+            loginSystem = new LoginSystem(basicViewElement, menuSelection, databaseMember, memberVO, databaseBook, exception, databaseLog, logVO);
+            modeSelection = new ModeSelection(menuSelection, loginSystem, basicViewElement, memberVO, databaseMember, exception, databaseLog, logVO);
         }
 
         public void ShowMainPage()

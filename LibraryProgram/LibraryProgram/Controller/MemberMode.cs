@@ -15,14 +15,18 @@ namespace LibraryProgram
         DatabaseMember databaseMember;
         DatabaseBook databaseBook;
         Exception exception;
+        DatabaseLog databaseLog;
+        LogVO logVO;
 
-        public MemberMode(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, DatabaseBook databaseBook, Exception exception)
+        public MemberMode(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogVO logVO)
         {
             this.viewElement = viewElement;
             this.menuSelection = menuSelection;
             this.databaseMember = databaseMember;
             this.databaseBook = databaseBook;
             this.exception = exception;
+            this.databaseLog = databaseLog;
+            this.logVO = logVO;
 
             bookViewElement = new BookViewElement();
             memberViewElement = new MemberViewElement();
@@ -43,7 +47,7 @@ namespace LibraryProgram
             {
                 case Constant.SEARCH_BOOK:
                     {
-                        SearchBook();
+                        SearchBook(id);
                         break;
                     }
                 case Constant.BOOKLIST:
@@ -76,7 +80,7 @@ namespace LibraryProgram
             }
         }
 
-        private void SearchBook()
+        private void SearchBook(string id)
         {
             string bookValue;
             bookViewElement.InformBookList();
@@ -104,6 +108,10 @@ namespace LibraryProgram
             Console.WriteLine();
             Console.WriteLine("==============================================================================");
             databaseBook.SelectBookOfList(bookValue);
+
+            logVO.User = id;
+            logVO.History = "''" + bookValue + "'' 도서 검색";
+            databaseLog.InsertLog(logVO);
         }
 
         private void PrintList()
@@ -178,6 +186,10 @@ namespace LibraryProgram
             Console.SetCursorPosition(33, 3);
             bookViewElement.PrintCheckOutSuccessMessage(dueDate.ToString("yyyy-MM-dd"));
 
+            logVO.User = id;
+            logVO.History = "도서 ID " + bookId + " 대출";
+            databaseLog.InsertLog(logVO);
+
         }
 
         private void ReturnBook(string id)
@@ -242,6 +254,10 @@ namespace LibraryProgram
 
             Console.SetCursorPosition(33, 3);
             bookViewElement.PrintReturnSuccessMessage();
+
+            logVO.User = id;
+            logVO.History = "ID " + bookId + " 도서 반납";
+            databaseLog.InsertLog(logVO);
         }
 
         private void EditMyInformation(string id)
@@ -318,12 +334,36 @@ namespace LibraryProgram
                 databaseMember.UpdateMember(address, number, id);
                 Console.SetCursorPosition(1, 11);
                 memberViewElement.PrintEditSuccessMessage();
+                AddEditLogToDatabase(id, address, number);
             }
 
             else
             {
                 memberViewElement.PrintEditFailMessage();
             }
+        }
+
+        private void AddEditLogToDatabase(string id, string address, string number)
+        {
+            logVO.User = id;
+
+            if (address.Length > 0 && number.Length == 0)
+            {
+                logVO.History = "주소를 ''" + address + "''(으)로 수정";
+            }
+
+            else if (address.Length == 0 && number.Length > 0)
+            {
+                logVO.History = "전화번호를 ''" + number + "''(으)로 수정";
+            }
+
+            else if (address.Length > 0 && number.Length > 0)
+            {
+                logVO.History = "주소를 ''" + address + "''(으)로 수정, " +
+                    "전화번호를 ''" + number + "''(으)로 수정";
+            }
+
+            databaseLog.InsertLog(logVO);
         }
        
     }

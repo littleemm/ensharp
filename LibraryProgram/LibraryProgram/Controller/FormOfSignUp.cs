@@ -12,13 +12,17 @@ namespace LibraryProgram
         MemberVO memberVO;
         DatabaseMember databaseMember;
         Exception exception;
+        DatabaseLog databaseLog;
+        LogVO logVO;
 
-        public FormOfSignUp(BasicViewElement viewElement, MemberVO memberVO, DatabaseMember databaseMember, Exception exception)
+        public FormOfSignUp(BasicViewElement viewElement, MemberVO memberVO, DatabaseMember databaseMember, Exception exception, DatabaseLog databaseLog, LogVO logVO)
         {
             this.viewElement = viewElement;
             this.memberVO = memberVO;
             this.databaseMember = databaseMember;
             this.exception = exception;
+            this.databaseLog = databaseLog;
+            this.logVO = logVO;
         }
 
         public void ShowSignUpPage() // 회원가입 페이지
@@ -125,7 +129,10 @@ namespace LibraryProgram
             }
             viewElement.ClearLineEasy(12, 5);
             databaseMember.InsertMember(memberVO);
-
+            
+            logVO.User = memberVO.Id;
+            logVO.History = "회원가입";
+            databaseLog.InsertLog(logVO);
         }
 
         private void PrintFalse(int x, int y)

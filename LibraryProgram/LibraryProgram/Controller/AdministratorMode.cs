@@ -10,14 +10,15 @@ namespace LibraryProgram
     {
         BookAdministration bookAdministration;
         MemberAdministration memberAdministration;
+        LogAdministration logAdministration;
         BasicViewElement viewElement;
         MenuSelection menuSelection;
 
-        public AdministratorMode(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO, DatabaseBook databaseBook, Exception exception)
+        public AdministratorMode(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogVO logVO)
         {
-            bookAdministration = new BookAdministration (viewElement, menuSelection, databaseBook, exception);
-            memberAdministration = new MemberAdministration(viewElement, menuSelection, databaseMember, memberVO, exception);
-
+            bookAdministration = new BookAdministration (viewElement, menuSelection, databaseBook, exception, databaseLog, logVO);
+            memberAdministration = new MemberAdministration(viewElement, menuSelection, databaseMember, memberVO, exception, databaseLog, logVO);
+            logAdministration = new LogAdministration(viewElement, menuSelection, databaseLog);
             this.viewElement = viewElement;
             this.menuSelection = menuSelection;
         }
@@ -47,6 +48,7 @@ namespace LibraryProgram
                     }
                 case Constant.LOG_MANAGE:
                     {
+                        logAdministration.SelectLogAdministration();
                         break;
                     }
                 case Constant.EXIT: 
