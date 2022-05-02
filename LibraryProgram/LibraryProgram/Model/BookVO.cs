@@ -13,15 +13,19 @@ namespace LibraryProgram
         private string publisher;
         private string author;
         private string price;
+        private string pubdate;
+        private string isbn;
         private string quantity;
 
-        public BookVO(string id, string name, string publisher, string author, string price, string quantity)
+        public BookVO(string id, string name, string publisher, string author, string price, string pubdate, string isbn, string quantity)
         {
             this.id = id;
             this.name = name;
             this.publisher = publisher;
             this.author = author;
             this.price = price;
+            this.pubdate = pubdate;
+            this.isbn = isbn;
             this.quantity = quantity;
         }
 
@@ -53,6 +57,17 @@ namespace LibraryProgram
         {
             get { return price; }
             set { price = value; }
+        }
+        public string Pubdate
+        {
+            get { return pubdate; }
+            set { pubdate = value; }
+        }
+
+        public string Isbn
+        {
+            get { return isbn; }
+            set { isbn = value; }
         }
 
         public string Quantity

@@ -21,7 +21,8 @@ namespace LibraryProgram
         {
             string query = Constant.INSERT_QUERY_BOOK +
                 "Value('" + bookVO.Id + "', '" + bookVO.Name + "', '" + bookVO.Author + "', '" +
-                bookVO.Publisher + "', '" + bookVO.Price + "', '" + bookVO.Quantity + "');";
+                bookVO.Publisher + "', '" + bookVO.Price + "', '" + bookVO.Pubdate + "', '" +
+                bookVO.Isbn + "', '" + bookVO.Quantity + "');";
 
             connection.Open();
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -73,11 +74,11 @@ namespace LibraryProgram
             connection.Close();
         }
 
-        public void SelectBookOfList(string value)
+        public void SelectBookOfList(string value) // 리스트에서 검색하기 위한 것
         {
             connection.Open();
 
-            List<string>[] element = new List<string>[6];
+            List<string>[] element = new List<string>[8];
 
             for (int index = 0; index < element.Length; index++)
             {
@@ -94,42 +95,26 @@ namespace LibraryProgram
                 element[2].Add(dataReader["author"].ToString());
                 element[3].Add(dataReader["publisher"].ToString());
                 element[4].Add(dataReader["price"].ToString());
-                element[5].Add(dataReader["quantity"].ToString());
+                element[5].Add(dataReader["pubdate"].ToString());
+                element[6].Add(dataReader["isbn"].ToString());
+                element[7].Add(dataReader["quantity"].ToString());
             }
 
             for (int i = 0; i < element[0].Count; i++)
             {
                 if (element[1][i].Contains(value)) // 책 제목이 일부 포함되면 출력
                 {
-                    Console.WriteLine("      ID      :  " + element[0][i]);
-                    Console.WriteLine("     NAME     :  " + element[1][i]);
-                    Console.WriteLine("    AUTHOR    :  " + element[2][i]);
-                    Console.WriteLine("  PUBLISHER   :  " + element[3][i]);
-                    Console.WriteLine("    PRICE     :  " + element[4][i] + "\\");
-                    Console.WriteLine("   QUANTITY   :  " + element[5][i]);
-                    Console.WriteLine("==============================================================================");
+                    ShowDatabaseOf(element, i);
                 }
 
                 else if (element[2][i].Contains(value)) // 저자 이름이 일부 포함되면 출력
                 {
-                    Console.WriteLine("      ID      :  " + element[0][i]);
-                    Console.WriteLine("     NAME     :  " + element[1][i]);
-                    Console.WriteLine("    AUTHOR    :  " + element[2][i]);
-                    Console.WriteLine("  PUBLISHER   :  " + element[3][i]);
-                    Console.WriteLine("    PRICE     :  " + element[4][i] + "\\");
-                    Console.WriteLine("   QUANTITY   :  " + element[5][i]);
-                    Console.WriteLine("==============================================================================");
+                    ShowDatabaseOf(element, i);
                 }
 
                 else if (element[3][i].Contains(value)) // 출판사명이 일부 포함되면 출력
                 {
-                    Console.WriteLine("      ID      :  " + element[0][i]);
-                    Console.WriteLine("     NAME     :  " + element[1][i]);
-                    Console.WriteLine("    AUTHOR    :  " + element[2][i]);
-                    Console.WriteLine("  PUBLISHER   :  " + element[3][i]);
-                    Console.WriteLine("    PRICE     :  " + element[4][i] + "\\");
-                    Console.WriteLine("   QUANTITY   :  " + element[5][i]);
-                    Console.WriteLine("==============================================================================");
+                    ShowDatabaseOf(element, i);
                 }
             }
 
@@ -137,29 +122,18 @@ namespace LibraryProgram
             connection.Close();
         }
 
-        public void SelectBookList()
+        public void SelectBookList() // 리스트 검색
         {
             connection.Open();
             
             MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_BOOK, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
-
-            while (dataReader.Read())
-            {
-                Console.WriteLine("      ID      :  " + dataReader["id"].ToString());
-                Console.WriteLine("     NAME     :  " + dataReader["name"].ToString());
-                Console.WriteLine("    AUTHOR    :  " + dataReader["author"].ToString());
-                Console.WriteLine("  PUBLISHER   :  " + dataReader["publisher"].ToString());
-                Console.WriteLine("    PRICE     :  " + dataReader["price"].ToString() + "\\");
-                Console.WriteLine("   QUANTITY   :  " + dataReader["quantity"].ToString());
-                Console.WriteLine("==============================================================================");
-            }
-
+            ShowDatabase(dataReader);
             dataReader.Close();
             connection.Close();
         }
 
-        public bool IsBookId(string bookId)
+        public bool IsBookId(string bookId) // 등록된 bookID와 중복되는지 체크
         {
             connection.Open();
 
@@ -186,6 +160,34 @@ namespace LibraryProgram
             dataReader.Close();
             connection.Close();
             return false;
+        }
+
+        private void ShowDatabase(MySqlDataReader dataReader) // 데이터베이스의 정보 출력 (모두)
+        {
+            while (dataReader.Read())
+            {
+                Console.WriteLine("      ID      :  " + dataReader["id"].ToString());
+                Console.WriteLine("     NAME     :  " + dataReader["name"].ToString());
+                Console.WriteLine("    AUTHOR    :  " + dataReader["author"].ToString());
+                Console.WriteLine("  PUBLISHER   :  " + dataReader["publisher"].ToString());
+                Console.WriteLine("    PRICE     :  " + dataReader["price"].ToString() + "\\");
+                Console.WriteLine("   PUBDATE    :  " + dataReader["pubdate"].ToString());
+                Console.WriteLine("     ISBN     :  " + dataReader["isbn"].ToString());
+                Console.WriteLine("   QUANTITY   :  " + dataReader["quantity"].ToString());
+                Console.WriteLine("==============================================================================");
+            }
+        }
+        private void ShowDatabaseOf(List<string>[] element, int index)
+        { // 데이터베이스 정보 출력 (일부)
+            Console.WriteLine("      ID      :  " + element[0][index]);
+            Console.WriteLine("     NAME     :  " + element[1][index]);
+            Console.WriteLine("    AUTHOR    :  " + element[2][index]);
+            Console.WriteLine("  PUBLISHER   :  " + element[3][index]);
+            Console.WriteLine("    PRICE     :  " + element[4][index] + "\\");
+            Console.WriteLine("   PUBDATE    :  " + element[5][index]);
+            Console.WriteLine("     ISBN     :  " + element[6][index]);
+            Console.WriteLine("   QUANTITY   :  " + element[7][index]);
+            Console.WriteLine("==============================================================================");
         }
     }
 }

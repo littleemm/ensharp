@@ -99,7 +99,7 @@ namespace LibraryProgram
 
         public BookVO SetBookVO(string title, string display, string isbn)
         {
-            BookVO bookVO = new BookVO("", "", "", "", "" ,"");
+            BookVO bookVO = new BookVO("", "", "", "", "" , "", "", "");
             List<ApiBookVO> bookList = FindBook(title, display);
             foreach (ApiBookVO book in bookList)
             {
@@ -113,6 +113,8 @@ namespace LibraryProgram
                     bookVO.Price = book.Price;
                     bookVO.Publisher = book.Publisher;
                     bookVO.Author = book.Author;
+                    bookVO.Pubdate = book.Pubdate;
+                    bookVO.Isbn = book.Isbn.Substring(11);
                 }
             }
 

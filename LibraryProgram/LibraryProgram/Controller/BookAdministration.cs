@@ -20,7 +20,7 @@ namespace LibraryProgram
         public BookAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseBook databaseBook, Exception exception)
         {
             bookViewElement = new BookViewElement();
-            bookVO = new BookVO("", "", "", "", "", "");
+            bookVO = new BookVO("", "", "", "", "", "", "", "");
             naverBookAPI = new NaverBookAPI();
             this.viewElement = viewElement;
             this.menuSelection = menuSelection;

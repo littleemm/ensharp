@@ -18,7 +18,7 @@ namespace LibraryProgram
 
         public static string SELECT_QUERY_ADMIN = "SELECT * FROM administrator";
 
-        public static string INSERT_QUERY_BOOK = "INSERT INTO book(id, name, author, publisher, price, quantity)";
+        public static string INSERT_QUERY_BOOK = "INSERT INTO book(id, name, author, publisher, price, quantity, pubdate, isbn)";
         public static string DELETE_QUERY_BOOK = "DELETE FROM book ";
         public static string SELECT_QUERY_BOOK = "SELECT * FROM book";
         public static string UPDATE_QUERY_BOOK = "UPDATE book ";
