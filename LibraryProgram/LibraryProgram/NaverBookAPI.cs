@@ -33,8 +33,9 @@ namespace LibraryProgram
 
         private string OpenAPI()
         {
+            string requestResult = "";
             string query = "노인과 바다"; // 검색할 문자열
-            string url = "https://openapi.naver.com/v1/search/book?query=" + query + ",display=" + "11"; // 결과가 JSON 포맷
+            string url = "https://openapi.naver.com/v1/search/book?query=" + query; // 결과가 JSON 포맷
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Headers.Add("X-Naver-Client-Id", CLIENT_ID); // 클라이언트 아이디
             request.Headers.Add("X-Naver-Client-Secret", CLIENT_SECRET);       // 클라이언트 시크릿
@@ -45,28 +46,22 @@ namespace LibraryProgram
             {
                 Stream stream = response.GetResponseStream();
                 StreamReader reader = new StreamReader(stream, Encoding.UTF8);
-                string requestResult = reader.ReadToEnd();
-
-                return requestResult;
-
+                requestResult = reader.ReadToEnd();
             }
-            else
-            {
-                Console.WriteLine("Error 발생=" + status);
-                return "ERROR";
-            }
+            // else
+            //     Console.WriteLine("Error 발생=" + status);
+            //return "ERROR";
+            return requestResult;
         }
 
         public List<ApiBookVO> FindBook()
         {
             string requestResult = OpenAPI();
-            requestResult = requestResult.Replace("<b>", "");
-            requestResult = requestResult.Replace("</b>", "");
-            requestResult = requestResult.Replace(",", "");
+           
 
             var parseJson = JObject.Parse(requestResult);
 
-            var QueryResultCount = Convert.ToInt32(parseJson["display"]);
+            //var QueryResultCount = Convert.ToInt32(parseJson["display"]);
             //var TotalResultCount = Convert.ToInt32(parseJson["total"]);
 
             List<ApiBookVO> bookList = JsonConvert.DeserializeObject<List<ApiBookVO>>(parseJson["items"].ToString());
@@ -81,6 +76,8 @@ namespace LibraryProgram
             Console.WriteLine("===========================================================");
             foreach (ApiBookVO book in bookList)
             {
+                book.Title = book.Title.Replace("<b>", "");
+                book.Title = book.Title.Replace("</b>", "");
                 Console.WriteLine("   TITLE   : " + book.Title);
                 Console.WriteLine("  AUTHOR   : " + book.Author);
                 Console.WriteLine(" PUBLISHER : " + book.Publisher);
