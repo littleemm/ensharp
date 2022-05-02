@@ -180,7 +180,7 @@ namespace LibraryProgram
         public void SearchNaverBook()
         {
             Console.WriteLine("          책 제목          : ");
-            Console.WriteLine("    수량 (10이상, 숫자만)  : ");
+            Console.WriteLine("            수량           : ");
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();

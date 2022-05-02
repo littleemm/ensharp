@@ -429,7 +429,7 @@ namespace LibraryProgram
         }
 
         private bool IsIsbn(string bookTitle, string bookQuantity, bool isBookValue)
-        {
+        { // isbn 입력시 맞는 isbn이면 데이터베이스 등록까지 완료 후 true 반환, 그렇지 않으면 false 반환
             string bookId = "", bookCount = "";
 
             Console.SetCursorPosition(37, 8);

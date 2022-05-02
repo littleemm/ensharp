@@ -77,7 +77,7 @@ namespace LibraryProgram
                 Console.WriteLine(" PUBLISHER : " + book.Publisher);
                 Console.WriteLine("   PRICE   : " + book.Price + "\\");
                 Console.WriteLine("  PUBDATE  : " + book.Pubdate);
-                Console.WriteLine("   ISBN    : " + book.Isbn);
+                Console.WriteLine("   ISBN    : " + book.Isbn.Substring(11));
                 Console.WriteLine();
                 Console.WriteLine("==================================================================================================================================");
             }
@@ -89,7 +89,7 @@ namespace LibraryProgram
     
             foreach (ApiBookVO book in bookList)
             {
-                if (isbn == book.Isbn)
+                if (isbn == book.Isbn.Substring(11))
                 {
                     return true;
                 }
@@ -103,7 +103,7 @@ namespace LibraryProgram
             List<ApiBookVO> bookList = FindBook(title, display);
             foreach (ApiBookVO book in bookList)
             {
-                if (isbn == book.Isbn)
+                if (isbn == book.Isbn.Substring(11))
                 {
                     book.Title = book.Title.Replace("<b>", "");
                     book.Title = book.Title.Replace("</b>", "");

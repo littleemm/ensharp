@@ -344,6 +344,11 @@ namespace LibraryProgram
             return false;
         }
 
+        public bool IsIsbn(string isbn)
+        {
+            return false;
+        }
+
         private bool IsWhiteSpace(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
