@@ -24,18 +24,17 @@ namespace LibraryProgram
             apiBookVO = new ApiBookVO("", "", "", "", "", "");
         }
 
-        public void SearchNaverAPI()
+        public void SearchNaverAPI(string title, string display)
         {
-            OpenAPI();
-            FindBook();
-            EditResultData();
+            Console.SetWindowSize(130, 28);
+            EditResultData(title, display);
+            
         }
 
-        private string OpenAPI()
+        private string OpenAPI(string title, string display)
         {
             string requestResult = "";
-            string query = "노인과 바다"; // 검색할 문자열
-            string url = "https://openapi.naver.com/v1/search/book?query=" + query; // 결과가 JSON 포맷
+            string url = "https://openapi.naver.com/v1/search/book?query=" + title + "&display=" + display; // 결과가 JSON 포맷
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Headers.Add("X-Naver-Client-Id", CLIENT_ID); // 클라이언트 아이디
             request.Headers.Add("X-Naver-Client-Secret", CLIENT_SECRET);       // 클라이언트 시크릿
@@ -54,9 +53,9 @@ namespace LibraryProgram
             return requestResult;
         }
 
-        public List<ApiBookVO> FindBook()
+        public List<ApiBookVO> FindBook(string title, string display)
         {
-            string requestResult = OpenAPI();
+            string requestResult = OpenAPI(title, display);
            
 
             var parseJson = JObject.Parse(requestResult);
@@ -69,11 +68,12 @@ namespace LibraryProgram
             return bookList;
         }
 
-        private void EditResultData()
+        private void EditResultData(string title, string display)
         {
-            List<ApiBookVO> bookList = FindBook();
+            List<ApiBookVO> bookList = FindBook(title, display);
 
-            Console.WriteLine("===========================================================");
+            Console.WriteLine("==================================================================================================================================");
+
             foreach (ApiBookVO book in bookList)
             {
                 book.Title = book.Title.Replace("<b>", "");
@@ -84,7 +84,8 @@ namespace LibraryProgram
                 Console.WriteLine("   PRICE   : " + book.Price + "\\");
                 Console.WriteLine("  PUBDATE  : " + book.Pubdate);
                 Console.WriteLine("   ISBN    : " + book.Isbn);
-                Console.WriteLine("===========================================================");
+                Console.WriteLine();
+                Console.WriteLine("==================================================================================================================================");
             }
         }
     }

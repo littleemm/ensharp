@@ -14,12 +14,14 @@ namespace LibraryProgram
         DatabaseBook databaseBook;
         BookVO bookVO;
         Exception exception;
+        NaverBookAPI naverBookAPI;
         
 
         public BookAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseBook databaseBook, Exception exception)
         {
             bookViewElement = new BookViewElement();
             bookVO = new BookVO("", "", "", "", "", "");
+            naverBookAPI = new NaverBookAPI();
             this.viewElement = viewElement;
             this.menuSelection = menuSelection;
             this.databaseBook = databaseBook;
@@ -31,7 +33,7 @@ namespace LibraryProgram
         {
             Console.Clear();
             bookViewElement.PrintManageBookMenu();
-            string number = menuSelection.CheckMenuNumber(46, 23, Constant.ARRAY_FIVE);
+            string number = menuSelection.CheckMenuNumber(46, 24, Constant.ARRAY_SIX);
             Console.Clear();
             switch(int.Parse(number))
             {
@@ -53,6 +55,11 @@ namespace LibraryProgram
                 case Constant.SEARCH:
                     {
                         SearchBook();
+                        break;
+                    }
+                case Constant.SEARCH_NAVER:
+                    {
+                        SearchNaverBook();
                         break;
                     }
                 case Constant.LIST:
@@ -355,6 +362,45 @@ namespace LibraryProgram
             Console.WriteLine("==============================================================================");
             databaseBook.SelectBookOfList(bookValue);
             Console.SetCursorPosition(0, 0);
+        }
+
+        private void SearchNaverBook()
+        {
+            string bookTitle = "", bookQuantity = "";
+            bookViewElement.InformNaverBookList();
+            bookViewElement.SearchNaverBook();
+
+            while (Constant.IS_CTRL_Z)
+            {
+                Console.SetCursorPosition(29, 6);
+                bookTitle = Console.ReadLine();
+                Console.SetCursorPosition(29, 7);
+                bookQuantity = Console.ReadLine();
+                if (string.IsNullOrEmpty(bookTitle?.Trim()) || string.IsNullOrEmpty(bookQuantity?.Trim()))
+                { // ctrl + z 체크
+                    bookViewElement.PrintSearchWarningMessage(3, 4);
+                    Console.SetCursorPosition(29, 7);
+                    viewElement.ClearLine(0, 29);
+                    Console.SetCursorPosition(29, 6);
+                    viewElement.ClearLine(0, 29);
+                    continue;
+                }
+                break;
+            }
+            Console.SetCursorPosition(29, 7);
+            viewElement.ClearLine(0, 0);
+            Console.SetCursorPosition(29, 6);
+            viewElement.ClearLine(0, 0);
+            Console.SetCursorPosition(0, 2);
+            viewElement.ClearLine(0, 0);
+            Console.SetCursorPosition(0, 1);
+            viewElement.ClearLine(0, 0);
+            Console.SetCursorPosition(0, 0);
+            viewElement.ClearLine(0, 0);
+            bookViewElement.InformNaverBookListAfter();
+            bookViewElement.AddNaverBookForm();
+            naverBookAPI.SearchNaverAPI(bookTitle, bookQuantity);
+
         }
 
         private void PrintList()

@@ -63,7 +63,8 @@ namespace LibraryProgram
             Console.WriteLine("                                                           ");
             Console.WriteLine("                       1. MANAGE MEMBER                          ");
             Console.WriteLine("                       2. MANAGE BOOK                            ");
-            Console.WriteLine("                       3. EXIT");
+            Console.WriteLine("                       3. MANAGE LOG                            ");
+            Console.WriteLine("                       4. EXIT");
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");

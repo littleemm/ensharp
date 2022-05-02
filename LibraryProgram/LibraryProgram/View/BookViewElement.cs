@@ -25,7 +25,8 @@ namespace LibraryProgram
             Console.WriteLine("                      2. EDIT BOOK                        ");
             Console.WriteLine("                      3. DELETE BOOK                      ");
             Console.WriteLine("                      4. SEARCH BOOK                      ");
-            Console.WriteLine("                      5. BOOK LIST                      ");
+            Console.WriteLine("                      5. SEARCH NAVER BOOK              ");
+            Console.WriteLine("                      6. BOOK LIST                      ");
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
@@ -127,14 +128,30 @@ namespace LibraryProgram
 
         }
 
+        public void InformNaverBookList()
+        {
+            Console.WriteLine("=============================================================");
+            Console.WriteLine("ESC: 뒤로가기          NAVER BOOK SEARCH                      ");
+            Console.WriteLine("=============================================================");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+        }
 
+        public void InformNaverBookListAfter()
+        {
+            Console.WriteLine("==================================================================================================================================");
+            Console.WriteLine("ESC: 뒤로가기                                            NAVER BOOK SEARCH                                                         ");
+            Console.WriteLine("==================================================================================================================================");
+            Console.WriteLine();
+
+        }
 
         public void InformMemberBook(string id)
         {
             Console.WriteLine("=============================================================");
             Console.WriteLine("ESC: 뒤로가기          " + id + "님의 대출 내역                     ");
             Console.WriteLine("=============================================================");
-            Console.WriteLine();
             Console.WriteLine();
 
         }
@@ -157,6 +174,24 @@ namespace LibraryProgram
         {
             Console.WriteLine();
             Console.WriteLine("   책 제목 / 저자 / 출판사 : ");
+            Console.WriteLine();
+        }
+
+        public void SearchNaverBook()
+        {
+            Console.WriteLine("          책 제목          : ");
+            Console.WriteLine("    수량 (10이상, 숫자만)  : ");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+        }
+
+        public void AddNaverBookForm()
+        {
+
+            Console.WriteLine("                                                    복사-붙여넣기를 하면 편합니다.");
+            Console.WriteLine();
+            Console.WriteLine("    도서 목록에 추가할 도서의 ISBN : ");
             Console.WriteLine();
         }
 

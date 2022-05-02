@@ -31,7 +31,7 @@ namespace LibraryProgram
 
         private void SelectManagement()
         {
-            string number = menuSelection.CheckMenuNumber(46, 22, Constant.ARRAY_THREE);
+            string number = menuSelection.CheckMenuNumber(46, 23, Constant.ARRAY_FOUR);
             Console.Clear();
             switch(int.Parse(number))
             {
@@ -43,6 +43,10 @@ namespace LibraryProgram
                 case Constant.BOOK_MANAGE: 
                     {
                         bookAdministration.SelectBookAdministration();
+                        break;
+                    }
+                case Constant.LOG_MANAGE:
+                    {
                         break;
                     }
                 case Constant.EXIT: 
