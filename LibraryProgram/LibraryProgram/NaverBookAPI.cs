@@ -17,11 +17,24 @@ namespace LibraryProgram
         private static string CLIENT_ID = "Gy_693vcZVxD7SqwKVzr";
         private static string CLIENT_SECRET = "SdGR7yh_9b";
 
+        private ApiBookVO apiBookVO;
 
-        public string OpenAPI()
+        public NaverBookAPI()
+        {
+            apiBookVO = new ApiBookVO("", "", "", "", "", "");
+        }
+
+        public void SearchNaverAPI()
+        {
+            OpenAPI();
+            FindBook();
+            EditResultData();
+        }
+
+        private string OpenAPI()
         {
             string query = "노인과 바다"; // 검색할 문자열
-            string url = "https://openapi.naver.com/v1/search/book?query=" + query; // 결과가 JSON 포맷
+            string url = "https://openapi.naver.com/v1/search/book?query=" + query + ",display=" + "11"; // 결과가 JSON 포맷
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Headers.Add("X-Naver-Client-Id", CLIENT_ID); // 클라이언트 아이디
             request.Headers.Add("X-Naver-Client-Secret", CLIENT_SECRET);       // 클라이언트 시크릿
@@ -44,38 +57,37 @@ namespace LibraryProgram
             }
         }
 
-        private void EditResultData()
+        public List<ApiBookVO> FindBook()
         {
             string requestResult = OpenAPI();
             requestResult = requestResult.Replace("<b>", "");
             requestResult = requestResult.Replace("</b>", "");
             requestResult = requestResult.Replace(",", "");
-            requestResult = requestResult.Replace("title", "  NAME   ");
-            requestResult = requestResult.Replace("price", "  PRICE  ");
-            requestResult = requestResult.Replace("author", " AUTHOR  ");
-            requestResult = requestResult.Replace("publisher", "PUBLISHER");
-            requestResult = requestResult.Replace("pubdate", " PUBDATE ");
-            requestResult = requestResult.Replace("isbn", "  ISBN   ");
 
             var parseJson = JObject.Parse(requestResult);
-            var countsOfDisplay = Convert.ToInt32(parseJson["display"]);
 
-            List<string> resultList = new List<string>();
-            for (int i = 0; i < countsOfDisplay; i++)
+            var QueryResultCount = Convert.ToInt32(parseJson["display"]);
+            //var TotalResultCount = Convert.ToInt32(parseJson["total"]);
+
+            List<ApiBookVO> bookList = JsonConvert.DeserializeObject<List<ApiBookVO>>(parseJson["items"].ToString());
+
+            return bookList;
+        }
+
+        private void EditResultData()
+        {
+            List<ApiBookVO> bookList = FindBook();
+
+            Console.WriteLine("===========================================================");
+            foreach (ApiBookVO book in bookList)
             {
-
-                var title = parseJson["items"][i]["title"].ToString();
-                var price = parseJson["items"][i]["price"].ToString();
-                var author = parseJson["items"][i]["author"].ToString();
-                var publisher = parseJson["items"][i]["publisher"].ToString();
-                var pubdate = parseJson["items"][i]["pubdate"].ToString();
-                var isbn = parseJson["items"][i]["isbn"].ToString();
-
-                resultList.Add(price.ToString());
-            }
-            for (int i = 0; i < resultList.Count; i++)
-            {
-                Console.WriteLine(resultList[i]);
+                Console.WriteLine("   TITLE   : " + book.Title);
+                Console.WriteLine("  AUTHOR   : " + book.Author);
+                Console.WriteLine(" PUBLISHER : " + book.Publisher);
+                Console.WriteLine("   PRICE   : " + book.Price + "\\");
+                Console.WriteLine("  PUBDATE  : " + book.Pubdate);
+                Console.WriteLine("   ISBN    : " + book.Isbn);
+                Console.WriteLine("===========================================================");
             }
         }
     }

@@ -11,6 +11,7 @@ namespace LibraryProgram
     class DatabaseMember
     {
         private MySqlConnection connection;
+        
         public DatabaseMember()
         {
             connection = new MySqlConnection(Constant.STRING_CONNECTION);

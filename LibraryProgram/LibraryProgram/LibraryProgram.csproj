@@ -89,6 +89,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiBookVO.cs" />
     <Compile Include="Model\BookVO.cs" />
     <Compile Include="Controller\BookAdministration.cs" />
     <Compile Include="Model\DatabaseBook.cs" />

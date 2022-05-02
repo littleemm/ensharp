@@ -44,7 +44,7 @@ namespace LibraryProgram
                 case Constant.NAVER_API:
                     {
                         NaverBookAPI naverBookAPI = new NaverBookAPI();
-                        naverBookAPI.OpenAPI();
+                        naverBookAPI.SearchNaverAPI();
                         break;
                     }
                 case Constant.SEARCH_BOOK:
