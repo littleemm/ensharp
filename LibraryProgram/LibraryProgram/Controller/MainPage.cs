@@ -35,6 +35,7 @@ namespace LibraryProgram
 
         public void ShowMainPage()
         {
+            databaseLog.ExportLog();
             basicViewElement.PrintLibraryMain();
             modeSelection.SelectMode();
         }

@@ -11,10 +11,21 @@ namespace LibraryProgram
     class DatabaseLog
     {
         private static MySqlConnection connection;
-
+        string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         public DatabaseLog()
         {
             connection = new MySqlConnection(Constant.STRING_CONNECTION);
+        }
+
+        public void ExportLog()
+        {
+            string query = "SELECT * FROM log INTO OUTFILE '" + path + "//log.txt'" +
+                "FIELDS TERMINTAED BY ','" +
+                "ENCLOSED BY '\"' ESCAPED BY '\\' LINES TERMINATED BY '\n'";
+            connection.Open();
+            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlDataAdapter dataAdapter = new MySqlDataAdapter(query, connection);
+            connection.Close();
         }
 
         public void InsertLog(LogVO logVO) // 로그 등록
@@ -49,7 +60,7 @@ namespace LibraryProgram
             connection.Close();
         }
 
-        public void TruncateLogList()
+        public void TruncateLogList() // 로그 내역 전면 지우기
         {
             connection.Open();
 

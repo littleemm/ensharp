@@ -418,6 +418,11 @@ namespace LibraryProgram
             viewElement.ClearLine(0, 0);
             bookViewElement.InformNaverBookListAfter();
             bookViewElement.AddNaverBookForm();
+
+            logVO.User = "관리자";
+            logVO.History = "NAVER 책 검색에서 ''" + bookTitle + "'' 도서 검색";
+            databaseLog.InsertLog(logVO);
+
             naverBookAPI.SearchNaverAPI(bookTitle, bookQuantity);
             while (isBookValue == false)
             {
@@ -430,10 +435,6 @@ namespace LibraryProgram
             }
             Console.SetCursorPosition(45, 4);
             bookViewElement.PrintRegistrationSuccessMessage();
-
-            logVO.User = "관리자";
-            logVO.History = "NAVER 책 검색에서 ''" + bookTitle + "'' 도서 검색";
-            databaseLog.InsertLog(logVO);
         }
 
         private void PrintList()
@@ -531,6 +532,10 @@ namespace LibraryProgram
             bookVO.Id = id;
             bookVO.Quantity = quantity;
             databaseBook.InsertBook(bookVO);
+
+            logVO.User = "관리자";
+            logVO.History = "NAVER 책에서 ''" + bookVO.Name + "'' 도서 추가";
+            databaseLog.InsertLog(logVO);
         }
         
         private void AddEditLogToDatabase(string quantity, string price)
