@@ -27,17 +27,16 @@ namespace LibraryProgram
             memberMode = new MemberMode(viewElement, menuSelection, databaseMember, databaseBook, exception, databaseLog, logVO);
         }
 
-        public void LoginAdministratorMode()
+        public void LoginAdministratorMode() // 관리자 로그인 모드
         {
             Console.Clear();
             bool isIdAndPassword = Constant.ID_AND_PW_UNCORRECT_NOW;
             viewElement.PrintLoginPage();
             while (isIdAndPassword == Constant.ID_AND_PW_UNCORRECT_NOW) {
-
-                LoginAll();
+                LoginAll(); 
                 isIdAndPassword = databaseMember.SelectMember(Constant.SELECT_QUERY_ADMIN, id, password);
                 if (isIdAndPassword == Constant.ID_AND_PW_UNCORRECT_NOW)
-                {
+                { // 아이디, 비밀번호 중 하나라도 틀리면 다시
                     viewElement.ClearLine(0, 37);
                     Console.SetCursorPosition(37, 14);
                     viewElement.ClearLine(0, 37);
@@ -47,7 +46,7 @@ namespace LibraryProgram
             administratorMode.ShowAdministratorPage();
         }
 
-        public void LoginMemberMode() 
+        public void LoginMemberMode() // 로그인 회원모드
         {
             Console.Clear();
             bool isIdAndPassword = Constant.ID_AND_PW_UNCORRECT_NOW;
@@ -69,10 +68,10 @@ namespace LibraryProgram
             
         }
 
-        public void LoginAll()
+        public void LoginAll() // 공통 로그인 폼 함수
         {
             Console.SetCursorPosition(37, 14);
-            id = Console.ReadLine();
+            id = Console.ReadLine(); // 아이디 입력
 
             Console.SetCursorPosition(37, 16);
             password = "";

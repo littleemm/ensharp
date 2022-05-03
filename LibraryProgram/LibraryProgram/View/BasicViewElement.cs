@@ -279,5 +279,12 @@ namespace LibraryProgram
             }
             Console.SetCursorPosition(0, againLine);
         }
+
+        public void PrintLine()
+        {
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("==============================================================================");
+        }
     }
 }

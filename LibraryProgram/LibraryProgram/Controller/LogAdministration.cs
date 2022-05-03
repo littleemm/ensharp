@@ -21,7 +21,7 @@ namespace LibraryProgram
 
             logViewElement = new LogViewElement();
         }
-        public void SelectLogAdministration()
+        public void SelectLogAdministration() // 로그 관리 모드에서 메뉴 선택
         {
             Console.Clear();
             Console.SetWindowSize(60, 28);
@@ -55,7 +55,7 @@ namespace LibraryProgram
             }
         }
 
-        private void EditLog()
+        private void EditLog() // 로그 일부 삭제
         {
             string id = "";
             bool isLogId = false;
@@ -85,7 +85,7 @@ namespace LibraryProgram
 
         }
 
-        private void DeleteLog()
+        private void DeleteLog() // 로그 전면 삭제
         {
             logViewElement.PrintDeleteLogList();
             string number = menuSelection.CheckMenuNumber(46, 20, Constant.ARRAY_TWO);
@@ -105,7 +105,7 @@ namespace LibraryProgram
             }
         }
 
-        private void PrintLogList()
+        private void PrintLogList() // 로그 내역을 전부 출력해주는 함수
         {
             Console.SetWindowSize(85, 28);
             logViewElement.PrintLogListSign();

@@ -31,7 +31,7 @@ namespace LibraryProgram
             this.logVO = logVO;
         }
 
-        public void SelectBookAdministration()
+        public void SelectBookAdministration() // 책 관리 모드에서 메뉴 고르기
         {
             Console.Clear();
             Console.SetWindowSize(60, 28);
@@ -196,9 +196,7 @@ namespace LibraryProgram
         {
             bookViewElement.PrintEditBook();
             bookViewElement.PrintEditBookForm();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("==============================================================================");
+            viewElement.PrintLine();
             databaseBook.SelectBookList();
 
             string bookId = "", bookPrice = "", bookQuantity = "";
@@ -300,9 +298,7 @@ namespace LibraryProgram
         {
             bookViewElement.PrintDeleteBook();
             bookViewElement.PrintBookIdForm();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("==============================================================================");
+            viewElement.PrintLine();
             databaseBook.SelectBookList();
 
             string bookId = "";
@@ -350,9 +346,7 @@ namespace LibraryProgram
             string bookValue;
             bookViewElement.InformBookList();
             bookViewElement.SearchBook();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("==============================================================================");
+            viewElement.PrintLine(); 
             databaseBook.SelectBookList();
 
             while (Constant.IS_CTRL_Z)
@@ -370,9 +364,7 @@ namespace LibraryProgram
             }
 
             viewElement.ClearButtomLine(11, 8);
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("==============================================================================");
+            viewElement.PrintLine(); 
             databaseBook.SelectBookOfList(bookValue);
             Console.SetCursorPosition(0, 0);
 

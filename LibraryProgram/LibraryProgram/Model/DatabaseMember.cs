@@ -140,13 +140,7 @@ namespace LibraryProgram
             {
                 if (element[0][i].Contains(id))
                 {
-                    Console.WriteLine("      ID      :  " + element[0][i]);
-                    Console.WriteLine("     NAME     :  " + element[1][i]);
-                    Console.WriteLine("      AGE     :  " + element[2][i] + "세");
-                    Console.WriteLine("   ADDRESS    :  " + element[3][i]);
-                    Console.WriteLine(" PHONE NUMBER :  " + element[4][i]);
-                    Console.WriteLine("  BOOK COUNT  :  " + element[5][i] + "권");
-                    Console.WriteLine("==============================================================================");
+                    ShowData(element, i);
                 }
             }
             
@@ -232,6 +226,17 @@ namespace LibraryProgram
             dataReader.Close();
             connection.Close();
             return false;
+        }
+
+        private void ShowData (List<string>[] element, int index)
+        {
+            Console.WriteLine("      ID      :  " + element[0][index]);
+            Console.WriteLine("     NAME     :  " + element[1][index]);
+            Console.WriteLine("      AGE     :  " + element[2][index] + "세");
+            Console.WriteLine("   ADDRESS    :  " + element[3][index]);
+            Console.WriteLine(" PHONE NUMBER :  " + element[4][index]);
+            Console.WriteLine("  BOOK COUNT  :  " + element[5][index] + "권");
+            Console.WriteLine("==============================================================================");
         }
 
 
