@@ -157,29 +157,62 @@ namespace LibraryProgram
         }
 
 
-        public void InformMemberBook(string id)
+        private void InformMemberBook(string id)
         {
             Console.WriteLine("=============================================================");
             Console.WriteLine("ESC: 뒤로가기          " + id + "님의 대출 내역                     ");
             Console.WriteLine("=============================================================");
             Console.WriteLine();
-
+            Console.WriteLine();
         }
 
-        public void PrintCheckOutBookIdForm()
+        public void PrintCheckOutBookInform()
+        {
+            InformBookList();
+            PrintBookIdFormMemberMode("대출");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("==============================================================================");
+        }
+
+        public void PrintSearchBookInform()
+        {
+            InformBookList();
+            SearchBook();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("==============================================================================");
+        }
+
+        public void PrintBookListInform()
+        {
+            InformBookList();
+            Console.WriteLine();
+            Console.WriteLine("==============================================================================");
+        }
+
+        public void PrintListLine()
         {
             Console.WriteLine();
-            Console.WriteLine("                대출할 책 ID   : ");
             Console.WriteLine();
+            Console.WriteLine("==============================================================================");
         }
 
-        public void PrintReturnBookIdForm()
+
+        public void PrintReturnBookInform(string id)
+        {
+            InformMemberBook(id);
+            PrintBookIdFormMemberMode("반납");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("==============================================================================");
+        }
+        public void PrintBookIdFormMemberMode(string detail)
         {
             Console.WriteLine();
-            Console.WriteLine("                반납할 책 ID   : ");
+            Console.WriteLine("                " + detail + "할 책 ID   : ");
             Console.WriteLine();
         }
-
         public void SearchBook()
         {
             Console.WriteLine();
@@ -214,20 +247,11 @@ namespace LibraryProgram
             Console.WriteLine();
         }
 
-        public void PrintRegistrationSuccessMessage()
+        public void PrintSuccessMessage(string detail)
         {
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("                [성공적으로 등록되었습니다.]");
-            Console.ResetColor();
-            Console.WriteLine();
-        }
-
-        public void PrintEditSuccessMessage()
-        {
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("                [성공적으로 수정되었습니다.]");
+            Console.WriteLine("                [성공적으로 "+ detail +"되었습니다.]");
             Console.ResetColor();
             Console.WriteLine();
         }
@@ -251,7 +275,6 @@ namespace LibraryProgram
 
         public void PrintCheckOutSuccessMessage(string date)
         {
-            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("   [대출이 완료되었습니다. 반납 기한은 " + date + " 입니다.]");
             Console.ResetColor();
@@ -260,16 +283,14 @@ namespace LibraryProgram
 
         public void PrintCountFailMessage()
         {
-            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("     [잔여 수량이 0권입니다. 다른 책 ID를 입력하세요.]");
+            Console.WriteLine("       [잔여 수량이 0권입니다. 다른 ID를 입력하세요.]");
             Console.ResetColor();
             Console.WriteLine();
         }
 
         public void PrintCheckedOutFailMessage()
         {
-            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(" [같은 책은 2권 이상 대출 불가합니다. 다른 ID를 입력하세요.]");
             Console.ResetColor();
@@ -278,7 +299,6 @@ namespace LibraryProgram
 
         public void PrintReturnSuccessMessage()
         {
-            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("                  [반납이 완료되었습니다.]");
             Console.ResetColor();
@@ -287,7 +307,6 @@ namespace LibraryProgram
 
         public void PrintBookIdFailMessage()
         {
-            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("                 [Book ID를 다시 입력하세요.]");
             Console.ResetColor();

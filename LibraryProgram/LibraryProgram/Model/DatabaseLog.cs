@@ -21,7 +21,7 @@ namespace LibraryProgram
 
         public void ExportLog()
         {
-            string query = "SELECT * FROM log INTO OUTFILE '" + path + "\\log.txt'" +
+            string query = "SELECT * FROM log INTO OUTFILE 'log.txt'" +
                 "FIELDS TERMINATED BY ','" +
                 "ENCLOSED BY '\"' ESCAPED BY '\\' LINES TERMINATED BY '\n'";
             connection.Open();
