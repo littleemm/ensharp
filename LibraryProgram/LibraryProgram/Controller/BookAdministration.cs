@@ -36,7 +36,7 @@ namespace LibraryProgram
             Console.Clear();
             Console.SetWindowSize(60, 28);
             bookViewElement.PrintManageBookMenu();
-            string number = menuSelection.CheckMenuNumber(46, 24, Constant.ARRAY_SIX);
+            string number = menuSelection.CheckMenuNumber(46, 25, Constant.ARRAY_SEVEN);
             Console.Clear();
             switch(int.Parse(number))
             {
@@ -68,6 +68,11 @@ namespace LibraryProgram
                 case Constant.LIST:
                     {
                         PrintList();
+                        break;
+                    }
+                case Constant.LIST_OF_CHECKOUT:
+                    {
+                        PrintCheckOutList();
                         break;
                     }
             }
@@ -435,6 +440,15 @@ namespace LibraryProgram
             Console.WriteLine();
             Console.WriteLine("==============================================================================");
             databaseBook.SelectBookList();
+            Console.SetCursorPosition(0, 0);
+        }
+        
+        private void PrintCheckOutList()
+        {
+            bookViewElement.InformCheckOutList();
+            Console.WriteLine();
+            Console.WriteLine("==============================================================================");
+            DatabaseMemberBook.databaseMemberBook.SelectMemberBookList();
             Console.SetCursorPosition(0, 0);
         }
 

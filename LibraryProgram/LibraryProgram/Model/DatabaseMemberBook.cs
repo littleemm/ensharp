@@ -377,6 +377,17 @@ namespace LibraryProgram
             connection.Close();
         }
 
+        public void SelectMemberBookList()
+        {
+            connection.Open();
+
+            MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_MEMBERBOOK, connection);
+            MySqlDataReader dataReader = command.ExecuteReader();
+            ShowDatabase(dataReader);
+            dataReader.Close();
+            connection.Close();
+        }
+
         public bool IsMemberCheckedOut(string memberOrBookId, string id) // 빌린 내역 확인
         {
             connection.Open();
@@ -404,6 +415,21 @@ namespace LibraryProgram
             dataReader.Close();
             connection.Close();
             return true;
+        }
+
+        private void ShowDatabase(MySqlDataReader dataReader) // 데이터베이스의 정보 출력 (모두)
+        {
+            while (dataReader.Read())
+            {
+                Console.WriteLine("      ID      :  " + dataReader["id"].ToString());
+                Console.WriteLine("   BOOK ID    :  " + dataReader["bookId"].ToString());
+                Console.WriteLine("  BOOK NAME   :  " + dataReader["bookName"].ToString());
+                Console.WriteLine("  MEMBER ID   :  " + dataReader["memberId"].ToString());
+                Console.WriteLine("  PUBLISHER   :  " + dataReader["bookPublisher"].ToString() + "\\");
+                Console.WriteLine("CHECKOUT DATE :  " + dataReader["checkOutDate"].ToString());
+                Console.WriteLine("   DUE DATE   :  " + dataReader["duedate"].ToString());
+                Console.WriteLine("==============================================================================");
+            }
         }
     }
 }

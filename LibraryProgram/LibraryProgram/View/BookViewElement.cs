@@ -27,6 +27,7 @@ namespace LibraryProgram
             Console.WriteLine("                      4. SEARCH BOOK                      ");
             Console.WriteLine("                      5. SEARCH NAVER BOOK              ");
             Console.WriteLine("                      6. BOOK LIST                      ");
+            Console.WriteLine("                      7. CHECK OUT LIST                  ");
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
@@ -125,7 +126,6 @@ namespace LibraryProgram
             Console.WriteLine("=============================================================");
             Console.WriteLine();
             Console.WriteLine();
-
         }
 
         public void InformNaverBookList()
@@ -146,6 +146,16 @@ namespace LibraryProgram
             Console.WriteLine();
 
         }
+
+        public void InformCheckOutList()
+        {
+            Console.WriteLine("=============================================================");
+            Console.WriteLine("ESC: 뒤로가기       C H E C K O U T L I S T                   ");
+            Console.WriteLine("=============================================================");
+            Console.WriteLine();
+            Console.WriteLine();
+        }
+
 
         public void InformMemberBook(string id)
         {
