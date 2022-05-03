@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace LibraryProgram
     class DatabaseLog
     {
         private static MySqlConnection connection;
+        private DataSet dataSet = new DataSet(); 
         string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         public DatabaseLog()
         {
@@ -19,12 +21,13 @@ namespace LibraryProgram
 
         public void ExportLog()
         {
-            string query = "SELECT * FROM log INTO OUTFILE '" + path + "/log.txt'" +
-                "FIELDS TERMINTAED BY ','" +
+            string query = "SELECT * FROM log INTO OUTFILE '" + path + "\\log.txt'" +
+                "FIELDS TERMINATED BY ','" +
                 "ENCLOSED BY '\"' ESCAPED BY '\\' LINES TERMINATED BY '\n'";
             connection.Open();
             MySqlCommand command = new MySqlCommand(query, connection);
             MySqlDataAdapter dataAdapter = new MySqlDataAdapter(query, connection);
+            
             connection.Close();
         }
 
@@ -105,11 +108,11 @@ namespace LibraryProgram
                 }
              
 
-                // history를 정렬해야 하는데 너무 긴 경우를 대비해 길이 20이하로 제한
+                // history를 정렬해야 하는데 너무 긴 경우를 대비해 길이 25이하로 제한
                 string history = dataReader["history"].ToString(); ;
-                if (dataReader["history"].ToString().Length > 20)
+                if (dataReader["history"].ToString().Length > 25)
                 {
-                    history = dataReader["history"].ToString().Substring(0,20) + "...";
+                    history = dataReader["history"].ToString().Substring(0,25) + "...";
                 }
 
                 Console.WriteLine(id + " " + dataReader["date"].ToString() + " " + 

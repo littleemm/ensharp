@@ -150,7 +150,7 @@ namespace LibraryProgram
             Console.WriteLine();
             Console.WriteLine("           이름(8자리 이내, 한글만)    :                  ");
             Console.WriteLine();
-            Console.WriteLine("           나이(0~150, 숫자만 입력)    :                  ");
+            Console.WriteLine("           나이(1~150, 숫자만 입력)    :                  ");
             Console.WriteLine();
             Console.WriteLine("             휴대폰 번호(-제외)        :                  ");
             Console.WriteLine();
