@@ -148,7 +148,7 @@ namespace LibraryProgram
             Console.WriteLine();
             Console.WriteLine("  PW (5~8자, 영어·숫자·특수문자 포함) :                  ");
             Console.WriteLine();
-            Console.WriteLine("             이름(25자 이내)            :                  ");
+            Console.WriteLine("            이름 (25자 이내)            :                  ");
             Console.WriteLine();
             Console.WriteLine("        나이(1~150, 숫자만 입력)        :                  ");
             Console.WriteLine();

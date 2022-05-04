@@ -255,32 +255,12 @@ namespace LibraryProgram
                 return false;
             }
 
-            pattern = @"^[가-힣\s]{6,8}$";
-
-            if (Regex.IsMatch(address, pattern))
-            {
-                switch (address.Length)
-                {
-                    case (Constant.ADDRESS_LENGTH_IS_6):
-                        {
-                            return IsAddressFor6(address);
-                        }
-                    case (Constant.ADDRESS_LENGTH_IS_7):
-                        {
-                            return IsAddressFor7(address);
-                        }
-                    case (Constant.ADDRESS_LENGTH_IS_8):
-                        {
-                            return IsAddressFor8(address);
-                        }
-                }
-            }
 
             return false;
             
         }
 
-        private bool IsAddressFor6(string address) // 서울시 중구
+        private bool IsAddressSeoul(string address) // 서울시,
         {
             pattern = @"^[가-힣]{2}시$";
             patternAfter = @"^[가-힣]{1}구$";
