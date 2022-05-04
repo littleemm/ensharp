@@ -33,15 +33,15 @@ namespace LibraryProgram
 
             while (isMemberValue == false)
             {
-                Console.SetCursorPosition(41, 15);
+                Console.SetCursorPosition(42, 15);
                 memberDTO.Id = Console.ReadLine();
                 isMemberValue = databaseMember.IsMemberId(memberDTO.Id);
 
                 if (isMemberValue == true)
                 {
                     viewElement.PrintSameDataSentence(5, 12);
-                    Console.SetCursorPosition(41, 15);
-                    viewElement.ClearLine(0, 41);
+                    Console.SetCursorPosition(42, 15);
+                    viewElement.ClearLine(0, 42);
                     isMemberValue = false;
                     continue;
                 }
@@ -49,7 +49,7 @@ namespace LibraryProgram
                 isMemberValue = exception.IsMemberId(memberDTO.Id);
                 if (isMemberValue == false)
                 {
-                    PrintFalse(41, 15);
+                    PrintFalse(42, 15);
                 }
             }
 
@@ -58,13 +58,13 @@ namespace LibraryProgram
 
             while (isMemberValue == false)
             {
-                Console.SetCursorPosition(41, 17);
+                Console.SetCursorPosition(42, 17);
                 memberDTO.Password = Console.ReadLine();
 
                 isMemberValue = exception.IsPassword(memberDTO.Password);
                 if (isMemberValue == false)
                 {
-                    PrintFalse(41, 17);
+                    PrintFalse(42, 17);
                 }
             }
 
@@ -73,13 +73,13 @@ namespace LibraryProgram
 
             while (isMemberValue == false)
             {
-                Console.SetCursorPosition(41, 19);
+                Console.SetCursorPosition(42, 19);
                 memberDTO.Name = Console.ReadLine();
 
                 isMemberValue = exception.IsMemberName(memberDTO.Name);
                 if (isMemberValue == false)
                 {
-                    PrintFalse(41, 19);
+                    PrintFalse(42, 19);
                 }
             }
 
@@ -88,13 +88,13 @@ namespace LibraryProgram
 
             while (isMemberValue == false)
             {
-                Console.SetCursorPosition(41, 21);
+                Console.SetCursorPosition(42, 21);
                 memberDTO.Age = Console.ReadLine();
 
                 isMemberValue = exception.IsAge(memberDTO.Age);
                 if (isMemberValue == false)
                 {
-                    PrintFalse(41, 21);
+                    PrintFalse(42, 21);
                 }
             }
 
@@ -103,13 +103,13 @@ namespace LibraryProgram
 
             while (isMemberValue == false)
             {
-                Console.SetCursorPosition(41, 23);
+                Console.SetCursorPosition(42, 23);
                 memberDTO.PhoneNumber = Console.ReadLine();
 
                 isMemberValue = exception.IsPhoneNumber(memberDTO.PhoneNumber);
                 if (isMemberValue == false)
                 {
-                    PrintFalse(41, 23);
+                    PrintFalse(42, 23);
                 }
             }
 
@@ -118,13 +118,13 @@ namespace LibraryProgram
 
             while (isMemberValue == false)
             {
-                Console.SetCursorPosition(41, 25);
+                Console.SetCursorPosition(42, 25);
                 memberDTO.Address = Console.ReadLine();
 
                 isMemberValue = exception.IsAddress(memberDTO.Address);
                 if (isMemberValue == false)
                 {
-                    PrintFalse(41, 25);
+                    PrintFalse(42, 25);
                 }
             }
             viewElement.ClearLineEasy(12, 5);

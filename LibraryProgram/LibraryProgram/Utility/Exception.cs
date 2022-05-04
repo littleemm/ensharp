@@ -151,7 +151,6 @@ namespace LibraryProgram
         }
 
 
-
         public bool IsMemberId(string memberId) // 회원 아이디
         {
             if (IsCtrlZ(memberId) == false)
@@ -173,9 +172,8 @@ namespace LibraryProgram
             {
                 return false;
             }
-            pattern = @"^[0-9]{2,5}$";
 
-            if (Regex.IsMatch(password, pattern))
+            if(Regex.IsMatch(password, Constant.PATTERN_PASSWORD))
             {
                 return true;
             }
@@ -189,14 +187,14 @@ namespace LibraryProgram
             {
                 return false;
             }
-            pattern = @"^[가-힣\s]{2,10}$";
 
-            if (IsWhiteSpace(name) == false)
+            if (IsWhiteSpace(name) == false) // 전부 공백으로 입력되는 것을 방지
             {
                 return false;
             }
 
-            if (Regex.IsMatch(name, pattern))
+            if (Regex.IsMatch(name, Constant.PATTERN_NAME_KOR) 
+                || Regex.IsMatch(name, Constant.PATTERN_NAME_ENG))
             {
                 return true;
             }
@@ -235,9 +233,10 @@ namespace LibraryProgram
             {
                 return false;
             }
-            pattern = @"^01[0-9]{9}$"; // 01XXXXXXXXX 형태로
 
-            if (Regex.IsMatch(phoneNumber, pattern))
+            if (Regex.IsMatch(phoneNumber, Constant.PATTERN_TEL_010) 
+                || Regex.IsMatch(phoneNumber, Constant.PATTERN_TEL_0XX)
+                || Regex.IsMatch(phoneNumber, Constant.PATTERN_TEL_02))
             {
                 return true;
             }
