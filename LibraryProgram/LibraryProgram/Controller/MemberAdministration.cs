@@ -31,6 +31,7 @@ namespace LibraryProgram
 
         public void SelectMemberAdministration() // 회원 관리모드에서 메뉴 고르기
         {
+            Console.SetWindowSize(60, 28);
             memberViewElement.PrintManageMemberMenu();
             string number = menuSelection.CheckMenuNumber(46, 23, Constant.ARRAY_FIVE);
             Console.Clear();
@@ -56,7 +57,7 @@ namespace LibraryProgram
                         SearchMember();
                         break;
                     }
-                case Constant.LIST:
+                case Constant.MEMBER_LIST:
                     {
                         PrintList();
                         break;
@@ -73,6 +74,7 @@ namespace LibraryProgram
 
         private void RegisterMember() // 회원 등록
         {
+            Console.SetWindowSize(65, 30);
             memberViewElement.PrintRegistration();
             bool isMemberValue = false;
 
@@ -364,11 +366,14 @@ namespace LibraryProgram
                     viewElement.ClearLine(0, 18);
                 }
             }
+            Console.SetCursorPosition(0, 4);
+            viewElement.ClearLine(0, 0);
 
+            Console.SetCursorPosition(18, 0);
             viewElement.ClearButtomLine(11, 8);
             viewElement.PrintLine();
             databaseMember.SelectMemberOfList(memberId);
-
+            Console.SetCursorPosition(0, 0);
             logVO.User = "관리자";
             logVO.History = "ID ''" + memberId + "'' 회원 검색";
             databaseLog.InsertLog(logVO); // 로그기록

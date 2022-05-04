@@ -42,29 +42,33 @@ namespace LibraryProgram
 
         public void PrintRegistration()
         {
-            Console.WriteLine("ESC: 뒤로가기                                                ");
-            Console.WriteLine("           *                 *                 *            ");
-            Console.WriteLine("                                                           ");
-            Console.WriteLine(" *                  *                  *                  * ");
-            Console.WriteLine("                                                           ");
-            Console.WriteLine("                      REGISTER A BOOK                      ");
-            Console.WriteLine("                                                           ");
-            Console.WriteLine(" *                  *                  *                  * ");
-            Console.WriteLine("                                                           ");
-            Console.WriteLine("           *                 *                 *            ");
+            Console.WriteLine("   ESC: 뒤로가기                                                ");
+            Console.WriteLine("              *                 *                 *            ");
+            Console.WriteLine("                                                              ");
+            Console.WriteLine("    *                  *                  *                  * ");
+            Console.WriteLine("                                                              ");
+            Console.WriteLine("                         REGISTER A BOOK                      ");
+            Console.WriteLine("                                                              ");
+            Console.WriteLine("    *                  *                  *                  * ");
+            Console.WriteLine("                                                              ");
+            Console.WriteLine("              *                 *                 *            ");
             Console.WriteLine();
-            Console.WriteLine("                                                           ");
-            Console.WriteLine("                                                           ");
+            Console.WriteLine("                                                              ");
+            Console.WriteLine("                                                              ");
             Console.WriteLine("         ID (5자 이내, 양의 정수)  : ");
             Console.WriteLine();
-            Console.WriteLine("               NAME (20자 이내)    : ");
+            Console.WriteLine("               NAME (80자 이내)    : ");
             Console.WriteLine();
-            Console.WriteLine("              AUTHOR (15자 이내)   : ");
+            Console.WriteLine("              AUTHOR (50자 이내)   : ");
             Console.WriteLine();
             Console.WriteLine("           PUBLISHER (10자 이내)   : ");
             Console.WriteLine();
             Console.WriteLine("       PRICE (7자 이내, 양의 정수) : ");
-            Console.WriteLine(); 
+            Console.WriteLine();
+            Console.WriteLine("            PUBDATE (YYYYMMDD)    : ");
+            Console.WriteLine();
+            Console.WriteLine("           ISBN  (13자, 양의 정수) : ");
+            Console.WriteLine();
             Console.WriteLine("        QUANTITY (5자 이내, 숫자)  : ");
             Console.WriteLine();
         }
@@ -313,6 +317,15 @@ namespace LibraryProgram
             Console.WriteLine();
         }
 
+        public void PrintLongSuccessMessage()
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("                                                     [성공적으로 등록되었습니다.]");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+
         public void PrintIsbnFailMessage()
         {
             Console.WriteLine();
@@ -321,6 +334,16 @@ namespace LibraryProgram
             Console.ResetColor();
             Console.WriteLine();
         }
+
+        public void PrintLongWarningMessage()
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("                                                    [조건에 맞춰 다시 입력하세요!]");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+
 
         public void PrintWarningMessage()
         {

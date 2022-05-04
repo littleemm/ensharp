@@ -14,8 +14,6 @@ namespace LibraryProgram
 {
     class NaverBookAPI
     {
-        private static string CLIENT_ID = "Gy_693vcZVxD7SqwKVzr";
-        private static string CLIENT_SECRET = "SdGR7yh_9b";
 
         public NaverBookAPI()
         {
@@ -32,8 +30,8 @@ namespace LibraryProgram
             string requestResult = "";
             string url = "https://openapi.naver.com/v1/search/book?query=" + title + "&display=" + display; // 결과가 JSON 포맷
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Headers.Add("X-Naver-Client-Id", CLIENT_ID); // 클라이언트 아이디
-            request.Headers.Add("X-Naver-Client-Secret", CLIENT_SECRET);       // 클라이언트 시크릿
+            request.Headers.Add("X-Naver-Client-Id", Constant.CLIENT_ID); // 클라이언트 아이디
+            request.Headers.Add("X-Naver-Client-Secret", Constant.CLIENT_SECRET);       // 클라이언트 시크릿
 
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             string status = response.StatusCode.ToString();
@@ -97,7 +95,7 @@ namespace LibraryProgram
             return false;
         }
 
-        public BookVO SetBookVO(string title, string display, string isbn)
+        public BookVO SetBookVO(string title, string display, string isbn) // set get
         {
             BookVO bookVO = new BookVO("", "", "", "", "" , "", "", "");
             List<ApiBookVO> bookList = FindBook(title, display);

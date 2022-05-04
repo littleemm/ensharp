@@ -134,6 +134,22 @@ namespace LibraryProgram
             return false;
         }
 
+        public bool IsDate(string date) // 책 수량
+        {
+            if (IsCtrlZ(date) == false)
+            {
+                return false;
+            }
+            pattern = @"^[0-9]{8}$";
+
+            if (Regex.IsMatch(date, pattern))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
 
 
         public bool IsMemberId(string memberId) // 회원 아이디

@@ -175,7 +175,7 @@ namespace LibraryProgram
             bookViewElement.PrintCheckOutSuccessMessage(dueDate.ToString("yyyy-MM-dd"));
 
             logVO.User = id;
-            logVO.History = "도서 ID " + bookId + " 대출";
+            logVO.History = "ID " + bookId + " 도서 대출";
             databaseLog.InsertLog(logVO);
 
         }

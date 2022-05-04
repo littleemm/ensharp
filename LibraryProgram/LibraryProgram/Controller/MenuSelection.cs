@@ -47,7 +47,7 @@ namespace LibraryProgram
             while (isMenuNumber == false)
             {
                 number = ScanMenuKey(x, y);
-                if (number == "0")
+                if (number.Equals("0"))
                 {
                     return number;
                 }
@@ -85,7 +85,7 @@ namespace LibraryProgram
             while (keyInfo.Key != ConsoleKey.Enter)
             {
                 keyInfo = Console.ReadKey(true);
-                if (keyInfo.Key != ConsoleKey.Backspace)
+                if (keyInfo.Key != ConsoleKey.Backspace && keyInfo.Key != ConsoleKey.Enter)
                 {
                     number += keyInfo.KeyChar.ToString();
                     Console.Write(keyInfo.KeyChar.ToString());
@@ -99,7 +99,6 @@ namespace LibraryProgram
                 {
                     return "0";
                 }
-
             }
 
             if(number == "0")

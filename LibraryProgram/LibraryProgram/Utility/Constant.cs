@@ -19,7 +19,7 @@ namespace LibraryProgram
 
         public static string SELECT_QUERY_ADMIN = "SELECT * FROM administrator";
 
-        public static string INSERT_QUERY_BOOK = "INSERT INTO book(id, name, author, publisher, price, quantity, pubdate, isbn)";
+        public static string INSERT_QUERY_BOOK = "INSERT INTO book(id, name, author, publisher, price, pubdate, isbn, quantity)";
         public static string DELETE_QUERY_BOOK = "DELETE FROM book ";
         public static string SELECT_QUERY_BOOK = "SELECT * FROM book";
         public static string UPDATE_QUERY_BOOK = "UPDATE book ";
@@ -49,6 +49,7 @@ namespace LibraryProgram
         public const int SEARCH = 4;
         public const int SEARCH_NAVER = 5;
         public const int LIST = 6;
+        public const int MEMBER_LIST = 5;
         public const int LIST_OF_CHECKOUT = 7;
 
         public const int SEARCH_BOOK = 1;
@@ -59,8 +60,10 @@ namespace LibraryProgram
         public const int GO_BACK_TO_ADMIN = 6;
 
         public const int EDIT_LOG = 1;
-        public const int DELETE_LOG = 2;
-        public const int LOG_LIST = 3;
+        public const int DELETE_LOG = 4;
+        public const int INIT_LOG = 2;
+        public const int SAVE_LOG = 3;
+        public const int LOG_LIST = 5;
 
         public const int LOGIN = 1;
         public const int SIGN_UP = 2;
@@ -79,5 +82,8 @@ namespace LibraryProgram
         public const bool ID_AND_PW_UNCORRECT = true;
         public const bool ID_AND_PW_UNCORRECT_NOW = false;
         public const bool IS_CTRL_Z = true;
+
+        public const string CLIENT_ID = "Gy_693vcZVxD7SqwKVzr";
+        public const string CLIENT_SECRET = "SdGR7yh_9b";
     }
 }

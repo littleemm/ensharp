@@ -26,7 +26,7 @@ namespace LibraryProgram
             Console.Clear();
             Console.SetWindowSize(60, 28);
             logViewElement.PrintManageLogMenu();
-            string number = menuSelection.CheckMenuNumber(46, 21, Constant.ARRAY_THREE);
+            string number = menuSelection.CheckMenuNumber(46, 23, Constant.ARRAY_FIVE);
             Console.Clear();
             switch (int.Parse(number))
             {
@@ -35,9 +35,19 @@ namespace LibraryProgram
                         EditLog();
                         break;
                     }
+                case Constant.INIT_LOG:
+                    {
+                        InitializeLog();
+                        break;
+                    }
+                case Constant.SAVE_LOG:
+                    {
+                        SaveLogFile();
+                        break;
+                    }
                 case Constant.DELETE_LOG:
                     {
-                        DeleteLog();
+                        DeleteLogFile();
                         break;
                     }
                 case Constant.LOG_LIST:
@@ -85,9 +95,9 @@ namespace LibraryProgram
 
         }
 
-        private void DeleteLog() // 로그 전면 삭제
+        private void InitializeLog() // 로그 초기화
         {
-            logViewElement.PrintDeleteLogList();
+            logViewElement.PrintDeleteLogList(" 전부 삭제");
             string number = menuSelection.CheckMenuNumber(46, 20, Constant.ARRAY_TWO);
             switch (int.Parse(number))
             {
@@ -95,6 +105,26 @@ namespace LibraryProgram
                     {
                         databaseLog.TruncateLogList();
                         logViewElement.PrintSuccessMessage("전면 삭제", 0, 18);
+                        break;
+                    }   
+                case Constant.GOBACK:
+                    {
+                        SelectLogAdministration();
+                        break;
+                    }
+            }
+        }
+
+        private void SaveLogFile()
+        {
+            logViewElement.PrintDeleteLogList("파일을 저장");
+            string number = menuSelection.CheckMenuNumber(46, 20, Constant.ARRAY_TWO);
+            switch (int.Parse(number))
+            {
+                case Constant.LOG_DELETE:
+                    {
+                        databaseLog.WriteLog();
+                        logViewElement.PrintSuccessMessage("파일 저장", 0, 18);
                         break;
                     }
                 case Constant.GOBACK:
@@ -105,12 +135,42 @@ namespace LibraryProgram
             }
         }
 
+        private void DeleteLogFile()
+        {
+            logViewElement.PrintDeleteLogList("파일을 삭제");
+            string number = menuSelection.CheckMenuNumber(46, 20, Constant.ARRAY_TWO);
+            switch (int.Parse(number))
+            {
+                case Constant.LOG_DELETE:
+                    {
+                        ConfirmLogFile();
+                        break;
+                    }
+                case Constant.GOBACK:
+                    {
+                        SelectLogAdministration();
+                        break;
+                    }
+            }
+        }
         private void PrintLogList() // 로그 내역을 전부 출력해주는 함수
         {
             Console.SetWindowSize(85, 28);
             logViewElement.PrintLogListSign();
             logViewElement.PrintLogListColumn();
             databaseLog.SelectLogList();
+        }
+
+        private void ConfirmLogFile()
+        {
+            if (databaseLog.IsLogFile())
+            {
+                logViewElement.PrintSuccessMessage("파일 삭제", 0, 18);
+            }
+            else
+            {
+                logViewElement.PrintFailMessage(0, 18);
+            }
         }
     }
 }

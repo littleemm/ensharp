@@ -40,19 +40,19 @@ namespace LibraryProgram
 
         public void PrintRegistration()
         {
-            Console.WriteLine(" ESC: 뒤로가기                                               ");
-            Console.WriteLine("           *                 *                 *            ");
-            Console.WriteLine("                                                           ");
-            Console.WriteLine(" *                  *                  *                  * ");
-            Console.WriteLine("                                                           ");
-            Console.WriteLine("                      REGISTER MEMBER                      ");
-            Console.WriteLine("                                                           ");
-            Console.WriteLine(" *                  *                  *                  * ");
-            Console.WriteLine("                                                           ");
-            Console.WriteLine("           *                 *                 *            ");
+            Console.WriteLine("    ESC: 뒤로가기                                               ");
+            Console.WriteLine("              *                 *                 *            ");
+            Console.WriteLine("                                                              ");
+            Console.WriteLine("    *                  *                  *                  * ");
+            Console.WriteLine("                                                              ");
+            Console.WriteLine("                         REGISTER MEMBER                      ");
+            Console.WriteLine("                                                              ");
+            Console.WriteLine("    *                  *                  *                  * ");
+            Console.WriteLine("                                                              ");
+            Console.WriteLine("              *                 *                 *            ");
             Console.WriteLine();
-            Console.WriteLine("                                                           ");
-            Console.WriteLine("                                                           ");
+            Console.WriteLine("                                                              ");
+            Console.WriteLine("                                                              ");
             Console.WriteLine("     ID(8자리 이내, 영어, 숫자 가능) :                 ");
             Console.WriteLine();
             Console.WriteLine("       PW(5자리 이내, 숫자만 가능)   :                  ");
