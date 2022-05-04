@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryProgram
 {
-    class LogVO
+    class LogDTO
     {
         private string id;
         private string date;
@@ -14,14 +14,14 @@ namespace LibraryProgram
         private string user;
         private string history;
 
-        public LogVO(string id, string user, string history)
+        public LogDTO(string id, string user, string history)
         {
             this.id = id;
             this.user = user;
             this.history = history;
         }
 
-        public LogVO(string date, string time, string user, string history)
+        public LogDTO(string date, string time, string user, string history)
         {
             this.date = date;
             this.time = time;

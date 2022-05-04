@@ -6,45 +6,29 @@ using System.Threading.Tasks;
 
 namespace LibraryProgram
 {
-    class BookVO
+    class ApiBookDTO
     {
-        private string id;
-        private string name;
-        private string publisher;
-        private string author;
+        private string title;
         private string price;
+        private string author;
+        private string publisher;
         private string pubdate;
         private string isbn;
-        private string quantity;
 
-        public BookVO(string id, string name, string publisher, string author, string price, string pubdate, string isbn, string quantity)
+        public ApiBookDTO(string title, string price, string author, string publisher, string pubdate, string isbn)
         {
-            this.id = id;
-            this.name = name;
+            this.title = title;
             this.publisher = publisher;
             this.author = author;
             this.price = price;
             this.pubdate = pubdate;
             this.isbn = isbn;
-            this.quantity = quantity;
         }
 
-        public string Id
+        public string Title
         {
-            get { return id; }
-            set { id = value; }
-        }
-
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-
-        public string Publisher
-        {
-            get { return publisher; }
-            set { publisher = value; }
+            get { return title; }
+            set { title = value; }
         }
 
         public string Author
@@ -53,11 +37,18 @@ namespace LibraryProgram
             set { author = value; }
         }
 
+        public string Publisher
+        {
+            get { return publisher; }
+            set { publisher = value; }
+        }
+
         public string Price
         {
             get { return price; }
             set { price = value; }
         }
+
         public string Pubdate
         {
             get { return pubdate; }
@@ -68,12 +59,6 @@ namespace LibraryProgram
         {
             get { return isbn; }
             set { isbn = value; }
-        }
-
-        public string Quantity
-        {
-            get { return quantity; }
-            set { quantity = value; }
         }
     }
 }

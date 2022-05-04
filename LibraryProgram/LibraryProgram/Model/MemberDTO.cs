@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryProgram
 {
-    class MemberVO
+    class MemberDTO
     {
         private string id;
         private string password;
@@ -15,7 +15,7 @@ namespace LibraryProgram
         private string address;
         private string phoneNumber;
 
-        public MemberVO(string id, string password, string name, string age, string phoneNumber, string address)
+        public MemberDTO(string id, string password, string name, string age, string phoneNumber, string address)
         {
             this.id = id;
             this.password = password;

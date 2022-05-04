@@ -12,24 +12,24 @@ namespace LibraryProgram
         BasicViewElement viewElement;
         MenuSelection menuSelection;
         DatabaseBook databaseBook;
-        BookVO bookVO;
+        BookDTO bookDTO;
         Exception exception;
         NaverBookAPI naverBookAPI;
         DatabaseLog databaseLog;
-        LogVO logVO;
+        LogDTO logDTO;
  
         
-        public BookAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogVO logVO)
+        public BookAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO)
         {
             bookViewElement = new BookViewElement();
-            bookVO = new BookVO("", "", "", "", "", "", "", "");
+            bookDTO = new BookDTO("", "", "", "", "", "", "", "");
             naverBookAPI = new NaverBookAPI();
             this.viewElement = viewElement;
             this.menuSelection = menuSelection;
             this.databaseBook = databaseBook;
             this.exception = exception;
             this.databaseLog = databaseLog;
-            this.logVO = logVO;
+            this.logDTO = logDTO;
         }
 
         public void SelectBookAdministration() // 책 관리 모드에서 메뉴 고르기
@@ -95,8 +95,8 @@ namespace LibraryProgram
             while (isBookValue == false)
             {
                 Console.SetCursorPosition(37, 13);
-                bookVO.Id = Console.ReadLine();
-                isBookValue = databaseBook.IsBookId(bookVO.Id);
+                bookDTO.Id = Console.ReadLine();
+                isBookValue = databaseBook.IsBookId(bookDTO.Id);
 
                 if (isBookValue == true)
                 {
@@ -107,7 +107,7 @@ namespace LibraryProgram
                     continue;
                 }
 
-                isBookValue = exception.IsBookId(bookVO.Id);
+                isBookValue = exception.IsBookId(bookDTO.Id);
                 if (isBookValue  == false)
                 {
                     PrintFalse(37, 13);
@@ -120,9 +120,9 @@ namespace LibraryProgram
             while (isBookValue == false)
             {
                 Console.SetCursorPosition(37, 15);
-                bookVO.Name = Console.ReadLine();
+                bookDTO.Name = Console.ReadLine();
                 
-                isBookValue = exception.IsBookName(bookVO.Name);
+                isBookValue = exception.IsBookName(bookDTO.Name);
                 if (isBookValue == false)
                 {
                     PrintFalse(37, 15);
@@ -135,9 +135,9 @@ namespace LibraryProgram
             while (isBookValue == false)
             {
                 Console.SetCursorPosition(37, 17);
-                bookVO.Author = Console.ReadLine();
+                bookDTO.Author = Console.ReadLine();
                 
-                isBookValue = exception.IsBookAuthor(bookVO.Author);
+                isBookValue = exception.IsBookAuthor(bookDTO.Author);
                 if (isBookValue == false)
                 {
                     PrintFalse(37, 17);
@@ -150,9 +150,9 @@ namespace LibraryProgram
             while (isBookValue == false)
             {
                 Console.SetCursorPosition(37, 19);
-                bookVO.Publisher = Console.ReadLine();
+                bookDTO.Publisher = Console.ReadLine();
                 
-                isBookValue = exception.IsBookPublisher(bookVO.Publisher);
+                isBookValue = exception.IsBookPublisher(bookDTO.Publisher);
                 if (isBookValue == false)
                 {
                     PrintFalse(37, 19);
@@ -165,9 +165,9 @@ namespace LibraryProgram
             while (isBookValue == false)
             {
                 Console.SetCursorPosition(37, 21);
-                bookVO.Price = Console.ReadLine();
+                bookDTO.Price = Console.ReadLine();
 
-                isBookValue = exception.IsPrice(bookVO.Price);
+                isBookValue = exception.IsPrice(bookDTO.Price);
                 if (isBookValue == false)
                 {
                     PrintFalse(37, 21);
@@ -180,9 +180,9 @@ namespace LibraryProgram
             while (isBookValue == false)
             {
                 Console.SetCursorPosition(37, 23);
-                bookVO.Pubdate = Console.ReadLine();
+                bookDTO.Pubdate = Console.ReadLine();
 
-                isBookValue = exception.IsDate(bookVO.Pubdate);
+                isBookValue = exception.IsDate(bookDTO.Pubdate);
                 if (isBookValue == false)
                 {
                     PrintFalse(37, 23);
@@ -195,9 +195,9 @@ namespace LibraryProgram
             while (isBookValue == false)
             {
                 Console.SetCursorPosition(37, 25);
-                bookVO.Isbn = Console.ReadLine();
+                bookDTO.Isbn = Console.ReadLine();
 
-                isBookValue = exception.IsIsbn(bookVO.Isbn);
+                isBookValue = exception.IsIsbn(bookDTO.Isbn);
                 if (isBookValue == false)
                 {
                     PrintFalse(37, 25);
@@ -210,9 +210,9 @@ namespace LibraryProgram
             while (isBookValue == false)
             {
                 Console.SetCursorPosition(37, 27);
-                bookVO.Quantity = Console.ReadLine();
+                bookDTO.Quantity = Console.ReadLine();
 
-                isBookValue = exception.IsQuantity(bookVO.Quantity);
+                isBookValue = exception.IsQuantity(bookDTO.Quantity);
                 if (isBookValue == false)
                 {
                     PrintFalse(37, 27);
@@ -221,12 +221,12 @@ namespace LibraryProgram
 
             viewElement.ClearLineEasy(10, 8);
 
-            databaseBook.InsertBook(bookVO);
+            databaseBook.InsertBook(bookDTO);
             bookViewElement.PrintSuccessMessage("등록");
 
-            logVO.User = "관리자";
-            logVO.History = "도서 Id " + bookVO.Id + "인 도서 ''" + bookVO.Name + "'' 추가";
-            databaseLog.InsertLog(logVO);
+            logDTO.User = "관리자";
+            logDTO.History = "도서 Id " + bookDTO.Id + "인 도서 ''" + bookDTO.Name + "'' 추가";
+            databaseLog.InsertLog(logDTO);
         }
 
         private void EditBook()
@@ -373,9 +373,9 @@ namespace LibraryProgram
             databaseBook.DeleteBook(bookId);
             bookViewElement.PrintDeleteSuccessMessage();
 
-            logVO.User = "관리자";
-            logVO.History = "ID " + bookId + " 도서 삭제";
-            databaseLog.InsertLog(logVO);
+            logDTO.User = "관리자";
+            logDTO.History = "ID " + bookId + " 도서 삭제";
+            databaseLog.InsertLog(logDTO);
         }
 
         private void SearchBook()
@@ -405,9 +405,9 @@ namespace LibraryProgram
             databaseBook.SelectBookOfList(bookValue);
             Console.SetCursorPosition(0, 0);
 
-            logVO.User = "관리자";
-            logVO.History = "''" + bookValue + "'' 도서 검색";
-            databaseLog.InsertLog(logVO);
+            logDTO.User = "관리자";
+            logDTO.History = "''" + bookValue + "'' 도서 검색";
+            databaseLog.InsertLog(logDTO);
         }
 
         private void SearchNaverBook()
@@ -448,9 +448,9 @@ namespace LibraryProgram
             bookViewElement.InformNaverBookListAfter();
             bookViewElement.AddNaverBookForm();
 
-            logVO.User = "관리자";
-            logVO.History = "NAVER 책 검색에서 ''" + bookTitle + "'' 도서 검색";
-            databaseLog.InsertLog(logVO);
+            logDTO.User = "관리자";
+            logDTO.History = "NAVER 책 검색에서 ''" + bookTitle + "'' 도서 검색";
+            databaseLog.InsertLog(logDTO);
 
             naverBookAPI.SearchNaverAPI(bookTitle, bookQuantity);
             while (isBookValue == false)
@@ -569,37 +569,37 @@ namespace LibraryProgram
 
         private void ConnectDatabase(string title, string display, string isbn, string id, string quantity)
         {
-            BookVO bookVO = naverBookAPI.SetBookVO(title, display, isbn);
-            bookVO.Id = id;
-            bookVO.Quantity = quantity;
-            databaseBook.InsertBook(bookVO);
+            BookDTO bookDTO = naverBookAPI.SetBookDTO(title, display, isbn);
+            bookDTO.Id = id;
+            bookDTO.Quantity = quantity;
+            databaseBook.InsertBook(bookDTO);
 
-            logVO.User = "관리자";
-            logVO.History = "NAVER 책에서 ''" + bookVO.Name + "'' 도서 추가";
-            databaseLog.InsertLog(logVO);
+            logDTO.User = "관리자";
+            logDTO.History = "NAVER 책에서 ''" + bookDTO.Name + "'' 도서 추가";
+            databaseLog.InsertLog(logDTO);
         }
         
         private void AddEditLogToDatabase(string quantity, string price)
         {
-            logVO.User = "관리자";
+            logDTO.User = "관리자";
 
             if (quantity.Length > 0 && price.Length == 0)
             {
-                logVO.History = "도서 수량을 ''" + quantity + "''(으)로 수정";
+                logDTO.History = "도서 수량을 ''" + quantity + "''(으)로 수정";
             }
 
             else if (quantity.Length == 0 && price.Length > 0)
             {
-                logVO.History = "도서 가격을 ''" + price + "''(으)로 수정";
+                logDTO.History = "도서 가격을 ''" + price + "''(으)로 수정";
             }
 
             else if (quantity.Length > 0 && price.Length > 0)
             {
-                logVO.History = "도서 수량을 ''" + quantity + "''(으)로 수정, " +
+                logDTO.History = "도서 수량을 ''" + quantity + "''(으)로 수정, " +
                     "도서 가격을 ''" + price + "''(으)로 수정";
             }
 
-            databaseLog.InsertLog(logVO);
+            databaseLog.InsertLog(logDTO);
         }
     }
 }

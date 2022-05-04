@@ -47,24 +47,24 @@ namespace LibraryProgram
             return requestResult;
         }
 
-        public List<ApiBookVO> FindBook(string title, string display)
+        public List<ApiBookDTO> FindBook(string title, string display)
         { // API에서의 데이터를 LIST에 넣는 과정
             string requestResult = OpenAPI(title, display);
            
             var parseJson = JObject.Parse(requestResult);
 
-            List<ApiBookVO> bookList = JsonConvert.DeserializeObject<List<ApiBookVO>>(parseJson["items"].ToString());
+            List<ApiBookDTO> bookList = JsonConvert.DeserializeObject<List<ApiBookDTO>>(parseJson["items"].ToString());
 
             return bookList;
         }
 
         private void EditResultData(string title, string display)
         { // 검색한 것 중 추려서 출력해야하는데, 이때 쓸모없는 것들도 없애야함
-            List<ApiBookVO> bookList = FindBook(title, display);
+            List<ApiBookDTO> bookList = FindBook(title, display);
 
             Console.WriteLine("==================================================================================================================================");
 
-            foreach (ApiBookVO book in bookList)
+            foreach (ApiBookDTO book in bookList)
             {
                 book.Title = book.Title.Replace("<b>", "");
                 book.Title = book.Title.Replace("</b>", "");
@@ -83,9 +83,9 @@ namespace LibraryProgram
 
         public bool IsIsbnData(string title, string display, string isbn)
         { // 데이터베이스(도서 목록)에 추가하기 위한 isbn 판별 함수
-            List<ApiBookVO> bookList = FindBook(title, display);
+            List<ApiBookDTO> bookList = FindBook(title, display);
     
-            foreach (ApiBookVO book in bookList)
+            foreach (ApiBookDTO book in bookList)
             {
                 if (isbn == book.Isbn.Substring(11))
                 {
@@ -95,11 +95,11 @@ namespace LibraryProgram
             return false;
         }
 
-        public BookVO SetBookVO(string title, string display, string isbn) // set get
+        public BookDTO SetBookDTO(string title, string display, string isbn) // set get
         {
-            BookVO bookVO = new BookVO("", "", "", "", "" , "", "", "");
-            List<ApiBookVO> bookList = FindBook(title, display);
-            foreach (ApiBookVO book in bookList)
+            BookDTO bookDTO = new BookDTO("", "", "", "", "" , "", "", "");
+            List<ApiBookDTO> bookList = FindBook(title, display);
+            foreach (ApiBookDTO book in bookList)
             {
                 if (isbn == book.Isbn.Substring(11))
                 {
@@ -107,16 +107,16 @@ namespace LibraryProgram
                     book.Title = book.Title.Replace("</b>", "");
                     book.Author = book.Author.Replace("<b>", "");
                     book.Author = book.Author.Replace("</b>", "");
-                    bookVO.Name = book.Title;
-                    bookVO.Price = book.Price;
-                    bookVO.Publisher = book.Publisher;
-                    bookVO.Author = book.Author;
-                    bookVO.Pubdate = book.Pubdate;
-                    bookVO.Isbn = book.Isbn.Substring(11);
+                    bookDTO.Name = book.Title;
+                    bookDTO.Price = book.Price;
+                    bookDTO.Publisher = book.Publisher;
+                    bookDTO.Author = book.Author;
+                    bookDTO.Pubdate = book.Pubdate;
+                    bookDTO.Isbn = book.Isbn.Substring(11);
                 }
             }
 
-            return bookVO;
+            return bookDTO;
         }
     }
 }

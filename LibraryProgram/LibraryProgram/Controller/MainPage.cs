@@ -14,23 +14,23 @@ namespace LibraryProgram
         LoginSystem loginSystem;
         DatabaseMember databaseMember;
         DatabaseBook databaseBook;
-        MemberVO memberVO;
+        MemberDTO memberDTO;
         Exception exception;
         DatabaseLog databaseLog;
-        LogVO logVO;
+        LogDTO logDTO;
 
         public MainPage()
         {
-            memberVO = new MemberVO("", "", "", "", "", "");
-            logVO = new LogVO("", "", "", "");
+            memberDTO = new MemberDTO("", "", "", "", "", "");
+            logDTO = new LogDTO("", "", "", "");
             basicViewElement = new BasicViewElement();
             databaseMember = new DatabaseMember();
             databaseBook = new DatabaseBook();
             exception = new Exception();
             databaseLog = new DatabaseLog();
             menuSelection = new MenuSelection(basicViewElement);
-            loginSystem = new LoginSystem(basicViewElement, menuSelection, databaseMember, memberVO, databaseBook, exception, databaseLog, logVO);
-            modeSelection = new ModeSelection(menuSelection, loginSystem, basicViewElement, memberVO, databaseMember, exception, databaseLog, logVO);
+            loginSystem = new LoginSystem(basicViewElement, menuSelection, databaseMember, memberDTO, databaseBook, exception, databaseLog, logDTO);
+            modeSelection = new ModeSelection(menuSelection, loginSystem, basicViewElement, memberDTO, databaseMember, exception, databaseLog, logDTO);
         }
 
         public void ShowMainPage()

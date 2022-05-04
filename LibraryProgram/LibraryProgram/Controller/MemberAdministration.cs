@@ -12,21 +12,21 @@ namespace LibraryProgram
         BasicViewElement viewElement;
         MenuSelection menuSelection;
         DatabaseMember databaseMember;
-        MemberVO memberVO;
+        MemberDTO memberDTO;
         Exception exception;
         DatabaseLog databaseLog;
-        LogVO logVO;
+        LogDTO logDTO;
 
-        public MemberAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberVO memberVO, Exception exception, DatabaseLog databaseLog, LogVO logVO)
+        public MemberAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberDTO memberDTO, Exception exception, DatabaseLog databaseLog, LogDTO logDTO)
         {
             memberViewElement = new MemberViewElement();
             this.viewElement = viewElement;
             this.menuSelection = menuSelection;
             this.databaseMember = databaseMember;
-            this.memberVO = memberVO;
+            this.memberDTO = memberDTO;
             this.exception = exception;
             this.databaseLog = databaseLog;
-            this.logVO = logVO;
+            this.logDTO = logDTO;
         }
 
         public void SelectMemberAdministration() // 회원 관리모드에서 메뉴 고르기
@@ -81,8 +81,8 @@ namespace LibraryProgram
             while (isMemberValue == false)
             {
                 Console.SetCursorPosition(40, 13);
-                memberVO.Id = Console.ReadLine(); // 아이디 입력
-                isMemberValue = databaseMember.IsMemberId(memberVO.Id);
+                memberDTO.Id = Console.ReadLine(); // 아이디 입력
+                isMemberValue = databaseMember.IsMemberId(memberDTO.Id);
 
                 if (isMemberValue == true)
                 {
@@ -93,7 +93,7 @@ namespace LibraryProgram
                     continue;
                 }
 
-                isMemberValue = exception.IsMemberId(memberVO.Id);
+                isMemberValue = exception.IsMemberId(memberDTO.Id);
                 if (isMemberValue == false)
                 {
                     PrintFalse(40, 13);
@@ -106,9 +106,9 @@ namespace LibraryProgram
             while (isMemberValue == false)
             {
                 Console.SetCursorPosition(40, 15);
-                memberVO.Password = Console.ReadLine(); // 비밀번호
+                memberDTO.Password = Console.ReadLine(); // 비밀번호
 
-                isMemberValue = exception.IsPassword(memberVO.Password);
+                isMemberValue = exception.IsPassword(memberDTO.Password);
                 if (isMemberValue == false)
                 {
                     PrintFalse(40, 15);
@@ -121,9 +121,9 @@ namespace LibraryProgram
             while (isMemberValue == false)
             {
                 Console.SetCursorPosition(40, 17);
-                memberVO.Name = Console.ReadLine(); // 이름
+                memberDTO.Name = Console.ReadLine(); // 이름
 
-                isMemberValue = exception.IsMemberName(memberVO.Name);
+                isMemberValue = exception.IsMemberName(memberDTO.Name);
                 if (isMemberValue == false)
                 {
                     PrintFalse(40, 17);
@@ -136,9 +136,9 @@ namespace LibraryProgram
             while (isMemberValue == false)
             {
                 Console.SetCursorPosition(40, 19);
-                memberVO.Age = Console.ReadLine(); // 나이
+                memberDTO.Age = Console.ReadLine(); // 나이
 
-                isMemberValue = exception.IsAge(memberVO.Age);
+                isMemberValue = exception.IsAge(memberDTO.Age);
                 if (isMemberValue == false)
                 {
                     PrintFalse(40, 19);
@@ -151,9 +151,9 @@ namespace LibraryProgram
             while (isMemberValue == false)
             {
                 Console.SetCursorPosition(40, 21);
-                memberVO.PhoneNumber = Console.ReadLine(); // 번호
+                memberDTO.PhoneNumber = Console.ReadLine(); // 번호
 
-                isMemberValue = exception.IsPhoneNumber(memberVO.PhoneNumber);
+                isMemberValue = exception.IsPhoneNumber(memberDTO.PhoneNumber);
                 if (isMemberValue == false)
                 {
                     PrintFalse(40, 21);
@@ -166,9 +166,9 @@ namespace LibraryProgram
             while (isMemberValue == false)
             {
                 Console.SetCursorPosition(40, 23);
-                memberVO.Address = Console.ReadLine(); // 주소
+                memberDTO.Address = Console.ReadLine(); // 주소
 
-                isMemberValue = exception.IsAddress(memberVO.Address);
+                isMemberValue = exception.IsAddress(memberDTO.Address);
                 if (isMemberValue == false)
                 {
                     PrintFalse(40, 23);
@@ -176,12 +176,12 @@ namespace LibraryProgram
             }
 
             viewElement.ClearLineEasy(11, 6);
-            databaseMember.InsertMember(memberVO); // 조건에 전부 맞았을 경우 VO를 데베로 보내기
+            databaseMember.InsertMember(memberDTO); // 조건에 전부 맞았을 경우 VO를 데베로 보내기
             memberViewElement.PrintRegistrationSuccessMessage();
 
-            logVO.User = "관리자";
-            logVO.History = "ID ''" + memberVO.Id + "'' 회원 추가";
-            databaseLog.InsertLog(logVO); // 로그 기록
+            logDTO.User = "관리자";
+            logDTO.History = "ID ''" + memberDTO.Id + "'' 회원 추가";
+            databaseLog.InsertLog(logDTO); // 로그 기록
         }
 
         private void EditMember() // 회원정보 수정
@@ -330,9 +330,9 @@ namespace LibraryProgram
             databaseMember.DeleteMember(memberId);
             memberViewElement.PrintDeleteSuccessMessage();
 
-            logVO.User = "관리자";
-            logVO.History = "ID ''" + memberId + "'' 회원 삭제";
-            databaseLog.InsertLog(logVO); // 로그 기록
+            logDTO.User = "관리자";
+            logDTO.History = "ID ''" + memberId + "'' 회원 삭제";
+            databaseLog.InsertLog(logDTO); // 로그 기록
         }
 
         private void SearchMember() // 회원 검색
@@ -374,32 +374,32 @@ namespace LibraryProgram
             viewElement.PrintLine();
             databaseMember.SelectMemberOfList(memberId);
             Console.SetCursorPosition(0, 0);
-            logVO.User = "관리자";
-            logVO.History = "ID ''" + memberId + "'' 회원 검색";
-            databaseLog.InsertLog(logVO); // 로그기록
+            logDTO.User = "관리자";
+            logDTO.History = "ID ''" + memberId + "'' 회원 검색";
+            databaseLog.InsertLog(logDTO); // 로그기록
         }
 
         private void AddEditLogToDatabase(string memberId, string address, string number)
         { // 회원 수정 메뉴에서 로그 기록하는 함수
-            logVO.User = "관리자";
+            logDTO.User = "관리자";
 
             if (address.Length > 0 && number.Length == 0)
             {
-                logVO.History = "회원 ''" + memberId + "''의 주소를 ''" + address + "''(으)로 수정";
+                logDTO.History = "회원 ''" + memberId + "''의 주소를 ''" + address + "''(으)로 수정";
             }
 
             else if (address.Length == 0 && number.Length > 0)
             {
-                logVO.History = "회원 ''" + memberId + "''의 전화번호를 ''" + number + "''(으)로 수정";
+                logDTO.History = "회원 ''" + memberId + "''의 전화번호를 ''" + number + "''(으)로 수정";
             }
 
             else if (address.Length > 0 && number.Length > 0)
             { // 둘다 수정할 경우 (위의 두 경우는 하나씩 수정)
-                logVO.History = "회원 ''" + memberId + "''의 주소를 ''" + address + "''(으)로 수정, " +
+                logDTO.History = "회원 ''" + memberId + "''의 주소를 ''" + address + "''(으)로 수정, " +
                     "전화번호를 ''" + number + "''(으)로 수정";
             }
 
-            databaseLog.InsertLog(logVO); // 로그 기록 성공
+            databaseLog.InsertLog(logDTO); // 로그 기록 성공
         }
 
         private void PrintList()

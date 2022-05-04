@@ -17,12 +17,12 @@ namespace LibraryProgram
             connection = new MySqlConnection(Constant.STRING_CONNECTION);
         }
 
-        public void InsertBook(BookVO bookVO) // 등록
+        public void InsertBook(BookDTO bookDTO) // 등록
         {
             string query = Constant.INSERT_QUERY_BOOK +
-                "Value('" + bookVO.Id + "', '" + bookVO.Name + "', '" + bookVO.Author + "', '" +
-                bookVO.Publisher + "', '" + bookVO.Price + "', '" + bookVO.Pubdate + "', '" +
-                bookVO.Isbn + "', '" + bookVO.Quantity + "');";
+                "Value('" + bookDTO.Id + "', '" + bookDTO.Name + "', '" + bookDTO.Author + "', '" +
+                bookDTO.Publisher + "', '" + bookDTO.Price + "', '" + bookDTO.Pubdate + "', '" +
+                bookDTO.Isbn + "', '" + bookDTO.Quantity + "');";
 
             connection.Open();
             MySqlCommand command = new MySqlCommand(query, connection);

@@ -9,20 +9,20 @@ namespace LibraryProgram
     class FormOfSignUp
     {
         BasicViewElement viewElement;
-        MemberVO memberVO;
+        MemberDTO memberDTO;
         DatabaseMember databaseMember;
         Exception exception;
         DatabaseLog databaseLog;
-        LogVO logVO;
+        LogDTO logDTO;
 
-        public FormOfSignUp(BasicViewElement viewElement, MemberVO memberVO, DatabaseMember databaseMember, Exception exception, DatabaseLog databaseLog, LogVO logVO)
+        public FormOfSignUp(BasicViewElement viewElement, MemberDTO memberDTO, DatabaseMember databaseMember, Exception exception, DatabaseLog databaseLog, LogDTO logDTO)
         {
             this.viewElement = viewElement;
-            this.memberVO = memberVO;
+            this.memberDTO = memberDTO;
             this.databaseMember = databaseMember;
             this.exception = exception;
             this.databaseLog = databaseLog;
-            this.logVO = logVO;
+            this.logDTO = logDTO;
         }
 
         public void ShowSignUpPage() // 회원가입 페이지
@@ -34,8 +34,8 @@ namespace LibraryProgram
             while (isMemberValue == false)
             {
                 Console.SetCursorPosition(41, 15);
-                memberVO.Id = Console.ReadLine();
-                isMemberValue = databaseMember.IsMemberId(memberVO.Id);
+                memberDTO.Id = Console.ReadLine();
+                isMemberValue = databaseMember.IsMemberId(memberDTO.Id);
 
                 if (isMemberValue == true)
                 {
@@ -46,7 +46,7 @@ namespace LibraryProgram
                     continue;
                 }
 
-                isMemberValue = exception.IsMemberId(memberVO.Id);
+                isMemberValue = exception.IsMemberId(memberDTO.Id);
                 if (isMemberValue == false)
                 {
                     PrintFalse(41, 15);
@@ -59,9 +59,9 @@ namespace LibraryProgram
             while (isMemberValue == false)
             {
                 Console.SetCursorPosition(41, 17);
-                memberVO.Password = Console.ReadLine();
+                memberDTO.Password = Console.ReadLine();
 
-                isMemberValue = exception.IsPassword(memberVO.Password);
+                isMemberValue = exception.IsPassword(memberDTO.Password);
                 if (isMemberValue == false)
                 {
                     PrintFalse(41, 17);
@@ -74,9 +74,9 @@ namespace LibraryProgram
             while (isMemberValue == false)
             {
                 Console.SetCursorPosition(41, 19);
-                memberVO.Name = Console.ReadLine();
+                memberDTO.Name = Console.ReadLine();
 
-                isMemberValue = exception.IsMemberName(memberVO.Name);
+                isMemberValue = exception.IsMemberName(memberDTO.Name);
                 if (isMemberValue == false)
                 {
                     PrintFalse(41, 19);
@@ -89,9 +89,9 @@ namespace LibraryProgram
             while (isMemberValue == false)
             {
                 Console.SetCursorPosition(41, 21);
-                memberVO.Age = Console.ReadLine();
+                memberDTO.Age = Console.ReadLine();
 
-                isMemberValue = exception.IsAge(memberVO.Age);
+                isMemberValue = exception.IsAge(memberDTO.Age);
                 if (isMemberValue == false)
                 {
                     PrintFalse(41, 21);
@@ -104,9 +104,9 @@ namespace LibraryProgram
             while (isMemberValue == false)
             {
                 Console.SetCursorPosition(41, 23);
-                memberVO.PhoneNumber = Console.ReadLine();
+                memberDTO.PhoneNumber = Console.ReadLine();
 
-                isMemberValue = exception.IsPhoneNumber(memberVO.PhoneNumber);
+                isMemberValue = exception.IsPhoneNumber(memberDTO.PhoneNumber);
                 if (isMemberValue == false)
                 {
                     PrintFalse(41, 23);
@@ -119,20 +119,20 @@ namespace LibraryProgram
             while (isMemberValue == false)
             {
                 Console.SetCursorPosition(41, 25);
-                memberVO.Address = Console.ReadLine();
+                memberDTO.Address = Console.ReadLine();
 
-                isMemberValue = exception.IsAddress(memberVO.Address);
+                isMemberValue = exception.IsAddress(memberDTO.Address);
                 if (isMemberValue == false)
                 {
                     PrintFalse(41, 25);
                 }
             }
             viewElement.ClearLineEasy(12, 5);
-            databaseMember.InsertMember(memberVO);
+            databaseMember.InsertMember(memberDTO);
             
-            logVO.User = memberVO.Id;
-            logVO.History = "회원가입";
-            databaseLog.InsertLog(logVO);
+            logDTO.User = memberDTO.Id;
+            logDTO.History = "회원가입";
+            databaseLog.InsertLog(logDTO);
         }
 
         private void PrintFalse(int x, int y)

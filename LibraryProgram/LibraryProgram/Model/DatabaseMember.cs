@@ -56,11 +56,11 @@ namespace LibraryProgram
             return false;
         }
 
-        public void InsertMember(MemberVO memberVO) // 등록
+        public void InsertMember(MemberDTO memberDTO) // 등록
         {
             string query = Constant.INSERT_QUERY_MEMBER +
-                "Value('" +  memberVO.Id + "', '" + memberVO.Password + "', '" + memberVO.Name + "', '" +
-                memberVO.Age + "', '" + memberVO.PhoneNumber + "', '" + memberVO.Address + "', '" + "0');";
+                "Value('" +  memberDTO.Id + "', '" + memberDTO.Password + "', '" + memberDTO.Name + "', '" +
+                memberDTO.Age + "', '" + memberDTO.PhoneNumber + "', '" + memberDTO.Address + "', '" + "0');";
 
             connection.Open();
             MySqlCommand command = new MySqlCommand(query, connection);

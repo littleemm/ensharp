@@ -14,11 +14,11 @@ namespace LibraryProgram
     {
         private static MySqlConnection connection; 
         string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+ "/log.txt";
-        private LogVO logListVO;
+        private LogDTO logListDTO;
         public DatabaseLog()
         {
             connection = new MySqlConnection(Constant.STRING_CONNECTION);
-            logListVO = new LogVO("", "", "");
+            logListDTO = new LogDTO("", "", "");
         }
 
         public void WriteLog()
@@ -31,18 +31,18 @@ namespace LibraryProgram
             if (File.Exists(path))
             {
                 writer = File.AppendText(path);
-                logListVO = SortLog(dataReader);
-                writer.WriteLine(logListVO.Id + " " + dataReader["date"].ToString() + " " +
-               dataReader["time"].ToString() + " " + logListVO.User + " " +
-               logListVO.History);
+                logListDTO = SortLog(dataReader);
+                writer.WriteLine(logListDTO.Id + " " + dataReader["date"].ToString() + " " +
+               dataReader["time"].ToString() + " " + logListDTO.User + " " +
+               logListDTO.History);
             }
             else
             {
                 writer = File.CreateText(path);
-                logListVO = SortLog(dataReader);
-                writer.WriteLine(logListVO.Id + " " + dataReader["date"].ToString() + " " +
-               dataReader["time"].ToString() + " " + logListVO.User + " " +
-               logListVO.History);
+                logListDTO = SortLog(dataReader);
+                writer.WriteLine(logListDTO.Id + " " + dataReader["date"].ToString() + " " +
+               dataReader["time"].ToString() + " " + logListDTO.User + " " +
+               logListDTO.History);
             }
 
             writer.Close();
@@ -61,16 +61,16 @@ namespace LibraryProgram
             return false;
         }
 
-        public void InsertLog(LogVO logVO) // 로그 등록
+        public void InsertLog(LogDTO logDTO) // 로그 등록
         {
             DateTime today = DateTime.Today;
             DateTime now = DateTime.Now;
-            logVO.Date = today.ToString("yyyy-MM-dd");
-            logVO.Time = now.ToString("hh:mm:ss");
+            logDTO.Date = today.ToString("yyyy-MM-dd");
+            logDTO.Time = now.ToString("hh:mm:ss");
 
             string query = Constant.INSERT_QUERY_LOG +
-                "Value('" + logVO.Date + "', '" + logVO.Time + "', '" + logVO.User + "', '" +
-                logVO.History + "');";
+                "Value('" + logDTO.Date + "', '" + logDTO.Time + "', '" + logDTO.User + "', '" +
+                logDTO.History + "');";
 
             connection.Open();
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -111,12 +111,12 @@ namespace LibraryProgram
             MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_LOG, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
-            logListVO = SortLog(dataReader);
-            if (!string.IsNullOrWhiteSpace(logListVO.Id))
+            logListDTO = SortLog(dataReader);
+            if (!string.IsNullOrWhiteSpace(logListDTO.Id))
             {
-                Console.WriteLine(logListVO.Id + " " + dataReader["date"].ToString() + " " +
-                 dataReader["time"].ToString() + " " + logListVO.User + " " +
-                 logListVO.History);
+                Console.WriteLine(logListDTO.Id + " " + dataReader["date"].ToString() + " " +
+                 dataReader["time"].ToString() + " " + logListDTO.User + " " +
+                 logListDTO.History);
             }
             dataReader.Close();
             connection.Close();
@@ -151,9 +151,9 @@ namespace LibraryProgram
             return false;
         }
 
-        private LogVO SortLog(MySqlDataReader dataReader)
+        private LogDTO SortLog(MySqlDataReader dataReader)
         {
-            LogVO logVO = new LogVO("", "", "");
+            LogDTO logVO = new LogDTO("", "", "");
             while (dataReader.Read())
             {
                 // id를 정렬하기 위해 공백을 채우는 과정 (4자리 채우기)
