@@ -8,10 +8,18 @@ namespace LibraryProgram
 {
     class LogVO
     {
+        private string id;
         private string date;
         private string time;
         private string user;
         private string history;
+
+        public LogVO(string id, string user, string history)
+        {
+            this.id = id;
+            this.user = user;
+            this.history = history;
+        }
 
         public LogVO(string date, string time, string user, string history)
         {
@@ -19,6 +27,12 @@ namespace LibraryProgram
             this.time = time;
             this.user = user;
             this.history = history;
+        }
+
+        public string Id
+        {
+            get { return id; }
+            set { id = value; }
         }
 
         public string Date
