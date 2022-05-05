@@ -44,16 +44,16 @@ namespace LibraryProgram
             string number = "";
             bool isMenuNumber = false;
 
-            while (isMenuNumber == false)
+            while (!isMenuNumber)
             {
                 number = ScanMenuKey(x, y);
-                if (number.Equals("0"))
+                if (number.Equals("\\n"))
                 {
                     return number;
                 }
                 isMenuNumber = IsMenuNumber(number, numberArray);
 
-                if (isMenuNumber == false)
+                if (!isMenuNumber)
                 {
                     viewElement.ClearLine(1, x);
                     Console.SetCursorPosition(x, y);
@@ -87,7 +87,7 @@ namespace LibraryProgram
                 keyInfo = Console.ReadKey(true);
                 if (keyInfo.Key == ConsoleKey.Escape)
                 {
-                    return "0";
+                    return "\\n";
                 }
                 else if (keyInfo.Key != ConsoleKey.Backspace && keyInfo.Key != ConsoleKey.Enter)
                 {
@@ -100,11 +100,6 @@ namespace LibraryProgram
                     Console.Write("\b \b");
                 }
                 
-            }
-
-            if(number == "0")
-            {
-                ScanMenuKey(x, y);
             }
 
             return number;

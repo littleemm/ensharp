@@ -72,48 +72,50 @@ namespace LibraryProgram
             bookViewElement.PrintManageBookMenu();
             string number = menuSelection.CheckMenuKey(46, 25, Constant.ARRAY_SEVEN);
             Console.Clear();
-            switch (int.Parse(number))
+            if (number.Equals("\\n"))
             {
-                case (0):
-                    {
-                        ShowAdministratorPage();
-                        break;
-                    }
-                case Constant.REGISTRATION:
-                    {
-                        bookAdministration.RegisterBook();
-                        break;
-                    }
-                case Constant.EDIT:
-                    {
-                        bookAdministration.EditBook();
-                        break;
-                    }
-                case Constant.DELETE:
-                    {
-                        bookAdministration.DeleteBook();
-                        break;
-                    }
-                case Constant.SEARCH:
-                    {
-                        bookAdministration.SearchBook();
-                        break;
-                    }
-                case Constant.SEARCH_NAVER:
-                    {
-                        bookAdministration.SearchNaverBook();
-                        break;
-                    }
-                case Constant.LIST:
-                    {
-                        bookAdministration.PrintList();
-                        break;
-                    }
-                case Constant.LIST_OF_CHECKOUT:
-                    {
-                        bookAdministration.PrintCheckOutList();
-                        break;
-                    }
+                ShowAdministratorPage();
+            }
+            else
+            {
+                switch (int.Parse(number))
+                {
+                    case Constant.REGISTRATION:
+                        {
+                            bookAdministration.RegisterBook();
+                            break;
+                        }
+                    case Constant.EDIT:
+                        {
+                            bookAdministration.EditBook();
+                            break;
+                        }
+                    case Constant.DELETE:
+                        {
+                            bookAdministration.DeleteBook();
+                            break;
+                        }
+                    case Constant.SEARCH:
+                        {
+                            bookAdministration.SearchBook();
+                            break;
+                        }
+                    case Constant.SEARCH_NAVER:
+                        {
+                            bookAdministration.SearchNaverBook();
+                            break;
+                        }
+                    case Constant.LIST:
+                        {
+                            bookAdministration.PrintList();
+                            break;
+                        }
+                    case Constant.LIST_OF_CHECKOUT:
+                        {
+                            bookAdministration.PrintCheckOutList();
+                            break;
+                        }
+                }
             }
             CreateKey();
         }
@@ -233,5 +235,7 @@ namespace LibraryProgram
                 SelectLogAdministration();
             }
         }
+
+
     }
 }
