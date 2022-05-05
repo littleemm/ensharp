@@ -139,7 +139,7 @@ namespace LibraryProgram
             {
                 return false;
             }
-            pattern = @"^[0-9]{3}$";
+            pattern = @"^[0-9]{1,3}$";
 
             if (Regex.IsMatch(quantity, pattern) && int.Parse(quantity) >= 1 && int.Parse(quantity) <= 100)
             {
