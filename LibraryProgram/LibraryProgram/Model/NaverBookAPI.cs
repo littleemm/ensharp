@@ -51,7 +51,7 @@ namespace LibraryProgram
         { // API에서의 데이터를 LIST에 넣는 과정
             string requestResult = OpenAPI(title, display);
            
-            var parseJson = JObject.Parse(requestResult);
+            JObject parseJson = JObject.Parse(requestResult);
 
             List<ApiBookDTO> bookList = JsonConvert.DeserializeObject<List<ApiBookDTO>>(parseJson["items"].ToString());
 

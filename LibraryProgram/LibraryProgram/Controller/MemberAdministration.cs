@@ -17,10 +17,10 @@ namespace LibraryProgram
         DatabaseLog databaseLog;
         LogDTO logDTO;
 
-        public MemberAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberDTO memberDTO, Exception exception, DatabaseLog databaseLog, LogDTO logDTO)
-        {
-            memberViewElement = new MemberViewElement();
+        public MemberAdministration(BasicViewElement viewElement, MemberViewElement memberViewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberDTO memberDTO, Exception exception, DatabaseLog databaseLog, LogDTO logDTO)
+        { 
             this.viewElement = viewElement;
+            this.memberViewElement = memberViewElement;
             this.menuSelection = menuSelection;
             this.databaseMember = databaseMember;
             this.memberDTO = memberDTO;
@@ -29,50 +29,7 @@ namespace LibraryProgram
             this.logDTO = logDTO;
         }
 
-        public void SelectMemberAdministration() // 회원 관리모드에서 메뉴 고르기
-        {
-            Console.SetWindowSize(60, 28);
-            memberViewElement.PrintManageMemberMenu();
-            string number = menuSelection.CheckMenuNumber(46, 23, Constant.ARRAY_FIVE);
-            Console.Clear();
-            switch (int.Parse(number))
-            {
-                case Constant.REGISTRATION:
-                    {
-                        RegisterMember();
-                        break;
-                    }
-                case Constant.EDIT:
-                    {
-                        EditMember();
-                        break;
-                    }
-                case Constant.DELETE:
-                    {
-                        DeleteMember();
-                        break;
-                    }
-                case Constant.SEARCH:
-                    {
-                        SearchMember();
-                        break;
-                    }
-                case Constant.MEMBER_LIST:
-                    {
-                        PrintList();
-                        break;
-                    }
-            }
-
-            ConsoleKeyInfo consoleKey = Console.ReadKey();
-            if (consoleKey.Key == ConsoleKey.Escape)
-            {
-                Console.Clear();
-                SelectMemberAdministration();
-            }
-        }
-
-        private void RegisterMember() // 회원 등록
+        public void RegisterMember() // 회원 등록
         {
             Console.SetWindowSize(74, 33);
             memberViewElement.PrintRegistration();
@@ -184,7 +141,7 @@ namespace LibraryProgram
             databaseLog.InsertLog(logDTO); // 로그 기록
         }
 
-        private void EditMember() // 회원정보 수정
+        public void EditMember() // 회원정보 수정
         {
             memberViewElement.PrintEditMember();
             memberViewElement.PrintEditMemberForm();
@@ -287,7 +244,7 @@ namespace LibraryProgram
 
         }
 
-        private void DeleteMember() // 회원 삭제
+        public void DeleteMember() // 회원 삭제
         {
             memberViewElement.PrintDeleteMember();
             memberViewElement.PrintDeleteMemberForm();
@@ -335,7 +292,7 @@ namespace LibraryProgram
             databaseLog.InsertLog(logDTO); // 로그 기록
         }
 
-        private void SearchMember() // 회원 검색
+        public void SearchMember() // 회원 검색
         {
             string memberId = "";
             bool isMemberId = false;
@@ -402,7 +359,7 @@ namespace LibraryProgram
             databaseLog.InsertLog(logDTO); // 로그 기록 성공
         }
 
-        private void PrintList()
+        public void PrintList()
         { 
             memberViewElement.InformMemberList();
             Console.WriteLine();

@@ -85,7 +85,11 @@ namespace LibraryProgram
             while (keyInfo.Key != ConsoleKey.Enter)
             {
                 keyInfo = Console.ReadKey(true);
-                if (keyInfo.Key != ConsoleKey.Backspace && keyInfo.Key != ConsoleKey.Enter)
+                if (keyInfo.Key == ConsoleKey.Escape)
+                {
+                    return "0";
+                }
+                else if (keyInfo.Key != ConsoleKey.Backspace && keyInfo.Key != ConsoleKey.Enter)
                 {
                     number += keyInfo.KeyChar.ToString();
                     Console.Write(keyInfo.KeyChar.ToString());
@@ -95,10 +99,7 @@ namespace LibraryProgram
                     number = number.Substring(0, (number.Length - 1));
                     Console.Write("\b \b");
                 }
-                else if (keyInfo.Key == ConsoleKey.Escape)
-                {
-                    return "0";
-                }
+                
             }
 
             if(number == "0")

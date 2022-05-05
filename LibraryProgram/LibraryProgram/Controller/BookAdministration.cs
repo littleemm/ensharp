@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryProgram
 {
-    class BookAdministration
+    class BookAdministration 
     {
         BookViewElement bookViewElement;
         BasicViewElement viewElement;
@@ -19,12 +19,12 @@ namespace LibraryProgram
         LogDTO logDTO;
  
         
-        public BookAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO)
+        public BookAdministration(BasicViewElement viewElement, BookViewElement bookViewElement, MenuSelection menuSelection, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO)
         {
-            bookViewElement = new BookViewElement();
             bookDTO = new BookDTO("", "", "", "", "", "", "", "");
             naverBookAPI = new NaverBookAPI();
             this.viewElement = viewElement;
+            this.bookViewElement = bookViewElement;
             this.menuSelection = menuSelection;
             this.databaseBook = databaseBook;
             this.exception = exception;
@@ -32,61 +32,7 @@ namespace LibraryProgram
             this.logDTO = logDTO;
         }
 
-        public void SelectBookAdministration() // 책 관리 모드에서 메뉴 고르기
-        {
-            Console.Clear();
-            Console.SetWindowSize(60, 28);
-            bookViewElement.PrintManageBookMenu();
-            string number = menuSelection.CheckMenuNumber(46, 25, Constant.ARRAY_SEVEN);
-            Console.Clear();
-            switch(int.Parse(number))
-            {
-                case Constant.REGISTRATION: 
-                    {
-                        RegisterBook();
-                        break;
-                    }
-                case Constant.EDIT:
-                    {
-                        EditBook();
-                        break;
-                    }
-                case Constant.DELETE:
-                    {
-                        DeleteBook();
-                        break;
-                    }
-                case Constant.SEARCH:
-                    {
-                        SearchBook();
-                        break;
-                    }
-                case Constant.SEARCH_NAVER:
-                    {
-                        SearchNaverBook();
-                        break;
-                    }
-                case Constant.LIST:
-                    {
-                        PrintList();
-                        break;
-                    }
-                case Constant.LIST_OF_CHECKOUT:
-                    {
-                        PrintCheckOutList();
-                        break;
-                    }
-            }
-
-            ConsoleKeyInfo consoleKey = Console.ReadKey();
-            if (consoleKey.Key == ConsoleKey.Escape)
-            {
-                Console.Clear();
-                SelectBookAdministration();
-            }
-        }
-
-        private void RegisterBook()
+        public void RegisterBook()
         {
             Console.SetWindowSize(65, 30);
             bookViewElement.PrintRegistration();
@@ -229,7 +175,7 @@ namespace LibraryProgram
             databaseLog.InsertLog(logDTO);
         }
 
-        private void EditBook()
+        public void EditBook()
         {
             bookViewElement.PrintEditBook();
             bookViewElement.PrintEditBookForm();
@@ -331,7 +277,7 @@ namespace LibraryProgram
             }
         }
 
-        private void DeleteBook()
+        public void DeleteBook()
         {
             bookViewElement.PrintDeleteBook();
             bookViewElement.PrintBookIdForm();
@@ -378,7 +324,7 @@ namespace LibraryProgram
             databaseLog.InsertLog(logDTO);
         }
 
-        private void SearchBook()
+        public void SearchBook()
         {
             string bookValue;
             bookViewElement.InformBookList();
@@ -410,7 +356,7 @@ namespace LibraryProgram
             databaseLog.InsertLog(logDTO);
         }
 
-        private void SearchNaverBook()
+        public void SearchNaverBook()
         {
             string bookTitle = "", bookQuantity = "";
             bool isBookValue = false;
@@ -469,7 +415,7 @@ namespace LibraryProgram
             bookViewElement.PrintLongSuccessMessage();
         }
 
-        private void PrintList()
+        public void PrintList()
         {
             bookViewElement.InformBookList();
             Console.WriteLine();
@@ -478,7 +424,7 @@ namespace LibraryProgram
             Console.SetCursorPosition(0, 0);
         }
         
-        private void PrintCheckOutList()
+        public void PrintCheckOutList()
         {
             bookViewElement.InformCheckOutList();
             Console.WriteLine();

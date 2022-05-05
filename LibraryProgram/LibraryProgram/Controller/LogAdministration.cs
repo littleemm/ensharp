@@ -13,59 +13,14 @@ namespace LibraryProgram
         DatabaseLog databaseLog;
         LogViewElement logViewElement;
 
-        public LogAdministration(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseLog databaseLog)
+        public LogAdministration(BasicViewElement viewElement, LogViewElement logViewElement, MenuSelection menuSelection, DatabaseLog databaseLog)
         {
             this.viewElement = viewElement;
+            this.logViewElement = logViewElement;
             this.menuSelection = menuSelection;
             this.databaseLog = databaseLog;
-
-            logViewElement = new LogViewElement();
         }
-        public void SelectLogAdministration() // 로그 관리 모드에서 메뉴 선택
-        {
-            Console.Clear();
-            Console.SetWindowSize(60, 28);
-            logViewElement.PrintManageLogMenu();
-            string number = menuSelection.CheckMenuNumber(46, 23, Constant.ARRAY_FIVE);
-            Console.Clear();
-            switch (int.Parse(number))
-            {
-                case Constant.EDIT_LOG:
-                    {
-                        EditLog();
-                        break;
-                    }
-                case Constant.INIT_LOG:
-                    {
-                        InitializeLog();
-                        break;
-                    }
-                case Constant.SAVE_LOG:
-                    {
-                        SaveLogFile();
-                        break;
-                    }
-                case Constant.DELETE_LOG:
-                    {
-                        DeleteLogFile();
-                        break;
-                    }
-                case Constant.LOG_LIST:
-                    {
-                        PrintLogList();
-                        break;
-                    }
-            }
-
-            ConsoleKeyInfo consoleKey = Console.ReadKey();
-            if (consoleKey.Key == ConsoleKey.Escape)
-            {
-                Console.Clear();
-                SelectLogAdministration();
-            }
-        }
-
-        private void EditLog() // 로그 일부 삭제
+        public void EditLog() // 로그 일부 삭제
         {
             string id = "";
             bool isLogId = false;
@@ -95,7 +50,7 @@ namespace LibraryProgram
 
         }
 
-        private void InitializeLog() // 로그 초기화
+        public void InitializeLog() // 로그 초기화
         {
             logViewElement.PrintDeleteLogList(" 전부 삭제");
             string number = menuSelection.CheckMenuNumber(46, 20, Constant.ARRAY_TWO);
@@ -109,13 +64,12 @@ namespace LibraryProgram
                     }   
                 case Constant.GOBACK:
                     {
-                        SelectLogAdministration();
                         break;
                     }
             }
         }
 
-        private void SaveLogFile()
+        public void SaveLogFile() // 로그 파일 저장(이미 존재하는 경우에는 파일 덮어쓰기)
         {
             logViewElement.PrintDeleteLogList("파일을 저장");
             string number = menuSelection.CheckMenuNumber(46, 20, Constant.ARRAY_TWO);
@@ -129,13 +83,13 @@ namespace LibraryProgram
                     }
                 case Constant.GOBACK:
                     {
-                        SelectLogAdministration();
+                       
                         break;
                     }
             }
         }
 
-        private void DeleteLogFile()
+        public void DeleteLogFile() // 로그 파일 삭제
         {
             logViewElement.PrintDeleteLogList("파일을 삭제");
             string number = menuSelection.CheckMenuNumber(46, 20, Constant.ARRAY_TWO);
@@ -148,12 +102,12 @@ namespace LibraryProgram
                     }
                 case Constant.GOBACK:
                     {
-                        SelectLogAdministration();
+                        
                         break;
                     }
             }
         }
-        private void PrintLogList() // 로그 내역을 전부 출력해주는 함수
+        public void PrintLogList() // 로그 내역을 전부 출력해주는 함수
         {
             Console.SetWindowSize(85, 28);
             logViewElement.PrintLogListSign();
