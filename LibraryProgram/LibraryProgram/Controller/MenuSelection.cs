@@ -82,7 +82,7 @@ namespace LibraryProgram
         {
             string number = "";
             Console.SetCursorPosition(x, y);
-
+            keyInfo = new ConsoleKeyInfo();
             while (keyInfo.Key != ConsoleKey.Enter)
             {
                 keyInfo = Console.ReadKey(true);

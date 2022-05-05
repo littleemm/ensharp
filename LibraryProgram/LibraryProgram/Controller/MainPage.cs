@@ -30,7 +30,7 @@ namespace LibraryProgram
             databaseLog = new DatabaseLog();
             menuSelection = new MenuSelection(basicViewElement);
             loginSystem = new LoginSystem(basicViewElement, menuSelection, databaseMember, memberDTO, databaseBook, exception, databaseLog, logDTO);
-            modeSelection = new ModeSelection(menuSelection, loginSystem, basicViewElement, memberDTO, databaseMember, exception, databaseLog, logDTO);
+            modeSelection = new ModeSelection(menuSelection, loginSystem, basicViewElement, memberDTO, databaseMember, databaseBook, exception, databaseLog, logDTO);
         }
 
         public void ShowMainPage()

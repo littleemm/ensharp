@@ -25,9 +25,7 @@ namespace LibraryProgram
             this.databaseMember = databaseMember;
             this.viewElement = viewElement;
             this.menuSelection = menuSelection;
-            administratorMode = new AdministratorMode(viewElement, menuSelection, databaseMember, memberDTO, databaseBook, exception, databaseLog, logDTO);
-            memberMode = new MemberMode(viewElement, menuSelection, databaseMember, databaseBook, exception, databaseLog, logDTO);
-        }
+}
 
         public void LoginAdministratorMode() // 관리자 로그인 모드
         {
@@ -45,10 +43,9 @@ namespace LibraryProgram
                     viewElement.PrintLoginWarning(2, 12);
                 }
             }
-            SelectManagement();
         }
 
-        public void LoginMemberMode() // 로그인 회원모드
+        public string LoginMemberMode() // 로그인 회원모드
         {
             Console.Clear();
             bool isIdAndPassword = Constant.ID_AND_PW_UNCORRECT_NOW;
@@ -65,9 +62,7 @@ namespace LibraryProgram
                     viewElement.PrintLoginWarning(2, 12);
                 }
             }
-
-            SelectMenu(id);
-            
+            return id;
         }
 
         public void LoginAll() // 공통 로그인 폼 함수
@@ -95,86 +90,5 @@ namespace LibraryProgram
             }
         }
 
-        private void SelectManagement() // 관리자 메뉴
-        {
-            Console.Clear();
-            viewElement.PrintAdministratorPage();
-            string number = menuSelection.CheckMenuKey(46, 23, Constant.ARRAY_FOUR);
-            Console.Clear();
-            if (number.Equals("\\n"))
-            {
-                LoginAdministratorMode();
-            }
-            switch (int.Parse(number))
-            {
-                case Constant.MEMBER_MANAGE:
-                    {
-                        administratorMode.SelectMemberAdministration();
-                        break;
-                    }
-                case Constant.BOOK_MANAGE:
-                    {
-                        administratorMode.SelectBookAdministration();
-                        break;
-                    }
-                case Constant.LOG_MANAGE:
-                    {
-                        administratorMode.SelectLogAdministration();
-                        break;
-                    }
-                case Constant.EXIT:
-                    {
-                        administratorMode.AskExit();
-                        break;
-                    }
-            }
-        }
-
-        private void SelectMenu(string id)
-        {
-            Console.Clear();
-            viewElement.PrintMemberMode();
-            string number = menuSelection.CheckMenuKey(46, 24, Constant.ARRAY_FIVE);
-            Console.Clear();
-            if (number.Equals("\\n"))
-            {
-                LoginMemberMode();
-            }
-            switch (int.Parse(number))
-            {
-                case Constant.SEARCH_BOOK:
-                    {
-                        memberMode.SearchBook(id);
-                        break;
-                    }
-                case Constant.BOOKLIST:
-                    {
-                        memberMode.PrintList();
-                        break;
-                    }
-                case Constant.CHECKOUT:
-                    {
-                        memberMode.CheckOutBook(id);
-                        break;
-                    }
-                case Constant.RETURN:
-                    {
-                        memberMode.ReturnBook(id);
-                        break;
-                    }
-                case Constant.MYPAGE:
-                    {
-                        memberMode.EditMyInformation(id);
-                        break;
-                    }
-            }
-
-            ConsoleKeyInfo consoleKey = Console.ReadKey();
-            if (consoleKey.Key == ConsoleKey.Escape)
-            {
-                Console.Clear();
-                SelectMenu(id);
-            }
-        }
     }
 }

@@ -30,42 +30,7 @@ namespace LibraryProgram
             this.menuSelection = menuSelection;
         }
 
-        public void ShowAdministratorPage()
-        {
-            Console.Clear();
-            viewElement.PrintAdministratorPage();
-            SelectManagement();
-        }
-
-        private void SelectManagement()
-        {
-            string number = menuSelection.CheckMenuNumber(46, 23, Constant.ARRAY_FOUR);
-            Console.Clear();
-            switch(int.Parse(number))
-            {
-                case Constant.MEMBER_MANAGE:
-                    {
-                        SelectMemberAdministration();
-                        break;
-                    }
-                case Constant.BOOK_MANAGE: 
-                    {
-                        SelectBookAdministration(); 
-                        break;
-                    }
-                case Constant.LOG_MANAGE:
-                    {
-                        SelectLogAdministration();
-                        break;
-                    }
-                case Constant.EXIT: 
-                    {
-                        AskExit();
-                        break;
-                    }
-            }
-        }
-        public void SelectBookAdministration() // 책 관리 모드에서 메뉴 선택
+        public string SelectBookAdministration() // 책 관리 모드에서 메뉴 선택
         {
             Console.Clear();
             Console.SetWindowSize(60, 28);
@@ -74,10 +39,10 @@ namespace LibraryProgram
             Console.Clear();
             if (number.Equals("\\n"))
             {
-                ShowAdministratorPage();
+                return number;
             }
             else
-            {
+            { 
                 switch (int.Parse(number))
                 {
                     case Constant.REGISTRATION:
@@ -123,9 +88,10 @@ namespace LibraryProgram
                 Console.Clear();
                 SelectBookAdministration();
             }
+            return number;
         }
 
-        public void SelectMemberAdministration() // 회원 관리모드에서 메뉴 선택
+        public string SelectMemberAdministration() // 회원 관리모드에서 메뉴 선택
         {
             Console.Clear();
             Console.SetWindowSize(60, 28);
@@ -134,17 +100,12 @@ namespace LibraryProgram
             Console.Clear();
             if (number.Equals("\\n"))
             {
-                ShowAdministratorPage();
+                return number;
             }
             else
             {
                 switch (int.Parse(number))
                 {
-                    case (0):
-                        {
-                            ShowAdministratorPage();
-                            break;
-                        }
                     case Constant.REGISTRATION:
                         {
                             memberAdministration.RegisterMember();
@@ -178,9 +139,10 @@ namespace LibraryProgram
                 Console.Clear();
                 SelectMemberAdministration();
             }
+            return number;
         }
 
-        public void SelectLogAdministration() // 로그 관리 모드에서 메뉴 선택
+        public string SelectLogAdministration() // 로그 관리 모드에서 메뉴 선택
         {
             Console.Clear();
             Console.SetWindowSize(60, 28);
@@ -189,17 +151,12 @@ namespace LibraryProgram
             Console.Clear();
             if (number.Equals("\\n"))
             {
-                ShowAdministratorPage();
+                return number;
             }
             else
             {
                 switch (int.Parse(number))
                 {
-                    case (0):
-                        {
-                            ShowAdministratorPage();
-                            break;
-                        }
                     case Constant.EDIT_LOG:
                         {
                             logAdministration.EditLog();
@@ -233,9 +190,10 @@ namespace LibraryProgram
                 Console.Clear();
                 SelectLogAdministration();
             }
+            return number;
         }
 
-        public void AskExit() // 나가기 전 한 번 더 묻기
+        public string AskExit() // 나가기 전 한 번 더 묻기
         {
             viewElement.PrintExitForm();
             string menuNumber = menuSelection.CheckMenuNumber(46, 21, Constant.ARRAY_TWO);
@@ -249,10 +207,11 @@ namespace LibraryProgram
                     }
                 case Constant.GOBACK:
                     {
-                        ShowAdministratorPage();
-                        break;
+                        return "\\n";
                     }
             }
+
+            return "";
         }
 
 
