@@ -94,5 +94,24 @@ namespace LibraryProgram
         public const string PATTERN_TEL_010 = @"^010[0-9]{9}$"; // 11자리 폰번호
         public const string PATTERN_TEL_0XX = @"^0[1-9]{2}[0-9]{7}$"; // 10자리 폰번호, 서울 외 전화번호
         public const string PATTERN_TEL_02 = @"^02[0-9]{7-8}$"; // 서울 전화번호
+
+        public static string[] NAME = { "인천", "대구", "광주", "대전", "울산", "부산" };
+        public static string[] NAMEOF = { "인천", "대구", "울산", "부산" };
+
+        public const string PATTERN_ADDRESS_METROPOLITANCITY = @"^[가-힣]{2}시$";
+        public const string PATTERN_ADDRESS_METROPOLITAN = @"^[가-힣]{2}광역시$";
+        public const string PATTERN_ADDRESS_PROVINCE_ISLAND = @"^[가-힣]{2,3}도$";
+
+        public const string PATTERN_ADDRESS_CITY = @"^[가-힣]{2,3}시$";
+        public const string PATTERN_ADDRESS_DISTRICT = @"^[가-힣]{1,4}구$";
+        public const string PATTERN_ADDRESS_COUNTY = @"^[가-힣]{2}군$";
+
+        public const string PATTERN_ADDRESS_TOWN = @"^[가-힣]{1,3}읍$";
+        public const string PATTERN_ADDRESS_TOWNSHIP = @"^[가-힣]{1,3}면$";
+
+        public const string PATTERN_ADDRESS_ROAD_GIL = @"^[가-힣0-9]{1,9}길$";
+        public const string PATTERN_ADDRESS_ROAD_RO = @"^[가-힣0-9]{1,6}로$";
+
+        public const string PATTERN_ADDRESS_NUMBER = @"^[0-9]{1,5}$";
     }
 }

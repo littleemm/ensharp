@@ -254,91 +254,174 @@ namespace LibraryProgram
             {
                 return false;
             }
+            string[] array = address.Split(' ');
 
+            if (array[0].Equals("서울시") || array[0].Equals("서울특별시"))
+            { // 서울시
+                return IsSeoulAddress(array);
+            }
+
+            else if (IsMetropolitanName(array[0], Constant.NAME) && (Regex.IsMatch(array[0], Constant.PATTERN_ADDRESS_METROPOLITANCITY) || Regex.IsMatch(array[0], Constant.PATTERN_ADDRESS_METROPOLITAN)))
+            { // 광역시
+                return IsMetropolitanAddress(array);
+            }
+            else if (array[0].Equals("세종시") || array[0].Equals("세종특별자치시"))
+            { // 세종시
+                return IsSejongCityAddress(array);
+            }
+
+            else if (Regex.IsMatch(array[0], Constant.PATTERN_ADDRESS_PROVINCE_ISLAND) || array[0].Equals("제주특별자치도"))
+            { // 도, 제주도
+                return IsProvinceOrJejuAddress(array);
+            }
 
             return false;
             
         }
 
-        private bool IsAddressSeoul(string address) // 서울시,
+        private bool IsSeoulAddress(string[] array)
         {
-            pattern = @"^[가-힣]{2}시$";
-            patternAfter = @"^[가-힣]{1}구$";
-            if (Regex.IsMatch(address.Substring(0, 3), pattern) && Regex.IsMatch(address.Substring(4), patternAfter))
+            if (IsDistrictAndCountyForSpecial(array) && IsRoad(array) && IsBuildingNumber(array))
             {
+                return true;
+            }
+            return false;
+        }
+
+        private bool IsMetropolitanAddress(string[] array)
+        {
+            if (array.Length == 4 && IsDistrictAndCountyForSpecial(array) && IsRoad(array) && IsBuildingNumber(array))
+            { // 인천광역시 남동구 정각로 9
+                return true;
+            }
+            else if (array.Length == 5 && IsDistrictAndCountyForSpecial(array) && IsTownAndTownship(array) && IsRoad(array) && IsBuildingNumber(array))
+            { // 대구광역시 달성군 현풍읍 테크노대로 36
+                return true;
+            }
+            return false;
+        }
+        
+        private bool IsSejongCityAddress(string[] array)
+        {
+            if (array.Length == 3 && IsRoad(array) && IsBuildingNumber(array))
+            { // 세종특별자치시 갈매로 477
+                return true;
+            }
+            else if (array.Length == 4 && IsTownAndTownship(array) && IsRoad(array) && IsBuildingNumber(array))
+            { // 세종특별자치시 연서면 연서로 148
+                return true;
+            }
+            return false;
+        }
+
+        private bool IsProvinceOrJejuAddress(string[] array)
+        {
+            if (array.Length == 4 && IsCityAndCounty(array) && IsRoad(array) && IsBuildingNumber(array))
+            { // 강원도 춘천시 중앙로 1, 제주특별자치도 제주시 임항로 286
+                return true;
+            }
+            else if (array.Length == 5 && IsCityAndCounty(array) && IsTownAndTownship(array) && IsRoad(array) && IsBuildingNumber(array))
+            { // 경기도 남양주시 진접읍 해밀예당3로 38, 경상북도 울릉군 북면 울릉순환로 2620 
+                return true;
+            }
+            else if ((array.Length == 5 || array.Length == 6) && IsCityAndCounty(array) && IsDistirct(array) && IsTownAndTownship(array) && IsRoad(array) && IsBuildingNumber(array))
+            { // 경기도 안산시 단원구 화랑로 387, 경상남도 창원시 마산회원구 내서읍 삼계10길 22
                 return true;
             }
 
             return false;
         }
 
-        private bool IsAddressFor7(string address) // 서울시 광진구, 경기도 부천시, 세종시 연서면, 세종시 도담동, 대구시 달성군
+        private bool IsDistrictAndCountyForSpecial(string[] array) // 구/군 체크 (특별시, 광역시)
         {
-            string[] addressAfter = { "구", "시", "군", "면", "동" };
-
-            pattern = @"^[가-힣]{2}시$";
-
-            for (int i = 0; i < addressAfter.Length; i++)
+            if (array.Length == 4 && Regex.IsMatch(array[1], Constant.PATTERN_ADDRESS_DISTRICT)) // 구
             {
-                patternAfter = @"^[가-힣]{2}" + addressAfter[i] + "$";
-                if (Regex.IsMatch(address.Substring(0, 3), pattern) && Regex.IsMatch(address.Substring(4), patternAfter))
-                {
-                    return true;
-                }
+                return true;
             }
-            pattern = @"^[가-힣]{2}도$";
-
-            for (int i = 0; i < addressAfter.Length; i++)
-            {
-                patternAfter = @"^[가-힣]{2}" + addressAfter[i] + "$";
-                if (Regex.IsMatch(address.Substring(0, 3), pattern) && Regex.IsMatch(address.Substring(4), patternAfter))
-                {
-                    return true;
-                }
+            else if (IsMetropolitanName(array[0], Constant.NAMEOF) && Regex.IsMatch(array[1], Constant.PATTERN_ADDRESS_COUNTY))
+            { // 일부 광역시 군
+                return true;
             }
 
             return false;
         }
 
-        private bool IsAddressFor8(string address) // 서울시 영등포구, 세종시 조치원읍, 경기도 남양주시, 충청북도 괴산군 
+        private bool IsDistirct(string[] array) // 구 체크
         {
-            string[] addressAfter = { "구", "시", "군", "읍", "면", "동" };
-            pattern = @"^[가-힣]{2}시$";
-
-            for (int i = 0; i < addressAfter.Length; i++)
-            {
-                patternAfter = @"^[가-힣]{3}" + addressAfter[i] + "$";
-                if (Regex.IsMatch(address.Substring(0, 3), pattern) && Regex.IsMatch(address.Substring(4), patternAfter))
-                {
-                    return true;
-                }
+            if ((array.Length == 5 || array.Length == 6)&& Regex.IsMatch(array[2], Constant.PATTERN_ADDRESS_DISTRICT)) // 구
+            { // 경기도 안산시 단원구 화랑로 387, 경상남도 창원시 마산회원구 내서읍 삼계10길 22
+                return true;
             }
-
-            pattern = @"^[가-힣]{2}도$";
-
-            for (int i = 0; i < addressAfter.Length; i++)
-            {
-                patternAfter = @"^[가-힣]{3}" + addressAfter[i] + "$";
-                if (Regex.IsMatch(address.Substring(0, 3), pattern) && Regex.IsMatch(address.Substring(4), patternAfter))
-                {
-                    return true;
-                }
-            }
-
-            pattern = @"^[가-힣]{3}도$";
-
-            for (int i = 0; i < addressAfter.Length; i++)
-            {
-                patternAfter = @"^[가-힣]{2}" + addressAfter[i] + "$";
-                if (Regex.IsMatch(address.Substring(0, 4), pattern) && Regex.IsMatch(address.Substring(5), patternAfter))
-                {
-                    return true;
-                }
-            }
-
             return false;
         }
 
+        private bool IsTownAndTownship(string[] array) // 읍/면 체크 
+        {
+            if (array.Length == 5 && (Regex.IsMatch(array[2], Constant.PATTERN_ADDRESS_TOWN) || Regex.IsMatch(array[2], Constant.PATTERN_ADDRESS_TOWNSHIP)))
+            { // 대구광역시 달성군 현풍읍 테크노대로 36, 경기도 남양주시 진접읍 해밀예당3로 38
+                return true;
+            }
+            else if (array.Length == 6 && (Regex.IsMatch(array[3], Constant.PATTERN_ADDRESS_TOWN) || Regex.IsMatch(array[3], Constant.PATTERN_ADDRESS_TOWNSHIP)))
+            { // 경상남도 창원시 마산회원구 내서읍 삼계10길 22
+                return true;
+            }
+            else if (array.Length == 4 && (Regex.IsMatch(array[1], Constant.PATTERN_ADDRESS_TOWN) || Regex.IsMatch(array[1], Constant.PATTERN_ADDRESS_TOWNSHIP)))
+            { // 세종특별자치시 조치원읍 세종로 2439, 세종특별자치시 연서면 연서로 148
+                return true;
+            }
+            return false;
+        }
+
+        private bool IsRoad(string[] array) // 도로 체크
+        {
+            if (array.Length == 3 && (Regex.IsMatch(array[1], Constant.PATTERN_ADDRESS_ROAD_GIL) || Regex.IsMatch(array[1], Constant.PATTERN_ADDRESS_ROAD_RO)))
+            {
+                return true;
+            }
+            else if (array.Length == 4 && (Regex.IsMatch(array[2], Constant.PATTERN_ADDRESS_ROAD_GIL) || Regex.IsMatch(array[2], Constant.PATTERN_ADDRESS_ROAD_RO)))
+            {
+                return true;
+            }
+            else if (array.Length == 5 && (Regex.IsMatch(array[3], Constant.PATTERN_ADDRESS_ROAD_GIL) || Regex.IsMatch(array[3], Constant.PATTERN_ADDRESS_ROAD_RO)))
+            {
+                return true;
+            }
+            else if (array.Length == 6 && (Regex.IsMatch(array[4], Constant.PATTERN_ADDRESS_ROAD_GIL) || Regex.IsMatch(array[4], Constant.PATTERN_ADDRESS_ROAD_RO)))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool IsBuildingNumber(string[] array) // 건물 번호 체크
+        { // 건물 번호는 1이상 부터
+            if (array.Length == 3 && int.Parse(array[2]) > 0 && Regex.IsMatch(array[2], Constant.PATTERN_ADDRESS_NUMBER))
+            {
+                return true;
+            }
+            else if (array.Length == 4 && int.Parse(array[3]) > 0 && Regex.IsMatch(array[3], Constant.PATTERN_ADDRESS_NUMBER))
+            {
+                return true;
+            }
+            else if (array.Length == 5 && int.Parse(array[4]) > 0 && Regex.IsMatch(array[4], Constant.PATTERN_ADDRESS_NUMBER))
+            {
+                return true;
+            }
+            else if (array.Length == 6 && int.Parse(array[5]) > 0  && Regex.IsMatch(array[5], Constant.PATTERN_ADDRESS_NUMBER))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool IsCityAndCounty(string[] array) // 시/군 체크
+        {
+            if (Regex.IsMatch(array[1], Constant.PATTERN_ADDRESS_CITY) || Regex.IsMatch(array[1], Constant.PATTERN_ADDRESS_COUNTY))
+            {
+                return true;
+            }
+            return false;
+        }
         public bool IsIsbn(string isbn)
         {
             if (IsCtrlZ(isbn) == false)
@@ -376,6 +459,18 @@ namespace LibraryProgram
                 return false;
             }
             return true;
+        }
+
+        private bool IsMetropolitanName(string input,string[] name)
+        {
+            for (int i = 0; i < name.Length; i++)
+            { // 광역시 혹은 특별자치시가 아닌 시의 이름이 들어오는 것을 막음
+                if (input.Substring(0, 2).Equals(name[i]))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
