@@ -244,7 +244,6 @@ namespace LibraryProgram
         {
             if (address.Substring(0, 2).Equals("서울"))
             {
-                Console.WriteLine("hello");
                 address.Replace("서울시", "서울특별시");
             }
             else if (address.Substring(0,2).Equals("세종"))

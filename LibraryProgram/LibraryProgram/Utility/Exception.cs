@@ -133,6 +133,22 @@ namespace LibraryProgram
             return false;
         }
 
+        public bool IsBookCount(string quantity) // 책 수량
+        {
+            if (IsCtrlZ(quantity) == false)
+            {
+                return false;
+            }
+            pattern = @"^[0-9]{3}$";
+
+            if (Regex.IsMatch(quantity, pattern) && int.Parse(quantity) >= 1 && int.Parse(quantity) <= 100)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public bool IsDate(string date) // 책 수량
         {
             if (IsCtrlZ(date) == false)

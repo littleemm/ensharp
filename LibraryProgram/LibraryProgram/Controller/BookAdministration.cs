@@ -424,7 +424,7 @@ namespace LibraryProgram
                 bookTitle = Console.ReadLine();
                 Console.SetCursorPosition(29, 7);
                 bookQuantity = Console.ReadLine();
-                if (string.IsNullOrEmpty(bookTitle?.Trim()) || string.IsNullOrEmpty(bookQuantity?.Trim()))
+                if (string.IsNullOrEmpty(bookTitle?.Trim()) || string.IsNullOrEmpty(bookQuantity?.Trim()) || !exception.IsBookCount(bookQuantity))
                 { // ctrl + z 체크
                     bookViewElement.PrintSearchWarningMessage(3, 4);
                     Console.SetCursorPosition(29, 7);
