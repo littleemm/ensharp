@@ -74,7 +74,8 @@ namespace LibraryProgram
                 case Constant.BOOK_MANAGE:
                     {
                         smallNumber = administratorMode.SelectBookAdministration();
-                        if (smallNumber == "\\n") SelectManagement();
+                        if (smallNumber == ("\\n")) SelectManagement();
+                        
                         break;
                     }
                 case Constant.LOG_MANAGE:

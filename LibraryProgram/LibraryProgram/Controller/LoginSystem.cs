@@ -12,8 +12,6 @@ namespace LibraryProgram
         private string password;
         private ConsoleKeyInfo keyInfo;
 
-        AdministratorMode administratorMode;
-        MemberMode memberMode;
         BasicViewElement viewElement;
         DatabaseMember databaseMember;
         MenuSelection menuSelection;
@@ -72,8 +70,8 @@ namespace LibraryProgram
 
             Console.SetCursorPosition(37, 16);
             password = "";
-
-             // 비밀번호 *처리
+            keyInfo = new ConsoleKeyInfo();
+            // 비밀번호 *처리
             while (keyInfo.Key != ConsoleKey.Enter)
             {
                 keyInfo = Console.ReadKey(true);
