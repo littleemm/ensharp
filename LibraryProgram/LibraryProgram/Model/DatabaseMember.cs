@@ -58,6 +58,7 @@ namespace LibraryProgram
 
         public void InsertMember(MemberDTO memberDTO) // 등록
         {
+            memberDTO.Address = ReplaceAddressBeforeInsert(memberDTO.Address);
             string query = Constant.INSERT_QUERY_MEMBER +
                 "Value('" +  memberDTO.Id + "', '" + memberDTO.Password + "', '" + memberDTO.Name + "', '" +
                 memberDTO.Age + "', '" + memberDTO.PhoneNumber + "', '" + memberDTO.Address + "', '" + "0');";
@@ -239,6 +240,43 @@ namespace LibraryProgram
             Console.WriteLine("==============================================================================");
         }
 
+        private string ReplaceAddressBeforeInsert(string address)
+        {
+            if (address.Substring(0, 2).Equals("서울"))
+            {
+                Console.WriteLine("hello");
+                address.Replace("서울시", "서울특별시");
+            }
+            else if (address.Substring(0,2).Equals("세종"))
+            {
+                address.Replace("세종시", "세종특별자치시");
+            }
+            else if (address.Substring(0, 2).Equals("제주"))
+            {
+                address.Replace("제주도", "제주특별자치도");
+            }
+            else if (CheckMetropolitanName(address))
+            {
+                for (int i = 0; i < Constant.NAME.Length; i++)
+                {
+                    address.Replace(Constant.NAME[i] + "시", Constant.NAME[i] + "광역시");
+                }
+            }
 
+            return address;
+        }
+
+        private bool CheckMetropolitanName(string address)
+        {
+            for (int i=0;i<Constant.NAME.Length;i++)
+            {
+                if (address.Substring(0,2).Equals(Constant.NAME[i]))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

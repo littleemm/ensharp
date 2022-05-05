@@ -91,7 +91,7 @@ namespace LibraryProgram
 
         public const string PATTERN_PASSWORD = @"^(?=.*[a-aA-Z])(?=.*[0-9])(?=.*[\W]).{5,8}$";
 
-        public const string PATTERN_TEL_010 = @"^010[0-9]{9}$"; // 11자리 폰번호
+        public const string PATTERN_TEL_010 = @"^010[0-9]{8}$"; // 11자리 폰번호
         public const string PATTERN_TEL_0XX = @"^0[1-9]{2}[0-9]{7}$"; // 10자리 폰번호, 서울 외 전화번호
         public const string PATTERN_TEL_02 = @"^02[0-9]{7-8}$"; // 서울 전화번호
 

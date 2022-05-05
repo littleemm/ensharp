@@ -10,7 +10,6 @@ namespace LibraryProgram
     class Exception
     {
         string pattern;
-        string patternAfter;
 
         public bool IsBookId(string bookId) // bookid 예외
         {
@@ -464,7 +463,7 @@ namespace LibraryProgram
         private bool IsMetropolitanName(string input,string[] name)
         {
             for (int i = 0; i < name.Length; i++)
-            { // 광역시 혹은 특별자치시가 아닌 시의 이름이 들어오는 것을 막음
+            { // 광역시가 아닌 시의 이름이 들어오는 것을 막음
                 if (input.Substring(0, 2).Equals(name[i]))
                 {
                     return true;
