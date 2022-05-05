@@ -61,35 +61,38 @@ namespace LibraryProgram
             Console.Clear();
             if (number.Equals("\\n"))
             {
-                loginPage.LoginAdministratorMode();
+                SelectMode();
             }
-            switch (int.Parse(number))
+            else
             {
-                case Constant.MEMBER_MANAGE:
-                    {
-                        smallNumber = administratorMode.SelectMemberAdministration();
-                        if (smallNumber == "\\n") SelectManagement();
-                        break;
-                    }
-                case Constant.BOOK_MANAGE:
-                    {
-                        smallNumber = administratorMode.SelectBookAdministration();
-                        if (smallNumber == ("\\n")) SelectManagement();
-                        
-                        break;
-                    }
-                case Constant.LOG_MANAGE:
-                    {
-                        smallNumber = administratorMode.SelectLogAdministration();
-                        if (smallNumber == "\\n") SelectManagement();
-                        break;
-                    }
-                case Constant.EXIT:
-                    {
-                        smallNumber = administratorMode.AskExit();
-                        if (smallNumber == "\\n") SelectManagement();
-                        break;
-                    }
+                switch (int.Parse(number))
+                {
+                    case Constant.MEMBER_MANAGE:
+                        {
+                            smallNumber = administratorMode.SelectMemberAdministration();
+                            if (smallNumber == "\\n") SelectManagement();
+                            break;
+                        }
+                    case Constant.BOOK_MANAGE:
+                        {
+                            smallNumber = administratorMode.SelectBookAdministration();
+                            if (smallNumber == ("\\n")) SelectManagement();
+
+                            break;
+                        }
+                    case Constant.LOG_MANAGE:
+                        {
+                            smallNumber = administratorMode.SelectLogAdministration();
+                            if (smallNumber == "\\n") SelectManagement();
+                            break;
+                        }
+                    case Constant.EXIT:
+                        {
+                            smallNumber = administratorMode.AskExit();
+                            if (smallNumber == "\\n") SelectManagement();
+                            break;
+                        }
+                }
             }
         }
         private void SelectMemberMode()
@@ -137,42 +140,45 @@ namespace LibraryProgram
             Console.Clear();
             if (number.Equals("\\n"))
             {
-                loginPage.LoginMemberMode();
+                SelectMemberMode();
             }
-            switch (int.Parse(number))
+            else
             {
-                case Constant.SEARCH_BOOK:
-                    {
-                        memberMode.SearchBook(id);
-                        break;
-                    }
-                case Constant.BOOKLIST:
-                    {
-                        memberMode.PrintList();
-                        break;
-                    }
-                case Constant.CHECKOUT:
-                    {
-                        memberMode.CheckOutBook(id);
-                        break;
-                    }
-                case Constant.RETURN:
-                    {
-                        memberMode.ReturnBook(id);
-                        break;
-                    }
-                case Constant.MYPAGE:
-                    {
-                        memberMode.EditMyInformation(id);
-                        break;
-                    }
-            }
+                switch (int.Parse(number))
+                {
+                    case Constant.SEARCH_BOOK:
+                        {
+                            memberMode.SearchBook(id);
+                            break;
+                        }
+                    case Constant.BOOKLIST:
+                        {
+                            memberMode.PrintList();
+                            break;
+                        }
+                    case Constant.CHECKOUT:
+                        {
+                            memberMode.CheckOutBook(id);
+                            break;
+                        }
+                    case Constant.RETURN:
+                        {
+                            memberMode.ReturnBook(id);
+                            break;
+                        }
+                    case Constant.MYPAGE:
+                        {
+                            memberMode.EditMyInformation(id);
+                            break;
+                        }
+                }
 
-            ConsoleKeyInfo consoleKey = Console.ReadKey();
-            if (consoleKey.Key == ConsoleKey.Escape)
-            {
-                Console.Clear();
-                SelectMenu(id);
+                ConsoleKeyInfo consoleKey = Console.ReadKey();
+                if (consoleKey.Key == ConsoleKey.Escape)
+                {
+                    Console.Clear();
+                    SelectMenu(id);
+                }
             }
         }
         private void AskExit()

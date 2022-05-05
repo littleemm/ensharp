@@ -66,6 +66,7 @@ namespace LibraryProgram
         public void LoginAll() // 공통 로그인 폼 함수
         {
             Console.SetCursorPosition(37, 14);
+            id = "";
             id = Console.ReadLine(); // 아이디 입력
 
             Console.SetCursorPosition(37, 16);
