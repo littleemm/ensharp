@@ -24,6 +24,7 @@ namespace LibraryProgram
         
         public void SelectMode()
         {
+            viewElement.PrintLibraryMain();
             string menuNumber = menuSelection.CheckMenuNumber(46, 22, Constant.ARRAY_THREE);
             Console.Clear();
             switch (int.Parse(menuNumber))
@@ -49,27 +50,34 @@ namespace LibraryProgram
         private void SelectMemberMode()
         {
             viewElement.PrintMemberPage();
-            string menuNumber = menuSelection.CheckMenuNumber(46, 22, Constant.ARRAY_THREE);
+            string menuNumber = menuSelection.CheckMenuKey(46, 22, Constant.ARRAY_THREE);
             Console.Clear();
-            switch (int.Parse(menuNumber))
+            if (menuNumber.Equals("\\n"))
             {
-                case Constant.LOGIN: 
-                    {
-                        Console.SetWindowSize(60, 28);
-                        loginPage.LoginMemberMode();
-                        break;
-                    }
-                case Constant.SIGN_UP: 
-                    {
-                        formOfSignUp.ShowSignUpPage();
-                        loginPage.LoginMemberMode();
-                        break;
-                    }
-                case Constant.EXIT:
-                    {
-                        AskExitMember();
-                        break;
-                    }
+                SelectMode();
+            }
+            else
+            {
+                switch (int.Parse(menuNumber))
+                {
+                    case Constant.LOGIN:
+                        {
+                            Console.SetWindowSize(60, 28);
+                            loginPage.LoginMemberMode();
+                            break;
+                        }
+                    case Constant.SIGN_UP:
+                        {
+                            formOfSignUp.ShowSignUpPage();
+                            loginPage.LoginMemberMode();
+                            break;
+                        }
+                    case Constant.EXIT:
+                        {
+                            AskExitMember();
+                            break;
+                        }
+                }
             }
         }
 

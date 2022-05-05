@@ -55,9 +55,10 @@ namespace LibraryProgram
 
                 if (!isMenuNumber)
                 {
-                    viewElement.ClearLine(1, x);
                     Console.SetCursorPosition(x, y);
+                    viewElement.ClearLine(0, x);
                     viewElement.PrintWarningSentence(1, y - 2);
+                    Console.SetCursorPosition(x, y);
                 }
             }
 

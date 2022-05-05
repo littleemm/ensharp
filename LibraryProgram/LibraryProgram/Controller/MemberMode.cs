@@ -32,55 +32,7 @@ namespace LibraryProgram
             memberViewElement = new MemberViewElement();
         }
 
-        public void ShowMemberPage(string id)
-        {
-            Console.Clear();
-            viewElement.PrintMemberMode();
-            SelectMenu(id);
-        }
-
-        private void SelectMenu(string id)
-        {
-            string number = menuSelection.CheckMenuNumber(46, 24, Constant.ARRAY_FIVE);
-            Console.Clear();
-            switch (int.Parse(number))
-            {
-                case Constant.SEARCH_BOOK:
-                    {
-                        SearchBook(id);
-                        break;
-                    }
-                case Constant.BOOKLIST:
-                    {
-                        PrintList();
-                        break;
-                    }
-                case Constant.CHECKOUT:
-                    {
-                        CheckOutBook(id);
-                        break;
-                    }
-                case Constant.RETURN:
-                    {
-                        ReturnBook(id);
-                        break;
-                    }
-                case Constant.MYPAGE:
-                    {
-                        EditMyInformation(id);
-                        break;
-                    }
-            }
-
-            ConsoleKeyInfo consoleKey = Console.ReadKey();
-            if (consoleKey.Key == ConsoleKey.Escape)
-            {
-                Console.Clear();
-                ShowMemberPage(id);
-            }
-        }
-
-        private void SearchBook(string id)
+        public void SearchBook(string id)
         {
             string bookValue;
             bookViewElement.PrintSearchBookInform();
@@ -108,14 +60,14 @@ namespace LibraryProgram
             databaseLog.InsertLog(logDTO);
         }
 
-        private void PrintList()
+        public void PrintList()
         {
             bookViewElement.PrintBookListInform();
             databaseBook.SelectBookList();
             Console.SetCursorPosition(0, 0);
         }
 
-        private void CheckOutBook(string id)
+        public void CheckOutBook(string id)
         {
             string bookId = "";
             bool isBook = false;
@@ -180,7 +132,7 @@ namespace LibraryProgram
 
         }
 
-        private void ReturnBook(string id)
+        public void ReturnBook(string id)
         {
             string bookId = "";
             bool isBook = false;
@@ -246,7 +198,7 @@ namespace LibraryProgram
             databaseLog.InsertLog(logDTO);
         }
 
-        private void EditMyInformation(string id)
+        public void EditMyInformation(string id)
         {
             memberViewElement.PrintEditMember();
             memberViewElement.PrintEditMineForm();
@@ -329,7 +281,7 @@ namespace LibraryProgram
             }
         }
 
-        private void AddEditLogToDatabase(string id, string address, string number)
+        public void AddEditLogToDatabase(string id, string address, string number)
         {
             logDTO.User = id;
 

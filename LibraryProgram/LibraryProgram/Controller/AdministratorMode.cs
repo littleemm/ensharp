@@ -117,7 +117,12 @@ namespace LibraryProgram
                         }
                 }
             }
-            CreateKey();
+            ConsoleKeyInfo consoleKey = Console.ReadKey();
+            if (consoleKey.Key == ConsoleKey.Escape)
+            {
+                Console.Clear();
+                SelectBookAdministration();
+            }
         }
 
         public void SelectMemberAdministration() // 회원 관리모드에서 메뉴 선택
@@ -127,40 +132,52 @@ namespace LibraryProgram
             memberViewElement.PrintManageMemberMenu();
             string number = menuSelection.CheckMenuKey(46, 23, Constant.ARRAY_FIVE);
             Console.Clear();
-            switch (int.Parse(number))
+            if (number.Equals("\\n"))
             {
-                case (0):
-                    {
-                        ShowAdministratorPage();
-                        break;
-                    }
-                case Constant.REGISTRATION:
-                    {
-                        memberAdministration.RegisterMember();
-                        break;
-                    }
-                case Constant.EDIT:
-                    {
-                        memberAdministration.EditMember();
-                        break;
-                    }
-                case Constant.DELETE:
-                    {
-                        memberAdministration.DeleteMember();
-                        break;
-                    }
-                case Constant.SEARCH:
-                    {
-                        memberAdministration.SearchMember();
-                        break;
-                    }
-                case Constant.MEMBER_LIST:
-                    {
-                        memberAdministration.PrintList();
-                        break;
-                    }
+                ShowAdministratorPage();
             }
-            CreateKey();
+            else
+            {
+                switch (int.Parse(number))
+                {
+                    case (0):
+                        {
+                            ShowAdministratorPage();
+                            break;
+                        }
+                    case Constant.REGISTRATION:
+                        {
+                            memberAdministration.RegisterMember();
+                            break;
+                        }
+                    case Constant.EDIT:
+                        {
+                            memberAdministration.EditMember();
+                            break;
+                        }
+                    case Constant.DELETE:
+                        {
+                            memberAdministration.DeleteMember();
+                            break;
+                        }
+                    case Constant.SEARCH:
+                        {
+                            memberAdministration.SearchMember();
+                            break;
+                        }
+                    case Constant.MEMBER_LIST:
+                        {
+                            memberAdministration.PrintList();
+                            break;
+                        }
+                }
+            }
+            ConsoleKeyInfo consoleKey = Console.ReadKey();
+            if (consoleKey.Key == ConsoleKey.Escape)
+            {
+                Console.Clear();
+                SelectMemberAdministration();
+            }
         }
 
         public void SelectLogAdministration() // 로그 관리 모드에서 메뉴 선택
@@ -170,43 +187,55 @@ namespace LibraryProgram
             logViewElement.PrintManageLogMenu();
             string number = menuSelection.CheckMenuKey(46, 23, Constant.ARRAY_FIVE);
             Console.Clear();
-            switch (int.Parse(number))
+            if (number.Equals("\\n"))
             {
-                case (0):
-                    {
-                        ShowAdministratorPage();
-                        break;
-                    }
-                case Constant.EDIT_LOG:
-                    {
-                        logAdministration.EditLog();
-                        break;
-                    }
-                case Constant.INIT_LOG:
-                    {
-                        logAdministration.InitializeLog();
-                        break;
-                    }
-                case Constant.SAVE_LOG:
-                    {
-                        logAdministration.SaveLogFile();
-                        break;
-                    }
-                case Constant.DELETE_LOG:
-                    {
-                        logAdministration.DeleteLogFile();
-                        break;
-                    }
-                case Constant.LOG_LIST:
-                    {
-                        logAdministration.PrintLogList();
-                        break;
-                    }
+                ShowAdministratorPage();
             }
-            CreateKey();
+            else
+            {
+                switch (int.Parse(number))
+                {
+                    case (0):
+                        {
+                            ShowAdministratorPage();
+                            break;
+                        }
+                    case Constant.EDIT_LOG:
+                        {
+                            logAdministration.EditLog();
+                            break;
+                        }
+                    case Constant.INIT_LOG:
+                        {
+                            logAdministration.InitializeLog();
+                            break;
+                        }
+                    case Constant.SAVE_LOG:
+                        {
+                            logAdministration.SaveLogFile();
+                            break;
+                        }
+                    case Constant.DELETE_LOG:
+                        {
+                            logAdministration.DeleteLogFile();
+                            break;
+                        }
+                    case Constant.LOG_LIST:
+                        {
+                            logAdministration.PrintLogList();
+                            break;
+                        }
+                }
+            }
+            ConsoleKeyInfo consoleKey = Console.ReadKey();
+            if (consoleKey.Key == ConsoleKey.Escape)
+            {
+                Console.Clear();
+                SelectLogAdministration();
+            }
         }
 
-        private void AskExit() // 나가기 전 한 번 더 묻기
+        public void AskExit() // 나가기 전 한 번 더 묻기
         {
             viewElement.PrintExitForm();
             string menuNumber = menuSelection.CheckMenuNumber(46, 21, Constant.ARRAY_TWO);
@@ -223,16 +252,6 @@ namespace LibraryProgram
                         ShowAdministratorPage();
                         break;
                     }
-            }
-        }
-
-        private void CreateKey()
-        {
-            ConsoleKeyInfo consoleKey = Console.ReadKey();
-            if (consoleKey.Key == ConsoleKey.Escape)
-            {
-                Console.Clear();
-                SelectLogAdministration();
             }
         }
 

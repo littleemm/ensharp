@@ -35,7 +35,7 @@ namespace LibraryProgram
 
         public void ShowMainPage()
         {
-            basicViewElement.PrintLibraryMain();
+
             modeSelection.SelectMode();
         }
     }
