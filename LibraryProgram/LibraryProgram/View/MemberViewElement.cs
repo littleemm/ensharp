@@ -40,30 +40,31 @@ namespace LibraryProgram
 
         public void PrintRegistration()
         {
-            Console.WriteLine("    ESC: 뒤로가기                                               ");
-            Console.WriteLine("              *                 *                 *            ");
-            Console.WriteLine("                                                              ");
-            Console.WriteLine("    *                  *                  *                  * ");
-            Console.WriteLine("                                                              ");
-            Console.WriteLine("                         REGISTER MEMBER                      ");
-            Console.WriteLine("                                                              ");
-            Console.WriteLine("    *                  *                  *                  * ");
-            Console.WriteLine("                                                              ");
-            Console.WriteLine("              *                 *                 *            ");
+            Console.WriteLine("ESC: 뒤로가기                                               ");
+            Console.WriteLine("                  *                 *                 *            ");
+            Console.WriteLine("                                                                  ");
+            Console.WriteLine("        *                  *                  *                  * ");
+            Console.WriteLine("                                                                  ");
+            Console.WriteLine("                              REGISTER MEMBER                      ");
+            Console.WriteLine("                                                                  ");
+            Console.WriteLine("        *                  *                  *                  * ");
+            Console.WriteLine("                                                                  ");
+            Console.WriteLine("                  *                 *                 *            ");
             Console.WriteLine();
-            Console.WriteLine("                                                              ");
-            Console.WriteLine("                                                              ");
-            Console.WriteLine("     ID(8자 이내, 영어, 숫자 가능) :                 ");
+            Console.WriteLine("                                                                 ");
+            Console.WriteLine("                                                                 ");
+            Console.WriteLine("     ID (8자 이내, 영어·숫자 가능)     :                 ");
             Console.WriteLine();
-            Console.WriteLine("      PW(5~8자, 영어, 숫자 조합)   :                  ");
+            Console.WriteLine("  PW (5~8자, 영어·숫자·특수문자 포함) :                  ");
             Console.WriteLine();
-            Console.WriteLine("             이름(25자 이내)       :                  ");
+            Console.WriteLine("            이름 (25자 이내)            :                  ");
             Console.WriteLine();
-            Console.WriteLine("        나이(1~150, 숫자만 입력)    :                  ");
+            Console.WriteLine("        나이(1~150, 숫자만 입력)        :                  ");
             Console.WriteLine();
-            Console.WriteLine("            전화번호(-제외)         :                  ");
+            Console.WriteLine("            전화번호(-제외)             :                  ");
             Console.WriteLine();
-            Console.WriteLine("        주소 (ex. 서울시 광진구)    :                   ");
+            Console.WriteLine("       도로명 주소 (건물 번호까지)      :                   ");
+            Console.WriteLine(" ex. 서울특별시 서초구 반포대로23길 6 ");
         }
 
         public void PrintRegistrationSuccessMessage()

@@ -130,18 +130,18 @@ namespace LibraryProgram
         public void PrintSignUpPage() // 회원가입 페이지 메인
         {
             Console.WriteLine("                                                           ");
-            Console.WriteLine("           *                 *                 *            ");
-            Console.WriteLine("                                                           ");
-            Console.WriteLine(" *                  *                  *                  * ");
-            Console.WriteLine("                                                           ");
-            Console.WriteLine("                      W E L C O M E T O                      ");
-            Console.WriteLine("                         S I G N U P                        ");
-            Console.WriteLine("                                                           ");
-            Console.WriteLine(" *                  *                  *                  * ");
-            Console.WriteLine("                                                           ");
-            Console.WriteLine("           *                 *                 *            ");
-            Console.WriteLine("                                                           ");
-            Console.WriteLine("                                                           ");
+            Console.WriteLine("                  *                 *                 *            ");
+            Console.WriteLine("                                                                  ");
+            Console.WriteLine("        *                  *                  *                  * ");
+            Console.WriteLine("                                                                  ");
+            Console.WriteLine("                             W E L C O M E T O                      ");
+            Console.WriteLine("                                S I G N U P                        ");
+            Console.WriteLine("                                                                  ");
+            Console.WriteLine("        *                  *                  *                  * ");
+            Console.WriteLine("                                                                  ");
+            Console.WriteLine("                  *                 *                 *            ");
+            Console.WriteLine("                                                                  ");
+            Console.WriteLine("                                                                  ");
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("     ID (8자 이내, 영어·숫자 가능)     :                 ");
@@ -154,7 +154,8 @@ namespace LibraryProgram
             Console.WriteLine();
             Console.WriteLine("            전화번호(-제외)             :                  ");
             Console.WriteLine();
-            Console.WriteLine("        주소 (ex. 서울시 광진구)        :                   ");
+            Console.WriteLine("       도로명 주소 (건물 번호까지)      :                   ");
+            Console.WriteLine(" ex. 서울특별시 서초구 반포대로23길 6 ");
 
         }
 

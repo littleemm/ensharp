@@ -74,21 +74,21 @@ namespace LibraryProgram
 
         private void RegisterMember() // 회원 등록
         {
-            Console.SetWindowSize(65, 30);
+            Console.SetWindowSize(74, 33);
             memberViewElement.PrintRegistration();
             bool isMemberValue = false;
 
             while (isMemberValue == false)
             {
-                Console.SetCursorPosition(40, 13);
+                Console.SetCursorPosition(42, 13);
                 memberDTO.Id = Console.ReadLine(); // 아이디 입력
                 isMemberValue = databaseMember.IsMemberId(memberDTO.Id);
 
                 if (isMemberValue == true)
                 {
                     viewElement.PrintSameDataSentence(6, 11);
-                    Console.SetCursorPosition(40, 13);
-                    viewElement.ClearLine(0, 40);
+                    Console.SetCursorPosition(42, 13);
+                    viewElement.ClearLine(0, 42);
                     isMemberValue = false;
                     continue;
                 }
@@ -96,7 +96,7 @@ namespace LibraryProgram
                 isMemberValue = exception.IsMemberId(memberDTO.Id);
                 if (isMemberValue == false)
                 {
-                    PrintFalse(40, 13);
+                    PrintFalse(42, 13);
                 }
             }
 
@@ -105,13 +105,13 @@ namespace LibraryProgram
 
             while (isMemberValue == false)
             {
-                Console.SetCursorPosition(40, 15);
+                Console.SetCursorPosition(42, 15);
                 memberDTO.Password = Console.ReadLine(); // 비밀번호
 
                 isMemberValue = exception.IsPassword(memberDTO.Password);
                 if (isMemberValue == false)
                 {
-                    PrintFalse(40, 15);
+                    PrintFalse(42, 15);
                 }
             }
 
@@ -120,13 +120,13 @@ namespace LibraryProgram
 
             while (isMemberValue == false)
             {
-                Console.SetCursorPosition(40, 17);
+                Console.SetCursorPosition(42, 17);
                 memberDTO.Name = Console.ReadLine(); // 이름
 
                 isMemberValue = exception.IsMemberName(memberDTO.Name);
                 if (isMemberValue == false)
                 {
-                    PrintFalse(40, 17);
+                    PrintFalse(42, 17);
                 }
             }
 
@@ -135,13 +135,13 @@ namespace LibraryProgram
 
             while (isMemberValue == false)
             {
-                Console.SetCursorPosition(40, 19);
+                Console.SetCursorPosition(42, 19);
                 memberDTO.Age = Console.ReadLine(); // 나이
 
                 isMemberValue = exception.IsAge(memberDTO.Age);
                 if (isMemberValue == false)
                 {
-                    PrintFalse(40, 19);
+                    PrintFalse(42, 19);
                 }
             }
 
@@ -150,13 +150,13 @@ namespace LibraryProgram
 
             while (isMemberValue == false)
             {
-                Console.SetCursorPosition(40, 21);
+                Console.SetCursorPosition(42, 21);
                 memberDTO.PhoneNumber = Console.ReadLine(); // 번호
 
                 isMemberValue = exception.IsPhoneNumber(memberDTO.PhoneNumber);
                 if (isMemberValue == false)
                 {
-                    PrintFalse(40, 21);
+                    PrintFalse(42, 21);
                 }
             }
 
@@ -165,13 +165,13 @@ namespace LibraryProgram
 
             while (isMemberValue == false)
             {
-                Console.SetCursorPosition(40, 23);
+                Console.SetCursorPosition(42, 23);
                 memberDTO.Address = Console.ReadLine(); // 주소
 
                 isMemberValue = exception.IsAddress(memberDTO.Address);
                 if (isMemberValue == false)
                 {
-                    PrintFalse(40, 23);
+                    PrintFalse(42, 23);
                 }
             }
 

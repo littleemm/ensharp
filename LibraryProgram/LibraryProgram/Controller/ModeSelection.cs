@@ -55,6 +55,7 @@ namespace LibraryProgram
             {
                 case Constant.LOGIN: 
                     {
+                        Console.SetWindowSize(60, 28);
                         loginPage.LoginMemberMode();
                         break;
                     }

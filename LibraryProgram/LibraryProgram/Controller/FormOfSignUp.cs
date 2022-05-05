@@ -27,6 +27,7 @@ namespace LibraryProgram
 
         public void ShowSignUpPage() // 회원가입 페이지
         {
+            Console.SetWindowSize(74, 33);
             viewElement.PrintSignUpPage();
 
             bool isMemberValue = false;
