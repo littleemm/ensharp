@@ -321,7 +321,7 @@ namespace LibraryProgram
                 Console.WriteLine("   BOOK ID    :  " + dataReader["bookId"].ToString());
                 Console.WriteLine("  BOOK NAME   :  " + dataReader["bookName"].ToString());
                 Console.WriteLine("  MEMBER ID   :  " + dataReader["memberId"].ToString());
-                Console.WriteLine("  PUBLISHER   :  " + dataReader["bookPublisher"].ToString() + "\\");
+                Console.WriteLine("  PUBLISHER   :  " + dataReader["bookPublisher"].ToString());
                 Console.WriteLine("CHECKOUT DATE :  " + dataReader["checkOutDate"].ToString());
                 Console.WriteLine("   DUE DATE   :  " + dataReader["duedate"].ToString());
                 Console.WriteLine("==============================================================================");

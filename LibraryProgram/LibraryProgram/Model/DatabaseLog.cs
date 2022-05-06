@@ -28,22 +28,15 @@ namespace LibraryProgram
             MySqlDataReader dataReader = command.ExecuteReader();
             StreamWriter writer;
 
-            if (File.Exists(path))
+            writer = File.CreateText(path);
+            logListDTO = SortLog(dataReader);
+            if (logListDTO.Id.Length > 0)
             {
-                writer = File.AppendText(path);
-                logListDTO = SortLog(dataReader);
                 writer.WriteLine(logListDTO.Id + " " + dataReader["date"].ToString() + " " +
                dataReader["time"].ToString() + " " + logListDTO.User + " " +
                logListDTO.History);
             }
-            else
-            {
-                writer = File.CreateText(path);
-                logListDTO = SortLog(dataReader);
-                writer.WriteLine(logListDTO.Id + " " + dataReader["date"].ToString() + " " +
-               dataReader["time"].ToString() + " " + logListDTO.User + " " +
-               logListDTO.History);
-            }
+
 
             writer.Close();
             dataReader.Close();
@@ -151,41 +144,41 @@ namespace LibraryProgram
 
         private LogDTO SortLog(MySqlDataReader dataReader)
         {
-            LogDTO logVO = new LogDTO("", "", "");
+            LogDTO logDTO = new LogDTO("", "", "");
             while (dataReader.Read())
             {
                 // id를 정렬하기 위해 공백을 채우는 과정 (4자리 채우기)
-                logVO.Id = dataReader["id"].ToString();
+                logDTO.Id = dataReader["id"].ToString();
                 if (dataReader["id"].ToString().Length < 4)
                 {
                     for (int i = 1; i <= 4 - dataReader["id"].ToString().Length; i++)
                     {
-                        logVO.Id += " ";
+                        logDTO.Id += " ";
                     }
                 }
 
                 // user를 정렬하기 위해 공백을 채우는 과정 (8자리 채우기)
-                logVO.User = dataReader["user"].ToString();
+                logDTO.User = dataReader["user"].ToString();
                 if (dataReader["user"].ToString().Equals("관리자"))
                 {
-                    logVO.User += "  ";
+                    logDTO.User += "  ";
                 }
                 else if (dataReader["user"].ToString().Length < 8)
                 {
                     for (int i = 1; i <= 8 - dataReader["user"].ToString().Length; i++)
                     {
-                        logVO.User += " ";
+                        logDTO.User += " ";
                     }
                 }
 
                 // history를 정렬해야 하는데 너무 긴 경우를 대비해 길이 25이하로 제한
-                logVO.History = dataReader["history"].ToString(); ;
+                logDTO.History = dataReader["history"].ToString(); ;
                 if (dataReader["history"].ToString().Length > 25)
                 {
-                    logVO.History = dataReader["history"].ToString().Substring(0, 25) + "...";
+                    logDTO.History = dataReader["history"].ToString().Substring(0, 25) + "...";
                 }
             }
-            return logVO;
+            return logDTO;
         }
     }
 }
