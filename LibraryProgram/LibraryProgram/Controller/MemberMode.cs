@@ -220,14 +220,7 @@ namespace LibraryProgram
                 address = keyReader.ReadKeyBasic(30, 13, address);
                 if (address == "\\n") return "\\n";
 
-                isMemberValue = exception.IsCtrlZ(address);
-                if (!isMemberValue)
-                {
-                    basicPage.PrintWarningSentence(2, 11, "올바른 형식으로 다시 입력하세요.");
-                    Console.SetCursorPosition(30, 13);
-                    basicPage.ClearLine(0, 30);
-                    continue;
-                }
+              
 
                 if (address.Length == 0)
                 {
@@ -251,14 +244,7 @@ namespace LibraryProgram
                 number = keyReader.ReadKeyBasic(30, 15, number);
                 if (number == "\\n") return "\\n";
 
-                isMemberValue = exception.IsCtrlZ(number);
-                if (!isMemberValue)
-                {
-                    basicPage.PrintWarningSentence(2, 11, "올바른 형식으로 다시 입력하세요.");
-                    Console.SetCursorPosition(30, 15);
-                    basicPage.ClearLine(0, 30);
-                    continue;
-                }
+              
 
                 if (number.Length == 0)
                 {

@@ -269,6 +269,11 @@ namespace LibraryProgram
             {
                 return false;
             }
+            if (address.Length < 13)
+            {
+                return false;
+            }
+
             string[] array = address.Split(' ');
 
             if (array[0].Equals("서울시") || array[0].Equals("서울특별시"))
@@ -470,10 +475,11 @@ namespace LibraryProgram
 
         public bool IsCtrlZ(string input)
         {
-            if (string.IsNullOrEmpty(input?.Trim()))
+            if (string.IsNullOrEmpty(input?.Trim()) && input != "\r\n") 
             { // ctrl + z 체크
                 return false;
             }
+
             return true;
         }
 

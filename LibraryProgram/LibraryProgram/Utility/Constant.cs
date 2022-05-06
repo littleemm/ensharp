@@ -27,7 +27,7 @@ namespace LibraryProgram
         public const string UPDATE_QUERY_BOOK_PRICE = "UPDATE book SET price = '{0}' WHERE id = '{1}';";
         public const string UPDATE_QUERY_BOOK_QUANTITY = "UPDATE book SET quantity = '{0}' WHERE id = '{1}';";
 
-        public const string SELECT_QUERY_BOOK_WHERE_ID = "SELECT * FROM book WHERE id = {0};";
+        public const string SELECT_QUERY_BOOK_WHERE_ID = "SELECT * FROM book WHERE id = '{0}';";
 
         public const string INSERT_QUERY_MEMBER = "INSERT INTO member(id, password, name, age, phoneNumber, address, bookCount)Value('{0}', '{1}', '{2}', '{3}, '{4}', '{5}', '0');";
         public const string SELECT_QUERY_MEMBER = "SELECT * FROM member";
@@ -38,15 +38,15 @@ namespace LibraryProgram
         public const string UPDATE_QUERY_MEMBER_ADDRESS = "UPDATE member SET address = '{0}' WHERE id = '{1}';";
         public const string UPDATE_QUERY_MEMBER_BOOKCOUNT = "UPDATE member SET bookCount = '{0}' WHERE id = '{1}';";
 
-        public const string SELECT_QUERY_MEMBER_WHERE_ID = "SELECT * FROM member WHERE id = {0};";
+        public const string SELECT_QUERY_MEMBER_WHERE_ID = "SELECT * FROM member WHERE id = '{0}';";
 
         public const string INSERT_QUERY_MEMBERBOOK = "INSERT INTO memberbook(memberId, bookId, bookName, bookPublisher, checkOutDate, dueDate)Value('{0}', '{1}', '{2}', '{3}', '{4}', '{5}');";
         public const string SELECT_QUERY_MEMBERBOOK = "SELECT * FROM memberbook";
         public const string DELETE_QUERY_MEMBERBOOK = "DELETE FROM memberbook WHERE id = '{0}';";
 
-        public const string SELECT_QUERY_MEMBERBOOK_WHERE_MEMBERID = "SELECT * FROM memberbook WHERE memberId = {0};";
-        public const string DELETE_QUERY_MEMBERBOOK_WHERE_BOOKID_MEMBERID = "DELETE FROM memberbook WHERE (memberId, bookId) = '{0}', '{1}';";
-        public const string SELECT_QUERY_MEMBERBOOK_WHERE_BOOKID = "SELECT * FROM memberbook WHERE bookId = {0};";
+        public const string SELECT_QUERY_MEMBERBOOK_WHERE_MEMBERID = "SELECT * FROM memberbook WHERE memberId = '{0}';";
+        public const string DELETE_QUERY_MEMBERBOOK_WHERE_BOOKID_MEMBERID = "DELETE FROM memberbook WHERE (memberId, bookId) = ('{0}', '{1}');";
+        public const string SELECT_QUERY_MEMBERBOOK_WHERE_BOOKID = "SELECT * FROM memberbook WHERE bookId = '{0}';";
 
         public const string INSERT_QUERY_LOG = "INSERT INTO log(date, time, user, history)Value('{0}', '{1}', '{2}', '{3}');";
         public const string SELECT_QUERY_LOG = "SELECT * FROM log";
