@@ -10,13 +10,13 @@ namespace LibraryProgram
     {
         BasicPage basicPage;
         MemberDTO memberDTO;
-        DatabaseMember databaseMember;
+        MemberDAO databaseMember;
         Exception exception;
-        DatabaseLog databaseLog;
+        LogDAO databaseLog;
         LogDTO logDTO;
         KeyReader keyReader;
 
-        public FormOfSignUp(BasicPage basicPage, MemberDTO memberDTO, DatabaseMember databaseMember, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
+        public FormOfSignUp(BasicPage basicPage, MemberDTO memberDTO, MemberDAO databaseMember, Exception exception, LogDAO databaseLog, LogDTO logDTO, KeyReader keyReader)
         {
             this.basicPage = basicPage;
             this.memberDTO = memberDTO;
@@ -37,7 +37,10 @@ namespace LibraryProgram
             while (!isMemberValue)
             {
                 memberDTO.Id = keyReader.ReadKeyBasic(42, 15, memberDTO.Id);
-                if (memberDTO.Id == "\\n") return "\\n";
+                if (memberDTO.Id == "\\n")
+                {
+                    return "\\n";
+                }
 
                 isMemberValue = databaseMember.IsMemberId(memberDTO.Id);
 
@@ -62,8 +65,11 @@ namespace LibraryProgram
 
             while (!isMemberValue)
             {
-                memberDTO.Id = keyReader.ReadKeySecret(42, 17, memberDTO.Password);
-                if (memberDTO.Password == "\\n") return "\\n";
+                memberDTO.Password = keyReader.ReadKeySecret(42, 17, memberDTO.Password);
+                if (memberDTO.Password == "\\n")
+                {
+                    return "\\n";
+                }
 
                 isMemberValue = exception.IsPassword(memberDTO.Password);
                 if (!isMemberValue)
@@ -78,7 +84,10 @@ namespace LibraryProgram
             while (!isMemberValue)
             {
                 memberDTO.Name = keyReader.ReadKeyBasic(42, 19, memberDTO.Name);
-                if (memberDTO.Name == "\\n") return "\\n";
+                if (memberDTO.Name == "\\n")
+                {
+                    return "\\n";
+                }
 
                 isMemberValue = exception.IsMemberName(memberDTO.Name);
                 if (!isMemberValue)
@@ -93,7 +102,10 @@ namespace LibraryProgram
             while (!isMemberValue)
             {
                 memberDTO.Age = keyReader.ReadKeyBasic(42, 21, memberDTO.Age);
-                if (memberDTO.Age == "\\n") return "\\n";
+                if (memberDTO.Age == "\\n")
+                {
+                    return "\\n";
+                }
 
                 isMemberValue = exception.IsAge(memberDTO.Age);
                 if (!isMemberValue)
@@ -108,7 +120,10 @@ namespace LibraryProgram
             while (!isMemberValue)
             {
                 memberDTO.PhoneNumber = keyReader.ReadKeyBasic(42, 23, memberDTO.PhoneNumber);
-                if (memberDTO.PhoneNumber == "\\n") return "\\n";
+                if (memberDTO.PhoneNumber == "\\n")
+                {
+                    return "\\n";
+                }
 
                 isMemberValue = exception.IsPhoneNumber(memberDTO.PhoneNumber);
                 if (!isMemberValue)
@@ -123,7 +138,10 @@ namespace LibraryProgram
             while (!isMemberValue)
             {
                 memberDTO.Address = keyReader.ReadKeyBasic(42, 25, memberDTO.Address);
-                if (memberDTO.Address == "\\n") return "\\n";
+                if (memberDTO.Address == "\\n")
+                {
+                    return "\\n";
+                }
 
                 isMemberValue = exception.IsAddress(memberDTO.Address);
                 if (!isMemberValue)

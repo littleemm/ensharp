@@ -8,11 +8,11 @@ using MySql.Data.MySqlClient;
 
 namespace LibraryProgram
 {
-    class DatabaseBook
+    class BookDAO
     {
         private static MySqlConnection connection;
 
-        public DatabaseBook()
+        public BookDAO()
         {
             connection = new MySqlConnection(Constant.STRING_CONNECTION);
         }

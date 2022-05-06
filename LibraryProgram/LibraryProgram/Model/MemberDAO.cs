@@ -8,11 +8,11 @@ using MySql.Data.MySqlClient;
 
 namespace LibraryProgram
 {
-    class DatabaseMember
+    class MemberDAO
     {
         private MySqlConnection connection;
         
-        public DatabaseMember()
+        public MemberDAO()
         {
             connection = new MySqlConnection(Constant.STRING_CONNECTION);
         }

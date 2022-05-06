@@ -12,10 +12,10 @@ namespace LibraryProgram
         private string password;
 
         BasicPage basicPage;
-        DatabaseMember databaseMember;
+        MemberDAO databaseMember;
         KeyReader keyReader;
 
-        public LoginSystem(BasicPage basicPage, MenuSelection menuSelection, DatabaseMember databaseMember, MemberDTO memberDTO, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
+        public LoginSystem(BasicPage basicPage, MenuSelection menuSelection, MemberDAO databaseMember, MemberDTO memberDTO, BookDAO databaseBook, Exception exception, LogDAO databaseLog, LogDTO logDTO, KeyReader keyReader)
         {
             this.basicPage = basicPage;
             this.databaseMember = databaseMember;

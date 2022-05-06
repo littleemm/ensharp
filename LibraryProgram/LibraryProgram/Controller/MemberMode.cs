@@ -12,14 +12,14 @@ namespace LibraryProgram
         MenuSelection menuSelection;
         BookPage bookViewElement;
         MemberPage memberViewElement;
-        DatabaseMember databaseMember;
-        DatabaseBook databaseBook;
+        MemberDAO databaseMember;
+        BookDAO databaseBook;
         Exception exception;
-        DatabaseLog databaseLog;
+        LogDAO databaseLog;
         LogDTO logDTO;
         KeyReader keyReader;
 
-        public MemberMode(BasicPage basicPage, MenuSelection menuSelection, DatabaseMember databaseMember, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
+        public MemberMode(BasicPage basicPage, MenuSelection menuSelection, MemberDAO databaseMember, BookDAO databaseBook, Exception exception, LogDAO databaseLog, LogDTO logDTO, KeyReader keyReader)
         {
             this.basicPage = basicPage;
             this.menuSelection = menuSelection;
@@ -39,6 +39,8 @@ namespace LibraryProgram
             string bookValue = "";
             bookViewElement.PrintSearchBookInform();
             databaseBook.SelectBookList();
+
+            AlertEmptyData(3, 4, Constant.SELECT_QUERY_BOOK);
 
             while (Constant.IS_CTRL_Z)
             {
@@ -68,6 +70,7 @@ namespace LibraryProgram
         public void PrintList()
         {
             bookViewElement.PrintBookListInform();
+            AlertEmptyData(3, 4, Constant.SELECT_QUERY_BOOK);
             databaseBook.SelectBookList();
             Console.SetCursorPosition(0, 0);
         }
@@ -80,6 +83,8 @@ namespace LibraryProgram
             bookViewElement.PrintCheckOutBookInform();
             databaseBook.SelectBookList();
 
+            AlertEmptyData(3, 4, Constant.SELECT_QUERY_BOOK);
+
             while (!isBook)
             {
                 bookId = keyReader.ReadKeyBasic(33, 6, bookId);
@@ -88,7 +93,7 @@ namespace LibraryProgram
                 Console.SetCursorPosition(0, 4);
                 basicPage.ClearLine(0, 0);
 
-                isBook = DatabaseMemberBook.databaseMemberBook.IsBookId(bookId);
+                isBook = MemberBookDAO.memberBookDAO.IsBookId(bookId);
                 if (!isBook)
                 {
                     Console.SetCursorPosition(0, 4);
@@ -106,7 +111,7 @@ namespace LibraryProgram
                     basicPage.ClearLine(0, 33);
                     continue;
                 }
-                isBook = DatabaseMemberBook.databaseMemberBook.IsBookCount(bookId);
+                isBook = MemberBookDAO.memberBookDAO.IsBookCount(bookId);
                 if (!isBook)
                 {
                     Console.SetCursorPosition(0, 4);
@@ -116,7 +121,7 @@ namespace LibraryProgram
                     continue;
                 }
 
-                isBook = DatabaseMemberBook.databaseMemberBook.IsCheckedOutBook(bookId, id);
+                isBook = MemberBookDAO.memberBookDAO.IsCheckedOutBook(bookId, id);
                 if (!isBook)
                 {
                     Console.SetCursorPosition(0, 4);
@@ -127,7 +132,7 @@ namespace LibraryProgram
             }
 
             basicPage.ClearLineEasy(4, 0);
-            DatabaseMemberBook.databaseMemberBook.InsertMemberBook(bookId, id);
+            MemberBookDAO.memberBookDAO.InsertMemberBook(bookId, id);
 
             Console.SetCursorPosition(0, 4);
             bookViewElement.PrintCheckOutSuccessMessage(dueDate.ToString("yyyy-MM-dd"));
@@ -145,8 +150,8 @@ namespace LibraryProgram
             bool isBook = false;
             
             bookViewElement.PrintReturnBookInform(id); 
-            DatabaseMemberBook.databaseMemberBook.SelectMemberBook(id);
-
+            MemberBookDAO.memberBookDAO.SelectMemberBook(id);
+            AlertEmptyData(3, 4, string.Format(Constant.SELECT_QUERY_MEMBERBOOK_WHERE_MEMBERID, id));
             while (!isBook)
             {
                 bookId = keyReader.ReadKeyBasic(33, 6, bookId);
@@ -154,7 +159,7 @@ namespace LibraryProgram
                 Console.SetCursorPosition(0, 4);
                 basicPage.ClearLine(0, 0);
 
-                isBook = DatabaseMemberBook.databaseMemberBook.IsBookId(bookId);
+                isBook = MemberBookDAO.memberBookDAO.IsBookId(bookId);
                 if (!isBook)
                 {
                     Console.SetCursorPosition(0, 4);
@@ -178,7 +183,7 @@ namespace LibraryProgram
 
             while (isBook)
             {
-                isBook = DatabaseMemberBook.databaseMemberBook.IsCheckedOutBook(bookId, id);
+                isBook = MemberBookDAO.memberBookDAO.IsCheckedOutBook(bookId, id);
                 if (isBook)
                 {
                     Console.SetCursorPosition(0, 4);
@@ -195,7 +200,7 @@ namespace LibraryProgram
 
             basicPage.ClearLineEasy(4, 0);
 
-            DatabaseMemberBook.databaseMemberBook.DeleteMemberBook(bookId, id);
+            MemberBookDAO.memberBookDAO.DeleteMemberBook(bookId, id);
 
             Console.SetCursorPosition(0, 4);
             bookViewElement.PrintReturnSuccessMessage();
@@ -275,10 +280,11 @@ namespace LibraryProgram
                 memberViewElement.PrintEditFailMessage();
             }
 
+            basicPage.PrintAfterWork();
             return "";
         }
 
-        public void AddEditLogToDatabase(string id, string address, string number)
+        private void AddEditLogToDatabase(string id, string address, string number)
         {
             logDTO.User = id;
 
@@ -300,6 +306,13 @@ namespace LibraryProgram
 
             databaseLog.InsertLog(logDTO);
         }
-      
+
+        private void AlertEmptyData(int x, int y, string query)
+        {
+            if (MemberBookDAO.memberBookDAO.CheckDataQuantity(query) == 0)
+            {
+                basicPage.PrintWarningSentence(x, y, "데이터가 존재하지 않습니다.");
+            }
+        }
     }
 }

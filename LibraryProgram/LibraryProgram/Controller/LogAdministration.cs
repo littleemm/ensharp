@@ -10,11 +10,11 @@ namespace LibraryProgram
     {
         BasicPage basicPage;
         MenuSelection menuSelection;
-        DatabaseLog databaseLog;
+        LogDAO databaseLog;
         LogPage logViewElement;
         KeyReader keyReader;
 
-        public LogAdministration(BasicPage basicPage, LogPage logViewElement, MenuSelection menuSelection, DatabaseLog databaseLog, KeyReader keyReader)
+        public LogAdministration(BasicPage basicPage, LogPage logViewElement, MenuSelection menuSelection, LogDAO databaseLog, KeyReader keyReader)
         {
             this.basicPage = basicPage;
             this.logViewElement = logViewElement;

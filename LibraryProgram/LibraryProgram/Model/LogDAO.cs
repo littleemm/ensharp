@@ -10,25 +10,27 @@ using MySql.Data.MySqlClient;
 
 namespace LibraryProgram
 {
-    class DatabaseLog
+    class LogDAO
     {
         private static MySqlConnection connection; 
         string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+ "/log.txt";
         private LogDTO logListDTO;
-        public DatabaseLog()
+        public LogDAO()
         {
             connection = new MySqlConnection(Constant.STRING_CONNECTION);
             logListDTO = new LogDTO("", "", "");
         }
 
-        public void WriteLog()
+
+
+        public void WriteLog() // 로그 파일 생성 함수
         {
             connection.Open();
             MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_LOG, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
             StreamWriter writer;
 
-            writer = File.CreateText(path);
+            writer = File.CreateText(path); // 로그 파일이 기존에 있었어도 그대로 덮어쓸 수 있다.
             logListDTO = SortLog(dataReader);
             if (logListDTO.Id.Length > 0)
             {
@@ -37,13 +39,12 @@ namespace LibraryProgram
                logListDTO.History);
             }
 
-
             writer.Close();
             dataReader.Close();
             connection.Close();
         }
 
-        public bool IsLogFile()
+        public bool IsLogFile() // 로그 파일 있는지 체크한 후 삭제하는 함수
         {
             if (File.Exists(path))
             {
@@ -143,7 +144,7 @@ namespace LibraryProgram
         }
 
         private LogDTO SortLog(MySqlDataReader dataReader)
-        {
+        { // 로그 정렬
             LogDTO logDTO = new LogDTO("", "", "");
             while (dataReader.Read())
             {

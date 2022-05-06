@@ -15,7 +15,7 @@ namespace LibraryProgram
         AdministratorMode administratorMode;
         MemberMode memberMode;
 
-        public ModeSelection(MenuSelection menuSelection, LoginSystem loginPage, BasicPage basicPage, MemberDTO memberDTO, DatabaseMember databaseMember, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
+        public ModeSelection(MenuSelection menuSelection, LoginSystem loginPage, BasicPage basicPage, MemberDTO memberDTO, MemberDAO databaseMember, BookDAO databaseBook, Exception exception, LogDAO databaseLog, LogDTO logDTO, KeyReader keyReader)
         {
             this.basicPage = basicPage;
             this.loginPage = loginPage;

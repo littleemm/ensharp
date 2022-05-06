@@ -12,11 +12,11 @@ namespace LibraryProgram
         ModeSelection modeSelection;
         MenuSelection menuSelection;
         LoginSystem loginSystem;
-        DatabaseMember databaseMember;
-        DatabaseBook databaseBook;
+        MemberDAO databaseMember;
+        BookDAO databaseBook;
         MemberDTO memberDTO;
         Exception exception;
-        DatabaseLog databaseLog;
+        LogDAO databaseLog;
         LogDTO logDTO;
         KeyReader keyReader;
 
@@ -25,10 +25,10 @@ namespace LibraryProgram
             memberDTO = new MemberDTO("", "", "", "", "", "");
             logDTO = new LogDTO("", "", "", "");
             basicPage = new BasicPage();
-            databaseMember = new DatabaseMember();
-            databaseBook = new DatabaseBook();
+            databaseMember = new MemberDAO();
+            databaseBook = new BookDAO();
             exception = new Exception();
-            databaseLog = new DatabaseLog();
+            databaseLog = new LogDAO();
             keyReader = new KeyReader();
             menuSelection = new MenuSelection(basicPage);
             loginSystem = new LoginSystem(basicPage, menuSelection, databaseMember, memberDTO, databaseBook, exception, databaseLog, logDTO, keyReader);

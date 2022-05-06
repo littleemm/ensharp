@@ -11,14 +11,14 @@ namespace LibraryProgram
         MemberPage memberViewElement;
         BasicPage basicPage;
         MenuSelection menuSelection;
-        DatabaseMember databaseMember;
+        MemberDAO databaseMember;
         MemberDTO memberDTO;
         Exception exception;
-        DatabaseLog databaseLog;
+        LogDAO databaseLog;
         LogDTO logDTO;
         KeyReader keyReader;
 
-        public MemberAdministration(BasicPage basicPage, MemberPage memberViewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberDTO memberDTO, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
+        public MemberAdministration(BasicPage basicPage, MemberPage memberViewElement, MenuSelection menuSelection, MemberDAO databaseMember, MemberDTO memberDTO, Exception exception, LogDAO databaseLog, LogDTO logDTO, KeyReader keyReader)
         { 
             this.basicPage = basicPage;
             this.memberViewElement = memberViewElement;
@@ -153,6 +153,8 @@ namespace LibraryProgram
             basicPage.PrintLine();
             databaseMember.SelectMemberList();
 
+            AlertEmptyData(3, 11, Constant.SELECT_QUERY_MEMBER);
+
             string memberId = "", memberAddress = "", memberNumber = "";
             bool isMemberValue = false;
 
@@ -231,6 +233,7 @@ namespace LibraryProgram
                 memberViewElement.PrintEditFailMessage();
             }
 
+            basicPage.PrintAfterWork();
             return "";
         }
 
@@ -240,6 +243,8 @@ namespace LibraryProgram
             memberViewElement.PrintDeleteMemberForm();
             basicPage.PrintLine();
             databaseMember.SelectMemberList();
+
+            AlertEmptyData(3, 11, Constant.SELECT_QUERY_MEMBER);
 
             string memberId = "";
             bool isMemberValue = false;
@@ -263,7 +268,7 @@ namespace LibraryProgram
                 }
 
                 // 멤버가 대출한 책이 있는지 확인
-                isMemberValue = DatabaseMemberBook.databaseMemberBook.IsMemberCheckedOut(memberId, "memberId");
+                isMemberValue = MemberBookDAO.memberBookDAO.IsMemberCheckedOut(memberId, "memberId");
                 if (!isMemberValue) // 대출 책 있을 경우 삭제 불가
                 {
                     memberViewElement.PrintDeleteWarningMessage(3, 11);
@@ -282,6 +287,7 @@ namespace LibraryProgram
             logDTO.History = "ID ''" + memberId + "'' 회원 삭제";
             databaseLog.InsertLog(logDTO); // 로그 기록
 
+            basicPage.PrintAfterWork();
             return "";
         }
 
@@ -293,6 +299,8 @@ namespace LibraryProgram
             memberViewElement.SearchMember();
             basicPage.PrintLine();
             databaseMember.SelectMemberList();
+
+            AlertEmptyData(3, 4, Constant.SELECT_QUERY_MEMBER);
 
             while (!isMemberId)
             {
@@ -357,6 +365,7 @@ namespace LibraryProgram
         public void PrintList()
         { 
             memberViewElement.InformMemberList();
+            AlertEmptyData(3, 4, Constant.SELECT_QUERY_MEMBER);
             Console.WriteLine();
             Console.WriteLine("==============================================================================");
             databaseMember.SelectMemberList();
@@ -369,6 +378,14 @@ namespace LibraryProgram
             memberViewElement.PrintWarningMessage();
             Console.SetCursorPosition(x, y);
             basicPage.ClearLine(0, x);
+        }
+
+        private void AlertEmptyData(int x, int y, string query)
+        {
+            if (MemberBookDAO.memberBookDAO.CheckDataQuantity(query) == 0)
+            {
+                basicPage.PrintWarningSentence(x, y, "데이터가 존재하지 않습니다.");
+            }
         }
     }
 }

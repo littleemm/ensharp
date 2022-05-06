@@ -183,7 +183,7 @@ namespace LibraryProgram
 
         public bool IsPassword(string password) // 비밀번호 예외처리
         {
-            if (IsCtrlZ(password) == false)
+            if (!IsCtrlZ(password))
             {
                 return false;
             }

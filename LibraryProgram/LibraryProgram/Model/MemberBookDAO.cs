@@ -8,20 +8,38 @@ using MySql.Data.MySqlClient;
 
 namespace LibraryProgram
 {
-    class DatabaseMemberBook
+    class MemberBookDAO
     {
-        static public DatabaseMemberBook databaseMemberBook = new DatabaseMemberBook();
+        static public MemberBookDAO memberBookDAO = new MemberBookDAO();
         private MySqlConnection connection;
-        private DatabaseMemberBook()
+        private MemberBookDAO()
         {
             connection = new MySqlConnection(Constant.STRING_CONNECTION);
         }
 
-        public static DatabaseMemberBook getInstance() //써보기
+        public static MemberBookDAO getInstance() //써보기
         {
-            return databaseMemberBook;
+            return memberBookDAO;
         }
 
+        public int CheckDataQuantity(string query)
+        {
+            connection.Open();
+            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlDataReader dataReader = command.ExecuteReader();
+
+            int dataCount = 0;
+
+            while (dataReader.Read())
+            {
+                ++dataCount;
+            }
+
+            dataReader.Close();
+            connection.Close();
+
+            return dataCount;
+        }
         public void SelectMemberBook(string memberId) // 자신이 빌린책 불러오기
         {
             connection.Open();

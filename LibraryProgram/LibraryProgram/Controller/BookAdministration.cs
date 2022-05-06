@@ -10,16 +10,16 @@ namespace LibraryProgram
     {
         BookPage bookViewElement;
         BasicPage basicPage;
-        DatabaseBook databaseBook;
+        BookDAO databaseBook;
         BookDTO bookDTO;
         Exception exception;
         NaverBookAPI naverBookAPI;
-        DatabaseLog databaseLog;
+        LogDAO databaseLog;
         LogDTO logDTO;
         KeyReader keyReader;
  
         
-        public BookAdministration(BasicPage basicPage, BookPage bookViewElement, MenuSelection menuSelection, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
+        public BookAdministration(BasicPage basicPage, BookPage bookViewElement, MenuSelection menuSelection, BookDAO databaseBook, Exception exception, LogDAO databaseLog, LogDTO logDTO, KeyReader keyReader)
         {
             bookDTO = new BookDTO("", "", "", "", "", "", "", "");
             naverBookAPI = new NaverBookAPI();
@@ -32,7 +32,7 @@ namespace LibraryProgram
             this.keyReader = keyReader;
         }
 
-        public string RegisterBook()
+        public string RegisterBook() // 책 등록
         {
             Console.SetWindowSize(65, 30);
             bookViewElement.PrintRegistration();
@@ -40,8 +40,11 @@ namespace LibraryProgram
 
             while (!isBookValue)
             {
-                bookDTO.Id = keyReader.ReadKeyBasic(37, 13, bookDTO.Id);
-                if (bookDTO.Id == "\\n") return "\\n";
+                bookDTO.Id = keyReader.ReadKeyBasic(37, 13, bookDTO.Id); // 아이디 입력
+                if (bookDTO.Id == "\\n") // esc 체크
+                {
+                    return "\\n";
+                }
                 isBookValue = databaseBook.IsBookId(bookDTO.Id);
 
                 if (isBookValue)
@@ -65,8 +68,11 @@ namespace LibraryProgram
 
             while (!isBookValue)
             {
-                bookDTO.Name = keyReader.ReadKeyBasic(37, 15, bookDTO.Name);
-                if (bookDTO.Name == "\\n") return "\\n";
+                bookDTO.Name = keyReader.ReadKeyBasic(37, 15, bookDTO.Name); // 제목 입력
+                if (bookDTO.Name == "\\n") 
+                {
+                    return "\\n";
+                }
 
                 isBookValue = exception.IsBookName(bookDTO.Name);
                 if (!isBookValue)
@@ -80,8 +86,11 @@ namespace LibraryProgram
 
             while (!isBookValue)
             {
-                bookDTO.Author = keyReader.ReadKeyBasic(37, 17, bookDTO.Author);
-                if (bookDTO.Author == "\\n") return "\\n";
+                bookDTO.Author = keyReader.ReadKeyBasic(37, 17, bookDTO.Author); // 작가 입력
+                if (bookDTO.Author == "\\n")
+                {
+                    return "\\n";
+                }
 
                 isBookValue = exception.IsBookAuthor(bookDTO.Author);
                 if (isBookValue == false)
@@ -95,8 +104,11 @@ namespace LibraryProgram
 
             while (!isBookValue)
             {
-                bookDTO.Publisher = keyReader.ReadKeyBasic(37, 19, bookDTO.Publisher);
-                if (bookDTO.Publisher == "\\n") return "\\n";
+                bookDTO.Publisher = keyReader.ReadKeyBasic(37, 19, bookDTO.Publisher); // 출판사 입력
+                if (bookDTO.Publisher == "\\n")
+                {
+                    return "\\n";
+                }
 
                 isBookValue = exception.IsBookPublisher(bookDTO.Publisher);
                 if (!isBookValue)
@@ -110,8 +122,11 @@ namespace LibraryProgram
 
             while (!isBookValue)
             {
-                bookDTO.Price = keyReader.ReadKeyBasic(37, 21, bookDTO.Price);
-                if (bookDTO.Price == "\\n") return "\\n";
+                bookDTO.Price = keyReader.ReadKeyBasic(37, 21, bookDTO.Price); // 가격 입력
+                if (bookDTO.Price == "\\n")
+                {
+                    return "\\n";
+                }
 
                 isBookValue = exception.IsPrice(bookDTO.Price);
                 if (!isBookValue)
@@ -125,8 +140,11 @@ namespace LibraryProgram
 
             while (!isBookValue)
             {
-                bookDTO.Pubdate = keyReader.ReadKeyBasic(37, 23, bookDTO.Pubdate);
-                if (bookDTO.Pubdate == "\\n") return "\\n";
+                bookDTO.Pubdate = keyReader.ReadKeyBasic(37, 23, bookDTO.Pubdate); // 출판일 입력
+                if (bookDTO.Pubdate == "\\n")
+                {
+                    return "\\n";
+                }
 
                 isBookValue = exception.IsDate(bookDTO.Pubdate);
                 if (!isBookValue)
@@ -140,8 +158,11 @@ namespace LibraryProgram
 
             while (!isBookValue)
             {
-                bookDTO.Isbn = keyReader.ReadKeyBasic(37, 25, bookDTO.Isbn);
-                if (bookDTO.Isbn == "\\n") return "\\n";
+                bookDTO.Isbn = keyReader.ReadKeyBasic(37, 25, bookDTO.Isbn); // isbn 입력
+                if (bookDTO.Isbn == "\\n")
+                {
+                    return "\\n";
+                }
 
                 isBookValue = exception.IsIsbn(bookDTO.Isbn);
                 if (!isBookValue)
@@ -155,8 +176,11 @@ namespace LibraryProgram
 
             while (!isBookValue)
             {
-                bookDTO.Quantity = keyReader.ReadKeyBasic(37, 27, bookDTO.Quantity);
-                if (bookDTO.Quantity == "\\n") return "\\n";
+                bookDTO.Quantity = keyReader.ReadKeyBasic(37, 27, bookDTO.Quantity); // 수량 입력
+                if (bookDTO.Quantity == "\\n")
+                {
+                    return "\\n";
+                }
 
                 isBookValue = exception.IsQuantity(bookDTO.Quantity);
                 if (!isBookValue)
@@ -167,23 +191,25 @@ namespace LibraryProgram
 
             basicPage.ClearLineEasy(11, 5);
 
-            databaseBook.InsertBook(bookDTO);
+            databaseBook.InsertBook(bookDTO); // 데이터베이스 삽입 
             bookViewElement.PrintSuccessMessage("등록");
 
             logDTO.User = "관리자";
             logDTO.History = "도서 Id " + bookDTO.Id + "인 도서 ''" + bookDTO.Name + "'' 추가";
-            databaseLog.InsertLog(logDTO);
+            databaseLog.InsertLog(logDTO); // 로그 기록
 
             basicPage.PrintAfterWork();
             return "";
         }
 
-        public string EditBook()
+        public string EditBook() // 책 정보 수정
         {
             bookViewElement.PrintEditBook();
             bookViewElement.PrintEditBookForm();
             basicPage.PrintLine();
             databaseBook.SelectBookList();
+
+            AlertEmptyData(3, 11, Constant.SELECT_QUERY_BOOK); // 데이터 없을 경우 
 
             string bookId = "", bookPrice = "", bookQuantity = "";
             bool isBookValue = false;
@@ -222,7 +248,7 @@ namespace LibraryProgram
                 }
 
                 if (bookPrice == "")
-                {
+                { // 엔터만 입력되었을 경우 (수정 안한다는 의미)
                     break;
                 }
 
@@ -245,7 +271,7 @@ namespace LibraryProgram
                 }
 
                 if (bookQuantity == "")
-                {
+                { // 엔터만 입력되었을 경우
                     break;
                 }
 
@@ -267,7 +293,7 @@ namespace LibraryProgram
             }
 
             else
-            {
+            { // 두 데이터 모두 엔터가 들어왔으면 수정된 것 x
                 bookViewElement.PrintEditFailMessage(5, 11);
             }
 
@@ -276,20 +302,25 @@ namespace LibraryProgram
             return "";
         }
 
-        public string DeleteBook()
+        public string DeleteBook() // 도서 삭제
         {
             bookViewElement.PrintDeleteBook();
             bookViewElement.PrintBookIdForm();
             basicPage.PrintLine();
             databaseBook.SelectBookList();
 
+            AlertEmptyData(3, 11, Constant.SELECT_QUERY_BOOK); // 도서 데이터 없을 경우
+
             string bookId = "";
             bool isBookValue = false;
 
             while (!isBookValue)
             {
-                bookId = keyReader.ReadKeyBasic(30, 13, bookId);
-                if (bookId == "\\n") return "\\n";
+                bookId = keyReader.ReadKeyBasic(30, 13, bookId); // 아이디 입력
+                if (bookId == "\\n")
+                {
+                    return "\\n";
+                }
 
                 isBookValue = databaseBook.IsBookId(bookId);
 
@@ -306,8 +337,8 @@ namespace LibraryProgram
                     continue;
                 }
                 
-                isBookValue = DatabaseMemberBook.databaseMemberBook.IsMemberCheckedOut(bookId, "bookId");
-                if (!isBookValue)
+                isBookValue = MemberBookDAO.memberBookDAO.IsMemberCheckedOut(bookId, "bookId");
+                if (!isBookValue) // 선택한 도서가 대출된 책인지 확인
                 {
                     bookViewElement.PrintDeleteWarningMessage(3, 11);
                     Console.SetCursorPosition(30, 13);
@@ -321,20 +352,22 @@ namespace LibraryProgram
 
             logDTO.User = "관리자";
             logDTO.History = "ID " + bookId + " 도서 삭제";
-            databaseLog.InsertLog(logDTO);
+            databaseLog.InsertLog(logDTO); // 로그 기록
 
             basicPage.PrintAfterWork();
 
             return "";
         }
 
-        public string SearchBook()
+        public string SearchBook() // 도서 검색
         {
             string bookValue = "";
             bookViewElement.InformBookList();
             bookViewElement.SearchBook();
             basicPage.PrintLine(); 
             databaseBook.SelectBookList();
+
+            AlertEmptyData(3, 4, Constant.SELECT_QUERY_BOOK);
 
             while (Constant.IS_CTRL_Z)
             {
@@ -433,6 +466,7 @@ namespace LibraryProgram
         public void PrintList()
         {
             bookViewElement.InformBookList();
+            AlertEmptyData(3, 4, Constant.SELECT_QUERY_MEMBERBOOK);
             Console.WriteLine();
             Console.WriteLine("==============================================================================");
             databaseBook.SelectBookList();
@@ -442,9 +476,10 @@ namespace LibraryProgram
         public void PrintCheckOutList()
         {
             bookViewElement.InformCheckOutList();
+            AlertEmptyData(3, 4, Constant.SELECT_QUERY_MEMBERBOOK);
             Console.WriteLine();
             Console.WriteLine("==============================================================================");
-            DatabaseMemberBook.databaseMemberBook.SelectMemberBookList();
+            MemberBookDAO.memberBookDAO.SelectMemberBookList();
             Console.SetCursorPosition(0, 0);
         }
 
@@ -559,6 +594,14 @@ namespace LibraryProgram
             }
 
             databaseLog.InsertLog(logDTO);
+        }
+
+        private void AlertEmptyData(int x, int y, string query)
+        {
+            if (MemberBookDAO.memberBookDAO.CheckDataQuantity(query) == 0)
+            {
+                basicPage.PrintWarningSentence(x, y, "데이터가 존재하지 않습니다.");
+            }
         }
     }
 }

@@ -17,7 +17,7 @@ namespace LibraryProgram
         LogPage logViewElement;
         MenuSelection menuSelection;
 
-        public AdministratorMode(BasicPage basicPage, MenuSelection menuSelection, DatabaseMember databaseMember, MemberDTO memberDTO, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
+        public AdministratorMode(BasicPage basicPage, MenuSelection menuSelection, MemberDAO databaseMember, MemberDTO memberDTO, BookDAO databaseBook, Exception exception, LogDAO databaseLog, LogDTO logDTO, KeyReader keyReader)
         {
             bookViewElement = new BookPage();
             memberViewElement = new MemberPage();

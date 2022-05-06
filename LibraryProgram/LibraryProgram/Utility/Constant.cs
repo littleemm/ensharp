@@ -29,7 +29,7 @@ namespace LibraryProgram
 
         public const string SELECT_QUERY_BOOK_WHERE_ID = "SELECT * FROM book WHERE id = '{0}';";
 
-        public const string INSERT_QUERY_MEMBER = "INSERT INTO member(id, password, name, age, phoneNumber, address, bookCount)Value('{0}', '{1}', '{2}', '{3}, '{4}', '{5}', '0');";
+        public const string INSERT_QUERY_MEMBER = "INSERT INTO member(id, password, name, age, phoneNumber, address, bookCount)Value('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '0');";
         public const string SELECT_QUERY_MEMBER = "SELECT * FROM member";
         public const string DELETE_QUERY_MEMBER = "DELETE FROM member WHERE id = '{0}';";
         public const string UPDATE_QUERY_MEMBER = "UPDATE member ";
