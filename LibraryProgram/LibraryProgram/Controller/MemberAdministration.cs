@@ -37,16 +37,16 @@ namespace LibraryProgram
             memberViewElement.PrintRegistration();
             bool isMemberValue = false;
 
-            while (isMemberValue == false)
+            while (!isMemberValue)
             {
                 memberDTO.Id = keyReader.ReadKeyBasic(42, 13, memberDTO.Id);
                 if (memberDTO.Id == "\\n") return "\\n";
 
                 isMemberValue = databaseMember.IsMemberId(memberDTO.Id);
 
-                if (isMemberValue == true)
+                if (isMemberValue)
                 {
-                    viewElement.PrintSameDataSentence(6, 11);
+                    viewElement.PrintWarningSentence(6, 11, "이미 존재하는 아이디입니다.");
                     Console.SetCursorPosition(42, 13);
                     viewElement.ClearLine(0, 42);
                     isMemberValue = false;
@@ -54,84 +54,84 @@ namespace LibraryProgram
                 }
 
                 isMemberValue = exception.IsMemberId(memberDTO.Id);
-                if (isMemberValue == false)
+                if (!isMemberValue)
                 {
-                    PrintFalse(42, 13);
+                    PrintFalse(10, 11, 42, 13);
                 }
             }
 
             viewElement.ClearLineEasy(11, 6);
             isMemberValue = false;
 
-            while (isMemberValue == false)
+            while (!isMemberValue)
             {
-                memberDTO.Password = keyReader.ReadKeyBasic(42, 15, memberDTO.Password);
+                memberDTO.Password = keyReader.ReadKeySecret(42, 15, memberDTO.Password);
                 if (memberDTO.Password == "\\n") return "\\n";
 
                 isMemberValue = exception.IsPassword(memberDTO.Password);
-                if (isMemberValue == false)
+                if (!isMemberValue)
                 {
-                    PrintFalse(42, 15);
+                    PrintFalse(10, 11, 42, 15);
                 }
             }
 
             viewElement.ClearLineEasy(11, 6);
             isMemberValue = false;
 
-            while (isMemberValue == false)
+            while (!isMemberValue)
             {
                 memberDTO.Name = keyReader.ReadKeyBasic(42, 17, memberDTO.Name);
                 if (memberDTO.Name == "\\n") return "\\n";
 
                 isMemberValue = exception.IsMemberName(memberDTO.Name);
-                if (isMemberValue == false)
+                if (!isMemberValue)
                 {
-                    PrintFalse(42, 17);
+                    PrintFalse(10, 11, 42, 17);
                 }
             }
 
             viewElement.ClearLineEasy(11, 6);
             isMemberValue = false;
 
-            while (isMemberValue == false)
+            while (!isMemberValue)
             {
                 memberDTO.Age = keyReader.ReadKeyBasic(42, 19, memberDTO.Age);
                 if (memberDTO.Age == "\\n") return "\\n";
 
                 isMemberValue = exception.IsAge(memberDTO.Age);
-                if (isMemberValue == false)
+                if (!isMemberValue)
                 {
-                    PrintFalse(42, 19);
+                    PrintFalse(10, 11, 42, 19);
                 }
             }
 
             viewElement.ClearLineEasy(11, 6);
             isMemberValue = false;
 
-            while (isMemberValue == false)
+            while (!isMemberValue)
             {
                 memberDTO.PhoneNumber = keyReader.ReadKeyBasic(42, 21, memberDTO.PhoneNumber);
                 if (memberDTO.PhoneNumber == "\\n") return "\\n";
 
                 isMemberValue = exception.IsPhoneNumber(memberDTO.PhoneNumber);
-                if (isMemberValue == false)
+                if (!isMemberValue)
                 {
-                    PrintFalse(42, 21);
+                    PrintFalse(10, 11, 42, 21);
                 }
             }
 
             viewElement.ClearLineEasy(11, 6);
             isMemberValue = false;
 
-            while (isMemberValue == false)
+            while (!isMemberValue)
             {
                 memberDTO.Address = keyReader.ReadKeyBasic(42, 23, memberDTO.Address);
                 if (memberDTO.Address == "\\n") return "\\n";
 
                 isMemberValue = exception.IsAddress(memberDTO.Address);
-                if (isMemberValue == false)
+                if (!isMemberValue)
                 {
-                    PrintFalse(42, 23);
+                    PrintFalse(10, 11, 42, 23);
                 }
             }
 
@@ -156,30 +156,30 @@ namespace LibraryProgram
             string memberId = "", memberAddress = "", memberNumber = "";
             bool isMemberValue = false;
 
-            while (isMemberValue == false)
+            while (!isMemberValue)
             {
-                memberId = keyReader.ReadKeyBasic(39, 13, memberId);
+                memberId = keyReader.ReadKeyBasic(30, 13, memberId);
                 if (memberId == "\\n") return "\\n";
 
                 isMemberValue = databaseMember.IsMemberId(memberId); // 존재하는 아이디인지 체크
 
-                if (isMemberValue == false) 
+                if (!isMemberValue) 
                 {
-                    PrintFalse(30, 13);
+                    PrintFalse(5, 11, 30, 13);
                     continue;
                 }
 
                 isMemberValue = exception.IsMemberId(memberId); // 아이디 입력 예외처리
-                if (isMemberValue == false)
+                if (!isMemberValue)
                 {
-                    PrintFalse(30, 13);
+                    PrintFalse(5, 11, 30, 13);
                 }
             }
 
             isMemberValue = false;
             viewElement.ClearLineEasy(11, 6);
 
-            while (isMemberValue == false)
+            while (!isMemberValue)
             {
                 memberAddress = keyReader.ReadKeyBasic(30, 15, memberAddress);
                 if (memberAddress == "\\n") return "\\n";
@@ -190,25 +190,25 @@ namespace LibraryProgram
                 }
 
                 isMemberValue = exception.IsCtrlZ(memberAddress); // 터지지 않기 위함
-                if (isMemberValue == false)
+                if (!isMemberValue)
                 {
-                    viewElement.PrintWarningSentence(2, 11);
+                    viewElement.PrintWarningSentence(2, 11, "조건에 맞춰서 다시 입력해주세요.");
                     Console.SetCursorPosition(30, 15);
                     viewElement.ClearLine(0, 30);
                     continue;
                 }
 
                 isMemberValue = exception.IsAddress(memberAddress); // 입력 예외처리
-                if (isMemberValue == false)
+                if (!isMemberValue)
                 {
-                    PrintFalse(30, 15);
+                    PrintFalse(5, 11, 30, 15);
                 }
             }
 
             isMemberValue = false;
             viewElement.ClearLineEasy(11, 6);
 
-            while (isMemberValue == false)
+            while (!isMemberValue)
             {
                 memberNumber = keyReader.ReadKeyBasic(30, 17, memberNumber);
                 if (memberNumber == "\\n") return "\\n";
@@ -219,18 +219,18 @@ namespace LibraryProgram
                 }
 
                 isMemberValue = exception.IsCtrlZ(memberNumber); // 프로그램 터지지 않도록
-                if (isMemberValue == false)
+                if (!isMemberValue)
                 {
-                    viewElement.PrintWarningSentence(2, 11);
+                    viewElement.PrintWarningSentence(2, 11, "조건에 맞춰서 다시 입력해주세요.");
                     Console.SetCursorPosition(30, 17);
                     viewElement.ClearLine(0, 30);
                     continue;
                 }
 
                 isMemberValue = exception.IsPhoneNumber(memberNumber); // 입력 예외처리
-                if (isMemberValue == false)
+                if (!isMemberValue)
                 {
-                    PrintFalse(30, 17);
+                    PrintFalse(5, 11, 30, 17);
                 }
             }
 
@@ -261,27 +261,27 @@ namespace LibraryProgram
             string memberId = "";
             bool isMemberValue = false;
 
-            while (isMemberValue == false)
+            while (!isMemberValue)
             {
                 memberId = keyReader.ReadKeyBasic(30, 13, memberId);
                 if (memberId == "\\n") return "\\n";
 
                 isMemberValue = databaseMember.IsMemberId(memberId);
-                if (isMemberValue == false) // 실제 존재하는 아이디인지 체크
+                if (!isMemberValue) // 실제 존재하는 아이디인지 체크
                 {
-                    PrintFalse(30, 13);
+                    PrintFalse(5, 11, 30, 13);
                     continue;
                 }
 
                 isMemberValue = exception.IsMemberId(memberId);
-                if (isMemberValue == false) // 입력 예외처리
+                if (!isMemberValue) // 입력 예외처리
                 {
-                    PrintFalse(30, 13);
+                    PrintFalse(5, 11, 30, 13);
                 }
 
                 // 멤버가 대출한 책이 있는지 확인
                 isMemberValue = DatabaseMemberBook.databaseMemberBook.IsMemberCheckedOut(memberId, "memberId");
-                if (isMemberValue == false) // 대출 책 있을 경우 삭제 불가
+                if (!isMemberValue) // 대출 책 있을 경우 삭제 불가
                 {
                     memberViewElement.PrintDeleteWarningMessage(3, 11);
                     Console.SetCursorPosition(30, 13);
@@ -311,13 +311,13 @@ namespace LibraryProgram
             viewElement.PrintLine();
             databaseMember.SelectMemberList();
 
-            while (isMemberId == false)
+            while (!isMemberId)
             {
                 memberId = keyReader.ReadKeyBasic(18, 6, memberId);
                 if (memberId == "\\n") return "\\n";
 
                 isMemberId = databaseMember.IsSearchedMemberId(memberId);
-                if (isMemberId == false) // 회원아이디 실제 존재 여부
+                if (!isMemberId) // 회원아이디 실제 존재 여부
                 {
                     memberViewElement.PrintSearchWarningMessage(9, 4);
                     Console.SetCursorPosition(18, 6);
@@ -326,7 +326,7 @@ namespace LibraryProgram
                 }
 
                 isMemberId = exception.IsMemberId(memberId);
-                if (isMemberId == false)
+                if (!isMemberId)
                 {
                     memberViewElement.PrintSearchWarningMessage(9, 4);
                     Console.SetCursorPosition(18, 6);
@@ -380,9 +380,9 @@ namespace LibraryProgram
             Console.SetCursorPosition(0, 0);
         }
 
-        private void PrintFalse(int x, int y)
+        private void PrintFalse(int printX, int printY, int x, int y)
         { // bool 함수를 이용해 확인한 후 false 상황일 때 사용 (메시지 출력, UI청소)
-            Console.SetCursorPosition(20, 10);
+            Console.SetCursorPosition(printX, printY);
             memberViewElement.PrintWarningMessage();
             Console.SetCursorPosition(x, y);
             viewElement.ClearLine(0, x);

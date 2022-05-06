@@ -80,7 +80,7 @@ namespace LibraryProgram
             bookViewElement.PrintCheckOutBookInform();
             databaseBook.SelectBookList();
 
-            while (isBook == false)
+            while (!isBook)
             {
                 bookId = keyReader.ReadKeyBasic(33, 6, bookId);
                 if (bookId == "\\n") return "\\n";
@@ -89,7 +89,7 @@ namespace LibraryProgram
                 viewElement.ClearLine(0, 0);
 
                 isBook = DatabaseMemberBook.databaseMemberBook.IsBookId(bookId);
-                if (isBook == false)
+                if (!isBook)
                 {
                     Console.SetCursorPosition(0, 4);
                     bookViewElement.PrintBookIdFailMessage();
@@ -98,7 +98,7 @@ namespace LibraryProgram
                     continue;
                 }
                 isBook = exception.IsBookId(bookId);
-                if (isBook == false)
+                if (!isBook)
                 {
                     Console.SetCursorPosition(0, 4);
                     bookViewElement.PrintBookIdFailMessage();
@@ -107,7 +107,7 @@ namespace LibraryProgram
                     continue;
                 }
                 isBook = DatabaseMemberBook.databaseMemberBook.IsBookCount(bookId);
-                if (isBook == false)
+                if (!isBook)
                 {
                     Console.SetCursorPosition(0, 4);
                     bookViewElement.PrintCountFailMessage();
@@ -117,7 +117,7 @@ namespace LibraryProgram
                 }
 
                 isBook = DatabaseMemberBook.databaseMemberBook.IsCheckedOutBook(bookId, id);
-                if (isBook == false)
+                if (!isBook)
                 {
                     Console.SetCursorPosition(0, 4);
                     bookViewElement.PrintCheckedOutFailMessage();
@@ -147,7 +147,7 @@ namespace LibraryProgram
             bookViewElement.PrintReturnBookInform(id); 
             DatabaseMemberBook.databaseMemberBook.SelectMemberBook(id);
 
-            while (isBook == false)
+            while (!isBook)
             {
                 bookId = keyReader.ReadKeyBasic(33, 6, bookId);
                 if (bookId == "\\n") return "\\n";
@@ -155,7 +155,7 @@ namespace LibraryProgram
                 viewElement.ClearLine(0, 0);
 
                 isBook = DatabaseMemberBook.databaseMemberBook.IsBookId(bookId);
-                if (isBook == false)
+                if (!isBook)
                 {
                     Console.SetCursorPosition(0, 4);
                     bookViewElement.PrintBookIdFailMessage();
@@ -164,7 +164,7 @@ namespace LibraryProgram
                 }
 
                 isBook = exception.IsBookId(bookId);
-                if (isBook == false)
+                if (!isBook)
                 {
                     Console.SetCursorPosition(0, 4);
                     bookViewElement.PrintBookIdFailMessage();
@@ -176,10 +176,10 @@ namespace LibraryProgram
 
             viewElement.ClearLineEasy(4, 0);
 
-            while (isBook == true)
+            while (isBook)
             {
                 isBook = DatabaseMemberBook.databaseMemberBook.IsCheckedOutBook(bookId, id);
-                if (isBook == true)
+                if (isBook)
                 {
                     Console.SetCursorPosition(0, 4);
                     bookViewElement.PrintBookIdFailMessage();
@@ -215,15 +215,15 @@ namespace LibraryProgram
             string address = "", number = "";
             bool isMemberValue = false;
 
-            while (isMemberValue == false)
+            while (!isMemberValue)
             {
                 address = keyReader.ReadKeyBasic(30, 13, address);
                 if (address == "\\n") return "\\n";
 
                 isMemberValue = exception.IsCtrlZ(address);
-                if (isMemberValue == false)
+                if (!isMemberValue)
                 {
-                    viewElement.PrintWarningSentence(2, 11);
+                    viewElement.PrintWarningSentence(2, 11, "올바른 형식으로 다시 입력하세요.");
                     Console.SetCursorPosition(30, 13);
                     viewElement.ClearLine(0, 30);
                     continue;
@@ -237,7 +237,7 @@ namespace LibraryProgram
                 isMemberValue = exception.IsAddress(address);
                 if (isMemberValue == false)
                 {
-                    viewElement.PrintWarningSentence(2, 11);
+                    viewElement.PrintWarningSentence(2, 11, "조건에 맞춰서 다시 입력하세요.");
                     Console.SetCursorPosition(30, 13);
                     viewElement.ClearLine(0, 30);
                 }
@@ -246,15 +246,15 @@ namespace LibraryProgram
             isMemberValue = false;
             viewElement.ClearLineEasy(11, 2);
 
-            while (isMemberValue == false)
+            while (!isMemberValue)
             {
                 number = keyReader.ReadKeyBasic(30, 15, number);
                 if (number == "\\n") return "\\n";
 
                 isMemberValue = exception.IsCtrlZ(number);
-                if (isMemberValue == false)
+                if (!isMemberValue)
                 {
-                    viewElement.PrintWarningSentence(2, 11);
+                    viewElement.PrintWarningSentence(2, 11, "올바른 형식으로 다시 입력하세요.");
                     Console.SetCursorPosition(30, 15);
                     viewElement.ClearLine(0, 30);
                     continue;
@@ -266,9 +266,9 @@ namespace LibraryProgram
                 }
 
                 isMemberValue = exception.IsPhoneNumber(number);
-                if (isMemberValue == false)
+                if (!isMemberValue)
                 {
-                    viewElement.PrintWarningSentence(2, 11);
+                    viewElement.PrintWarningSentence(2, 11, "조건에 맞춰서 다시 입력하세요.");
                     Console.SetCursorPosition(30, 15);
                     viewElement.ClearLine(0, 30);
                 }

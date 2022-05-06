@@ -32,12 +32,12 @@ namespace LibraryProgram
             logViewElement.PrintLogListColumn();
             databaseLog.SelectLogList();
 
-            while (isLogId == false)
+            while (!isLogId)
             {
                 id = keyReader.ReadKeyBasic(24, 6, id);
                 if (id == "\\n") return "\\n";
                 isLogId = databaseLog.IsLogId(id);
-                if (isLogId == false)
+                if (!isLogId)
                 {
                     Console.SetCursorPosition(24, 6);
                     viewElement.ClearLine(0, 24);
@@ -57,11 +57,11 @@ namespace LibraryProgram
         {
             logViewElement.PrintDeleteLogList(" 전부 삭제");
             string number = menuSelection.CheckMenuNumber(46, 20, Constant.ARRAY_TWO);
-            while (true)
+            while (Constant.EXIT_WHEN_GO_BACK)
             {
                 switch (int.Parse(number))
                 {
-                    case Constant.LOG_DELETE:
+                    case Constant.LOG_INIT:
                         {
                             databaseLog.TruncateLogList();
                             logViewElement.PrintSuccessMessage("전면 삭제", 0, 18);
@@ -79,11 +79,11 @@ namespace LibraryProgram
         {
             logViewElement.PrintDeleteLogList("파일을 저장");
             string number = menuSelection.CheckMenuNumber(46, 20, Constant.ARRAY_TWO);
-            while (true)
+            while (Constant.EXIT_WHEN_GO_BACK)
             {
                 switch (int.Parse(number))
                 {
-                    case Constant.LOG_DELETE:
+                    case Constant.LOG_SAVE:
                         {
                             databaseLog.WriteLog();
                             logViewElement.PrintSuccessMessage("파일 저장", 0, 18);
@@ -102,7 +102,7 @@ namespace LibraryProgram
         {
             logViewElement.PrintDeleteLogList("파일을 삭제");
             string number = menuSelection.CheckMenuNumber(46, 20, Constant.ARRAY_TWO);
-            while (true)
+            while (Constant.EXIT_WHEN_GO_BACK)
             {
                 switch (int.Parse(number))
                 {
@@ -118,6 +118,7 @@ namespace LibraryProgram
                 }
             }
         }
+
         public void PrintLogList() // 로그 내역을 전부 출력해주는 함수
         {
             Console.SetWindowSize(85, 28);

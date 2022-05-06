@@ -26,21 +26,22 @@ namespace LibraryProgram
         public string LoginAdministratorMode() // 관리자 모드 로그인
         {
             Console.Clear();
-            bool isIdAndPassword = Constant.ID_AND_PW_UNCORRECT_NOW;
+            bool isIdAndPassword = false;
             viewElement.PrintLoginPage();
-            while (isIdAndPassword == Constant.ID_AND_PW_UNCORRECT_NOW) {
+
+            while (!isIdAndPassword) {
                 id = keyReader.ReadKeyBasic(37, 14, id);
                 if (id == "\\n") return id;
                 password = keyReader.ReadKeySecret(37, 16, password);
                 if (password == "\\n") return password;
 
                 isIdAndPassword = databaseMember.SelectMember(Constant.SELECT_QUERY_ADMIN, id, password);
-                if (isIdAndPassword == Constant.ID_AND_PW_UNCORRECT_NOW)
+                if (!isIdAndPassword)
                 { // 아이디, 비밀번호 중 하나라도 틀리면 다시
                     viewElement.ClearLine(0, 37);
                     Console.SetCursorPosition(37, 14);
                     viewElement.ClearLine(0, 37);
-                    viewElement.PrintLoginWarning(2, 12);
+                    viewElement.PrintWarningSentence(2, 12, "일치하는 회원정보가 없습니다!");
                 }
             }
 
@@ -51,9 +52,10 @@ namespace LibraryProgram
         {
             Console.Clear();
             Console.SetWindowSize(60, 28);
-            bool isIdAndPassword = Constant.ID_AND_PW_UNCORRECT_NOW;
+            bool isIdAndPassword = false;
             viewElement.PrintLoginPage();
-            while (isIdAndPassword == Constant.ID_AND_PW_UNCORRECT_NOW)
+
+            while (!isIdAndPassword)
             {
                 id = keyReader.ReadKeyBasic(37, 14, id);
                 if (id == "\\n") return id;
@@ -61,12 +63,12 @@ namespace LibraryProgram
                 if (password == "\\n") return password;
 
                 isIdAndPassword = databaseMember.SelectMember(Constant.SELECT_QUERY_MEMBER, id, password);
-                if (isIdAndPassword == Constant.ID_AND_PW_UNCORRECT_NOW)// 아이디 비밀번호 틀렸을 경우 <- 매직넘버 처리 
+                if (!isIdAndPassword)// 아이디 비밀번호 틀렸을 경우 <- 매직넘버 처리 
                 {
                     viewElement.ClearLine(0, 37);
                     Console.SetCursorPosition(37, 14);
                     viewElement.ClearLine(0, 37);
-                    viewElement.PrintLoginWarning(2, 12);
+                    viewElement.PrintWarningSentence(2, 12, "일치하는 회원정보가 없습니다!");
                 }
             }
 

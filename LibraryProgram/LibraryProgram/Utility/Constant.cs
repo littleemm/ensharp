@@ -76,12 +76,17 @@ namespace LibraryProgram
         public const int ADDRESS_LENGTH_IS_8 = 8;
 
         public const int LOG_DELETE = 1;
+        public const int LOG_INIT = 1;
+        public const int LOG_SAVE = 1;
+
         public const int EXIT_REAL = 1;
         public const int GOBACK = 2;
 
         public const bool ID_AND_PW_UNCORRECT = true;
         public const bool ID_AND_PW_UNCORRECT_NOW = false;
         public const bool IS_CTRL_Z = true;
+        public const bool LOOP_FINAL_ESC_KEY_PRESSED = true;
+        public const bool EXIT_WHEN_GO_BACK = true;
 
         public const string CLIENT_ID = "Gy_693vcZVxD7SqwKVzr";
         public const string CLIENT_SECRET = "SdGR7yh_9b";

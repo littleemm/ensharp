@@ -33,7 +33,7 @@ namespace LibraryProgram
         public string SelectBookAdministration() // 책 관리 모드에서 메뉴 선택
         {
             string number = "";
-            while (true)
+            while (Constant.LOOP_FINAL_ESC_KEY_PRESSED) // 마지막에 esc 키를 누르면 반복됨
             {
                 Console.Clear();
                 Console.SetWindowSize(60, 28);
@@ -50,42 +50,27 @@ namespace LibraryProgram
                     {
                         case Constant.REGISTRATION:
                             {
-                                if (bookAdministration.RegisterBook() == "\\n")
-                                {
-                                    SelectBookAdministration();
-                                }
+                                GobackAdministratorBookMenu(bookAdministration.RegisterBook());
                                 break;
                             }
                         case Constant.EDIT:
                             {
-                                if (bookAdministration.EditBook() == "\\n")
-                                {
-                                    SelectBookAdministration();
-                                }
+                                GobackAdministratorBookMenu(bookAdministration.EditBook());
                                 break;
                             }
                         case Constant.DELETE:
                             {
-                                if (bookAdministration.DeleteBook() == "\\n")
-                                {
-                                    SelectBookAdministration();
-                                }
+                                GobackAdministratorBookMenu(bookAdministration.DeleteBook());
                                 break;
                             }
                         case Constant.SEARCH:
                             {
-                                if (bookAdministration.SearchBook() == "\\n")
-                                {
-                                    SelectBookAdministration();
-                                }
+                                GobackAdministratorBookMenu(bookAdministration.SearchBook());
                                 break;
                             }
                         case Constant.SEARCH_NAVER:
                             {
-                                if (bookAdministration.SearchNaverBook() == "\\n")
-                                {
-                                    SelectBookAdministration();
-                                }
+                                GobackAdministratorBookMenu(bookAdministration.SearchNaverBook());
                                 break;
                             }
                         case Constant.LIST:
@@ -115,7 +100,7 @@ namespace LibraryProgram
         public string SelectMemberAdministration() // 회원 관리모드에서 메뉴 선택
         {
             string number = "";
-            while (true)
+            while (Constant.LOOP_FINAL_ESC_KEY_PRESSED)
             {
                 Console.Clear();
                 Console.SetWindowSize(60, 28);
@@ -132,34 +117,22 @@ namespace LibraryProgram
                     {
                         case Constant.REGISTRATION:
                             {
-                                if (memberAdministration.RegisterMember() == "\\n")
-                                {
-                                    SelectMemberAdministration();
-                                }
+                                GobackAdministratorMemberMenu(memberAdministration.RegisterMember());
                                 break;
                             }
                         case Constant.EDIT:
                             {
-                                if (memberAdministration.EditMember() == "\\n")
-                                {
-                                    SelectMemberAdministration();
-                                }
+                                GobackAdministratorMemberMenu(memberAdministration.EditMember());
                                 break;
                             }
                         case Constant.DELETE:
                             {
-                                if (memberAdministration.DeleteMember() == "\\n")
-                                {
-                                    SelectMemberAdministration();
-                                }
+                                GobackAdministratorMemberMenu(memberAdministration.DeleteMember());
                                 break;
                             }
                         case Constant.SEARCH:
                             {
-                                if (memberAdministration.SearchMember() == "\\n")
-                                {
-                                    SelectMemberAdministration();
-                                }
+                                GobackAdministratorMemberMenu(memberAdministration.SearchMember());
                                 break;
                             }
                         case Constant.MEMBER_LIST:
@@ -183,7 +156,7 @@ namespace LibraryProgram
         public string SelectLogAdministration() // 로그 관리 모드에서 메뉴 선택
         {
             string number = "";
-            while (true)
+            while (Constant.LOOP_FINAL_ESC_KEY_PRESSED)
             {
                 Console.Clear();
                 Console.SetWindowSize(60, 28);
@@ -200,34 +173,22 @@ namespace LibraryProgram
                     {
                         case Constant.EDIT_LOG:
                             {
-                                if (logAdministration.EditLog() == "\\n")
-                                {
-                                    SelectLogAdministration();
-                                }
+                                GobackAdministratorLogMenu(logAdministration.EditLog());
                                 break;
                             }
                         case Constant.INIT_LOG:
                             {
-                                if (logAdministration.InitializeLog() == "\\n")
-                                {
-                                    SelectLogAdministration();
-                                }
+                                GobackAdministratorLogMenu(logAdministration.InitializeLog());
                                 break;
                             }
                         case Constant.SAVE_LOG:
                             {
-                                if (logAdministration.SaveLogFile() == "\\n")
-                                {
-                                    SelectLogAdministration();
-                                }
+                                GobackAdministratorLogMenu(logAdministration.SaveLogFile());
                                 break;
                             }
                         case Constant.DELETE_LOG:
                             {
-                                if (logAdministration.DeleteLogFile() == "\\n")
-                                {
-                                    SelectLogAdministration();
-                                }
+                                GobackAdministratorLogMenu(logAdministration.DeleteLogFile());
                                 break;
                             }
                         case Constant.LOG_LIST:
@@ -266,12 +227,35 @@ namespace LibraryProgram
                         }
                     case Constant.GOBACK:
                         {
-                            return "\\n";
+                            return "\\n"; // ESC키가 눌렸다는 것 의미
                         }
                 }
             }
         }
 
+        private void GobackAdministratorBookMenu(string key) // ESC 키가 눌렸으면 다시 관리 메인 메뉴로
+        { // book
+            if (key == "\\n")
+            {
+                SelectBookAdministration();
+            }
+        }
+
+        private void GobackAdministratorMemberMenu(string key) // ESC 키가 눌렸으면 다시 관리 메인 메뉴로
+        { // member
+            if (key == "\\n")
+            {
+                SelectMemberAdministration();
+            }
+        }
+
+        private void GobackAdministratorLogMenu(string key) // ESC 키가 눌렸으면 다시 관리 메인 메뉴로
+        { // log
+            if (key == "\\n")
+            {
+                SelectLogAdministration();
+            }
+        }
 
     }
 }
