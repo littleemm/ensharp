@@ -109,9 +109,7 @@ namespace LibraryProgram
             DateTime today = DateTime.Today;
             DateTime due = today.AddDays(7);
 
-            string query = Constant.INSERT_QUERY_MEMBERBOOK +
-            "Value('" + memberId + "', '" + bookId + "', '" + bookName + "', '" + bookPublisher + "', '" +
-            today.ToString("yyyy-MM-dd") + "', '" + due.ToString("yyyy-MM-dd") + "');";
+            string query = string.Format(Constant.INSERT_QUERY_MEMBERBOOK, memberId, bookId, bookName, bookPublisher, today.ToString("yyyy-MM-dd"), due.ToString("yyyy-MM-dd"));
 
             connection.Open();
 
@@ -152,7 +150,7 @@ namespace LibraryProgram
             {
                 if (element[0][i].Equals(memberId) && element[1][i].Equals(bookId))
                 {
-                    string query = Constant.DELETE_QUERY_MEMBERBOOK + "WHERE id = '" + element[2][i] + "';";
+                    string query = string.Format(Constant.DELETE_QUERY_MEMBERBOOK, element[2][i]);
                     command = new MySqlCommand(query, connection);
                     MySqlDataReader memberbookDataReader = command.ExecuteReader();
 
@@ -302,8 +300,7 @@ namespace LibraryProgram
                 { // 대출하는 경우
                     bookCount = int.Parse(element[0][i]);
                     bookCount++;
-                    query = Constant.UPDATE_QUERY_MEMBER + "SET bookCount = '" + bookCount.ToString() +
-                  "' WHERE id = '" + memberId + "';";
+                    query = string.Format(Constant.UPDATE_QUERY_MEMBER_BOOKCOUNT, bookCount.ToString(), memberId);
                     break;
                 }
 
@@ -311,8 +308,7 @@ namespace LibraryProgram
                 { // 반납하는 경우
                     bookCount = int.Parse(element[0][i]);
                     bookCount--;
-                    query = Constant.UPDATE_QUERY_MEMBER + "SET bookCount = '" + bookCount.ToString() +
-                  "' WHERE id = '" + memberId + "';";
+                    query = string.Format(Constant.UPDATE_QUERY_MEMBER_BOOKCOUNT, bookCount.ToString(), memberId);
                     break;
                 }
             }
@@ -355,8 +351,7 @@ namespace LibraryProgram
                 { // 대출하는 경우
                     quantity = int.Parse(element[0][i]);
                     quantity--;
-                    query = Constant.UPDATE_QUERY_BOOK + "SET quantity = '" + quantity.ToString() +
-                  "' WHERE id = '" + bookId + "';";
+                    query = string.Format(Constant.UPDATE_QUERY_BOOK_QUANTITY, quantity.ToString(), bookId);
                     break;
                 }
 
@@ -364,8 +359,7 @@ namespace LibraryProgram
                 { // 반납하는 경우
                     quantity = int.Parse(element[0][i]);
                     quantity++;
-                    query = Constant.UPDATE_QUERY_BOOK + "SET quantity = '" + quantity.ToString() +
-                  "' WHERE id = '" + bookId + "';";
+                    query = string.Format(Constant.UPDATE_QUERY_BOOK_QUANTITY, quantity.ToString(), bookId);
                     break;
                 }
             }

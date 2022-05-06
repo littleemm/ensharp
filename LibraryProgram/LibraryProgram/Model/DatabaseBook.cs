@@ -19,10 +19,7 @@ namespace LibraryProgram
 
         public void InsertBook(BookDTO bookDTO) // 등록
         {
-            string query = Constant.INSERT_QUERY_BOOK +
-                "Value('" + bookDTO.Id + "', '" + bookDTO.Name + "', '" + bookDTO.Author + "', '" +
-                bookDTO.Publisher + "', '" + bookDTO.Price + "', '" + bookDTO.Pubdate + "', '" +
-                bookDTO.Isbn + "', '" + bookDTO.Quantity + "');";
+            string query = string.Format(Constant.INSERT_QUERY_BOOK, bookDTO.Id, bookDTO.Name, bookDTO.Author, bookDTO.Publisher, bookDTO.Price, bookDTO.Pubdate, bookDTO.Isbn, bookDTO.Quantity);
 
             connection.Open();
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -38,18 +35,15 @@ namespace LibraryProgram
 
             if (price.Length > 0 && quantity.Length > 0) // if - else if 로
             {
-                query = Constant.UPDATE_QUERY_BOOK + "SET price = '" + price + "', " +
-                    "quantity = '" + quantity + "' WHERE id = '" + id + "';";
+                query = string.Format(Constant.UPDATE_QUERY_BOOK_PRICE_QUANTITY, price, quantity, id);
             }
             if (price.Length > 0 && quantity.Length == 0)
             {
-                query = Constant.UPDATE_QUERY_BOOK + "SET price = '" + price +
-                    "' WHERE id = '" + id + "';";
+                query = string.Format(Constant.UPDATE_QUERY_BOOK_PRICE, price, id);
             }
             if (price.Length == 0 && quantity.Length > 0)
             {
-                query = Constant.UPDATE_QUERY_BOOK + "SET quantity  = '" + quantity +
-                    "' WHERE id = '" + id + "';";
+                query = string.Format(Constant.UPDATE_QUERY_BOOK_QUANTITY, quantity, id);
             }
 
             connection.Open();
@@ -63,7 +57,7 @@ namespace LibraryProgram
 
         public void DeleteBook(string id) // 도서 삭제
         {
-            string query = Constant.DELETE_QUERY_BOOK + "WHERE id = '" + id + "';";
+            string query = string.Format(Constant.DELETE_QUERY_BOOK, id);
 
             connection.Open();
 

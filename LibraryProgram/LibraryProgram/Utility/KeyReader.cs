@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace LibraryProgram
 {
@@ -35,8 +36,7 @@ namespace LibraryProgram
                 }
                 else if (keyInfo.Key == ConsoleKey.Backspace && input.Length > 0)
                 {
-                    input = input.Substring(0, (input.Length - 1));
-                    Console.Write("\b \b");
+                    input = EraseWord(input);
                 }
             }
 
@@ -70,6 +70,22 @@ namespace LibraryProgram
             }
 
             return input;
+        }
+
+        private string EraseWord(string input)
+        {
+            if (Regex.IsMatch(input.Substring(input.Length - 1), Constant.PATTERN_KEY_KOR))
+            {
+                input = input.Substring(0, (input.Length - 1));
+                Console.Write("\b \b");
+                Console.Write("\b \b");
+                return input;
+            }
+
+            input = input.Substring(0, (input.Length - 1));
+            Console.Write("\b \b");
+            return input;
+            
         }
     }
 }

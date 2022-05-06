@@ -294,7 +294,7 @@ namespace LibraryProgram
             
         }
 
-        private bool IsSeoulAddress(string[] array)
+        private bool IsSeoulAddress(string[] array) // 서울특별시 체크
         {
             if (IsDistrictAndCountyForSpecial(array) && IsRoad(array) && IsBuildingNumber(array))
             {
@@ -303,7 +303,7 @@ namespace LibraryProgram
             return false;
         }
 
-        private bool IsMetropolitanAddress(string[] array)
+        private bool IsMetropolitanAddress(string[] array) // 광역시 체크
         {
             if (array.Length == 4 && IsDistrictAndCountyForSpecial(array) && IsRoad(array) && IsBuildingNumber(array))
             { // 인천광역시 남동구 정각로 9
@@ -316,7 +316,7 @@ namespace LibraryProgram
             return false;
         }
         
-        private bool IsSejongCityAddress(string[] array)
+        private bool IsSejongCityAddress(string[] array) // 세종특별자치시 체크
         {
             if (array.Length == 3 && IsRoad(array) && IsBuildingNumber(array))
             { // 세종특별자치시 갈매로 477
@@ -329,7 +329,7 @@ namespace LibraryProgram
             return false;
         }
 
-        private bool IsProvinceOrJejuAddress(string[] array)
+        private bool IsProvinceOrJejuAddress(string[] array) // 도 단위, 제주도 체크
         {
             if (array.Length == 4 && IsCityAndCounty(array) && IsRoad(array) && IsBuildingNumber(array))
             { // 강원도 춘천시 중앙로 1, 제주특별자치도 제주시 임항로 286
@@ -437,6 +437,7 @@ namespace LibraryProgram
             }
             return false;
         }
+
         public bool IsIsbn(string isbn)
         {
             if (IsCtrlZ(isbn) == false)

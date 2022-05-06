@@ -17,26 +17,33 @@ namespace LibraryProgram
 
         public static string STRING_CONNECTION = "Server=localhost;Database=younglim_library;Uid=root;Pwd=0000;charset=utf8;";
 
-        public static string SELECT_QUERY_ADMIN = "SELECT * FROM administrator";
+        public const string SELECT_QUERY_ADMIN = "SELECT * FROM administrator";
 
-        public static string INSERT_QUERY_BOOK = "INSERT INTO book(id, name, author, publisher, price, pubdate, isbn, quantity)";
-        public static string DELETE_QUERY_BOOK = "DELETE FROM book ";
-        public static string SELECT_QUERY_BOOK = "SELECT * FROM book";
-        public static string UPDATE_QUERY_BOOK = "UPDATE book ";
+        public const string INSERT_QUERY_BOOK = "INSERT INTO book(id, name, author, publisher, price, pubdate, isbn, quantity)Value('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}');";
+        public const string DELETE_QUERY_BOOK = "DELETE FROM book WHERE id = '{0}';";
+        public const string SELECT_QUERY_BOOK = "SELECT * FROM book";
+        public const string UPDATE_QUERY_BOOK = "UPDATE book ";
+        public const string UPDATE_QUERY_BOOK_PRICE_QUANTITY = "UPDATE book SET price = '{0}', quantity = '{1}' WHERE id = '{2}';";
+        public const string UPDATE_QUERY_BOOK_PRICE = "UPDATE book SET price = '{0}' WHERE id = '{1}';";
+        public const string UPDATE_QUERY_BOOK_QUANTITY = "UPDATE book SET quantity = '{0}' WHERE id = '{1}';";
 
-        public static string INSERT_QUERY_MEMBER = "INSERT INTO member(id, password, name, age, phoneNumber, address, bookCount)";
-        public static string SELECT_QUERY_MEMBER = "SELECT * FROM member";
-        public static string DELETE_QUERY_MEMBER = "DELETE FROM member ";
-        public static string UPDATE_QUERY_MEMBER = "UPDATE member ";
+        public const string INSERT_QUERY_MEMBER = "INSERT INTO member(id, password, name, age, phoneNumber, address, bookCount)Value('{0}', '{1}', '{2}', '{3}, '{4}', '{5}', '0');";
+        public const string SELECT_QUERY_MEMBER = "SELECT * FROM member";
+        public const string DELETE_QUERY_MEMBER = "DELETE FROM member WHERE id = '{0}';";
+        public const string UPDATE_QUERY_MEMBER = "UPDATE member ";
+        public const string UPDATE_QUERY_MEMBER_NUMBER_ADDRESS = "UPDATE member SET phoneNumber = '{0}', address = '{1}' WHERE id = '{2}';";
+        public const string UPDATE_QUERY_MEMBER_NUMBER = "UPDATE member SET phoneNumber = '{0}' WHERE id = '{1}';";
+        public const string UPDATE_QUERY_MEMBER_ADDRESS = "UPDATE member SET address = '{0}' WHERE id = '{1}';";
+        public const string UPDATE_QUERY_MEMBER_BOOKCOUNT = "UPDATE member SET bookCount = '{0}' WHERE id = '{1}';";
 
-        public static string INSERT_QUERY_MEMBERBOOK = "INSERT INTO memberbook(memberId, bookId, bookName, bookPublisher, checkOutDate, dueDate)";
-        public static string SELECT_QUERY_MEMBERBOOK = "SELECT * FROM memberbook";
-        public static string DELETE_QUERY_MEMBERBOOK = "DELETE FROM memberbook ";
+        public const string INSERT_QUERY_MEMBERBOOK = "INSERT INTO memberbook(memberId, bookId, bookName, bookPublisher, checkOutDate, dueDate)Value('{0}', '{1}', '{2}', '{3}', '{4}', '{5}');";
+        public const string SELECT_QUERY_MEMBERBOOK = "SELECT * FROM memberbook";
+        public const string DELETE_QUERY_MEMBERBOOK = "DELETE FROM memberbook WHERE id = '{0}';";
 
-        public static string INSERT_QUERY_LOG = "INSERT INTO log(date, time, user, history)";
-        public static string SELECT_QUERY_LOG = "SELECT * FROM log";
-        public static string DELETE_QUERY_LOG = "DELETE FROM log ";
-        public static string TRUNCATE_QUERY_LOG = "TRUNCATE log";
+        public const string INSERT_QUERY_LOG = "INSERT INTO log(date, time, user, history)Value('{0}', '{1}', '{2}', '{3}');";
+        public const string SELECT_QUERY_LOG = "SELECT * FROM log";
+        public const string DELETE_QUERY_LOG = "DELETE FROM log WHERE id = '{0}';";
+        public const string TRUNCATE_QUERY_LOG = "TRUNCATE log";
 
         public const int MEMBER_MANAGE = 1;
         public const int BOOK_MANAGE = 2;
@@ -118,5 +125,7 @@ namespace LibraryProgram
         public const string PATTERN_ADDRESS_ROAD_RO = @"^[가-힣0-9]{1,6}로$";
 
         public const string PATTERN_ADDRESS_NUMBER = @"^[0-9]{1,5}$";
+
+        public const string PATTERN_KEY_KOR = @"^[ㄱ-ㅎ가-힣]$";
     }
 }

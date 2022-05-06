@@ -68,9 +68,7 @@ namespace LibraryProgram
             logDTO.Date = today.ToString("yyyy-MM-dd");
             logDTO.Time = now.ToString("hh:mm:ss");
 
-            string query = Constant.INSERT_QUERY_LOG +
-                "Value('" + logDTO.Date + "', '" + logDTO.Time + "', '" + logDTO.User + "', '" +
-                logDTO.History + "');";
+            string query = string.Format(Constant.INSERT_QUERY_LOG, logDTO.Date, logDTO.Time, logDTO.User, logDTO.History);
 
             connection.Open();
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -82,7 +80,7 @@ namespace LibraryProgram
 
         public void DeleteLogList(string id) // 로그 일부 지움
         {
-            string query = Constant.DELETE_QUERY_LOG + "WHERE id = '" + id + "';";
+            string query = string.Format(Constant.DELETE_QUERY_LOG, id);
 
             connection.Open();
 

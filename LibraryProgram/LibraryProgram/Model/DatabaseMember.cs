@@ -59,9 +59,7 @@ namespace LibraryProgram
         public void InsertMember(MemberDTO memberDTO) // 등록
         {
             memberDTO.Address = ReplaceAddressBeforeInsert(memberDTO.Address);
-            string query = Constant.INSERT_QUERY_MEMBER +
-                "Value('" +  memberDTO.Id + "', '" + memberDTO.Password + "', '" + memberDTO.Name + "', '" +
-                memberDTO.Age + "', '" + memberDTO.PhoneNumber + "', '" + memberDTO.Address + "', '" + "0');";
+            string query = string.Format(Constant.INSERT_QUERY_MEMBER, memberDTO.Id, memberDTO.Password, memberDTO.Name, memberDTO.Age, memberDTO.PhoneNumber, memberDTO.Address);
 
             connection.Open();
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -77,18 +75,15 @@ namespace LibraryProgram
 
             if (phoneNumber.Length > 0 && address.Length > 0)
             {
-                query = Constant.UPDATE_QUERY_MEMBER + "SET phoneNumber = '" + phoneNumber + "', " +
-                    "address = '" + address + "' WHERE id = '" + id + "';";
+                query = string.Format(Constant.UPDATE_QUERY_MEMBER_NUMBER_ADDRESS, phoneNumber, address, id);
             }
             if (phoneNumber.Length > 0 && address.Length == 0)
             {
-                query = Constant.UPDATE_QUERY_MEMBER + "SET phoneNumber = '" + phoneNumber +
-                    "' WHERE id = '" + id + "';";
+                query = string.Format(Constant.UPDATE_QUERY_MEMBER_NUMBER, phoneNumber, id);
             }
             if (phoneNumber.Length == 0 && address.Length > 0)
             {
-                query = Constant.UPDATE_QUERY_MEMBER + "SET address = '" + address +
-                    "' WHERE id = '" + id + "';";
+                query = string.Format(Constant.UPDATE_QUERY_MEMBER_ADDRESS, address, id);
             }
 
             connection.Open();
@@ -102,7 +97,7 @@ namespace LibraryProgram
 
         public void DeleteMember(string id) // 회원 삭제
         {
-            string query = Constant.DELETE_QUERY_MEMBER + "WHERE id = '" + id + "';";
+            string query = string.Format(Constant.DELETE_QUERY_MEMBER, id);
 
             connection.Open();
 
