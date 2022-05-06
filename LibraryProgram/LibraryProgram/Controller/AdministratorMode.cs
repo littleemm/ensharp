@@ -87,11 +87,12 @@ namespace LibraryProgram
                 }
 
                 ConsoleKeyInfo consoleKey = Console.ReadKey();
-                if (consoleKey.Key == ConsoleKey.Escape)
+                if (consoleKey.Key == ConsoleKey.F1)
                 {
-                    Console.Clear();
+                    break;
                 }
-                else break;
+                Console.Clear();
+                
             }
 
             return number;
@@ -143,11 +144,11 @@ namespace LibraryProgram
                     }
                 }
                 ConsoleKeyInfo consoleKey = Console.ReadKey();
-                if (consoleKey.Key == ConsoleKey.Escape)
+                if (consoleKey.Key == ConsoleKey.F1)
                 {
-                    Console.Clear();
+                    break;
                 }
-                else break;
+                Console.Clear();
             }
 
             return number;
@@ -199,11 +200,11 @@ namespace LibraryProgram
                     }
                 }
                 ConsoleKeyInfo consoleKey = Console.ReadKey();
-                if (consoleKey.Key == ConsoleKey.Escape)
+                if (consoleKey.Key == ConsoleKey.F1)
                 {
-                    Console.Clear();
+                    break;
                 }
-                else break;
+                Console.Clear();
 
             }
 
@@ -227,7 +228,7 @@ namespace LibraryProgram
                         }
                     case Constant.GOBACK:
                         {
-                            return "\\n"; // ESC키가 눌렸다는 것 의미
+                            return "\\n"; // ESC키가 눌린 것 과 같은 의미
                         }
                 }
             }

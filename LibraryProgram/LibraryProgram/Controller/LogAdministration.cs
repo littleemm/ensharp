@@ -56,7 +56,7 @@ namespace LibraryProgram
         public string InitializeLog() // 로그 초기화
         {
             logViewElement.PrintDeleteLogList(" 전부 삭제");
-            string number = menuSelection.CheckMenuNumber(46, 20, Constant.ARRAY_TWO);
+            string number = menuSelection.CheckMenuNumber(46, 21, Constant.ARRAY_TWO);
             while (Constant.EXIT_WHEN_GO_BACK)
             {
                 switch (int.Parse(number))
@@ -78,7 +78,7 @@ namespace LibraryProgram
         public string SaveLogFile() // 로그 파일 저장(이미 존재하는 경우에는 파일 덮어쓰기)
         {
             logViewElement.PrintDeleteLogList("파일을 저장");
-            string number = menuSelection.CheckMenuNumber(46, 20, Constant.ARRAY_TWO);
+            string number = menuSelection.CheckMenuNumber(46, 21, Constant.ARRAY_TWO);
             while (Constant.EXIT_WHEN_GO_BACK)
             {
                 switch (int.Parse(number))
@@ -101,7 +101,7 @@ namespace LibraryProgram
         public string DeleteLogFile() // 로그 파일 삭제
         {
             logViewElement.PrintDeleteLogList("파일을 삭제");
-            string number = menuSelection.CheckMenuNumber(46, 20, Constant.ARRAY_TWO);
+            string number = menuSelection.CheckMenuNumber(46, 21, Constant.ARRAY_TWO);
             while (Constant.EXIT_WHEN_GO_BACK)
             {
                 switch (int.Parse(number))

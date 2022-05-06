@@ -129,7 +129,7 @@ namespace LibraryProgram
 
         public void PrintSignUpPage() // 회원가입 페이지 메인
         {
-            Console.WriteLine("                                                           ");
+            Console.WriteLine(" ESC: 뒤로가기                                                     ");
             Console.WriteLine("                  *                 *                 *            ");
             Console.WriteLine("                                                                  ");
             Console.WriteLine("        *                  *                  *                  * ");
@@ -263,6 +263,15 @@ namespace LibraryProgram
                 Console.Write(new string(' ', Console.WindowWidth));
             }
             Console.SetCursorPosition(0, againLine);
+        }
+
+        public void PrintAfterWork()
+        {
+            Console.SetCursorPosition(0, 0);
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.WriteLine(" 아무 키: 뒤로가기                                 F1: 종료 ");
         }
 
         public void PrintLine()

@@ -10,7 +10,7 @@ namespace LibraryProgram
     {
         public void PrintManageLogMenu()
         {
-            Console.WriteLine("   ESC: 뒤로가기                                            ");
+            Console.WriteLine(" ESC: 뒤로가기                                            ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
@@ -67,6 +67,7 @@ namespace LibraryProgram
             Console.WriteLine("                                                           ");
             Console.WriteLine("                                                           ");
             Console.WriteLine();
+            Console.WriteLine();
             Console.WriteLine("          원하시는 기능의 번호를 입력하세요 :                  ");
             Console.WriteLine();
             Console.WriteLine("                                                           ");
@@ -99,7 +100,8 @@ namespace LibraryProgram
         {
             Console.SetCursorPosition(x, y);
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("  [" + detail + "에 성공했습니다! ESC 키를 누르면 뒤로 갑니다.]           ");
+            Console.WriteLine("                [" + detail + "에 성공했습니다!]           ");
+            Console.WriteLine("        [종료는 F1, 뒤로가기는 그 외 키를 입력하세요.]   ");
             Console.ResetColor();
         }
 
@@ -107,7 +109,8 @@ namespace LibraryProgram
         {
             Console.SetCursorPosition(x, y);
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("        [파일이 없습니다. ESC 키를 누르면 뒤로 갑니다.]              ");
+            Console.WriteLine("                     [파일이 없습니다.]                  ");
+            Console.WriteLine("        [종료는 F1, 뒤로가기는 그 외 키를 입력하세요.]   ");
             Console.ResetColor();
         }
     }

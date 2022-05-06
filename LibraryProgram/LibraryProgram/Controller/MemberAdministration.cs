@@ -189,15 +189,6 @@ namespace LibraryProgram
                     break; // 종료 (수정 x)
                 }
 
-                isMemberValue = exception.IsCtrlZ(memberAddress); // 터지지 않기 위함
-                if (!isMemberValue)
-                {
-                    basicPage.PrintWarningSentence(2, 11, "조건에 맞춰서 다시 입력해주세요.");
-                    Console.SetCursorPosition(30, 15);
-                    basicPage.ClearLine(0, 30);
-                    continue;
-                }
-
                 isMemberValue = exception.IsAddress(memberAddress); // 입력 예외처리
                 if (!isMemberValue)
                 {
@@ -218,14 +209,6 @@ namespace LibraryProgram
                     break; // 종료(수정x)
                 }
 
-                isMemberValue = exception.IsCtrlZ(memberNumber); // 프로그램 터지지 않도록
-                if (!isMemberValue)
-                {
-                    basicPage.PrintWarningSentence(2, 11, "조건에 맞춰서 다시 입력해주세요.");
-                    Console.SetCursorPosition(30, 17);
-                    basicPage.ClearLine(0, 30);
-                    continue;
-                }
 
                 isMemberValue = exception.IsPhoneNumber(memberNumber); // 입력 예외처리
                 if (!isMemberValue)

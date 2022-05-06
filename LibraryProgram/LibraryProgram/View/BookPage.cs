@@ -10,7 +10,7 @@ namespace LibraryProgram
     {
         public void PrintManageBookMenu()
         {
-            Console.WriteLine("   ESC: 뒤로가기                                             ");
+            Console.WriteLine(" ESC: 뒤로가기                                             ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
@@ -42,7 +42,7 @@ namespace LibraryProgram
 
         public void PrintRegistration()
         {
-            Console.WriteLine("   ESC: 뒤로가기                                                ");
+            Console.WriteLine(" ESC: 뒤로가기                                                  ");
             Console.WriteLine("              *                 *                 *            ");
             Console.WriteLine("                                                              ");
             Console.WriteLine("    *                  *                  *                  * ");
@@ -75,7 +75,7 @@ namespace LibraryProgram
 
         public void PrintEditBook()
         {
-            Console.WriteLine("ESC: 뒤로가기                                               ");
+            Console.WriteLine(" ESC: 뒤로가기                                              ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
@@ -102,7 +102,7 @@ namespace LibraryProgram
 
         public void PrintDeleteBook()
         {
-            Console.WriteLine("ESC: 뒤로가기                                               ");
+            Console.WriteLine(" ESC: 뒤로가기                                               ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
@@ -126,7 +126,7 @@ namespace LibraryProgram
         public void InformBookList()
         {
             Console.WriteLine("=============================================================");
-            Console.WriteLine("ESC: 뒤로가기            B O O K L I S T                      ");
+            Console.WriteLine("ESC: 뒤로가기            B O O K L I S T            F1: 종료");
             Console.WriteLine("=============================================================");
             Console.WriteLine();
             Console.WriteLine();
@@ -154,7 +154,7 @@ namespace LibraryProgram
         public void InformCheckOutList()
         {
             Console.WriteLine("=============================================================");
-            Console.WriteLine("ESC: 뒤로가기       C H E C K O U T L I S T                   ");
+            Console.WriteLine("ESC: 뒤로가기       C H E C K O U T L I S T         F1: 종료 ");
             Console.WriteLine("=============================================================");
             Console.WriteLine();
             Console.WriteLine();
@@ -164,7 +164,7 @@ namespace LibraryProgram
         private void InformMemberBook(string id)
         {
             Console.WriteLine("=============================================================");
-            Console.WriteLine("ESC: 뒤로가기          " + id + "님의 대출 내역                     ");
+            Console.WriteLine("ESC: 뒤로가기         " + id + "님의 대출 내역                ");
             Console.WriteLine("=============================================================");
             Console.WriteLine();
             Console.WriteLine();
@@ -260,11 +260,11 @@ namespace LibraryProgram
             Console.WriteLine();
         }
 
-        public void PrintEditFailMessage()
+        public void PrintEditFailMessage(int x, int y)
         {
-            Console.WriteLine();
+            Console.SetCursorPosition(x, y);
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("                 [수정 내용이 없습니다!]");
+            Console.WriteLine("              [수정 내용이 없습니다!]");
             Console.ResetColor();
             Console.WriteLine();
         }
@@ -347,9 +347,8 @@ namespace LibraryProgram
 
         public void PrintWarningMessage()
         {
-            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("                [조건에 맞춰 다시 입력하세요!]");
+            Console.WriteLine("               [조건에 맞춰 다시 입력하세요!]");
             Console.ResetColor();
             Console.WriteLine();
         }
@@ -373,5 +372,6 @@ namespace LibraryProgram
             Console.ResetColor();
             Console.WriteLine();
         }
+
     }
 }

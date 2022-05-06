@@ -140,51 +140,55 @@ namespace LibraryProgram
 
         private void SelectMenu(string id) // 멤버 메뉴 선택
         {
-            Console.Clear();
-            Console.SetWindowSize(60, 28);
-            basicPage.PrintMemberMode();
-            string number = menuSelection.CheckMenuKey(46, 24, Constant.ARRAY_FIVE);
-            Console.Clear();
-            if (number.Equals("\\n"))
+            while (true)
             {
-                SelectMemberMode();
-            }
-            else
-            {
-                switch (int.Parse(number))
+                Console.Clear();
+                Console.SetWindowSize(60, 28);
+                basicPage.PrintMemberMode();
+                string number = menuSelection.CheckMenuKey(46, 24, Constant.ARRAY_FIVE);
+                Console.Clear();
+                if (number.Equals("\\n"))
                 {
-                    case Constant.SEARCH_BOOK:
-                        {
-                            memberMode.SearchBook(id);
-                            break;
-                        }
-                    case Constant.BOOKLIST:
-                        {
-                            memberMode.PrintList();
-                            break;
-                        }
-                    case Constant.CHECKOUT:
-                        {
-                            memberMode.CheckOutBook(id);
-                            break;
-                        }
-                    case Constant.RETURN:
-                        {
-                            memberMode.ReturnBook(id);
-                            break;
-                        }
-                    case Constant.MYPAGE:
-                        {
-                            memberMode.EditMyInformation(id);
-                            break;
-                        }
+                    SelectMemberMode();
                 }
-
-                ConsoleKeyInfo consoleKey = Console.ReadKey();
-                if (consoleKey.Key == ConsoleKey.Escape)
+                else
                 {
+                    switch (int.Parse(number))
+                    {
+                        case Constant.SEARCH_BOOK:
+                            {
+                                memberMode.SearchBook(id);
+                                break;
+                            }
+                        case Constant.BOOKLIST:
+                            {
+                                memberMode.PrintList();
+                                break;
+                            }
+                        case Constant.CHECKOUT:
+                            {
+                                memberMode.CheckOutBook(id);
+                                break;
+                            }
+                        case Constant.RETURN:
+                            {
+                                memberMode.ReturnBook(id);
+                                break;
+                            }
+                        case Constant.MYPAGE:
+                            {
+                                memberMode.EditMyInformation(id);
+                                break;
+                            }
+                    }
+
+                    ConsoleKeyInfo consoleKey = Console.ReadKey();
+                    if (consoleKey.Key == ConsoleKey.F1)
+                    {
+                        break;
+                    }
+
                     Console.Clear();
-                    SelectMenu(id);
                 }
             }
         }

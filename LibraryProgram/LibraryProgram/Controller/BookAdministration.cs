@@ -10,7 +10,6 @@ namespace LibraryProgram
     {
         BookPage bookViewElement;
         BasicPage basicPage;
-        MenuSelection menuSelection;
         DatabaseBook databaseBook;
         BookDTO bookDTO;
         Exception exception;
@@ -26,7 +25,6 @@ namespace LibraryProgram
             naverBookAPI = new NaverBookAPI();
             this.basicPage = basicPage;
             this.bookViewElement = bookViewElement;
-            this.menuSelection = menuSelection;
             this.databaseBook = databaseBook;
             this.exception = exception;
             this.databaseLog = databaseLog;
@@ -63,7 +61,7 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
-            basicPage.ClearLineEasy(11, 9);
+            basicPage.ClearLineEasy(11, 5);
 
             while (!isBookValue)
             {
@@ -93,7 +91,7 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
-            basicPage.ClearLineEasy(11, 25);
+            basicPage.ClearLineEasy(11, 5);
 
             while (!isBookValue)
             {
@@ -108,7 +106,7 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
-            basicPage.ClearLineEasy(11, 25);
+            basicPage.ClearLineEasy(11, 5);
 
             while (!isBookValue)
             {
@@ -123,7 +121,7 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
-            basicPage.ClearLineEasy(11, 25);
+            basicPage.ClearLineEasy(11, 5);
 
             while (!isBookValue)
             {
@@ -153,7 +151,7 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
-            basicPage.ClearLineEasy(11, 25);
+            basicPage.ClearLineEasy(11, 5);
 
             while (!isBookValue)
             {
@@ -167,7 +165,7 @@ namespace LibraryProgram
                 }
             }
 
-            basicPage.ClearLineEasy(10, 8);
+            basicPage.ClearLineEasy(11, 5);
 
             databaseBook.InsertBook(bookDTO);
             bookViewElement.PrintSuccessMessage("등록");
@@ -176,6 +174,7 @@ namespace LibraryProgram
             logDTO.History = "도서 Id " + bookDTO.Id + "인 도서 ''" + bookDTO.Name + "'' 추가";
             databaseLog.InsertLog(logDTO);
 
+            basicPage.PrintAfterWork();
             return "";
         }
 
@@ -190,12 +189,14 @@ namespace LibraryProgram
             bool isBookValue = false;
 
             while (!isBookValue)
-            {
+            { // bookID 입력 및 체크
                 bookId = keyReader.ReadKeyBasic(30, 13, bookId);
-                if (bookId == "\\n") return "\\n";
+                if (bookId == "\\n")
+                {
+                    return "\\n";
+                }
 
                 isBookValue = databaseBook.IsBookId(bookId);
-
                 if (!isBookValue)
                 {
                     PrintFalse(30, 13);
@@ -210,25 +211,19 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
-            basicPage.ClearLineEasy(10, 25);
+            basicPage.ClearLineEasy(11, 0);
 
             while (!isBookValue)
-            {
+            { // 도서 가격 입력 및 체크
                 bookPrice = keyReader.ReadKeyBasic(30, 15, bookPrice);
-                if (bookPrice == "\\n") return "\\n";
+                if (bookPrice == "\\n")
+                {
+                    return "\\n";
+                }
 
                 if (bookPrice == "")
                 {
                     break;
-                }
-
-                isBookValue = exception.IsCtrlZ(bookPrice);
-                if (!isBookValue)
-                {
-                    basicPage.PrintWarningSentence(2, 11, "조건에 맞춰서 다시 입력해주세요.");
-                    Console.SetCursorPosition(30, 15);
-                    basicPage.ClearLine(0, 30);
-                    continue;
                 }
 
                 isBookValue = exception.IsPrice(bookPrice);
@@ -239,25 +234,19 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
-            basicPage.ClearLineEasy(10, 25);
+            basicPage.ClearLineEasy(11, 0);
 
             while (!isBookValue)
-            {
+            { // 도서 수량 입력 및 체크
                 bookQuantity = keyReader.ReadKeyBasic(30, 17, bookQuantity);
-                if (bookQuantity == "\\n") return "\\n";
+                if (bookQuantity == "\\n")
+                {
+                    return "\\n";
+                }
 
                 if (bookQuantity == "")
                 {
                     break;
-                }
-
-                isBookValue = exception.IsCtrlZ(bookQuantity);
-                if (!isBookValue)
-                {
-                    basicPage.PrintWarningSentence(2, 11, "조건에 맞춰서 다시 입력해주세요.");
-                    Console.SetCursorPosition(30, 17);
-                    basicPage.ClearLine(0, 30);
-                    continue;
                 }
 
                 isBookValue = exception.IsQuantity(bookQuantity);
@@ -266,7 +255,8 @@ namespace LibraryProgram
                     PrintFalse(30, 17);
                 }
             }
-            basicPage.ClearLineEasy(10, 25);
+
+            basicPage.ClearLineEasy(11, 0);
 
             if (bookPrice.Length > 0 || bookQuantity.Length > 0)
             {
@@ -278,8 +268,10 @@ namespace LibraryProgram
 
             else
             {
-                bookViewElement.PrintEditFailMessage();
+                bookViewElement.PrintEditFailMessage(5, 11);
             }
+
+            basicPage.PrintAfterWork();
 
             return "";
         }
@@ -323,13 +315,15 @@ namespace LibraryProgram
                 }
             }
 
-            basicPage.ClearLineEasy(11, 3);
+            basicPage.ClearLineEasy(11, 5);
             databaseBook.DeleteBook(bookId);
             bookViewElement.PrintDeleteSuccessMessage();
 
             logDTO.User = "관리자";
             logDTO.History = "ID " + bookId + " 도서 삭제";
             databaseLog.InsertLog(logDTO);
+
+            basicPage.PrintAfterWork();
 
             return "";
         }
@@ -456,7 +450,7 @@ namespace LibraryProgram
 
         private void PrintFalse(int x, int y)
         {
-            Console.SetCursorPosition(25, 10);
+            Console.SetCursorPosition(0, 11);
             bookViewElement.PrintWarningMessage();
             Console.SetCursorPosition(x, y);
             basicPage.ClearLine(0, x);

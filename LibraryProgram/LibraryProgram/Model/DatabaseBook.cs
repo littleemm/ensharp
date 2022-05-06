@@ -133,7 +133,7 @@ namespace LibraryProgram
             int dataCount = 0;
 
             string query = string.Format(Constant.SELECT_QUERY_BOOK_WHERE_ID, bookId);
-            MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_BOOK, connection);
+            MySqlCommand command = new MySqlCommand(query, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
             while (dataReader.Read())
