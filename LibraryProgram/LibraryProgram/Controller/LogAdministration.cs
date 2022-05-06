@@ -8,15 +8,15 @@ namespace LibraryProgram
 {
     class LogAdministration
     {
-        BasicViewElement viewElement;
+        BasicPage basicPage;
         MenuSelection menuSelection;
         DatabaseLog databaseLog;
-        LogViewElement logViewElement;
+        LogPage logViewElement;
         KeyReader keyReader;
 
-        public LogAdministration(BasicViewElement viewElement, LogViewElement logViewElement, MenuSelection menuSelection, DatabaseLog databaseLog, KeyReader keyReader)
+        public LogAdministration(BasicPage basicPage, LogPage logViewElement, MenuSelection menuSelection, DatabaseLog databaseLog, KeyReader keyReader)
         {
-            this.viewElement = viewElement;
+            this.basicPage = basicPage;
             this.logViewElement = logViewElement;
             this.menuSelection = menuSelection;
             this.databaseLog = databaseLog;
@@ -40,14 +40,14 @@ namespace LibraryProgram
                 if (!isLogId)
                 {
                     Console.SetCursorPosition(24, 6);
-                    viewElement.ClearLine(0, 24);
+                    basicPage.ClearLine(0, 24);
                     Console.SetCursorPosition(0, 4);
                     logViewElement.PrintWarningMessage();
                 }
             }
             databaseLog.DeleteLogList(id);
             Console.SetCursorPosition(0, 4);
-            viewElement.ClearLine(0, 0);
+            basicPage.ClearLine(0, 0);
             logViewElement.PrintSuccessMessage("부분 삭제", 14, 4);
 
             return "";

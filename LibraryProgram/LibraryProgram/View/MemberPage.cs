@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryProgram
 {
-    class MemberViewElement
+    class MemberPage
     {
         public void PrintManageMemberMenu()
         {

@@ -91,7 +91,7 @@
   <ItemGroup>
     <Compile Include="Controller\LogAdministration.cs" />
     <Compile Include="Utility\KeyReader.cs" />
-    <Compile Include="View\LogViewElement.cs" />
+    <Compile Include="View\LogPage.cs" />
     <Compile Include="Model\LogDTO.cs" />
     <Compile Include="Model\DatabaseLog.cs" />
     <Compile Include="Model\ApiBookDTO.cs" />
@@ -103,14 +103,14 @@
     <Compile Include="Model\DatabaseMemberBook.cs" />
     <Compile Include="Model\NaverBookAPI.cs" />
     <Compile Include="Utility\Exception.cs" />
-    <Compile Include="View\MemberViewElement.cs" />
-    <Compile Include="View\BookViewElement.cs" />
+    <Compile Include="View\MemberPage.cs" />
+    <Compile Include="View\BookPage.cs" />
     <Compile Include="Controller\AdministratorMode.cs" />
     <Compile Include="Utility\Constant.cs" />
     <Compile Include="Controller\LoginSystem.cs" />
     <Compile Include="Controller\MemberAdministration.cs" />
     <Compile Include="Model\MemberDTO.cs" />
-    <Compile Include="View\BasicViewElement.cs" />
+    <Compile Include="View\BasicPage.cs" />
     <Compile Include="LibraryProgram.cs" />
     <Compile Include="Controller\MainPage.cs" />
     <Compile Include="Controller\MemberMode.cs" />

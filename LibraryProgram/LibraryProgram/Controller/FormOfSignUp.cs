@@ -8,7 +8,7 @@ namespace LibraryProgram
 {
     class FormOfSignUp
     {
-        BasicViewElement viewElement;
+        BasicPage basicPage;
         MemberDTO memberDTO;
         DatabaseMember databaseMember;
         Exception exception;
@@ -16,9 +16,9 @@ namespace LibraryProgram
         LogDTO logDTO;
         KeyReader keyReader;
 
-        public FormOfSignUp(BasicViewElement viewElement, MemberDTO memberDTO, DatabaseMember databaseMember, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
+        public FormOfSignUp(BasicPage basicPage, MemberDTO memberDTO, DatabaseMember databaseMember, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
         {
-            this.viewElement = viewElement;
+            this.basicPage = basicPage;
             this.memberDTO = memberDTO;
             this.databaseMember = databaseMember;
             this.exception = exception;
@@ -30,7 +30,7 @@ namespace LibraryProgram
         public string ShowSignUpPage() // 회원가입 페이지
         {
             Console.SetWindowSize(74, 33);
-            viewElement.PrintSignUpPage();
+            basicPage.PrintSignUpPage();
 
             bool isMemberValue = false;
 
@@ -43,9 +43,9 @@ namespace LibraryProgram
 
                 if (isMemberValue)
                 {
-                    viewElement.PrintWarningSentence(8, 12, "이미 존재하는 아이디입니다.");
+                    basicPage.PrintWarningSentence(8, 12, "이미 존재하는 아이디입니다.");
                     Console.SetCursorPosition(42, 15);
-                    viewElement.ClearLine(0, 42);
+                    basicPage.ClearLine(0, 42);
                     isMemberValue = false;
                     continue;
                 }
@@ -58,7 +58,7 @@ namespace LibraryProgram
             }
 
             isMemberValue = false;
-            viewElement.ClearLineEasy(12, 5);
+            basicPage.ClearLineEasy(12, 5);
 
             while (!isMemberValue)
             {
@@ -73,7 +73,7 @@ namespace LibraryProgram
             }
 
             isMemberValue = false;
-            viewElement.ClearLineEasy(12, 5);
+            basicPage.ClearLineEasy(12, 5);
 
             while (!isMemberValue)
             {
@@ -88,7 +88,7 @@ namespace LibraryProgram
             }
 
             isMemberValue = false;
-            viewElement.ClearLineEasy(12, 5);
+            basicPage.ClearLineEasy(12, 5);
 
             while (!isMemberValue)
             {
@@ -103,7 +103,7 @@ namespace LibraryProgram
             }
 
             isMemberValue = false;
-            viewElement.ClearLineEasy(12, 5);
+            basicPage.ClearLineEasy(12, 5);
 
             while (!isMemberValue)
             {
@@ -118,7 +118,7 @@ namespace LibraryProgram
             }
 
             isMemberValue = false;
-            viewElement.ClearLineEasy(12, 5);
+            basicPage.ClearLineEasy(12, 5);
 
             while (!isMemberValue)
             {
@@ -131,7 +131,7 @@ namespace LibraryProgram
                     PrintFalse(42, 25);
                 }
             }
-            viewElement.ClearLineEasy(12, 5);
+            basicPage.ClearLineEasy(12, 5);
             databaseMember.InsertMember(memberDTO);
             
             logDTO.User = memberDTO.Id;
@@ -143,9 +143,9 @@ namespace LibraryProgram
 
         private void PrintFalse(int x, int y)
         {
-            viewElement.PrintWarningSentence(3, 12, "조건에 맞춰서 다시 입력해주세요.");
+            basicPage.PrintWarningSentence(3, 12, "조건에 맞춰서 다시 입력해주세요.");
             Console.SetCursorPosition(x, y);
-            viewElement.ClearLine(0, x);
+            basicPage.ClearLine(0, x);
         }
     }
 }

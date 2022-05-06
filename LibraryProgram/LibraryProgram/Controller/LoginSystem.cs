@@ -11,15 +11,14 @@ namespace LibraryProgram
         private string id;
         private string password;
 
-        BasicViewElement viewElement;
+        BasicPage basicPage;
         DatabaseMember databaseMember;
         KeyReader keyReader;
 
-        public LoginSystem(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberDTO memberDTO, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
+        public LoginSystem(BasicPage basicPage, MenuSelection menuSelection, DatabaseMember databaseMember, MemberDTO memberDTO, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
         {
-            this.viewElement = viewElement;
+            this.basicPage = basicPage;
             this.databaseMember = databaseMember;
-            this.viewElement = viewElement;
             this.keyReader = keyReader;
 }
 
@@ -27,7 +26,7 @@ namespace LibraryProgram
         {
             Console.Clear();
             bool isIdAndPassword = false;
-            viewElement.PrintLoginPage();
+            basicPage.PrintLoginPage();
 
             while (!isIdAndPassword) {
                 id = keyReader.ReadKeyBasic(37, 14, id);
@@ -38,10 +37,10 @@ namespace LibraryProgram
                 isIdAndPassword = databaseMember.SelectMember(Constant.SELECT_QUERY_ADMIN, id, password);
                 if (!isIdAndPassword)
                 { // 아이디, 비밀번호 중 하나라도 틀리면 다시
-                    viewElement.ClearLine(0, 37);
+                    basicPage.ClearLine(0, 37);
                     Console.SetCursorPosition(37, 14);
-                    viewElement.ClearLine(0, 37);
-                    viewElement.PrintWarningSentence(2, 12, "일치하는 회원정보가 없습니다!");
+                    basicPage.ClearLine(0, 37);
+                    basicPage.PrintWarningSentence(2, 12, "일치하는 회원정보가 없습니다!");
                 }
             }
 
@@ -53,7 +52,7 @@ namespace LibraryProgram
             Console.Clear();
             Console.SetWindowSize(60, 28);
             bool isIdAndPassword = false;
-            viewElement.PrintLoginPage();
+            basicPage.PrintLoginPage();
 
             while (!isIdAndPassword)
             {
@@ -65,10 +64,10 @@ namespace LibraryProgram
                 isIdAndPassword = databaseMember.SelectMember(Constant.SELECT_QUERY_MEMBER, id, password);
                 if (!isIdAndPassword)// 아이디 비밀번호 틀렸을 경우 <- 매직넘버 처리 
                 {
-                    viewElement.ClearLine(0, 37);
+                    basicPage.ClearLine(0, 37);
                     Console.SetCursorPosition(37, 14);
-                    viewElement.ClearLine(0, 37);
-                    viewElement.PrintWarningSentence(2, 12, "일치하는 회원정보가 없습니다!");
+                    basicPage.ClearLine(0, 37);
+                    basicPage.PrintWarningSentence(2, 12, "일치하는 회원정보가 없습니다!");
                 }
             }
 

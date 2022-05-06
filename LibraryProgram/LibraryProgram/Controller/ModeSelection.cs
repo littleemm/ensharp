@@ -8,29 +8,29 @@ namespace LibraryProgram
 {
     class ModeSelection 
     {
-        BasicViewElement viewElement;
+        BasicPage basicPage;
         LoginSystem loginPage;
         MenuSelection menuSelection;
         FormOfSignUp formOfSignUp;
         AdministratorMode administratorMode;
         MemberMode memberMode;
 
-        public ModeSelection(MenuSelection menuSelection, LoginSystem loginPage, BasicViewElement viewElement, MemberDTO memberDTO, DatabaseMember databaseMember, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
+        public ModeSelection(MenuSelection menuSelection, LoginSystem loginPage, BasicPage basicPage, MemberDTO memberDTO, DatabaseMember databaseMember, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
         {
-            this.viewElement = viewElement;
+            this.basicPage = basicPage;
             this.loginPage = loginPage;
             this.menuSelection = menuSelection;
 
-            formOfSignUp = new FormOfSignUp(viewElement, memberDTO, databaseMember, exception, databaseLog, logDTO, keyReader);
-            administratorMode = new AdministratorMode(viewElement, menuSelection, databaseMember, memberDTO, databaseBook, exception, databaseLog, logDTO, keyReader);
-            memberMode = new MemberMode(viewElement, menuSelection, databaseMember, databaseBook, exception, databaseLog, logDTO, keyReader);
+            formOfSignUp = new FormOfSignUp(basicPage, memberDTO, databaseMember, exception, databaseLog, logDTO, keyReader);
+            administratorMode = new AdministratorMode(basicPage, menuSelection, databaseMember, memberDTO, databaseBook, exception, databaseLog, logDTO, keyReader);
+            memberMode = new MemberMode(basicPage, menuSelection, databaseMember, databaseBook, exception, databaseLog, logDTO, keyReader);
 
         }
 
         public void SelectMode() // 모드 선택
         {
             Console.Clear();
-            viewElement.PrintLibraryMain();
+            basicPage.PrintLibraryMain();
             string menuNumber = menuSelection.CheckMenuNumber(46, 22, Constant.ARRAY_THREE);
             Console.Clear();
             switch (int.Parse(menuNumber))
@@ -57,7 +57,7 @@ namespace LibraryProgram
         {
             Console.Clear();
             Console.SetWindowSize(60, 28);
-            viewElement.PrintAdministratorPage();
+            basicPage.PrintAdministratorPage();
             string number = menuSelection.CheckMenuKey(46, 23, Constant.ARRAY_FOUR);
             string smallNumber = "";
             Console.Clear();
@@ -101,7 +101,7 @@ namespace LibraryProgram
         {
             string id = "";
             Console.SetWindowSize(60, 28);
-            viewElement.PrintMemberPage();
+            basicPage.PrintMemberPage();
             string menuNumber = menuSelection.CheckMenuKey(46, 22, Constant.ARRAY_THREE);
             Console.Clear();
             if (menuNumber.Equals("\\n"))
@@ -142,7 +142,7 @@ namespace LibraryProgram
         {
             Console.Clear();
             Console.SetWindowSize(60, 28);
-            viewElement.PrintMemberMode();
+            basicPage.PrintMemberMode();
             string number = menuSelection.CheckMenuKey(46, 24, Constant.ARRAY_FIVE);
             Console.Clear();
             if (number.Equals("\\n"))
@@ -191,19 +191,19 @@ namespace LibraryProgram
 
         private void AskExit() // 종료 전 한 번 더 묻기
         {
-            viewElement.PrintExitForm();
+            basicPage.PrintExitForm();
             string menuNumber = menuSelection.CheckMenuNumber(46, 21, Constant.ARRAY_TWO);
             Console.Clear();
             switch (int.Parse(menuNumber))
             {
                 case Constant.EXIT_REAL:
                     {
-                        viewElement.PrintExit();
+                        basicPage.PrintExit();
                         break;
                     }
                 case Constant.GOBACK:
                     {
-                        viewElement.PrintLibraryMain();
+                        basicPage.PrintLibraryMain();
                         SelectMode();
                         break;
                     }
@@ -212,14 +212,14 @@ namespace LibraryProgram
 
         private void AskExitMember() // 멤버 모드 종료 전 한 번 더 묻기
         {
-            viewElement.PrintExitForm();
+            basicPage.PrintExitForm();
             string menuNumber = menuSelection.CheckMenuNumber(46, 21, Constant.ARRAY_TWO);
             Console.Clear();
             switch (int.Parse(menuNumber))
             {
                 case Constant.EXIT_REAL:
                     {
-                        viewElement.PrintExit();
+                        basicPage.PrintExit();
                         break;
                     }
                 case Constant.GOBACK:

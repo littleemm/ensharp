@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryProgram
 {
-    class LogViewElement
+    class LogPage
     {
         public void PrintManageLogMenu()
         {

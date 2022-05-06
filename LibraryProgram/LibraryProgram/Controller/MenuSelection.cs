@@ -9,12 +9,12 @@ namespace LibraryProgram
     class MenuSelection
     {
 
-        BasicViewElement viewElement;
+        BasicPage basicPage;
         private ConsoleKeyInfo keyInfo;
-        public MenuSelection(BasicViewElement viewElement)
+        public MenuSelection(BasicPage basicPage)
         {
             keyInfo = new ConsoleKeyInfo();
-            this.viewElement = viewElement;
+            this.basicPage = basicPage;
         }
 
         public string CheckMenuNumber(int x, int y, string[] numberArray) // 체크해서 넘어가는 로직
@@ -29,9 +29,9 @@ namespace LibraryProgram
 
                 if (!isMenuNumber)
                 {
-                    viewElement.ClearLine(1, x);
+                    basicPage.ClearLine(1, x);
                     Console.SetCursorPosition(x, y);
-                    viewElement.PrintWarningSentence(0, y - 2, "조건에 맞춰서 다시 입력하세요!");
+                    basicPage.PrintWarningSentence(0, y - 2, "조건에 맞춰서 다시 입력하세요!");
                 }
             }
 
@@ -56,8 +56,8 @@ namespace LibraryProgram
                 if (!isMenuNumber)
                 {
                     Console.SetCursorPosition(x, y);
-                    viewElement.ClearLine(0, x);
-                    viewElement.PrintWarningSentence(0, y - 2, "조건에 맞춰서 다시 입력하세요!");
+                    basicPage.ClearLine(0, x);
+                    basicPage.PrintWarningSentence(0, y - 2, "조건에 맞춰서 다시 입력하세요!");
                     Console.SetCursorPosition(x, y);
                 }
             }

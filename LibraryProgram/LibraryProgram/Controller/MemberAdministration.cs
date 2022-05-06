@@ -8,8 +8,8 @@ namespace LibraryProgram
 {
     class MemberAdministration
     {
-        MemberViewElement memberViewElement;
-        BasicViewElement viewElement;
+        MemberPage memberViewElement;
+        BasicPage basicPage;
         MenuSelection menuSelection;
         DatabaseMember databaseMember;
         MemberDTO memberDTO;
@@ -18,9 +18,9 @@ namespace LibraryProgram
         LogDTO logDTO;
         KeyReader keyReader;
 
-        public MemberAdministration(BasicViewElement viewElement, MemberViewElement memberViewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberDTO memberDTO, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
+        public MemberAdministration(BasicPage basicPage, MemberPage memberViewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberDTO memberDTO, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
         { 
-            this.viewElement = viewElement;
+            this.basicPage = basicPage;
             this.memberViewElement = memberViewElement;
             this.menuSelection = menuSelection;
             this.databaseMember = databaseMember;
@@ -46,9 +46,9 @@ namespace LibraryProgram
 
                 if (isMemberValue)
                 {
-                    viewElement.PrintWarningSentence(6, 11, "이미 존재하는 아이디입니다.");
+                    basicPage.PrintWarningSentence(6, 11, "이미 존재하는 아이디입니다.");
                     Console.SetCursorPosition(42, 13);
-                    viewElement.ClearLine(0, 42);
+                    basicPage.ClearLine(0, 42);
                     isMemberValue = false;
                     continue;
                 }
@@ -60,7 +60,7 @@ namespace LibraryProgram
                 }
             }
 
-            viewElement.ClearLineEasy(11, 6);
+            basicPage.ClearLineEasy(11, 6);
             isMemberValue = false;
 
             while (!isMemberValue)
@@ -75,7 +75,7 @@ namespace LibraryProgram
                 }
             }
 
-            viewElement.ClearLineEasy(11, 6);
+            basicPage.ClearLineEasy(11, 6);
             isMemberValue = false;
 
             while (!isMemberValue)
@@ -90,7 +90,7 @@ namespace LibraryProgram
                 }
             }
 
-            viewElement.ClearLineEasy(11, 6);
+            basicPage.ClearLineEasy(11, 6);
             isMemberValue = false;
 
             while (!isMemberValue)
@@ -105,7 +105,7 @@ namespace LibraryProgram
                 }
             }
 
-            viewElement.ClearLineEasy(11, 6);
+            basicPage.ClearLineEasy(11, 6);
             isMemberValue = false;
 
             while (!isMemberValue)
@@ -120,7 +120,7 @@ namespace LibraryProgram
                 }
             }
 
-            viewElement.ClearLineEasy(11, 6);
+            basicPage.ClearLineEasy(11, 6);
             isMemberValue = false;
 
             while (!isMemberValue)
@@ -135,7 +135,7 @@ namespace LibraryProgram
                 }
             }
 
-            viewElement.ClearLineEasy(11, 6);
+            basicPage.ClearLineEasy(11, 6);
             databaseMember.InsertMember(memberDTO); // 조건에 전부 맞았을 경우 VO를 데베로 보내기
             memberViewElement.PrintRegistrationSuccessMessage();
 
@@ -150,7 +150,7 @@ namespace LibraryProgram
         {
             memberViewElement.PrintEditMember();
             memberViewElement.PrintEditMemberForm();
-            viewElement.PrintLine();
+            basicPage.PrintLine();
             databaseMember.SelectMemberList();
 
             string memberId = "", memberAddress = "", memberNumber = "";
@@ -177,7 +177,7 @@ namespace LibraryProgram
             }
 
             isMemberValue = false;
-            viewElement.ClearLineEasy(11, 6);
+            basicPage.ClearLineEasy(11, 6);
 
             while (!isMemberValue)
             {
@@ -192,9 +192,9 @@ namespace LibraryProgram
                 isMemberValue = exception.IsCtrlZ(memberAddress); // 터지지 않기 위함
                 if (!isMemberValue)
                 {
-                    viewElement.PrintWarningSentence(2, 11, "조건에 맞춰서 다시 입력해주세요.");
+                    basicPage.PrintWarningSentence(2, 11, "조건에 맞춰서 다시 입력해주세요.");
                     Console.SetCursorPosition(30, 15);
-                    viewElement.ClearLine(0, 30);
+                    basicPage.ClearLine(0, 30);
                     continue;
                 }
 
@@ -206,7 +206,7 @@ namespace LibraryProgram
             }
 
             isMemberValue = false;
-            viewElement.ClearLineEasy(11, 6);
+            basicPage.ClearLineEasy(11, 6);
 
             while (!isMemberValue)
             {
@@ -221,9 +221,9 @@ namespace LibraryProgram
                 isMemberValue = exception.IsCtrlZ(memberNumber); // 프로그램 터지지 않도록
                 if (!isMemberValue)
                 {
-                    viewElement.PrintWarningSentence(2, 11, "조건에 맞춰서 다시 입력해주세요.");
+                    basicPage.PrintWarningSentence(2, 11, "조건에 맞춰서 다시 입력해주세요.");
                     Console.SetCursorPosition(30, 17);
-                    viewElement.ClearLine(0, 30);
+                    basicPage.ClearLine(0, 30);
                     continue;
                 }
 
@@ -234,7 +234,7 @@ namespace LibraryProgram
                 }
             }
 
-            viewElement.ClearLineEasy(11, 6);
+            basicPage.ClearLineEasy(11, 6);
 
             if (memberAddress.Length > 0 || memberNumber.Length > 0)
             { // 수정 요청이 하나라도 들어올 경우 데이터베이스로 넘겨서 수정함
@@ -255,7 +255,7 @@ namespace LibraryProgram
         {
             memberViewElement.PrintDeleteMember();
             memberViewElement.PrintDeleteMemberForm();
-            viewElement.PrintLine();
+            basicPage.PrintLine();
             databaseMember.SelectMemberList();
 
             string memberId = "";
@@ -285,13 +285,13 @@ namespace LibraryProgram
                 {
                     memberViewElement.PrintDeleteWarningMessage(3, 11);
                     Console.SetCursorPosition(30, 13);
-                    viewElement.ClearLine(0, 30);
+                    basicPage.ClearLine(0, 30);
                 }
 
 
             }
 
-            viewElement.ClearLineEasy(11, 3);
+            basicPage.ClearLineEasy(11, 3);
             databaseMember.DeleteMember(memberId);
             memberViewElement.PrintDeleteSuccessMessage();
 
@@ -308,7 +308,7 @@ namespace LibraryProgram
             bool isMemberId = false;
             memberViewElement.InformMemberList();
             memberViewElement.SearchMember();
-            viewElement.PrintLine();
+            basicPage.PrintLine();
             databaseMember.SelectMemberList();
 
             while (!isMemberId)
@@ -321,7 +321,7 @@ namespace LibraryProgram
                 {
                     memberViewElement.PrintSearchWarningMessage(9, 4);
                     Console.SetCursorPosition(18, 6);
-                    viewElement.ClearLine(0, 18);
+                    basicPage.ClearLine(0, 18);
                     continue;
                 }
 
@@ -330,15 +330,15 @@ namespace LibraryProgram
                 {
                     memberViewElement.PrintSearchWarningMessage(9, 4);
                     Console.SetCursorPosition(18, 6);
-                    viewElement.ClearLine(0, 18);
+                    basicPage.ClearLine(0, 18);
                 }
             }
             Console.SetCursorPosition(0, 4);
-            viewElement.ClearLine(0, 0);
+            basicPage.ClearLine(0, 0);
 
             Console.SetCursorPosition(18, 0);
-            viewElement.ClearButtomLine(11, 8);
-            viewElement.PrintLine();
+            basicPage.ClearButtomLine(11, 8);
+            basicPage.PrintLine();
             databaseMember.SelectMemberOfList(memberId);
             Console.SetCursorPosition(0, 0);
             logDTO.User = "관리자";
@@ -385,7 +385,7 @@ namespace LibraryProgram
             Console.SetCursorPosition(printX, printY);
             memberViewElement.PrintWarningMessage();
             Console.SetCursorPosition(x, y);
-            viewElement.ClearLine(0, x);
+            basicPage.ClearLine(0, x);
         }
     }
 }

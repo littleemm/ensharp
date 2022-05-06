@@ -11,22 +11,22 @@ namespace LibraryProgram
         BookAdministration bookAdministration;
         MemberAdministration memberAdministration;
         LogAdministration logAdministration;
-        BasicViewElement viewElement;
-        BookViewElement bookViewElement;
-        MemberViewElement memberViewElement;
-        LogViewElement logViewElement;
+        BasicPage basicPage;
+        BookPage bookViewElement;
+        MemberPage memberViewElement;
+        LogPage logViewElement;
         MenuSelection menuSelection;
 
-        public AdministratorMode(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberDTO memberDTO, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
+        public AdministratorMode(BasicPage basicPage, MenuSelection menuSelection, DatabaseMember databaseMember, MemberDTO memberDTO, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
         {
-            bookViewElement = new BookViewElement();
-            memberViewElement = new MemberViewElement();
-            logViewElement = new LogViewElement();
-            bookAdministration = new BookAdministration (viewElement, bookViewElement, menuSelection, databaseBook, exception, databaseLog, logDTO, keyReader);
-            memberAdministration = new MemberAdministration(viewElement, memberViewElement, menuSelection, databaseMember, memberDTO, exception, databaseLog, logDTO, keyReader);
-            logAdministration = new LogAdministration(viewElement, logViewElement, menuSelection, databaseLog, keyReader);
+            bookViewElement = new BookPage();
+            memberViewElement = new MemberPage();
+            logViewElement = new LogPage();
+            bookAdministration = new BookAdministration (basicPage, bookViewElement, menuSelection, databaseBook, exception, databaseLog, logDTO, keyReader);
+            memberAdministration = new MemberAdministration(basicPage, memberViewElement, menuSelection, databaseMember, memberDTO, exception, databaseLog, logDTO, keyReader);
+            logAdministration = new LogAdministration(basicPage, logViewElement, menuSelection, databaseLog, keyReader);
             
-            this.viewElement = viewElement;
+            this.basicPage = basicPage;
             this.menuSelection = menuSelection;
         }
 
@@ -215,14 +215,14 @@ namespace LibraryProgram
             string menuNumber = "";
             while (true)
             {
-                viewElement.PrintExitForm();
+                basicPage.PrintExitForm();
                 menuNumber = menuSelection.CheckMenuNumber(46, 21, Constant.ARRAY_TWO);
                 Console.Clear();
                 switch (int.Parse(menuNumber))
                 {
                     case Constant.EXIT_REAL:
                         {
-                            viewElement.PrintExit();
+                            basicPage.PrintExit();
                             break;
                         }
                     case Constant.GOBACK:

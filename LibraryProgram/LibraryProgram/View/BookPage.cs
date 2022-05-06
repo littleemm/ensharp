@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryProgram
 {
-    class BookViewElement
+    class BookPage
     {
         public void PrintManageBookMenu()
         {

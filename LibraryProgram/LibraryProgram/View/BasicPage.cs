@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace LibraryProgram
 {
-    class BasicViewElement
+    class BasicPage
     {
         [DllImport("kernel32.dll", ExactSpelling = true)]
         private static extern IntPtr GetConsoleWindow();

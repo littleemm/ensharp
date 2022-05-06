@@ -8,8 +8,8 @@ namespace LibraryProgram
 {
     class BookAdministration 
     {
-        BookViewElement bookViewElement;
-        BasicViewElement viewElement;
+        BookPage bookViewElement;
+        BasicPage basicPage;
         MenuSelection menuSelection;
         DatabaseBook databaseBook;
         BookDTO bookDTO;
@@ -20,11 +20,11 @@ namespace LibraryProgram
         KeyReader keyReader;
  
         
-        public BookAdministration(BasicViewElement viewElement, BookViewElement bookViewElement, MenuSelection menuSelection, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
+        public BookAdministration(BasicPage basicPage, BookPage bookViewElement, MenuSelection menuSelection, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
         {
             bookDTO = new BookDTO("", "", "", "", "", "", "", "");
             naverBookAPI = new NaverBookAPI();
-            this.viewElement = viewElement;
+            this.basicPage = basicPage;
             this.bookViewElement = bookViewElement;
             this.menuSelection = menuSelection;
             this.databaseBook = databaseBook;
@@ -48,9 +48,9 @@ namespace LibraryProgram
 
                 if (isBookValue)
                 {
-                    viewElement.PrintWarningSentence(9, 11, "이미 존재하는 아이디입니다.");
+                    basicPage.PrintWarningSentence(9, 11, "이미 존재하는 아이디입니다.");
                     Console.SetCursorPosition(37, 13);
-                    viewElement.ClearLine(0, 37);
+                    basicPage.ClearLine(0, 37);
                     isBookValue = false;
                     continue;
                 }
@@ -63,7 +63,7 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
-            viewElement.ClearLineEasy(11, 9);
+            basicPage.ClearLineEasy(11, 9);
 
             while (!isBookValue)
             {
@@ -78,7 +78,7 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
-            viewElement.ClearLineEasy(11, 25);
+            basicPage.ClearLineEasy(11, 25);
 
             while (!isBookValue)
             {
@@ -93,7 +93,7 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
-            viewElement.ClearLineEasy(11, 25);
+            basicPage.ClearLineEasy(11, 25);
 
             while (!isBookValue)
             {
@@ -108,7 +108,7 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
-            viewElement.ClearLineEasy(11, 25);
+            basicPage.ClearLineEasy(11, 25);
 
             while (!isBookValue)
             {
@@ -123,7 +123,7 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
-            viewElement.ClearLineEasy(11, 25);
+            basicPage.ClearLineEasy(11, 25);
 
             while (!isBookValue)
             {
@@ -138,7 +138,7 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
-            viewElement.ClearLineEasy(11, 25);
+            basicPage.ClearLineEasy(11, 25);
 
             while (!isBookValue)
             {
@@ -153,7 +153,7 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
-            viewElement.ClearLineEasy(11, 25);
+            basicPage.ClearLineEasy(11, 25);
 
             while (!isBookValue)
             {
@@ -167,7 +167,7 @@ namespace LibraryProgram
                 }
             }
 
-            viewElement.ClearLineEasy(10, 8);
+            basicPage.ClearLineEasy(10, 8);
 
             databaseBook.InsertBook(bookDTO);
             bookViewElement.PrintSuccessMessage("등록");
@@ -183,7 +183,7 @@ namespace LibraryProgram
         {
             bookViewElement.PrintEditBook();
             bookViewElement.PrintEditBookForm();
-            viewElement.PrintLine();
+            basicPage.PrintLine();
             databaseBook.SelectBookList();
 
             string bookId = "", bookPrice = "", bookQuantity = "";
@@ -210,7 +210,7 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
-            viewElement.ClearLineEasy(10, 25);
+            basicPage.ClearLineEasy(10, 25);
 
             while (!isBookValue)
             {
@@ -225,9 +225,9 @@ namespace LibraryProgram
                 isBookValue = exception.IsCtrlZ(bookPrice);
                 if (!isBookValue)
                 {
-                    viewElement.PrintWarningSentence(2, 11, "조건에 맞춰서 다시 입력해주세요.");
+                    basicPage.PrintWarningSentence(2, 11, "조건에 맞춰서 다시 입력해주세요.");
                     Console.SetCursorPosition(30, 15);
-                    viewElement.ClearLine(0, 30);
+                    basicPage.ClearLine(0, 30);
                     continue;
                 }
 
@@ -239,7 +239,7 @@ namespace LibraryProgram
             }
 
             isBookValue = false;
-            viewElement.ClearLineEasy(10, 25);
+            basicPage.ClearLineEasy(10, 25);
 
             while (!isBookValue)
             {
@@ -254,9 +254,9 @@ namespace LibraryProgram
                 isBookValue = exception.IsCtrlZ(bookQuantity);
                 if (!isBookValue)
                 {
-                    viewElement.PrintWarningSentence(2, 11, "조건에 맞춰서 다시 입력해주세요.");
+                    basicPage.PrintWarningSentence(2, 11, "조건에 맞춰서 다시 입력해주세요.");
                     Console.SetCursorPosition(30, 17);
-                    viewElement.ClearLine(0, 30);
+                    basicPage.ClearLine(0, 30);
                     continue;
                 }
 
@@ -266,7 +266,7 @@ namespace LibraryProgram
                     PrintFalse(30, 17);
                 }
             }
-            viewElement.ClearLineEasy(10, 25);
+            basicPage.ClearLineEasy(10, 25);
 
             if (bookPrice.Length > 0 || bookQuantity.Length > 0)
             {
@@ -288,7 +288,7 @@ namespace LibraryProgram
         {
             bookViewElement.PrintDeleteBook();
             bookViewElement.PrintBookIdForm();
-            viewElement.PrintLine();
+            basicPage.PrintLine();
             databaseBook.SelectBookList();
 
             string bookId = "";
@@ -319,11 +319,11 @@ namespace LibraryProgram
                 {
                     bookViewElement.PrintDeleteWarningMessage(3, 11);
                     Console.SetCursorPosition(30, 13);
-                    viewElement.ClearLine(0, 30);
+                    basicPage.ClearLine(0, 30);
                 }
             }
 
-            viewElement.ClearLineEasy(11, 3);
+            basicPage.ClearLineEasy(11, 3);
             databaseBook.DeleteBook(bookId);
             bookViewElement.PrintDeleteSuccessMessage();
 
@@ -339,7 +339,7 @@ namespace LibraryProgram
             string bookValue = "";
             bookViewElement.InformBookList();
             bookViewElement.SearchBook();
-            viewElement.PrintLine(); 
+            basicPage.PrintLine(); 
             databaseBook.SelectBookList();
 
             while (Constant.IS_CTRL_Z)
@@ -351,14 +351,14 @@ namespace LibraryProgram
                 { // ctrl + z 체크
                     bookViewElement.PrintSearchWarningMessage(3, 4);
                     Console.SetCursorPosition(29, 6);
-                    viewElement.ClearLine(0, 29);
+                    basicPage.ClearLine(0, 29);
                     continue;
                 }
                 break;
             }
 
-            viewElement.ClearButtomLine(11, 8);
-            viewElement.PrintLine(); 
+            basicPage.ClearButtomLine(11, 8);
+            basicPage.PrintLine(); 
             databaseBook.SelectBookOfList(bookValue);
             Console.SetCursorPosition(0, 0);
 
@@ -389,23 +389,23 @@ namespace LibraryProgram
                 { // ctrl + z 체크
                     bookViewElement.PrintSearchWarningMessage(3, 4);
                     Console.SetCursorPosition(29, 7);
-                    viewElement.ClearLine(0, 29);
+                    basicPage.ClearLine(0, 29);
                     Console.SetCursorPosition(29, 6);
-                    viewElement.ClearLine(0, 29);
+                    basicPage.ClearLine(0, 29);
                     continue;
                 }
                 break;
             }
             Console.SetCursorPosition(0, 7);
-            viewElement.ClearLine(0, 0);
+            basicPage.ClearLine(0, 0);
             Console.SetCursorPosition(0, 6);
-            viewElement.ClearLine(0, 0);
+            basicPage.ClearLine(0, 0);
             Console.SetCursorPosition(0, 2);
-            viewElement.ClearLine(0, 0);
+            basicPage.ClearLine(0, 0);
             Console.SetCursorPosition(0, 1);
-            viewElement.ClearLine(0, 0);
+            basicPage.ClearLine(0, 0);
             Console.SetCursorPosition(0, 0);
-            viewElement.ClearLine(0, 0);
+            basicPage.ClearLine(0, 0);
             bookViewElement.InformNaverBookListAfter();
             bookViewElement.AddNaverBookForm();
 
@@ -426,7 +426,7 @@ namespace LibraryProgram
                     Console.SetCursorPosition(50, 4);
                     bookViewElement.PrintIsbnFailMessage();
                     Console.SetCursorPosition(37, 8);
-                    viewElement.ClearLine(0, 37);
+                    basicPage.ClearLine(0, 37);
                 }
 
             }
@@ -459,7 +459,7 @@ namespace LibraryProgram
             Console.SetCursorPosition(25, 10);
             bookViewElement.PrintWarningMessage();
             Console.SetCursorPosition(x, y);
-            viewElement.ClearLine(0, x);
+            basicPage.ClearLine(0, x);
         }
 
         private bool IsIsbn(string isbn, string bookTitle, string bookQuantity, bool isBookValue)
@@ -473,12 +473,12 @@ namespace LibraryProgram
             if (naverBookAPI.IsIsbnData(bookTitle, bookQuantity, isbn) == true)
             {
                 Console.SetCursorPosition(50, 5);
-                viewElement.ClearLine(0, 0);
+                basicPage.ClearLine(0, 0);
 
                 Console.SetCursorPosition(0, 6);
-                viewElement.ClearLine(0, 0);
+                basicPage.ClearLine(0, 0);
                 Console.SetCursorPosition(0, 8);
-                viewElement.ClearLine(0, 0);
+                basicPage.ClearLine(0, 0);
                 Console.SetCursorPosition(0, 7);
                 bookViewElement.PrintRegisterNaverBook();
 
@@ -493,7 +493,7 @@ namespace LibraryProgram
                         Console.SetCursorPosition(45, 4);
                         bookViewElement.PrintLongWarningMessage();
                         Console.SetCursorPosition(37, 7);
-                        viewElement.ClearLine(0, 37);
+                        basicPage.ClearLine(0, 37);
                         isBookValue = false;
                         continue;
                     }
@@ -504,12 +504,12 @@ namespace LibraryProgram
                         Console.SetCursorPosition(45, 4);
                         bookViewElement.PrintLongWarningMessage();
                         Console.SetCursorPosition(37, 7);
-                        viewElement.ClearLine(0, 37);
+                        basicPage.ClearLine(0, 37);
                     }
                 }
 
                 isBookValue = false;
-                viewElement.ClearLineEasy(5, 0);
+                basicPage.ClearLineEasy(5, 0);
 
                 while (!isBookValue)
                 {
@@ -522,10 +522,10 @@ namespace LibraryProgram
                         Console.SetCursorPosition(45, 4);
                         bookViewElement.PrintLongWarningMessage();
                         Console.SetCursorPosition(37, 9);
-                        viewElement.ClearLine(0, 37);
+                        basicPage.ClearLine(0, 37);
                     }
                 }
-                viewElement.ClearLineEasy(5, 0);
+                basicPage.ClearLineEasy(5, 0);
                 ConnectDatabase(bookTitle, bookQuantity, isbn, bookId, bookCount);
                 return true;
             }
