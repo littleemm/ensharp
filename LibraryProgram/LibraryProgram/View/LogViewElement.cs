@@ -10,7 +10,7 @@ namespace LibraryProgram
     {
         public void PrintManageLogMenu()
         {
-            Console.WriteLine("                                                           ");
+            Console.WriteLine("   ESC: 뒤로가기                                            ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");

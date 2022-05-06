@@ -49,7 +49,7 @@ namespace LibraryProgram
 
         public void PrintAdministratorPage() // 관리자 모드 선택
         {
-            Console.WriteLine("                                                           ");
+            Console.WriteLine(" ESC: 뒤로가기                                             ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
@@ -79,7 +79,7 @@ namespace LibraryProgram
 
         public void PrintMemberPage() // 멤버모드에서만 선택
         {
-            Console.WriteLine("                                                           ");
+            Console.WriteLine(" ESC: 뒤로가기                                             ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
@@ -108,7 +108,7 @@ namespace LibraryProgram
 
         public void PrintLoginPage() // 로그인 페이지 메인
         {
-            Console.WriteLine("                                                           ");
+            Console.WriteLine(" ESC: 처음 화면으로                                        ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
@@ -161,7 +161,7 @@ namespace LibraryProgram
 
         public void PrintMemberMode()
         {
-            Console.WriteLine("                                                           ");
+            Console.WriteLine(" ESC: 처음 화면으로                                          ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");

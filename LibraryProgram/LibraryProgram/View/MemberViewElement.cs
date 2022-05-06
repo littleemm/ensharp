@@ -10,7 +10,7 @@ namespace LibraryProgram
     {
         public void PrintManageMemberMenu()
         {
-            Console.WriteLine("                                                           ");
+            Console.WriteLine(" ESC: 뒤로가기                                             ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
@@ -40,7 +40,7 @@ namespace LibraryProgram
 
         public void PrintRegistration()
         {
-            Console.WriteLine("ESC: 뒤로가기                                               ");
+            Console.WriteLine(" ESC: 뒤로가기                                               ");
             Console.WriteLine("                  *                 *                 *            ");
             Console.WriteLine("                                                                  ");
             Console.WriteLine("        *                  *                  *                  * ");
