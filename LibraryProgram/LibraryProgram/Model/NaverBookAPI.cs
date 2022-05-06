@@ -95,7 +95,7 @@ namespace LibraryProgram
             return false;
         }
 
-        public BookDTO SetBookDTO(string title, string display, string isbn) // set get
+        public BookDTO GetBookDTO(string title, string display, string isbn) 
         {
             BookDTO bookDTO = new BookDTO("", "", "", "", "" , "", "", "");
             List<ApiBookDTO> bookList = FindBook(title, display);

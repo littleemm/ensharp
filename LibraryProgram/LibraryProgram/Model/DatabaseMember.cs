@@ -108,15 +108,15 @@ namespace LibraryProgram
             connection.Close();
         }
 
-        public void SelectMemberOfList(string id)
+        public void SelectMemberOfList(string id) // 회원 검색을 위한 데이터 추출
         {
             connection.Open();
 
-            List<string>[] element = new List<string>[6];
+            List<string>[] memberSelection = new List<string>[6];
 
-            for (int index = 0; index < element.Length; index++)
+            for (int index = 0; index < memberSelection.Length; index++)
             {
-                element[index] = new List<string>();
+                memberSelection[index] = new List<string>();
             }
 
             MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_MEMBER, connection);
@@ -124,19 +124,19 @@ namespace LibraryProgram
 
             while (dataReader.Read())
             {
-                element[0].Add(dataReader["id"].ToString());
-                element[1].Add(dataReader["name"].ToString());
-                element[2].Add(dataReader["age"].ToString());
-                element[3].Add(dataReader["address"].ToString());
-                element[4].Add(dataReader["phoneNumber"].ToString());
-                element[5].Add(dataReader["bookCount"].ToString());
+                memberSelection[0].Add(dataReader["id"].ToString());
+                memberSelection[1].Add(dataReader["name"].ToString());
+                memberSelection[2].Add(dataReader["age"].ToString());
+                memberSelection[3].Add(dataReader["address"].ToString());
+                memberSelection[4].Add(dataReader["phoneNumber"].ToString());
+                memberSelection[5].Add(dataReader["bookCount"].ToString());
             }
 
-            for (int i = 0; i < element[0].Count; i++)
+            for (int i = 0; i < memberSelection[0].Count; i++)
             {
-                if (element[0][i].Contains(id))
+                if (memberSelection[0][i].Contains(id))
                 {
-                    ShowData(element, i);
+                    ShowData(memberSelection, i);
                 }
             }
             
@@ -166,28 +166,26 @@ namespace LibraryProgram
             connection.Close();
         }
 
-        public bool IsMemberId(string memberId)
+        public bool IsMemberId(string memberId) // 회원 아이디 존재 확인
         {
             connection.Open();
 
-            List<string> element = new List<string>();
-
-            MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_MEMBER, connection);
+            int dataCount = 0;
+            
+            string query = string.Format(Constant.SELECT_QUERY_MEMBER_WHERE_ID, memberId);
+            MySqlCommand command = new MySqlCommand(query, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
             while (dataReader.Read())
             {
-                element.Add(dataReader["id"].ToString());
+                ++dataCount;
             }
 
-            for (int i = 0; i < element.Count; i++)
+            if (dataCount > 0)
             {
-                if (element[i].Equals(memberId))
-                {
-                    dataReader.Close();
-                    connection.Close();
-                    return true;
-                }
+                dataReader.Close();
+                connection.Close();
+                return true;
             }
 
             dataReader.Close();
@@ -195,7 +193,7 @@ namespace LibraryProgram
             return false;
         }
 
-        public bool IsSearchedMemberId(string memberId)
+        public bool IsSearchedMemberId(string memberId) // 회원 아이디 존재 여부 (contain)
         {
             connection.Open();
 

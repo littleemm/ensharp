@@ -534,7 +534,7 @@ namespace LibraryProgram
 
         private void ConnectDatabase(string title, string display, string isbn, string id, string quantity)
         {
-            BookDTO bookDTO = naverBookAPI.SetBookDTO(title, display, isbn);
+            BookDTO bookDTO = naverBookAPI.GetBookDTO(title, display, isbn);
             bookDTO.Id = id;
             bookDTO.Quantity = quantity;
             databaseBook.InsertBook(bookDTO);

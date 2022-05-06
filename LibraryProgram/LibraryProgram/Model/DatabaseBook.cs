@@ -130,25 +130,22 @@ namespace LibraryProgram
         public bool IsBookId(string bookId) // 등록된 bookID와 중복되는지 체크
         {
             connection.Open();
+            int dataCount = 0;
 
-            List<string> element = new List<string>();
-
+            string query = string.Format(Constant.SELECT_QUERY_BOOK_WHERE_ID, bookId);
             MySqlCommand command = new MySqlCommand(Constant.SELECT_QUERY_BOOK, connection);
             MySqlDataReader dataReader = command.ExecuteReader();
 
             while (dataReader.Read())
             {
-                element.Add(dataReader["id"].ToString());
+                ++dataCount;
             }
 
-            for (int i=0;i<element.Count;i++)
+            if (dataCount > 0)
             {
-                if(element[i].Equals(bookId))
-                {
-                    dataReader.Close();
-                    connection.Close();
-                    return true;
-                }
+                dataReader.Close();
+                connection.Close();
+                return true;
             }
 
             dataReader.Close();
