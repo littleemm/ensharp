@@ -33,7 +33,7 @@ namespace LibraryProgram
         public string SelectBookAdministration() // 책 관리 모드에서 메뉴 선택
         {
             string number = "";
-            while (Constant.LOOP_FINAL_ESC_KEY_PRESSED) // 마지막에 esc 키를 누르면 반복됨
+            while (Constant.LOOP_UNTIL_F1_KEY_PRESSED) // 마지막에 F1 누를 때까지 반복됨
             {
                 Console.Clear();
                 Console.SetWindowSize(60, 28);
@@ -101,7 +101,7 @@ namespace LibraryProgram
         public string SelectMemberAdministration() // 회원 관리모드에서 메뉴 선택
         {
             string number = "";
-            while (Constant.LOOP_FINAL_ESC_KEY_PRESSED)
+            while (Constant.LOOP_UNTIL_F1_KEY_PRESSED)
             {
                 Console.Clear();
                 Console.SetWindowSize(60, 28);
@@ -157,7 +157,7 @@ namespace LibraryProgram
         public string SelectLogAdministration() // 로그 관리 모드에서 메뉴 선택
         {
             string number = "";
-            while (Constant.LOOP_FINAL_ESC_KEY_PRESSED)
+            while (Constant.LOOP_UNTIL_F1_KEY_PRESSED)
             {
                 Console.Clear();
                 Console.SetWindowSize(60, 28);
@@ -214,7 +214,7 @@ namespace LibraryProgram
         public string AskExit() // 나가기 전 한 번 더 묻기
         {
             string menuNumber = "";
-            while (true)
+            while (Constant.LOOP_UNTIL_EXIT)
             {
                 basicPage.PrintExitForm();
                 menuNumber = menuSelection.CheckMenuNumber(46, 21, Constant.ARRAY_TWO);

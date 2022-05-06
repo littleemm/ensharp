@@ -13,7 +13,7 @@ namespace LibraryProgram
 
         public bool IsBookId(string bookId) // bookid 예외
         {
-            if(IsCtrlZ(bookId) == false)
+            if(!IsCtrlZ(bookId))
             {
                 return false;
             }
@@ -36,13 +36,13 @@ namespace LibraryProgram
 
         public bool IsBookName(string bookName) // 책제목 예외
         {
-            if (IsCtrlZ(bookName) == false)
+            if (!IsCtrlZ(bookName))
             {
                 return false;
             }
 
             pattern = @"^[a-zA-Z가-힣0-9.,+#%@$&()!?\s]{1,20}$";
-            if (IsWhiteSpace(bookName) == false)
+            if (!IsWhiteSpace(bookName))
             {
                 return false;
             }
@@ -56,13 +56,13 @@ namespace LibraryProgram
 
         public bool IsBookAuthor(string bookAuthor) // 저자 예외
         {
-            if (IsCtrlZ(bookAuthor) == false)
+            if (!IsCtrlZ(bookAuthor))
             {
                 return false;
             }
             pattern = @"^[a-zA-Z가-힣,.\s]{1,15}$";
 
-            if (IsWhiteSpace(bookAuthor) == false)
+            if (!IsWhiteSpace(bookAuthor))
             {
                 return false;
             }
@@ -77,13 +77,13 @@ namespace LibraryProgram
 
         public bool IsBookPublisher(string bookPublisher) // 출판사 예외
         {
-            if (IsCtrlZ(bookPublisher) == false)
+            if (!IsCtrlZ(bookPublisher))
             {
                 return false;
             }
             pattern = @"^[a-zA-Z가-힣0-9#()\s]{1,10}$";
 
-            if (IsWhiteSpace(bookPublisher) == false)
+            if (!IsWhiteSpace(bookPublisher))
             {
                 return false;
             }
@@ -98,7 +98,7 @@ namespace LibraryProgram
 
         public bool IsPrice(string price) // 책 가격
         {
-            if (IsCtrlZ(price) == false)
+            if (!IsCtrlZ(price))
             {
                 return false;
             }
@@ -119,7 +119,7 @@ namespace LibraryProgram
 
         public bool IsQuantity(string quantity) // 책 수량
         {
-            if (IsCtrlZ(quantity) == false)
+            if (!IsCtrlZ(quantity))
             {
                 return false;
             }
@@ -135,7 +135,7 @@ namespace LibraryProgram
 
         public bool IsBookCount(string quantity) // 책 수량
         {
-            if (IsCtrlZ(quantity) == false)
+            if (!IsCtrlZ(quantity))
             {
                 return false;
             }
@@ -149,9 +149,9 @@ namespace LibraryProgram
             return false;
         }
 
-        public bool IsDate(string date) // 책 수량
+        public bool IsDate(string date) // 출판일
         {
-            if (IsCtrlZ(date) == false)
+            if (!IsCtrlZ(date))
             {
                 return false;
             }
@@ -168,7 +168,7 @@ namespace LibraryProgram
 
         public bool IsMemberId(string memberId) // 회원 아이디
         {
-            if (IsCtrlZ(memberId) == false)
+            if (!IsCtrlZ(memberId))
             {
                 return false;
             }
@@ -198,12 +198,12 @@ namespace LibraryProgram
 
         public bool IsMemberName(string name) // 이름 예외처리
         {
-            if (IsCtrlZ(name) == false)
+            if (!IsCtrlZ(name))
             {
                 return false;
             }
 
-            if (IsWhiteSpace(name) == false) // 전부 공백으로 입력되는 것을 방지
+            if (!IsWhiteSpace(name)) // 전부 공백으로 입력되는 것을 방지
             {
                 return false;
             }
@@ -219,7 +219,7 @@ namespace LibraryProgram
 
         public bool IsAge(string age) // 나이 예외처리, 0~150세
         {
-            if (IsCtrlZ(age) == false)
+            if (!IsCtrlZ(age))
             {
                 return false;
             }
@@ -244,7 +244,7 @@ namespace LibraryProgram
 
         public bool IsPhoneNumber(string phoneNumber) // 휴대전화 예외처리
         {
-            if (IsCtrlZ(phoneNumber) == false)
+            if (!IsCtrlZ(phoneNumber))
             {
                 return false;
             }
@@ -261,11 +261,11 @@ namespace LibraryProgram
 
         public bool IsAddress(string address) // 주소 예외처리
         {
-            if (IsCtrlZ(address) == false)
+            if (!IsCtrlZ(address))
             {
                 return false;
             }
-            if (IsWhiteSpace(address) == false)
+            if (!IsWhiteSpace(address))
             {
                 return false;
             }
@@ -344,8 +344,12 @@ namespace LibraryProgram
             { // 경기도 남양주시 진접읍 해밀예당3로 38, 경상북도 울릉군 북면 울릉순환로 2620 
                 return true;
             }
-            else if ((array.Length == 5 || array.Length == 6) && IsCityAndCounty(array) && IsDistirct(array) && IsTownAndTownship(array) && IsRoad(array) && IsBuildingNumber(array))
-            { // 경기도 안산시 단원구 화랑로 387, 경상남도 창원시 마산회원구 내서읍 삼계10길 22
+            else if (array.Length == 6 && IsCityAndCounty(array) && IsDistirct(array) && IsTownAndTownship(array) && IsRoad(array) && IsBuildingNumber(array))
+            { // 경상남도 창원시 마산회원구 내서읍 삼계10길 22
+                return true;
+            }
+            else if (array.Length == 5 && IsCityAndCounty(array) && IsDistirct(array) &&  IsRoad(array) && IsBuildingNumber(array))
+            { // 경기도 안산시 단원구 화랑로 387
                 return true;
             }
 

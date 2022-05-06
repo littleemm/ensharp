@@ -100,11 +100,12 @@ namespace LibraryProgram
         public const bool ID_AND_PW_UNCORRECT = true;
         public const bool ID_AND_PW_UNCORRECT_NOW = false;
         public const bool IS_CTRL_Z = true;
-        public const bool LOOP_FINAL_ESC_KEY_PRESSED = true;
+        public const bool LOOP_UNTIL_F1_KEY_PRESSED = true;
+        public const bool LOOP_UNTIL_EXIT = true;
         public const bool EXIT_WHEN_GO_BACK = true;
 
         public const string CLIENT_ID = "Gy_693vcZVxD7SqwKVzr";
-        public const string CLIENT_SECRET = "SdGR7yh_9b";
+        public const string CLIENT_SECRET = "SdGR7yh_9b"; // 환경변수..
 
         public const string PATTERN_NAME_KOR = @"^[가-힣\s]{2,25}$";
         public const string PATTERN_NAME_ENG = @"^[a-zA-Z.\s]{2,25}$";
@@ -113,7 +114,7 @@ namespace LibraryProgram
 
         public const string PATTERN_TEL_010 = @"^010[0-9]{8}$"; // 11자리 폰번호
         public const string PATTERN_TEL_0XX = @"^0[1-9]{2}[0-9]{7}$"; // 10자리 폰번호, 서울 외 전화번호
-        public const string PATTERN_TEL_02 = @"^02[0-9]{7-8}$"; // 서울 전화번호
+        public const string PATTERN_TEL_02 = @"^02[0-9]{7,8}$"; // 서울 전화번호
 
         public static string[] NAME = { "인천", "대구", "광주", "대전", "울산", "부산" };
         public static string[] NAMEOF = { "인천", "대구", "울산", "부산" };

@@ -168,16 +168,16 @@ namespace LibraryProgram
                 Console.WriteLine("==============================================================================");
             }
         }
-        private void ShowDatabaseOf(List<string>[] element, int index)
+        private void ShowDatabaseOf(List<string>[] bookList, int index)
         { // 데이터베이스 정보 출력 (일부)
-            Console.WriteLine("      ID      :  " + element[0][index]);
-            Console.WriteLine("     NAME     :  " + element[1][index]);
-            Console.WriteLine("    AUTHOR    :  " + element[2][index]);
-            Console.WriteLine("  PUBLISHER   :  " + element[3][index]);
-            Console.WriteLine("    PRICE     :  " + element[4][index] + "\\");
-            Console.WriteLine("   PUBDATE    :  " + element[5][index]);
-            Console.WriteLine("     ISBN     :  " + element[6][index]);
-            Console.WriteLine("   QUANTITY   :  " + element[7][index]);
+            Console.WriteLine("      ID      :  " + bookList[0][index]);
+            Console.WriteLine("     NAME     :  " + bookList[1][index]);
+            Console.WriteLine("    AUTHOR    :  " + bookList[2][index]);
+            Console.WriteLine("  PUBLISHER   :  " + bookList[3][index]);
+            Console.WriteLine("    PRICE     :  " + bookList[4][index] + "\\");
+            Console.WriteLine("   PUBDATE    :  " + bookList[5][index]);
+            Console.WriteLine("     ISBN     :  " + bookList[6][index]);
+            Console.WriteLine("   QUANTITY   :  " + bookList[7][index]);
             Console.WriteLine("==============================================================================");
         }
     }

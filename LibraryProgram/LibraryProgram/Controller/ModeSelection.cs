@@ -37,8 +37,7 @@ namespace LibraryProgram
             {
                 case Constant.ADMINISTRATOR_MODE:
                     {
-                        if (loginPage.LoginAdministratorMode() == "\\n") SelectMode();
-                        else SelectManagement();
+                        SetDirectionToFirstOr(loginPage.LoginAdministratorMode());
                         break;
                     }
                 case Constant.MEMBER_MODE:
@@ -48,12 +47,12 @@ namespace LibraryProgram
                     }
                 case Constant.EXIT:
                     {
-                        AskExit();
+                        AskExitEnd();
                         break;
                     }
             }
         }
-        public void SelectManagement() // 관리자 모드 첫 화면
+        private void SelectManagement() // 관리자 모드 첫 화면
         {
             Console.Clear();
             Console.SetWindowSize(60, 28);
@@ -72,26 +71,26 @@ namespace LibraryProgram
                     case Constant.MEMBER_MANAGE:
                         {
                             smallNumber = administratorMode.SelectMemberAdministration();
-                            if (smallNumber == "\\n") SelectManagement();
+                            SetDirectionToManagement(smallNumber);
                             break;
                         }
                     case Constant.BOOK_MANAGE:
                         {
                             smallNumber = administratorMode.SelectBookAdministration();
-                            if (smallNumber == ("\\n")) SelectManagement();
+                            SetDirectionToManagement(smallNumber);
 
                             break;
                         }
                     case Constant.LOG_MANAGE:
                         {
                             smallNumber = administratorMode.SelectLogAdministration();
-                            if (smallNumber == "\\n") SelectManagement();
+                            SetDirectionToManagement(smallNumber);
                             break;
                         }
                     case Constant.EXIT:
                         {
                             smallNumber = administratorMode.AskExit();
-                            if (smallNumber == "\\n") SelectManagement();
+                            SetDirectionToManagement(smallNumber);
                             break;
                         }
                 }
@@ -114,19 +113,14 @@ namespace LibraryProgram
                 {
                     case Constant.LOGIN:
                         {
-                            Console.SetWindowSize(60, 28);
                             id = loginPage.LoginMemberMode();
-                            if (id == "\\n") SelectMode();
-                            else SelectMenu(id);
+                            SetDirectionMemberLogin(id);
                             break;
                         }
                     case Constant.SIGN_UP:
                         {
-                            formOfSignUp.ShowSignUpPage();
-                            
-                            id = loginPage.LoginMemberMode();
-                            if (id == "\\n") SelectMode();
-                            else SelectMenu(id);
+                            SetDirectionToFirst(formOfSignUp.ShowSignUpPage());
+                            SelectMode();
                             break;
                         }
                     case Constant.EXIT:
@@ -140,7 +134,7 @@ namespace LibraryProgram
 
         private void SelectMenu(string id) // 멤버 메뉴 선택
         {
-            while (true)
+            while (Constant.LOOP_UNTIL_F1_KEY_PRESSED)
             {
                 Console.Clear();
                 Console.SetWindowSize(60, 28);
@@ -193,8 +187,9 @@ namespace LibraryProgram
             }
         }
 
-        private void AskExit() // 종료 전 한 번 더 묻기
+        private void AskExitEnd() // 종료 전 한 번 더 묻기
         {
+            Console.Clear();
             basicPage.PrintExitForm();
             string menuNumber = menuSelection.CheckMenuNumber(46, 21, Constant.ARRAY_TWO);
             Console.Clear();
@@ -216,6 +211,7 @@ namespace LibraryProgram
 
         private void AskExitMember() // 멤버 모드 종료 전 한 번 더 묻기
         {
+            Console.Clear();
             basicPage.PrintExitForm();
             string menuNumber = menuSelection.CheckMenuNumber(46, 21, Constant.ARRAY_TWO);
             Console.Clear();
@@ -231,6 +227,37 @@ namespace LibraryProgram
                         SelectMemberMode();
                         break;
                     }
+            }
+        }
+
+        private void SetDirectionMemberLogin(string id)
+        {
+            if (id == "\\n")
+            {
+                SelectMode();
+            }
+            else SelectMenu(id);
+        }
+
+        private void SetDirectionToFirstOr(string input)
+        {
+            if (input == "\\n")
+            {
+                SelectMode();
+            }
+            else SelectManagement();
+        }
+
+        private void SetDirectionToManagement(string input)
+        {
+            if (input == "\\n") SelectManagement();
+        }
+
+        private void SetDirectionToFirst(string input)
+        {
+            if (input == "\\n")
+            {
+                SelectMode();
             }
         }
     }

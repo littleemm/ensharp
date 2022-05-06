@@ -69,7 +69,7 @@ namespace LibraryProgram
 
         private string ScanMenuNumber(int x, int y) // 읽기
         {
-            string number;
+            string number = "";
 
             Console.SetCursorPosition(x, y);
 

@@ -42,9 +42,10 @@ namespace LibraryProgram
                 StreamReader reader = new StreamReader(stream, Encoding.UTF8);
                 requestResult = reader.ReadToEnd();
             }
-            // else
-            //     Console.WriteLine("Error 발생=" + status);
-            //return "ERROR";
+            else
+            {
+                Console.WriteLine("Error 발생=" + status);
+            }
             return requestResult;
         }
 
