@@ -14,8 +14,9 @@ namespace LibraryProgram
         Exception exception;
         DatabaseLog databaseLog;
         LogDTO logDTO;
+        KeyReader keyReader;
 
-        public FormOfSignUp(BasicViewElement viewElement, MemberDTO memberDTO, DatabaseMember databaseMember, Exception exception, DatabaseLog databaseLog, LogDTO logDTO)
+        public FormOfSignUp(BasicViewElement viewElement, MemberDTO memberDTO, DatabaseMember databaseMember, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
         {
             this.viewElement = viewElement;
             this.memberDTO = memberDTO;
@@ -23,6 +24,7 @@ namespace LibraryProgram
             this.exception = exception;
             this.databaseLog = databaseLog;
             this.logDTO = logDTO;
+            this.keyReader = keyReader;
         }
 
         public void ShowSignUpPage() // 회원가입 페이지

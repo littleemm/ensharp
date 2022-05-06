@@ -17,9 +17,10 @@ namespace LibraryProgram
         NaverBookAPI naverBookAPI;
         DatabaseLog databaseLog;
         LogDTO logDTO;
+        KeyReader keyReader;
  
         
-        public BookAdministration(BasicViewElement viewElement, BookViewElement bookViewElement, MenuSelection menuSelection, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO)
+        public BookAdministration(BasicViewElement viewElement, BookViewElement bookViewElement, MenuSelection menuSelection, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
         {
             bookDTO = new BookDTO("", "", "", "", "", "", "", "");
             naverBookAPI = new NaverBookAPI();
@@ -30,9 +31,10 @@ namespace LibraryProgram
             this.exception = exception;
             this.databaseLog = databaseLog;
             this.logDTO = logDTO;
+            this.keyReader = keyReader;
         }
 
-        public void RegisterBook()
+        public string RegisterBook()
         {
             Console.SetWindowSize(65, 30);
             bookViewElement.PrintRegistration();
@@ -40,8 +42,8 @@ namespace LibraryProgram
 
             while (isBookValue == false)
             {
-                Console.SetCursorPosition(37, 13);
-                bookDTO.Id = Console.ReadLine();
+                bookDTO.Id = keyReader.ReadKeyBasic(37, 13, bookDTO.Id);
+                if (bookDTO.Id == "\\n") return "\\n";
                 isBookValue = databaseBook.IsBookId(bookDTO.Id);
 
                 if (isBookValue == true)
@@ -65,9 +67,9 @@ namespace LibraryProgram
 
             while (isBookValue == false)
             {
-                Console.SetCursorPosition(37, 15);
-                bookDTO.Name = Console.ReadLine();
-                
+                bookDTO.Name = keyReader.ReadKeyBasic(37, 15, bookDTO.Name);
+                if (bookDTO.Name == "\\n") return "\\n";
+
                 isBookValue = exception.IsBookName(bookDTO.Name);
                 if (isBookValue == false)
                 {
@@ -80,9 +82,9 @@ namespace LibraryProgram
 
             while (isBookValue == false)
             {
-                Console.SetCursorPosition(37, 17);
-                bookDTO.Author = Console.ReadLine();
-                
+                bookDTO.Author = keyReader.ReadKeyBasic(37, 17, bookDTO.Author);
+                if (bookDTO.Author == "\\n") return "\\n";
+
                 isBookValue = exception.IsBookAuthor(bookDTO.Author);
                 if (isBookValue == false)
                 {
@@ -95,9 +97,9 @@ namespace LibraryProgram
 
             while (isBookValue == false)
             {
-                Console.SetCursorPosition(37, 19);
-                bookDTO.Publisher = Console.ReadLine();
-                
+                bookDTO.Publisher = keyReader.ReadKeyBasic(37, 19, bookDTO.Publisher);
+                if (bookDTO.Publisher == "\\n") return "\\n";
+
                 isBookValue = exception.IsBookPublisher(bookDTO.Publisher);
                 if (isBookValue == false)
                 {
@@ -110,8 +112,8 @@ namespace LibraryProgram
 
             while (isBookValue == false)
             {
-                Console.SetCursorPosition(37, 21);
-                bookDTO.Price = Console.ReadLine();
+                bookDTO.Price = keyReader.ReadKeyBasic(37, 21, bookDTO.Price);
+                if (bookDTO.Price == "\\n") return "\\n";
 
                 isBookValue = exception.IsPrice(bookDTO.Price);
                 if (isBookValue == false)
@@ -125,8 +127,8 @@ namespace LibraryProgram
 
             while (isBookValue == false)
             {
-                Console.SetCursorPosition(37, 23);
-                bookDTO.Pubdate = Console.ReadLine();
+                bookDTO.Pubdate = keyReader.ReadKeyBasic(37, 23, bookDTO.Pubdate);
+                if (bookDTO.Pubdate == "\\n") return "\\n";
 
                 isBookValue = exception.IsDate(bookDTO.Pubdate);
                 if (isBookValue == false)
@@ -140,8 +142,8 @@ namespace LibraryProgram
 
             while (isBookValue == false)
             {
-                Console.SetCursorPosition(37, 25);
-                bookDTO.Isbn = Console.ReadLine();
+                bookDTO.Isbn = keyReader.ReadKeyBasic(37, 25, bookDTO.Isbn);
+                if (bookDTO.Isbn == "\\n") return "\\n";
 
                 isBookValue = exception.IsIsbn(bookDTO.Isbn);
                 if (isBookValue == false)
@@ -155,8 +157,8 @@ namespace LibraryProgram
 
             while (isBookValue == false)
             {
-                Console.SetCursorPosition(37, 27);
-                bookDTO.Quantity = Console.ReadLine();
+                bookDTO.Quantity = keyReader.ReadKeyBasic(37, 27, bookDTO.Quantity);
+                if (bookDTO.Quantity == "\\n") return "\\n";
 
                 isBookValue = exception.IsQuantity(bookDTO.Quantity);
                 if (isBookValue == false)
@@ -173,9 +175,11 @@ namespace LibraryProgram
             logDTO.User = "관리자";
             logDTO.History = "도서 Id " + bookDTO.Id + "인 도서 ''" + bookDTO.Name + "'' 추가";
             databaseLog.InsertLog(logDTO);
+
+            return "";
         }
 
-        public void EditBook()
+        public string EditBook()
         {
             bookViewElement.PrintEditBook();
             bookViewElement.PrintEditBookForm();
@@ -187,8 +191,9 @@ namespace LibraryProgram
 
             while (isBookValue == false)
             {
-                Console.SetCursorPosition(30, 13);
-                bookId = Console.ReadLine();
+                bookId = keyReader.ReadKeyBasic(30, 13, bookId);
+                if (bookId == "\\n") return "\\n";
+
                 isBookValue = databaseBook.IsBookId(bookId);
 
                 if (isBookValue == false)
@@ -209,8 +214,8 @@ namespace LibraryProgram
 
             while (isBookValue == false)
             {
-                Console.SetCursorPosition(30, 15);
-                bookPrice = Console.ReadLine();
+                bookPrice = keyReader.ReadKeyBasic(30, 15, bookPrice);
+                if (bookPrice == "\\n") return "\\n";
 
                 if (bookPrice == "")
                 {
@@ -238,10 +243,10 @@ namespace LibraryProgram
 
             while (isBookValue == false)
             {
-                Console.SetCursorPosition(30, 17);
-                bookQuantity = Console.ReadLine();
+                bookQuantity = keyReader.ReadKeyBasic(30, 17, bookQuantity);
+                if (bookQuantity == "\\n") return "\\n";
 
-                if(bookQuantity == "")
+                if (bookQuantity == "")
                 {
                     break;
                 }
@@ -275,9 +280,11 @@ namespace LibraryProgram
             {
                 bookViewElement.PrintEditFailMessage();
             }
+
+            return "";
         }
 
-        public void DeleteBook()
+        public string DeleteBook()
         {
             bookViewElement.PrintDeleteBook();
             bookViewElement.PrintBookIdForm();
@@ -289,8 +296,9 @@ namespace LibraryProgram
 
             while (isBookValue == false)
             {
-                Console.SetCursorPosition(30, 13);
-                bookId = Console.ReadLine();
+                bookId = keyReader.ReadKeyBasic(30, 13, bookId);
+                if (bookId == "\\n") return "\\n";
+
                 isBookValue = databaseBook.IsBookId(bookId);
 
                 if (isBookValue == false)
@@ -322,11 +330,13 @@ namespace LibraryProgram
             logDTO.User = "관리자";
             logDTO.History = "ID " + bookId + " 도서 삭제";
             databaseLog.InsertLog(logDTO);
+
+            return "";
         }
 
-        public void SearchBook()
+        public string SearchBook()
         {
-            string bookValue;
+            string bookValue = "";
             bookViewElement.InformBookList();
             bookViewElement.SearchBook();
             viewElement.PrintLine(); 
@@ -334,8 +344,9 @@ namespace LibraryProgram
 
             while (Constant.IS_CTRL_Z)
             {
-                Console.SetCursorPosition(29, 6);
-                bookValue = Console.ReadLine();
+                bookValue = keyReader.ReadKeyBasic(29, 6, bookValue);
+                if (bookValue == "\\n") return "\\n";
+
                 if (string.IsNullOrEmpty(bookValue?.Trim()))
                 { // ctrl + z 체크
                     bookViewElement.PrintSearchWarningMessage(3, 4);
@@ -354,9 +365,11 @@ namespace LibraryProgram
             logDTO.User = "관리자";
             logDTO.History = "''" + bookValue + "'' 도서 검색";
             databaseLog.InsertLog(logDTO);
+
+            return "";
         }
 
-        public void SearchNaverBook()
+        public string SearchNaverBook()
         {
             string bookTitle = "", bookQuantity = "";
             bool isBookValue = false;
@@ -366,10 +379,12 @@ namespace LibraryProgram
 
             while (Constant.IS_CTRL_Z)
             {
-                Console.SetCursorPosition(29, 6);
-                bookTitle = Console.ReadLine();
-                Console.SetCursorPosition(29, 7);
-                bookQuantity = Console.ReadLine();
+                bookTitle = keyReader.ReadKeyBasic(29, 6, bookTitle);
+                if (bookTitle == "\\n") return "\\n";
+
+                bookQuantity = keyReader.ReadKeyBasic(29, 7, bookQuantity);
+                if (bookQuantity == "\\n") return "\\n";
+
                 if (string.IsNullOrEmpty(bookTitle?.Trim()) || string.IsNullOrEmpty(bookQuantity?.Trim()) || exception.IsBookCount(bookQuantity) == false)
                 { // ctrl + z 체크
                     bookViewElement.PrintSearchWarningMessage(3, 4);
@@ -401,7 +416,11 @@ namespace LibraryProgram
             naverBookAPI.SearchNaverAPI(bookTitle, bookQuantity);
             while (isBookValue == false)
             {
-                isBookValue = IsIsbn(bookTitle, bookQuantity, isBookValue);
+                string isbn = "";
+                isbn = keyReader.ReadKeyBasic(37, 8, isbn);
+                if (isbn == "\\n") return "\\n";
+
+                isBookValue = IsIsbn(isbn, bookTitle, bookQuantity, isBookValue);
                 if (isBookValue == false)
                 {
                     Console.SetCursorPosition(50, 4);
@@ -413,6 +432,8 @@ namespace LibraryProgram
             }
             Console.SetCursorPosition(70, 4);
             bookViewElement.PrintLongSuccessMessage();
+
+            return "";
         }
 
         public void PrintList()
@@ -441,12 +462,10 @@ namespace LibraryProgram
             viewElement.ClearLine(0, x);
         }
 
-        private bool IsIsbn(string bookTitle, string bookQuantity, bool isBookValue)
+        private bool IsIsbn(string isbn, string bookTitle, string bookQuantity, bool isBookValue)
         { // isbn 입력시 맞는 isbn이면 데이터베이스 등록까지 완료 후 true 반환, 그렇지 않으면 false 반환
             string bookId = "", bookCount = "";
 
-            Console.SetCursorPosition(37, 8);
-            string isbn = Console.ReadLine();
             if (exception.IsIsbn(isbn) == false)
             {
                 return false;

@@ -15,15 +15,15 @@ namespace LibraryProgram
         AdministratorMode administratorMode;
         MemberMode memberMode;
 
-        public ModeSelection(MenuSelection menuSelection, LoginSystem loginPage, BasicViewElement viewElement, MemberDTO memberDTO, DatabaseMember databaseMember, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO)
+        public ModeSelection(MenuSelection menuSelection, LoginSystem loginPage, BasicViewElement viewElement, MemberDTO memberDTO, DatabaseMember databaseMember, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
         {
             this.viewElement = viewElement;
             this.loginPage = loginPage;
             this.menuSelection = menuSelection;
 
-            formOfSignUp = new FormOfSignUp(viewElement, memberDTO, databaseMember, exception, databaseLog, logDTO);
-            administratorMode = new AdministratorMode(viewElement, menuSelection, databaseMember, memberDTO, databaseBook, exception, databaseLog, logDTO);
-            memberMode = new MemberMode(viewElement, menuSelection, databaseMember, databaseBook, exception, databaseLog, logDTO);
+            formOfSignUp = new FormOfSignUp(viewElement, memberDTO, databaseMember, exception, databaseLog, logDTO, keyReader);
+            administratorMode = new AdministratorMode(viewElement, menuSelection, databaseMember, memberDTO, databaseBook, exception, databaseLog, logDTO, keyReader);
+            memberMode = new MemberMode(viewElement, menuSelection, databaseMember, databaseBook, exception, databaseLog, logDTO, keyReader);
 
         }
 

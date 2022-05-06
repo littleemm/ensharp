@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\LogAdministration.cs" />
+    <Compile Include="Utility\KeyReader.cs" />
     <Compile Include="View\LogViewElement.cs" />
     <Compile Include="Model\LogDTO.cs" />
     <Compile Include="Model\DatabaseLog.cs" />

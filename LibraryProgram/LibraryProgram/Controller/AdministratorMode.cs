@@ -17,14 +17,14 @@ namespace LibraryProgram
         LogViewElement logViewElement;
         MenuSelection menuSelection;
 
-        public AdministratorMode(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberDTO memberDTO, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO)
+        public AdministratorMode(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, MemberDTO memberDTO, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
         {
             bookViewElement = new BookViewElement();
             memberViewElement = new MemberViewElement();
             logViewElement = new LogViewElement();
-            bookAdministration = new BookAdministration (viewElement, bookViewElement, menuSelection, databaseBook, exception, databaseLog, logDTO);
-            memberAdministration = new MemberAdministration(viewElement, memberViewElement, menuSelection, databaseMember, memberDTO, exception, databaseLog, logDTO);
-            logAdministration = new LogAdministration(viewElement, logViewElement, menuSelection, databaseLog);
+            bookAdministration = new BookAdministration (viewElement, bookViewElement, menuSelection, databaseBook, exception, databaseLog, logDTO, keyReader);
+            memberAdministration = new MemberAdministration(viewElement, memberViewElement, menuSelection, databaseMember, memberDTO, exception, databaseLog, logDTO, keyReader);
+            logAdministration = new LogAdministration(viewElement, logViewElement, menuSelection, databaseLog, keyReader);
             
             this.viewElement = viewElement;
             this.menuSelection = menuSelection;
@@ -50,27 +50,42 @@ namespace LibraryProgram
                     {
                         case Constant.REGISTRATION:
                             {
-                                bookAdministration.RegisterBook();
+                                if (bookAdministration.RegisterBook() == "\\n")
+                                {
+                                    SelectBookAdministration();
+                                }
                                 break;
                             }
                         case Constant.EDIT:
                             {
-                                bookAdministration.EditBook();
+                                if (bookAdministration.EditBook() == "\\n")
+                                {
+                                    SelectBookAdministration();
+                                }
                                 break;
                             }
                         case Constant.DELETE:
                             {
-                                bookAdministration.DeleteBook();
+                                if (bookAdministration.DeleteBook() == "\\n")
+                                {
+                                    SelectBookAdministration();
+                                }
                                 break;
                             }
                         case Constant.SEARCH:
                             {
-                                bookAdministration.SearchBook();
+                                if (bookAdministration.SearchBook() == "\\n")
+                                {
+                                    SelectBookAdministration();
+                                }
                                 break;
                             }
                         case Constant.SEARCH_NAVER:
                             {
-                                bookAdministration.SearchNaverBook();
+                                if (bookAdministration.SearchNaverBook() == "\\n")
+                                {
+                                    SelectBookAdministration();
+                                }
                                 break;
                             }
                         case Constant.LIST:
@@ -117,22 +132,34 @@ namespace LibraryProgram
                     {
                         case Constant.REGISTRATION:
                             {
-                                memberAdministration.RegisterMember();
+                                if (memberAdministration.RegisterMember() == "\\n")
+                                {
+                                    SelectMemberAdministration();
+                                }
                                 break;
                             }
                         case Constant.EDIT:
                             {
-                                memberAdministration.EditMember();
+                                if (memberAdministration.EditMember() == "\\n")
+                                {
+                                    SelectMemberAdministration();
+                                }
                                 break;
                             }
                         case Constant.DELETE:
                             {
-                                memberAdministration.DeleteMember();
+                                if (memberAdministration.DeleteMember() == "\\n")
+                                {
+                                    SelectMemberAdministration();
+                                }
                                 break;
                             }
                         case Constant.SEARCH:
                             {
-                                memberAdministration.SearchMember();
+                                if (memberAdministration.SearchMember() == "\\n")
+                                {
+                                    SelectMemberAdministration();
+                                }
                                 break;
                             }
                         case Constant.MEMBER_LIST:
@@ -173,22 +200,34 @@ namespace LibraryProgram
                     {
                         case Constant.EDIT_LOG:
                             {
-                                logAdministration.EditLog();
+                                if (logAdministration.EditLog() == "\\n")
+                                {
+                                    SelectLogAdministration();
+                                }
                                 break;
                             }
                         case Constant.INIT_LOG:
                             {
-                                logAdministration.InitializeLog();
+                                if (logAdministration.InitializeLog() == "\\n")
+                                {
+                                    SelectLogAdministration();
+                                }
                                 break;
                             }
                         case Constant.SAVE_LOG:
                             {
-                                logAdministration.SaveLogFile();
+                                if (logAdministration.SaveLogFile() == "\\n")
+                                {
+                                    SelectLogAdministration();
+                                }
                                 break;
                             }
                         case Constant.DELETE_LOG:
                             {
-                                logAdministration.DeleteLogFile();
+                                if (logAdministration.DeleteLogFile() == "\\n")
+                                {
+                                    SelectLogAdministration();
+                                }
                                 break;
                             }
                         case Constant.LOG_LIST:

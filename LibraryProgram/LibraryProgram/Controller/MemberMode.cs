@@ -17,8 +17,9 @@ namespace LibraryProgram
         Exception exception;
         DatabaseLog databaseLog;
         LogDTO logDTO;
+        KeyReader keyReader;
 
-        public MemberMode(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO)
+        public MemberMode(BasicViewElement viewElement, MenuSelection menuSelection, DatabaseMember databaseMember, DatabaseBook databaseBook, Exception exception, DatabaseLog databaseLog, LogDTO logDTO, KeyReader keyReader)
         {
             this.viewElement = viewElement;
             this.menuSelection = menuSelection;
@@ -27,21 +28,23 @@ namespace LibraryProgram
             this.exception = exception;
             this.databaseLog = databaseLog;
             this.logDTO = logDTO;
+            this.keyReader = keyReader;
 
             bookViewElement = new BookViewElement();
             memberViewElement = new MemberViewElement();
         }
 
-        public void SearchBook(string id)
+        public string SearchBook(string id)
         {
-            string bookValue;
+            string bookValue = "";
             bookViewElement.PrintSearchBookInform();
             databaseBook.SelectBookList();
 
             while (Constant.IS_CTRL_Z)
             {
-                Console.SetCursorPosition(29, 6);
-                bookValue = Console.ReadLine();
+                bookValue = keyReader.ReadKeyBasic(29, 6, bookValue);
+                if (bookValue == "\\n") return "\\n";
+
                 if (string.IsNullOrEmpty(bookValue?.Trim()))
                 { // ctrl + z 체크
                     bookViewElement.PrintSearchWarningMessage(3, 4);
@@ -58,6 +61,8 @@ namespace LibraryProgram
             logDTO.User = id;
             logDTO.History = "''" + bookValue + "'' 도서 검색";
             databaseLog.InsertLog(logDTO);
+
+            return "";
         }
 
         public void PrintList()
@@ -67,7 +72,7 @@ namespace LibraryProgram
             Console.SetCursorPosition(0, 0);
         }
 
-        public void CheckOutBook(string id)
+        public string CheckOutBook(string id)
         {
             string bookId = "";
             bool isBook = false;
@@ -77,8 +82,9 @@ namespace LibraryProgram
 
             while (isBook == false)
             {
-                Console.SetCursorPosition(33, 6);
-                bookId = Console.ReadLine();
+                bookId = keyReader.ReadKeyBasic(33, 6, bookId);
+                if (bookId == "\\n") return "\\n";
+
                 Console.SetCursorPosition(0, 4);
                 viewElement.ClearLine(0, 0);
 
@@ -130,9 +136,10 @@ namespace LibraryProgram
             logDTO.History = "ID " + bookId + " 도서 대출";
             databaseLog.InsertLog(logDTO);
 
+            return "";
         }
 
-        public void ReturnBook(string id)
+        public string ReturnBook(string id)
         {
             string bookId = "";
             bool isBook = false;
@@ -142,8 +149,8 @@ namespace LibraryProgram
 
             while (isBook == false)
             {
-                Console.SetCursorPosition(33, 6);
-                bookId = Console.ReadLine();
+                bookId = keyReader.ReadKeyBasic(33, 6, bookId);
+                if (bookId == "\\n") return "\\n";
                 Console.SetCursorPosition(0, 4);
                 viewElement.ClearLine(0, 0);
 
@@ -196,9 +203,11 @@ namespace LibraryProgram
             logDTO.User = id;
             logDTO.History = "ID " + bookId + " 도서 반납";
             databaseLog.InsertLog(logDTO);
+
+            return "";
         }
 
-        public void EditMyInformation(string id)
+        public string EditMyInformation(string id)
         {
             memberViewElement.PrintEditMember();
             memberViewElement.PrintEditMineForm();
@@ -208,8 +217,8 @@ namespace LibraryProgram
 
             while (isMemberValue == false)
             {
-                Console.SetCursorPosition(30, 13);
-                address = Console.ReadLine();
+                address = keyReader.ReadKeyBasic(30, 13, address);
+                if (address == "\\n") return "\\n";
 
                 isMemberValue = exception.IsCtrlZ(address);
                 if (isMemberValue == false)
@@ -239,8 +248,8 @@ namespace LibraryProgram
 
             while (isMemberValue == false)
             {
-                Console.SetCursorPosition(30, 15);
-                number = Console.ReadLine();
+                number = keyReader.ReadKeyBasic(30, 15, number);
+                if (number == "\\n") return "\\n";
 
                 isMemberValue = exception.IsCtrlZ(number);
                 if (isMemberValue == false)
@@ -279,6 +288,8 @@ namespace LibraryProgram
             {
                 memberViewElement.PrintEditFailMessage();
             }
+
+            return "";
         }
 
         public void AddEditLogToDatabase(string id, string address, string number)

@@ -47,7 +47,7 @@ namespace LibraryProgram
 
         public void PrintDeleteLogList(string detail)
         {
-            Console.WriteLine("ESC: 뒤로가기                                               ");
+            Console.WriteLine("                                               ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
             Console.WriteLine(" *                  *                  *                  * ");
@@ -58,8 +58,8 @@ namespace LibraryProgram
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
-            Console.WriteLine("                          1.  예              ");
-            Console.WriteLine("                          2. 아니오            ");
+            Console.WriteLine("                       1.  예              ");
+            Console.WriteLine("                       2. 아니오 (뒤로가기)           ");
             Console.WriteLine("                                                           ");
             Console.WriteLine("           *                 *                 *            ");
             Console.WriteLine("                                                           ");
@@ -99,7 +99,7 @@ namespace LibraryProgram
         {
             Console.SetCursorPosition(x, y);
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("                   [" + detail + "에 성공했습니다!]                    ");
+            Console.WriteLine("  [" + detail + "에 성공했습니다! ESC 키를 누르면 뒤로 갑니다.]           ");
             Console.ResetColor();
         }
 
@@ -107,7 +107,7 @@ namespace LibraryProgram
         {
             Console.SetCursorPosition(x, y);
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("                           [파일이 없습니다.]                    ");
+            Console.WriteLine("        [파일이 없습니다. ESC 키를 누르면 뒤로 갑니다.]              ");
             Console.ResetColor();
         }
     }

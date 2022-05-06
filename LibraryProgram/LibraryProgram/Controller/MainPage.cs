@@ -18,6 +18,7 @@ namespace LibraryProgram
         Exception exception;
         DatabaseLog databaseLog;
         LogDTO logDTO;
+        KeyReader keyReader;
 
         public MainPage()
         {
@@ -28,9 +29,10 @@ namespace LibraryProgram
             databaseBook = new DatabaseBook();
             exception = new Exception();
             databaseLog = new DatabaseLog();
+            keyReader = new KeyReader();
             menuSelection = new MenuSelection(basicViewElement);
-            loginSystem = new LoginSystem(basicViewElement, menuSelection, databaseMember, memberDTO, databaseBook, exception, databaseLog, logDTO);
-            modeSelection = new ModeSelection(menuSelection, loginSystem, basicViewElement, memberDTO, databaseMember, databaseBook, exception, databaseLog, logDTO);
+            loginSystem = new LoginSystem(basicViewElement, menuSelection, databaseMember, memberDTO, databaseBook, exception, databaseLog, logDTO, keyReader);
+            modeSelection = new ModeSelection(menuSelection, loginSystem, basicViewElement, memberDTO, databaseMember, databaseBook, exception, databaseLog, logDTO, keyReader);
         }
 
         public void ShowMainPage()
