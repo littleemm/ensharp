@@ -170,6 +170,19 @@ namespace LibraryProgram
             Console.WriteLine();
         }
 
+        public void PrintNaverBookAPIList(ApiBookDTO book)
+        {
+            Console.WriteLine("   TITLE   : " + book.Title);
+            Console.WriteLine("  AUTHOR   : " + book.Author);
+            Console.WriteLine(" PUBLISHER : " + book.Publisher);
+            Console.WriteLine("   PRICE   : " + book.Price + "\\");
+            Console.WriteLine("  PUBDATE  : " + book.Pubdate);
+            Console.WriteLine("   ISBN    : " + book.Isbn.Substring(11));
+            Console.WriteLine();
+            Console.WriteLine("==================================================================================================================================");
+
+        }
+
         public void PrintCheckOutBookInform()
         {
             InformBookList();
@@ -227,7 +240,7 @@ namespace LibraryProgram
         public void SearchNaverBook()
         {
             Console.WriteLine("          책 제목          : ");
-            Console.WriteLine("            수량           : ");
+            Console.WriteLine("        수량 (1~100)       : ");
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();

@@ -440,7 +440,17 @@ namespace LibraryProgram
             logDTO.History = "NAVER 책 검색에서 ''" + bookTitle + "'' 도서 검색";
             databaseLog.InsertLog(logDTO);
 
-            naverBookAPI.SearchNaverAPI(bookTitle, bookQuantity);
+            List<ApiBookDTO> bookList = naverBookAPI.SearchNaverAPI(bookTitle, bookQuantity);
+            Console.WriteLine("==================================================================================================================================");
+            foreach (ApiBookDTO book in bookList)
+            {
+                book.Title = book.Title.Replace("<b>", "");
+                book.Title = book.Title.Replace("</b>", "");
+                book.Author = book.Author.Replace("<b>", "");
+                book.Author = book.Author.Replace("</b>", "");
+                bookViewElement.PrintNaverBookAPIList(book);
+            }
+
             while (!isBookValue)
             {
                 string isbn = "";
