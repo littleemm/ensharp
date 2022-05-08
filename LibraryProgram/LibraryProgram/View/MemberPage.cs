@@ -162,7 +162,7 @@ namespace LibraryProgram
         public void PrintEditFailMessage()
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("                 [수정 내용이 없습니다!]");
+            Console.WriteLine("                   [수정 내용이 없습니다!]");
             Console.ResetColor();
             Console.WriteLine();
         }

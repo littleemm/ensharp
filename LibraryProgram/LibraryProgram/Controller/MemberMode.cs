@@ -95,7 +95,7 @@ namespace LibraryProgram
 
                 isBook = MemberBookDAO.memberBookDAO.IsBookId(bookId);
                 if (!isBook)
-                {
+                { // 같은 거 모듈화
                     Console.SetCursorPosition(0, 4);
                     bookViewElement.PrintBookIdFailMessage();
                     Console.SetCursorPosition(33, 6);

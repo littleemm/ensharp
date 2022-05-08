@@ -33,6 +33,7 @@ namespace LibraryProgram
         public string SelectBookAdministration() // 책 관리 모드에서 메뉴 선택
         {
             string number = "";
+            string key = "";
             while (Constant.LOOP_UNTIL_F1_KEY_PRESSED) // 마지막에 F1 누를 때까지 반복됨
             {
                 Console.Clear();
@@ -50,27 +51,32 @@ namespace LibraryProgram
                     {
                         case Constant.REGISTRATION:
                             {
-                                GobackAdministratorBookMenu(bookAdministration.RegisterBook());
+                                key = bookAdministration.RegisterBook();
+                                GobackAdministratorBookMenu(key);
                                 break;
                             }
                         case Constant.EDIT:
                             {
-                                GobackAdministratorBookMenu(bookAdministration.EditBook());
+                                key = bookAdministration.EditBook();
+                                GobackAdministratorBookMenu(key);
                                 break;
                             }
                         case Constant.DELETE:
                             {
-                                GobackAdministratorBookMenu(bookAdministration.DeleteBook());
+                                key = bookAdministration.DeleteBook();
+                                GobackAdministratorBookMenu(key);
                                 break;
                             }
                         case Constant.SEARCH:
                             {
-                                GobackAdministratorBookMenu(bookAdministration.SearchBook());
+                                key = bookAdministration.SearchBook();
+                                GobackAdministratorBookMenu(key);
                                 break;
                             }
                         case Constant.SEARCH_NAVER:
                             {
-                                GobackAdministratorBookMenu(bookAdministration.SearchNaverBook());
+                                key = bookAdministration.SearchNaverBook();
+                                GobackAdministratorBookMenu(key);
                                 break;
                             }
                         case Constant.LIST:
@@ -85,13 +91,15 @@ namespace LibraryProgram
                             }
                     }
                 }
-
-                ConsoleKeyInfo consoleKey = Console.ReadKey();
-                if (consoleKey.Key == ConsoleKey.F1)
+                if (key != "\\n")
                 {
-                    break;
+                    ConsoleKeyInfo consoleKey = Console.ReadKey();
+                    if (consoleKey.Key == ConsoleKey.F1)
+                    {
+                        break;
+                    }
+                    Console.Clear();
                 }
-                Console.Clear();
                 
             }
 
@@ -101,6 +109,7 @@ namespace LibraryProgram
         public string SelectMemberAdministration() // 회원 관리모드에서 메뉴 선택
         {
             string number = "";
+            string key = "";
             while (Constant.LOOP_UNTIL_F1_KEY_PRESSED)
             {
                 Console.Clear();
@@ -118,22 +127,26 @@ namespace LibraryProgram
                     {
                         case Constant.REGISTRATION:
                             {
-                                GobackAdministratorMemberMenu(memberAdministration.RegisterMember());
+                                key = memberAdministration.RegisterMember();
+                                GobackAdministratorMemberMenu(key);
                                 break;
                             }
                         case Constant.EDIT:
                             {
-                                GobackAdministratorMemberMenu(memberAdministration.EditMember());
+                                key = memberAdministration.EditMember();
+                                GobackAdministratorMemberMenu(key);
                                 break;
                             }
                         case Constant.DELETE:
                             {
-                                GobackAdministratorMemberMenu(memberAdministration.DeleteMember());
+                                key = memberAdministration.DeleteMember();
+                                GobackAdministratorMemberMenu(key);
                                 break;
                             }
                         case Constant.SEARCH:
                             {
-                                GobackAdministratorMemberMenu(memberAdministration.SearchMember());
+                                key = memberAdministration.SearchMember();
+                                GobackAdministratorMemberMenu(key);
                                 break;
                             }
                         case Constant.MEMBER_LIST:
@@ -143,12 +156,16 @@ namespace LibraryProgram
                             }
                     }
                 }
-                ConsoleKeyInfo consoleKey = Console.ReadKey();
-                if (consoleKey.Key == ConsoleKey.F1)
+                if (key != "\\n")
                 {
-                    break;
+                    ConsoleKeyInfo consoleKey = Console.ReadKey();
+                    if (consoleKey.Key == ConsoleKey.F1)
+                    {
+                        break;
+                    }
+                    Console.Clear();
                 }
-                Console.Clear();
+
             }
 
             return number;
@@ -157,6 +174,7 @@ namespace LibraryProgram
         public string SelectLogAdministration() // 로그 관리 모드에서 메뉴 선택
         {
             string number = "";
+            string key = "";
             while (Constant.LOOP_UNTIL_F1_KEY_PRESSED)
             {
                 Console.Clear();
@@ -174,22 +192,26 @@ namespace LibraryProgram
                     {
                         case Constant.EDIT_LOG:
                             {
-                                GobackAdministratorLogMenu(logAdministration.EditLog());
+                                key = logAdministration.EditLog();
+                                GobackAdministratorLogMenu(key);
                                 break;
                             }
                         case Constant.INIT_LOG:
                             {
-                                GobackAdministratorLogMenu(logAdministration.InitializeLog());
+                                key = logAdministration.InitializeLog();
+                                GobackAdministratorLogMenu(key);
                                 break;
                             }
                         case Constant.SAVE_LOG:
                             {
-                                GobackAdministratorLogMenu(logAdministration.SaveLogFile());
+                                key = logAdministration.SaveLogFile();
+                                GobackAdministratorLogMenu(key);
                                 break;
                             }
                         case Constant.DELETE_LOG:
                             {
-                                GobackAdministratorLogMenu(logAdministration.DeleteLogFile());
+                                key = logAdministration.DeleteLogFile();
+                                GobackAdministratorLogMenu(key);
                                 break;
                             }
                         case Constant.LOG_LIST:
@@ -199,12 +221,15 @@ namespace LibraryProgram
                             }
                     }
                 }
-                ConsoleKeyInfo consoleKey = Console.ReadKey();
-                if (consoleKey.Key == ConsoleKey.F1)
+                if (key != "\\n")
                 {
-                    break;
+                    ConsoleKeyInfo consoleKey = Console.ReadKey();
+                    if (consoleKey.Key == ConsoleKey.F1)
+                    {
+                        break;
+                    }
+                    Console.Clear();
                 }
-                Console.Clear();
 
             }
 
