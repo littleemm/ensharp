@@ -2,15 +2,16 @@ package View;
 import javax.swing.*;
 
 public class Basic extends JFrame {
-	private JTextField searchField;
-	private JButton searchButton;
-	private JFrame searchFrame; 
-	private JPanel searchPanel;
+	public JTextField searchField;
+	public JButton searchButton;
+	public JFrame searchFrame; 
+	public JButton logButton;
+	private JPanel panel;
 	
 	public Basic() {
 		searchField = new JTextField();
 		searchButton = new JButton(" 검색 ");
-		searchPanel = new JPanel();
+		logButton = new JButton(" 당신의 모든 기록 ");
 	}
 	
 	public void PrintSearchPage() {
@@ -22,12 +23,26 @@ public class Basic extends JFrame {
 		searchField.setSize(480, 50);
 		searchField.setLocation(350, 250);
 		searchFrame.add(searchField);
+		
 		searchButton.setSize(80, 40);
-		searchButton.setLocation(840, 255);
+		searchButton.setLocation(835, 255);
 		searchFrame.add(searchButton);
 		
-		searchFrame.add(searchPanel);
+		logButton.setSize(150, 35);
+		logButton.setLocation(530, 330);
+		searchFrame.add(logButton);
+		
+		
+		searchFrame.add(new JPanel());
 		searchFrame.setSize(1200, 600);
 		searchFrame.setVisible(true);
+	}
+	
+	public void PrintLogPage() {
+		
+	}
+	
+	public void PrintResultPage() {
+		
 	}
 }
