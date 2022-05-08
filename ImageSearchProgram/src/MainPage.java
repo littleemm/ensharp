@@ -1,15 +1,11 @@
-import Controller.*;
-import Model.*;
+import Controller.Search;
 
 
 public class MainPage {
 
 	public static void main(String[] args) {
 		Controller.Search search = new Controller.Search();
-		Model.Basic basic = new Model.Basic();
-		
-		basic.PrintSearchPage();
-		
+		search.SearchImage();
 	}
 
 }
