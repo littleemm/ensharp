@@ -1,7 +1,10 @@
 package Controller;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import java.awt.Graphics;
 import java.awt.Image;
+import javax.swing.ImageIcon;
 import java.awt.event.*;
 import View.*;
 import java.util.*;
@@ -14,8 +17,9 @@ public class ImageSearching extends JFrame{
 	private KakaoAPI kakaoApi;
 	private JButton [] imageButton;
 	private JPanel buttonPanel;
+	private ImageIcon mainImage;
+	private JLabel imageLabel; 
 
-	
 	public ImageSearching() 
 	{
 		mainFrame = new JFrame();
@@ -23,6 +27,8 @@ public class ImageSearching extends JFrame{
 		kakaoApi = new KakaoAPI();
 		buttonPanel = new JPanel();
 		imageButton = new JButton[30];
+		imageLabel = new JLabel();
+		mainImage = new ImageIcon("src/Image/applemain.png");
 	}
 	
 	public void SearchImage() {	
@@ -31,7 +37,13 @@ public class ImageSearching extends JFrame{
 		mainFrame.setSize(1000, 600);
 		mainFrame.setLocation(220,100);
 		mainFrame.setLayout(null);
+		imageLabel.setLayout(null);
+		imageLabel.setSize(600, 200);
+		imageLabel.setLocation(430, 70);
+		imageLabel.setIcon(mainImage);
+		mainFrame.add(imageLabel);
 		basic.PrintSearchPage();
+		
 		
 		mainFrame.add(basic.searchPanel);
 		basic.searchButton.addActionListener(new ButtonActionListener());
@@ -68,6 +80,7 @@ public class ImageSearching extends JFrame{
 		mainFrame.add(buttonPanel);
 		mainFrame.setVisible(true);
 	}
+	
 	
 	private class ButtonActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {

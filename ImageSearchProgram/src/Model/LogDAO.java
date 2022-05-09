@@ -11,15 +11,21 @@ public class LogDAO {
 	static final String PASSWORD = "0000";
 	
 	public LogDAO() {  
-		Connection connection = null; 
-		Statement state = null; 
-		ResultSet result = null; 
-		
+		try {
 		Class.forName(JDBC_DRIVER); 
-		connection = DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
+		Connection connection = DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
+		} catch(ClassNotFoundException e) {
+			
+		} catch(SQLException e) {
+			
+		}
 	}
 	
-	public void InsertLog()
+	public void InsertLog() {
+		String query = "INSERT INTO log(history, time)Value('{0}', '{1}')";
+		
+		
+	}
 }
 	
 

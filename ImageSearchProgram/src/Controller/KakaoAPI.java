@@ -38,8 +38,6 @@ public class KakaoAPI {
 			connection.setRequestProperty("Content-type", "application/json");
 			connection.setRequestProperty("Accept-Charset", "UTF-8");
 			connection.setDoOutput(true); 
-			//connection.setUseCaches(false); 
-			//connection.setDefaultUseCaches(false); 
 			
 			StringBuilder response = new StringBuilder();
 			if(connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
@@ -53,21 +51,9 @@ public class KakaoAPI {
 			else {
 				System.out.println(connection.getResponseCode());
 			}
-			//BufferedReader reader = new BufferedReader( new InputStreamReader(connection.getInputStream()));
-			
-			
-			//Charset charset = Charset.forName("UTF-8"); 
-			//BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), charset)); 
-			
-			//String inputLine; 
-			//StringBuffer response = new StringBuffer(); 
-			
-			//while ((inputLine = reader.readLine()) != null) { 
-			//	response.append(inputLine); 
-			//}
-			//reader.close();
-			
+	
 			result = response.toString();
+			
 			} 
 		
 		catch (Exception e) {  
