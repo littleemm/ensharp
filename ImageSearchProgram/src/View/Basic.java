@@ -46,11 +46,11 @@ public class Basic extends JFrame {
 		
 	}
 	
-	public void PrintResultPage() {
+	public void PrintResultPageOfTop() {
 		resultPanel.setSize(800, 100);
 		
-		searchField.setSize(480, 50);
-		searchField.setLocation(0, 0);
+		searchField.setSize(400, 50);
+		searchField.setLocation(90, 0);
 		resultPanel.add(searchField);
 		
 		searchButton.setSize(80, 40);
@@ -68,5 +68,9 @@ public class Basic extends JFrame {
 		resultPanel.setLayout(null);
 		resultPanel.setLocation(100, 50);
 		resultPanel.setVisible(true);
+	}
+	
+	public void PrintResultPageOfResult() {
+		
 	}
 }

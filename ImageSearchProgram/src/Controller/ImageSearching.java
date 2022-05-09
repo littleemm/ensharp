@@ -31,10 +31,13 @@ public class ImageSearching extends JFrame{
 	}
 	
 	private void ShowImageResult(String image) {
-		basic.PrintResultPage();
+		basic.PrintResultPageOfTop();
 		mainFrame.add(basic.resultPanel);
 		
-		kakaoApi.SearchImageIcon(image, "10");
+		JList<ImageIcon> imageList = kakaoApi.SearchImageIcon("설현", "10"); // default는 10
+		imageList.setSize(400, 400);
+		imageList.setLocation(10, 10);
+		mainFrame.add(new JScrollPane(imageList));
 		mainFrame.setVisible(true);
 	}
 	

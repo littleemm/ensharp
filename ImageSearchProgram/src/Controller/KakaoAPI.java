@@ -16,7 +16,7 @@ import org.json.simple.parser.ParseException;
 
 public class KakaoAPI {
 	
-	private static String IMAGE_URL="http://dapi.kakao.com/v2/local/search/image?query={0}&size={1}"; 
+	private static String IMAGE_URL="https://dapi.kakao.com/v2/search/image.json?query="; 
 	private static String USER_INFO="6d21e6a6177862f350927b8f4e691138"; 
 	
 	public JList<ImageIcon> SearchImageIcon(String image, String display) {
@@ -30,25 +30,43 @@ public class KakaoAPI {
 		try{ 
 			String query = URLEncoder.encode(image, "UTF-8"); 
 			String size = URLEncoder.encode(display, "UTF-8");
-			url = new URL(String.format(IMAGE_URL, query, size)); 
+			url = new URL(IMAGE_URL + image); 
 			
 			HttpURLConnection connection = (HttpURLConnection)url.openConnection(); 
 			
-			connection.setRequestMethod("GET"); connection.setRequestProperty("Authorization", USER_INFO); 
-			connection.setRequestProperty("content-type", "application/json"); 
+			connection.setRequestMethod("GET"); 
+			connection.setRequestProperty("Authorization", "KakaoAK " + USER_INFO); 
+			connection.setRequestProperty("Content-type", "application/json");
+			connection.setRequestProperty("Accept-Charset", "UTF-8");
 			connection.setDoOutput(true); 
-			connection.setUseCaches(false); 
-			connection.setDefaultUseCaches(false); 
+			//connection.setUseCaches(false); 
+			//connection.setDefaultUseCaches(false); 
 			
-			Charset charset = Charset.forName("UTF-8"); 
-			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream(), charset)); 
+			StringBuilder response = new StringBuilder();
+			if(connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+				BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8")); 
+				String inputLine;
+				while ((inputLine = reader.readLine()) != null) { 
+					response.append(inputLine); 
+				}
+				reader.close();
+			}
+			else {
+				System.out.println(connection.getResponseCode());
+			}
+			//BufferedReader reader = new BufferedReader( new InputStreamReader(connection.getInputStream()));
 			
-			String inputLine; 
-			StringBuffer response = new StringBuffer(); 
 			
-			while ((inputLine = in.readLine()) != null) { 
-				response.append(inputLine); 
-			} 
+			//Charset charset = Charset.forName("UTF-8"); 
+			//BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), charset)); 
+			
+			//String inputLine; 
+			//StringBuffer response = new StringBuffer(); 
+			
+			//while ((inputLine = reader.readLine()) != null) { 
+			//	response.append(inputLine); 
+			//}
+			//reader.close();
 			
 			result = response.toString();
 			} 
