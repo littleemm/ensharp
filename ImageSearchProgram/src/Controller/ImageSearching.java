@@ -7,12 +7,14 @@ public class ImageSearching extends JFrame{
 	private View.Basic basic;
 	private JFrame mainFrame;
 	private KakaoAPI kakaoApi;
+	private JLabel jlabel;
 	
 	public ImageSearching() 
 	{
 		mainFrame = new JFrame();
 		basic = new View.Basic();
 		kakaoApi = new KakaoAPI();
+		jlabel = new JLabel();
 	}
 	
 	public void SearchImage() {	
@@ -34,9 +36,9 @@ public class ImageSearching extends JFrame{
 		basic.PrintResultPageOfTop();
 		mainFrame.add(basic.resultPanel);
 		
-		JList<ImageIcon> imageList = kakaoApi.SearchImageIcon("설현", "10"); // default는 10
+		JList<ImageIcon> imageList = kakaoApi.SearchImageIcon(image, "10"); // default는 10
 		imageList.setSize(400, 400);
-		imageList.setLocation(10, 10);
+		imageList.setLocation(20, 20);
 		mainFrame.add(new JScrollPane(imageList));
 		mainFrame.setVisible(true);
 	}

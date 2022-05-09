@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.nio.charset.Charset;
 
-
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
@@ -30,7 +29,7 @@ public class KakaoAPI {
 		try{ 
 			String query = URLEncoder.encode(image, "UTF-8"); 
 			String size = URLEncoder.encode(display, "UTF-8");
-			url = new URL(IMAGE_URL + image); 
+			url = new URL(IMAGE_URL + query); 
 			
 			HttpURLConnection connection = (HttpURLConnection)url.openConnection(); 
 			
@@ -84,10 +83,9 @@ public class KakaoAPI {
 		JList<ImageIcon> imageList = new JList<ImageIcon>(images);
 		ImageIcon icon;
 		
-		JSONParser parser = new JSONParser();
 		try {
-		Object object = parser.parse(result);
-		JSONArray jsonArray = (JSONArray)object;
+			JSONObject object = (JSONObject)new JSONParser().parse(result.toString());
+			JSONArray jsonArray = (JSONArray)object.get("documents");
 		
 		for (int i=0;i<jsonArray.size();i++) {
 			JSONObject jsonObject = (JSONObject)jsonArray.get(i);
