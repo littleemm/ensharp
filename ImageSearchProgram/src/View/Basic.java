@@ -9,7 +9,8 @@ public class Basic extends JFrame {
 	public JPanel searchPanel;
 	public JPanel logPanel;
 	public JPanel resultPanel;
-	public JComboBox comboBox;
+	public JComboBox<String> comboBox;
+	String [] size = {"10", "20", "30"};
 	
 	public Basic() {
 		searchField = new JTextField();
@@ -19,7 +20,7 @@ public class Basic extends JFrame {
 		searchPanel = new JPanel();
 		logPanel = new JPanel();
 		resultPanel = new JPanel();
-		comboBox = new JComboBox();
+		comboBox = new JComboBox(size);
 	}
 	
 	public void PrintSearchPage() {
@@ -63,6 +64,7 @@ public class Basic extends JFrame {
 		
 		comboBox.setSize(80, 40);
 		comboBox.setLocation(650, 5);
+		
 		resultPanel.add(comboBox);
 		
 		resultPanel.setLayout(null);

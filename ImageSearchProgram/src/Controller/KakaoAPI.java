@@ -18,7 +18,7 @@ public class KakaoAPI {
 	private static String IMAGE_URL="https://dapi.kakao.com/v2/search/image.json?query="; 
 	private static String USER_INFO="6d21e6a6177862f350927b8f4e691138"; 
 	
-	public JList<ImageIcon> SearchImageIcon(String image, String display) {
+	public Vector<ImageIcon> SearchImageIcon(String image, String display) {
 		return CreateImageList(image, display);
 	}
 	
@@ -28,8 +28,8 @@ public class KakaoAPI {
 		
 		try{ 
 			String query = URLEncoder.encode(image, "UTF-8"); 
-			String size = URLEncoder.encode(display, "UTF-8");
-			url = new URL(IMAGE_URL + query); 
+			String count = URLEncoder.encode(display, "UTF-8");
+			url = new URL(IMAGE_URL + query + "&size=" + count); 
 			
 			HttpURLConnection connection = (HttpURLConnection)url.openConnection(); 
 			
@@ -77,10 +77,9 @@ public class KakaoAPI {
 		
 	}
 	
-	private JList<ImageIcon> CreateImageList(String image, String display) {
+	private Vector<ImageIcon> CreateImageList(String image, String display) {
 		String result = OpenAPI(image, display);
 		Vector<ImageIcon> images = new Vector<ImageIcon>();
-		JList<ImageIcon> imageList = new JList<ImageIcon>(images);
 		ImageIcon icon;
 		
 		try {
@@ -95,13 +94,11 @@ public class KakaoAPI {
 			images.add(icon);
 		}
 		
-		imageList.setListData(images);
-		
 		} 
 		catch(Exception e) {
 			e.printStackTrace();
 		}
 		
-		return imageList;
+		return images;
 	}
 }
