@@ -5,7 +5,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.FileReader;
 import java.net.HttpURLConnection;
 import java.nio.charset.Charset;
 
@@ -20,7 +19,11 @@ public class KakaoAPI {
 	private static String IMAGE_URL="http://dapi.kakao.com/v2/local/search/image?query={0}&size={1}"; 
 	private static String USER_INFO="6d21e6a6177862f350927b8f4e691138"; 
 	
-	public String OpenAPI(String image, String display) {
+	public JList<ImageIcon> SearchImageIcon(String image, String display) {
+		return CreateImageList(image, display);
+	}
+	
+	private String OpenAPI(String image, String display) {
 		String result = "";
 		URL url;
 		
@@ -57,7 +60,7 @@ public class KakaoAPI {
 		
 	}
 	
-	private JList<ImageIcon> CreateImageMap(String image, String display) {
+	private JList<ImageIcon> CreateImageList(String image, String display) {
 		String result = OpenAPI(image, display);
 		Vector<ImageIcon> images = new Vector<ImageIcon>();
 		JList<ImageIcon> imageList = new JList<ImageIcon>(images);

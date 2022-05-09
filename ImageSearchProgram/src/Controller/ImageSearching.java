@@ -3,14 +3,16 @@ import javax.swing.*;
 import java.awt.event.*;
 import View.*;
 
-public class Search extends JFrame{
+public class ImageSearching extends JFrame{
 	private View.Basic basic;
 	private JFrame mainFrame;
+	private KakaoAPI kakaoApi;
 	
-	public Search() 
+	public ImageSearching() 
 	{
 		mainFrame = new JFrame();
 		basic = new View.Basic();
+		kakaoApi = new KakaoAPI();
 	}
 	
 	public void SearchImage() {	
@@ -28,15 +30,21 @@ public class Search extends JFrame{
 		mainFrame.setVisible(true);
 	}
 	
-	private void ShowImageResult() {
+	private void ShowImageResult(String image) {
+		basic.PrintResultPage();
+		mainFrame.add(basic.resultPanel);
 		
+		kakaoApi.SearchImageIcon(image, "10");
+		mainFrame.setVisible(true);
 	}
 	
 	private class ButtonActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			JButton button = (JButton)e.getSource();
 			if(button.getText().equals(" 검색 ")) {
-				ShowImageResult();
+				String image = basic.searchField.getText();
+				basic.searchPanel.setVisible(false);
+				ShowImageResult(image);
 			}
 			else if(button.getText().equals(" 당신의 모든 기록 ")) {
 				

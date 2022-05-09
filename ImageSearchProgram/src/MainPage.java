@@ -1,10 +1,10 @@
-import Controller.Search;
+import Controller.ImageSearching;
 
 
 public class MainPage {
 
 	public static void main(String[] args) {
-		Controller.Search search = new Controller.Search();
+		Controller.ImageSearching search = new Controller.ImageSearching();
 		search.SearchImage();
 	}
 
