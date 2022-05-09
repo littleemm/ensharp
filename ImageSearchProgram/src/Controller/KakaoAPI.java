@@ -1,15 +1,19 @@
 package Controller;
 import javax.swing.*;
+import java.util.*;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.FileReader;
 import java.net.HttpURLConnection;
 import java.nio.charset.Charset;
-import java.io.FileReader;
+
+
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONParser;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class KakaoAPI {
 	
@@ -55,14 +59,30 @@ public class KakaoAPI {
 	
 	private JList<ImageIcon> CreateImageMap(String image, String display) {
 		String result = OpenAPI(image, display);
+		Vector<ImageIcon> images = new Vector<ImageIcon>();
+		JList<ImageIcon> imageList = new JList<ImageIcon>(images);
+		ImageIcon icon;
 		
-		Reader reader = new FileReader();
-		JSONArray JsonArray = (JSONArray)object;
+		JSONParser parser = new JSONParser();
+		try {
+		Object object = parser.parse(result);
+		JSONArray jsonArray = (JSONArray)object;
 		
+		for (int i=0;i<jsonArray.size();i++) {
+			JSONObject jsonObject = (JSONObject)jsonArray.get(i);
+			
+			String imageUrl = (String)jsonObject.get("image_url");
+			icon = new ImageIcon(imageUrl);
+			images.add(icon);
+		}
 		
-		JList<ImageIcon> imageList = new JList<ImageIcon>();
-		imageList.setListData();
-
-	
+		imageList.setListData(images);
+		
+		} 
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return imageList;
 	}
 }
