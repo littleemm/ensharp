@@ -1,6 +1,5 @@
 package View;
 import javax.swing.*;
-import java.awt.*;
 
 public class Basic extends JFrame {
 	public JTextField searchField;
@@ -19,7 +18,6 @@ public class Basic extends JFrame {
 	}
 	
 	public void PrintSearchPage() {
-	
 		searchPanel.setSize(570, 100);
 
 		searchField.setSize(480, 50);

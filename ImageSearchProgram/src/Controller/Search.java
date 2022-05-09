@@ -1,7 +1,5 @@
 package Controller;
 import javax.swing.*;
-
-import java.awt.BorderLayout;
 import java.awt.event.*;
 import View.*;
 
@@ -30,16 +28,19 @@ public class Search extends JFrame{
 		mainFrame.setVisible(true);
 	}
 	
+	private void ShowImageResult() {
+		
+	}
+	
 	private class ButtonActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			JButton button = (JButton)e.getSource();
 			if(button.getText().equals(" 검색 ")) {
-				
+				ShowImageResult();
 			}
 			else if(button.getText().equals(" 당신의 모든 기록 ")) {
 				
 			}
 		}
 	}
-	
 }
