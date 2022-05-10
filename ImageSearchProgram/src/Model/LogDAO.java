@@ -10,10 +10,13 @@ public class LogDAO {
 	static final String USERNAME = "root"; 
 	static final String PASSWORD = "0000";
 	
+	Connection connection;
+	Statement statement;
+	
 	public LogDAO() {  
 		try {
 		Class.forName(JDBC_DRIVER); 
-		Connection connection = DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
+		connection = DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
 		} catch(ClassNotFoundException e) {
 			
 		} catch(SQLException e) {
@@ -21,10 +24,31 @@ public class LogDAO {
 		}
 	}
 	
-	public void InsertLog() {
+	public void InsertLog(LogDTO logDTO) {
 		String query = "INSERT INTO log(history, time)Value('{0}', '{1}')";
-		
-		
+		try {
+			statement.executeUpdate(String.format(query, logDTO.getHistory(), logDTO.getTime()));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void TruncateLog() {
+		String query = "TRUNCATE TABLE log";
+		try {
+			statement.executeUpdate(query);
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void SelectLog() {
+		String query = "SELECT * FROM log";
+		try {
+			statement.executeUpdate(query);
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
 	

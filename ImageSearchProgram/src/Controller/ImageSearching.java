@@ -37,18 +37,18 @@ public class ImageSearching extends JFrame{
 		mainFrame.setSize(1000, 600);
 		mainFrame.setLocation(220,100);
 		mainFrame.setLayout(null);
+		
 		imageLabel.setLayout(null);
 		imageLabel.setSize(600, 200);
 		imageLabel.setLocation(430, 70);
 		imageLabel.setIcon(mainImage);
-		mainFrame.add(imageLabel);
+		
 		basic.PrintSearchPage();
 		
-		
+		mainFrame.add(imageLabel);
 		mainFrame.add(basic.searchPanel);
 		basic.searchButton.addActionListener(new ButtonActionListener());
 		basic.logButton.addActionListener(new ButtonActionListener());
-		
 		mainFrame.setVisible(true);
 	}
 	
@@ -61,12 +61,20 @@ public class ImageSearching extends JFrame{
 		Vector<ImageIcon> images = kakaoApi.SearchImageIcon(image, "10"); // default는 10
 		
 		for (int i=0;i<images.size();i++) {
-			imageButton[i] = new JButton();
-			imageButton[i].setSize(100, 100);
-			imageButton[i].setBorderPainted(true);
-			//URL url = new URL(images.get(i).toString());
-			//Image im = ImageIO.read(url);
-			imageButton[i].setIcon(images.get(i));
+			
+			try {
+				URL url = new URL(images.get(i).toString());
+				Image ButtonIcon = ImageIO.read(url);
+				imageButton[i] = new JButton(new ImageIcon(ButtonIcon));
+				imageButton[i].setSize(100, 100);
+				imageButton[i].setBorderPainted(false);
+				imageButton[i].setFocusPainted(false);
+				imageButton[i].setContentAreaFilled(false);
+				
+			} catch(Exception e) {
+				
+			}
+			
 		}
 		for (int i=0;i<images.size()/2;i++) {
 			imageButton[i].setLocation(10 + i*100, 0);
@@ -75,12 +83,20 @@ public class ImageSearching extends JFrame{
 			buttonPanel.add(imageButton[i + images.size()/2]);
 		}
 		basic.backButton.addActionListener(new ButtonActionListener());
+		basic.logButton.addActionListener(new ButtonActionListener());
 		buttonPanel.setLocation(220, 150);
 		buttonPanel.setVisible(true);
 		mainFrame.add(buttonPanel);
 		mainFrame.setVisible(true);
 	}
 	
+	private void ShowLogPage() {
+		basic.PrintLogPage();
+		mainFrame.add(basic.logPanel);
+		basic.logBackButton.addActionListener(new ButtonActionListenerForLog());
+		
+		mainFrame.setVisible(true);
+	}
 	
 	private class ButtonActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -88,15 +104,33 @@ public class ImageSearching extends JFrame{
 			if(button.getText().equals(" 검색 ")) {
 				String image = basic.searchField.getText();
 				basic.searchPanel.setVisible(false);
+				imageLabel.setVisible(false);				
 				ShowImageResult(image);
 			}
 			else if(button.getText().equals(" 당신의 모든 기록 ")) {
-				
+				basic.searchPanel.setVisible(false);
+				imageLabel.setVisible(false);
+				ShowLogPage();
 			}
 			else if(button.getText().equals(" 뒤로가기 ")) {
 				basic.resultPanel.setVisible(false);
 				buttonPanel.setVisible(false);
 				SearchImage();
+				imageLabel.setVisible(true);
+			}
+		}
+	}
+	
+	private class ButtonActionListenerForLog implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			JButton button = (JButton)e.getSource();
+			if(button.getText().equals(" 기록삭제 ")) {
+				
+			}
+			else if(button.getText().equals(" 뒤로가기 ")) {
+				basic.logPanel.setVisible(false);
+				SearchImage();
+				imageLabel.setVisible(true);
 			}
 		}
 	}

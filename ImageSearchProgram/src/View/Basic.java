@@ -10,6 +10,9 @@ public class Basic extends JFrame {
 	public JPanel logPanel;
 	public JPanel resultPanel;
 	public JComboBox<String> comboBox;
+	public JButton logBackButton;
+	public JButton logDeleteButton;
+	private JLabel topLabel;
 	String [] size = {"10", "20", "30"};
 	
 	public Basic() {
@@ -20,7 +23,10 @@ public class Basic extends JFrame {
 		searchPanel = new JPanel();
 		logPanel = new JPanel();
 		resultPanel = new JPanel();
+		logBackButton = new JButton(" 뒤로가기 ");
+		logDeleteButton = new JButton(" 기록삭제 ");
 		comboBox = new JComboBox(size);
+		topLabel = new JLabel(" 당신의 모든 기록 ");
 	}
 	
 	public void PrintSearchPage() {
@@ -44,6 +50,23 @@ public class Basic extends JFrame {
 	}
 	
 	public void PrintLogPage() {
+		logPanel.setSize(100, 100);
+		
+		topLabel.setSize(10, 100);
+		topLabel.setLayout(null);
+		logPanel.add(topLabel);
+		
+		logBackButton.setSize(80, 40);
+		logBackButton.setLocation(20, 10);
+		logPanel.add(logBackButton);
+		
+		logDeleteButton.setSize(80, 40);
+		logDeleteButton.setLocation(10, 10);
+		logPanel.add(logDeleteButton);
+		
+		logPanel.setLayout(null);
+		logPanel.setLocation(10, 10);
+		logPanel.setVisible(true);
 		
 	}
 	
