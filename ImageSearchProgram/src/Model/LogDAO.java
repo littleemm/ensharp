@@ -25,7 +25,7 @@ public class LogDAO {
 	}
 	
 	public void InsertLog(LogDTO logDTO) {
-		String query = "INSERT INTO log(history, time)Value('{0}', '{1}')";
+		String query = "INSERT INTO log(history, time)Values('%s', '%s')";
 		try {
 			statement.executeUpdate(String.format(query, logDTO.getHistory(), logDTO.getTime()));
 		} catch (SQLException e) {
