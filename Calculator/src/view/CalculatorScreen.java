@@ -5,22 +5,25 @@ import java.awt.*;
 public class CalculatorScreen {
 	
 	public JPanel inputPanel; 
-	private JLabel beforeInput;
-	private JLabel currentInput;
+	public JLabel beforeInput;
+	public JLabel currentInput;
 	
 	public CalculatorScreen() {
 		inputPanel = new JPanel();
 		beforeInput = new JLabel("djdkhla");
-		currentInput = new JLabel();
+		currentInput = new JLabel("hi");
 	}
 	
 	public void PrintCalculatorScreen() {
 		inputPanel.setSize(400, 150);
-		inputPanel.setLayout(new GridLayout(1, 1));
+		inputPanel.setLayout(new GridLayout(2, 1));
 		
-		beforeInput.setSize(400, 150);
+		beforeInput.setSize(400, 5);
 		inputPanel.add(beforeInput);
-
+		
+		currentInput.setSize(400, 145);
+		inputPanel.add(currentInput);
+		
 		inputPanel.setBackground(Color.RED);
 		inputPanel.setLocation(0, 80);
 		inputPanel.setVisible(true);

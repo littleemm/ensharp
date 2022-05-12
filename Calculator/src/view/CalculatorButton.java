@@ -4,6 +4,7 @@ import javax.swing.*;
 
 public class CalculatorButton extends JPanel {
 	private String [] calculatorValue = {"CE", "C", "x", "÷", "7", "8", "9", "X", "4", "5", "6", "-", "1", "2", "3", "+", "+/-", "0", ".","="};
+	public String [] screenValue = {"7", "8", "9", "4", "5", "6", "1", "2", "3", "+/-", "0", "."};
 	public JPanel buttonPanel;
 	public JPanel logButtonPanel;
 	public JButton [] clearButton;
@@ -42,24 +43,24 @@ public class CalculatorButton extends JPanel {
 		buttonPanel.add(operationButton[1]);
 		
 		for (int i=8;i<11;i++) {
-			valueButton[i-8] = new JButton(calculatorValue[i]);
-			buttonPanel.add(valueButton[i-8]);
+			valueButton[i+3-8] = new JButton(calculatorValue[i]);
+			buttonPanel.add(valueButton[i+3-8]);
 		}
 		
 		operationButton[2] = new JButton(calculatorValue[11]);
 		buttonPanel.add(operationButton[2]);
 		
 		for (int i=12;i<15;i++) {
-			valueButton[i-12] = new JButton(calculatorValue[i]);
-			buttonPanel.add(valueButton[i-12]);
+			valueButton[i+6-12] = new JButton(calculatorValue[i]);
+			buttonPanel.add(valueButton[i+6-12]);
 		}
 		
 		operationButton[3] = new JButton(calculatorValue[15]);
 		buttonPanel.add(operationButton[3]);
 		
 		for (int i=16;i<19;i++) {
-			valueButton[i-16] = new JButton(calculatorValue[i]);
-			buttonPanel.add(valueButton[i-16]);
+			valueButton[i+9-16] = new JButton(calculatorValue[i]);
+			buttonPanel.add(valueButton[i+9-16]);
 		}
 		
 		operationButton[4] = new JButton(calculatorValue[19]);

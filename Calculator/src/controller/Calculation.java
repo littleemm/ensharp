@@ -2,6 +2,7 @@ package controller;
 import view.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class Calculation extends JFrame{
 	
@@ -28,7 +29,23 @@ public class Calculation extends JFrame{
 		mainFrame.add(calculatorScreen.inputPanel);
 		mainFrame.add(calculatorButton.buttonPanel);
 		
+		CalculateWithButton();
+		
 		mainFrame.setVisible(true);
+	}
+	
+	private void CalculateWithButton() {
+		for (int i=0;i<12;i++) {
+			calculatorButton.valueButton[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JButton button = (JButton)e.getSource();
+					for (int j=0;j<12;j++) {
+					if(button.getText().equals(calculatorButton.screenValue[j]))
+						calculatorScreen.currentInput.setText(calculatorButton.screenValue[j]);
+					}
+				}
+			});
+		}
 	}
 	
 }
