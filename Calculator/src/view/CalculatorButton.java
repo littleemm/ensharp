@@ -20,6 +20,7 @@ public class CalculatorButton extends JPanel {
 		buttonPanel.setSize(400, 500);
 		buttonPanel.setLayout(new GridLayout(5, 4, 2, 2));
 		
+		
 		for (int i=0;i<3;i++) {
 			clearButton[i] = new JButton(calculatorValue[i]);
 			buttonPanel.add(clearButton[i]);
