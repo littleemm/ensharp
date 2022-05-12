@@ -7,11 +7,15 @@ import java.awt.event.*;
 public class Calculation extends JFrame{
 	
 	private JFrame mainFrame;
+	private JLabel miniLabel;
+	private Font font;
 	public CalculatorButton calculatorButton;
 	public CalculatorScreen calculatorScreen;
 	
 	public Calculation() {
 		mainFrame = new JFrame("계산기");
+		miniLabel = new JLabel();
+		font = new Font("Arial", Font.PLAIN, 10);
 		calculatorButton = new CalculatorButton();
 		calculatorScreen = new CalculatorScreen();
 	}
@@ -41,7 +45,11 @@ public class Calculation extends JFrame{
 					JButton button = (JButton)e.getSource();
 					for (int j=0;j<12;j++) {
 					if(button.getText().equals(calculatorButton.screenValue[j]))
-						calculatorScreen.currentInput.setText(calculatorButton.screenValue[j]);
+						miniLabel.setSize(20, 10);
+						miniLabel.setText(calculatorButton.screenValue[j]);
+						miniLabel.setFont(font);
+						miniLabel.setLocation(1, 10);
+						calculatorScreen.inputPanel.add(miniLabel);
 					}
 				}
 			});
