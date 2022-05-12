@@ -10,20 +10,19 @@ public class CalculatorScreen {
 	
 	public CalculatorScreen() {
 		inputPanel = new JPanel();
-		beforeInput = new JLabel();
+		beforeInput = new JLabel("djdkhla");
 		currentInput = new JLabel();
 	}
 	
 	public void PrintCalculatorScreen() {
-		inputPanel.setSize(400, 300);
-		inputPanel.setLayout(new GridLayout(2, 1));
+		inputPanel.setSize(400, 150);
+		inputPanel.setLayout(new GridLayout(1, 1));
 		
 		beforeInput.setSize(400, 150);
 		inputPanel.add(beforeInput);
-		
-		currentInput.setSize(400, 150);
-		inputPanel.add(currentInput);
-		
+
+		inputPanel.setBackground(Color.RED);
+		inputPanel.setLocation(0, 80);
 		inputPanel.setVisible(true);
 	}
 }

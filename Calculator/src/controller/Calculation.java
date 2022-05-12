@@ -16,8 +16,8 @@ public class Calculation extends JFrame{
 	}
 	
 	public void ShowCalculatorMain() {
-		mainFrame.setBounds(10, 10, 400, 600);
-		mainFrame.setLayout(new GridLayout(3, 1));
+		mainFrame.setBounds(10, 10, 400, 590);
+		mainFrame.setLayout(null);
 		//mainFrame.setUndecorated(true);
 		//mainFrame.setBackground(new Color(0,0,0,230));
 		calculatorButton.PrintMainPanel();

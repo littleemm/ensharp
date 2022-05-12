@@ -21,7 +21,7 @@ public class CalculatorButton extends JPanel {
 	}
 	
 	public void PrintMainPanel() {
-		buttonPanel.setSize(400, 500);
+		buttonPanel.setSize(400, 300);
 		buttonPanel.setLayout(new GridLayout(5, 4, 1, 1));
 		
 		
@@ -65,16 +65,19 @@ public class CalculatorButton extends JPanel {
 		operationButton[4] = new JButton(calculatorValue[19]);
 		buttonPanel.add(operationButton[4]);
 		
+		buttonPanel.setLocation(0, 260);
 		buttonPanel.setVisible(true);
 	}
 	
 	public void PrintLogButtonPanel() {
-		logButtonPanel.setSize(400, 10);
+		logButtonPanel.setSize(400, 50);
 		logButtonPanel.setLayout(null);
 		
 		logButton.setLocation(10, 10);
 		logButtonPanel.add(logButton);
 		
+		logButtonPanel.setBackground(Color.YELLOW);
+		logButtonPanel.setLocation(0, 1);
 		logButtonPanel.setVisible(true);
 	}
 }
