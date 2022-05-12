@@ -5,16 +5,16 @@ import java.awt.*;
 public class CalculatorScreen {
 	
 	public JPanel inputPanel; 
-	private JTextField beforeInput;
-	private JTextField currentInput;
+	private JLabel beforeInput;
+	private JLabel currentInput;
 	
 	public CalculatorScreen() {
 		inputPanel = new JPanel();
-		beforeInput = new JTextField();
-		currentInput = new JTextField();
+		beforeInput = new JLabel();
+		currentInput = new JLabel();
 	}
 	
-	public void PrintCalculatorScreen(String input) {
+	public void PrintCalculatorScreen() {
 		inputPanel.setSize(400, 300);
 		inputPanel.setLayout(new GridLayout(2, 1));
 		

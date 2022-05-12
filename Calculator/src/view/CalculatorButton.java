@@ -5,20 +5,24 @@ import javax.swing.*;
 public class CalculatorButton extends JPanel {
 	private String [] calculatorValue = {"CE", "C", "x", "÷", "7", "8", "9", "X", "4", "5", "6", "-", "1", "2", "3", "+", "+/-", "0", ".","="};
 	public JPanel buttonPanel;
+	public JPanel logButtonPanel;
 	public JButton [] clearButton;
 	public JButton [] operationButton;
 	public JButton [] valueButton;
+	public JButton logButton;
 	
 	public CalculatorButton() {
 		buttonPanel = new JPanel();
+		logButtonPanel = new JPanel();
 		clearButton = new JButton[3];
 		operationButton = new JButton[5];
 		valueButton = new JButton[12];
+		logButton = new JButton("O");
 	}
 	
 	public void PrintMainPanel() {
 		buttonPanel.setSize(400, 500);
-		buttonPanel.setLayout(new GridLayout(5, 4, 2, 2));
+		buttonPanel.setLayout(new GridLayout(5, 4, 1, 1));
 		
 		
 		for (int i=0;i<3;i++) {
@@ -62,5 +66,15 @@ public class CalculatorButton extends JPanel {
 		buttonPanel.add(operationButton[4]);
 		
 		buttonPanel.setVisible(true);
+	}
+	
+	public void PrintLogButtonPanel() {
+		logButtonPanel.setSize(400, 10);
+		logButtonPanel.setLayout(null);
+		
+		logButton.setLocation(10, 10);
+		logButtonPanel.add(logButton);
+		
+		logButtonPanel.setVisible(true);
 	}
 }
