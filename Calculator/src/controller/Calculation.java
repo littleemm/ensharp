@@ -51,7 +51,14 @@ public class Calculation extends JFrame{
 		
 		for (int i=0;i<4;i++) {
 			calculatorButton.operationButton[i].addActionListener(new operationButtonListener());
+			calculatorButton.operationButton[i].addMouseListener(new MouseButtonListener());
 		}
+		
+		for (int i=0;i<3;i++) {
+			calculatorButton.clearButton[i].addActionListener(new clearButtonListener());
+			calculatorButton.clearButton[i].addMouseListener(new MouseButtonListener());
+		}
+		
 		
 		mainFrame.setVisible(true);
 	}
@@ -60,14 +67,23 @@ public class Calculation extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			JButton button = (JButton)e.getSource();
 			for (int j=0;j<12;j++) {
-				if(button.getText().equals(calculatorButton.screenValue[j])) {
+				if(button.getText().equals("+/-") && inputTextAll.substring(0,1).equals("-")) {
+					inputTextAll = inputTextAll.substring(1);
+				}
+				else if (button.getText().equals("+/-") && !inputTextAll.substring(0,1).equals("-")) {
+					String conversion = "-";
+					conversion += inputTextAll;
+					inputTextAll = conversion;
+				}
+				else if(button.getText().equals(calculatorButton.screenValue[j])) {
 					inputText = calculatorButton.screenValue[j]; // 현재 눌린 숫자 
 					inputTextAll += inputText; // 연산 기호가 입력되기 전까지는 숫자를 연속적으로 표현해야한다.
-					calculatorScreen.currentInput.setText(inputTextAll); // label에 입력된 숫자 넣기 
-					calculatorScreen.currentInput.setFont(font); 
 				}
-			calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT); // 오른쪽에서부터 숫자 시작 
-			calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
+				
+				calculatorScreen.currentInput.setText(inputTextAll); // label에 입력된 숫자 넣기 
+				calculatorScreen.currentInput.setFont(font); 
+				calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT); // 오른쪽에서부터 숫자 시작 
+				calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
 			}
 		}
 
@@ -91,6 +107,30 @@ public class Calculation extends JFrame{
 		
 	}
 	
+	private class clearButtonListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			JButton button = (JButton)e.getSource();
+			if(button.getText().equals("C")) { // 작은 글씨까지 삭제 
+				beforeInputTextAll = "";
+				inputTextAll = "";
+				calculatorScreen.beforeInput.setText(beforeInputTextAll);
+				calculatorScreen.currentInput.setText(inputTextAll);
+				calculatorScreen.beforeInput.setFont(beforeFont);
+			}
+			else if (button.getText().equals("CE")) { // 현재 입력값만 삭제 
+				inputTextAll = "";
+				calculatorScreen.currentInput.setText(inputTextAll);
+			}
+			else if (button.getText().equals("x")) { // 현재 입력값에서 하나씩 삭제 
+				inputTextAll = inputTextAll.substring(0, inputTextAll.length() - 1);
+				calculatorScreen.currentInput.setText(inputTextAll);
+			}
+			calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT);
+			calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
+			
+		}
+	}
+	
 	private class MouseButtonListener implements MouseListener {
 		public void mouseEntered(MouseEvent e) {
 			JButton button = (JButton)e.getSource();
@@ -105,7 +145,6 @@ public class Calculation extends JFrame{
 			for (int j=0;j<20;j++)
 				if(button.getText().equals(calculatorButton.calculatorValue[j])) {
 					calculatorButton.PaintColor();
-					
 				}
 		}
 		public void mousePressed(MouseEvent e) {
