@@ -2,8 +2,9 @@ package view;
 import java.awt.*;
 import javax.swing.*;
 
+
 public class CalculatorButton extends JPanel {
-	private String [] calculatorValue = {"CE", "C", "x", "÷", "7", "8", "9", "X", "4", "5", "6", "-", "1", "2", "3", "+", "+/-", "0", ".","="};
+	public String [] calculatorValue = {"CE", "C", "x", "÷", "7", "8", "9", "X", "4", "5", "6", "-", "1", "2", "3", "+", "+/-", "0", ".","="};
 	public String [] screenValue = {"7", "8", "9", "4", "5", "6", "1", "2", "3", "+/-", "0", "."};
 	public String [] operationValue = {"÷", "X", "-", "+"};
 	public JPanel buttonPanel;
@@ -12,6 +13,11 @@ public class CalculatorButton extends JPanel {
 	public JButton [] operationButton;
 	public JButton [] valueButton;
 	public JButton logButton;
+	private JLabel imageLabel;
+	private Color numberColor;
+	private Color color;
+	private ImageIcon logButtonImage;
+	private ImageIcon logoImage;
 	
 	public CalculatorButton() {
 		buttonPanel = new JPanel();
@@ -19,13 +25,17 @@ public class CalculatorButton extends JPanel {
 		clearButton = new JButton[3];
 		operationButton = new JButton[5];
 		valueButton = new JButton[12];
-		logButton = new JButton("O");
+		imageLabel = new JLabel();
+		logButton = new JButton();
+		numberColor = new Color(200, 199, 252);
+		color = new Color(250, 249, 250);
+		logoImage = new ImageIcon("src/image/logo.png");
+		logButtonImage = new ImageIcon("src/image/logButton.png");
 	}
 	
 	public void PrintMainPanel() {
 		buttonPanel.setSize(430, 300);
 		buttonPanel.setLayout(new GridLayout(5, 4, 1, 1));
-		
 		
 		for (int i=0;i<3;i++) {
 			clearButton[i] = new JButton(calculatorValue[i]);
@@ -67,18 +77,54 @@ public class CalculatorButton extends JPanel {
 		operationButton[4] = new JButton(calculatorValue[19]);
 		buttonPanel.add(operationButton[4]);
 		
+		PaintColor();
+		
 		buttonPanel.setLocation(0, 180);
 		buttonPanel.setVisible(true);
+	}
+	
+	public void PaintColor() {
+		for (int i=0;i<3;i++) {
+			clearButton[i].setOpaque(true);
+			clearButton[i].setBackground(color);
+			clearButton[i].setBorderPainted(false);
+			clearButton[i].setFocusPainted(false);
+		}
+		for (int i=0;i<5;i++) {
+			operationButton[i].setOpaque(true);
+			operationButton[i].setBackground(color);
+			operationButton[i].setBorderPainted(false);
+			operationButton[i].setFocusPainted(false);
+		}
+		for (int i=0;i<12;i++) {
+			valueButton[i].setOpaque(true);
+			valueButton[i].setBackground(Color.WHITE);
+			valueButton[i].setBorderPainted(false);
+			valueButton[i].setFocusPainted(false);
+		}
+		operationButton[4].setOpaque(true);
+		operationButton[4].setBackground(numberColor);
+		
 	}
 	
 	public void PrintLogButtonPanel() {
 		logButtonPanel.setSize(430, 50);
 		logButtonPanel.setLayout(null);
 		
-		logButton.setLocation(10, 10);
-		logButtonPanel.add(logButton);
+		imageLabel.setSize(200, 50);
+		imageLabel.setLayout(null);
+		imageLabel.setLocation(10, 0);
+		imageLabel.setIcon(logoImage);
+		logButtonPanel.add(imageLabel);
 		
-		logButtonPanel.setBackground(Color.YELLOW);
+		logButton.setLocation(395,17);
+		logButton.setSize(20,20);
+		logButton.setIcon(logButtonImage);
+		//logButton.setHorizontalAlignment(JButton.CENTER);
+		logButton.setBorderPainted(false);
+		logButton.setFocusPainted(false);
+		logButtonPanel.add(logButton);
+
 		logButtonPanel.setLocation(0, 1);
 		logButtonPanel.setVisible(true);
 	}

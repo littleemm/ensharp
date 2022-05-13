@@ -33,6 +33,7 @@ public class Calculation extends JFrame{
 	public void ShowCalculatorMain() {
 		mainFrame.setBounds(10, 10, 430, 510);
 		mainFrame.setLayout(null);
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//mainFrame.setUndecorated(true);
 		//mainFrame.setBackground(new Color(0,0,0,230));
 		calculatorButton.PrintMainPanel();
@@ -45,6 +46,7 @@ public class Calculation extends JFrame{
 		
 		for (int i=0;i<12;i++) {
 			calculatorButton.valueButton[i].addActionListener(new numberButtonListener());
+			calculatorButton.valueButton[i].addMouseListener(new MouseButtonListener());
 		}
 		
 		for (int i=0;i<4;i++) {
@@ -87,6 +89,35 @@ public class Calculation extends JFrame{
 			}
 		}
 		
+	}
+	
+	private class MouseButtonListener implements MouseListener {
+		public void mouseEntered(MouseEvent e) {
+			JButton button = (JButton)e.getSource();
+			for (int j=0;j<20;j++)
+			if(button.getText().equals(calculatorButton.calculatorValue[j])) {
+				button.setOpaque(true);
+				button.setBackground(Color.GRAY);
+			}
+		}
+		public void mouseExited(MouseEvent e) {
+			JButton button = (JButton)e.getSource();
+			for (int j=0;j<20;j++)
+				if(button.getText().equals(calculatorButton.calculatorValue[j])) {
+					calculatorButton.PaintColor();
+					
+				}
+		}
+		public void mousePressed(MouseEvent e) {
+			
+		}
+		public void mouseReleased(MouseEvent e) {
+			
+		}
+		public void mouseClicked(MouseEvent e) {
+			
+		}
+
 	}
 	
 }
