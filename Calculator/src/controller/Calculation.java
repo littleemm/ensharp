@@ -9,13 +9,17 @@ public class Calculation extends JFrame{
 	private JFrame mainFrame;
 	private JLabel miniLabel;
 	private Font font;
+	private String inputTextAll;
+	private String inputText;
 	public CalculatorButton calculatorButton;
 	public CalculatorScreen calculatorScreen;
 	
 	public Calculation() {
 		mainFrame = new JFrame("계산기");
 		miniLabel = new JLabel();
-		font = new Font("Arial", Font.PLAIN, 10);
+		font = new Font("Arial Unicode", Font.BOLD, 50);
+		inputTextAll = "";
+		inputText = "";
 		calculatorButton = new CalculatorButton();
 		calculatorScreen = new CalculatorScreen();
 	}
@@ -44,12 +48,14 @@ public class Calculation extends JFrame{
 				public void actionPerformed(ActionEvent e) {
 					JButton button = (JButton)e.getSource();
 					for (int j=0;j<12;j++) {
-					if(button.getText().equals(calculatorButton.screenValue[j]))
-						miniLabel.setSize(20, 10);
-						miniLabel.setText(calculatorButton.screenValue[j]);
-						miniLabel.setFont(font);
-						miniLabel.setLocation(1, 10);
-						calculatorScreen.inputPanel.add(miniLabel);
+					if(button.getText().equals(calculatorButton.screenValue[j])) {
+						//calculatorScreen.currentInput.setText(calculatorButton.screenValue[j]);
+						inputText = calculatorButton.screenValue[j];
+						inputTextAll += inputText;
+						calculatorScreen.currentInput.setText(inputTextAll);
+						calculatorScreen.currentInput.setFont(font);
+					}
+						calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
 					}
 				}
 			});

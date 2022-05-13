@@ -24,7 +24,7 @@ public class CalculatorScreen {
 		currentInput.setSize(400, 145);
 		inputPanel.add(currentInput);
 		
-		inputPanel.setBackground(Color.RED);
+		inputPanel.setBackground(Color.PINK);
 		inputPanel.setLocation(0, 80);
 		inputPanel.setVisible(true);
 	}
