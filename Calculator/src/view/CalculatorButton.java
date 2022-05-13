@@ -4,9 +4,9 @@ import javax.swing.*;
 
 
 public class CalculatorButton extends JPanel {
-	public String [] calculatorValue = {"CE", "C", "x", "÷", "7", "8", "9", "X", "4", "5", "6", "-", "1", "2", "3", "+", "+/-", "0", ".","="};
+	public String [] calculatorValue = {"CE", "C", "x", "÷", "7", "8", "9", "×", "4", "5", "6", "-", "1", "2", "3", "+", "+/-", "0", ".","="};
 	public String [] screenValue = {"7", "8", "9", "4", "5", "6", "1", "2", "3", "+/-", "0", "."};
-	public String [] operationValue = {"÷", "X", "-", "+"};
+	public String [] operationValue = {"÷", "×", "-", "+"};
 	public String [] clearValue = {"CE", "C", "x"};
 	public JPanel buttonPanel;
 	public JPanel logButtonPanel;

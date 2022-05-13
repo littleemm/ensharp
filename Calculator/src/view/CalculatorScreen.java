@@ -15,14 +15,14 @@ public class CalculatorScreen {
 	}
 	
 	public void PrintCalculatorScreen() {
-		inputPanel.setSize(430, 150);
+		inputPanel.setSize(420, 150);
 		inputPanel.setLayout(null);
 		
-		beforeInput.setSize(430, 10);
+		beforeInput.setSize(410, 10);
 		beforeInput.setLocation(0, 40);
 		inputPanel.add(beforeInput);
 		
-		currentInput.setSize(430, 145);
+		currentInput.setSize(410, 145);
 		currentInput.setLocation(0, 15);
 		inputPanel.add(currentInput);
 		
