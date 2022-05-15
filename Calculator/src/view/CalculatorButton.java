@@ -109,7 +109,7 @@ public class CalculatorButton extends JPanel {
 	}
 	
 	public void PrintLogButtonPanel() {
-		//logButtonPanel.setSize(430, 5);
+		logButtonPanel.setSize(430, 5);
 		logButtonPanel.setLayout(null);
 		
 		imageLabel.setSize(200, 50);
@@ -126,7 +126,6 @@ public class CalculatorButton extends JPanel {
 		logButton.setFocusPainted(false);
 		logButtonPanel.add(logButton);
 		
-		logButtonPanel.setBackground(Color.YELLOW);
 		//logButtonPanel.setLocation(0, 1);
 		logButtonPanel.setVisible(true);
 	}

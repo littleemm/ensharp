@@ -36,10 +36,8 @@ public class Calculation extends JFrame{
 	}
 	
 	public void ShowCalculatorMain() {
-		constraint.weightx=20;
-	    constraint.weighty=20;
 		
-		mainFrame.setBounds(20, 20, 430, 530);
+		mainFrame.setBounds(20, 20, 430, 600);
 		mainFrame.setLayout(layout);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//mainFrame.setUndecorated(true);
@@ -48,14 +46,10 @@ public class Calculation extends JFrame{
 		calculatorButton.PrintLogButtonPanel();
 		calculatorScreen.PrintCalculatorScreen();
 		
-		gridBagInsert(calculatorButton.logButtonPanel, 0, 0, 0, 1);
-		gridBagInsert(calculatorScreen.inputPanel, 0, 2, 0, 1);
-		gridBagInsert(calculatorButton.buttonPanel, 0, 3, 0, 20);
-		
-		//mainFrame.pack();
-		//mainFrame.add(calculatorButton.logButtonPanel);
-		//mainFrame.add(calculatorScreen.inputPanel);
-		//mainFrame.add(calculatorButton.buttonPanel);
+		gridBagInsert(calculatorButton.logButtonPanel, 0, 0, 0, 1, 1);
+		gridBagInsert(calculatorScreen.inputPanel, 0, 1, 0, 2, 3);
+		gridBagInsert(calculatorButton.buttonPanel, 0, 5, 0, 5, 5);
+
 		
 		calculatorScreen.currentInput.setText(inputTextAll); // label에 입력된 숫자 넣기 
 		calculatorScreen.currentInput.setFont(font); 
@@ -72,9 +66,6 @@ public class Calculation extends JFrame{
 			calculatorButton.operationButton[i].addMouseListener(new MouseButtonListener());
 		}
 		
-		//calculatorButton.operationButton[4].addActionListener(new EqualButtonListener());
-		//calculatorButton.operationButton[4].addMouseListener(new MouseButtonListener());
-		
 		for (int i=0;i<3;i++) {
 			calculatorButton.clearButton[i].addActionListener(new ClearButtonListener());
 			calculatorButton.clearButton[i].addMouseListener(new MouseButtonListener());
@@ -83,8 +74,10 @@ public class Calculation extends JFrame{
 		mainFrame.setVisible(true);
 	}
 	
-	private void gridBagInsert(Component component, int x, int y, int width, int height) {
+	private void gridBagInsert(Component component, int x, int y, int width, int height, int y1) {
 	        constraint.fill= GridBagConstraints.BOTH;
+	        constraint.weightx=1;
+		    constraint.weighty=y1;
 	        constraint.gridx = x;
 	        constraint.gridy = y;
 	        constraint.gridwidth = width;
