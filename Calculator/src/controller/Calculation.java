@@ -16,6 +16,9 @@ public class Calculation extends JFrame{
 	public CalculatorScreen calculatorScreen;
 	private Color buttonColor;
 	private Color equalButtonColor;
+	private GridBagLayout layout;
+	private GridBagConstraints constraint;
+		
 	
 	public Calculation() {
 		mainFrame = new JFrame("계산기");
@@ -24,6 +27,8 @@ public class Calculation extends JFrame{
 		beforeInputTextAll = "";
 		inputTextAll = "0";
 		inputText = "";
+		layout = new GridBagLayout();
+		constraint = new GridBagConstraints();
 		buttonColor = new Color(208, 205, 205);
 		equalButtonColor = new Color(176, 160, 229);
 		calculatorButton = new CalculatorButton();
@@ -31,8 +36,11 @@ public class Calculation extends JFrame{
 	}
 	
 	public void ShowCalculatorMain() {
-		mainFrame.setBounds(10, 10, 430, 510);
-		mainFrame.setLayout(null);
+		constraint.weightx=20;
+	    constraint.weighty=20;
+		
+		mainFrame.setBounds(20, 20, 430, 530);
+		mainFrame.setLayout(layout);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//mainFrame.setUndecorated(true);
 		//mainFrame.setBackground(new Color(0,0,0,230));
@@ -40,9 +48,14 @@ public class Calculation extends JFrame{
 		calculatorButton.PrintLogButtonPanel();
 		calculatorScreen.PrintCalculatorScreen();
 		
-		mainFrame.add(calculatorButton.logButtonPanel);
-		mainFrame.add(calculatorScreen.inputPanel);
-		mainFrame.add(calculatorButton.buttonPanel);
+		gridBagInsert(calculatorButton.logButtonPanel, 0, 0, 0, 1);
+		gridBagInsert(calculatorScreen.inputPanel, 0, 2, 0, 1);
+		gridBagInsert(calculatorButton.buttonPanel, 0, 3, 0, 20);
+		
+		//mainFrame.pack();
+		//mainFrame.add(calculatorButton.logButtonPanel);
+		//mainFrame.add(calculatorScreen.inputPanel);
+		//mainFrame.add(calculatorButton.buttonPanel);
 		
 		calculatorScreen.currentInput.setText(inputTextAll); // label에 입력된 숫자 넣기 
 		calculatorScreen.currentInput.setFont(font); 
@@ -68,6 +81,16 @@ public class Calculation extends JFrame{
 		}
 		
 		mainFrame.setVisible(true);
+	}
+	
+	private void gridBagInsert(Component component, int x, int y, int width, int height) {
+	        constraint.fill= GridBagConstraints.BOTH;
+	        constraint.gridx = x;
+	        constraint.gridy = y;
+	        constraint.gridwidth = width;
+	        constraint.gridheight = height;
+	        layout.setConstraints(component, constraint);
+	        mainFrame.add(component);
 	}
 	
 	private class NumberButtonListener implements ActionListener {
@@ -269,5 +292,6 @@ public class Calculation extends JFrame{
 		
 		return resultString;
 	}
+	
 	
 }
