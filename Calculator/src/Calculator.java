@@ -1,11 +1,11 @@
-import controller.Calculation;
+import controller.CalculatorMain;
 
 public class Calculator {
 
 	public static void main(String[] args) {
-		Calculation calculation = new Calculation();
+		CalculatorMain calculatorMain = new CalculatorMain();
 		
-		calculation.ShowCalculatorMain();
+		calculatorMain.ShowCalculatorMain();
 		
 	}
 

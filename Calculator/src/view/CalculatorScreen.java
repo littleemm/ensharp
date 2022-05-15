@@ -26,6 +26,7 @@ public class CalculatorScreen {
 		currentInput.setLocation(0, 15);
 		inputPanel.add(currentInput);
 		
+
 		//inputPanel.setLocation(0, 30);
 		inputPanel.setVisible(true);
 	}
