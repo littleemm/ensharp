@@ -30,8 +30,9 @@ public class Calculation {
 		else if (operator.equals("÷")) {
 			result = beforeInputNumber / inputNumber;
 		}
-		
+
 		if (equalSign.equals("=")) {
+		
 			beforeInputTextAll += inputTextAll;
 			beforeInputTextAll += "=";
 		}
@@ -39,6 +40,7 @@ public class Calculation {
 		if (resultString.substring(resultString.length() - 1).equals("0")) {
 			resultString = Integer.toString((int)result);
 		}
+		System.out.println(resultString);
 
 		calculationDTO.setInput(resultString);
 		calculationDTO.setBeforeInput(beforeInputTextAll);
