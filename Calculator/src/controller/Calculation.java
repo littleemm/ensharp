@@ -9,7 +9,7 @@ public class Calculation {
 		this.beforeInputTextAll = beforeInputTextAll;
 	}
 	
-	public String CalculateWithOperator(String equalSign) { // 사칙연산 
+	public String CalculateWithOperator(String equalSign, String beforeInputTextAll, String inputTextAll) { // 사칙연산 
 		double result = 0.0;
 		System.out.println(beforeInputTextAll);
 		double beforeInputNumber = Double.parseDouble(beforeInputTextAll.substring(0,beforeInputTextAll.length()-1));

@@ -204,7 +204,7 @@ public class ButtonActionListener {
 	private void CheckBeforeInputLength(String operator) { // 전에 계산한 값의 길이를 확인 
 		if (beforeInputTextAll.length() > 0) {
 			System.out.println(beforeInputTextAll.length());
-			inputTextAll = calculation.CalculateWithOperator(operator);
+			inputTextAll = calculation.CalculateWithOperator(operator, beforeInputTextAll, inputTextAll);
 		}
 	}
 	
