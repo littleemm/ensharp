@@ -1,4 +1,5 @@
 package controller;
+import model.*;
 
 public class Calculation {
 	private String inputTextAll;
@@ -9,9 +10,10 @@ public class Calculation {
 		this.beforeInputTextAll = beforeInputTextAll;
 	}
 	
-	public String CalculateWithOperator(String equalSign, String beforeInputTextAll, String inputTextAll) { // 사칙연산 
+	public CalculationDTO CalculateWithOperator(String equalSign) { // 사칙연산 
+		CalculationDTO calculationDTO = new CalculationDTO("", "");
+		
 		double result = 0.0;
-		System.out.println(beforeInputTextAll);
 		double beforeInputNumber = Double.parseDouble(beforeInputTextAll.substring(0,beforeInputTextAll.length()-1));
 		double inputNumber = Double.parseDouble(inputTextAll);
 		String operator = beforeInputTextAll.substring(beforeInputTextAll.length() - 1);
@@ -37,7 +39,10 @@ public class Calculation {
 		if (resultString.substring(resultString.length() - 1).equals("0")) {
 			resultString = Integer.toString((int)result);
 		}
+
+		calculationDTO.setInput(resultString);
+		calculationDTO.setBeforeInput(beforeInputTextAll);
 		
-		return resultString;
+		return calculationDTO;
 	}
 }

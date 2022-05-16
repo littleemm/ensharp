@@ -1,4 +1,5 @@
 package controller;
+import model.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -28,7 +29,7 @@ public class ButtonActionListener {
 		this.calculatorButton = calculatorButton;
 		this.calculatorScreen = calculatorScreen;
 		
-		calculation = new Calculation(inputTextAll, beforeInputTextAll);
+		//calculation = new Calculation(inputTextAll, beforeInputTextAll);
 		buttonColor = new Color(208, 205, 205);
 		equalButtonColor = new Color(176, 160, 229);
 		beforeFont = new Font("맑은 고딕 Bold", Font.BOLD, 10);
@@ -203,8 +204,11 @@ public class ButtonActionListener {
 	
 	private void CheckBeforeInputLength(String operator) { // 전에 계산한 값의 길이를 확인 
 		if (beforeInputTextAll.length() > 0) {
-			System.out.println(beforeInputTextAll.length());
-			inputTextAll = calculation.CalculateWithOperator(operator, beforeInputTextAll, inputTextAll);
+			calculation = new Calculation(inputTextAll, beforeInputTextAll);
+			CalculationDTO calculationDTO = calculation.CalculateWithOperator(operator);
+			inputTextAll = calculationDTO.getInput();
+			beforeInputTextAll = calculationDTO.getBeforeInput();
+			System.out.println(beforeInputTextAll);
 		}
 	}
 	

@@ -1,27 +1,27 @@
 package model;
 
 public class CalculationDTO {
-	private String expression;
-	private String result;
+	private String inputTextAll;
+	private String beforeInputTextAll;
 	
-	public CalculationDTO(String expression, String result) {
-		this.expression = expression;
-		this.result = result;
+	public CalculationDTO(String inputTextAll, String beforeInputTextAll) {
+		this.inputTextAll = inputTextAll;
+		this.beforeInputTextAll = beforeInputTextAll;
 	}
 	
-	public String getExpression() {
-		return expression;
+	public String getInput() {
+		return inputTextAll;
 	}
 	
-	public void setExpression(String expression) {
-		this.expression = expression;
+	public void setInput(String inputTextAll) {
+		this.inputTextAll = inputTextAll;
 	}
 	
-	public String getResult() {
-		return result;
+	public String getBeforeInput() {
+		return beforeInputTextAll;
 	}
 	
-	public void setResult(String result) {
-		this.result = result;
+	public void setBeforeInput(String beforeInputTextAll) {
+		this.beforeInputTextAll = beforeInputTextAll;
 	}
 }
