@@ -59,7 +59,7 @@ public class ButtonActionListener {
 		public void actionPerformed(ActionEvent e) {
 			JButton button = (JButton)e.getSource();
 			for (int i=0;i<12;i++) {
-				if(button.getText().equals(calculatorButton.screenValue[i])) {
+				if(button.getText().equals(calculatorButton.screenValue[i]) && isNumber()) {
 					inputText = calculatorButton.screenValue[i]; // 현재 눌린 숫자 
 					
 					if(inputText.equals("+/-") && inputTextAll.substring(0,1).equals("-")) { // 부호 버튼 (+) 처리 
@@ -179,7 +179,7 @@ public class ButtonActionListener {
 	}
 	
 	private void CheckBeforeInputLength(String operator) { // 전에 계산한 값의 길이를 확인 
-		if (beforeInputTextAll.length() > 0) {
+		if (beforeInputTextAll.length() > 0) { // 숫자 + 연산자 조합의 입력값이 존재할 경우 
 			calculation = new Calculation(inputTextAll, beforeInputTextAll);
 			CalculationDTO calculationDTO = calculation.CalculateWithOperator(operator);
 			inputTextAll = calculationDTO.getInput();
@@ -187,17 +187,30 @@ public class ButtonActionListener {
 			System.out.println(beforeInputTextAll);
 			System.out.println(inputTextAll);
 		}
-		else {
-			
-		}
 	}
 	
-	private void AddOperator(String operator) { // 수행된 값을 바탕으로 오른쪽에 기호 추가 
-		beforeInputTextAll = inputTextAll;
-		beforeInputTextAll += operator;
+	private boolean isNumber() {
+		String input = inputTextAll.substring(0, inputTextAll.length()-1); // 연산자 전까지의 숫자 
+		int numberCount = 0;
+		for (int i=0;i<input.length();i++) {
+			if (input.charAt(i) >= '0' && input.charAt(i) <= '9') {
+				numberCount++;
+			}
+		}
+		if (numberCount >= 16) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	private void AddOperator(String operator) { // 수행된 값을 바탕으로 오른쪽에 연산자 추가  
+		beforeInputTextAll = inputTextAll; // 첫번째 피연산자를 옮겨주기 
+		beforeInputTextAll += operator; 
 		inputText = operator; // 나중에 마지막 입력 버튼 값을 알아야하는 때를 위해 저장 
 		calculatorScreen.beforeInput.setText(beforeInputTextAll);
 		calculatorScreen.beforeInput.setFont(beforeFont);
+		inputTextAll = "0"; // 입력값 초기화 
 	}
 	
 	private void AddEqualSign() {
