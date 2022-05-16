@@ -1,31 +1,31 @@
 package controller;
-import model.*;
+
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import view.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+import model.CalculationDTO;
+import view.CalculatorButton;
+import view.CalculatorScreen;
 
 public class ButtonActionListener {
-	private String inputText;
-	private String inputTextAll;
-	private String beforeInputTextAll;
+	private String inputText; // 현재 눌린 값  
+	private String inputTextAll; // 연산자가 입력되기 전까지 입력된 숫자 전체 
+	private String beforeInputTextAll; // 숫자 + 연산자가 저장되어 있는, 이전에 입력된 값 
+	private String firstNumber;
+	private String operator;
+	private String secondNumber;
+	
 	private CalculatorScreen calculatorScreen;
 	private CalculatorButton calculatorButton;
 	private Calculation calculation;
+	
 	private Color buttonColor;
 	private Color equalButtonColor;
 	private Font font;
 	private Font beforeFont;
 	private Font fontToSmall;
-	
-	private String firstNumber;
-	private String secondNumber;
-	private String operationSign;
 	
 	public ButtonActionListener(String inputText, String inputTextAll, String beforeInputTextAll, CalculatorScreen calculatorScreen, CalculatorButton calculatorButton) {
 		this.inputText = inputText;
@@ -40,128 +40,131 @@ public class ButtonActionListener {
 		beforeFont = new Font("맑은 고딕 Bold", Font.BOLD, 10);
 		font = new Font("맑은 고딕 Bold", Font.BOLD, 40);
 		fontToSmall = new Font("맑은 고딕 Bold", Font.BOLD, 30);
-		operationSign = "";
+		operator = "";
+		firstNumber = "";
+		secondNumber = "";
 	}
 	
 	public void ListenButtonAction() { // 버튼 리스너 
-		for (int i=0;i<12;i++) {
+		for (int i=0;i<12;i++) { // 피연산자 버튼 
 			calculatorButton.valueButton[i].addActionListener(new NumberButtonListener());
 			calculatorButton.valueButton[i].addMouseListener(new MouseButtonListener());
 		}
 		
-		for (int i=0;i<5;i++) {
+		for (int i=0;i<5;i++) { // 연산자 버튼 
 			calculatorButton.operationButton[i].addActionListener(new OperationButtonListener());
 			calculatorButton.operationButton[i].addMouseListener(new MouseButtonListener());
 		}
 		
-		for (int i=0;i<3;i++) {
+		for (int i=0;i<3;i++) { // 지우기 버튼 
 			calculatorButton.clearButton[i].addActionListener(new ClearButtonListener());
 			calculatorButton.clearButton[i].addMouseListener(new MouseButtonListener());
 		}
 	}
 	
-	private class NumberButtonListener implements ActionListener { // 숫자 및 부호, 소수점 버튼 
+	private class NumberButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			JButton button = (JButton)e.getSource();
+			int beforeLength = beforeInputTextAll.length();
+			String beforeInputNumberPart = "";
+			String beforeInputOperatorPart = "";
+			
+			if (beforeLength > 0) {
+				beforeInputNumberPart = beforeInputTextAll.substring(0,beforeInputTextAll.length() - 1);
+				beforeInputOperatorPart = beforeInputTextAll.substring(beforeInputTextAll.length() - 1);
+			}
+			
+			if(secondNumber.length() > 0) {
+				firstNumber = "";
+				operator = "";
+				secondNumber = "";
+			}
+			
 			for (int i=0;i<12;i++) {
 				if(button.getText().equals(calculatorButton.screenValue[i]) && isNumber()) {
-					inputText = calculatorButton.screenValue[i]; // 현재 눌린 숫자 
+					inputText = button.getText(); // 현재 눌린 숫자 
 					
-					if(inputText.equals("+/-") && inputTextAll.substring(0,1).equals("-")) { // 부호 버튼 (+) 처리 
-						inputTextAll = inputTextAll.substring(1);
+					if (inputText.equals("+/-")) {
+						ShowPositiveOrNegative();
 					}
-					else if (inputText.equals("+/-")) {  // 부호 버튼 (-) 처리 
-						String conversion = "-";
-						conversion += inputTextAll;
-						inputTextAll = conversion;
+					else if (inputTextAll.equals("0")) {
+						ShowFirstInput();
 					}
-					else if (inputTextAll.equals("0") && inputText.equals(".")) {  // 소수점 입력 처리 
-						inputTextAll += inputText; 
-					}
-					else if (inputTextAll.equals("0"))  { // 아직 아무것도 입력되지 않은 상태 
-						inputTextAll = "";
-						inputTextAll += inputText; 
-					} // 연산 기호가 입력되기 전까지는 숫자를 연속적으로 표현해야한다. 
-					else if (beforeInputTextAll.length() > 0 && inputTextAll.equals(beforeInputTextAll.substring(0,beforeInputTextAll.length() - 1))) {
+					else if (beforeLength > 0 && inputTextAll.equals(beforeInputNumberPart)) {
 						inputTextAll = "";
 						inputTextAll += inputText;
 					}
-					else if (beforeInputTextAll.length() > 0 && beforeInputTextAll.substring(beforeInputTextAll.length() - 1).equals("=")) {
+					else if (beforeLength > 0 && beforeInputOperatorPart.equals("=")) {
 						beforeInputTextAll = "";
-						inputTextAll = "";
-						inputTextAll += inputText;
+						inputTextAll = "0";
+						ShowFirstInput();
 						calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT); 
 						calculatorScreen.beforeInput.setText(beforeInputTextAll);
 					}
-					else { // 입력 중 
+					else { 
 						inputTextAll += inputText; 
 					}
 				}
 			}
-				calculatorScreen.currentInput.setText(inputTextAll); // label에 입력된 숫자 넣기 
-				calculatorScreen.currentInput.setFont(font); 
-				if (inputTextAll.length() > 15) {
-					calculatorScreen.currentInput.setFont(fontToSmall);
-				}
-				calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT); // 오른쪽에서부터 숫자 시작 
-				calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
-				
-				if (operationSign.length() == 0) {
-					firstNumber = inputTextAll;
-				}
-				else {
-					secondNumber = inputTextAll;
-				}
+			
+			// 큰 숫자 부분 
+			calculatorScreen.currentInput.setText(inputTextAll); 
+			calculatorScreen.currentInput.setFont(font); 
+			if (inputTextAll.length() > 15) {
+				calculatorScreen.currentInput.setFont(fontToSmall);
+			}
+			calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT); // 오른쪽에서부터 숫자 시작 
+			calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
+			
+			if(operator.length() > 0) {
+				secondNumber = inputTextAll;
+			}
 		}
-
 	}
 	
-	private class OperationButtonListener implements ActionListener { // 연산자 버튼 
+	private class OperationButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			JButton button = (JButton)e.getSource();
-			String operator = button.getText();
+			
 			if (inputText.equals("+") || inputText.equals("-") || inputText.equals("×") || inputText.equals("÷")) {
-				// 피연산자를 입력하지 않은채 연산자를 입력하면 버튼이 먹히지 않음 
+				return;
 			}
-			else if(operator.equals("+")) {
-				operationSign = operator;
-				CheckBeforeInputLength(operator);
-				AddOperator(operator);
+			
+			switch(button.getText().charAt(0)) {
+			case ('+') : {
+				AddOperator(button);
+				break;
 			}
-			else if (operator.equals("-")) {
-				operationSign = operator;
-				CheckBeforeInputLength(operator);
-				AddOperator(operator);
+			case ('-') : {
+				AddOperator(button);
+				break;
 			}
-			else if (operator.equals("×")) {
-				operationSign = operator;
-				CheckBeforeInputLength(operator);
-				AddOperator(operator);
+			case ('×') : {
+				AddOperator(button);
+				break;
 			}
-			else if (operator.equals("÷")) {
-				operationSign = operator;
-				CheckBeforeInputLength(operator);
-				AddOperator(operator);
+			case ('÷') : {
+				AddOperator(button);
+				break;
 			}
-			else if (operator.equals("=")) {
-				operationSign = operator;
-				CheckBeforeInputLength(operator);
-				AddEqualSign();
+			case ('=') : {
+				IdentifyEqualSign(button);
+				break;
+			}
 			}
 			
 			calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT);
 			calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
 			
-			if(operator.equals("=")) {
+			if(beforeInputTextAll.substring(beforeInputTextAll.length()-1).equals("=")) {
 				calculatorScreen.currentInput.setText(inputTextAll);
 				calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT);
 				calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
 			}
 		}
-		
 	}
 	
-	private class ClearButtonListener implements ActionListener { // 지우는 버튼 
+	private class ClearButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			JButton button = (JButton)e.getSource();
 			if(button.getText().equals("C")) { // 작은 글씨까지 삭제 
@@ -191,25 +194,6 @@ public class ButtonActionListener {
 			}
 			calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT);
 			calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
-			
-		}
-	}
-	
-	private void CheckBeforeInputLength(String operator) { // 전에 계산한 값의 길이를 확인 
-		if (beforeInputTextAll.length() > 0) { // 숫자 + 연산자 조합의 입력값이 존재할 경우 
-			calculation = new Calculation(firstNumber, secondNumber, inputTextAll, beforeInputTextAll);
-			System.out.println(beforeInputTextAll);
-			System.out.println(inputTextAll);
-			
-			CalculationDTO calculationDTO = calculation.CalculateWithOperator(operator);
-			
-			inputTextAll = calculationDTO.getInput();
-			beforeInputTextAll = calculationDTO.getBeforeInput();
-			firstNumber = calculationDTO.getFirstNumber();
-			
-			System.out.println(beforeInputTextAll);
-			System.out.println(inputTextAll);
-			System.out.println(firstNumber);
 		}
 	}
 	
@@ -228,19 +212,79 @@ public class ButtonActionListener {
 		return true;
 	}
 	
-	private void AddOperator(String operator) { // 수행된 값을 바탕으로 오른쪽에 연산자 추가  
-		beforeInputTextAll = inputTextAll; // 첫번째 피연산자를 옮겨주기 
-		beforeInputTextAll += operator; 
-		inputText = operator; // 나중에 마지막 입력 버튼 값을 알아야하는 때를 위해 저장 
-		calculatorScreen.beforeInput.setText(beforeInputTextAll);
-		calculatorScreen.beforeInput.setFont(beforeFont);
-		inputTextAll = "0"; // 입력값 초기화 
+	private void ShowPositiveOrNegative() {
+		String sign = inputTextAll.substring(0,1); // 부호 
+		
+		if(sign.equals("-")) { // 부호 버튼 (+) 처리 
+			inputTextAll = inputTextAll.substring(1);
+		}
+		else {  // 부호 버튼 (-) 처리 
+			String conversion = "-";
+			conversion += inputTextAll;
+			inputTextAll = conversion;
+		}
 	}
 	
-	private void AddEqualSign() {
-		inputText = "="; // 나중에 마지막 입력 버튼 값을 알아야하는 때를 위해 저장 
-		calculatorScreen.beforeInput.setText(beforeInputTextAll);
-		calculatorScreen.beforeInput.setFont(beforeFont);
+	private void ShowFirstInput() {
+		if (inputText.equals(".")) {  // 소수점 입력 처리 
+			inputTextAll += inputText; 
+		}
+		else { 
+			inputTextAll = "";
+			inputTextAll += inputText; 
+		} 
+	}
+	
+	private void IdentifyEqualSign(JButton button) {
+
+		if (operator.length() > 0 && beforeInputTextAll.substring(beforeInputTextAll.length() - 1).equals("=")) {
+			calculation = new Calculation(firstNumber, secondNumber, operator, inputTextAll, beforeInputTextAll);
+			CalculationDTO calculationDTO = calculation.CalculateAgain();
+			
+			beforeInputTextAll = calculationDTO.getBeforeInput();
+			inputTextAll = calculationDTO.getInput();
+			firstNumber = calculationDTO.getFirstNumber();
+			
+			calculatorScreen.beforeInput.setText(beforeInputTextAll);
+			calculatorScreen.beforeInput.setFont(beforeFont);
+		}
+		else {
+			AddOperator(button);
+		}
+	}
+	
+	private void AddOperator(JButton button) { // 수행된 값을 바탕으로 오른쪽에 연산자 추가  
+		if (beforeInputTextAll.length() > 0) { // 숫자 + 연산자 조합의 입력값이 존재할 경우 
+			calculation = new Calculation(firstNumber, secondNumber, operator, inputTextAll, beforeInputTextAll);
+			System.out.println(beforeInputTextAll);
+			System.out.println(inputTextAll);
+			System.out.println(firstNumber);
+			System.out.println(secondNumber);
+			
+			inputTextAll = calculation.StartCalculatingBasic();
+			
+			beforeInputTextAll += secondNumber; 
+			beforeInputTextAll += "="; 
+			
+			calculatorScreen.beforeInput.setText(beforeInputTextAll);
+			calculatorScreen.beforeInput.setFont(beforeFont);
+			
+			System.out.println(beforeInputTextAll);
+			System.out.println(inputTextAll);
+			System.out.println(firstNumber);
+		}
+		else {
+			operator = button.getText();
+			firstNumber = inputTextAll;
+			beforeInputTextAll = inputTextAll; 
+			beforeInputTextAll += operator; 
+			
+			inputText = operator; // 나중에 마지막 입력 버튼 값을 알아야하는 때를 위해 저장 
+			
+			calculatorScreen.beforeInput.setText(beforeInputTextAll);
+			calculatorScreen.beforeInput.setFont(beforeFont);
+			inputTextAll = "0"; // 입력값 초기화 
+		}
 	}
 	
 	private class MouseButtonListener implements MouseListener {
