@@ -240,7 +240,6 @@ public class ButtonActionListener {
 		if (operator.length() > 0 && beforeInputTextAll.substring(beforeInputTextAll.length() - 1).equals("=")) {
 			calculation = new Calculation(firstNumber, secondNumber, operator, inputTextAll, beforeInputTextAll);
 			CalculationDTO calculationDTO = calculation.CalculateAgain();
-			
 			beforeInputTextAll = calculationDTO.getBeforeInput();
 			inputTextAll = calculationDTO.getInput();
 			firstNumber = calculationDTO.getFirstNumber();
