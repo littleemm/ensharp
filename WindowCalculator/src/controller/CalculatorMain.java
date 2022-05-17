@@ -18,7 +18,7 @@ public class CalculatorMain extends JFrame{
 	private ButtonActionListener listener;
 	
 	public CalculatorMain() {
-		mainFrame = new JFrame("계산기2");
+		mainFrame = new JFrame("계산기");
 		beforeFont = new Font("맑은 고딕 Bold", Font.BOLD, 10);
 		font = new Font("맑은 고딕 Bold", Font.BOLD, 40);
 		beforeInputTextAll = "";

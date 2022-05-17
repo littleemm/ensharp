@@ -73,6 +73,7 @@ public class ButtonActionListener {
 				beforeInputNumberPart = beforeInputTextAll.substring(0,beforeInputTextAll.length() - 1);
 				beforeInputOperatorPart = beforeInputTextAll.substring(beforeInputTextAll.length() - 1);
 			}
+			System.out.println(button.getText());
 		
 			for (int i=0;i<12;i++) {
 				if(button.getText().equals(calculatorButton.screenValue[i]) && isNumber()) {
@@ -109,7 +110,7 @@ public class ButtonActionListener {
 			}
 			calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT); // 오른쪽에서부터 숫자 시작 
 			calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
-			
+			System.out.println(inputTextAll + "!");
 		}
 	}
 	
