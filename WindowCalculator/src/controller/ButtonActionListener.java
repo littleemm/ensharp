@@ -73,13 +73,7 @@ public class ButtonActionListener {
 				beforeInputNumberPart = beforeInputTextAll.substring(0,beforeInputTextAll.length() - 1);
 				beforeInputOperatorPart = beforeInputTextAll.substring(beforeInputTextAll.length() - 1);
 			}
-			
-			if(secondNumber.length() > 0) {
-				firstNumber = "";
-				operator = "";
-				secondNumber = "";
-			}
-			
+		
 			for (int i=0;i<12;i++) {
 				if(button.getText().equals(calculatorButton.screenValue[i]) && isNumber()) {
 					inputText = button.getText(); // 현재 눌린 숫자 
@@ -116,9 +110,6 @@ public class ButtonActionListener {
 			calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT); // 오른쪽에서부터 숫자 시작 
 			calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
 			
-			if(operator.length() > 0) {
-				secondNumber = inputTextAll;
-			}
 		}
 	}
 	
@@ -152,7 +143,7 @@ public class ButtonActionListener {
 				break;
 			}
 			}
-			
+			inputText = button.getText();
 			calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT);
 			calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
 			
@@ -254,16 +245,28 @@ public class ButtonActionListener {
 	
 	private void AddOperator(JButton button) { // 수행된 값을 바탕으로 오른쪽에 연산자 추가  
 		if (beforeInputTextAll.length() > 0) { // 숫자 + 연산자 조합의 입력값이 존재할 경우 
+			secondNumber = inputTextAll;
+			System.out.println(secondNumber);
 			calculation = new Calculation(firstNumber, secondNumber, operator, inputTextAll, beforeInputTextAll);
+			
 			System.out.println(beforeInputTextAll);
 			System.out.println(inputTextAll);
 			System.out.println(firstNumber);
 			System.out.println(secondNumber);
 			
-			inputTextAll = calculation.StartCalculatingBasic();
+			CalculationDTO calculationDTO = calculation.StartCalculatingBasic();
+			inputTextAll = calculationDTO.getInput();
+			firstNumber = calculationDTO.getFirstNumber();
 			
-			beforeInputTextAll += secondNumber; 
-			beforeInputTextAll += "="; 
+			if(button.getText().equals("=")) {
+				beforeInputTextAll += secondNumber; 
+				beforeInputTextAll += "="; 
+			}
+			else {
+				operator = button.getText();
+				beforeInputTextAll = inputTextAll;
+				beforeInputTextAll += button.getText();
+			}
 			
 			calculatorScreen.beforeInput.setText(beforeInputTextAll);
 			calculatorScreen.beforeInput.setFont(beforeFont);

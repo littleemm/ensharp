@@ -16,7 +16,8 @@ public class Calculation {
 		this.beforeInputTextAll = beforeInputTextAll;
 	}
 	
-	public String StartCalculatingBasic() {
+	public CalculationDTO StartCalculatingBasic() {
+		CalculationDTO calculationDTO = new CalculationDTO("", "", "");
 		double result = 0.0;
 		double firstNumberDouble = Double.parseDouble(firstNumber);
 		double secondNumberDouble = Double.parseDouble(secondNumber);
@@ -50,8 +51,11 @@ public class Calculation {
 			resultString = Integer.toString((int)result);
 		}
 		System.out.println(resultString);
-
-		return resultString;
+		
+		calculationDTO.setInput(resultString);
+		calculationDTO.setFirstNumber(resultString);
+		
+		return calculationDTO;
 	}
 	
 	public CalculationDTO CalculateAgain() {
