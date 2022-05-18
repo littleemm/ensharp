@@ -35,7 +35,10 @@ public class ButtonActionListener {
 	private BigDecimal secondBig;
 	private BigDecimal inputTextAllBig;
 	private BigDecimal beforeInputTextAllBig;
+	
 	private NumberFormat format;
+	private DecimalFormat decimalPoint;
+	private DecimalFormat decimalPointSmall;
 	
 	public ButtonActionListener(String inputText, String inputTextAll, String beforeInputTextAll, CalculatorScreen calculatorScreen, CalculatorButton calculatorButton) {
 		this.inputText = inputText;
@@ -48,12 +51,14 @@ public class ButtonActionListener {
 		buttonColor = new Color(208, 205, 205);
 		equalButtonColor = new Color(176, 160, 229);
 		beforeFont = new Font("맑은 고딕 Bold", Font.BOLD, 10);
-		font = new Font("맑은 고딕 Bold", Font.BOLD, 40);
+		font = new Font("맑은 고딕", Font.BOLD, 40);
 		fontToSmall = new Font("맑은 고딕 Bold", Font.BOLD, 30);
 		logButtonImage = new ImageIcon("src/image/logButton.png");
 		operator = "";
 		firstNumber = "";
 		secondNumber = "";
+		decimalPoint = new DecimalFormat("#,###,###,###,###,###.################");
+		decimalPointSmall = new DecimalFormat("###,###");
 	}
 	
 	public void ListenButtonAction() { // 버튼 리스너 
@@ -114,14 +119,13 @@ public class ButtonActionListener {
 			}
 			
 			// 큰 숫자 부분 
-			calculatorScreen.currentInput.setText(inputTextAll); 
+			calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll))); 
 			calculatorScreen.currentInput.setFont(font); 
 			if (inputTextAll.length() > 15) {
 				calculatorScreen.currentInput.setFont(fontToSmall);
 			}
 			calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT); // 오른쪽에서부터 숫자 시작 
 			calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
-			System.out.println(inputTextAll + "!");
 		}
 	}
 	
@@ -160,7 +164,7 @@ public class ButtonActionListener {
 			calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
 			
 			if(beforeInputTextAll.substring(beforeInputTextAll.length()-1).equals("=")) {
-				calculatorScreen.currentInput.setText(inputTextAll);
+				calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll)));
 				calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT);
 				calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
 			}
@@ -174,26 +178,26 @@ public class ButtonActionListener {
 				beforeInputTextAll = "";
 				inputTextAll = "0";
 				calculatorScreen.beforeInput.setText(beforeInputTextAll);
-				calculatorScreen.currentInput.setText(inputTextAll);
+				calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll)));
 				calculatorScreen.beforeInput.setFont(beforeFont);
 			}
 			else if (button.getText().equals("CE") && beforeInputTextAll.substring(beforeInputTextAll.length() - 1).equals("=")) { // 현재 입력값만 삭제 
 				beforeInputTextAll = "";
 				inputTextAll = "0";
 				calculatorScreen.beforeInput.setText(beforeInputTextAll);
-				calculatorScreen.currentInput.setText(inputTextAll);
+				calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll)));
 				calculatorScreen.beforeInput.setFont(beforeFont);
 			}
 			else if (button.getText().equals("CE")) {
 				inputTextAll = "0";
-				calculatorScreen.currentInput.setText(inputTextAll);
+				calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll)));
 			}
-			else if (button.getText().equals("x")) { // 현재 입력값에서 하나씩 삭제 
+			else if (button.getText().equals("⌫")) { // 현재 입력값에서 하나씩 삭제 
 				inputTextAll = inputTextAll.substring(0, inputTextAll.length() - 1);
 				if (inputTextAll.length() == 0) {
 					inputTextAll = "0";
 				}
-				calculatorScreen.currentInput.setText(inputTextAll);
+				calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll)));
 			}
 			calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT);
 			calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
@@ -286,7 +290,7 @@ public class ButtonActionListener {
 			calculatorScreen.beforeInput.setFont(beforeFont);
 			
 			System.out.println(beforeInputTextAll);
-			System.out.println(inputTextAll);
+			System.out.println(decimalPoint.format(Double.parseDouble(inputTextAll)));
 			System.out.println(firstNumber);
 		}
 		else {

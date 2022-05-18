@@ -15,10 +15,13 @@ public class CalculatorButton extends JPanel {
 	public JButton [] valueButton;
 	public JButton logButton;
 	private JLabel imageLabel;
+	private JLabel guideLabel;
+	
 	private Color numberColor;
 	private Color color;
 	private ImageIcon logButtonImage;
 	private ImageIcon logoImage;
+	private Font guideFont;
 	
 	public CalculatorButton() {
 		buttonPanel = new JPanel();
@@ -27,11 +30,13 @@ public class CalculatorButton extends JPanel {
 		operationButton = new JButton[5];
 		valueButton = new JButton[12];
 		imageLabel = new JLabel();
+		guideLabel = new JLabel("표준");
 		logButton = new JButton();
 		numberColor = new Color(200, 199, 252);
 		color = new Color(250, 249, 250);
 		logoImage = new ImageIcon("src/image/logo.png");
 		logButtonImage = new ImageIcon("src/image/logButton.png");
+		guideFont = new Font("맑은 고딕", Font.BOLD, 20);
 	}
 	
 	public void PrintMainPanel() {
@@ -114,11 +119,16 @@ public class CalculatorButton extends JPanel {
 		logButtonPanel.setSize(430, 5);
 		logButtonPanel.setLayout(null);
 		
-		imageLabel.setSize(200, 50);
-		imageLabel.setLayout(null);
-		imageLabel.setLocation(10, 0);
-		imageLabel.setIcon(logoImage);
-		logButtonPanel.add(imageLabel);
+		guideLabel.setSize(210, 45);
+		guideLabel.setLayout(null);
+		guideLabel.setLocation(10, 0);
+		guideLabel.setFont(guideFont);
+		logButtonPanel.add(guideLabel);
+		//imageLabel.setSize(200, 50);
+		//imageLabel.setLayout(null);
+		//imageLabel.setLocation(10, 0);
+		//imageLabel.setIcon(logoImage);
+		//logButtonPanel.add(imageLabel);
 		
 		logButton.setLocation(395,17);
 		logButton.setSize(20,20);
