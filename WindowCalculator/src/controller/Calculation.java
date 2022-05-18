@@ -17,7 +17,8 @@ public class Calculation {
 	private BigDecimal secondBig;
 	private BigDecimal inputTextAllBig;
 	private BigDecimal beforeInputTextAllBig;
-	private NumberFormat format;
+	//private NumberFormat format;
+	private DecimalFormat format;
 	
 	private Exception exception;
 	
@@ -29,7 +30,8 @@ public class Calculation {
 		this.beforeInputTextAll = beforeInputTextAll;
 		
 		exception = new Exception();
-		format = NumberFormat.getInstance();
+		//format = NumberFormat.getInstance();
+		format = new DecimalFormat("#,###,###,###,###,###.################");
 	}
 	
 	public CalculationDTO StartCalculatingBasic() {
@@ -52,12 +54,13 @@ public class Calculation {
 			break;
 		}
 		case ('×') : {
-			resultBig = firstBig.multiply(secondBig);
+			resultBig = firstBig.multiply(secondBig, MathContext.DECIMAL64);
 			resultString = format.format(resultBig);
 			break;
 		}
 		case ('÷') : { 
 			resultString = exception.DivideByZero(firstBig, secondBig);
+			System.out.println(resultString+"hello");
 			break;
 		}
 		case ('=') : { // 0 = 0
@@ -71,10 +74,9 @@ public class Calculation {
 			calculationDTO.setFirstNumber(resultString);
 			return calculationDTO;
 		}
-		
+		resultBig = new BigDecimal(resultString);
 		resultString = eraseDecimalPoint(resultBig);
-		
-		System.out.println(resultString);
+		System.out.println(resultString + "hi");
 		
 		calculationDTO.setInput(resultString);
 		calculationDTO.setFirstNumber(resultString);
@@ -110,7 +112,8 @@ public class Calculation {
 		}
 		
 		String resultString = eraseDecimalPoint(resultBig);
-		System.out.println(resultString);
+		resultString.replaceAll("\\,","");
+		System.out.println(resultString + "hi");
 		
 		beforeInputTextAll = inputTextAll;
 		beforeInputTextAll += operator;
@@ -126,9 +129,9 @@ public class Calculation {
 	
 	private String eraseDecimalPoint(BigDecimal resultBig) {
 		String resultString = format.format(resultBig);
-		if (resultString.substring(resultString.length() - 1).equals("0")) {
-			resultString = format.format(resultBig.setScale(0, RoundingMode.FLOOR));
-		}
+		resultBig = resultBig.stripTrailingZeros();
+		resultString = format.format(resultBig);
+		System.out.println(resultString + "erase");
 		return resultString;
 	}
 }

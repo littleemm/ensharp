@@ -164,7 +164,7 @@ public class ButtonActionListener {
 			calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
 			
 			if(beforeInputTextAll.substring(beforeInputTextAll.length()-1).equals("=")) {
-				calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll)));
+				calculatorScreen.currentInput.setText(inputTextAll);
 				calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT);
 				calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
 			}
@@ -205,7 +205,7 @@ public class ButtonActionListener {
 	}
 	
 	private boolean isNumber() {
-		String input = inputTextAll.substring(0, inputTextAll.length()-1); // 연산자 전까지의 숫자 
+		String input = inputTextAll.substring(0, inputTextAll.length()); // 연산자 전까지의 숫자 
 		int numberCount = 0;
 		for (int i=0;i<input.length();i++) {
 			if (input.charAt(i) >= '0' && input.charAt(i) <= '9') {
@@ -290,7 +290,7 @@ public class ButtonActionListener {
 			calculatorScreen.beforeInput.setFont(beforeFont);
 			
 			System.out.println(beforeInputTextAll);
-			System.out.println(decimalPoint.format(Double.parseDouble(inputTextAll)));
+			System.out.println(inputTextAll);
 			System.out.println(firstNumber);
 		}
 		else {
