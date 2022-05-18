@@ -35,7 +35,7 @@ public class CalculatorMain extends JFrame{
 		mainFrame.setBounds(20, 20, 430, 600);
 		mainFrame.setLayout(layout);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		mainFrame.setResizable(false);
 		calculatorButton.PrintMainPanel();
 		calculatorButton.PrintLogButtonPanel();
 		calculatorScreen.PrintCalculatorScreen();

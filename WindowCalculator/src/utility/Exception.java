@@ -1,17 +1,32 @@
 package utility;
+import java.text.*;
+import java.math.BigDecimal;
 
 public class Exception {
-	private String inputTextAll;
+	private NumberFormat format;
 	
-	
-	public Exception(String inputTextAll) {
-		this.inputTextAll = inputTextAll;
+	public Exception() {
+		format = NumberFormat.getInstance();
 	}
 	
-	public String DivideByZero(String value) {
-		if (value == "0") {
-			inputTextAll = "0으로 나눌 수 없습니다";
+	public String DivideByZero(BigDecimal firstNumber, BigDecimal secondNumber) {
+		String resultString = "";
+		BigDecimal result = new BigDecimal("0");
+		String firstString = format.format(firstNumber);
+		String secondString = format.format(secondNumber);
+		
+		try {
+			
+			result = firstNumber.subtract(secondNumber);
+			resultString = format.format(result);
+			
+		}catch(ArithmeticException e) {
+			
+			resultString = "0으로 나눌 수 없습니다";
+			System.out.println("hi");
+			
 		}
-		return inputTextAll;
+		
+		return resultString;
 	}
 }

@@ -4,10 +4,10 @@ import javax.swing.*;
 
 
 public class CalculatorButton extends JPanel {
-	public String [] calculatorValue = {"CE", "C", "x", "÷", "7", "8", "9", "×", "4", "5", "6", "-", "1", "2", "3", "+", "+/-", "0", ".","="};
+	public String [] calculatorValue = {"CE", "C", "⌫", "÷", "7", "8", "9", "×", "4", "5", "6", "-", "1", "2", "3", "+", "+/-", "0", ".","="};
 	public String [] screenValue = {"7", "8", "9", "4", "5", "6", "1", "2", "3", "+/-", "0", "."};
 	public String [] operationValue = {"÷", "×", "-", "+"};
-	public String [] clearValue = {"CE", "C", "x"};
+	public String [] clearValue = {"CE", "C", "⌫"};
 	public JPanel buttonPanel;
 	public JPanel logButtonPanel;
 	public JButton [] clearButton;
@@ -103,6 +103,8 @@ public class CalculatorButton extends JPanel {
 			valueButton[i].setBorderPainted(false);
 			valueButton[i].setFocusPainted(false);
 		}
+		logButton.setOpaque(false);
+		logButton.setBackground(Color.WHITE);
 		operationButton[4].setOpaque(true);
 		operationButton[4].setBackground(numberColor);
 		

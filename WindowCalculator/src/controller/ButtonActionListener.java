@@ -1,9 +1,12 @@
 package controller;
-
+import utility.Exception;
+import java.text.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.*;
 import javax.swing.*;
+import java.math.*;
+import javax.swing.AbstractButton;
 
 import model.CalculationDTO;
 import view.CalculatorButton;
@@ -26,6 +29,13 @@ public class ButtonActionListener {
 	private Font font;
 	private Font beforeFont;
 	private Font fontToSmall;
+	private ImageIcon logButtonImage;
+	
+	private BigDecimal firstBig;
+	private BigDecimal secondBig;
+	private BigDecimal inputTextAllBig;
+	private BigDecimal beforeInputTextAllBig;
+	private NumberFormat format;
 	
 	public ButtonActionListener(String inputText, String inputTextAll, String beforeInputTextAll, CalculatorScreen calculatorScreen, CalculatorButton calculatorButton) {
 		this.inputText = inputText;
@@ -40,6 +50,7 @@ public class ButtonActionListener {
 		beforeFont = new Font("맑은 고딕 Bold", Font.BOLD, 10);
 		font = new Font("맑은 고딕 Bold", Font.BOLD, 40);
 		fontToSmall = new Font("맑은 고딕 Bold", Font.BOLD, 30);
+		logButtonImage = new ImageIcon("src/image/logButton.png");
 		operator = "";
 		firstNumber = "";
 		secondNumber = "";
@@ -60,9 +71,10 @@ public class ButtonActionListener {
 			calculatorButton.clearButton[i].addActionListener(new ClearButtonListener());
 			calculatorButton.clearButton[i].addMouseListener(new MouseButtonListener());
 		}
+		calculatorButton.logButton.addMouseListener(new MouseButtonListener());
 	}
 	
-	private class NumberButtonListener implements ActionListener {
+	private class NumberButtonListener implements ActionListener { // 숫자 버튼 
 		public void actionPerformed(ActionEvent e) {
 			JButton button = (JButton)e.getSource();
 			int beforeLength = beforeInputTextAll.length();
@@ -73,7 +85,6 @@ public class ButtonActionListener {
 				beforeInputNumberPart = beforeInputTextAll.substring(0,beforeInputTextAll.length() - 1);
 				beforeInputOperatorPart = beforeInputTextAll.substring(beforeInputTextAll.length() - 1);
 			}
-			System.out.println(button.getText());
 		
 			for (int i=0;i<12;i++) {
 				if(button.getText().equals(calculatorButton.screenValue[i]) && isNumber()) {
@@ -114,15 +125,15 @@ public class ButtonActionListener {
 		}
 	}
 	
-	private class OperationButtonListener implements ActionListener {
+	private class OperationButtonListener implements ActionListener { // 연산자 버튼 
 		public void actionPerformed(ActionEvent e) {
 			JButton button = (JButton)e.getSource();
 			
-			if (inputText.equals("+") || inputText.equals("-") || inputText.equals("×") || inputText.equals("÷")) {
+			if (inputText.equals("+") || inputText.equals("-") || inputText.equals("×") || inputText.equals("÷")) { // 정규식 !!!!
 				return;
-			}
+			} 
 			
-			switch(button.getText().charAt(0)) {
+			switch(button.getText().charAt(0)) { // 통일 (한줄로 가능) !!!!!
 			case ('+') : {
 				AddOperator(button);
 				break;
@@ -156,7 +167,7 @@ public class ButtonActionListener {
 		}
 	}
 	
-	private class ClearButtonListener implements ActionListener {
+	private class ClearButtonListener implements ActionListener { // 지우기 버튼 
 		public void actionPerformed(ActionEvent e) {
 			JButton button = (JButton)e.getSource();
 			if(button.getText().equals("C")) { // 작은 글씨까지 삭제 
@@ -247,6 +258,7 @@ public class ButtonActionListener {
 	private void AddOperator(JButton button) { // 수행된 값을 바탕으로 오른쪽에 연산자 추가  
 		if (beforeInputTextAll.length() > 0) { // 숫자 + 연산자 조합의 입력값이 존재할 경우 
 			secondNumber = inputTextAll;
+			
 			System.out.println(secondNumber);
 			calculation = new Calculation(firstNumber, secondNumber, operator, inputTextAll, beforeInputTextAll);
 			
@@ -267,6 +279,7 @@ public class ButtonActionListener {
 				operator = button.getText();
 				beforeInputTextAll = inputTextAll;
 				beforeInputTextAll += button.getText();
+				inputTextAll = "0";
 			}
 			
 			calculatorScreen.beforeInput.setText(beforeInputTextAll);
@@ -289,28 +302,46 @@ public class ButtonActionListener {
 			inputTextAll = "0"; // 입력값 초기화 
 		}
 	}
+	private class LogButtonListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			JButton button = (JButton)e.getSource();
+			if (button.getIcon().equals(logButtonImage)) {
+				
+			}
+		}
+	}
 	
 	private class MouseButtonListener implements MouseListener {
 		public void mouseEntered(MouseEvent e) {
 			JButton button = (JButton)e.getSource();
-			for (int j=0;j<20;j++) {
+			if (button.getIcon() == logButtonImage) {
+				button.setOpaque(true);
+				System.out.println("hi");
+				button.setBackground(buttonColor);
+			}
+			for (int i=0;i<20;i++) {
 				if (button.getText().equals("=")) {
 					button.setOpaque(true);
 					button.setBackground(equalButtonColor);
 				}
-				else if(button.getText().equals(calculatorButton.calculatorValue[j])) {
+				else if(button.getText().equals(calculatorButton.calculatorValue[i])) {
 				button.setOpaque(true);
 				button.setBackground(buttonColor);
+			}	
 			}
-			}
+			
 		}
 		public void mouseExited(MouseEvent e) {
 			JButton button = (JButton)e.getSource();
-			for (int j=0;j<20;j++) {
-				if(button.getText().equals(calculatorButton.calculatorValue[j])) {
+			if (button.getIcon() == logButtonImage) {
+				calculatorButton.PaintColor();
+			}
+			for (int i=0;i<20;i++) {
+				if(button.getText().equals(calculatorButton.calculatorValue[i])) {
 					calculatorButton.PaintColor();
 				}
 			}
+		
 		}
 		public void mousePressed(MouseEvent e) {
 		}
