@@ -17,8 +17,8 @@ public class Calculation {
 	private BigDecimal secondBig;
 	private BigDecimal inputTextAllBig;
 	private BigDecimal beforeInputTextAllBig;
-	//private NumberFormat format;
-	private DecimalFormat format;
+	private NumberFormat format;
+	//private DecimalFormat format;
 	
 	private Exception exception;
 	
@@ -30,8 +30,8 @@ public class Calculation {
 		this.beforeInputTextAll = beforeInputTextAll;
 		
 		exception = new Exception();
-		//format = NumberFormat.getInstance();
-		format = new DecimalFormat("#,###,###,###,###,###.################");
+		format = NumberFormat.getInstance();
+		//format = new DecimalFormat("#,###,###,###,###,###.################");
 	}
 	
 	public CalculationDTO StartCalculatingBasic() {
@@ -54,12 +54,17 @@ public class Calculation {
 			break;
 		}
 		case ('×') : {
-			resultBig = firstBig.multiply(secondBig, MathContext.DECIMAL64);
+			resultBig = firstBig.multiply(secondBig, MathContext.DECIMAL128);
+			format.setMaximumFractionDigits(15);
+			format.setRoundingMode(RoundingMode.HALF_EVEN);
 			resultString = format.format(resultBig);
+			System.out.println(resultString);
 			break;
 		}
 		case ('÷') : { 
 			resultString = exception.DivideByZero(firstBig, secondBig);
+			format.setMaximumFractionDigits(16);
+			format.setRoundingMode(RoundingMode.HALF_EVEN);
 			System.out.println(resultString+"hello");
 			break;
 		}
@@ -76,8 +81,7 @@ public class Calculation {
 		}
 		resultBig = new BigDecimal(resultString);
 		resultString = eraseDecimalPoint(resultBig);
-		System.out.println(resultString + "hi");
-		
+
 		calculationDTO.setInput(resultString);
 		calculationDTO.setFirstNumber(resultString);
 		
@@ -112,7 +116,6 @@ public class Calculation {
 		}
 		
 		String resultString = eraseDecimalPoint(resultBig);
-		resultString.replaceAll("\\,","");
 		System.out.println(resultString + "hi");
 		
 		beforeInputTextAll = inputTextAll;
@@ -131,7 +134,6 @@ public class Calculation {
 		String resultString = format.format(resultBig);
 		resultBig = resultBig.stripTrailingZeros();
 		resultString = format.format(resultBig);
-		System.out.println(resultString + "erase");
 		return resultString;
 	}
 }

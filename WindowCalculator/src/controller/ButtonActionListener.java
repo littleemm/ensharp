@@ -164,6 +164,9 @@ public class ButtonActionListener {
 			calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
 			
 			if(beforeInputTextAll.substring(beforeInputTextAll.length()-1).equals("=")) {
+			if (inputTextAll.length() > 15) {
+					calculatorScreen.currentInput.setFont(fontToSmall);
+				}
 				calculatorScreen.currentInput.setText(inputTextAll);
 				calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT);
 				calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
@@ -262,7 +265,6 @@ public class ButtonActionListener {
 	private void AddOperator(JButton button) { // 수행된 값을 바탕으로 오른쪽에 연산자 추가  
 		if (beforeInputTextAll.length() > 0) { // 숫자 + 연산자 조합의 입력값이 존재할 경우 
 			secondNumber = inputTextAll;
-			
 			System.out.println(secondNumber);
 			calculation = new Calculation(firstNumber, secondNumber, operator, inputTextAll, beforeInputTextAll);
 			

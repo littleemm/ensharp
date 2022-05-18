@@ -1,4 +1,6 @@
 package model;
+import java.math.*;
+import java.text.*;
 
 public class CalculationDTO {
 	private String inputTextAll;

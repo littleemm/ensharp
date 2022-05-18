@@ -16,7 +16,7 @@ public class Exception {
 		String secondString = format.format(secondNumber);
 		
 		try {
-			result = firstNumber.divide(secondNumber, MathContext.DECIMAL64);
+			result = firstNumber.divide(secondNumber, MathContext.DECIMAL128);
 			System.out.println("DIVIDE SUCCESS");
 			format.setMaximumFractionDigits(16);
 			format.setRoundingMode(RoundingMode.HALF_EVEN);
