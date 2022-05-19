@@ -183,6 +183,18 @@ public class ButtonActionListener {
 					inputTextAll = inputTextAll.replaceAll(",", "");
 				}
 			}
+			else {
+				if (inputTextAll.length() > 14) {
+					calculatorScreen.currentInput.setFont(fontToSmall);
+				}
+				if (beforeInputTextAll.substring(0, 1) != "0" && inputTextAll.equals("0")) {
+					inputTextAll = decimalPoint.format(Double.parseDouble(beforeInputTextAll.substring(0, beforeInputTextAll.length() - 1)));
+				}
+				calculatorScreen.currentInput.setText(inputTextAll);
+				calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT);
+				calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
+				inputTextAll = "0";
+			}
 		}
 	}
 	
@@ -297,7 +309,7 @@ public class ButtonActionListener {
 				operator = button.getText();
 				beforeInputTextAll = inputTextAll;
 				beforeInputTextAll += button.getText();
-				inputTextAll = "0";
+				
 			}
 			
 			calculatorScreen.beforeInput.setText(beforeInputTextAll);
