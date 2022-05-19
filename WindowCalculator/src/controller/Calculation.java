@@ -44,28 +44,25 @@ public class Calculation {
 		switch(operator.charAt(0)) {
 		case ('+') : {
 			resultBig = firstBig.add(secondBig);
-			resultString = format.format(resultBig);
-			System.out.println(resultString);
 			break;
 		}
 		case ('-') : {
 			resultBig = firstBig.subtract(secondBig);
-			resultString = format.format(resultBig);
 			break;
 		}
 		case ('×') : {
 			resultBig = firstBig.multiply(secondBig, MathContext.DECIMAL128);
 			format.setMaximumFractionDigits(15);
 			format.setRoundingMode(RoundingMode.HALF_EVEN);
-			resultString = format.format(resultBig);
-			System.out.println(resultString);
 			break;
 		}
 		case ('÷') : { 
-			resultString = exception.DivideByZero(firstBig, secondBig);
+			CalculationDTO exceptionDTO = exception.DivideByZero(firstBig, secondBig);
 			format.setMaximumFractionDigits(16);
 			format.setRoundingMode(RoundingMode.HALF_EVEN);
-			System.out.println(resultString+"hello");
+			
+			resultBig = exceptionDTO.getResultBig();
+			resultString = exceptionDTO.getWarningMessage();
 			break;
 		}
 		case ('=') : { // 0 = 0
@@ -74,12 +71,13 @@ public class Calculation {
 			break;
 		}
 		}
+		
 		if(resultString == Constant.WARNING_DIVIDE_0) {
 			calculationDTO.setInput(resultString);
 			calculationDTO.setFirstNumber(resultString);
 			return calculationDTO;
 		}
-		resultBig = new BigDecimal(resultString);
+		
 		resultString = eraseDecimalPoint(resultBig);
 
 		calculationDTO.setInput(resultString);

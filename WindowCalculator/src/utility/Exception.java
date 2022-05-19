@@ -1,4 +1,5 @@
 package utility;
+import model.*;
 import java.text.*;
 import java.math.*;
 
@@ -9,24 +10,23 @@ public class Exception {
 		format = NumberFormat.getInstance();
 	}
 	
-	public String DivideByZero(BigDecimal firstNumber, BigDecimal secondNumber) {
+	public CalculationDTO DivideByZero(BigDecimal firstNumber, BigDecimal secondNumber) {
 		String resultString = "";
 		BigDecimal result = new BigDecimal("0");
-		String firstString = format.format(firstNumber);
-		String secondString = format.format(secondNumber);
+		CalculationDTO calculationDTO = new CalculationDTO(new BigDecimal("0"),"");
 		
 		try {
 			result = firstNumber.divide(secondNumber, MathContext.DECIMAL128);
 			System.out.println("DIVIDE SUCCESS");
 			format.setMaximumFractionDigits(16);
 			format.setRoundingMode(RoundingMode.HALF_EVEN);
-			resultString = format.format(result);
+			calculationDTO.setResultBig(result);
 			
 		}catch(ArithmeticException e) {
 			resultString = "0으로 나눌 수 없습니다";
-			System.out.println("hi");
+			calculationDTO.setWarningMessage(resultString);
 		}
 		
-		return resultString;
+		return calculationDTO;
 	}
 }
