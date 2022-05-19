@@ -44,7 +44,7 @@ public class CalculatorMain extends JFrame{
 		gridBagInsert(calculatorScreen.inputPanel, 0, 1, 0, 2, 3);
 		gridBagInsert(calculatorButton.buttonPanel, 0, 5, 0, 5, 5);
 		
-		listener.ListenButtonAction();
+		listener.ListenButtonAction(mainFrame);
 		
 		calculatorScreen.currentInput.setText(inputTextAll); // label에 입력된 숫자 넣기 
 		calculatorScreen.currentInput.setFont(font); 

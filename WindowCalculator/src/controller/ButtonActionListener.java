@@ -1,4 +1,5 @@
 package controller;
+import utility.Constant;
 import utility.Exception;
 import java.text.*;
 import java.awt.Color;
@@ -65,7 +66,7 @@ public class ButtonActionListener {
 		basicNumber = new DecimalFormat("################.################");
 	}
 	
-	public void ListenButtonAction() { // 버튼 리스너 
+	public void ListenButtonAction(JFrame mainFrame) { // 버튼 리스너 
 		for (int i=0;i<12;i++) { // 피연산자 버튼 
 			calculatorButton.valueButton[i].addActionListener(new NumberButtonListener());
 			calculatorButton.valueButton[i].addMouseListener(new MouseButtonListener());
@@ -81,61 +82,91 @@ public class ButtonActionListener {
 			calculatorButton.clearButton[i].addMouseListener(new MouseButtonListener());
 		}
 		calculatorButton.logButton.addMouseListener(new MouseButtonListener());
+		
+		mainFrame.addKeyListener(new NumberKeyListener());
+		mainFrame.setFocusable(true);
+		mainFrame.requestFocus();
+	}
+	
+	private class NumberKeyListener extends KeyAdapter {
+		public void keyPressed(KeyEvent e) {
+			int key = e.getKeyCode();
+			int keyForInput = key - 48;
+			String keyText = KeyEvent.getKeyText(key);
+			String keyCodeText = Integer.toString(key);
+			System.out.println(keyCodeText);
+			System.out.println(keyText);
+			numberInput(Integer.toString(keyForInput));
+			
+		}
+		public void keyReleased(KeyEvent e) {
+			
+		}
+		public void keyTyped(KeyEvent e) {
+			
+		}
 	}
 	
 	private class NumberButtonListener implements ActionListener { // 숫자 버튼 
 		public void actionPerformed(ActionEvent e) {
 			JButton button = (JButton)e.getSource();
-			int beforeLength = beforeInputTextAll.length();
-			String beforeInputNumberPart = "";
-			String beforeInputOperatorPart = "";
+			String buttonText = button.getText();
 			
-			if (beforeLength > 0) {
-				beforeInputNumberPart = beforeInputTextAll.substring(0,beforeInputTextAll.length() - 1);
-				beforeInputOperatorPart = beforeInputTextAll.substring(beforeInputTextAll.length() - 1);
-			}
-			
-			if (beforeInputOperatorPart.equals("=")) {
-				inputTextAll = "0";
-				beforeInputTextAll = "";
-			}
+			numberInput(buttonText);
+		}
+	}
+	
+	private void numberInput(String text) {
+		int beforeLength = beforeInputTextAll.length();
+		String beforeInputNumberPart = "";
+		String beforeInputOperatorPart = "";
 		
-			for (int i=0;i<12;i++) {
-				if(button.getText().equals(calculatorButton.screenValue[i]) && isNumber()) {
-					inputText = button.getText(); // 현재 눌린 숫자 
-					System.out.println(inputText);
-					if (inputText.equals("+/-")) {
-						ShowPositiveOrNegative();
-					}
-					else if (inputTextAll.equals("0")) {
-						ShowFirstInput();
-					}
-					else if (beforeLength > 0 && inputTextAll.equals(beforeInputNumberPart)) {
-						inputTextAll = "";
-						inputTextAll += inputText;
-					}
-					else if (beforeLength > 0 && beforeInputOperatorPart.equals("=")) {
-						beforeInputTextAll = "";
-						inputTextAll = "0";
-						ShowFirstInput();
-						calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT); 
-						calculatorScreen.beforeInput.setText(beforeInputTextAll);
-					}
-					else { 
-						inputTextAll += inputText; 
-					}
+		
+		if (beforeLength > 0) {
+			beforeInputNumberPart = beforeInputTextAll.substring(0,beforeInputTextAll.length() - 1);
+			beforeInputOperatorPart = beforeInputTextAll.substring(beforeInputTextAll.length() - 1);
+		}
+		
+		if (beforeInputOperatorPart.equals("=")) {
+			inputTextAll = "0";
+			beforeInputTextAll = "";
+		}
+	
+		for (int i=0;i<12;i++) {
+			if((text.equals(calculatorButton.screenValue[i]) || text.equals(Constant.SPACE_CODE))&& isNumber()) {
+				inputText = text; // 현재 눌린 숫자 
+				System.out.println(inputText);
+				if (inputText.equals("+/-") || inputText.equals(Constant.SPACE_CODE)) {
+					ShowPositiveOrNegative();
+				}
+				else if (inputTextAll.equals("0")) {
+					ShowFirstInput();
+				}
+				else if (beforeLength > 0 && inputTextAll.equals(beforeInputNumberPart)) {
+					inputTextAll = "";
+					inputTextAll += inputText;
+				}
+				else if (beforeLength > 0 && beforeInputOperatorPart.equals("=")) {
+					beforeInputTextAll = "";
+					inputTextAll = "0";
+					ShowFirstInput();
+					calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT); 
+					calculatorScreen.beforeInput.setText(beforeInputTextAll);
+				}
+				else { 
+					inputTextAll += inputText; 
 				}
 			}
-			System.out.println(inputTextAll);
-			// 큰 숫자 부분 
-			calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll))); 
-			calculatorScreen.currentInput.setFont(font); 
-			if (inputTextAll.length() > 14) {
-				calculatorScreen.currentInput.setFont(fontToSmall);
-			}
-			calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT); // 오른쪽에서부터 숫자 시작 
-			calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
 		}
+		System.out.println(inputTextAll);
+		// 큰 숫자 부분 
+		calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll))); 
+		calculatorScreen.currentInput.setFont(font); 
+		if (inputTextAll.length() > 14) {
+			calculatorScreen.currentInput.setFont(fontToSmall);
+		}
+		calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT); // 오른쪽에서부터 숫자 시작 
+		calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
 	}
 	
 	private class OperationButtonListener implements ActionListener { // 연산자 버튼 
