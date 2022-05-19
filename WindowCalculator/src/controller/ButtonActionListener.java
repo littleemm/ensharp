@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.event.*;
 import javax.swing.*;
 import java.math.*;
+import java.nio.file.spi.FileSystemProvider;
+
 import javax.swing.AbstractButton;
 
 import model.CalculationDTO;
@@ -90,11 +92,16 @@ public class ButtonActionListener {
 				beforeInputNumberPart = beforeInputTextAll.substring(0,beforeInputTextAll.length() - 1);
 				beforeInputOperatorPart = beforeInputTextAll.substring(beforeInputTextAll.length() - 1);
 			}
+			
+			if (beforeInputOperatorPart.equals("=")) {
+				inputTextAll = "0";
+				beforeInputTextAll = "";
+			}
 		
 			for (int i=0;i<12;i++) {
 				if(button.getText().equals(calculatorButton.screenValue[i]) && isNumber()) {
 					inputText = button.getText(); // 현재 눌린 숫자 
-					
+					System.out.println(inputText);
 					if (inputText.equals("+/-")) {
 						ShowPositiveOrNegative();
 					}
@@ -117,11 +124,11 @@ public class ButtonActionListener {
 					}
 				}
 			}
-			
+			System.out.println(inputTextAll);
 			// 큰 숫자 부분 
 			calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll))); 
 			calculatorScreen.currentInput.setFont(font); 
-			if (inputTextAll.length() > 15) {
+			if (inputTextAll.length() > 14) {
 				calculatorScreen.currentInput.setFont(fontToSmall);
 			}
 			calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT); // 오른쪽에서부터 숫자 시작 
@@ -164,7 +171,7 @@ public class ButtonActionListener {
 			calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
 			
 			if(beforeInputTextAll.substring(beforeInputTextAll.length()-1).equals("=")) {
-			if (inputTextAll.length() > 15) {
+				if (inputTextAll.length() > 14) {
 					calculatorScreen.currentInput.setFont(fontToSmall);
 				}
 				calculatorScreen.currentInput.setText(inputTextAll);

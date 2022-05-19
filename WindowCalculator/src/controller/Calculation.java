@@ -18,7 +18,7 @@ public class Calculation {
 	private BigDecimal inputTextAllBig;
 	private BigDecimal beforeInputTextAllBig;
 	private NumberFormat format;
-	//private DecimalFormat format;
+	private DecimalFormat basicFormat;
 	
 	private Exception exception;
 	
@@ -31,7 +31,7 @@ public class Calculation {
 		
 		exception = new Exception();
 		format = NumberFormat.getInstance();
-		//format = new DecimalFormat("#,###,###,###,###,###.################");
+		basicFormat = new DecimalFormat("################.################");
 	}
 	
 	public CalculationDTO StartCalculatingBasic() {
@@ -78,10 +78,11 @@ public class Calculation {
 			return calculationDTO;
 		}
 		
-		resultString = eraseDecimalPoint(resultBig);
+		resultBig = eraseDecimalPoint(resultBig);
+		resultString = format.format(resultBig);
 
 		calculationDTO.setInput(resultString);
-		calculationDTO.setFirstNumber(resultString);
+		calculationDTO.setFirstNumber(basicFormat.format(resultBig));
 		
 		return calculationDTO;
 	}
@@ -113,7 +114,9 @@ public class Calculation {
 		}
 		}
 		
-		String resultString = eraseDecimalPoint(resultBig);
+		resultBig = eraseDecimalPoint(resultBig);
+		String resultString = format.format(resultBig);
+		
 		System.out.println(resultString + "hi");
 		
 		beforeInputTextAll = inputTextAll;
@@ -122,16 +125,14 @@ public class Calculation {
 		beforeInputTextAll += "=";
 		
 		calculationDTO.setInput(resultString);
-		calculationDTO.setFirstNumber(format.format(firstBig));
+		calculationDTO.setFirstNumber(basicFormat.format(firstBig));
 		calculationDTO.setBeforeInput(beforeInputTextAll);
 	
 		return calculationDTO;
 	}
 	
-	private String eraseDecimalPoint(BigDecimal resultBig) {
-		String resultString = format.format(resultBig);
+	private BigDecimal eraseDecimalPoint(BigDecimal resultBig) {
 		resultBig = resultBig.stripTrailingZeros();
-		resultString = format.format(resultBig);
-		return resultString;
+		return resultBig;
 	}
 }
