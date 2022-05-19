@@ -41,6 +41,7 @@ public class ButtonActionListener {
 	private NumberFormat format;
 	private DecimalFormat decimalPoint;
 	private DecimalFormat decimalPointSmall;
+	private DecimalFormat basicNumber;
 	
 	public ButtonActionListener(String inputText, String inputTextAll, String beforeInputTextAll, CalculatorScreen calculatorScreen, CalculatorButton calculatorButton) {
 		this.inputText = inputText;
@@ -61,6 +62,7 @@ public class ButtonActionListener {
 		secondNumber = "";
 		decimalPoint = new DecimalFormat("#,###,###,###,###,###.################");
 		decimalPointSmall = new DecimalFormat("###,###");
+		basicNumber = new DecimalFormat("################.################");
 	}
 	
 	public void ListenButtonAction() { // 버튼 리스너 
@@ -177,6 +179,9 @@ public class ButtonActionListener {
 				calculatorScreen.currentInput.setText(inputTextAll);
 				calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT);
 				calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
+				if(inputTextAll != "0") {
+					inputTextAll = inputTextAll.replaceAll(",", "");
+				}
 			}
 		}
 	}
