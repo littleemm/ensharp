@@ -1,15 +1,13 @@
 package controller;
 import utility.Constant;
-import utility.Exception;
+
+import java.util.regex.Pattern;
 import java.text.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.*;
 import javax.swing.*;
 import java.math.*;
-import java.nio.file.spi.FileSystemProvider;
-
-import javax.swing.AbstractButton;
 
 import model.CalculationDTO;
 import view.CalculatorButton;
@@ -94,10 +92,10 @@ public class ButtonActionListener {
 			int keyForInput = key - 48;
 			String keyText = KeyEvent.getKeyText(key);
 			String keyCodeText = Integer.toString(key);
-			System.out.println(keyCodeText);
-			System.out.println(keyText);
+	
 			numberInput(Integer.toString(keyForInput));
-			
+			recognizeOperator(keyCodeText);
+			recognizeClearSign(keyCodeText);
 		}
 		public void keyReleased(KeyEvent e) {
 			
@@ -133,10 +131,10 @@ public class ButtonActionListener {
 		}
 	
 		for (int i=0;i<12;i++) {
-			if((text.equals(calculatorButton.screenValue[i]) || text.equals(Constant.SPACE_CODE))&& isNumber()) {
+			if((text.equals(calculatorButton.screenValue[i])) && isNumber()) {
 				inputText = text; // 현재 눌린 숫자 
 				System.out.println(inputText);
-				if (inputText.equals("+/-") || inputText.equals(Constant.SPACE_CODE)) {
+				if (inputText.equals("+/-")) {
 					ShowPositiveOrNegative();
 				}
 				else if (inputTextAll.equals("0")) {
@@ -157,7 +155,14 @@ public class ButtonActionListener {
 					inputTextAll += inputText; 
 				}
 			}
+			
 		}
+		
+		if ((text.equals(Constant.SPACE_CODE_CHANGED) || text.equals(Constant.F9_CODE_CHANGED)) && isNumber()) { // 키보드로 스페이스(부호키) 입력됐을 경우 
+			inputText = text;
+			ShowPositiveOrNegative();
+		}
+		
 		System.out.println(inputTextAll);
 		// 큰 숫자 부분 
 		calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll))); 
@@ -172,94 +177,95 @@ public class ButtonActionListener {
 	private class OperationButtonListener implements ActionListener { // 연산자 버튼 
 		public void actionPerformed(ActionEvent e) {
 			JButton button = (JButton)e.getSource();
+			String buttonText = button.getText();
 			
-			if (inputText.equals("+") || inputText.equals("-") || inputText.equals("×") || inputText.equals("÷")) { // 정규식 !!!!
-				return;
-			} 
-			
-			switch(button.getText().charAt(0)) { // 통일 (한줄로 가능) !!!!!
-			case ('+') : {
-				AddOperator(button);
-				break;
+			recognizeOperator(buttonText);
+		}
+	}
+	
+	private void recognizeOperator(String text) {
+		String operatorPattern = "^[+-×÷]$";
+		String equalSignPattern = "^[=]$";
+		boolean regex = operatorPattern.matches(text);
+		boolean regexEqual = equalSignPattern.matches(text);
+		
+		if (inputText.equals("+") || inputText.equals("-") || inputText.equals("×") || inputText.equals("÷")) { // 정규식 !!!!
+			return;
+		} 
+		
+		if(regex || text.equals("42") || text.equals("43") || text.equals("45") || text.equals("47")) {
+			AddOperator(text);
+		}
+		else if (regexEqual || text.equals("32") || text.equals("61")) {
+			IdentifyEqualSign(text);
+		}
+		
+		inputText = text;
+		calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT);
+		calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
+		
+		if(beforeInputTextAll.substring(beforeInputTextAll.length()-1).equals("=")) {
+			if (inputTextAll.length() > 14) {
+				calculatorScreen.currentInput.setFont(fontToSmall);
 			}
-			case ('-') : {
-				AddOperator(button);
-				break;
+			calculatorScreen.currentInput.setText(inputTextAll);
+			calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT);
+			calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
+			if(inputTextAll != "0") {
+				inputTextAll = inputTextAll.replaceAll(",", "");
 			}
-			case ('×') : {
-				AddOperator(button);
-				break;
+		}
+		else {
+			if (inputTextAll.length() > 14) {
+				calculatorScreen.currentInput.setFont(fontToSmall);
 			}
-			case ('÷') : {
-				AddOperator(button);
-				break;
+			if (beforeInputTextAll.substring(0, 1) != "0" && inputTextAll.equals("0")) {
+				inputTextAll = decimalPoint.format(Double.parseDouble(beforeInputTextAll.substring(0, beforeInputTextAll.length() - 1)));
 			}
-			case ('=') : {
-				IdentifyEqualSign(button);
-				break;
-			}
-			}
-			inputText = button.getText();
-			calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT);
-			calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
-			
-			if(beforeInputTextAll.substring(beforeInputTextAll.length()-1).equals("=")) {
-				if (inputTextAll.length() > 14) {
-					calculatorScreen.currentInput.setFont(fontToSmall);
-				}
-				calculatorScreen.currentInput.setText(inputTextAll);
-				calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT);
-				calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
-				if(inputTextAll != "0") {
-					inputTextAll = inputTextAll.replaceAll(",", "");
-				}
-			}
-			else {
-				if (inputTextAll.length() > 14) {
-					calculatorScreen.currentInput.setFont(fontToSmall);
-				}
-				if (beforeInputTextAll.substring(0, 1) != "0" && inputTextAll.equals("0")) {
-					inputTextAll = decimalPoint.format(Double.parseDouble(beforeInputTextAll.substring(0, beforeInputTextAll.length() - 1)));
-				}
-				calculatorScreen.currentInput.setText(inputTextAll);
-				calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT);
-				calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
-				inputTextAll = "0";
-			}
+			calculatorScreen.currentInput.setText(inputTextAll);
+			calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT);
+			calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
+			inputTextAll = "0";
 		}
 	}
 	
 	private class ClearButtonListener implements ActionListener { // 지우기 버튼 
 		public void actionPerformed(ActionEvent e) {
 			JButton button = (JButton)e.getSource();
-			if(button.getText().equals("C")) { // 작은 글씨까지 삭제 
-				beforeInputTextAll = "";
-				inputTextAll = "0";
-				calculatorScreen.beforeInput.setText(beforeInputTextAll);
-				calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll)));
-				calculatorScreen.beforeInput.setFont(beforeFont);
-			}
-			else if (button.getText().equals("CE") && beforeInputTextAll.substring(beforeInputTextAll.length() - 1).equals("=")) { // 현재 입력값만 삭제 
-				beforeInputTextAll = "";
-				inputTextAll = "0";
-				calculatorScreen.beforeInput.setText(beforeInputTextAll);
-				calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll)));
-				calculatorScreen.beforeInput.setFont(beforeFont);
-			}
-			else if (button.getText().equals("CE")) {
-				inputTextAll = "0";
-				calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll)));
-			}
-			else if (button.getText().equals("⌫")) { // 현재 입력값에서 하나씩 삭제 
-				inputTextAll = inputTextAll.substring(0, inputTextAll.length() - 1);
-				if (inputTextAll.length() == 0) {
-					inputTextAll = "0";
-				}
-				calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll)));
-			}
-			calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT);
-			calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
+			String buttonText = button.getText();
+			
+			recognizeClearSign(buttonText);
 		}
+	}
+	
+	private void recognizeClearSign(String text) {
+		if(text.equals("C") || text.equals(Constant.ESC_CODE)) { // 작은 글씨까지 삭제 
+			beforeInputTextAll = "";
+			inputTextAll = "0";
+			calculatorScreen.beforeInput.setText(beforeInputTextAll);
+			calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll)));
+			calculatorScreen.beforeInput.setFont(beforeFont);
+		}
+		else if (text.equals("CE") && beforeInputTextAll.substring(beforeInputTextAll.length() - 1).equals("=")) { // 현재 입력값만 삭제 
+			beforeInputTextAll = "";
+			inputTextAll = "0";
+			calculatorScreen.beforeInput.setText(beforeInputTextAll);
+			calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll)));
+			calculatorScreen.beforeInput.setFont(beforeFont);
+		}
+		else if (text.equals("CE")) {
+			inputTextAll = "0";
+			calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll)));
+		}
+		else if (text.equals("⌫") || text.equals(Constant.BACKSPACE_CODE)) { // 현재 입력값에서 하나씩 삭제 
+			inputTextAll = inputTextAll.substring(0, inputTextAll.length() - 1);
+			if (inputTextAll.length() == 0) {
+				inputTextAll = "0";
+			}
+			calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll)));
+		}
+		calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT);
+		calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
 	}
 	
 	private boolean isNumber() {
@@ -300,7 +306,7 @@ public class ButtonActionListener {
 		} 
 	}
 	
-	private void IdentifyEqualSign(JButton button) {
+	private void IdentifyEqualSign(String text) {
 
 		if (operator.length() > 0 && beforeInputTextAll.substring(beforeInputTextAll.length() - 1).equals("=")) {
 			calculation = new Calculation(firstNumber, secondNumber, operator, inputTextAll, beforeInputTextAll);
@@ -313,11 +319,11 @@ public class ButtonActionListener {
 			calculatorScreen.beforeInput.setFont(beforeFont);
 		}
 		else {
-			AddOperator(button);
+			AddOperator(text);
 		}
 	}
 	
-	private void AddOperator(JButton button) { // 수행된 값을 바탕으로 오른쪽에 연산자 추가  
+	private void AddOperator(String text) { // 수행된 값을 바탕으로 오른쪽에 연산자 추가  
 		if (beforeInputTextAll.length() > 0) { // 숫자 + 연산자 조합의 입력값이 존재할 경우 
 			secondNumber = inputTextAll;
 			System.out.println(secondNumber);
@@ -332,14 +338,14 @@ public class ButtonActionListener {
 			inputTextAll = calculationDTO.getInput();
 			firstNumber = calculationDTO.getFirstNumber();
 			
-			if(button.getText().equals("=")) {
+			if(text.equals("=")) {
 				beforeInputTextAll += secondNumber; 
 				beforeInputTextAll += "="; 
 			}
 			else {
-				operator = button.getText();
+				operator = text;
 				beforeInputTextAll = inputTextAll;
-				beforeInputTextAll += button.getText();
+				beforeInputTextAll += text;
 				
 			}
 			
@@ -351,7 +357,7 @@ public class ButtonActionListener {
 			System.out.println(firstNumber);
 		}
 		else {
-			operator = button.getText();
+			operator = text;
 			firstNumber = inputTextAll;
 			beforeInputTextAll = inputTextAll; 
 			beforeInputTextAll += operator; 
