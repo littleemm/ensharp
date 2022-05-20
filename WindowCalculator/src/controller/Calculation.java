@@ -72,7 +72,7 @@ public class Calculation {
 		}
 		}
 		
-		if(resultString == Constant.WARNING_DIVIDE_0) {
+		if(resultString == Constant.WARNING_DIVIDE_0 || resultString == Constant.WARNING_DIVIDE_EMPTY) {
 			calculationDTO.setInput(resultString);
 			calculationDTO.setFirstNumber(resultString);
 			return calculationDTO;

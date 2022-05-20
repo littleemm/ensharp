@@ -54,7 +54,7 @@ public class ButtonActionListener {
 		buttonColor = new Color(208, 205, 205);
 		equalButtonColor = new Color(176, 160, 229);
 		beforeFont = new Font("맑은 고딕 Bold", Font.BOLD, 10);
-		font = new Font("맑은 고딕", Font.BOLD, 40);
+		font = new Font("맑은 고딕", Font.BOLD, 38);
 		fontToSmall = new Font("맑은 고딕 Bold", Font.BOLD, 30);
 		logButtonImage = new ImageIcon("src/image/logButton.png");
 		operator = "";
@@ -153,7 +153,6 @@ public class ButtonActionListener {
 		for (int i=0;i<12;i++) {
 			if((text.equals(calculatorButton.screenValue[i])) && isNumber()) {
 				inputText = text; // 현재 눌린 숫자 
-				System.out.println(inputText);
 				if (inputText.equals("+/-")) {
 					ShowPositiveOrNegative();
 				}
@@ -369,10 +368,10 @@ public class ButtonActionListener {
 			System.out.println(secondNumber);
 			calculation = new Calculation(firstNumber, secondNumber, operator, inputTextAll, beforeInputTextAll);
 			
-			System.out.println(beforeInputTextAll);
-			System.out.println(inputTextAll);
+			System.out.println("before" + beforeInputTextAll);
+			System.out.println("inputAll" + inputTextAll);
 			System.out.println(firstNumber);
-			System.out.println(secondNumber);
+			System.out.println("second" + secondNumber);
 			
 			CalculationDTO calculationDTO = calculation.StartCalculatingBasic();
 			inputTextAll = calculationDTO.getInput();
