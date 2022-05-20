@@ -61,6 +61,7 @@ public class ButtonActionListener {
 		firstNumber = "";
 		secondNumber = "";
 		shift = false;
+		format = NumberFormat.getInstance();
 		decimalPoint = new DecimalFormat("#,###,###,###,###,###.################");
 		decimalPointSmall = new DecimalFormat("###,###");
 		basicNumber = new DecimalFormat("################.################");
@@ -139,6 +140,7 @@ public class ButtonActionListener {
 		if (beforeInputOperatorPart.equals("=")) {
 			inputTextAll = "0";
 			beforeInputTextAll = "";
+			operator = "";
 		}
 	
 		for (int i=0;i<12;i++) {
@@ -234,11 +236,7 @@ public class ButtonActionListener {
 			AddOperator(text);
 		}
 		else if (regexEqual || text.equals(Constant.ENTER_CODE_MAC) || text.equals(Constant.ENTER_CODE_WINDOW) || text.equals(Constant.EQUALSIGN_CODE)) {
-			
-			if(text.equals(Constant.ENTER_CODE_MAC) || text.equals(Constant.ENTER_CODE_WINDOW) || text.equals(Constant.EQUALSIGN_CODE)) {
-				text = "=";
-			}
-			
+			text = "=";
 			IdentifyEqualSign(text);
 		}
 		
@@ -250,11 +248,13 @@ public class ButtonActionListener {
 			if (inputTextAll.length() > 14) {
 				calculatorScreen.currentInput.setFont(fontToSmall);
 			}
-			calculatorScreen.currentInput.setText(inputTextAll);
+			inputTextAllBig = new BigDecimal(inputTextAll).stripTrailingZeros();
+			calculatorScreen.currentInput.setText(decimalPoint.format(inputTextAllBig));
 			calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT);
 			calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
-			if(inputTextAll != "0") {
-				inputTextAll = inputTextAll.replaceAll(",", "");
+			
+			if (inputTextAll != "0") {
+			inputTextAll = inputTextAll.replaceAll(",", "");
 			}
 		}
 		else {
@@ -264,7 +264,8 @@ public class ButtonActionListener {
 			if (beforeInputTextAll.substring(0, 1) != "0" && inputTextAll.equals("0")) {
 				inputTextAll = decimalPoint.format(Double.parseDouble(beforeInputTextAll.substring(0, beforeInputTextAll.length() - 1)));
 			}
-			calculatorScreen.currentInput.setText(inputTextAll);
+			inputTextAllBig = new BigDecimal(inputTextAll).stripTrailingZeros();
+			calculatorScreen.currentInput.setText(decimalPoint.format(inputTextAllBig));
 			calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT);
 			calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
 			inputTextAll = "0";
@@ -351,7 +352,6 @@ public class ButtonActionListener {
 	}
 	
 	private void IdentifyEqualSign(String text) {
-
 		if (operator.length() > 0 && beforeInputTextAll.substring(beforeInputTextAll.length() - 1).equals("=")) {
 			calculation = new Calculation(firstNumber, secondNumber, operator, inputTextAll, beforeInputTextAll);
 			CalculationDTO calculationDTO = calculation.CalculateAgain();
@@ -383,11 +383,18 @@ public class ButtonActionListener {
 			firstNumber = calculationDTO.getFirstNumber();
 	
 			if(text.equals("=")) {
+				secondBig = new BigDecimal(secondNumber).stripTrailingZeros();
+				secondNumber = format.format(secondBig).replaceAll(",", "");
+				
 				beforeInputTextAll += secondNumber; 
 				beforeInputTextAll += "="; 
 			}
 			else {
 				operator = text;
+				
+				inputTextAllBig = new BigDecimal(inputTextAll).stripTrailingZeros();
+				inputTextAll = format.format(inputTextAllBig).replaceAll(",", "");
+				
 				beforeInputTextAll = inputTextAll;
 				beforeInputTextAll += text;	
 			}
@@ -402,6 +409,10 @@ public class ButtonActionListener {
 		else {
 			operator = text;
 			firstNumber = inputTextAll;
+			
+			inputTextAllBig = new BigDecimal(inputTextAll).stripTrailingZeros();
+			inputTextAll = format.format(inputTextAllBig).replaceAll(",", "");
+			
 			beforeInputTextAll = inputTextAll; 
 			beforeInputTextAll += operator; 
 			
@@ -410,7 +421,6 @@ public class ButtonActionListener {
 			calculatorScreen.beforeInput.setText(beforeInputTextAll);
 			calculatorScreen.beforeInput.setFont(beforeFont);
 			//inputTextAll = "0"; // 입력값 초기화 
-			System.out.println("hi");
 		}
 	}
 	private class LogButtonListener implements ActionListener {
