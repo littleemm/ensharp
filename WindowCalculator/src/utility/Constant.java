@@ -6,4 +6,5 @@ public class Constant {
 	public static String F9_CODE_CHANGED = "72";
 	public static String BACKSPACE_CODE = "8";
 	public static String ESC_CODE = "27";
+	public static String DELETE_CODE = "46";
 }

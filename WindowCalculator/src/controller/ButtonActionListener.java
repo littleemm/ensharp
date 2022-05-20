@@ -20,6 +20,7 @@ public class ButtonActionListener {
 	private String firstNumber;
 	private String operator;
 	private String secondNumber;
+	private boolean shift;
 	
 	private CalculatorScreen calculatorScreen;
 	private CalculatorButton calculatorButton;
@@ -59,6 +60,7 @@ public class ButtonActionListener {
 		operator = "";
 		firstNumber = "";
 		secondNumber = "";
+		shift = false;
 		decimalPoint = new DecimalFormat("#,###,###,###,###,###.################");
 		decimalPointSmall = new DecimalFormat("###,###");
 		basicNumber = new DecimalFormat("################.################");
@@ -92,7 +94,25 @@ public class ButtonActionListener {
 			int keyForInput = key - 48;
 			String keyText = KeyEvent.getKeyText(key);
 			String keyCodeText = Integer.toString(key);
-	
+			System.out.println(keyText);
+			System.out.println(keyCodeText);
+			
+			if (keyCodeText.equals("16")) {
+				shift = true;
+			}
+			if (shift && keyCodeText.equals("56")) {
+				keyCodeText = "42";
+				recognizeOperator(keyCodeText);
+				shift = false;
+				return;
+			}
+			else if (shift && keyCodeText.equals("61")) {
+				keyCodeText = "43";
+				recognizeOperator(keyCodeText);
+				shift = false;
+				return;
+			}
+			
 			numberInput(Integer.toString(keyForInput));
 			recognizeOperator(keyCodeText);
 			recognizeClearSign(keyCodeText);
@@ -189,14 +209,32 @@ public class ButtonActionListener {
 		boolean regex = Pattern.matches(operatorPattern, text);
 		boolean regexEqual = Pattern.matches(equalSignPattern, text);
 		System.out.println(regex);
+		System.out.println(text+ "hi");
 		if (inputText.equals("+") || inputText.equals("-") || inputText.equals("×") || inputText.equals("÷")) { // 정규식 !!!!
 			return;
 		} 
 		
 		if(regex || text.equals("42") || text.equals("43") || text.equals("45") || text.equals("47")) {
+			
+			if(text.equals("42")) {
+				text = "×";
+			}
+			else if (text.equals("43")) {
+				text ="+";
+			}
+			else if (text.equals("45")) {
+				text = "-";
+			}
+			else if (text.equals("47")) {
+				text = "÷";
+			}
+			
 			AddOperator(text);
 		}
 		else if (regexEqual || text.equals("32") || text.equals("61")) {
+			if(text.equals("32") || text.equals("61")) {
+				text = "=";
+			}
 			IdentifyEqualSign(text);
 		}
 		else {
@@ -248,14 +286,14 @@ public class ButtonActionListener {
 			calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll)));
 			calculatorScreen.beforeInput.setFont(beforeFont);
 		}
-		else if (text.equals("CE") && beforeInputTextAll.substring(beforeInputTextAll.length() - 1).equals("=")) { // 현재 입력값만 삭제 
+		else if ((text.equals("CE") || text.equals(Constant.DELETE_CODE)) && beforeInputTextAll.substring(beforeInputTextAll.length() - 1).equals("=")) { // 현재 입력값만 삭제 
 			beforeInputTextAll = "";
 			inputTextAll = "0";
 			calculatorScreen.beforeInput.setText(beforeInputTextAll);
 			calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll)));
 			calculatorScreen.beforeInput.setFont(beforeFont);
 		}
-		else if (text.equals("CE")) {
+		else if (text.equals("CE") || text.equals(Constant.DELETE_CODE)) {
 			inputTextAll = "0";
 			calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll)));
 		}
@@ -347,8 +385,7 @@ public class ButtonActionListener {
 			else {
 				operator = text;
 				beforeInputTextAll = inputTextAll;
-				beforeInputTextAll += text;
-				
+				beforeInputTextAll += text;	
 			}
 			
 			calculatorScreen.beforeInput.setText(beforeInputTextAll);
