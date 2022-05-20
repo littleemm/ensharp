@@ -184,11 +184,11 @@ public class ButtonActionListener {
 	}
 	
 	private void recognizeOperator(String text) {
-		String operatorPattern = "^[+-×÷]$";
-		String equalSignPattern = "^[=]$";
-		boolean regex = operatorPattern.matches(text);
-		boolean regexEqual = equalSignPattern.matches(text);
-		
+		String operatorPattern = "^[+×÷-]{1}$";
+		String equalSignPattern = "^[=]{1}$";
+		boolean regex = Pattern.matches(operatorPattern, text);
+		boolean regexEqual = Pattern.matches(equalSignPattern, text);
+		System.out.println(regex);
 		if (inputText.equals("+") || inputText.equals("-") || inputText.equals("×") || inputText.equals("÷")) { // 정규식 !!!!
 			return;
 		} 
@@ -199,7 +199,9 @@ public class ButtonActionListener {
 		else if (regexEqual || text.equals("32") || text.equals("61")) {
 			IdentifyEqualSign(text);
 		}
-		
+		else {
+			return;
+		}
 		inputText = text;
 		calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT);
 		calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
