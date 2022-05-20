@@ -8,10 +8,11 @@ import java.awt.Font;
 import java.awt.event.*;
 import javax.swing.*;
 import java.math.*;
-
+import model.CalculationLogDTO;
 import model.CalculationDTO;
 import view.CalculatorButton;
 import view.CalculatorScreen;
+import view.LogPage;
 
 public class ButtonActionListener {
 	private String inputText; // 현재 눌린 값  
@@ -25,6 +26,8 @@ public class ButtonActionListener {
 	private CalculatorScreen calculatorScreen;
 	private CalculatorButton calculatorButton;
 	private Calculation calculation;
+	private LogPage logPage;
+	private CalculationLogDTO logDTO;
 	
 	private Color buttonColor;
 	private Color equalButtonColor;
@@ -57,6 +60,8 @@ public class ButtonActionListener {
 		font = new Font("맑은 고딕", Font.BOLD, 38);
 		fontToSmall = new Font("맑은 고딕 Bold", Font.BOLD, 30);
 		logButtonImage = new ImageIcon("src/image/logButton.png");
+		logPage = new LogPage();
+		logDTO = new CalculationLogDTO("", "");
 		operator = "";
 		firstNumber = "";
 		secondNumber = "";
@@ -83,6 +88,15 @@ public class ButtonActionListener {
 			calculatorButton.clearButton[i].addMouseListener(new MouseButtonListener());
 		}
 		calculatorButton.logButton.addMouseListener(new MouseButtonListener());
+		calculatorButton.logButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JButton button = (JButton)e.getSource();
+				if(button.getIcon().equals(logButtonImage)) {
+					logPage.PrintLogList(logDTO);
+					mainFrame.add(logPage.logPanel);
+				}
+			}
+		});
 		
 		mainFrame.addKeyListener(new NumberKeyListener());
 		mainFrame.setFocusable(true);
@@ -433,7 +447,7 @@ public class ButtonActionListener {
 		public void actionPerformed(ActionEvent e) {
 			JButton button = (JButton)e.getSource();
 			if (button.getIcon().equals(logButtonImage)) {
-				
+				logPage.PrintLogList(logDTO);
 			}
 		}
 	}

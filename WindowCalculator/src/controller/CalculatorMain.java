@@ -13,6 +13,7 @@ public class CalculatorMain extends JFrame{
 	private String inputText;
 	public CalculatorButton calculatorButton;
 	public CalculatorScreen calculatorScreen;
+	public LogPage logPage;
 	private GridBagLayout layout;
 	private GridBagConstraints constraint;
 	private ButtonActionListener listener;
@@ -28,6 +29,7 @@ public class CalculatorMain extends JFrame{
 		constraint = new GridBagConstraints();
 		calculatorButton = new CalculatorButton();
 		calculatorScreen = new CalculatorScreen();
+		logPage = new LogPage();
 		listener = new ButtonActionListener(inputText, inputTextAll, beforeInputTextAll, calculatorScreen, calculatorButton);
 	}
 	
