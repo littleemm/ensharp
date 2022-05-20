@@ -1,5 +1,6 @@
 package view;
 import javax.swing.*;
+import java.awt.*;
 
 public class CalculatorScreen {
 	
@@ -14,15 +15,17 @@ public class CalculatorScreen {
 	}
 	
 	public void PrintCalculatorScreen() {
-		inputPanel.setSize(420, 150);
+		inputPanel.setSize(420, 100);
 		inputPanel.setLayout(null);
 		
 		beforeInput.setSize(410, 10);
 		beforeInput.setLocation(0, 40);
+		beforeInput.setHorizontalAlignment(JLabel.RIGHT);
 		inputPanel.add(beforeInput);
 		
 		currentInput.setSize(410, 145);
 		currentInput.setLocation(0, 15);
+		currentInput.setHorizontalAlignment(JLabel.RIGHT);
 		inputPanel.add(currentInput);
 		
 

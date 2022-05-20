@@ -117,26 +117,29 @@ public class CalculatorButton extends JPanel {
 	
 	public void PrintLogButtonPanel() {
 		logButtonPanel.setSize(430, 5);
-		logButtonPanel.setLayout(null);
+		logButtonPanel.setLayout(new BorderLayout());
 		
-		guideLabel.setSize(210, 45);
+
+		guideLabel.setSize(210, 35);
 		guideLabel.setLayout(null);
-		guideLabel.setLocation(10, 0);
+		//guideLabel.setLocation(10, 0);
 		guideLabel.setFont(guideFont);
-		logButtonPanel.add(guideLabel);
+		//guideLabel.setHorizontalAlignment(JLabel.LEFT); 
+		logButtonPanel.add(guideLabel, BorderLayout.NORTH);
+	
 		//imageLabel.setSize(200, 50);
 		//imageLabel.setLayout(null);
 		//imageLabel.setLocation(10, 0);
 		//imageLabel.setIcon(logoImage);
 		//logButtonPanel.add(imageLabel);
 		
-		logButton.setLocation(395,17);
+		//logButton.setLocation(395,17);
 		logButton.setSize(20,20);
 		logButton.setIcon(logButtonImage);
-		//logButton.setHorizontalAlignment(JButton.CENTER);
+		logButton.setHorizontalAlignment(JButton.RIGHT);
 		logButton.setBorderPainted(false);
 		logButton.setFocusPainted(false);
-		logButtonPanel.add(logButton);
+		logButtonPanel.add(logButton, BorderLayout.NORTH);
 		
 		//logButtonPanel.setLocation(0, 1);
 		logButtonPanel.setVisible(true);

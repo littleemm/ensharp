@@ -248,8 +248,14 @@ public class ButtonActionListener {
 			if (inputTextAll.length() > 14) {
 				calculatorScreen.currentInput.setFont(fontToSmall);
 			}
-			inputTextAllBig = new BigDecimal(inputTextAll).stripTrailingZeros();
-			calculatorScreen.currentInput.setText(decimalPoint.format(inputTextAllBig));
+			
+			if (inputTextAll.equals(Constant.WARNING_DIVIDE_0) || inputTextAll.equals(Constant.WARNING_DIVIDE_EMPTY)) {
+				calculatorScreen.currentInput.setText(inputTextAll);
+			}
+			else {
+				inputTextAllBig = new BigDecimal(inputTextAll).stripTrailingZeros();
+				calculatorScreen.currentInput.setText(decimalPoint.format(inputTextAllBig));
+			}
 			calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT);
 			calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
 			
