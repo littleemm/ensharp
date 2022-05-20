@@ -5,9 +5,11 @@ import java.math.*;
 
 public class Exception {
 	private NumberFormat format;
+	private DecimalFormat decimalFormat;
 	
 	public Exception() {
 		format = NumberFormat.getInstance();
+		decimalFormat = new DecimalFormat("#.################");
 	}
 	
 	public CalculationDTO DivideByZero(BigDecimal firstNumber, BigDecimal secondNumber) {
@@ -32,14 +34,16 @@ public class Exception {
 	
 	public String modifyResult(String resultString) {
 		resultString = resultString.replaceAll(",", "");
-		double resultDouble = Double.parseDouble(resultString);
 		BigDecimal resultBig;
 		
 		if (resultString.length() > 16 && !isDecimalPoint(resultString)) {
-			resultBig = new BigDecimal(Double.toString(resultDouble));
-			System.out.println(resultBig.toEngineeringString() + "double");
-			resultString = format.format(resultBig);
-			System.out.println(resultString + "double");
+			resultBig = new BigDecimal(resultString);
+			String point = Double.toString(Math.pow(0.1, resultString.length() - 1));
+			System.out.println(point);
+			resultBig = resultBig.multiply(new BigDecimal(point));
+			
+			resultString = format.format(resultBig) + "e+" + Double.toString(resultString.length()-1);
+			System.out.println(resultString);
 		}
 		else if (isDecimalPoint(resultString)) {
 			
