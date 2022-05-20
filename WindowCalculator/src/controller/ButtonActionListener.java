@@ -20,7 +20,7 @@ public class ButtonActionListener {
 	private String firstNumber;
 	private String operator;
 	private String secondNumber;
-	private boolean shift;
+	private Boolean shift;
 	
 	private CalculatorScreen calculatorScreen;
 	private CalculatorButton calculatorButton;
@@ -185,7 +185,7 @@ public class ButtonActionListener {
 		
 		System.out.println(inputTextAll);
 		// 큰 숫자 부분 
-		calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll))); 
+		calculatorScreen.currentInput.setText(decimalPoint.format(new BigDecimal(inputTextAll))); 
 		calculatorScreen.currentInput.setFont(font); 
 		if (inputTextAll.length() > 14) {
 			calculatorScreen.currentInput.setFont(fontToSmall);

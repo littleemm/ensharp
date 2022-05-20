@@ -80,6 +80,7 @@ public class Calculation {
 		
 		resultBig = eraseDecimalPoint(resultBig);
 		resultString = format.format(resultBig);
+		resultString = exception.modifyResult(resultString);
 		System.out.println(resultString);
 		calculationDTO.setInput(resultString);
 		calculationDTO.setFirstNumber(basicFormat.format(resultBig));

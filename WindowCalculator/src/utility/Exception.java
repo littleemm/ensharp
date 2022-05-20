@@ -29,4 +29,30 @@ public class Exception {
 		
 		return calculationDTO;
 	}
+	
+	public String modifyResult(String resultString) {
+		resultString = resultString.replaceAll(",", "");
+		double resultDouble = Double.parseDouble(resultString);
+		BigDecimal resultBig;
+		
+		if (resultString.length() > 16 && !isDecimalPoint(resultString)) {
+			resultBig = new BigDecimal(Double.toString(resultDouble));
+			System.out.println(resultBig.toEngineeringString() + "double");
+			resultString = format.format(resultBig);
+			System.out.println(resultString + "double");
+		}
+		else if (isDecimalPoint(resultString)) {
+			
+		}
+		return resultString;
+	}
+	
+	private Boolean isDecimalPoint(String resultString) {
+		for (int i=0;i<resultString.length();i++) {
+			if (resultString.charAt(i) == '.') {
+				return true;
+			}
+		}
+		return false;
+	}
 }
