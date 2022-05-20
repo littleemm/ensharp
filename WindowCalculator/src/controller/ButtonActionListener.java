@@ -97,22 +97,22 @@ public class ButtonActionListener {
 			System.out.println(keyText);
 			System.out.println(keyCodeText);
 			
-			if (keyCodeText.equals("16")) {
+			if (keyCodeText.equals(Constant.SHIFT_CODE)) {
 				shift = true;
 			}
-			if (shift && keyCodeText.equals("56")) {
-				keyCodeText = "42";
+			if (shift && keyCodeText.equals(Constant.NUMBER8_CODE)) {
+				keyCodeText = Constant.MULTIPLY_CODE;
 				recognizeOperator(keyCodeText);
 				shift = false;
 				return;
 			}
-			else if (shift && keyCodeText.equals("61")) {
-				keyCodeText = "43";
+			else if (shift && keyCodeText.equals(Constant.EQUALSIGN_CODE)) {
+				keyCodeText = Constant.ADD_CODE;
 				recognizeOperator(keyCodeText);
 				shift = false;
 				return;
 			}
-			
+			shift = false;
 			numberInput(Integer.toString(keyForInput));
 			recognizeOperator(keyCodeText);
 			recognizeClearSign(keyCodeText);
@@ -208,38 +208,38 @@ public class ButtonActionListener {
 		String equalSignPattern = "^[=]{1}$";
 		boolean regex = Pattern.matches(operatorPattern, text);
 		boolean regexEqual = Pattern.matches(equalSignPattern, text);
-		System.out.println(regex);
-		System.out.println(text+ "hi");
-		if (inputText.equals("+") || inputText.equals("-") || inputText.equals("×") || inputText.equals("÷")) { // 정규식 !!!!
-			return;
-		} 
+	
+		//if (inputText.equals("+") || inputText.equals("-") || inputText.equals("×") || inputText.equals("÷")) { // 정규식 !!!!
+		//	return;
+		//} 
 		
-		if(regex || text.equals("42") || text.equals("43") || text.equals("45") || text.equals("47")) {
+		if(regex || text.equals(Constant.MULTIPLY_CODE) || text.equals(Constant.ADD_CODE) 
+				|| text.equals(Constant.SUBTRACT_CODE) || text.equals(Constant.DIVIDE_CODE)) {
 			
-			if(text.equals("42")) {
+			if(text.equals(Constant.MULTIPLY_CODE)) {
 				text = "×";
 			}
-			else if (text.equals("43")) {
+			else if (text.equals(Constant.ADD_CODE)) {
 				text ="+";
 			}
-			else if (text.equals("45")) {
+			else if (text.equals(Constant.SUBTRACT_CODE)) {
 				text = "-";
 			}
-			else if (text.equals("47")) {
+			else if (text.equals(Constant.DIVIDE_CODE)) {
 				text = "÷";
 			}
 			
 			AddOperator(text);
 		}
-		else if (regexEqual || text.equals("32") || text.equals("61")) {
-			if(text.equals("32") || text.equals("61")) {
+		else if (regexEqual || text.equals(Constant.ENTER_CODE_MAC) || text.equals(Constant.ENTER_CODE_WINDOW) || text.equals(Constant.EQUALSIGN_CODE)) {
+			
+			if(text.equals(Constant.ENTER_CODE_MAC) || text.equals(Constant.ENTER_CODE_WINDOW) || text.equals(Constant.EQUALSIGN_CODE)) {
 				text = "=";
 			}
+			
 			IdentifyEqualSign(text);
 		}
-		else {
-			return;
-		}
+		
 		inputText = text;
 		calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT);
 		calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
@@ -279,7 +279,7 @@ public class ButtonActionListener {
 	}
 	
 	private void recognizeClearSign(String text) {
-		if(text.equals("C") || text.equals(Constant.ESC_CODE)) { // 작은 글씨까지 삭제 
+		if(text.equals("C") || text.equals(Constant.ESC_CODE) || text.equals(Constant.SPACE_CODE)) { // 작은 글씨까지 삭제 
 			beforeInputTextAll = "";
 			inputTextAll = "0";
 			calculatorScreen.beforeInput.setText(beforeInputTextAll);
@@ -377,7 +377,7 @@ public class ButtonActionListener {
 			CalculationDTO calculationDTO = calculation.StartCalculatingBasic();
 			inputTextAll = calculationDTO.getInput();
 			firstNumber = calculationDTO.getFirstNumber();
-			
+	
 			if(text.equals("=")) {
 				beforeInputTextAll += secondNumber; 
 				beforeInputTextAll += "="; 
@@ -405,7 +405,8 @@ public class ButtonActionListener {
 			
 			calculatorScreen.beforeInput.setText(beforeInputTextAll);
 			calculatorScreen.beforeInput.setFont(beforeFont);
-			inputTextAll = "0"; // 입력값 초기화 
+			//inputTextAll = "0"; // 입력값 초기화 
+			System.out.println("hi");
 		}
 	}
 	private class LogButtonListener implements ActionListener {
@@ -422,7 +423,7 @@ public class ButtonActionListener {
 			JButton button = (JButton)e.getSource();
 			if (button.getIcon() == logButtonImage) {
 				button.setOpaque(true);
-				System.out.println("hi");
+				
 				button.setBackground(buttonColor);
 			}
 			for (int i=0;i<20;i++) {
