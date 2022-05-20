@@ -92,10 +92,7 @@ public class ButtonActionListener {
 		public void keyPressed(KeyEvent e) {
 			int key = e.getKeyCode();
 			int keyForInput = key - 48;
-			String keyText = KeyEvent.getKeyText(key);
 			String keyCodeText = Integer.toString(key);
-			System.out.println(keyText);
-			System.out.println(keyCodeText);
 			
 			if (keyCodeText.equals(Constant.SHIFT_CODE)) {
 				shift = true;
@@ -116,12 +113,6 @@ public class ButtonActionListener {
 			numberInput(Integer.toString(keyForInput));
 			recognizeOperator(keyCodeText);
 			recognizeClearSign(keyCodeText);
-		}
-		public void keyReleased(KeyEvent e) {
-			
-		}
-		public void keyTyped(KeyEvent e) {
-			
 		}
 	}
 	
@@ -153,6 +144,7 @@ public class ButtonActionListener {
 		for (int i=0;i<12;i++) {
 			if((text.equals(calculatorButton.screenValue[i])) && isNumber()) {
 				inputText = text; // 현재 눌린 숫자 
+				System.out.println(inputText);
 				if (inputText.equals("+/-")) {
 					ShowPositiveOrNegative();
 				}
@@ -180,6 +172,17 @@ public class ButtonActionListener {
 		if ((text.equals(Constant.SPACE_CODE_CHANGED) || text.equals(Constant.F9_CODE_CHANGED)) && isNumber()) { // 키보드로 스페이스(부호키) 입력됐을 경우 
 			inputText = text;
 			ShowPositiveOrNegative();
+		}
+		
+		if((text.equals(Constant.PERIOD_CODE)) && isNumber()) {
+			inputText = text;
+			if (inputTextAll.equals("0")) {
+				ShowFirstInput();
+			}
+			else {
+				inputText = ".";
+				inputTextAll += inputText;
+			}
 		}
 		
 		System.out.println(inputTextAll);
@@ -336,8 +339,10 @@ public class ButtonActionListener {
 	}
 	
 	private void ShowFirstInput() {
-		if (inputText.equals(".")) {  // 소수점 입력 처리 
+		if (inputText.equals(".") || inputText.equals(Constant.PERIOD_CODE)) {  // 소수점 입력 처리 
+			inputText = ".";
 			inputTextAll += inputText; 
+			System.out.println("period!");
 		}
 		else { 
 			inputTextAll = "";

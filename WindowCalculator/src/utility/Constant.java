@@ -18,5 +18,6 @@ public class Constant {
 	public static String SUBTRACT_CODE = "45";
 	public static String SHIFT_CODE = "16";
 	public static String EQUALSIGN_CODE = "61";
+	public static String PERIOD_CODE = "-2";
 	
 }
