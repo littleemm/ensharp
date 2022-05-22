@@ -61,7 +61,7 @@ public class ButtonActionListener {
 		fontToSmall = new Font("맑은 고딕 Bold", Font.BOLD, 30);
 		logButtonImage = new ImageIcon("src/image/logButton.png");
 		logPage = new LogPage();
-		logDTO = new CalculationLogDTO("", "");
+		logDTO = new CalculationLogDTO("3+4=", "7");
 		operator = "";
 		firstNumber = "";
 		secondNumber = "";
@@ -91,7 +91,9 @@ public class ButtonActionListener {
 		calculatorButton.logButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JButton button = (JButton)e.getSource();
-				if(button.getIcon().equals(logButtonImage)) {
+				if(button.getText().equals(".")) {
+					calculatorButton.buttonPanel.setVisible(false);
+					//calculatorScreen.inputPanel.setVisible(false);
 					logPage.PrintLogList(logDTO);
 					mainFrame.add(logPage.logPanel);
 				}
@@ -398,6 +400,17 @@ public class ButtonActionListener {
 			System.out.println(firstNumber);
 			System.out.println("second" + secondNumber);
 			
+			//String operatorBefore = beforeInputTextAll.substring(beforeInputTextAll.length() - 1); 
+			//if (text.equals("=") && (operatorBefore.equals("+") || operatorBefore.equals("-") 
+			//		|| operatorBefore.equals("×") || operatorBefore.equals("÷"))) {
+			//	secondNumber = firstNumber;
+			//	beforeInputTextAll = firstNumber;
+			//	beforeInputTextAll += operatorBefore;
+			//	inputTextAll = firstNumber;
+			//	IdentifyEqualSign(text);
+			//	return;
+			//}
+			
 			CalculationDTO calculationDTO = calculation.StartCalculatingBasic();
 			inputTextAll = calculationDTO.getInput();
 			firstNumber = calculationDTO.getFirstNumber();
@@ -412,11 +425,13 @@ public class ButtonActionListener {
 			else {
 				operator = text;
 				
+				String inputTextAllTemporary = inputTextAll;
 				inputTextAllBig = new BigDecimal(inputTextAll).stripTrailingZeros();
 				inputTextAll = format.format(inputTextAllBig).replaceAll(",", "");
 				
 				beforeInputTextAll = inputTextAll;
 				beforeInputTextAll += text;	
+				inputTextAll = inputTextAllTemporary;
 			}
 			
 			calculatorScreen.beforeInput.setText(beforeInputTextAll);
@@ -436,19 +451,12 @@ public class ButtonActionListener {
 			beforeInputTextAll = inputTextAll; 
 			beforeInputTextAll += operator; 
 			
+			inputTextAll = firstNumber;
 			inputText = operator; // 나중에 마지막 입력 버튼 값을 알아야하는 때를 위해 저장 
 			
 			calculatorScreen.beforeInput.setText(beforeInputTextAll);
 			calculatorScreen.beforeInput.setFont(beforeFont);
 			//inputTextAll = "0"; // 입력값 초기화 
-		}
-	}
-	private class LogButtonListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			JButton button = (JButton)e.getSource();
-			if (button.getIcon().equals(logButtonImage)) {
-				logPage.PrintLogList(logDTO);
-			}
 		}
 	}
 	

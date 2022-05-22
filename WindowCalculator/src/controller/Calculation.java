@@ -88,6 +88,16 @@ public class Calculation {
 		return calculationDTO;
 	}
 	
+	private void calculateEmptyMore() {
+		String operatorBefore = beforeInputTextAll.substring(beforeInputTextAll.length() - 1); 
+		if (operatorBefore == "+" || operatorBefore == "-" || operatorBefore == "×" || operatorBefore == "÷") {
+			secondNumber = firstNumber;
+			beforeInputTextAll = firstNumber;
+			beforeInputTextAll += operatorBefore;
+			inputTextAll = firstNumber;
+		}
+	}
+	
 	public CalculationDTO CalculateAgain() {
 		CalculationDTO calculationDTO = new CalculationDTO("", "", "");
 		resultBig = new BigDecimal("0");

@@ -23,6 +23,11 @@ public class LogPage {
 		
 		smallFont = new Font("맑은 고딕", Font.PLAIN, 10);
 		bigFont = new Font("맑은 고딕 Bold", Font.BOLD, 15);
+		logPanel = new JPanel();
+		expressionLabel = new JLabel();
+		resultLabel = new JLabel();
+		logListButton = new JButton[30];
+		logList = new JList();
 	}
 	
 	public void PrintLogList(CalculationLogDTO logDTO) {
@@ -30,10 +35,13 @@ public class LogPage {
 		logPanel.setLayout(new BorderLayout());
 		
 		//logList.add(logDTO);
+		expressionLabel.setSize(430, 20);
 		expressionLabel.setText(logDTO.getExpression());
 		expressionLabel.setFont(smallFont);
+		resultLabel.setSize(430, 20);
 		resultLabel.setText(logDTO.getResult());
 		resultLabel.setFont(bigFont);
+		logListButton[logList.getModel().getSize()] = new JButton();
 		logListButton[logList.getModel().getSize()].add(expressionLabel);
 		logListButton[logList.getModel().getSize()].add(resultLabel);
 		logPanel.add(logListButton[logList.getModel().getSize()]);

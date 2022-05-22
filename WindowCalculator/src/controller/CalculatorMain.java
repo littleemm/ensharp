@@ -2,6 +2,7 @@ package controller;
 import view.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class CalculatorMain extends JFrame{
 	
@@ -34,12 +35,11 @@ public class CalculatorMain extends JFrame{
 	}
 	
 	public void ShowCalculatorMain() {
-		mainFrame.setBounds(20, 20, 430, 600);
+		mainFrame.setSize(430, 600);
+		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setLayout(layout);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		if(mainFrame.getWidth() < 400) {
-		mainFrame.setResizable(false);
-		}
+		
 		calculatorButton.PrintMainPanel();
 		calculatorButton.PrintLogButtonPanel();
 		calculatorScreen.PrintCalculatorScreen();
@@ -55,7 +55,26 @@ public class CalculatorMain extends JFrame{
 		calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT); // 오른쪽에서부터 숫자 시작 
 		calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
 		
+		mainFrame.addComponentListener(new Listener());
+		
 		mainFrame.setVisible(true);
+	}
+	
+	private class Listener implements ComponentListener {
+		public void componentResized(ComponentEvent e) {
+			if (mainFrame.getWidth() < 400) {
+				mainFrame.setResizable(false);
+			}
+		}
+		public void componentHidden(ComponentEvent e) {
+			
+		}
+		public void componentMoved(ComponentEvent e) {
+			
+		}
+		public void componentShown(ComponentEvent e) {
+			
+		}
 	}
 	
 	private void gridBagInsert(Component component, int x, int y, int width, int height, int y1) {
