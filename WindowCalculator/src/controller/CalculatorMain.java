@@ -62,9 +62,10 @@ public class CalculatorMain extends JFrame{
 	
 	private class Listener implements ComponentListener {
 		public void componentResized(ComponentEvent e) {
-			if (mainFrame.getWidth() < 400) {
+			if (mainFrame.getWidth() <= 400 || mainFrame.getHeight() <= 540) {
 				mainFrame.setResizable(false);
 			}
+			
 		}
 		public void componentHidden(ComponentEvent e) {
 			
@@ -73,7 +74,9 @@ public class CalculatorMain extends JFrame{
 			
 		}
 		public void componentShown(ComponentEvent e) {
-			
+			if (mainFrame.getWidth() >= 390) {
+				mainFrame.setResizable(true);
+			}
 		}
 	}
 	
