@@ -18,6 +18,7 @@ public class CalculatorMain extends JFrame{
 	private GridBagLayout layout;
 	private GridBagConstraints constraint;
 	private ButtonActionListener listener;
+	private JPanel panel;
 	
 	public CalculatorMain() {
 		mainFrame = new JFrame("계산기");
@@ -32,6 +33,7 @@ public class CalculatorMain extends JFrame{
 		calculatorScreen = new CalculatorScreen();
 		logPage = new LogPage();
 		listener = new ButtonActionListener(inputText, inputTextAll, beforeInputTextAll, calculatorScreen, calculatorButton);
+		panel = new JPanel();
 	}
 	
 	public void ShowCalculatorMain() {
@@ -50,6 +52,11 @@ public class CalculatorMain extends JFrame{
 		
 		listener.ListenButtonAction(mainFrame);
 		
+		calculatorScreen.beforeInput.setText(beforeInputTextAll); // label에 입력된 숫자 넣기 
+		calculatorScreen.beforeInput.setFont(beforeFont); 
+		calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT); // 오른쪽에서부터 숫자 시작 
+		calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
+		
 		calculatorScreen.currentInput.setText(inputTextAll); // label에 입력된 숫자 넣기 
 		calculatorScreen.currentInput.setFont(font); 
 		calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT); // 오른쪽에서부터 숫자 시작 
@@ -65,6 +72,13 @@ public class CalculatorMain extends JFrame{
 			if (mainFrame.getWidth() <= 400 || mainFrame.getHeight() <= 540) {
 				mainFrame.setResizable(false);
 			}
+			else if (mainFrame.getWidth() > 500) {
+				panel.setSize(300, 600);
+				panel.setLayout(null);
+				panel.setBackground(Color.pink);
+				panel.setVisible(true);
+				gridBagInsert(panel, 1, 0, 3, 5, 5);
+			}
 			
 		}
 		public void componentHidden(ComponentEvent e) {
@@ -74,9 +88,7 @@ public class CalculatorMain extends JFrame{
 			
 		}
 		public void componentShown(ComponentEvent e) {
-			if (mainFrame.getWidth() >= 390) {
-				mainFrame.setResizable(true);
-			}
+			
 		}
 	}
 	
@@ -90,6 +102,7 @@ public class CalculatorMain extends JFrame{
 	        constraint.gridheight = height;
 	        layout.setConstraints(component, constraint);
 	        mainFrame.add(component);
+	        mainFrame.setVisible(true);
 	}
 	
 }
