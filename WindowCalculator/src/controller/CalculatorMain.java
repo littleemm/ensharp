@@ -62,6 +62,7 @@ public class CalculatorMain extends JFrame{
 		calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT); // 오른쪽에서부터 숫자 시작 
 		calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
 		
+		
 		mainFrame.addComponentListener(new Listener());
 		
 		mainFrame.setVisible(true);

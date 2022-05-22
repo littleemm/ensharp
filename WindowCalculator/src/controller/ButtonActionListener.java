@@ -331,6 +331,7 @@ public class ButtonActionListener {
 		}
 		calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT);
 		calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
+		calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
 	}
 	
 	private boolean isNumber() {
