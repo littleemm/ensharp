@@ -153,10 +153,15 @@ public class ButtonActionListener {
 			beforeInputOperatorPart = beforeInputTextAll.substring(beforeInputTextAll.length() - 1);
 		}
 		
-		if (beforeInputOperatorPart.equals("=")) {
+		if (beforeInputOperatorPart.equals("=") || firstNumber.equals(Constant.WARNING_DIVIDE_0) || firstNumber.equals(Constant.WARNING_DIVIDE_EMPTY)) {
 			inputTextAll = "0";
+			firstNumber = "";
 			beforeInputTextAll = "";
 			operator = "";
+			calculatorScreen.beforeInput.setText(beforeInputTextAll);
+			calculatorScreen.beforeInput.setFont(fontToSmall);
+			calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT);
+			calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
 		}
 	
 		for (int i=0;i<12;i++) {
