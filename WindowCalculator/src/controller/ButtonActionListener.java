@@ -227,12 +227,21 @@ public class ButtonActionListener {
 		if (beforeInputTextAll.length() > 0 && beforeInputTextAll.substring(0, 1).equals("n") || secondNegate.length() - secondNegate.replace(String.valueOf('n'), "").length() > 0) {
 			calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT);
 			calculatorScreen.beforeInput.setText(beforeInputTextAll);
-			if (inputTextAll != "0") {
+			if (inputTextAll != "0" && inputTextAll.length() - inputTextAll.replace(String.valueOf('.'), "").length() == 1) {
+				calculatorScreen.currentInput.setText(decimalPoint.format(new BigDecimal(inputTextAll.substring(0, inputTextAll.indexOf(".")))) + inputTextAll.substring(inputTextAll.indexOf(".")));
+			}
+			else if (inputTextAll != "0") {
 				calculatorScreen.currentInput.setText(decimalPoint.format(new BigDecimal(inputTextAll)));
 			}
 		}
 		else {
-			calculatorScreen.currentInput.setText(decimalPoint.format(new BigDecimal(inputTextAll))); 
+			if (inputTextAll.length() - inputTextAll.replace(String.valueOf('.'), "").length() == 1) {
+				calculatorScreen.currentInput.setText(decimalPoint.format(new BigDecimal(inputTextAll.substring(0, inputTextAll.indexOf(".")))) + inputTextAll.substring(inputTextAll.indexOf(".")));
+				calculatorScreen.beforeInput.setText(beforeInputTextAll);
+			}
+			else {
+				calculatorScreen.currentInput.setText(decimalPoint.format(new BigDecimal(inputTextAll))); 
+			}
 		}
 		
 		calculatorScreen.currentInput.setFont(font); 
@@ -450,14 +459,19 @@ public class ButtonActionListener {
 	}
 	
 	private void showPeriod() {
+		System.out.println("text:" + inputTextBefore);
 		if (inputTextBefore.equals("+/-")) {
 			beforeInputTextAll = beforeInputTextAll.replace(secondNegate, "");
+			System.out.println(beforeInputTextAll);
 			inputTextAll = "0.";
 			secondNumber = "0";
 			secondNegate = "";
 		}
-		inputTextAll = "";
+		//inputTextAll = "";
+		else {
 		inputTextAll += inputText;
+		System.out.println("inputTextAll:" + inputTextAll);
+		}
 	}
 	
 	private void ShowFirstInput() {
