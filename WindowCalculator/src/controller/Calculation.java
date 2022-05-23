@@ -102,7 +102,9 @@ public class Calculation {
 		CalculationDTO calculationDTO = new CalculationDTO("", "", "");
 		resultBig = new BigDecimal("0");
 		firstBig = new BigDecimal(firstNumber);
+		if (secondNumber.length() > 0) {
 		secondBig = new BigDecimal(secondNumber);
+		}
 		inputTextAllBig = new BigDecimal(inputTextAll);
 		firstBig= inputTextAllBig;
 		
@@ -123,6 +125,9 @@ public class Calculation {
 			resultBig = firstBig.divide(secondBig);
 			break;
 		}
+		case ('=') : {
+			resultBig = firstBig;
+		}
 		}
 		
 		resultBig = eraseDecimalPoint(resultBig);
@@ -133,7 +138,9 @@ public class Calculation {
 		beforeInputTextAll = inputTextAll;
 		beforeInputTextAll += operator;
 		beforeInputTextAll += secondNumber;
+		if(!operator.equals("=")) {
 		beforeInputTextAll += "=";
+		}
 		
 		calculationDTO.setInput(resultString);
 		calculationDTO.setFirstNumber(basicFormat.format(firstBig));
