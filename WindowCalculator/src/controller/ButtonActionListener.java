@@ -409,7 +409,7 @@ public class ButtonActionListener {
 			beforeInputTextAll = "0";
 		}
 		
-		if ((count == 0 && inputTextAll.equals("0")) || beforeInputTextAll.substring(0, 1).equals("n")) { // negate는 계산기 처음 시작할 때 아무 값도 안눌렀을 때 기능함 
+		if (beforeInputTextAll.length() > 0 && ((count == 0 && inputTextAll.equals("0")) || beforeInputTextAll.substring(0, 1).equals("n"))) { // negate는 계산기 처음 시작할 때 아무 값도 안눌렀을 때 기능함 
 			beforeInputTextAll = String.format("negate(%s)", beforeInputTextAll);
 			firstNumber = "0";
 		}
