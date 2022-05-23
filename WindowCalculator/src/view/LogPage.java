@@ -35,7 +35,7 @@ public class LogPage {
 		logPanel.setLayout(new BorderLayout());
 		
 		//logList.add(logDTO);
-		expressionLabel.setSize(430, 20);
+		expressionLabel.setSize(430, 300);
 		expressionLabel.setText(logDTO.getExpression());
 		expressionLabel.setFont(smallFont);
 		resultLabel.setSize(430, 20);
@@ -47,6 +47,7 @@ public class LogPage {
 		logPanel.add(logListButton[logList.getModel().getSize()]);
 		
 		scroll.add(logPanel);
+		logPanel.setBackground(color.pink);
 	}
 	public void PaintColor() {
 		for (int i=0;;i++) {

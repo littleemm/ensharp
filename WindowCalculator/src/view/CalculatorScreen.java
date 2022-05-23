@@ -23,13 +23,14 @@ public class CalculatorScreen {
 		beforeInput.setHorizontalAlignment(JLabel.RIGHT);
 		inputPanel.add(beforeInput);
 		
-		currentInput.setSize(410, 145);
+		currentInput.setSize(410, 90);
 		currentInput.setLocation(0, 15);
 		currentInput.setHorizontalAlignment(JLabel.RIGHT);
 		inputPanel.add(currentInput);
 		
 
 		//inputPanel.setLocation(0, 30);
+		inputPanel.setBackground(Color.yellow);
 		inputPanel.setVisible(true);
 	}
 }

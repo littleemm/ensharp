@@ -116,7 +116,7 @@ public class CalculatorButton extends JPanel {
 	}
 	
 	public void PrintLogButtonPanel() {
-		logButtonPanel.setSize(430, 5);
+		logButtonPanel.setSize(430, 30);
 		logButtonPanel.setLayout(new BorderLayout());
 		
 

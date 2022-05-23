@@ -4,7 +4,10 @@ import utility.Constant;
 import java.util.regex.Pattern;
 import java.text.*;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.*;
 import javax.swing.*;
 import java.math.*;
@@ -48,6 +51,10 @@ public class ButtonActionListener {
 	private DecimalFormat decimalPointSmall;
 	private DecimalFormat basicNumber;
 	
+	private GridBagLayout layout;
+	private GridBagConstraints constraint;
+	private ButtonActionListener listener;
+	
 	private int count;
 	
 	public ButtonActionListener(String inputText, String inputTextAll, String beforeInputTextAll, CalculatorScreen calculatorScreen, CalculatorButton calculatorButton) {
@@ -78,6 +85,9 @@ public class ButtonActionListener {
 		decimalPoint = new DecimalFormat("#,###,###,###,###,###.################");
 		decimalPointSmall = new DecimalFormat("###,###");
 		basicNumber = new DecimalFormat("################.################");
+		
+		layout = new GridBagLayout();
+		constraint = new GridBagConstraints();
 	}
 	
 	public void ListenButtonAction(JFrame mainFrame) { // 버튼 리스너 
@@ -100,10 +110,17 @@ public class ButtonActionListener {
 			public void actionPerformed(ActionEvent e) {
 				JButton button = (JButton)e.getSource();
 				if(button.getText().equals(".")) {
+					mainFrame.setLayout(layout);
+					mainFrame.setVisible(true);
+					logPage.PrintLogList(logDTO);
 					calculatorButton.buttonPanel.setVisible(false);
 					//calculatorScreen.inputPanel.setVisible(false);
-					logPage.PrintLogList(logDTO);
-					mainFrame.add(logPage.logPanel);
+					//calculatorButton.logButtonPanel.setVisible(false);
+					//gridBagInsert(mainFrame, calculatorButton.logButtonPanel, 0, 0, 0, 1, 1);
+					//gridBagInsert(mainFrame, calculatorScreen.inputPanel, 0, 1, 0, 2, 3);
+					gridBagInsert(mainFrame, logPage.logPanel, 0, 5, 0, 5, 5);
+					
+					
 				}
 			}
 		});
@@ -112,6 +129,19 @@ public class ButtonActionListener {
 		mainFrame.setFocusable(true);
 		mainFrame.requestFocus();
 	}
+	
+	private void gridBagInsert(JFrame mainFrame, Component component, int x, int y, int width, int height, int y1) {
+        constraint.fill= GridBagConstraints.BOTH;
+        constraint.weightx=1;
+	    constraint.weighty=y1;
+        constraint.gridx = x;
+        constraint.gridy = y;
+        constraint.gridwidth = width;
+        constraint.gridheight = height;
+        layout.setConstraints(component, constraint);
+        mainFrame.add(component);
+        mainFrame.setVisible(true);
+}
 	
 	private class NumberKeyListener extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
@@ -614,9 +644,8 @@ public class ButtonActionListener {
 	private class MouseButtonListener implements MouseListener {
 		public void mouseEntered(MouseEvent e) {
 			JButton button = (JButton)e.getSource();
-			if (button.getIcon() == logButtonImage) {
+			if (button.getText().equals(".")) {
 				button.setOpaque(true);
-				
 				button.setBackground(buttonColor);
 			}
 			for (int i=0;i<20;i++) {
@@ -633,7 +662,7 @@ public class ButtonActionListener {
 		}
 		public void mouseExited(MouseEvent e) {
 			JButton button = (JButton)e.getSource();
-			if (button.getIcon() == logButtonImage) {
+			if (button.getText().equals(".")) {
 				calculatorButton.PaintColor();
 			}
 			for (int i=0;i<20;i++) {
