@@ -184,6 +184,9 @@ public class ButtonActionListener {
 				else if (inputTextAll.equals("0")) {
 					ShowFirstInput();
 				}
+				else if (inputText.equals(".")) {
+					showPeriod();
+				}
 				else if (beforeLength > 0 && inputTextAll.equals(beforeInputNumberPart)) {
 					inputTextAll = "";
 					inputTextAll += inputText;
@@ -402,6 +405,7 @@ public class ButtonActionListener {
 	}
 	
 	private void ShowPositiveOrNegative() {
+
 		String operatorPattern = "^[+×÷=-]{1}$";
 		Boolean regex = Pattern.matches(operatorPattern, inputTextBefore);
 		String sign = inputTextAll.substring(0,1); // 부호 
@@ -443,6 +447,17 @@ public class ButtonActionListener {
 			conversion += inputTextAll;
 			inputTextAll = conversion;
 		}
+	}
+	
+	private void showPeriod() {
+		if (inputTextBefore.equals("+/-")) {
+			beforeInputTextAll = beforeInputTextAll.replace(secondNegate, "");
+			inputTextAll = "0.";
+			secondNumber = "0";
+			secondNegate = "";
+		}
+		inputTextAll = "";
+		inputTextAll += inputText;
 	}
 	
 	private void ShowFirstInput() {
