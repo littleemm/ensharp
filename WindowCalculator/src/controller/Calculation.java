@@ -105,8 +105,13 @@ public class Calculation {
 		if (secondNumber.length() > 0) {
 		secondBig = new BigDecimal(secondNumber);
 		}
+		if (inputTextAll.length() - inputTextAll.replace(String.valueOf('e'), "").length() == 1) {
+			inputTextAllBig = new BigDecimal(firstNumber);
+		}
+		else {
 		inputTextAllBig = new BigDecimal(inputTextAll);
-		firstBig= inputTextAllBig;
+		}
+		firstBig = inputTextAllBig;
 		
 		switch(operator.charAt(0)) {
 		case ('+') : {
@@ -132,7 +137,7 @@ public class Calculation {
 		
 		resultBig = eraseDecimalPoint(resultBig);
 		String resultString = format.format(resultBig);
-		
+		resultString = exception.modifyResult(resultString);
 		System.out.println(resultString + "hi");
 		
 		beforeInputTextAll = inputTextAll;
@@ -141,7 +146,7 @@ public class Calculation {
 		if(!operator.equals("=")) {
 		beforeInputTextAll += "=";
 		}
-		
+		System.out.println(firstBig.toString());
 		calculationDTO.setInput(resultString);
 		calculationDTO.setFirstNumber(basicFormat.format(firstBig));
 		calculationDTO.setBeforeInput(beforeInputTextAll);

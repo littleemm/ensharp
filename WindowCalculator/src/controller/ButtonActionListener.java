@@ -308,7 +308,8 @@ public class ButtonActionListener {
 				calculatorScreen.currentInput.setFont(fontToSmall);
 			}
 			
-			if (inputTextAll.equals(Constant.WARNING_DIVIDE_0) || inputTextAll.equals(Constant.WARNING_DIVIDE_EMPTY)) {
+			if (inputTextAll.equals(Constant.WARNING_DIVIDE_0) || inputTextAll.equals(Constant.WARNING_DIVIDE_EMPTY) 
+					|| inputTextAll.length() - inputTextAll.replace(String.valueOf('e'), "").length() == 1) {
 				calculatorScreen.currentInput.setText(inputTextAll);
 			}
 			else {
@@ -457,9 +458,12 @@ public class ButtonActionListener {
 	
 	private void showPeriod() {
 		System.out.println("text:" + inputTextBefore);
+		if(inputTextBefore.equals(".")) {
+			return;
+		}
+		
 		if (inputTextBefore.equals("+/-")) {
 			beforeInputTextAll = beforeInputTextAll.replace(secondNegate, "");
-			System.out.println(beforeInputTextAll);
 			inputTextAll = "0.";
 			secondNumber = "0";
 			secondNegate = "";
@@ -467,7 +471,6 @@ public class ButtonActionListener {
 		//inputTextAll = "";
 		else {
 		inputTextAll += inputText;
-		System.out.println("inputTextAll:" + inputTextAll);
 		}
 	}
 	

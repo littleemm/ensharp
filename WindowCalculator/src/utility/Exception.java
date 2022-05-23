@@ -50,20 +50,31 @@ public class Exception {
 	public String modifyResult(String resultString) {
 		resultString = resultString.replaceAll(",", "");
 		BigDecimal resultBig;
-		
+		System.out.println(resultString + "string");
 		if (resultString.length() > 16 && !isDecimalPoint(resultString)) {
 			resultBig = new BigDecimal(resultString);
-			String point = Double.toString(Math.pow(0.1, resultString.length() - 1));
-			resultBig = resultBig.multiply(new BigDecimal(point));
+			System.out.println(resultBig.toString());
+			String point = squareDecimal(resultString);
+			System.out.println(point);
+			System.out.println(new BigDecimal(point));
+			resultBig = resultBig.multiply(new BigDecimal(point), MathContext.DECIMAL64);
 			int resultInteger = (int)(resultString.length()-1);
 			
-			resultString = format.format(resultBig) + "e+" + Integer.toString(resultInteger);
+			resultString = resultBig.toString() + "e+" + Integer.toString(resultInteger);
 			System.out.println(resultString);
 		}
 		else if (isDecimalPoint(resultString)) {
 			
 		}
 		return resultString;
+	}
+	private String squareDecimal(String resultString) {
+		BigDecimal result = new BigDecimal("0.1");
+		BigDecimal decimal = new BigDecimal("0.1");
+		for (int i=0;i < resultString.length() - 2;i++) {
+			result = decimal.multiply(result, MathContext.DECIMAL64); 
+		}
+		return result.toString();
 	}
 	
 	private Boolean isDecimalPoint(String resultString) {
