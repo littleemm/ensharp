@@ -21,6 +21,7 @@ public class ButtonActionListener {
 	private String firstNumber;
 	private String operator;
 	private String secondNumber;
+	private String secondNegate;
 	private Boolean shift;
 	
 	private CalculatorScreen calculatorScreen;
@@ -67,6 +68,7 @@ public class ButtonActionListener {
 		operator = "";
 		firstNumber = "";
 		secondNumber = "";
+		secondNegate = "";
 		shift = false;
 		count = 0;
 		format = NumberFormat.getInstance();
@@ -212,10 +214,14 @@ public class ButtonActionListener {
 		}
 		
 		System.out.println(inputTextAll);
+		System.out.println("beforeInputtextAll:" + beforeInputTextAll);
 		// 큰 숫자 부분 
-		if (inputTextAll.length() > 6 && inputTextAll.substring(0, 6).equals("negate")) {
-			calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT);
+		if (beforeInputTextAll.length() > 0 && beforeInputTextAll.substring(0, 1).equals("n") || secondNegate.length() - secondNegate.replace(String.valueOf('n'), "").length() > 0) {
+			calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT);
 			calculatorScreen.beforeInput.setText(beforeInputTextAll);
+			if (inputTextAll != "0") {
+				calculatorScreen.currentInput.setText(decimalPoint.format(new BigDecimal(inputTextAll)));
+			}
 		}
 		else {
 			calculatorScreen.currentInput.setText(decimalPoint.format(new BigDecimal(inputTextAll))); 
@@ -345,6 +351,7 @@ public class ButtonActionListener {
 			beforeInputTextAll = "";
 			inputTextAll = "0";
 			operator = "";
+			secondNegate = "";
 			calculatorScreen.beforeInput.setText(beforeInputTextAll);
 			calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll)));
 			calculatorScreen.beforeInput.setFont(beforeFont);
@@ -353,6 +360,7 @@ public class ButtonActionListener {
 			beforeInputTextAll = "";
 			inputTextAll = "0";
 			operator = "";
+			secondNegate = "";
 			calculatorScreen.beforeInput.setText(beforeInputTextAll);
 			calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll)));
 			calculatorScreen.beforeInput.setFont(beforeFont);
@@ -390,14 +398,36 @@ public class ButtonActionListener {
 	
 	private void ShowPositiveOrNegative() {
 		String sign = inputTextAll.substring(0,1); // 부호 
+		if(count == 0 && inputTextAll.equals("0")) {
+			beforeInputTextAll = "0";
+		}
 		
-		if ((count == 0 && inputTextAll.equals("0")) || (inputTextAll.substring(0, 6).equals("negate") && operator.equals(""))) { // negate는 계산기 처음 시작할 때 아무 값도 안눌렀을 때 기능함 
-			beforeInputTextAll = String.format("negate(%s)", inputTextAll);
+		if ((count == 0 && inputTextAll.equals("0")) || beforeInputTextAll.substring(0, 1).equals("n")) { // negate는 계산기 처음 시작할 때 아무 값도 안눌렀을 때 기능함 
+			beforeInputTextAll = String.format("negate(%s)", beforeInputTextAll);
 			firstNumber = "0";
 		}
 		else if (beforeInputTextAll.length() > 0 && operator.length() > 0) {
-			inputTextAll = String.format("negate(%s)", firstNumber);
+			if (secondNegate.length() == 0) {
+				secondNegate = String.format("negate(%s)", firstNumber);
+				beforeInputTextAll += secondNegate;
+			}
+			else {
+				String beforeSecondNegate = secondNegate;
+				System.out.println(beforeSecondNegate);
+				secondNegate = String.format("negate(%s)", secondNegate);
+				beforeInputTextAll = beforeInputTextAll.replace(beforeSecondNegate, secondNegate);
+				System.out.println(beforeInputTextAll);
+			}
 			
+			
+			if((secondNegate.length() - secondNegate.replace(String.valueOf('n'), "").length()) % 2 == 0) {
+				secondNumber = firstNumber;
+			}
+			else {
+				secondNumber = String.format("-%s", firstNumber);
+			}
+			
+			inputTextAll = secondNumber;
 		}
 		else if(sign.equals("-")) { // 부호 버튼 (+) 처리 
 			inputTextAll = inputTextAll.substring(1);
