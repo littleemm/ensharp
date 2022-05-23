@@ -139,7 +139,9 @@ public class Calculation {
 		String resultString = format.format(resultBig);
 		resultString = exception.modifyResult(resultString);
 		System.out.println(resultString + "hi");
-		
+		if (inputTextAll.length() - inputTextAll.replace(String.valueOf('e'), "").length() == 1) {
+			firstBig = resultBig;
+		}
 		beforeInputTextAll = inputTextAll;
 		beforeInputTextAll += operator;
 		beforeInputTextAll += secondNumber;
