@@ -109,8 +109,17 @@ public class Calculation {
 			inputTextAllBig = new BigDecimal(firstNumber);
 		}
 		else {
-		inputTextAllBig = new BigDecimal(inputTextAll);
+			inputTextAllBig = new BigDecimal(inputTextAll);
 		}
+		
+		if (inputTextAll.substring(inputTextAll.indexOf("e") + 1).equals("9999")) {
+			calculationDTO.setInput(Constant.WARNING_OVERFLOW);
+			calculationDTO.setFirstNumber(Constant.WARNING_OVERFLOW);
+			calculationDTO.setBeforeInput("");
+		
+			return calculationDTO;
+		}
+		
 		firstBig = inputTextAllBig;
 		
 		switch(operator.charAt(0)) {
@@ -138,6 +147,14 @@ public class Calculation {
 		resultBig = eraseDecimalPoint(resultBig);
 		String resultString = format.format(resultBig);
 		resultString = exception.modifyResult(resultString);
+		
+		if(resultString == Constant.WARNING_OVERFLOW) {
+			calculationDTO.setInput(resultString);
+			calculationDTO.setFirstNumber(resultString);
+			calculationDTO.setBeforeInput("");
+			return calculationDTO;
+		}
+		
 		System.out.println(resultString + "hi");
 		if (inputTextAll.length() - inputTextAll.replace(String.valueOf('e'), "").length() == 1) {
 			firstBig = resultBig;

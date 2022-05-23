@@ -168,7 +168,6 @@ public class ButtonActionListener {
 			operator = "";
 			secondNegate = "";
 			calculatorScreen.beforeInput.setText(beforeInputTextAll);
-			calculatorScreen.beforeInput.setFont(fontToSmall);
 			calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT);
 			//calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
 		}
@@ -276,6 +275,23 @@ public class ButtonActionListener {
 		//	beforeInputTextAll = "";
 		//} 왜 필요한걸까 
 		
+		if(inputTextAll.equals(Constant.WARNING_DIVIDE_0) || inputTextAll.equals(Constant.WARNING_DIVIDE_EMPTY) || inputTextAll.equals(Constant.WARNING_OVERFLOW)) {
+			if (text.equals("=")) {
+				beforeInputTextAll = "";
+				inputTextAll = "0";
+				operator = "";
+				inputText = "";
+				secondNegate = "";
+				calculatorScreen.beforeInput.setText(beforeInputTextAll);
+				calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT);
+				calculatorScreen.currentInput.setText(inputTextAll);
+				return;
+			}
+			else {
+				return;
+			}
+		}
+		
 		if(regex || text.equals(Constant.MULTIPLY_CODE) || text.equals(Constant.ADD_CODE) 
 				|| text.equals(Constant.SUBTRACT_CODE) || text.equals(Constant.DIVIDE_CODE)) {
 			
@@ -312,12 +328,16 @@ public class ButtonActionListener {
 					|| inputTextAll.length() - inputTextAll.replace(String.valueOf('e'), "").length() == 1) {
 				calculatorScreen.currentInput.setText(inputTextAll);
 			}
+			else if (inputTextAll.equals(Constant.WARNING_OVERFLOW)) {
+				calculatorScreen.currentInput.setText(inputTextAll);
+				calculatorScreen.beforeInput.setText(beforeInputTextAll);
+			}
 			else {
 				inputTextAllBig = new BigDecimal(inputTextAll).stripTrailingZeros();
 				calculatorScreen.currentInput.setText(decimalPoint.format(inputTextAllBig));
 			}
 			calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT);
-			calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
+			//calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
 			
 			if (inputTextAll != "0") {
 			inputTextAll = inputTextAll.replaceAll(",", "");
@@ -399,6 +419,9 @@ public class ButtonActionListener {
 	private boolean isNumber() {
 		String input = inputTextAll.substring(0, inputTextAll.length()); // 연산자 전까지의 숫자 
 		int numberCount = 0;
+		if (inputTextAll.length() - inputTextAll.replace(String.valueOf('.'), "").length() == 1 && inputTextAll.substring(0,1).equals("0")) {
+			numberCount = -1;
+		}
 		for (int i=0;i<input.length();i++) {
 			if (input.charAt(i) >= '0' && input.charAt(i) <= '9') {
 				numberCount++;

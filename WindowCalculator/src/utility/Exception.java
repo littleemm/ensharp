@@ -51,6 +51,10 @@ public class Exception {
 		resultString = resultString.replaceAll(",", "");
 		BigDecimal resultBig;
 		System.out.println(resultString + "string");
+		if(resultString.length()-1 >= 10000) {
+			return "오버플로";
+		}
+		
 		if (resultString.length() > 16 && !isDecimalPoint(resultString)) {
 			resultBig = new BigDecimal(resultString);
 			System.out.println(resultBig.toString());
@@ -66,6 +70,7 @@ public class Exception {
 		else if (isDecimalPoint(resultString)) {
 			
 		}
+		
 		return resultString;
 	}
 	private String squareDecimal(String resultString) {
