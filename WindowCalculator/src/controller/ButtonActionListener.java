@@ -271,13 +271,10 @@ public class ButtonActionListener {
 		//if (inputText.equals("+") || inputText.equals("-") || inputText.equals("×") || inputText.equals("÷")) { // 정규식 !!!!
 		//	return;
 		//} 
-		
-		System.out.println("hihi!" + inputTextAll);
-		System.out.println("itsfirst!" + firstNumber);
-		
-		if(beforeInputTextAll.length() > 0 && beforeInputTextAll.substring(beforeInputTextAll.length() - 1).equals("=")) {
-			beforeInputTextAll = "";
-		}
+
+		//if(beforeInputTextAll.length() > 0 && beforeInputTextAll.substring(beforeInputTextAll.length() - 1).equals("=")) {
+		//	beforeInputTextAll = "";
+		//}
 		
 		if(regex || text.equals(Constant.MULTIPLY_CODE) || text.equals(Constant.ADD_CODE) 
 				|| text.equals(Constant.SUBTRACT_CODE) || text.equals(Constant.DIVIDE_CODE)) {
@@ -487,6 +484,8 @@ public class ButtonActionListener {
 	}
 	
 	private void IdentifyEqualSign(String text) {
+		System.out.println("operator:" + operator);
+		System.out.println(beforeInputTextAll);
 		if (operator.length() > 0 && beforeInputTextAll.substring(beforeInputTextAll.length() - 1).equals("=")) {
 			calculation = new Calculation(firstNumber, secondNumber, operator, inputTextAll, beforeInputTextAll);
 			CalculationDTO calculationDTO = calculation.CalculateAgain();
