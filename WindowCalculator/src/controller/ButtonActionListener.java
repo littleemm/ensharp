@@ -394,23 +394,23 @@ public class ButtonActionListener {
 		if (beforeInputTextAll.length() > 0) { // 숫자 + 연산자 조합의 입력값이 존재할 경우 
 			secondNumber = inputTextAll;
 			System.out.println(secondNumber);
-			calculation = new Calculation(firstNumber, secondNumber, operator, inputTextAll, beforeInputTextAll);
 			
 			System.out.println("before" + beforeInputTextAll);
 			System.out.println("inputAll" + inputTextAll);
 			System.out.println(firstNumber);
 			System.out.println("second" + secondNumber);
 			
-			//String operatorBefore = beforeInputTextAll.substring(beforeInputTextAll.length() - 1); 
-			//if (text.equals("=") && (operatorBefore.equals("+") || operatorBefore.equals("-") 
-			//		|| operatorBefore.equals("×") || operatorBefore.equals("÷"))) {
-			//	secondNumber = firstNumber;
-			//	beforeInputTextAll = firstNumber;
-			//	beforeInputTextAll += operatorBefore;
-			//	inputTextAll = firstNumber;
-			//	IdentifyEqualSign(text);
-			//	return;
-			//}
+			String operatorBefore = beforeInputTextAll.substring(beforeInputTextAll.length() - 1); 
+			if (text.equals("=") && (operatorBefore.equals("+") || operatorBefore.equals("-") 
+					|| operatorBefore.equals("×") || operatorBefore.equals("÷"))) {
+				secondNumber = firstNumber;
+				beforeInputTextAll = firstNumber;
+				beforeInputTextAll += operatorBefore;
+				inputTextAll = firstNumber;
+				//IdentifyEqualSign(text);
+				//return;
+			}
+			calculation = new Calculation(firstNumber, secondNumber, operator, inputTextAll, beforeInputTextAll);
 			
 			CalculationDTO calculationDTO = calculation.StartCalculatingBasic();
 			inputTextAll = calculationDTO.getInput();
