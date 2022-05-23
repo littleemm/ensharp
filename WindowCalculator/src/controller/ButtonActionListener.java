@@ -238,6 +238,10 @@ public class ButtonActionListener {
 		//	return;
 		//} 
 		
+		if(beforeInputTextAll.length() > 0 && beforeInputTextAll.substring(beforeInputTextAll.length() - 1).equals("=")) {
+			beforeInputTextAll = "";
+		}
+		
 		if(regex || text.equals(Constant.MULTIPLY_CODE) || text.equals(Constant.ADD_CODE) 
 				|| text.equals(Constant.SUBTRACT_CODE) || text.equals(Constant.DIVIDE_CODE)) {
 			
