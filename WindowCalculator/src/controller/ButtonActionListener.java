@@ -16,6 +16,7 @@ import view.LogPage;
 
 public class ButtonActionListener {
 	private String inputText; // 현재 눌린 값  
+	private String inputTextBefore;
 	private String inputTextAll; // 연산자가 입력되기 전까지 입력된 숫자 전체 
 	private String beforeInputTextAll; // 숫자 + 연산자가 저장되어 있는, 이전에 입력된 값 
 	private String firstNumber;
@@ -65,6 +66,8 @@ public class ButtonActionListener {
 		logButtonImage = new ImageIcon("src/image/logButton.png");
 		logPage = new LogPage();
 		logDTO = new CalculationLogDTO("3+4=", "7");
+		inputTextBefore = "";
+		inputText = "";
 		operator = "";
 		firstNumber = "";
 		secondNumber = "";
@@ -163,6 +166,7 @@ public class ButtonActionListener {
 			firstNumber = "";
 			beforeInputTextAll = "";
 			operator = "";
+			secondNegate = "";
 			calculatorScreen.beforeInput.setText(beforeInputTextAll);
 			calculatorScreen.beforeInput.setFont(fontToSmall);
 			calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT);
@@ -171,6 +175,7 @@ public class ButtonActionListener {
 	
 		for (int i=0;i<12;i++) {
 			if((text.equals(calculatorButton.screenValue[i])) && isNumber()) {
+				inputTextBefore = inputText;
 				inputText = text; // 현재 눌린 숫자 
 				System.out.println(inputText);
 				if (inputText.equals("+/-")) {
@@ -397,6 +402,8 @@ public class ButtonActionListener {
 	}
 	
 	private void ShowPositiveOrNegative() {
+		String operatorPattern = "^[+×÷=-]{1}$";
+		Boolean regex = Pattern.matches(operatorPattern, inputTextBefore);
 		String sign = inputTextAll.substring(0,1); // 부호 
 		if(count == 0 && inputTextAll.equals("0")) {
 			beforeInputTextAll = "0";
@@ -406,17 +413,16 @@ public class ButtonActionListener {
 			beforeInputTextAll = String.format("negate(%s)", beforeInputTextAll);
 			firstNumber = "0";
 		}
-		else if (beforeInputTextAll.length() > 0 && operator.length() > 0) {
+		else if (beforeInputTextAll.length() > 0 && operator.length() > 0 && (inputTextBefore.equals("+/-") || regex)) {
+			System.out.println("now" + inputTextAll);
 			if (secondNegate.length() == 0) {
 				secondNegate = String.format("negate(%s)", firstNumber);
 				beforeInputTextAll += secondNegate;
 			}
 			else {
 				String beforeSecondNegate = secondNegate;
-				System.out.println(beforeSecondNegate);
 				secondNegate = String.format("negate(%s)", secondNegate);
 				beforeInputTextAll = beforeInputTextAll.replace(beforeSecondNegate, secondNegate);
-				System.out.println(beforeInputTextAll);
 			}
 			
 			
