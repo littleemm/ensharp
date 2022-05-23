@@ -164,7 +164,7 @@ public class ButtonActionListener {
 			calculatorScreen.beforeInput.setText(beforeInputTextAll);
 			calculatorScreen.beforeInput.setFont(fontToSmall);
 			calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT);
-			calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
+			//calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
 		}
 	
 		for (int i=0;i<12;i++) {
@@ -214,11 +214,11 @@ public class ButtonActionListener {
 		System.out.println(inputTextAll);
 		// 큰 숫자 부분 
 		if (inputTextAll.length() > 6 && inputTextAll.substring(0, 6).equals("negate")) {
-			calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT);
-			calculatorScreen.beforeInput.setText(inputTextAll);
+			calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT);
+			calculatorScreen.beforeInput.setText(beforeInputTextAll);
 		}
 		else {
-		calculatorScreen.currentInput.setText(decimalPoint.format(new BigDecimal(inputTextAll))); 
+			calculatorScreen.currentInput.setText(decimalPoint.format(new BigDecimal(inputTextAll))); 
 		}
 		
 		calculatorScreen.currentInput.setFont(font); 
@@ -226,7 +226,7 @@ public class ButtonActionListener {
 			calculatorScreen.currentInput.setFont(fontToSmall);
 		}
 		calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT); // 오른쪽에서부터 숫자 시작 
-		calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
+		//calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
 		count++;
 	}
 	
@@ -248,6 +248,9 @@ public class ButtonActionListener {
 		//if (inputText.equals("+") || inputText.equals("-") || inputText.equals("×") || inputText.equals("÷")) { // 정규식 !!!!
 		//	return;
 		//} 
+		
+		System.out.println("hihi!" + inputTextAll);
+		System.out.println("itsfirst!" + firstNumber);
 		
 		if(beforeInputTextAll.length() > 0 && beforeInputTextAll.substring(beforeInputTextAll.length() - 1).equals("=")) {
 			beforeInputTextAll = "";
@@ -278,7 +281,7 @@ public class ButtonActionListener {
 		
 		inputText = text;
 		calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT);
-		calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
+		//calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
 		
 		if(beforeInputTextAll.substring(beforeInputTextAll.length()-1).equals("=")) {
 			if (inputTextAll.length() > 14) {
@@ -311,13 +314,19 @@ public class ButtonActionListener {
 			if (inputTextAll.equals(Constant.WARNING_DIVIDE_0) || inputTextAll.equals(Constant.WARNING_DIVIDE_EMPTY)) {
 				calculatorScreen.currentInput.setText(inputTextAll);
 			}
+			else if (inputTextAll.substring(0,1).equals("n")) {
+				int signCount = inputTextAll.length() - inputTextAll.replace(String.valueOf("n"), "").length();
+				if (signCount % 2 == 0) {
+					calculatorScreen.currentInput.setText(inputTextAll);
+				}
+			}
 			else {
 				inputTextAllBig = new BigDecimal(inputTextAll).stripTrailingZeros();
 				calculatorScreen.currentInput.setText(decimalPoint.format(inputTextAllBig));
 			}
 			
 			calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT);
-			calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
+			//calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
 			inputTextAll = "0";
 		}
 	}
@@ -360,8 +369,8 @@ public class ButtonActionListener {
 			calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll)));
 		}
 		calculatorScreen.beforeInput.setHorizontalAlignment(JLabel.RIGHT);
-		calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
-		calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
+		//calculatorScreen.inputPanel.add(calculatorScreen.beforeInput);
+		//calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
 	}
 	
 	private boolean isNumber() {
@@ -382,11 +391,13 @@ public class ButtonActionListener {
 	private void ShowPositiveOrNegative() {
 		String sign = inputTextAll.substring(0,1); // 부호 
 		
-		if ((count == 0 && inputTextAll.equals("0")) || inputTextAll.substring(0, 6).equals("negate")) { // negate는 계산기 처음 시작할 때 아무 값도 안눌렀을 때 기능함 
-			inputTextAll = String.format("negate(%s)", inputTextAll);
+		if ((count == 0 && inputTextAll.equals("0")) || (inputTextAll.substring(0, 6).equals("negate") && operator.equals(""))) { // negate는 계산기 처음 시작할 때 아무 값도 안눌렀을 때 기능함 
+			beforeInputTextAll = String.format("negate(%s)", inputTextAll);
+			firstNumber = "0";
 		}
 		else if (beforeInputTextAll.length() > 0 && operator.length() > 0) {
 			inputTextAll = String.format("negate(%s)", firstNumber);
+			
 		}
 		else if(sign.equals("-")) { // 부호 버튼 (+) 처리 
 			inputTextAll = inputTextAll.substring(1);
@@ -488,10 +499,15 @@ public class ButtonActionListener {
 		}
 		else {
 			operator = text;
-			firstNumber = inputTextAll;
 			
-			inputTextAllBig = new BigDecimal(inputTextAll).stripTrailingZeros();
-			inputTextAll = format.format(inputTextAllBig).replaceAll(",", "");
+			if(inputTextAll.substring(0,1).equals("n")) {
+				
+			}
+			if (!inputTextAll.substring(0, 1).equals("n")) {
+				firstNumber = inputTextAll;
+				inputTextAllBig = new BigDecimal(inputTextAll).stripTrailingZeros();
+				inputTextAll = format.format(inputTextAllBig).replaceAll(",", "");	
+			}
 			
 			beforeInputTextAll = inputTextAll; 
 			beforeInputTextAll += operator; 
