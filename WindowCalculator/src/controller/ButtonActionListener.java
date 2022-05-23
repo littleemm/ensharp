@@ -320,6 +320,7 @@ public class ButtonActionListener {
 		if(text.equals("C") || text.equals(Constant.ESC_CODE) || text.equals(Constant.SPACE_CODE)) { // 작은 글씨까지 삭제 
 			beforeInputTextAll = "";
 			inputTextAll = "0";
+			operator = "";
 			calculatorScreen.beforeInput.setText(beforeInputTextAll);
 			calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll)));
 			calculatorScreen.beforeInput.setFont(beforeFont);
@@ -327,6 +328,7 @@ public class ButtonActionListener {
 		else if ((text.equals("CE") || text.equals(Constant.DELETE_CODE)) && beforeInputTextAll.substring(beforeInputTextAll.length() - 1).equals("=")) { // 현재 입력값만 삭제 
 			beforeInputTextAll = "";
 			inputTextAll = "0";
+			operator = "";
 			calculatorScreen.beforeInput.setText(beforeInputTextAll);
 			calculatorScreen.currentInput.setText(decimalPoint.format(Double.parseDouble(inputTextAll)));
 			calculatorScreen.beforeInput.setFont(beforeFont);
