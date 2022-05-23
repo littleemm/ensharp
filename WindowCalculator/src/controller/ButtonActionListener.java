@@ -46,6 +46,8 @@ public class ButtonActionListener {
 	private DecimalFormat decimalPointSmall;
 	private DecimalFormat basicNumber;
 	
+	private int count;
+	
 	public ButtonActionListener(String inputText, String inputTextAll, String beforeInputTextAll, CalculatorScreen calculatorScreen, CalculatorButton calculatorButton) {
 		this.inputText = inputText;
 		this.inputTextAll = inputTextAll;
@@ -66,6 +68,7 @@ public class ButtonActionListener {
 		firstNumber = "";
 		secondNumber = "";
 		shift = false;
+		count = 0;
 		format = NumberFormat.getInstance();
 		decimalPoint = new DecimalFormat("#,###,###,###,###,###.################");
 		decimalPointSmall = new DecimalFormat("###,###");
@@ -210,13 +213,21 @@ public class ButtonActionListener {
 		
 		System.out.println(inputTextAll);
 		// 큰 숫자 부분 
+		if (inputTextAll.length() > 6 && inputTextAll.substring(0, 6).equals("negate")) {
+			calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT);
+			calculatorScreen.beforeInput.setText(inputTextAll);
+		}
+		else {
 		calculatorScreen.currentInput.setText(decimalPoint.format(new BigDecimal(inputTextAll))); 
+		}
+		
 		calculatorScreen.currentInput.setFont(font); 
 		if (inputTextAll.length() > 14) {
 			calculatorScreen.currentInput.setFont(fontToSmall);
 		}
 		calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT); // 오른쪽에서부터 숫자 시작 
 		calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
+		count++;
 	}
 	
 	private class OperationButtonListener implements ActionListener { // 연산자 버튼 
@@ -371,7 +382,13 @@ public class ButtonActionListener {
 	private void ShowPositiveOrNegative() {
 		String sign = inputTextAll.substring(0,1); // 부호 
 		
-		if(sign.equals("-")) { // 부호 버튼 (+) 처리 
+		if ((count == 0 && inputTextAll.equals("0")) || inputTextAll.substring(0, 6).equals("negate")) { // negate는 계산기 처음 시작할 때 아무 값도 안눌렀을 때 기능함 
+			inputTextAll = String.format("negate(%s)", inputTextAll);
+		}
+		else if (beforeInputTextAll.length() > 0 && operator.length() > 0) {
+			inputTextAll = String.format("negate(%s)", firstNumber);
+		}
+		else if(sign.equals("-")) { // 부호 버튼 (+) 처리 
 			inputTextAll = inputTextAll.substring(1);
 		}
 		else {  // 부호 버튼 (-) 처리 
