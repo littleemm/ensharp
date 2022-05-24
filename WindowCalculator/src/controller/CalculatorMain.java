@@ -19,6 +19,7 @@ public class CalculatorMain extends JFrame{
 	private GridBagConstraints constraint;
 	private ButtonActionListener listener;
 	private JPanel panel;
+	private JPanel p;
 	
 	public CalculatorMain() {
 		mainFrame = new JFrame("계산기");
@@ -34,13 +35,17 @@ public class CalculatorMain extends JFrame{
 		logPage = new LogPage();
 		listener = new ButtonActionListener(inputText, inputTextAll, beforeInputTextAll, calculatorScreen, calculatorButton);
 		panel = new JPanel();
+		p = new JPanel();
 	}
 	
 	public void ShowCalculatorMain() {
 		mainFrame.setSize(430, 600);
 		mainFrame.setLocationRelativeTo(null);
-		mainFrame.setLayout(layout);
+		mainFrame.setLayout(new BorderLayout());
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		panel.setSize(340, 600);
+		panel.setLayout(layout);
 		
 		calculatorButton.PrintMainPanel();
 		calculatorButton.PrintLogButtonPanel();
@@ -49,7 +54,7 @@ public class CalculatorMain extends JFrame{
 		gridBagInsert(calculatorButton.logButtonPanel, 0, 0, 0, 1, 1);
 		gridBagInsert(calculatorScreen.inputPanel, 0, 1, 0, 2, 3);
 		gridBagInsert(calculatorButton.buttonPanel, 0, 5, 0, 5, 5);
-		
+		mainFrame.add(panel, BorderLayout.CENTER);
 		listener.ListenButtonAction(mainFrame);
 		
 		calculatorScreen.beforeInput.setText(beforeInputTextAll); // label에 입력된 숫자 넣기 
@@ -74,11 +79,17 @@ public class CalculatorMain extends JFrame{
 				mainFrame.setResizable(false);
 			}
 			else if (mainFrame.getWidth() > 500) {
-				panel.setSize(300, 600);
-				panel.setLayout(null);
-				panel.setBackground(Color.pink);
+				//panel.setSize(340, 600);
+				calculatorButton.buttonPanel.setSize(240, 300);
+				calculatorScreen.inputPanel.setSize(240, 100);
+				calculatorButton.logButtonPanel.setSize(240, 30);
+				
+				mainFrame.add(panel, BorderLayout.CENTER);
 				panel.setVisible(true);
-				gridBagInsert(panel, 1, 0, 3, 5, 5);
+				p.setSize(400, 600);
+				p.setBackground(Color.blue);
+				mainFrame.add(p, BorderLayout.EAST);
+				
 			}
 			
 		}
@@ -102,8 +113,7 @@ public class CalculatorMain extends JFrame{
 	        constraint.gridwidth = width;
 	        constraint.gridheight = height;
 	        layout.setConstraints(component, constraint);
-	        mainFrame.add(component);
-	        mainFrame.setVisible(true);
+	        panel.add(component);
 	}
 	
 }

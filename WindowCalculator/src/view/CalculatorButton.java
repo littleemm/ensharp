@@ -40,7 +40,7 @@ public class CalculatorButton extends JPanel {
 	}
 	
 	public void PrintMainPanel() {
-		buttonPanel.setSize(430, 300);
+		buttonPanel.setSize(340, 300);
 		buttonPanel.setLayout(new GridLayout(5, 4, 1, 1));
 		
 		for (int i=0;i<3;i++) {
@@ -116,7 +116,7 @@ public class CalculatorButton extends JPanel {
 	}
 	
 	public void PrintLogButtonPanel() {
-		logButtonPanel.setSize(430, 30);
+		logButtonPanel.setSize(340, 30);
 		logButtonPanel.setLayout(new BorderLayout());
 		
 

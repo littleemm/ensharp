@@ -15,7 +15,7 @@ public class CalculatorScreen {
 	}
 	
 	public void PrintCalculatorScreen() {
-		inputPanel.setSize(420, 100);
+		inputPanel.setSize(340, 100);
 		inputPanel.setLayout(new GridLayout(2,1));
 		
 		beforeInput.setSize(410, 10);
