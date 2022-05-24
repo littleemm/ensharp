@@ -86,7 +86,9 @@ public class Calculation {
 		else {
 		resultString = format.format(resultBig);
 		}
-		resultString = exception.modifyResult(resultString);
+		if (firstNumber.indexOf("0.") >= 0) {
+			resultString = exception.modifyResult(resultString);
+		}
 		System.out.println(resultString);
 		calculationDTO.setInput(resultString);
 		if (resultBig.toPlainString().length() - resultBig.toPlainString().replace(String.valueOf('.'), "").length() == 1 && resultBig.toPlainString().length() > 16) {
@@ -160,7 +162,9 @@ public class Calculation {
 		if (inputTextAll.length() - inputTextAll.replace(String.valueOf('.'), "").length() == 1) {
 			resultString = resultBig.toPlainString();
 		}
-		resultString = exception.modifyResult(resultString);
+		if (firstNumber.indexOf("0.") >= 0) {
+			resultString = exception.modifyResult(resultString);
+		}
 		
 		if(resultString == Constant.WARNING_OVERFLOW) {
 			calculationDTO.setInput(resultString);
