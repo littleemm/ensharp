@@ -30,7 +30,6 @@ public class CalculatorScreen {
 		
 
 		//inputPanel.setLocation(0, 30);
-		inputPanel.setBackground(Color.yellow);
 		inputPanel.setVisible(true);
 	}
 }

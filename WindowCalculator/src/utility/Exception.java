@@ -74,9 +74,12 @@ public class Exception {
 			System.out.println(point);
 			System.out.println(new BigDecimal(point));
 			resultBig = resultBig.multiply(new BigDecimal(point), MathContext.DECIMAL64);
-			int resultInteger = (int)(resultString.length()-1);
+			int resultInteger = (int)(resultString.length()-2);
 			
-			resultString = resultBig.toString() + "e-" + Integer.toString(resultInteger);
+			resultString = resultBig.stripTrailingZeros().toString() + "e-" + Integer.toString(resultInteger);
+			if (resultBig.toString().indexOf(".") != -1 && resultString.indexOf(".") == -1) {
+				resultString = resultBig.stripTrailingZeros().toString() + "." + "e-" + Integer.toString(resultInteger);
+			}
 			System.out.println(resultString);
 		}
 		
@@ -85,7 +88,7 @@ public class Exception {
 	private String squareTen(String resultString) {
 		BigDecimal result = new BigDecimal("10");
 		BigDecimal decimal = new BigDecimal("10");
-		for (int i=0;i < resultString.substring(resultString.indexOf(".") + 1).length() - 2;i++) {
+		for (int i=0;i < resultString.substring(resultString.indexOf(".") + 1).length() - 1;i++) {
 			result = decimal.multiply(result, MathContext.DECIMAL64); 
 		}
 		return result.toString();

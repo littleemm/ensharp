@@ -89,8 +89,12 @@ public class Calculation {
 		resultString = exception.modifyResult(resultString);
 		System.out.println(resultString);
 		calculationDTO.setInput(resultString);
+		if (resultBig.toPlainString().length() - resultBig.toPlainString().replace(String.valueOf('.'), "").length() == 1 && resultBig.toPlainString().length() > 16) {
+		calculationDTO.setFirstNumber(resultBig.toPlainString());
+		}
+		else {
 		calculationDTO.setFirstNumber(basicFormat.format(resultBig));
-		
+		}
 		return calculationDTO;
 	}
 	
@@ -106,6 +110,7 @@ public class Calculation {
 	
 	public CalculationDTO CalculateAgain() {
 		CalculationDTO calculationDTO = new CalculationDTO("", "", "");
+		System.out.println(inputTextAll);
 		resultBig = new BigDecimal("0");
 		firstBig = new BigDecimal(firstNumber);
 		if (secondNumber.length() > 0) {
@@ -117,7 +122,7 @@ public class Calculation {
 		else {
 			inputTextAllBig = new BigDecimal(inputTextAll);
 		}
-		
+		System.out.println("inputTextAllBig" + inputTextAllBig.toPlainString());
 		if (inputTextAll.substring(inputTextAll.indexOf("e") + 1).equals("9999")) {
 			calculationDTO.setInput(Constant.WARNING_OVERFLOW);
 			calculationDTO.setFirstNumber(Constant.WARNING_OVERFLOW);
@@ -152,6 +157,9 @@ public class Calculation {
 		
 		resultBig = eraseDecimalPoint(resultBig);
 		String resultString = format.format(resultBig);
+		if (inputTextAll.length() - inputTextAll.replace(String.valueOf('.'), "").length() == 1) {
+			resultString = resultBig.toPlainString();
+		}
 		resultString = exception.modifyResult(resultString);
 		
 		if(resultString == Constant.WARNING_OVERFLOW) {
@@ -173,7 +181,13 @@ public class Calculation {
 		}
 		System.out.println(firstBig.toString());
 		calculationDTO.setInput(resultString);
-		calculationDTO.setFirstNumber(basicFormat.format(firstBig));
+		
+		if (inputTextAll.length() - inputTextAll.replace(String.valueOf('.'), "").length() == 1 && inputTextAll.length() - inputTextAll.replace(String.valueOf('e'), "").length() == 1) {
+			calculationDTO.setFirstNumber(firstBig.toPlainString());
+		}
+		else {
+			calculationDTO.setFirstNumber(basicFormat.format(firstBig));
+		}
 		calculationDTO.setBeforeInput(beforeInputTextAll);
 	
 		return calculationDTO;
