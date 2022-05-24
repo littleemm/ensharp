@@ -33,13 +33,14 @@ public class CalculatorMain extends JFrame{
 		calculatorButton = new CalculatorButton();
 		calculatorScreen = new CalculatorScreen();
 		logPage = new LogPage();
-		listener = new ButtonActionListener(inputText, inputTextAll, beforeInputTextAll, calculatorScreen, calculatorButton);
+		listener = new ButtonActionListener(inputText, inputTextAll, beforeInputTextAll, calculatorScreen, calculatorButton, logPage);
 		panel = new JPanel();
 		p = new JPanel();
 	}
 	
 	public void ShowCalculatorMain() {
-		mainFrame.setSize(430, 600);
+		mainFrame.setPreferredSize(new Dimension(430, 600));
+		mainFrame.setMinimumSize(new Dimension(400, 550));
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setLayout(new BorderLayout());
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,23 +76,27 @@ public class CalculatorMain extends JFrame{
 	
 	private class Listener implements ComponentListener {
 		public void componentResized(ComponentEvent e) {
-			if (mainFrame.getWidth() <= 400 || mainFrame.getHeight() <= 540) {
-				mainFrame.setResizable(false);
-			}
-			else if (mainFrame.getWidth() > 500) {
-				//panel.setSize(340, 600);
-				//calculatorButton.buttonPanel.setSize(240, 300);
-				//calculatorScreen.inputPanel.setSize(240, 100);
-				//calculatorButton.logButtonPanel.setSize(240, 30);
-				
-				mainFrame.add(panel, BorderLayout.CENTER);
-				panel.setVisible(true);
-				p.setSize(400, 600);
-				p.setBackground(Color.blue);
-				mainFrame.add(p, BorderLayout.EAST);
+			if (mainFrame.getWidth() > 500) {
+				panel.setPreferredSize(new Dimension(400, 600));
+				calculatorButton.buttonPanel.setMaximumSize(new Dimension(400, 300));
+				calculatorScreen.inputPanel.setSize(400, 100);
+				calculatorButton.logButtonPanel.setSize(400, 30);
+				logPage.PrintLogList();
+				//mainFrame.add(panel, BorderLayout.CENTER);
+				logPage.logPanel.setVisible(true);
+				//p.setSize(400, 600);
+				mainFrame.add(logPage.logPanel, BorderLayout.EAST);
 				
 			}
 			
+			if (mainFrame.getWidth() <= 440) {
+				panel.setSize(440, 600);
+				mainFrame.add(panel, BorderLayout.CENTER);
+				logPage.logPanel.setVisible(false);
+				//p.setSize(400, 600);
+			}
+			mainFrame.repaint();
+			mainFrame.revalidate();
 		}
 		public void componentHidden(ComponentEvent e) {
 			

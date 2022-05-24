@@ -57,12 +57,13 @@ public class ButtonActionListener {
 	
 	private int count;
 	
-	public ButtonActionListener(String inputText, String inputTextAll, String beforeInputTextAll, CalculatorScreen calculatorScreen, CalculatorButton calculatorButton) {
+	public ButtonActionListener(String inputText, String inputTextAll, String beforeInputTextAll, CalculatorScreen calculatorScreen, CalculatorButton calculatorButton, LogPage logPage) {
 		this.inputText = inputText;
 		this.inputTextAll = inputTextAll;
 		this.beforeInputTextAll = beforeInputTextAll;
 		this.calculatorButton = calculatorButton;
 		this.calculatorScreen = calculatorScreen;
+		this.logPage = logPage;
 		
 		//calculation = new Calculation(inputTextAll, beforeInputTextAll);
 		buttonColor = new Color(208, 205, 205);
@@ -108,16 +109,15 @@ public class ButtonActionListener {
 		calculatorButton.logButton.addMouseListener(new MouseButtonListener());
 		calculatorButton.logButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JButton button = (JButton)e.getSource();
-					mainFrame.setLayout(layout);
-					mainFrame.setVisible(true);
-					logPage.PrintLogList(logDTO);
-					calculatorButton.buttonPanel.setVisible(false);
-					//calculatorScreen.inputPanel.setVisible(false);
-					//calculatorButton.logButtonPanel.setVisible(false);
-					//gridBagInsert(mainFrame, calculatorButton.logButtonPanel, 0, 0, 0, 1, 1);
-					//gridBagInsert(mainFrame, calculatorScreen.inputPanel, 0, 1, 0, 2, 3);
-					gridBagInsert(mainFrame, logPage.logPanel, 0, 5, 0, 5, 5);
+				mainFrame.setLayout(layout);
+				mainFrame.setVisible(true);
+				logPage.PrintLogList();
+				calculatorButton.buttonPanel.setVisible(false);
+				//calculatorScreen.inputPanel.setVisible(false);
+				//calculatorButton.logButtonPanel.setVisible(false);
+				//gridBagInsert(mainFrame, calculatorButton.logButtonPanel, 0, 0, 0, 1, 1);
+				//gridBagInsert(mainFrame, calculatorScreen.inputPanel, 0, 1, 0, 2, 3);
+				gridBagInsert(mainFrame, logPage.logPanel, 0, 5, 0, 5, 5);
 			}
 		});
 		
@@ -395,6 +395,7 @@ public class ButtonActionListener {
 			calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT);
 			//calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
 			inputTextAll = "0";
+			insertLogToLogPage();
 		}
 	}
 	
@@ -651,6 +652,17 @@ public class ButtonActionListener {
 		}
 	}
 	
+	private void insertLogToLogPage() {
+		if (beforeInputTextAll.indexOf("=") >= 0) {
+			logDTO.setExpression(beforeInputTextAll);
+		}
+		else {
+			logDTO.setExpression(beforeInputTextAll + "=");
+		}
+		logDTO.setResult(inputTextAll);
+		logPage.insertData(logDTO);
+	}
+	
 	private class MouseButtonListener implements MouseListener {
 		public void mouseEntered(MouseEvent e) {
 			JButton button = (JButton)e.getSource();
@@ -688,5 +700,6 @@ public class ButtonActionListener {
 		}
 		public void mouseClicked(MouseEvent e) {
 		}
+		
 	}
 }
