@@ -588,8 +588,12 @@ public class ButtonActionListener {
 	
 			if(text.equals("=")) {
 				secondBig = new BigDecimal(secondNumber).stripTrailingZeros();
-				secondNumber = format.format(secondBig).replaceAll(",", "");
-				
+				if (secondNumber.length() - secondNumber.replace(String.valueOf('.'), "").length() == 1) {
+					secondNumber = secondBig.toPlainString().replaceAll(",", "");	
+				}
+				else {
+					secondNumber = format.format(secondBig).replaceAll(",", "");
+				}
 				beforeInputTextAll += secondNumber; 
 				beforeInputTextAll += "="; 
 			}
@@ -602,7 +606,12 @@ public class ButtonActionListener {
 				else {
 				String inputTextAllTemporary = inputTextAll;
 				inputTextAllBig = new BigDecimal(inputTextAll).stripTrailingZeros();
-				inputTextAll = format.format(inputTextAllBig).replaceAll(",", "");
+				if (inputTextAll.length() - inputTextAll.replace(String.valueOf('.'), "").length() == 1) {
+					inputTextAll = inputTextAllBig.toPlainString().replaceAll(",", "");	
+				}
+				else {
+					inputTextAll = format.format(inputTextAllBig).replaceAll(",", "");
+				}
 				
 				beforeInputTextAll = inputTextAll;
 				beforeInputTextAll += text;	
@@ -623,14 +632,19 @@ public class ButtonActionListener {
 			if(inputTextAll.substring(0,1).equals("n")) {
 				
 			}
+			
 			if (!inputTextAll.substring(0, 1).equals("n")) {
 				firstNumber = inputTextAll;
 				inputTextAllBig = new BigDecimal(inputTextAll).stripTrailingZeros();
-				inputTextAll = format.format(inputTextAllBig).replaceAll(",", "");	
+				inputTextAll = inputTextAllBig.toPlainString().replaceAll(",", "");	
 			}
+			
+			System.out.println("input!" + inputTextAll);
 			
 			beforeInputTextAll = inputTextAll; 
 			beforeInputTextAll += operator; 
+			
+			System.out.println("before!" + beforeInputTextAll);
 			
 			inputTextAll = firstNumber;
 			inputText = operator; // 나중에 마지막 입력 버튼 값을 알아야하는 때를 위해 저장 

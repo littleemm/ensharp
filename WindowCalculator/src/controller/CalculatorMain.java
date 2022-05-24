@@ -80,9 +80,9 @@ public class CalculatorMain extends JFrame{
 			}
 			else if (mainFrame.getWidth() > 500) {
 				//panel.setSize(340, 600);
-				calculatorButton.buttonPanel.setSize(240, 300);
-				calculatorScreen.inputPanel.setSize(240, 100);
-				calculatorButton.logButtonPanel.setSize(240, 30);
+				//calculatorButton.buttonPanel.setSize(240, 300);
+				//calculatorScreen.inputPanel.setSize(240, 100);
+				//calculatorButton.logButtonPanel.setSize(240, 30);
 				
 				mainFrame.add(panel, BorderLayout.CENTER);
 				panel.setVisible(true);

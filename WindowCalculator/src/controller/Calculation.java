@@ -52,6 +52,7 @@ public class Calculation {
 		}
 		case ('×') : {
 			resultBig = firstBig.multiply(secondBig, MathContext.DECIMAL128);
+			
 			format.setMaximumFractionDigits(15);
 			format.setRoundingMode(RoundingMode.HALF_EVEN);
 			break;
@@ -79,7 +80,12 @@ public class Calculation {
 		}
 		
 		resultBig = eraseDecimalPoint(resultBig);
+		if (resultBig.toPlainString().length() - resultBig.toPlainString().replace(String.valueOf('.'), "").length() == 1) {
+			resultString = resultBig.toPlainString();
+		}
+		else {
 		resultString = format.format(resultBig);
+		}
 		resultString = exception.modifyResult(resultString);
 		System.out.println(resultString);
 		calculationDTO.setInput(resultString);

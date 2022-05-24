@@ -67,12 +67,30 @@ public class Exception {
 			resultString = resultBig.toString() + "e+" + Integer.toString(resultInteger);
 			System.out.println(resultString);
 		}
-		else if (isDecimalPoint(resultString)) {
+		else if (resultString.substring(resultString.indexOf(".") + 1).length() > 16 && isDecimalPoint(resultString)) {
+			resultBig = new BigDecimal(resultString);
+			System.out.println(resultBig.toString());
+			String point = squareTen(resultString);
+			System.out.println(point);
+			System.out.println(new BigDecimal(point));
+			resultBig = resultBig.multiply(new BigDecimal(point), MathContext.DECIMAL64);
+			int resultInteger = (int)(resultString.length()-1);
 			
+			resultString = resultBig.toString() + "e-" + Integer.toString(resultInteger);
+			System.out.println(resultString);
 		}
 		
 		return resultString;
 	}
+	private String squareTen(String resultString) {
+		BigDecimal result = new BigDecimal("10");
+		BigDecimal decimal = new BigDecimal("10");
+		for (int i=0;i < resultString.substring(resultString.indexOf(".") + 1).length() - 2;i++) {
+			result = decimal.multiply(result, MathContext.DECIMAL64); 
+		}
+		return result.toString();
+	}
+	
 	private String squareDecimal(String resultString) {
 		BigDecimal result = new BigDecimal("0.1");
 		BigDecimal decimal = new BigDecimal("0.1");
