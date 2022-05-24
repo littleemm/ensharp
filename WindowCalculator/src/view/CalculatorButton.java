@@ -31,7 +31,7 @@ public class CalculatorButton extends JPanel {
 		valueButton = new JButton[12];
 		imageLabel = new JLabel();
 		guideLabel = new JLabel("  표준");
-		logButton = new JButton(".");
+		logButton = new JButton();
 		numberColor = new Color(200, 199, 252);
 		color = new Color(250, 249, 250);
 		logoImage = new ImageIcon("src/image/logo.png");

@@ -109,7 +109,6 @@ public class ButtonActionListener {
 		calculatorButton.logButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JButton button = (JButton)e.getSource();
-				if(button.getText().equals(".")) {
 					mainFrame.setLayout(layout);
 					mainFrame.setVisible(true);
 					logPage.PrintLogList(logDTO);
@@ -119,9 +118,6 @@ public class ButtonActionListener {
 					//gridBagInsert(mainFrame, calculatorButton.logButtonPanel, 0, 0, 0, 1, 1);
 					//gridBagInsert(mainFrame, calculatorScreen.inputPanel, 0, 1, 0, 2, 3);
 					gridBagInsert(mainFrame, logPage.logPanel, 0, 5, 0, 5, 5);
-					
-					
-				}
 			}
 		});
 		

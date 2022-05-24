@@ -47,7 +47,7 @@ public class Exception {
 		return false;
 	}
 	
-	public String modifyResult(String resultString) {
+	public String modifyResult(String resultString, String firstNumber) {
 		resultString = resultString.replaceAll(",", "");
 		BigDecimal resultBig;
 		System.out.println(resultString + "string");
@@ -67,7 +67,7 @@ public class Exception {
 			resultString = resultBig.toString() + "e+" + Integer.toString(resultInteger);
 			System.out.println(resultString);
 		}
-		else if (resultString.substring(resultString.indexOf(".") + 1).length() > 16 && isDecimalPoint(resultString)) {
+		else if (firstNumber.indexOf("0.") >= 0 && resultString.substring(resultString.indexOf(".") + 1).length() > 16 && isDecimalPoint(resultString)) {
 			resultBig = new BigDecimal(resultString);
 			System.out.println(resultBig.toString());
 			String point = squareTen(resultString);
