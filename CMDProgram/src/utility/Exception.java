@@ -13,8 +13,7 @@ public class Exception {
 		return false;
 	}
 	
-	public Boolean isCdCommand(String command) {
-		String pattern = "^(?i)cd[;,=]$";
+	public Boolean isCdCommand(String command, String pattern) {
 		if (Pattern.matches(pattern, command)) {
 			return true;
 		}

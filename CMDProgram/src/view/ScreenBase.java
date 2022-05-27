@@ -9,11 +9,12 @@ public class ScreenBase implements CMDInterface {
 	}
 	
 	public void showFirstRoute() {
-		System.out.print("\nC:\\Users\\ASUS>");
+		String homeRoute = System.getProperty("user.home");
+		System.out.print(String.format("\n%s>", homeRoute));
 	}
 	
 	public void showNextRoute(String route) {
-		System.out.print(route);
+		System.out.print(String.format("\n%s>", route));
 	}
 	
 	public void showHelpResult() {
