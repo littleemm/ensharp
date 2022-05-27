@@ -1,10 +1,10 @@
 package CMDProgram;
+import controller.*;
 
-public class CMD {
-
+public class CMD { // CMD 메인 클래스
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		MainCMD mainCMD = new MainCMD();
+		mainCMD.startCMD();
 	}
 
 }
