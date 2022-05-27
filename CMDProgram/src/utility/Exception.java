@@ -6,11 +6,12 @@ public class Exception {
 		
 	}
 	
-	public Boolean isHelpCommand(String command) {
-		if (command.matches(Constant.HELP_COMMAND)) {
+	public Boolean isCommand(String command, String standardCommand) {
+		if (command.matches(standardCommand)) {
 			return true;
 		}
 		return false;
 	}
+	
 
 }
