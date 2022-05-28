@@ -14,6 +14,7 @@ public class CommandCd {
 	
 	public String analyzeCd(String command, String route) {
 		if (exception.isCdCommand(command, Constant.CD_PATTERN)) { // cd¸¸ ÀÔ·Â
+			screenBase.printOnlyRoute(route);
 			screenBase.showNextRoute(route);
 		}
 		

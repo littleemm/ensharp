@@ -17,6 +17,10 @@ public class ScreenBase implements CMDInterface {
 		System.out.print(String.format("\n%s>", route));
 	}
 	
+	public void printOnlyRoute(String route) {
+		System.out.println(route);
+	}
+	
 	public void showHelpResult() {
 		System.out.println(
 				"특정 명령어에 대한 자세한 내용이 필요하면 HELP 명령어 이름을 입력하십시오.\r\n"

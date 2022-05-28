@@ -19,5 +19,12 @@ public class Exception {
 		}
 		return false;
 	}
+	
+	public Boolean isDirCommand(String command, String pattern) {
+		if (Pattern.matches(pattern,  command)) {
+			return true;
+		}
+		return false;
+	}
 
 }

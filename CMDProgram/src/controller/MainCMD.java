@@ -1,5 +1,6 @@
 package controller;
 import view.ScreenBase;
+import java.io.*;
 import java.util.Scanner;
 import utility.Constant;
 import utility.Exception;
@@ -9,19 +10,21 @@ public class MainCMD {
 	private Scanner scanner;
 	private Exception exception;
 	private CommandCd commandCd;
+	private CommandDir commandDir;
 	
 	public MainCMD() {
 		screenBase = new ScreenBase();
 		scanner = new Scanner(System.in);
 		exception = new Exception();
 		commandCd = new CommandCd(exception, screenBase);
+		commandDir = new CommandDir(exception, screenBase);
 	}
 	
-	public void startCMD() {
+	public void startCMD() throws IOException, InterruptedException {
 		startFirst();	
 	}
 	
-	private void startFirst() {
+	private void startFirst() throws IOException, InterruptedException {
 		screenBase.showCMDSign();
 		screenBase.showFirstRoute();
 		String route = System.getProperty("user.home");
@@ -55,6 +58,9 @@ public class MainCMD {
 			
 		}
 		else if (command.length() >= 4 && exception.isCommand(command.substring(0,4), Constant.MOVE_COMMAND)) {
+			
+		}
+		else {
 			
 		}
 		
