@@ -120,7 +120,9 @@ public class ScreenBase implements CMDInterface {
 	}
 	
 	public void showClsResult() {
-		
+		for (int i=0;i<32;i++) {
+			System.out.println("\n");
+		}
 	}
 
 }

@@ -42,6 +42,7 @@ public class MainCMD {
 			screenBase.showNextRoute(route);
 		}
 		else if (exception.isCommand(command, Constant.CLS_COMMAND)) {
+			screenBase.showClsResult();
 			screenBase.showNextRoute(route);
 		}
 		else if (command.length() >= 2 && exception.isCommand(command.substring(0,2), Constant.CD_COMMAND)) {
