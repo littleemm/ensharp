@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.Scanner;
 import utility.Constant;
 import utility.Exception;
+import java.util.concurrent.Executors;
+import java.util.function.Consumer;
 
 public class MainCMD {
 	private ScreenBase screenBase;
@@ -39,7 +41,7 @@ public class MainCMD {
 		return command;
 	}
 	
-	private String readCommand(String command, String route) {
+	private String readCommand(String command, String route) throws IOException, InterruptedException {
 		if (exception.isCommand(command, Constant.HELP_COMMAND)) {
 			screenBase.showHelpResult();
 			screenBase.showNextRoute(route);
@@ -52,7 +54,7 @@ public class MainCMD {
 			return commandCd.analyzeCd(command, route);
 		}
 		else if (command.length() >= 3 && exception.isCommand(command.substring(0,3), Constant.DIR_COMMAND)) {
-			
+			return commandDir.analyzeDir(command, route);
 		}
 		else if (command.length() >= 4 && exception.isCommand(command.substring(0,4), Constant.COPY_COMMAND)) {
 			

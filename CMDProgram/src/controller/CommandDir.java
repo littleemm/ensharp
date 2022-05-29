@@ -15,9 +15,11 @@ public class CommandDir {
 		this.screenBase = screenBase;
 	}
 	
-	public String analyzeCd(String command, String route) throws IOException, InterruptedException {
+	public String analyzeDir(String command, String route) throws IOException, InterruptedException {
+		System.out.println(exception.isDirCommand(command, Constant.DIR_PATTERN));
 		if (exception.isDirCommand(command, Constant.DIR_PATTERN)) { // cd만 입력
 			showBasicDirResult(route);
+			screenBase.showNextRoute(route);
 		}
 		
 		else if (exception.isDirCommand(command, Constant.CD_GO_FIRST_PATTERN)) { // 처음으로
