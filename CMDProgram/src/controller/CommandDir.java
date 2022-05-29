@@ -16,8 +16,7 @@ public class CommandDir {
 	}
 	
 	public String analyzeDir(String command, String route) throws IOException, InterruptedException {
-		System.out.println(exception.isDirCommand(command, Constant.DIR_PATTERN));
-		if (exception.isDirCommand(command, Constant.DIR_PATTERN)) { // cd만 입력
+		if (exception.isDirBasicCommand(command)) { // cd만 입력
 			showBasicDirResult(route);
 			screenBase.showNextRoute(route);
 		}

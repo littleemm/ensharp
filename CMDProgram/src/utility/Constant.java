@@ -21,7 +21,8 @@ public class Constant {
 	public static String CD_GO_BACK_TWICE_PATTERN = "^(?i)cd[;,=\s]*..\\\\..$";
 	public static String CD_GO_BACK_ONCE_PATTERN = "^(?i)cd[;,=\s]*..$";
 	
-	public static String DIR_PATTERN = "^(?i)dir[;,=\s]*$";
+	public static String DIR_PATTERN = "^(?i)dir[;,=\s]*[.]?$";
+	public static String DIR_ADDITIONAL_PATTERN = "^(?i)dir[;,=\s]*$";
 	
 	public static Boolean UNTIL_CONSOLE_EXIT = true;
 
