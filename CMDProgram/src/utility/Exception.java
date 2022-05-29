@@ -1,5 +1,6 @@
 package utility;
 import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class Exception {
 	public Exception() {
@@ -31,6 +32,19 @@ public class Exception {
 		}
 		
 		return false;
+	}
+	
+	public Boolean isDirBeforeRouteCommand(String command) {
+		Pattern pattern = Pattern.compile(Constant.DIR_ADDITIONAL_PATTERN);
+		Matcher matcher = pattern.matcher(command);
+		if(matcher.groupCount() == 1) {
+			return true;
+		}
+		return false;
+	}
+	
+	public String getDirRoute(String command) {
+		
 	}
 	
 	public Boolean isDirCommand(String command, String pattern) {
