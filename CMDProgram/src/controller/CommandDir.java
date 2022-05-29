@@ -9,20 +9,24 @@ import java.io.*;
 public class CommandDir {
 	private Exception exception;
 	private ScreenBase screenBase;
+	private String command;
 	
 	public CommandDir(Exception exception, ScreenBase screenBase) {
 		this.exception = exception;
 		this.screenBase = screenBase;
+		command = "";
 	}
 	
 	public String analyzeDir(String command, String route) throws IOException, InterruptedException {
-		if (exception.isDirBasicCommand(command)) { // cd만 입력
+		this.command = command;
+		
+		if (exception.isDirBasicCommand(command)) { // dir
 			showBasicDirResult(route);
 			screenBase.showNextRoute(route);
 		}
 		
-		else if (exception.isDirCommand(command, Constant.CD_GO_FIRST_PATTERN)) { // 처음으로
-			route = route.substring(0,3);
+		else if (exception.isDirBeforeRouteCommand(command)) { // dir + 경로
+			
 			screenBase.showNextRoute(route);
 		}
 		
@@ -38,6 +42,10 @@ public class CommandDir {
 		}
 		
 		return route;
+	}
+	
+	public void getDirRoute(String command) {
+		
 	}
 	
 	

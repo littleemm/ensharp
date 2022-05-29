@@ -43,8 +43,21 @@ public class Exception {
 		return false;
 	}
 	
-	public String getDirRoute(String command) {
-		
+	public Boolean isCopyBeforeSourceFileCommand(String command) {
+		Pattern pattern = Pattern.compile(Constant.COPY_FRONT_PATTERN);
+		Matcher matcher = pattern.matcher(command);
+		if(matcher.groupCount() == 1) {
+			return true;
+		}
+		return false;
+	}
+	
+	public Boolean isCopyCommand(String command) {
+		if(Pattern.matches(Constant.COPY_FRONT_PATTERN, command)) {
+			return true;
+		}
+		System.out.println("hi");
+		return false;
 	}
 	
 	public Boolean isDirCommand(String command, String pattern) {

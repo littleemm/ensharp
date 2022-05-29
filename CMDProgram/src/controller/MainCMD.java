@@ -13,6 +13,7 @@ public class MainCMD {
 	private Exception exception;
 	private CommandCd commandCd;
 	private CommandDir commandDir;
+	private CommandCopy commandCopy;
 	
 	public MainCMD() {
 		screenBase = new ScreenBase();
@@ -20,6 +21,7 @@ public class MainCMD {
 		exception = new Exception();
 		commandCd = new CommandCd(exception, screenBase);
 		commandDir = new CommandDir(exception, screenBase);
+		commandCopy = new CommandCopy(exception, screenBase);
 	}
 	
 	public void startCMD() throws IOException, InterruptedException {
@@ -57,7 +59,7 @@ public class MainCMD {
 			return commandDir.analyzeDir(command, route);
 		}
 		else if (command.length() >= 4 && exception.isCommand(command.substring(0,4), Constant.COPY_COMMAND)) {
-			
+			return commandCopy.analyzeCopy(command, route);
 		}
 		else if (command.length() >= 4 && exception.isCommand(command.substring(0,4), Constant.MOVE_COMMAND)) {
 			
