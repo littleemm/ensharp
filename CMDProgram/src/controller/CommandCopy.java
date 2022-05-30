@@ -46,7 +46,7 @@ public class CommandCopy {
 		
 		File source = new File(String.format("%s%s", directory, sourceFile));
 		File destination = new File(String.format("%s%s", destinationDirectory, destinationFile));
-		copyFileBasic(source, destination);
+		copyFileBasic2(source, destination);
 	}
 	
 	private void copyEmptyNameFile(String command, String route) {
@@ -56,7 +56,7 @@ public class CommandCopy {
 		String destinationDirectory = getDirectory(command, route, Constant.COPY_SPECIAL_CURRENT_PATTERN, "$3");
 		File source = new File(String.format("%s\\%s", route, sourceFile));
 		File destination = new File(String.format("%s%s", destinationDirectory, destinationFile));
-		copyFileBasic(source, destination);
+		copyFileBasic2(source, destination);
 	}
 	
 	private void copyFileSimply(String command, String route) {
@@ -65,7 +65,27 @@ public class CommandCopy {
 		
 		File source = new File(String.format("%s%s", directory, file));
 		File destination = new File(String.format("%s\\%s", route, file));
-		copyFileBasic(source, destination);
+		copyFileBasic2(source, destination);
+	}
+	
+	private void copyFileBasic2(File source, File destination) {
+		try {
+			FileInputStream fileInput = new FileInputStream(source);
+			FileOutputStream fileOutput = new FileOutputStream(destination);
+			byte [] buffer = new byte[1024*10];
+			while(true) {
+				int size = fileInput.read(buffer);
+				fileOutput.write(buffer, 0, size);
+				if(size < buffer.length) {
+					break;
+				}
+			}
+			fileOutput.close();
+			fileInput.close();
+			System.out.println("        1개 파일이 복사되었습니다.");
+		} catch(IOException e) {
+			System.out.println("파일 복사 오류");
+		}
 	}
 	
 	private void copyFileBasic(File source, File destination) {
