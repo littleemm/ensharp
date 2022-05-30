@@ -14,7 +14,7 @@ public class CommandCopy {
 	}
 	
 	public String analyzeCopy(String command, String route) {
-		if (exception.isCopyCommand(command) || exception.isCopyNextCommand(command.substring(4))) { 
+		if (exception.isCopyCurrentCommand(command, Constant.COPY_CURRENT_PATTERN) || exception.isCopyCurrentCommand(command, Constant.COPY_SPECIAL_CURRENT_PATTERN)) { 
 			screenBase.showNextRoute(route);
 		}
 		
@@ -38,6 +38,28 @@ public class CommandCopy {
 	}
 	
 	private void fileCopy(String command, String route) {
+		String directory = route;
+		String destinationDirectory = route;
 		
+		int sourceFileLength = exception.getEndFileIndex(command, 0) - exception.getBeginFileIndex(command) + 1;
+		String sourceFileName = command.substring(exception.getBeginFileIndex(command), sourceFileLength);
+		
+		if (exception.getBeginRouteIndex(sourceFileName, 0) >= 0) {
+			int directoryLength = exception.getEndRouteIndex(sourceFileName, 0) - exception.getBeginRouteIndex(sourceFileName, 0) + 1;
+			directory = sourceFileName.substring(exception.getBeginRouteIndex(sourceFileName, 0), directoryLength);
+		}
+		
+		command = command.substring(exception.getEndFileIndex(command, 0) + 1);
+		int destinationFileLength = exception.getEndFileIndex(command, 0) - exception.getBeginCutFileIndex(command, 0) + 1;
+		String destinationFileName = command.substring(exception.getBeginCutFileIndex(command, 0), destinationFileLength);
+		
+		if (exception.getBeginRouteIndex(destinationFileName, 0) >= 0) {
+			int directoryLength = exception.getEndRouteIndex(destinationFileName, 0) - exception.getBeginRouteIndex(destinationFileName, 0) + 1;
+			destinationDirectory = sourceFileName.substring(exception.getBeginRouteIndex(destinationFileName, 0), directoryLength);
+		}
+		
+		
+		File source = new File(String.format("%s%s", directory, command));
+		File destination = new File(String.format("%s%s", destinationDirectory, command));
 	}
 }
