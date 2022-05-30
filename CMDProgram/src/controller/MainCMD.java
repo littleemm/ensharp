@@ -39,7 +39,7 @@ public class MainCMD {
 	}
 	
 	private String scanCommand() {
-		String command = scanner.next();
+		String command = scanner.nextLine();
 		return command;
 	}
 	

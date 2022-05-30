@@ -18,7 +18,7 @@ public class Constant {
 	public static String ALL_DIVISION_PATTERN = "[;,=\s]*";
 	
 	public static String CD_PATTERN = "^(?i)cd[;,=\s]*$";
-	public static String CD_PATTERN_DRIVE = "^(?i)cd[;,=\s]*(?i)c:$";
+	public static String CD_PATTERN_DRIVE = "^(?i)cd[;,=\s]+(?i)c:$";
 	public static String CD_GO_FIRST_PATTERN = "^(?i)cd[;,=\s]*\\\\$";
 	public static String CD_GO_BACK_TWICE_PATTERN = "^(?i)cd[;,=\s]*..\\\\..$";
 	public static String CD_GO_BACK_ONCE_PATTERN = "^(?i)cd[;,=\s]*..$";
@@ -26,7 +26,8 @@ public class Constant {
 	public static String DIR_PATTERN = "^(?i)dir[;,=\s]*[.]?$";
 	public static String DIR_ADDITIONAL_PATTERN = "^(?i)dir[;,=\s]*$";
 	
-	public static String COPY_FRONT_PATTERN = "^(?i)copy[\s]+[\\w\\W]+\\.txt[;,=\s]*[a-z]+\\.txt$";
+	public static String COPY_CURRENT_PATTERN = "^(?i)copy[\\s;=]+[^/:\\*\\?\"<>\\|\\\\]+\\.(?i)(txt|ini)[\\s;,=]+[^/:\\*\\?\"<>\\|\\\\]+\\.(?i)(txt|ini)$";
+	public static String COPY_NEXT_PATTERN = "^[\s]*[^/:\\*\\?\"<>\\|\\\\]+\\.(?i)(txt|ini)[\\s;,=]+[^/:\\*\\?\"<>\\|\\\\]+\\.(?i)(txt|ini)$";
 	public static String COPY_PATTERN = "^[A-Za-z°¡-ÆR]+.txt[:,=\s]*[A-Za-z°¡-ÆR]+.txt$";
 	
 	public static Boolean UNTIL_CONSOLE_EXIT = true;

@@ -14,7 +14,7 @@ public class CommandCopy {
 	}
 	
 	public String analyzeCopy(String command, String route) {
-		if (exception.isCopyCommand(command)) { 
+		if (exception.isCopyCommand(command) || exception.isCopyNextCommand(command.substring(4))) { 
 			screenBase.showNextRoute(route);
 		}
 		

@@ -43,20 +43,17 @@ public class Exception {
 		return false;
 	}
 	
-	public Boolean isCopyBeforeSourceFileCommand(String command) {
-		Pattern pattern = Pattern.compile(Constant.COPY_FRONT_PATTERN);
-		Matcher matcher = pattern.matcher(command);
-		if(matcher.groupCount() == 1) {
+	public Boolean isCopyNextCommand(String command) {
+		if(Pattern.matches(Constant.COPY_NEXT_PATTERN, command)) {
 			return true;
 		}
 		return false;
 	}
 	
 	public Boolean isCopyCommand(String command) {
-		if(Pattern.matches(Constant.COPY_FRONT_PATTERN, command)) {
+		if(Pattern.matches(Constant.COPY_CURRENT_PATTERN, command)) {
 			return true;
 		}
-		System.out.println("hi");
 		return false;
 	}
 	

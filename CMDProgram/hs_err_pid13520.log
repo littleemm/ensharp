@@ -18,7 +18,7 @@
 #     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
 # This output file may be truncated or incomplete.
 #
-#  Out of Memory Error (os_windows.cpp:3466), pid=12396, tid=25512
+#  Out of Memory Error (os_windows.cpp:3466), pid=13520, tid=19112
 #
 # JRE version:  (16.0.2+7) (build )
 # Java VM: Java HotSpot(TM) 64-Bit Server VM (16.0.2+7-67, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
@@ -30,13 +30,13 @@
 Command Line: -Dfile.encoding=MS949 -XX:+ShowCodeDetailsInExceptionMessages CMDProgram.CMD
 
 Host: Intel(R) Core(TM) i3-8130U CPU @ 2.20GHz, 4 cores, 3G,  Windows 10 , 64 bit Build 19041 (10.0.19041.1466)
-Time: Mon May 30 02:01:50 2022  Windows 10 , 64 bit Build 19041 (10.0.19041.1466) elapsed time: 0.042167 seconds (0d 0h 0m 0s)
+Time: Mon May 30 14:17:25 2022  Windows 10 , 64 bit Build 19041 (10.0.19041.1466) elapsed time: 0.051839 seconds (0d 0h 0m 0s)
 
 ---------------  T H R E A D  ---------------
 
-Current thread (0x0000021deeeb95b0):  JavaThread "Unknown thread" [_thread_in_vm, id=25512, stack(0x000000a28b900000,0x000000a28ba00000)]
+Current thread (0x0000025a7fcb95b0):  JavaThread "Unknown thread" [_thread_in_vm, id=19112, stack(0x000000ca2fd00000,0x000000ca2fe00000)]
 
-Stack: [0x000000a28b900000,0x000000a28ba00000]
+Stack: [0x000000ca2fd00000,0x000000ca2fe00000]
 Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
 V  [jvm.dll+0x6681ca]
 V  [jvm.dll+0x7c9e69]
@@ -65,22 +65,22 @@ C  [ntdll.dll+0x52651]
 ---------------  P R O C E S S  ---------------
 
 Threads class SMR info:
-_java_thread_list=0x00007ffa8957cbb8, length=0, elements={
+_java_thread_list=0x00007ffa9dffcbb8, length=0, elements={
 }
 
 Java Threads: ( => current thread )
 
 Other Threads:
-  0x0000021deeee9220 GCTaskThread "GC Thread#0" [stack: 0x000000a28ba00000,0x000000a28bb00000] [id=10044]
-  0x0000021deeef25c0 ConcurrentGCThread "G1 Main Marker" [stack: 0x000000a28bb00000,0x000000a28bc00000] [id=8880]
-  0x0000021deeef3030 ConcurrentGCThread "G1 Conc#0" [stack: 0x000000a28bc00000,0x000000a28bd00000] [id=27340]
+  0x0000025a7fce9220 GCTaskThread "GC Thread#0" [stack: 0x000000ca2fe00000,0x000000ca2ff00000] [id=15920]
+  0x0000025a7fcf38e0 ConcurrentGCThread "G1 Main Marker" [stack: 0x000000ca2ff00000,0x000000ca30000000] [id=1200]
+  0x0000025a7fcf4260 ConcurrentGCThread "G1 Conc#0" [stack: 0x000000ca30000000,0x000000ca30100000] [id=20096]
 
-[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffa88d53ee7]
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffa9d7d3ee7]
 
 VM state: not at safepoint (not fully initialized)
 
 VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
-[0x0000021deeeb6990] Heap_lock - owner thread: 0x0000021deeeb95b0
+[0x0000025a7fcb5d30] Heap_lock - owner thread: 0x0000025a7fcb95b0
 
 Heap address: 0x00000000c2200000, size: 990 MB, Compressed Oops mode: 32-bit
 
@@ -94,7 +94,7 @@ Heap:
  garbage-first heap   total 0K, used 0K [0x00000000c2200000, 0x0000000100000000)
   region size 1024K, 0 young (0K), 0 survivors (0K)
 
-[error occurred during error reporting (printing heap information), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffa89131eed]
+[error occurred during error reporting (printing heap information), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffa9dbb1eed]
 
 GC Heap History (0 events):
 No events
@@ -112,17 +112,17 @@ Internal exceptions (0 events):
 No events
 
 Events (1 events):
-Event: 0.030 Loaded shared library C:\Program Files\Java\jdk-16.0.2\bin\java.dll
+Event: 0.035 Loaded shared library C:\Program Files\Java\jdk-16.0.2\bin\java.dll
 
 
 Dynamic libraries:
-0x00007ff675fd0000 - 0x00007ff675fe0000 	C:\Program Files\Java\jdk-16.0.2\bin\javaw.exe
+0x00007ff74b150000 - 0x00007ff74b160000 	C:\Program Files\Java\jdk-16.0.2\bin\javaw.exe
 0x00007ffadfe50000 - 0x00007ffae0045000 	C:\WINDOWS\SYSTEM32\ntdll.dll
 0x00007ffadfc80000 - 0x00007ffadfd3e000 	C:\WINDOWS\System32\KERNEL32.DLL
 0x00007ffadd930000 - 0x00007ffaddbf8000 	C:\WINDOWS\System32\KERNELBASE.dll
 0x00007ffaddd40000 - 0x00007ffadde40000 	C:\WINDOWS\System32\ucrtbase.dll
-0x00007ffad5000000 - 0x00007ffad5019000 	C:\Program Files\Java\jdk-16.0.2\bin\VCRUNTIME140.dll
-0x00007ffad5750000 - 0x00007ffad5768000 	C:\Program Files\Java\jdk-16.0.2\bin\jli.dll
+0x00007ffad6b50000 - 0x00007ffad6b69000 	C:\Program Files\Java\jdk-16.0.2\bin\VCRUNTIME140.dll
+0x00007ffad6df0000 - 0x00007ffad6e08000 	C:\Program Files\Java\jdk-16.0.2\bin\jli.dll
 0x00007ffadfd60000 - 0x00007ffadfe0e000 	C:\WINDOWS\System32\ADVAPI32.dll
 0x00007ffadedf0000 - 0x00007ffadee8e000 	C:\WINDOWS\System32\msvcrt.dll
 0x00007ffadf760000 - 0x00007ffadf7fc000 	C:\WINDOWS\System32\sechost.dll
@@ -131,23 +131,23 @@ Dynamic libraries:
 0x00007ffaddd10000 - 0x00007ffaddd32000 	C:\WINDOWS\System32\win32u.dll
 0x00007ffadf660000 - 0x00007ffadf68b000 	C:\WINDOWS\System32\GDI32.dll
 0x00007ffadd6c0000 - 0x00007ffadd7cd000 	C:\WINDOWS\System32\gdi32full.dll
-0x00007ffadd890000 - 0x00007ffadd92d000 	C:\WINDOWS\System32\msvcp_win.dll
 0x00007ffadc900000 - 0x00007ffadcb9a000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.1110_none_60b5254171f9507e\COMCTL32.dll
+0x00007ffadd890000 - 0x00007ffadd92d000 	C:\WINDOWS\System32\msvcp_win.dll
 0x00007ffad5e80000 - 0x00007ffad5e8a000 	C:\WINDOWS\SYSTEM32\VERSION.dll
 0x00007ffadf4a0000 - 0x00007ffadf4d0000 	C:\WINDOWS\System32\IMM32.DLL
-0x00007ffadcec0000 - 0x00007ffadcecc000 	C:\Program Files\Java\jdk-16.0.2\bin\vcruntime140_1.dll
-0x00007ffac80b0000 - 0x00007ffac8141000 	C:\Program Files\Java\jdk-16.0.2\bin\msvcp140.dll
-0x00007ffa88a70000 - 0x00007ffa8961b000 	C:\Program Files\Java\jdk-16.0.2\bin\server\jvm.dll
+0x00007ffad9d10000 - 0x00007ffad9d1c000 	C:\Program Files\Java\jdk-16.0.2\bin\vcruntime140_1.dll
+0x00007ffac9f80000 - 0x00007ffaca011000 	C:\Program Files\Java\jdk-16.0.2\bin\msvcp140.dll
+0x00007ffa9d4f0000 - 0x00007ffa9e09b000 	C:\Program Files\Java\jdk-16.0.2\bin\server\jvm.dll
 0x00007ffadfd40000 - 0x00007ffadfd48000 	C:\WINDOWS\System32\PSAPI.DLL
+0x00007ffac6830000 - 0x00007ffac6857000 	C:\WINDOWS\SYSTEM32\WINMM.dll
 0x00007ffaca740000 - 0x00007ffaca749000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
 0x00007ffadf430000 - 0x00007ffadf49b000 	C:\WINDOWS\System32\WS2_32.dll
-0x00007ffac6830000 - 0x00007ffac6857000 	C:\WINDOWS\SYSTEM32\WINMM.dll
 0x00007ffadae70000 - 0x00007ffadae82000 	C:\WINDOWS\SYSTEM32\kernel.appcore.dll
-0x00007ffac9fb0000 - 0x00007ffac9fba000 	C:\Program Files\Java\jdk-16.0.2\bin\jimage.dll
+0x00007ffadcec0000 - 0x00007ffadceca000 	C:\Program Files\Java\jdk-16.0.2\bin\jimage.dll
 0x00007ffadd040000 - 0x00007ffadd224000 	C:\WINDOWS\SYSTEM32\DBGHELP.DLL
 0x00007ffadce90000 - 0x00007ffadcebc000 	C:\WINDOWS\SYSTEM32\dbgcore.DLL
 0x00007ffadd7d0000 - 0x00007ffadd852000 	C:\WINDOWS\System32\bcryptPrimitives.dll
-0x00007ffac9f20000 - 0x00007ffac9f45000 	C:\Program Files\Java\jdk-16.0.2\bin\java.dll
+0x00007ffad65e0000 - 0x00007ffad6605000 	C:\Program Files\Java\jdk-16.0.2\bin\java.dll
 
 dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
 symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\SYSTEM32;C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.1110_none_60b5254171f9507e;C:\Program Files\Java\jdk-16.0.2\bin\server
@@ -198,12 +198,12 @@ PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
 
 OS:
  Windows 10 , 64 bit Build 19041 (10.0.19041.1466)
-OS uptime: 8 days 22:08 hours
+OS uptime: 9 days 10:24 hours
 
 CPU: total 4 (initial active 4) (2 cores per cpu, 2 threads per core) family 6 model 142 stepping 10 microcode 0xb4, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, adx, fma, vzeroupper, clflush, clflushopt
 
-Memory: 4k page, system-wide physical 3953M (526M free)
-TotalPageFile size 16241M (AvailPageFile size 56M)
+Memory: 4k page, system-wide physical 3953M (559M free)
+TotalPageFile size 16241M (AvailPageFile size 15M)
 current process WorkingSet (physical memory assigned to process): 10M, peak: 10M
 current process commit charge ("private bytes"): 51M, peak: 113M
 
