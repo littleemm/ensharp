@@ -73,6 +73,8 @@ public class Exception {
 	public int getEndFileIndex(String command, int sequence) {
 		Pattern pattern = Pattern.compile(Constant.COPY_END_PATTERN);
 		Matcher matcher = pattern.matcher(command);
+		String result = command.replaceAll(Constant.COPY_CURRENT_PATTERN, "$1, $2, $3, $4, $5, $6");
+		System.out.println(result);
 		return matcher.end(sequence) - 1;
 	}
 	

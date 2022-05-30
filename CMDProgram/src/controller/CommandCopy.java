@@ -15,6 +15,7 @@ public class CommandCopy {
 	
 	public String analyzeCopy(String command, String route) {
 		if (exception.isCopyCurrentCommand(command, Constant.COPY_CURRENT_PATTERN) || exception.isCopyCurrentCommand(command, Constant.COPY_SPECIAL_CURRENT_PATTERN)) { 
+			fileCopy(command, route);
 			screenBase.showNextRoute(route);
 		}
 		
@@ -38,11 +39,12 @@ public class CommandCopy {
 	}
 	
 	private void fileCopy(String command, String route) {
-		String directory = route;
-		String destinationDirectory = route;
+		String directory = route; // 복사할 파일의 파일 위치
+		String destinationDirectory = route; // 붙여넣어질 파일의 파일 위치
 		
 		int sourceFileLength = exception.getEndFileIndex(command, 0) - exception.getBeginFileIndex(command) + 1;
-		String sourceFileName = command.substring(exception.getBeginFileIndex(command), sourceFileLength);
+		System.out.println(exception.getEndFileIndex(command, 0));
+		String sourceFileName = command.substring(exception.getBeginFileIndex(command), sourceFileLength); // 디렉토리 부분 잘라낸 순수 파일 이름
 		
 		if (exception.getBeginRouteIndex(sourceFileName, 0) >= 0) {
 			int directoryLength = exception.getEndRouteIndex(sourceFileName, 0) - exception.getBeginRouteIndex(sourceFileName, 0) + 1;

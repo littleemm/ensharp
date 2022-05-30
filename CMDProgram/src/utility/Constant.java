@@ -27,10 +27,10 @@ public class Constant {
 	public static String DIR_PATTERN = "^(?i)dir[;,=\s]*[.]?$";
 	public static String DIR_ADDITIONAL_PATTERN = "^(?i)dir[;,=\s]*$";
 	
-	public static String COPY_CURRENT_PATTERN = "^(?i)copy[\\s;=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+)*[^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini)[\\s;,=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+)*[^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini)[\\\\s;=]*$";
-	public static String COPY_SPECIAL_CURRENT_PATTERN = "^(?i)copy\\.(?i)(txt|ini)[\\s;,=]+[^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini)$";
+	public static String COPY_CURRENT_PATTERN = "^(?i)copy[\\s;=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+[\\\\]{1})*([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\\s;,=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+[\\\\]{1})*([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\\\\s;=]*$";
+	public static String COPY_SPECIAL_CURRENT_PATTERN = "^(?i)copy(\\.(?i)(txt|ini))[\\s;,=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+[\\\\]{1})*([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))$";
 	public static String COPY_BEGIN_PATTERN = "(?i)copy[\\s;=]*";
-	public static String COPY_END_PATTERN = ".(?i)(txt|ini)";
+	public static String COPY_END_PATTERN = "^\\.(?i)(txt|ini)$";
 	
 	public static String ROUTE_PATTERN = "[a-zA-Z]{1}:";
 	public static String ROUTE_END_PATTERN = "\\";
