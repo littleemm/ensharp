@@ -51,6 +51,13 @@ public class Exception {
 		return false;
 	}
 	
+	public Boolean isMoveCurrentCommand(String command, String pattern) {
+		if(Pattern.matches(pattern, command)) {
+			return true;
+		}
+		return false;
+	}
+	
 	public Boolean isDirCommand(String command, String pattern) {
 		if (Pattern.matches(pattern,  command)) {
 			return true;
@@ -58,11 +65,8 @@ public class Exception {
 		return false;
 	}
 		
-	public int getEndFileIndex(String command, int sequence) {
-		Pattern pattern = Pattern.compile(Constant.COPY_END_PATTERN);
-		Matcher matcher = pattern.matcher(command);
+	public void getEndFileIndex(String command, int sequence) {
 		String result = command.replaceAll(Constant.COPY_CURRENT_PATTERN, "$1, $2, $3, $4, $5, $6");
 		System.out.println(result);
-		return matcher.end(sequence) - 1;
 	}
 }
