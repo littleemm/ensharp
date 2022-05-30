@@ -1,4 +1,5 @@
 package controller;
+import view.ScreenException;
 import view.ScreenBase;
 import utility.Constant;
 import utility.Exception;
@@ -9,10 +10,12 @@ import java.io.*;
 public class CommandDir {
 	private Exception exception;
 	private ScreenBase screenBase;
+	private ScreenException screenException;
 	
-	public CommandDir(Exception exception, ScreenBase screenBase) {
+	public CommandDir(Exception exception, ScreenBase screenBase, ScreenException screenException) {
 		this.exception = exception;
 		this.screenBase = screenBase;
+		this.screenException = screenException;
 	}
 	
 	public String analyzeDir(String command, String route) throws IOException, InterruptedException {
@@ -23,6 +26,9 @@ public class CommandDir {
 		else if (exception.isDirCommand(command, Constant.DIR_ROUTE_PATTERN)) { // dir + °æ·Î
 			showRouteDirResult(command);
 		}
+		else {
+			
+		}
 		
 		screenBase.showNextRoute(route);
 		return route;
@@ -31,7 +37,6 @@ public class CommandDir {
 	
 	private void showRouteDirResult (String command) throws IOException, InterruptedException {
 		String route = command.replaceAll(Constant.DIR_ROUTE_PATTERN, "$1");
-		System.out.println(route);
 		executeDirCommand(route);
 	}
 	

@@ -23,19 +23,19 @@ public class Constant {
 	public static String CD_GO_FIRST_PATTERN = "^(?i)cd[;,=\s]*\\\\$";
 	public static String CD_GO_BACK_TWICE_PATTERN = "^(?i)cd[;,=\s]*..\\\\..$";
 	public static String CD_GO_BACK_ONCE_PATTERN = "^(?i)cd[;,=\s]*..$";
-	public static String CD_ROUTE_PATTERN = "^(?i)cd[;,=\s]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|])[;,=\s]*$";
+	public static String CD_ROUTE_PATTERN = "^(?i)cd[;,=\s]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+)[;,=\s]*$";
 	
 	public static String DIR_PATTERN = "^(?i)dir[;,=\s]*(\\.|\\.\\\\)*[;,=\\s]*$";
-	public static String DIR_ROUTE_PATTERN = "^(?i)dir[;,=\s]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|])[;,=\s]*$";
+	public static String DIR_ROUTE_PATTERN = "^(?i)dir[;,=\s]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+)[;,=\s]*$";
 	public static String DIR_ADDITIONAL_PATTERN = "^(?i)dir[;,=\s]*$";
 	
-	public static String COPY_CURRENT_PATTERN = "^(?i)copy[\\s;=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+[\\\\]{1})*([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\\s;,=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+[\\\\]{1})*([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\\s;=]*$";
-	public static String COPY_SPECIAL_CURRENT_PATTERN = "^(?i)copy(\\.(?i)(txt|ini))[\s;,=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+[\\\\]{1})*([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))$";
-	public static String COPY_ONE_FILE_PATTERN = "^(?i)copy[\\s;=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+[\\\\]{1})*([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\\s;=]*$";
+	public static String COPY_CURRENT_PATTERN = "^(?i)copy[\\s;=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+[\\\\]{1})?([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\\s;,=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+[\\\\]{1})?([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\\s;=]*$";
+	public static String COPY_SPECIAL_CURRENT_PATTERN = "^(?i)copy(\\.(?i)(txt|ini))[\s;,=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+[\\\\]{1})?([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))$";
+	public static String COPY_ONE_FILE_PATTERN = "^(?i)copy[\\s;=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+[\\\\]{1})?([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\\s;=]*$";
 	
-	public static String MOVE_CURRENT_PATTERN = "^(?i)move[\\s;=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+[\\\\]{1})*([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\\s;,=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+[\\\\]{1})*([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\\s;=]*$";
-	public static String MOVE_SPECIAL_CURRENT_PATTERN = "^(?i)move(\\.(?i)(txt|ini))[\s;,=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+[\\\\]{1})*([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))$";
-	public static String MOVE_ONE_FILE_PATTERN = "^(?i)move[\\s;=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+[\\\\]{1})*([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\\s;=]*$";
+	public static String MOVE_CURRENT_PATTERN = "^(?i)move[\\s;=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+[\\\\]{1})?([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\\s;,=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+[\\\\]{1})?([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\\s;=]*$";
+	public static String MOVE_SPECIAL_CURRENT_PATTERN = "^(?i)move(\\.(?i)(txt|ini))[\s;,=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+[\\\\]{1})?([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))$";
+	public static String MOVE_ONE_FILE_PATTERN = "^(?i)move[\\s;=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+[\\\\]{1})?([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\\s;=]*$";
 	
 	
 	public static Boolean UNTIL_CONSOLE_EXIT = true;

@@ -1,5 +1,6 @@
 package controller;
 import view.ScreenBase;
+import view.ScreenException;
 import java.io.*;
 import java.util.Scanner;
 import utility.Constant;
@@ -9,6 +10,7 @@ import java.util.function.Consumer;
 
 public class MainCMD {
 	private ScreenBase screenBase;
+	private ScreenException screenException;
 	private Scanner scanner;
 	private Exception exception;
 	private CommandCd commandCd;
@@ -18,12 +20,13 @@ public class MainCMD {
 	
 	public MainCMD() {
 		screenBase = new ScreenBase();
+		screenException = new ScreenException();
 		scanner = new Scanner(System.in);
 		exception = new Exception();
-		commandCd = new CommandCd(exception, screenBase);
-		commandDir = new CommandDir(exception, screenBase);
-		commandCopy = new CommandCopy(exception, screenBase);
-		commandMove = new CommandMove(exception, screenBase);
+		commandCd = new CommandCd(exception, screenBase, screenException);
+		commandDir = new CommandDir(exception, screenBase, screenException);
+		commandCopy = new CommandCopy(exception, screenBase, screenException);
+		commandMove = new CommandMove(exception, screenBase, screenException);
 	}
 	
 	public void startCMD() throws IOException, InterruptedException {

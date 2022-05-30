@@ -1,16 +1,21 @@
 package controller;
+import view.ScreenException;
 import utility.Constant;
 import utility.Exception;
 import view.ScreenBase;
+import view.ScreenException;
+
 import java.io.*;
 
 public class CommandCopy {
 	private Exception exception;
 	private ScreenBase screenBase;
+	private ScreenException screenException;
 	
-	public CommandCopy(Exception exception, ScreenBase screenBase) {
+	public CommandCopy(Exception exception, ScreenBase screenBase, ScreenException screenException) {
 		this.exception = exception;
 		this.screenBase = screenBase;
+		this.screenException = screenException;
 	}
 	
 	public String analyzeCopy(String command, String route) {
@@ -46,7 +51,7 @@ public class CommandCopy {
 		
 		File source = new File(String.format("%s%s", directory, sourceFile));
 		File destination = new File(String.format("%s%s", destinationDirectory, destinationFile));
-		copyFileBasic2(source, destination);
+		copyFileBasic(source, destination);
 	}
 	
 	private void copyEmptyNameFile(String command, String route) {
@@ -56,7 +61,7 @@ public class CommandCopy {
 		String destinationDirectory = getDirectory(command, route, Constant.COPY_SPECIAL_CURRENT_PATTERN, "$3");
 		File source = new File(String.format("%s\\%s", route, sourceFile));
 		File destination = new File(String.format("%s%s", destinationDirectory, destinationFile));
-		copyFileBasic2(source, destination);
+		copyFileBasic(source, destination);
 	}
 	
 	private void copyFileSimply(String command, String route) {
@@ -65,10 +70,10 @@ public class CommandCopy {
 		
 		File source = new File(String.format("%s%s", directory, file));
 		File destination = new File(String.format("%s\\%s", route, file));
-		copyFileBasic2(source, destination);
+		copyFileBasic(source, destination);
 	}
 	
-	private void copyFileBasic2(File source, File destination) {
+	private void copyFileBasic(File source, File destination) {
 		try {
 			FileInputStream fileInput = new FileInputStream(source);
 			FileOutputStream fileOutput = new FileOutputStream(destination);
@@ -82,22 +87,6 @@ public class CommandCopy {
 			}
 			fileOutput.close();
 			fileInput.close();
-			System.out.println("        1개 파일이 복사되었습니다.");
-		} catch(IOException e) {
-			System.out.println("파일 복사 오류");
-		}
-	}
-	
-	private void copyFileBasic(File source, File destination) {
-		int text;
-		try {
-			FileReader reader = new FileReader(source);
-			FileWriter writer = new FileWriter(destination);
-			while((text = reader.read()) != -1) {
-				writer.write((char)text);
-			}
-			reader.close();
-			writer.close();
 			System.out.println("        1개 파일이 복사되었습니다.");
 		} catch(IOException e) {
 			System.out.println("파일 복사 오류");

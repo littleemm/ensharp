@@ -1,5 +1,5 @@
 package controller;
-
+import view.ScreenException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -8,14 +8,17 @@ import java.io.IOException;
 import utility.Constant;
 import utility.Exception;
 import view.ScreenBase;
+import view.ScreenException;
 
 public class CommandMove {
 	private Exception exception;
 	private ScreenBase screenBase;
+	private ScreenException screenException;
 	
-	public CommandMove(Exception exception, ScreenBase screenBase) {
+	public CommandMove(Exception exception, ScreenBase screenBase, ScreenException screenException) {
 		this.exception = exception;
 		this.screenBase = screenBase;
+		this.screenException = screenException;
 	}
 	
 	public String analyzeMove(String command, String route) {
