@@ -57,19 +57,7 @@ public class Exception {
 		}
 		return false;
 	}
-	
-	public int getBeginFileIndex(String command) {
-		Pattern pattern = Pattern.compile(Constant.COPY_BEGIN_PATTERN);
-		Matcher matcher = pattern.matcher(command);
-		return matcher.end();
-	}
-	
-	public int getBeginCutFileIndex(String command, int sequence) {
-		Pattern pattern = Pattern.compile(Constant.ALL_DIVISION_PATTERN);
-		Matcher matcher = pattern.matcher(command);
-		return matcher.end(sequence);
-	}
-	
+		
 	public int getEndFileIndex(String command, int sequence) {
 		Pattern pattern = Pattern.compile(Constant.COPY_END_PATTERN);
 		Matcher matcher = pattern.matcher(command);
@@ -77,17 +65,4 @@ public class Exception {
 		System.out.println(result);
 		return matcher.end(sequence) - 1;
 	}
-	
-	public int getBeginRouteIndex(String file, int sequence) {
-		Pattern pattern = Pattern.compile(Constant.ROUTE_PATTERN);
-		Matcher matcher = pattern.matcher(file);
-		return matcher.start(sequence);
-	}
-	
-	public int getEndRouteIndex(String file, int sequence) {
-		Pattern pattern = Pattern.compile(Constant.ROUTE_END_PATTERN);
-		Matcher matcher = pattern.matcher(file);
-		return matcher.end(sequence) - 1;
-	}
-
 }

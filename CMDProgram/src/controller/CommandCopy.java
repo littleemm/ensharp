@@ -14,54 +14,73 @@ public class CommandCopy {
 	}
 	
 	public String analyzeCopy(String command, String route) {
-		if (exception.isCopyCurrentCommand(command, Constant.COPY_CURRENT_PATTERN) || exception.isCopyCurrentCommand(command, Constant.COPY_SPECIAL_CURRENT_PATTERN)) { 
-			fileCopy(command, route);
-			screenBase.showNextRoute(route);
+		if (exception.isCopyCurrentCommand(command, Constant.COPY_CURRENT_PATTERN)) { 
+			copyFile(command, route);
 		}
 		
-		else if (exception.isCdCommand(command, Constant.CD_GO_FIRST_PATTERN)) { // 처음으로
-			route = route.substring(0,3);
-			screenBase.showNextRoute(route);
+		else if (exception.isCopyCurrentCommand(command, Constant.COPY_SPECIAL_CURRENT_PATTERN)) {
+			copyEmptyNameFile(command, route);
 		}
 		
-		else if (exception.isCdCommand(command, Constant.CD_GO_BACK_ONCE_PATTERN)) { // 1단계 위
-			route = route.substring(0, route.lastIndexOf("\\"));
-			screenBase.showNextRoute(route);
+		else if (exception.isCopyCurrentCommand(command, Constant.COPY_ONE_FILE_PATTERN)) { // 처음으로
+			copyFileSimply(command, route);
 		}
 		
-		else if (exception.isCdCommand(command, Constant.CD_GO_BACK_TWICE_PATTERN)) { // 2단계 위
-			route = route.substring(0, route.lastIndexOf("\\"));
-			route = route.substring(0, route.lastIndexOf("\\"));
-			screenBase.showNextRoute(route);
-		}
-		
+		screenBase.showNextRoute(route);
 		return route;
 	}
 	
-	private void fileCopy(String command, String route) {
-		String directory = route; // 복사할 파일의 파일 위치
-		String destinationDirectory = route; // 붙여넣어질 파일의 파일 위치
-		
-		int sourceFileLength = exception.getEndFileIndex(command, 0) - exception.getBeginFileIndex(command) + 1;
-		System.out.println(exception.getEndFileIndex(command, 0));
-		String sourceFileName = command.substring(exception.getBeginFileIndex(command), sourceFileLength); // 디렉토리 부분 잘라낸 순수 파일 이름
-		
-		if (exception.getBeginRouteIndex(sourceFileName, 0) >= 0) {
-			int directoryLength = exception.getEndRouteIndex(sourceFileName, 0) - exception.getBeginRouteIndex(sourceFileName, 0) + 1;
-			directory = sourceFileName.substring(exception.getBeginRouteIndex(sourceFileName, 0), directoryLength);
+	private String getDirectory(String command, String route, String pattern, String sequence) {
+		if(command.replaceAll(pattern, sequence).length() > 0) {
+			return command.replaceAll(pattern, sequence);
 		}
+		return route + "\\";
+	}
+	
+	private void copyFile(String command, String route) {
+		String sourceFile = command.replaceAll(Constant.COPY_CURRENT_PATTERN, "$2");
+		String destinationFile = command.replaceAll(Constant.COPY_CURRENT_PATTERN, "$5");
 		
-		command = command.substring(exception.getEndFileIndex(command, 0) + 1);
-		int destinationFileLength = exception.getEndFileIndex(command, 0) - exception.getBeginCutFileIndex(command, 0) + 1;
-		String destinationFileName = command.substring(exception.getBeginCutFileIndex(command, 0), destinationFileLength);
+		String directory = getDirectory(command, route, Constant.COPY_CURRENT_PATTERN, "$1"); // 복사할 파일의 파일 위치
+		String destinationDirectory = getDirectory(command, route, Constant.COPY_CURRENT_PATTERN, "$4"); // 붙여넣어질 파일의 파일 위치
 		
-		if (exception.getBeginRouteIndex(destinationFileName, 0) >= 0) {
-			int directoryLength = exception.getEndRouteIndex(destinationFileName, 0) - exception.getBeginRouteIndex(destinationFileName, 0) + 1;
-			destinationDirectory = sourceFileName.substring(exception.getBeginRouteIndex(destinationFileName, 0), directoryLength);
+		File source = new File(String.format("%s%s", directory, sourceFile));
+		File destination = new File(String.format("%s%s", destinationDirectory, destinationFile));
+		copyFileBasic(source, destination);
+	}
+	
+	private void copyEmptyNameFile(String command, String route) {
+		String sourceFile = command.replaceAll(Constant.COPY_SPECIAL_CURRENT_PATTERN, "$1");
+		String destinationFile = command.replaceAll(Constant.COPY_SPECIAL_CURRENT_PATTERN, "$4");
+		
+		String destinationDirectory = getDirectory(command, route, Constant.COPY_SPECIAL_CURRENT_PATTERN, "$3");
+		File source = new File(String.format("%s\\%s", route, sourceFile));
+		File destination = new File(String.format("%s%s", destinationDirectory, destinationFile));
+		copyFileBasic(source, destination);
+	}
+	
+	private void copyFileSimply(String command, String route) {
+		String directory = command.replaceAll(Constant.COPY_ONE_FILE_PATTERN, "$1");
+		String file = command.replaceAll(Constant.COPY_ONE_FILE_PATTERN, "$2");
+		
+		File source = new File(String.format("%s%s", directory, file));
+		File destination = new File(String.format("%s\\%s", route, file));
+		copyFileBasic(source, destination);
+	}
+	
+	private void copyFileBasic(File source, File destination) {
+		int text;
+		try {
+			FileReader reader = new FileReader(source);
+			FileWriter writer = new FileWriter(destination);
+			while((text = reader.read()) != -1) {
+				writer.write((char)text);
+			}
+			reader.close();
+			writer.close();
+			System.out.println("        1개 파일이 복사되었습니다.");
+		} catch(IOException e) {
+			System.out.println("파일 복사 오류");
 		}
-		
-		
-		File source = new File(String.format("%s%s", directory, command));
-		File destination = new File(String.format("%s%s", destinationDirectory, command));
 	}
 }
