@@ -1,10 +1,56 @@
 package utility;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import view.ScreenException;
 
 public class Exception {
-	public Exception() {
+	private ScreenException screenException;
+	
+	public Exception(ScreenException screenException) {
+		this.screenException = screenException;
+	}
+	public Boolean isTwinSign(String command) {
+		if(command.matches(Constant.EXCEPTION_COMMAND_PATTERN_THREE) 
+				&& command.matches(Constant.EXCEPTION_COMMAND_PATTERN_TWO_OTHER)) {
+			compareSequence(command);
+			return true;
+		}
+		else if (command.matches(Constant.EXCEPTION_COMMAND_PATTERN_THREE)) {
+			System.out.println(">은(는) 예상되지 않았습니다.");
+			return true;
+		}
+		else if (command.matches(Constant.EXCEPTION_COMMAND_PATTERN_TWO_OTHER)) {
+			System.out.println("<<은(는) 예상되지 않았습니다.");
+			return true;
+		}
+		else if (command.matches(Constant.EXCEPTION_COMMAND_PATTERN_TWO) 
+				|| command.matches(Constant.EXCEPTION_COMMAND_PATTERN_ONE_OTHER)) {
+			System.out.println("명령 구문이 올바르지 않습니다.");
+			return true;
+		}
+		return false;
+	}
+	
+	public Boolean isColons(String command) {
+		if (command.substring(0,3).matches(Constant.DIR_COMMAND) && command.matches(Constant.COLONS_EXCEPTION_PATTERN)) {
+			System.out.println("지정된 경로를 찾을 수 없습니다.");
+			return true;
+		}
+		else if (command.matches(Constant.COLONS_EXCEPTION_PATTERN)) {
+			System.out.println("시스템이 지정된 드라이브를 찾을 수 없습니다.");
+			return true;
+		}
 		
+		return false;
+	}
+	
+	private void compareSequence(String command) {
+		if (command.indexOf('>') < command.indexOf('<')) {
+			System.out.println(">은(는) 예상되지 않았습니다.");
+		}
+		else {
+			System.out.println("<<은(는) 예상되지 않았습니다.");
+		}
 	}
 	
 	public Boolean isCommand(String command, String standardCommand) {

@@ -37,6 +37,12 @@ public class Constant {
 	public static String MOVE_SPECIAL_CURRENT_PATTERN = "^(?i)move(\\.(?i)(txt|ini))[\s;,=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+[\\\\]{1})?([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))$";
 	public static String MOVE_ONE_FILE_PATTERN = "^(?i)move[\\s;=]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+[\\\\]{1})?([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\\s;=]*$";
 	
+	public static String EXCEPTION_COMMAND_PATTERN_TWO = "(.*)[>]{1,2}(.*)";
+	public static String EXCEPTION_COMMAND_PATTERN_THREE = "(.*)[>]{3,}(.*)";
+	public static String EXCEPTION_COMMAND_PATTERN_ONE_OTHER = "(.*)[<]{1}(.*)";
+	public static String EXCEPTION_COMMAND_PATTERN_TWO_OTHER = "(.*)[<]{2,}(.*)";
+	
+	public static String COLONS_EXCEPTION_PATTERN = "(.*)[:]{2,}(.*)";
 	
 	public static Boolean UNTIL_CONSOLE_EXIT = true;
 

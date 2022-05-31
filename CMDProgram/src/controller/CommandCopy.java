@@ -31,6 +31,10 @@ public class CommandCopy {
 			copyFileSimply(command, route);
 		}
 		
+		else {
+			screenException.printTypoWarning(command);
+		}
+		
 		screenBase.showNextRoute(route);
 		return route;
 	}

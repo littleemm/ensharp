@@ -22,7 +22,7 @@ public class MainCMD {
 		screenBase = new ScreenBase();
 		screenException = new ScreenException();
 		scanner = new Scanner(System.in);
-		exception = new Exception();
+		exception = new Exception(screenException);
 		commandCd = new CommandCd(exception, screenBase, screenException);
 		commandDir = new CommandDir(exception, screenBase, screenException);
 		commandCopy = new CommandCopy(exception, screenBase, screenException);
@@ -49,6 +49,16 @@ public class MainCMD {
 	}
 	
 	private String readCommand(String command, String route) throws IOException, InterruptedException {
+		if (exception.isTwinSign(command)) {
+			screenBase.showNextRoute(route);
+			return route;
+		}
+		
+		if (exception.isColons(command)) {
+			screenBase.showNextRoute(route);
+			return route;
+		}
+		
 		if (exception.isCommand(command, Constant.HELP_COMMAND)) {
 			screenBase.showHelpResult();
 			screenBase.showNextRoute(route);
@@ -70,7 +80,8 @@ public class MainCMD {
 			return commandMove.analyzeMove(command, route);
 		}
 		else {
-			
+			screenException.printTypoWarning(command);
+			screenBase.showNextRoute(route);
 		}
 		
 		return route;

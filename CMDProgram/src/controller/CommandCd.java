@@ -36,6 +36,9 @@ public class CommandCd {
 		else if (exception.isCdCommand(command, Constant.CD_ROUTE_PATTERN)) {
 			route = getRouteFromCommand(command, route);
 		}
+		else {
+			screenException.printTypoWarning(command);
+		}
 		
 		screenBase.showNextRoute(route);
 		return route;

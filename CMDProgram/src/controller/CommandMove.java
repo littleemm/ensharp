@@ -34,6 +34,10 @@ public class CommandMove {
 			moveFileSimply(command, route);
 		}
 		
+		else {
+			screenException.printTypoWarning(command);
+		}
+		
 		screenBase.showNextRoute(route);
 		return route;
 	}

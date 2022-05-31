@@ -27,7 +27,7 @@ public class CommandDir {
 			showRouteDirResult(command);
 		}
 		else {
-			
+			screenException.printTypoWarning(command);
 		}
 		
 		screenBase.showNextRoute(route);
