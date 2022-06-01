@@ -17,6 +17,7 @@ public class Constant {
 	
 	public static String ALL_DIVISION_PATTERN = "[;,=\s]+";
 	public static String DIVISION_SPECIAL_PATTERN = "[;=\s]+";
+	public static String CANONICAL_ROUTE = "..\\";
 	
 	/////////////////////////////////////////////////////
 	public static String CD_PATTERN = "^(?i)cd[;,=\s]*$";
@@ -26,6 +27,7 @@ public class Constant {
 	public static String CD_GO_BACK_ONCE_PATTERN = "^(?i)cd[;,=\s]*..$";
 	public static String CD_ROUTE_PATTERN = "^(?i)cd[;,=\s]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+)[;,=\s]*$";
 	public static String CD_ROUTE_PATTERN_FROM_CURRENT = "^(?i)cd[;,=\s]+([^/:\\*\\?\"<>\\|]+)$";
+	public static String CD_CANONICALROUTE_PATTERN = "^(?i)cd[;,=\s]+([\\.\\\\]+)$";
 	
 	public static String DIR_PATTERN = "^(?i)dir[;,=\s]*(\\.|\\.\\\\)*[;,=\\s]*$";
 	public static String DIR_ROUTE_PATTERN = "^(?i)dir[;,=\s]+([a-zA-Z]{1}:[^/:\\*\\?\"<>\\|]+)[;,=\s]*$";
