@@ -7,7 +7,7 @@ import view.ScreenException;
 
 import java.io.*;
 import java.util.Scanner;
-
+import java.io.*;
 public class CommandCopy {
 	private Exception exception;
 	private ScreenBase screenBase;
@@ -47,12 +47,24 @@ public class CommandCopy {
 		return route + "\\";
 	}
 	
+	private String getCanonicalDirectory(String directory, String route) {
+		if (!directory.contains(":")) {
+			directory = route + "\\" + directory;
+			return directory;
+		}
+		
+		return directory;
+	}
+	
 	private void copyFile(String command, String route) { //////
-		String sourceFile = command.replaceAll(Constant.COPY_CURRENT_PATTERN, "$2");
-		String destinationFile = command.replaceAll(Constant.COPY_CURRENT_PATTERN, "$5");
+		String sourceFile = command.replaceAll(Constant.COPY_CURRENT_PATTERN, "$3");
+		String destinationFile = command.replaceAll(Constant.COPY_CURRENT_PATTERN, "$7");
 		
 		String directory = getDirectory(command, route, Constant.COPY_CURRENT_PATTERN, "$1"); // 복사할 파일의 파일 위치
-		String destinationDirectory = getDirectory(command, route, Constant.COPY_CURRENT_PATTERN, "$4"); // 붙여넣어질 파일의 파일 위치
+		String destinationDirectory = getDirectory(command, route, Constant.COPY_CURRENT_PATTERN, "$5"); // 붙여넣어질 파일의 파일 위치
+		
+		directory = getCanonicalDirectory(directory, route);
+		destinationDirectory = getCanonicalDirectory(destinationDirectory, route);
 		
 		File source = new File(String.format("%s%s", directory, sourceFile));
 		File destination = new File(String.format("%s%s", destinationDirectory, destinationFile));
@@ -129,6 +141,9 @@ public class CommandCopy {
 			byte [] buffer = new byte[1024*10];
 			while(true) {
 				int size = fileInput.read(buffer);
+				if (size < 0) {
+					size = 0;
+				}
 				fileOutput.write(buffer, 0, size);
 				if(size < buffer.length) {
 					break;

@@ -92,8 +92,6 @@ public class CommandCd {
 		
 	
 		try {
-			
-			System.out.println(directoryBefore);
 			directory.getCanonicalPath();
 			
 			while (directoryBefore.indexOf(Constant.CANONICAL_ROUTE, startPoint) >= 0) {
