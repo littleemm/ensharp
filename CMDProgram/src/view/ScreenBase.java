@@ -3,7 +3,7 @@ import controller.CMDInterface;
 
 public class ScreenBase implements CMDInterface {
 	
-	public void showCMDSign() {
+	public void showCMDSign() { /// x
 		System.out.println("Microsoft Windows [Version 10.0.19042.1466]");
 		System.out.println("(c) Microsoft Corporation. All rights reserved.");
 	}

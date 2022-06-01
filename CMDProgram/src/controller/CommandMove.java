@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.util.Scanner;
 import utility.Constant;
 import utility.Exception;
 import view.ScreenBase;
@@ -34,6 +34,10 @@ public class CommandMove {
 			moveFileSimply(command, route);
 		}
 		
+		else if (exception.isMoveCurrentCommand(command, Constant.MOVE_FILE_TO_FOLDER)) {
+			moveFileToFolder(command, route);
+		}
+		
 		else {
 			screenException.printTypoWarning(command);
 		}
@@ -58,7 +62,7 @@ public class CommandMove {
 		
 		File source = new File(String.format("%s%s", directory, sourceFile));
 		File destination = new File(String.format("%s%s", destinationDirectory, destinationFile));
-		moveFileBasic(source, destination);
+		checkSameFileInDestination(source, destination);
 	}
 	
 	private void moveEmptyNameFile(String command, String route) {
@@ -69,7 +73,7 @@ public class CommandMove {
 		
 		File source = new File(String.format("%s\\%s", route, sourceFile));
 		File destination = new File(String.format("%s%s", destinationDirectory, destinationFile));
-		moveFileBasic(source, destination);
+		checkSameFileInDestination(source, destination);
 	}
 	
 	private void moveFileSimply(String command, String route) {
@@ -78,7 +82,68 @@ public class CommandMove {
 		
 		File source = new File(String.format("%s%s", directory, file));
 		File destination = new File(String.format("%s\\%s", route, file));
+		checkSameFileInDestination(source, destination);
+	}
+	
+	private void moveFileToFolder(String command, String route) {
+		String directory = getCanonicalRouteFromCommand(command, route);
+		if (directory == "-1") {
+			return;
+		}
+		
+		String fileDirectory = getDirectory(command, route, Constant.MOVE_FILE_TO_FOLDER, "$1");
+		String file = command.replaceAll(Constant.MOVE_FILE_TO_FOLDER, "$2");
+		
+		File source = new File(String.format("%s%s", fileDirectory, file));
+		File destination = new File(String.format("%s\\%s", directory, file));
+		checkSameFileInDestination(source, destination);
+	}
+	
+	private String getCanonicalRouteFromCommand (String command, String route) {
+		String routeBefore = route + command.replaceAll(Constant.MOVE_FILE_TO_FOLDER, "$4").replace(".", "");
+		File directory = new File(routeBefore);
+		if (directory.isDirectory()) {
+			return directory.getAbsolutePath();
+		}
+		else {
+			screenException.informWarningRoute();
+			return "-1";
+		}
+	}
+	
+	private void checkSameFileInDestination(File source, File destination) {
+		String directory = destination.getParentFile().toString();
+		File destinationDirectory = new File(directory);
+
+		String[] filenames = destinationDirectory.list();
+		for (String filename : filenames) {
+			if (filename.equals(destination.getName())) {
+				askMoveFile(source, destination);
+				return;
+			}
+		}
 		moveFileBasic(source, destination);
+	}
+	
+	private void askMoveFile(File source, File destination) {
+		Scanner scanner = new Scanner(System.in);
+		while (true) {
+			System.out.println(String.format("%s을(를) 덮어쓰시겠습니까? (Yes/No/All): ", destination));
+			String answer = scanner.nextLine();
+			
+			if (exception.isAnswer(answer, Constant.ANSWER_POSITIVE)) {
+				moveFileBasic(source, destination);
+				return;
+			}
+			else if (exception.isAnswer(answer, Constant.ANSWER_NEGATIVE)){
+				System.out.println("        0개 파일을 이동했습니다.");
+				return;
+			}
+			else if (exception.isAnswer(answer, Constant.ANSWER_ALL)) {
+				moveFileBasic(source, destination);
+				return;
+			}
+		}
 	}
 	
 	private void moveFileBasic(File source, File destination) {

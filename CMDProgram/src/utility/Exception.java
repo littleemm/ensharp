@@ -9,6 +9,14 @@ public class Exception {
 	public Exception(ScreenException screenException) {
 		this.screenException = screenException;
 	}
+	
+	public Boolean isDriveString(String command) {
+		if (Pattern.matches(Constant.DRIVE_PATTERN, command)) {
+			return true;
+		}
+		return false;
+	}
+	
 	public Boolean isTwinSign(String command) {
 		if(command.matches(Constant.EXCEPTION_COMMAND_PATTERN_THREE) 
 				&& command.matches(Constant.EXCEPTION_COMMAND_PATTERN_TWO_OTHER)) {
@@ -32,7 +40,8 @@ public class Exception {
 	}
 	
 	public Boolean isColons(String command) {
-		if (command.substring(0,3).matches(Constant.DIR_COMMAND) && command.matches(Constant.COLONS_EXCEPTION_PATTERN)) {
+		if (command.length() >= 3 && 
+				command.substring(0,3).matches(Constant.DIR_COMMAND) && command.matches(Constant.COLONS_EXCEPTION_PATTERN)) {
 			System.out.println("지정된 경로를 찾을 수 없습니다.");
 			return true;
 		}
@@ -100,6 +109,13 @@ public class Exception {
 	
 	public Boolean isDirCommand(String command, String pattern) {
 		if (Pattern.matches(pattern,  command)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public Boolean isAnswer(String command, String pattern) {
+		if (Pattern.matches(pattern, command)) {
 			return true;
 		}
 		return false;

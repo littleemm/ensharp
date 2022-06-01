@@ -18,6 +18,7 @@ public class MainCMD {
 	private CommandCopy commandCopy;
 	private CommandMove commandMove;
 	
+	/////////////////// 넘겨줄 클래스가 많아질 경우 어떻게?
 	public MainCMD() {
 		screenBase = new ScreenBase();
 		screenException = new ScreenException();

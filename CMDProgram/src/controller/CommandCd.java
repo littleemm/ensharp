@@ -1,4 +1,5 @@
 package controller;
+import java.util.regex.Pattern;
 import utility.Exception;
 import java.io.*;
 import utility.Constant;
@@ -26,16 +27,26 @@ public class CommandCd {
 		}
 		
 		else if (exception.isCdCommand(command, Constant.CD_GO_BACK_ONCE_PATTERN)) { // 1단계 위
-			route = route.substring(0, route.lastIndexOf("\\"));
+			if (!exception.isDriveString(command)) {
+				route = route.substring(0, route.lastIndexOf("\\"));
+			}
 		}
 		
 		else if (exception.isCdCommand(command, Constant.CD_GO_BACK_TWICE_PATTERN)) { // 2단계 위
-			route = route.substring(0, route.lastIndexOf("\\"));
-			route = route.substring(0, route.lastIndexOf("\\"));
+			if (!exception.isDriveString(command)) {
+				route = route.substring(0, route.lastIndexOf("\\") + 1);
+				//route = route.substring(0, route.lastIndexOf("\\"));
+			}
 		}
+		
 		else if (exception.isCdCommand(command, Constant.CD_ROUTE_PATTERN)) {
 			route = getRouteFromCommand(command, route);
 		}
+		
+		else if (exception.isCdCommand(command, Constant.CD_ROUTE_PATTERN_FROM_CURRENT)) {
+			route = getRouteFromCurrentDirectory(command, route);
+		}
+		
 		else {
 			screenException.printTypoWarning(command);
 		}
@@ -47,11 +58,21 @@ public class CommandCd {
 	private String getRouteFromCommand (String command, String route) {
 		File directory = new File(command.replaceAll(Constant.CD_ROUTE_PATTERN, "$1"));
 		if (directory.isDirectory()) {
-			return directory.getPath();
+			return directory.getAbsolutePath();
 		}
-		else {
-			screenException.informWarningRoute();
-			return route;
+		
+		screenException.informWarningRoute();
+		return route;
+	}
+	
+	private String getRouteFromCurrentDirectory (String command, String route) {
+		String directoryBefore = route + "\\" + command.replaceAll(Constant.CD_ROUTE_PATTERN_FROM_CURRENT, "$1");
+		File directory = new File(directoryBefore);
+		if (directory.isDirectory()) {
+			return directory.getAbsolutePath();
 		}
+		
+		screenException.informWarningRoute();
+		return route;
 	}
 }

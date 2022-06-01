@@ -6,6 +6,7 @@ import view.ScreenBase;
 import view.ScreenException;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class CommandCopy {
 	private Exception exception;
@@ -46,7 +47,7 @@ public class CommandCopy {
 		return route + "\\";
 	}
 	
-	private void copyFile(String command, String route) {
+	private void copyFile(String command, String route) { //////
 		String sourceFile = command.replaceAll(Constant.COPY_CURRENT_PATTERN, "$2");
 		String destinationFile = command.replaceAll(Constant.COPY_CURRENT_PATTERN, "$5");
 		
@@ -55,7 +56,7 @@ public class CommandCopy {
 		
 		File source = new File(String.format("%s%s", directory, sourceFile));
 		File destination = new File(String.format("%s%s", destinationDirectory, destinationFile));
-		copyFileBasic(source, destination);
+		checkSameFileInDestination(source, destination);
 	}
 	
 	private void copyEmptyNameFile(String command, String route) {
@@ -65,7 +66,7 @@ public class CommandCopy {
 		String destinationDirectory = getDirectory(command, route, Constant.COPY_SPECIAL_CURRENT_PATTERN, "$3");
 		File source = new File(String.format("%s\\%s", route, sourceFile));
 		File destination = new File(String.format("%s%s", destinationDirectory, destinationFile));
-		copyFileBasic(source, destination);
+		checkSameFileInDestination(source, destination);
 	}
 	
 	private void copyFileSimply(String command, String route) {
@@ -74,8 +75,52 @@ public class CommandCopy {
 		
 		File source = new File(String.format("%s%s", directory, file));
 		File destination = new File(String.format("%s\\%s", route, file));
+		checkSameFileInDestination(source, destination);
+	}
+	
+	private void checkSameFileInDestination(File source, File destination) {
+		String directory = destination.getParentFile().toString();
+		File destinationDirectory = new File(directory);
+		
+		if (source.toString().equals(destination.toString())) {
+			System.out.println("같은 파일로 복사할 수 없습니다.");
+			System.out.println("        0개 파일이 복사되었습니다.");
+			return;
+		}
+
+		String[] filenames = destinationDirectory.list();
+		for (String filename : filenames) {
+			if (filename.equals(destination.getName())) {
+				askCopyFile(source, destination);
+				return;
+			}
+		}
 		copyFileBasic(source, destination);
 	}
+	
+	private void askCopyFile(File source, File destination) {
+		Scanner scanner = new Scanner(System.in);
+		while (true) {
+			System.out.print(String.format("%s을(를) 덮어쓰시겠습니까? (Yes/No/All): ", destination));
+			String answer = scanner.nextLine();
+			
+			if (exception.isAnswer(answer, Constant.ANSWER_POSITIVE)) {
+				copyFileBasic(source, destination);
+				return;
+			}
+			else if (exception.isAnswer(answer, Constant.ANSWER_NEGATIVE)){
+				System.out.println("        0개 파일이 복사되었습니다.");
+			
+				return;
+			}
+			else if (exception.isAnswer(answer, Constant.ANSWER_ALL)) {
+				copyFileBasic(source, destination);
+			
+				return;
+			}
+		}
+	}
+	
 	
 	private void copyFileBasic(File source, File destination) {
 		try {
