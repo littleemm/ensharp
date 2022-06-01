@@ -50,6 +50,11 @@ public class MainCMD {
 	}
 	
 	private String readCommand(String command, String route) throws IOException, InterruptedException {
+		if(exception.isSignWithBlank(command)) {
+			screenBase.showNextRoute(route);
+			return route;
+		}
+		
 		if (exception.isTwinSign(command)) {
 			screenBase.showNextRoute(route);
 			return route;

@@ -1,5 +1,7 @@
 package controller;
 import view.ScreenException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -40,6 +42,10 @@ public class CommandMove {
 		
 		else if (exception.isMoveCurrentCommand(command, Constant.MOVE_FILE_TO_FOLDER)) {
 			moveFileToFolderCanonical(command, route);
+		}
+		
+		else if (exception.isMoveCurrentCommand(command, Constant.MOVE_FOLDER_TO_FOLDER)) {
+			moveFolderToFolder(command, route);
 		}
 		
 		else {
@@ -104,8 +110,6 @@ public class CommandMove {
 		
 		File source = new File(String.format("%s%s", fileDirectory, file));
 		File destination = new File(String.format("%s%s", destinationDirectory, file));
-		System.out.println(source);
-		System.out.println(destination);
 		checkSameFileInDestination(source, destination);
 	}
 	
@@ -124,9 +128,19 @@ public class CommandMove {
 
 		File source = new File(String.format("%s%s", directory, sourceFile));
 		File destination = new File(String.format("%s%s", destinationDirectory, destinationFile));
-		System.out.println(source);
-		System.out.println(destination);
 		checkSameFileInDestination(source, destination);
+	}
+	
+	private void moveFolderToFolder(String command, String route) {
+		String sourceFile = command.replaceAll(Constant.MOVE_FOLDER_TO_FOLDER, "$2");
+		String destinationFile = command.replaceAll(Constant.MOVE_FOLDER_TO_FOLDER, "$4");
+		
+		String directory = getDirectory(command, route, Constant.MOVE_FOLDER_TO_FOLDER, "$1"); // 복사할 파일의 파일 위치
+		String destinationDirectory = getDirectory(command, route, Constant.MOVE_FOLDER_TO_FOLDER, "$3"); // 붙여넣어질 파일의 파일 위치
+		
+		File source = new File(String.format("%s%s", directory, sourceFile));
+		File destination = new File(String.format("%s%s", destinationDirectory, destinationFile));
+		checkSameFolderInDestination(source, destination);
 	}
 	
 	private String getCanonicalRouteFromCommand (String command, String route) {
@@ -184,6 +198,59 @@ public class CommandMove {
 		moveFileBasic(source, destination);
 	}
 	
+	private void checkSameFolderInDestination(File source, File destination) {
+		String directory = destination.getParentFile().toString();
+		File destinationDirectory = new File(directory);
+
+		String[] foldernames = destinationDirectory.list();
+		for (String foldername : foldernames) {
+			if (foldername.equals(destination.getPath())) {
+				askMoveFolder(source, destination);
+				return;
+			}
+		
+		}
+		String sourceString = source.toString();
+		String destinationString = destination.toString();
+		
+		destinationString += "\\";
+		destinationString += sourceString.substring(sourceString.lastIndexOf("\\"));
+		File newDestination = new File(destinationString);
+		
+		if(newDestination.mkdir()) {
+			copyInFolder(source,newDestination);
+			deleteFolder(source.toString());
+		}
+	}
+	
+	private void askMoveFolder(File source, File destination) {
+		Scanner scanner = new Scanner(System.in);
+		while (true) {
+			System.out.println(String.format("%s을(를) 덮어쓰시겠습니까? (Yes/No/All): ", destination));
+			String answer = scanner.nextLine();
+			
+			if (exception.isAnswer(answer, Constant.ANSWER_POSITIVE) || exception.isAnswer(answer, Constant.ANSWER_ALL)) {
+				String sourceString = source.toString();
+				String destinationString = destination.toString();
+				
+				destinationString += "\\";
+				destinationString += sourceString.substring(sourceString.lastIndexOf("\\"));
+				File newDestination = new File(destinationString);
+				
+				if(newDestination.mkdir()) {
+					copyInFolder(source,newDestination);
+					deleteFolder(source.toString());
+				}
+				moveFileBasic(source, newDestination);
+				return;
+			}
+			else if (exception.isAnswer(answer, Constant.ANSWER_NEGATIVE)){
+				System.out.println("        0개 파일을 이동했습니다.");
+				return;
+			}
+		}
+	}
+	
 	private void askMoveFile(File source, File destination) {
 		Scanner scanner = new Scanner(System.in);
 		while (true) {
@@ -214,4 +281,63 @@ public class CommandMove {
 		}
 	
 	}
+	
+	  public void copyInFolder(File source, File destination){
+			File[] fileList = source.listFiles();
+			for (File file : fileList) {
+				File fileTemporary = new File(destination.getAbsolutePath() + File.separator + file.getName());
+				if(file.isDirectory()){
+					fileTemporary.mkdir();
+					copyInFolder(file, fileTemporary);
+				} 
+				else {      
+					FileInputStream input = null;
+					FileOutputStream output = null;
+					
+					try {
+						
+						input = new FileInputStream(file);
+						output = new FileOutputStream(fileTemporary) ;
+						byte[] bytes = new byte[4096];
+						int count = 0;
+						while((count = input.read(bytes)) != -1){
+							output.write(bytes, 0, count);
+						}
+						System.out.println("        1개의 디렉터리를 이동했습니다.");
+						
+					} catch (IOException e) {
+						e.printStackTrace();
+					} finally{
+						try {
+							input.close();
+							output.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+							
+					}
+				}
+			}
+	  }
+			
+	  public void deleteFolder(String path) {
+		  File folder = new File(path);
+		  
+		  if(folder.exists()){
+			  File[] fileList = folder.listFiles();
+			  for (int i = 0; i < fileList.length; i++) {
+				  
+				  if(fileList[i].isFile()) {
+					  fileList[i].delete();
+				  }
+				  
+				  else {
+					deleteFolder(fileList[i].getPath());
+				  }
+				  fileList[i].delete();
+			  }
+		  }
+		  
+		  folder.delete();
+	  }
 }

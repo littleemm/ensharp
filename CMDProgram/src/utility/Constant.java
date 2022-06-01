@@ -6,7 +6,7 @@ public class Constant {
 	}
 	
 	public static String HELP_COMMAND = "(?i)help";
-	public static String CLS_COMMAND = "(?i)cls";
+	public static String CLS_COMMAND = "^(?i)cls[;,=\\s]*$";
 	public static String CD_COMMAND = "(?i)cd";
 	public static String DIR_COMMAND = "(?i)dir";
 	public static String COPY_COMMAND = "(?i)copy";
@@ -42,12 +42,15 @@ public class Constant {
 	public static String MOVE_ONE_FILE_PATTERN = "^(?i)move[\\s;=]+([a-zA-Z]{1}:[^:\\*\\?\"<>\\|]+[\\\\]{1})?([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\\s;=]*$";
 	public static String MOVE_FILE_TO_FOLDER_ABSOLUTE = "^(?i)move[\\s;=]+([a-zA-Z]{1}:[^:\\*\\?\"<>\\|]+[\\\\]{1})?([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\\s;,=]+([a-zA-Z]{1}:[^:\\*\\?\"<>\\|]+)$";
 	public static String MOVE_FILE_TO_FOLDER = "^(?i)move[\\s;=]+([a-zA-Z]{1}:[^:\\*\\?\"<>\\|]+[\\\\]{1})?([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\s;,=]+(([/\\.\\\\]*)([^:\\*\\?\"<>\\|]*))$";
+	public static String MOVE_FOLDER_TO_FOLDER = "^(?i)move[\\s;=]+([a-zA-Z]{1}:[^:\\*\\?\"<>\\|]+[\\\\]{1})?([^/:\\*\\?\"<>\\|\\\\]*)[\\s;,=]+([a-zA-Z]{1}:[^:\\*\\?\"<>\\|]+[\\\\]{1})?([^/:\\*\\?\"<>\\|\\\\]*)[\\s;=]*$";
+	
 	///////////////////////////////////////////////////////
 	
 	public static String EXCEPTION_COMMAND_PATTERN_TWO = "(.*)[>]{1,2}(.*)";
 	public static String EXCEPTION_COMMAND_PATTERN_THREE = "(.*)[>]{3,}(.*)";
 	public static String EXCEPTION_COMMAND_PATTERN_ONE_OTHER = "(.*)[<]{1}(.*)";
 	public static String EXCEPTION_COMMAND_PATTERN_TWO_OTHER = "(.*)[<]{2,}(.*)";
+	public static String EXCEPTION_COMMAND_FRONT = "[\\.\\\\/]+";
 	
 	public static String COLONS_EXCEPTION_PATTERN = "(.*)[:]{2,}(.*)";
 	

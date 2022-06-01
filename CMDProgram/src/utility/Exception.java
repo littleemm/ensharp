@@ -10,6 +10,19 @@ public class Exception {
 		this.screenException = screenException;
 	}
 	
+	public Boolean isSignWithBlank(String command) {
+		if (command.indexOf(" ") == -1) {
+			return false;
+		}
+		if (Pattern.matches(Constant.EXCEPTION_COMMAND_FRONT, command.substring(0, command.indexOf(" ")))) {
+			System.out.println
+			(String.format("'%s'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는\r\n"
+					+ "배치 파일이 아닙니다.", command.substring(0, command.indexOf(" "))));
+			return true;
+		}
+		return false;
+	}
+	
 	public Boolean isDriveString(String command) {
 		if (Pattern.matches(Constant.DRIVE_PATTERN, command)) {
 			return true;
