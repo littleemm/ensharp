@@ -141,7 +141,7 @@ public class CommandCopy {
 			byte [] buffer = new byte[1024*10];
 			while(true) {
 				int size = fileInput.read(buffer);
-				if (size < 0) {
+				if (size < 0) { // 급한 오류 해결.. 파일에 대한 오류 해결방법을 못찾음
 					size = 0;
 				}
 				fileOutput.write(buffer, 0, size);
