@@ -40,8 +40,8 @@ public class Constant {
 	public static String MOVE_CURRENT_PATTERN = "^(?i)move[\\s;=]+([a-zA-Z]{1}:[^:\\*\\?\"<>\\|]+[\\\\]{1})?([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\\s;,=]+([a-zA-Z]{1}:[^:\\*\\?\"<>\\|]+[\\\\]{1})?([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\\s;=]*$";
 	public static String MOVE_SPECIAL_CURRENT_PATTERN = "^(?i)move(\\.(?i)(txt|ini))[\s;,=]+([a-zA-Z]{1}:[^:\\*\\?\"<>\\|]+[\\\\]{1})?([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))$";
 	public static String MOVE_ONE_FILE_PATTERN = "^(?i)move[\\s;=]+([a-zA-Z]{1}:[^:\\*\\?\"<>\\|]+[\\\\]{1})?([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\\s;=]*$";
-	public static String MOVE_FILE_TO_FOLDER = "^(?i)move[\\s;=]+([a-zA-Z]{1}:[^:\\*\\?\"<>\\|]+[\\\\]{1})?([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\\s;,=]+((\\.\\\\)([^:\\*\\?\"<>\\|\\\\]+))$";
-	public static String MOVE_FILE_TO_FOLDER_ABSOULUTE = "(?i)move[\\\\s;=]+([a-zA-Z]{1}:[^:\\\\*\\\\?\\\"<>\\\\|]+[\\\\\\\\]{1})?([^/:\\\\*\\\\?\\\"<>\\\\|\\\\\\\\]*\\\\.(?i)(txt|ini))[\s;,=]+(([/\\.\\\\]+)([^/:\\*\\?\"<>\\|\\\\]+))$";
+	public static String MOVE_FILE_TO_FOLDER_ABSOLUTE = "^(?i)move[\\s;=]+([a-zA-Z]{1}:[^:\\*\\?\"<>\\|]+[\\\\]{1})?([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\\s;,=]+([a-zA-Z]{1}:[^:\\*\\?\"<>\\|]+)$";
+	public static String MOVE_FILE_TO_FOLDER = "^(?i)move[\\s;=]+([a-zA-Z]{1}:[^:\\*\\?\"<>\\|]+[\\\\]{1})?([^/:\\*\\?\"<>\\|\\\\]*\\.(?i)(txt|ini))[\s;,=]+(([/\\.\\\\]*)([^:\\*\\?\"<>\\|]*))$";
 	///////////////////////////////////////////////////////
 	
 	public static String EXCEPTION_COMMAND_PATTERN_TWO = "(.*)[>]{1,2}(.*)";

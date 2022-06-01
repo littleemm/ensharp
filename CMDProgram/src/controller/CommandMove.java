@@ -34,8 +34,12 @@ public class CommandMove {
 			moveFileSimply(command, route);
 		}
 		
-		else if (exception.isMoveCurrentCommand(command, Constant.MOVE_FILE_TO_FOLDER)) {
+		else if (exception.isMoveCurrentCommand(command, Constant.MOVE_FILE_TO_FOLDER_ABSOLUTE)) {
 			moveFileToFolder(command, route);
+		}
+		
+		else if (exception.isMoveCurrentCommand(command, Constant.MOVE_FILE_TO_FOLDER)) {
+			moveFileToFolderCanonical(command, route);
 		}
 		
 		else {
@@ -86,29 +90,83 @@ public class CommandMove {
 	}
 	
 	private void moveFileToFolder(String command, String route) {
-		String directory = getCanonicalRouteFromCommand(command, route);
-		if (directory == "-1") {
-			return;
+		String destinationDirectory = getDirectory(command, route, Constant.MOVE_FILE_TO_FOLDER_ABSOLUTE, "$4");
+		if (destinationDirectory.substring(destinationDirectory.length() - 2, destinationDirectory.length() - 1).equals("\\")) {
+			destinationDirectory = destinationDirectory.substring(0, destinationDirectory.length()-2);
 		}
 		
-		String fileDirectory = getDirectory(command, route, Constant.MOVE_FILE_TO_FOLDER, "$1");
-		String file = command.replaceAll(Constant.MOVE_FILE_TO_FOLDER, "$2");
+		String fileDirectory = getDirectory(command, route, Constant.MOVE_FILE_TO_FOLDER_ABSOLUTE, "$1");
+		String file = command.replaceAll(Constant.MOVE_FILE_TO_FOLDER_ABSOLUTE, "$2");
+		
+		if (destinationDirectory.substring(0, destinationDirectory.length() - 1) != "\\") {
+			destinationDirectory += "\\";
+		}
 		
 		File source = new File(String.format("%s%s", fileDirectory, file));
-		File destination = new File(String.format("%s\\%s", directory, file));
+		File destination = new File(String.format("%s%s", destinationDirectory, file));
+		System.out.println(source);
+		System.out.println(destination);
+		checkSameFileInDestination(source, destination);
+	}
+	
+	private void moveFileToFolderCanonical(String command, String route) {
+		String directory = getDirectory(command, route, Constant.MOVE_FILE_TO_FOLDER, "$1"); // 복사할 파일의 파일 위치
+		String destinationDirectory = getCanonicalRouteFromCommand(command, route);
+		
+		String sourceFile = command.replaceAll(Constant.MOVE_FILE_TO_FOLDER, "$2");
+		String destinationFile = sourceFile;
+		
+		String directoryNext = command.replaceAll(Constant.MOVE_FILE_TO_FOLDER, "$6");
+		if (directoryNext.indexOf(".txt") >= 0 || directoryNext.indexOf(".ini") >= 0) {
+			destinationFile = directoryNext;
+		}
+		
+
+		File source = new File(String.format("%s%s", directory, sourceFile));
+		File destination = new File(String.format("%s%s", destinationDirectory, destinationFile));
+		System.out.println(source);
+		System.out.println(destination);
 		checkSameFileInDestination(source, destination);
 	}
 	
 	private String getCanonicalRouteFromCommand (String command, String route) {
-		String routeBefore = route + command.replaceAll(Constant.MOVE_FILE_TO_FOLDER, "$4").replace(".", "");
-		File directory = new File(routeBefore);
-		if (directory.isDirectory()) {
-			return directory.getAbsolutePath();
+		String directoryBefore = command.replaceAll(Constant.MOVE_FILE_TO_FOLDER, "$5");
+		File directory = new File(directoryBefore);
+		int startPoint = 0;
+		
+		try {
+			directory.getCanonicalPath();
+			
+			while (directoryBefore.indexOf(Constant.CANONICAL_ROUTE, startPoint) >= 0) {
+				startPoint = directoryBefore.indexOf(Constant.CANONICAL_ROUTE, startPoint) + 2;
+				route = route.substring(0, route.lastIndexOf("\\"));
+				
+				if (route.length() == 2) {
+					route += "\\";
+					break;
+				}
+			} 
+			
 		}
-		else {
-			screenException.informWarningRoute();
-			return "-1";
+		catch(IOException e) {
+			
+			System.out.println("오류");
 		}
+		
+		if (route.substring(0, route.length() - 1) != ("\\")) {
+			route += "\\";
+		}
+		
+		String directoryNext = command.replaceAll(Constant.MOVE_FILE_TO_FOLDER, "$6");
+		if (directoryNext.indexOf(".txt") < 0 && directoryNext.indexOf(".ini") < 0) {
+			route += directoryNext;
+			route += "\\";
+		}
+
+		System.out.println(route);
+		
+		return route;
+			
 	}
 	
 	private void checkSameFileInDestination(File source, File destination) {
@@ -121,6 +179,7 @@ public class CommandMove {
 				askMoveFile(source, destination);
 				return;
 			}
+		
 		}
 		moveFileBasic(source, destination);
 	}
