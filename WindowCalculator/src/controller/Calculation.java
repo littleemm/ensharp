@@ -41,7 +41,7 @@ public class Calculation {
 		secondBig = new BigDecimal(secondNumber);
 		String resultString = "";
 		
-		switch(operator.charAt(0)) {
+		switch(operator.charAt(0)) { // 뺄 수 있다 ->모듈화 
 		case ('+') : {
 			resultBig = firstBig.add(secondBig);
 			break;
@@ -102,13 +102,14 @@ public class Calculation {
 	
 	private void calculateEmptyMore() {
 		String operatorBefore = beforeInputTextAll.substring(beforeInputTextAll.length() - 1); 
-		if (operatorBefore == "+" || operatorBefore == "-" || operatorBefore == "×" || operatorBefore == "÷") {
+		if (operatorBefore == "+" || operatorBefore == "-" || operatorBefore == "×" || operatorBefore == "÷") { // 조건문 안은 최대한 적게 
 			secondNumber = firstNumber;
 			beforeInputTextAll = firstNumber;
 			beforeInputTextAll += operatorBefore;
 			inputTextAll = firstNumber;
 		}
 	}
+	// 가로 짧게
 	
 	public CalculationDTO CalculateAgain() {
 		CalculationDTO calculationDTO = new CalculationDTO("", "", "");
@@ -135,7 +136,7 @@ public class Calculation {
 		
 		firstBig = inputTextAllBig;
 		
-		switch(operator.charAt(0)) {
+		switch(operator.charAt(0)) { //// 모듈
 		case ('+') : {
 			resultBig = firstBig.add(secondBig);
 			break;

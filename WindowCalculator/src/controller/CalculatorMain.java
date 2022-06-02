@@ -56,7 +56,7 @@ public class CalculatorMain extends JFrame{
 		gridBagInsert(calculatorScreen.inputPanel, 0, 1, 0, 2, 3);
 		gridBagInsert(calculatorButton.buttonPanel, 0, 5, 0, 5, 5);
 		mainFrame.add(panel, BorderLayout.CENTER);
-		listener.ListenButtonAction(mainFrame);
+		listener.ListenButtonAction(mainFrame, panel);
 		
 		calculatorScreen.beforeInput.setText(beforeInputTextAll); // label에 입력된 숫자 넣기 
 		calculatorScreen.beforeInput.setFont(beforeFont); 

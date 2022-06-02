@@ -3,8 +3,10 @@ import utility.Constant;
 
 import java.util.regex.Pattern;
 import java.text.*;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -41,7 +43,7 @@ public class ButtonActionListener {
 	private Font fontToSmall;
 	private ImageIcon logButtonImage;
 	
-	private BigDecimal firstBig;
+	private BigDecimal firstBig; // 네이밍 좀 더 잘 인식될 수 있게!
 	private BigDecimal secondBig;
 	private BigDecimal inputTextAllBig;
 	private BigDecimal beforeInputTextAllBig;
@@ -91,7 +93,7 @@ public class ButtonActionListener {
 		constraint = new GridBagConstraints();
 	}
 	
-	public void ListenButtonAction(JFrame mainFrame) { // 버튼 리스너 
+	public void ListenButtonAction(JFrame mainFrame, JPanel panels) { // 버튼 리스너 
 		for (int i=0;i<12;i++) { // 피연산자 버튼 
 			calculatorButton.valueButton[i].addActionListener(new NumberButtonListener());
 			calculatorButton.valueButton[i].addMouseListener(new MouseButtonListener());
@@ -106,27 +108,30 @@ public class ButtonActionListener {
 			calculatorButton.clearButton[i].addActionListener(new ClearButtonListener());
 			calculatorButton.clearButton[i].addMouseListener(new MouseButtonListener());
 		}
-		calculatorButton.logButton.addMouseListener(new MouseButtonListener());
+		
 		calculatorButton.logButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.setLayout(layout);
-				mainFrame.setVisible(true);
+				panels.setVisible(false);
 				logPage.PrintLogList();
 				calculatorButton.buttonPanel.setVisible(false);
+				logPage.logPanel.setVisible(true);
 				//calculatorScreen.inputPanel.setVisible(false);
 				//calculatorButton.logButtonPanel.setVisible(false);
-				//gridBagInsert(mainFrame, calculatorButton.logButtonPanel, 0, 0, 0, 1, 1);
-				//gridBagInsert(mainFrame, calculatorScreen.inputPanel, 0, 1, 0, 2, 3);
-				gridBagInsert(mainFrame, logPage.logPanel, 0, 5, 0, 5, 5);
+				//gridBagInsert(panels, calculatorButton.logButtonPanel, 0, 0, 0, 1, 1);
+				//gridBagInsert(panels, calculatorScreen.inputPanel, 0, 1, 0, 2, 3);
+				gridBagInsert(panels, logPage.logPanel, 0, 5, 0, 5, 5);
+				mainFrame.add(panels);
+				mainFrame.repaint();
+				mainFrame.revalidate();
 			}
 		});
-		
+	
 		mainFrame.addKeyListener(new NumberKeyListener());
 		mainFrame.setFocusable(true);
 		mainFrame.requestFocus();
 	}
 	
-	private void gridBagInsert(JFrame mainFrame, Component component, int x, int y, int width, int height, int y1) {
+	private void gridBagInsert(JPanel panels, Component component, int x, int y, int width, int height, int y1) {
         constraint.fill= GridBagConstraints.BOTH;
         constraint.weightx=1;
 	    constraint.weighty=y1;
@@ -135,8 +140,8 @@ public class ButtonActionListener {
         constraint.gridwidth = width;
         constraint.gridheight = height;
         layout.setConstraints(component, constraint);
-        mainFrame.add(component);
-        mainFrame.setVisible(true);
+        panels.add(component);
+        panels.setVisible(true);
 }
 	
 	private class NumberKeyListener extends KeyAdapter {
@@ -368,6 +373,7 @@ public class ButtonActionListener {
 			if (inputTextAll != "0") {
 			inputTextAll = inputTextAll.replaceAll(",", "");
 			}
+			
 		}
 		else {
 			if (inputTextAll.length() > 14) {
@@ -395,7 +401,6 @@ public class ButtonActionListener {
 			calculatorScreen.currentInput.setHorizontalAlignment(JLabel.RIGHT);
 			//calculatorScreen.inputPanel.add(calculatorScreen.currentInput);
 			inputTextAll = "0";
-			insertLogToLogPage();
 		}
 	}
 	
@@ -593,6 +598,7 @@ public class ButtonActionListener {
 				}
 				beforeInputTextAll += secondNumber; 
 				beforeInputTextAll += "="; 
+				logPage.insertLog(inputTextAll, beforeInputTextAll);
 			}
 			else {
 				operator = text;
@@ -613,7 +619,10 @@ public class ButtonActionListener {
 				beforeInputTextAll = inputTextAll;
 				beforeInputTextAll += text;	
 				inputTextAll = inputTextAllTemporary;
+				
+				//logPage.insertLog(inputTextAll, beforeInputTextAll);
 				}
+				
 			}
 			
 			calculatorScreen.beforeInput.setText(beforeInputTextAll);
@@ -662,14 +671,12 @@ public class ButtonActionListener {
 		logDTO.setResult(inputTextAll);
 		logPage.insertData(logDTO);
 	}
+
 	
 	private class MouseButtonListener implements MouseListener {
 		public void mouseEntered(MouseEvent e) {
 			JButton button = (JButton)e.getSource();
-			if (button.getText().equals(".")) {
-				button.setOpaque(true);
-				button.setBackground(buttonColor);
-			}
+			
 			for (int i=0;i<20;i++) {
 				if (button.getText().equals("=")) {
 					button.setOpaque(true);

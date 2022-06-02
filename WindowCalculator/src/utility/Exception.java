@@ -88,7 +88,7 @@ public class Exception {
 	private String squareTen(String resultString) {
 		BigDecimal result = new BigDecimal("10");
 		BigDecimal decimal = new BigDecimal("10");
-		for (int i=0;i < resultString.substring(resultString.indexOf(".") + 1).length() - 1;i++) {
+		for (int i=0;i < resultString.substring(resultString.indexOf(".") + 1).length() - 1;i++) { // 변수 이름으로 따로 빼주기 (협업!)
 			result = decimal.multiply(result, MathContext.DECIMAL64); 
 		}
 		return result.toString();
