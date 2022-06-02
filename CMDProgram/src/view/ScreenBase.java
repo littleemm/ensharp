@@ -4,7 +4,9 @@ import controller.CMDInterface;
 public class ScreenBase implements CMDInterface {
 	
 	public void showCMDSign() { /// x
-		System.out.println("Microsoft Windows [Version 10.0.19042.1466]");
+		String os = System.getProperty("os.name").toLowerCase();
+		String osVersion = System.getProperty("os.version").toLowerCase();
+		System.out.println(String.format("Microsoft Windows [Version %s]", osVersion));
 		System.out.println("(c) Microsoft Corporation. All rights reserved.");
 	}
 	
