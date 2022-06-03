@@ -16,7 +16,6 @@ public class databaseConnection {
 			String password = "0000";
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection(url,id,password);
-			System.out.println("연결 성공");
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -42,4 +41,6 @@ public class databaseConnection {
 		}
 		return -2;
 	}
+	
+	
 }

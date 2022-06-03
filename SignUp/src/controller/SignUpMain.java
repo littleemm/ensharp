@@ -2,19 +2,21 @@ package controller;
 import javax.swing.*;
 import java.awt.*;
 import view.MainScreen;
-
+import model.MemberDTO;
 public class SignUpMain {
 	private JFrame mainFrame;
 	private MainScreen mainScreen;
 	private databaseConnection connection;
 	private SignUpButtonListener signUpButtonListener;
+	private MemberDTO memberDTO;
 	
 	public SignUpMain() {
 		mainFrame = new JFrame();
 		mainScreen = new MainScreen();
 		connection = new databaseConnection();
 		
-		signUpButtonListener = new SignUpButtonListener(mainScreen);
+		memberDTO = new MemberDTO("", "", "", "", "", "", "", "", "");
+		signUpButtonListener = new SignUpButtonListener(mainScreen, memberDTO);
 	}
 	
 	public void showSignUp() { // signup 프로그램 처음 시작 화면 

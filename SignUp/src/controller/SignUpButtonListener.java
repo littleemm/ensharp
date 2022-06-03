@@ -6,12 +6,17 @@ import java.awt.*;
 import java.awt.event.*;
 import view.SignUpScreen;
 import view.MainScreen;
+import model.MemberDTO;
+
 public class SignUpButtonListener {
 	private SignUpScreen signUpScreen;
 	private MainScreen mainScreen;
+	private MemberDTO memberDTO;
 	
-	public SignUpButtonListener(MainScreen mainScreen) {
+	public SignUpButtonListener(MainScreen mainScreen, MemberDTO memberDTO) {
 		mainScreen = this.mainScreen;
+		memberDTO = this.memberDTO;
+		
 		signUpScreen = new SignUpScreen();
 	}
 	
@@ -27,6 +32,10 @@ public class SignUpButtonListener {
 				changeSignUpPageToMain(mainFrame, mainStartingPanel);
 			}
 		});
+		
+	}
+	
+	private void getInformatinFromTextField() {
 		
 	}
 	
