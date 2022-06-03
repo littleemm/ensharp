@@ -12,10 +12,12 @@ public class SignUpButtonListener {
 	private SignUpScreen signUpScreen;
 	private MainScreen mainScreen;
 	private MemberDTO memberDTO;
+	private DatabaseConnection connection;
 	
-	public SignUpButtonListener(MainScreen mainScreen, MemberDTO memberDTO) {
-		mainScreen = this.mainScreen;
-		memberDTO = this.memberDTO;
+	public SignUpButtonListener(MainScreen mainScreen, MemberDTO memberDTO, DatabaseConnection connection) {
+		this.mainScreen = mainScreen;
+		this.memberDTO = memberDTO;
+		this.connection = connection;
 		
 		signUpScreen = new SignUpScreen();
 	}
@@ -34,12 +36,54 @@ public class SignUpButtonListener {
 		});
 		
 	}
-	
-	private void getInformatinFromTextField() {
+	private String convertPasswordToString() { // password 값 받아오
+		String password = "";
+		char[] secret = signUpScreen.passwordField.getPassword(); 
+
+		for(char sign : secret){         
+	         Character.toString(sign);   
+	         password += (password.equals("")) ? ""+sign+"" : ""+sign+"";   
+		}
 		
+		return password;
 	}
 	
-	private void openAddressSite() {
+	private void setInformationFromTextField() { // DTO 세팅 
+		memberDTO.setName(signUpScreen.informationField[0].getText());
+		memberDTO.setId(signUpScreen.informationField[1].getText());
+		memberDTO.setPassword(convertPasswordToString());
+		memberDTO.setBirth(signUpScreen.informationField[2].getText());
+		memberDTO.setEmail(signUpScreen.informationField[3].getText() + "@" + signUpScreen.informationField[4].getText());
+		memberDTO.setPhoneNumber(signUpScreen.informationField[5].getText()+signUpScreen.informationField[6].getText()+signUpScreen.informationField[7].getText());
+		memberDTO.setZipCode(signUpScreen.informationField[8].getText());
+		memberDTO.setAddress(signUpScreen.informationField[9].getText());
+		memberDTO.setDetailAddress(signUpScreen.informationField[10].getText());
+	}
+	
+	private Boolean isBlank() {
+		if (memberDTO.getName().length() == 0) {
+			signUpScreen.popFrame("아이디를 입력해주세요!");
+			return true;
+		}
+		return false;
+	}
+	
+	private void clickSignUpButton(JFrame mainFrame, JPanel mainStartingPanel) {
+		signUpScreen.signupButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setInformationFromTextField();
+				
+				if(!isBlank()) {
+					System.out.println(memberDTO.getDetailAddress());
+					connection.succeedSignUp(memberDTO);
+					signUpScreen.popFrame("회원가입이 성공적으로 완료되었습니다!\n 처음 화면으로 이동합니다..");
+					changeSignUpPageToMain(mainFrame, mainStartingPanel);
+				}
+			}
+		});
+	}
+	
+	private void openAddressSite() { // 우편번호 칸 옆 버튼 누르면 주소 찾는 사이트 
 		signUpScreen.addressSearchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Desktop desktop = Desktop.getDesktop();
@@ -61,20 +105,19 @@ public class SignUpButtonListener {
 		mainStartingPanel.setVisible(false);
 		signUpScreen.showSignUpScreen();
 		
-
 		mainFrame.add(signUpScreen.signUpPagePanel);
 		mainFrame.repaint();
 		mainFrame.revalidate();
 		mainFrame.setVisible(true);
 		
 		openAddressSite();
+		clickSignUpButton(mainFrame, mainStartingPanel);
 	}
 	
 	private void changeSignUpPageToMain(JFrame mainFrame, JPanel mainStartingPanel) {
 		//signUpScreen.initializeTextField();
 		signUpScreen.signUpPagePanel.setVisible(false);
 	
-		
 		mainStartingPanel.setVisible(true);
 		mainFrame.repaint();
 		mainFrame.revalidate();

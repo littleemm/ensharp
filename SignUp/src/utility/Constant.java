@@ -12,4 +12,7 @@ public class Constant {
 	public static String EMAIL_PATTERN = "^\\w+@\\w+\\.\\w+(\\.\\w+)?$";
 	public static String PHONE_PATTERN = "(010[0-9]{8})|(0[1-9]{2}[0-9]{7})|(02[0-9]{7,8})";
 	
+	public static String INSERT_QUERY = "INSERT INTO member (id, password, birth, email, phone, zipcode, address, detailAddress) VALUE ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');";
+	
+	
 }

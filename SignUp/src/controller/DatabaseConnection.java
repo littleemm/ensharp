@@ -3,13 +3,19 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import model.MemberDTO;
+import utility.Constant;
 
-public class databaseConnection {
+public class DatabaseConnection {
 	private Connection connection;
 	private PreparedStatement statement;
 	private ResultSet result;
+	private MemberDTO memberDTO;
 	
-	public databaseConnection() {
+	public DatabaseConnection(MemberDTO memberDTO) {
+		this.memberDTO = memberDTO;
+		
 		try {
 			String url = "jdbc:mysql://localhost/younglim_signup?serverTimezone=Asia/Seoul";
 			String id = "root";
@@ -19,6 +25,19 @@ public class databaseConnection {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void succeedSignUp(MemberDTO memberDTO) {
+		String query = String.format(Constant.INSERT_QUERY, memberDTO.getName(), memberDTO.getId(), 
+				memberDTO.getPassword(), memberDTO.getBirth(), memberDTO.getEmail(), memberDTO.getPhoneNumber(), 
+				memberDTO.getAddress(), memberDTO.getDetailAddress());
+		
+		try {
+			statement.executeUpdate(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	
 	}
 	
 	public int login(String userID, String userPassword) {

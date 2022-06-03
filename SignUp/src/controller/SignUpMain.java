@@ -6,17 +6,17 @@ import model.MemberDTO;
 public class SignUpMain {
 	private JFrame mainFrame;
 	private MainScreen mainScreen;
-	private databaseConnection connection;
+	private DatabaseConnection connection;
 	private SignUpButtonListener signUpButtonListener;
 	private MemberDTO memberDTO;
 	
 	public SignUpMain() {
 		mainFrame = new JFrame();
 		mainScreen = new MainScreen();
-		connection = new databaseConnection();
+		connection = new DatabaseConnection(memberDTO);
 		
 		memberDTO = new MemberDTO("", "", "", "", "", "", "", "", "");
-		signUpButtonListener = new SignUpButtonListener(mainScreen, memberDTO);
+		signUpButtonListener = new SignUpButtonListener(mainScreen, memberDTO, connection);
 	}
 	
 	public void showSignUp() { // signup 프로그램 처음 시작 화면 

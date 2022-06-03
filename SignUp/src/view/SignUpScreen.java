@@ -13,14 +13,19 @@ public class SignUpScreen extends BasicScreen {
 	public JButton backButton;
 	public JButton signupButton;
 	
-	private JTextField [] informationField;
-	private JPasswordField passwordField;
-	private JPasswordField passwordCheckField;
+	public JTextField [] informationField;
+	public JPasswordField passwordField;
+	public JPasswordField passwordCheckField;
 	private JLabel emailSign;
 	private Font font;
 	private Font smallFont;
 	public JButton doubleCheckButton;
 	public JButton addressSearchButton;
+	
+	public JFrame frame;
+	private JPanel panel;
+	private JLabel label;
+
 	
 	public SignUpScreen() {
 		signupPanel = new Panel();
@@ -46,6 +51,10 @@ public class SignUpScreen extends BasicScreen {
 		
 		doubleCheckButton = new JButton("중복 확인");
 		addressSearchButton = new JButton("검색");
+		
+		frame = new JFrame();
+		panel = new JPanel();
+		label = new JLabel();
 		
 	}
 	
@@ -97,7 +106,7 @@ public class SignUpScreen extends BasicScreen {
 		buttonPanel.setVisible(true);
 	}
 	
-	private void showInformationTextField() {
+	private void showInformationTextField() { // 텍스트필드 볼 수 있게 패널 설정 
 		textPanel.setSize(1250, 710);
 		textPanel.setLocation(0, 0);
 		textPanel.setOpaque(false);
@@ -117,7 +126,7 @@ public class SignUpScreen extends BasicScreen {
 		textPanel.setVisible(true);
 	}
 	
-	private void setFieldPosition() {
+	private void setFieldPosition() { // 텍스트 필드 위치 및 사이즈 설정 
 		informationField[0].setSize(150, 30);
 		informationField[0].setLocation(195, 50); // 이름 
 		
@@ -161,14 +170,32 @@ public class SignUpScreen extends BasicScreen {
 		informationField[10].setLocation(195, 585); // 상세주소 
 	}
 	
-	private void setAddressSearchButton() {
+	private void setAddressSearchButton() { // 주소 찾기 버튼 세팅 
 		addressSearchButton.setSize(80, 30);
 		addressSearchButton.setLocation(350, 500);
 		addressSearchButton.setFont(smallFont);
 		addressSearchButton.setBackground(Color.WHITE);
-		
-		
 	}
+	
+	public void popFrame(String text) {
+		frame.setSize(200, 100);
+		frame.setLayout(new BorderLayout());
+		frame.setLocationRelativeTo(null);
+		frame.setResizable(false);
+		
+		panel.setPreferredSize(new Dimension(200, 100));
+		panel.setLayout(new BorderLayout());
+		
+		label.setPreferredSize(new Dimension(100, 100));
+		label.setText(text);
+		label.setHorizontalAlignment(JLabel.CENTER);
+
+		
+		panel.add(label, BorderLayout.CENTER);
+		frame.add(panel, BorderLayout.CENTER);
+		frame.setVisible(true);
+	}
+
 	
 	private class Panel extends JPanel { // 패널에 배경 그려주는 클래스 
 		public void paint(Graphics g) { 
