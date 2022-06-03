@@ -101,7 +101,7 @@ public class SignUpButtonListener {
 	}
 	
 	private void changeMainToSignUpPage(JFrame mainFrame, JPanel mainStartingPanel) {
-		//mainScreen.initializeTextField();
+		mainScreen.initializeTextField();
 		mainStartingPanel.setVisible(false);
 		signUpScreen.showSignUpScreen();
 		
@@ -115,7 +115,7 @@ public class SignUpButtonListener {
 	}
 	
 	private void changeSignUpPageToMain(JFrame mainFrame, JPanel mainStartingPanel) {
-		//signUpScreen.initializeTextField();
+		signUpScreen.initializeTextField();
 		signUpScreen.signUpPagePanel.setVisible(false);
 	
 		mainStartingPanel.setVisible(true);
