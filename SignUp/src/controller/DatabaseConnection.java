@@ -2,6 +2,7 @@ package controller;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.MemberDTO;
@@ -9,7 +10,7 @@ import utility.Constant;
 
 public class DatabaseConnection {
 	private Connection connection;
-	private PreparedStatement statement;
+	private Statement statement;
 	private ResultSet result;
 	private MemberDTO memberDTO;
 	
@@ -22,6 +23,7 @@ public class DatabaseConnection {
 			String password = "0000";
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection(url,id,password);
+			statement = connection.createStatement();
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -30,7 +32,8 @@ public class DatabaseConnection {
 	public void succeedSignUp(MemberDTO memberDTO) {
 		String query = String.format(Constant.INSERT_QUERY, memberDTO.getName(), memberDTO.getId(), 
 				memberDTO.getPassword(), memberDTO.getBirth(), memberDTO.getEmail(), memberDTO.getPhoneNumber(), 
-				memberDTO.getAddress(), memberDTO.getDetailAddress());
+				memberDTO.getZipCode(), memberDTO.getAddress(), memberDTO.getDetailAddress());
+		System.out.println(query);
 		
 		try {
 			statement.executeUpdate(query);
@@ -44,8 +47,8 @@ public class DatabaseConnection {
 		String SQL = "SELECT userPassword FROM USER WHERE userID = ?";
 		try {
 			statement = connection.prepareStatement(SQL);
-			statement.setString(1, userID);
-			result = statement.executeQuery();
+			//statement.setString(1, userID);
+			//result = statement.executeQuery();
 			if(result.next()) {
 				if(result.getString(1).contentEquals(userPassword)) {
 					return 1;

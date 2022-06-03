@@ -76,8 +76,8 @@ public class SignUpButtonListener {
 				if(!isBlank()) {
 					System.out.println(memberDTO.getDetailAddress());
 					connection.succeedSignUp(memberDTO);
-					signUpScreen.popFrame("회원가입이 성공적으로 완료되었습니다!\n 처음 화면으로 이동합니다..");
 					changeSignUpPageToMain(mainFrame, mainStartingPanel);
+					signUpScreen.popFrame("회원가입 성공!");
 				}
 			}
 		});
