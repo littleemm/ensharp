@@ -10,8 +10,8 @@ public class SignUpScreen extends BasicScreen {
 	private JPanel buttonPanel;
 	
 	private Image background;
-	private JButton backButton;
-	private JButton signupButton;
+	public JButton backButton;
+	public JButton signupButton;
 	private JTextField [] informationField;
 	private JPasswordField passwordField;
 	private JPasswordField passwordCheckField;
@@ -36,6 +36,7 @@ public class SignUpScreen extends BasicScreen {
 		
 		emailSign = new JLabel("@");
 	}
+	
 	public void showSignUpScreen() {
 		signUpPagePanel.setSize(new Dimension(1280, 745));
 		signUpPagePanel.setLocation(0,0);
@@ -43,20 +44,22 @@ public class SignUpScreen extends BasicScreen {
 		showSignUpBackground();
 		showButtonPanel();
 		showInformationTextField();
-		signUpPagePanel.add(signupPanel);
 		signUpPagePanel.add(buttonPanel);
 		signUpPagePanel.add(textPanel);
+		signUpPagePanel.add(signupPanel);
+		signUpPagePanel.setVisible(true);
 	}
 	
-	public void showSignUpBackground() {
+	private void showSignUpBackground() {
 		signupPanel.setLayout(null);
 		signupPanel.setSize(1280, 745);
 		signupPanel.setVisible(true);
 	}
 	
-	public void showButtonPanel() { // 버튼 패널 생성 (메인 패널에 버튼을 집어넣으면 안보임) 
+	private void showButtonPanel() { // 버튼 패널 생성 (메인 패널에 버튼을 집어넣으면 안보임) 
 		buttonPanel.setSize(1280, 745); 
 		buttonPanel.setLocation(0,0);
+		buttonPanel.setOpaque(false);
 		buttonPanel.setBackground(new Color(255, 0,0,0));
 		buttonPanel.setLayout(null);
 		
@@ -74,9 +77,10 @@ public class SignUpScreen extends BasicScreen {
 		buttonPanel.setVisible(true);
 	}
 	
-	public void showInformationTextField() {
+	private void showInformationTextField() {
 		textPanel.setSize(1250, 710);
 		textPanel.setLocation(0, 0);
+		textPanel.setOpaque(false);
 		textPanel.setLayout(null);
 		
 		informationField[0].setSize(150, 30);
@@ -94,7 +98,7 @@ public class SignUpScreen extends BasicScreen {
 		
 		informationField[3].setSize(150, 30);
 		informationField[3].setLocation(195, 370); // 이메일 아이디 
-		emailSign.setLocation(1, 1);
+		emailSign.setLocation(370, 375);
 		emailSign.setSize(20, 20);
 		informationField[4].setSize(150, 30);
 		informationField[4].setLocation(400, 370); // 이메일 뒷 주소 

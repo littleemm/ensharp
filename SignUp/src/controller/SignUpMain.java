@@ -25,6 +25,7 @@ public class SignUpMain {
 		mainFrame.setLayout(null);
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setResizable(false);
+		mainFrame.setTitle("EN#WATCH");
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		mainScreen.showMainScreen();
@@ -33,9 +34,9 @@ public class SignUpMain {
 		
 		mainStartingPanel.setSize(new Dimension(1280, 745));
 		mainStartingPanel.setLayout(null);
-		mainStartingPanel.add(mainScreen.mainPanel);
 		mainStartingPanel.add(mainScreen.buttonPanel);
 		mainStartingPanel.add(mainScreen.loginPanel);
+		mainStartingPanel.add(mainScreen.mainPanel);
 		
 		mainFrame.add(mainStartingPanel);
 		mainFrame.repaint();

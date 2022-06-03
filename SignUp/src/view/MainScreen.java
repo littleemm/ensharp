@@ -40,6 +40,7 @@ public class MainScreen extends BasicScreen {
 	public void showButtonPanel() { // 버튼 패널 생성 (메인 패널에 버튼을 집어넣으면 안보임) 
 		buttonPanel.setSize(1280, 745); 
 		buttonPanel.setLocation(0,0);
+		buttonPanel.setOpaque(false);
 		buttonPanel.setBackground(new Color(255, 0,0,0));
 		buttonPanel.setLayout(null);
 		
@@ -71,6 +72,7 @@ public class MainScreen extends BasicScreen {
 	public void showLoginTextField() {
 		loginPanel.setSize(500, 500);
 		loginPanel.setLocation(213, 313);
+		loginPanel.setOpaque(false);
 		loginPanel.setLayout(null);
 		
 		idField.setSize(300, 50);
