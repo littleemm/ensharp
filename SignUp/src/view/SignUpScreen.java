@@ -13,6 +13,8 @@ public class SignUpScreen extends BasicScreen {
 	private JButton backButton;
 	private JButton signupButton;
 	private JTextField [] informationField;
+	private JPasswordField passwordField;
+	private JPasswordField passwordCheckField;
 	private JLabel emailSign;
 	
 	public SignUpScreen() {
@@ -25,10 +27,13 @@ public class SignUpScreen extends BasicScreen {
 		backButton = new JButton(new ImageIcon(MainScreen.class.getResource("../image/backButton.png")));
 		signupButton = new JButton(new ImageIcon(MainScreen.class.getResource("../image/signupButton.png")));
 		
-		informationField = new JTextField[13];
-		for (int fieldIndex = 0;fieldIndex<13;fieldIndex++) {
+		informationField = new JTextField[11];
+		for (int fieldIndex = 0;fieldIndex<11;fieldIndex++) {
 			informationField[fieldIndex] = new JTextField(){public void setBorder(Border border) {}};
 		}
+		passwordField = new JPasswordField(){public void setBorder(Border border) {}};
+		passwordCheckField = new JPasswordField(){public void setBorder(Border border) {}};
+		
 		emailSign = new JLabel("@");
 	}
 	public void showSignUpScreen() {
@@ -78,38 +83,42 @@ public class SignUpScreen extends BasicScreen {
 		informationField[0].setLocation(195, 50); // 이름 
 		informationField[1].setSize(150, 30);
 		informationField[1].setLocation(195, 115); // 아이디 
-		informationField[2].setSize(150, 30); 
-		informationField[2].setLocation(195, 180); // 비밀번호 
-		informationField[3].setSize(150, 30);
-		informationField[3].setLocation(195, 245); // 비밀번호 확인 
-		informationField[4].setSize(150, 30);
-		informationField[4].setLocation(195, 305); // 생년월일8글자 
 		
-		informationField[5].setSize(150, 30);
-		informationField[5].setLocation(195, 370); // 이메일 아이디 
+		passwordField.setSize(150, 30); 
+		passwordField.setLocation(195, 180); // 비밀번호 
+		passwordCheckField.setSize(150, 30);
+		passwordCheckField.setLocation(195, 245); // 비밀번호 확인 
+		
+		informationField[2].setSize(150, 30);
+		informationField[2].setLocation(195, 305); // 생년월일8글자 
+		
+		informationField[3].setSize(150, 30);
+		informationField[3].setLocation(195, 370); // 이메일 아이디 
 		emailSign.setLocation(1, 1);
 		emailSign.setSize(20, 20);
-		informationField[6].setSize(150, 30);
-		informationField[6].setLocation(400, 370); // 이메일 뒷 주소 
+		informationField[4].setSize(150, 30);
+		informationField[4].setLocation(400, 370); // 이메일 뒷 주소 
 		
+		informationField[5].setSize(90, 30);
+		informationField[5].setLocation(195, 435); // 전화번호 
+		informationField[6].setSize(90, 30);
+		informationField[6].setLocation(290, 435);
 		informationField[7].setSize(90, 30);
-		informationField[7].setLocation(195, 435); // 전화번호 
-		informationField[8].setSize(90, 30);
-		informationField[8].setLocation(290, 435);
-		informationField[9].setSize(90, 30);
-		informationField[9].setLocation(385, 435);
+		informationField[7].setLocation(385, 435);
 		
+		informationField[8].setSize(150, 30);
+		informationField[8].setLocation(195, 500); // 우편번호 
+		informationField[9].setSize(350, 30);
+		informationField[9].setLocation(195, 550); // 주소 
 		informationField[10].setSize(150, 30);
-		informationField[10].setLocation(195, 500); // 우편번호 
-		informationField[11].setSize(350, 30);
-		informationField[11].setLocation(195, 550); // 주소 
-		informationField[12].setSize(150, 30);
-		informationField[12].setLocation(195, 585); // 상세주소 
+		informationField[10].setLocation(195, 585); // 상세주소 
 		
 		
-		for (int fieldIndex = 0;fieldIndex<13;fieldIndex++) {
+		for (int fieldIndex = 0;fieldIndex<11;fieldIndex++) {
 			textPanel.add(informationField[fieldIndex]);
 		}
+		textPanel.add(passwordField);
+		textPanel.add(passwordCheckField);
 		textPanel.add(emailSign);
 		textPanel.setVisible(true);
 	}
