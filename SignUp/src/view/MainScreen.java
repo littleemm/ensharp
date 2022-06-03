@@ -1,22 +1,25 @@
 package view;
 import javax.swing.*;
+import javax.swing.border.*;
 import java.awt.*;
 
 
 public class MainScreen {
 	public Panel mainPanel = new Panel();
 	public JPanel buttonPanel = new JPanel();
+	public JPanel loginPanel = new JPanel();
 	private Image background;
 	public JButton loginButton;
 	public JButton signupButton;
 	public JButton idFindingButton;
 	public JButton passwordFindingButton;
 	public JTextField idField;
-	public JTextField passwordField;
+	public JPasswordField passwordField;
 	
 	public MainScreen() {
 		mainPanel = new Panel();
 		buttonPanel = new JPanel();
+		loginPanel = new JPanel();
 		background = new ImageIcon(MainScreen.class.getResource("../image/mainBackground2.png")).getImage();
 		
 		loginButton = new JButton(new ImageIcon(MainScreen.class.getResource("../image/loginButton.png")));
@@ -24,8 +27,8 @@ public class MainScreen {
 		idFindingButton = new JButton(new ImageIcon(MainScreen.class.getResource("../image/idFindingButton.png")));
 		passwordFindingButton = new JButton(new ImageIcon(MainScreen.class.getResource("../image/pwFindingButton.png")));
 		
-		idField = new JTextField();
-		passwordField = new JTextField();
+		idField = new JTextField() {public void setBorder(Border border) {}};
+		passwordField = new JPasswordField() {public void setBorder(Border border) {}};
 	}
 	
 	public void showMainScreen() { // 배경 사진만 보여주는 패널 생성 
@@ -46,7 +49,6 @@ public class MainScreen {
 		buttonPanel.setLayout(null);
 		
 		loginButton.setSize(200, 90);
-		//loginButton.setMinimumSize(new Dimension(400, 150));
 		loginButton.setLocation(597, 338);
 		
 		signupButton.setSize(200, 53);
@@ -63,11 +65,27 @@ public class MainScreen {
 		paintButton(idFindingButton);
 		paintButton(passwordFindingButton);
 		
+		
 		buttonPanel.add(loginButton);
 		buttonPanel.add(signupButton);
 		buttonPanel.add(idFindingButton);
 		buttonPanel.add(passwordFindingButton);
 		buttonPanel.setVisible(true);
+	}
+	
+	public void showLoginTextField() {
+		loginPanel.setSize(500, 500);
+		loginPanel.setLocation(213, 313);
+		loginPanel.setLayout(null);
+		
+		idField.setSize(300, 50);
+		idField.setLocation(10, 12);
+		passwordField.setSize(300, 50);
+		passwordField.setLocation(10, 90);
+		
+		loginPanel.add(idField);
+		loginPanel.add(passwordField);
+		loginPanel.setVisible(true);
 	}
 	
 	private void paintButton(JButton button) {

@@ -22,9 +22,11 @@ public class SignUpMain extends JFrame {
 		
 		mainScreen.showMainScreen();
 		mainScreen.showButtonPanel();
+		mainScreen.showLoginTextField();
 		
 		mainFrame.add(mainScreen.mainPanel);
 		mainFrame.add(mainScreen.buttonPanel);
+		mainFrame.add(mainScreen.loginPanel);
 		
 		mainFrame.repaint();
 		mainFrame.revalidate();
