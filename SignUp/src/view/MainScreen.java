@@ -33,17 +33,12 @@ public class MainScreen extends BasicScreen {
 	
 	public void showMainScreen() { // 배경 사진만 보여주는 패널 생성 
 		mainPanel.setLayout(null);
-		mainPanel.setSize(1250, 700);
-		//mainPanel.setMinimumSize(new Dimension(1250, 700));
-		//mainPanel.repaint();
-		//mainPanel.revalidate();
-
-
+		mainPanel.setSize(1280, 745);
 		mainPanel.setVisible(true);
 	}
 	
 	public void showButtonPanel() { // 버튼 패널 생성 (메인 패널에 버튼을 집어넣으면 안보임) 
-		buttonPanel.setSize(1250, 700); 
+		buttonPanel.setSize(1280, 745); 
 		buttonPanel.setLocation(0,0);
 		buttonPanel.setBackground(new Color(255, 0,0,0));
 		buttonPanel.setLayout(null);
