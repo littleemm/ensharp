@@ -60,10 +60,10 @@ public class SignUpScreen extends BasicScreen {
 	
 	public void initializeTextField() {
 		for (int fieldIndex = 0;fieldIndex<11;fieldIndex++) {
-			informationField[fieldIndex] = new JTextField();
+			informationField[fieldIndex].setText("");
 		}
-		passwordField = new JPasswordField();
-		passwordCheckField = new JPasswordField();
+		passwordField.setText("");
+		passwordCheckField.setText("");
 	}
 	
 	public void showSignUpScreen() {

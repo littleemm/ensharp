@@ -34,8 +34,8 @@ public class MainScreen extends BasicScreen {
 	}
 	
 	public void initializeTextField() {
-		idField.setText(" ");
-		passwordField.setText(" ");
+		idField.setText("");
+		passwordField.setText("");
 	}
 	
 	public void showMainScreen() {
