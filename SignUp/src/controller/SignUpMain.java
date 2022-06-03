@@ -6,10 +6,12 @@ import view.MainScreen;
 public class SignUpMain extends JFrame {
 	private JFrame mainFrame;
 	private MainScreen mainScreen;
+	private databaseConnection connection;
 	
 	public SignUpMain() {
 		mainFrame = new JFrame();
 		mainScreen = new MainScreen();
+		connection = new databaseConnection();
 	}
 	
 	public void showSignUp() {
