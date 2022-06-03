@@ -13,6 +13,7 @@ public class Constant {
 	public static String PHONE_PATTERN = "(010[0-9]{8})|(0[1-9]{2}[0-9]{7})|(02[0-9]{7,8})";
 	
 	public static String INSERT_QUERY = "INSERT INTO member (name, id, password, birth, email, phone, zipcode, address, detailAddress) VALUE ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');";
-	public static String SELECT_PASSWORD_QUERY = "SELECT password FROM member WHERE iD = '%s'";
+	public static String SELECT_PASSWORD_QUERY = "SELECT password FROM member WHERE id = '%s'";
+	public static String SELECT_NAME_QUERY = "SELECT name FROM member WHERE id = '%s'";
 	
 }

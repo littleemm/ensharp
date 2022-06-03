@@ -66,5 +66,21 @@ public class DatabaseConnection {
 		return false;
 	}
 	
+	public String printName (String id) {
+		String query = String.format(Constant.SELECT_NAME_QUERY, id);
+		
+		try {
+			result = statement.executeQuery(query);
+			
+			while(result.next()) {
+				return result.getString("name");
+			}
+		} catch(Exception e) {
+			return "-1";
+		}
+		
+		return "-1";
+	}
+	
 	
 }

@@ -10,9 +10,11 @@ import javax.swing.JPanel;
 import model.MemberDTO;
 import view.MainScreen;
 import view.SignUpScreen;
+import view.LoginedScreen;
 
 public class LoginAdministrator {
 	private MainScreen mainScreen;
+	private LoginedScreen loginedScreen;
 	private MemberDTO memberDTO;
 	private DatabaseConnection connection;
 	
@@ -20,6 +22,8 @@ public class LoginAdministrator {
 		this.mainScreen = mainScreen;
 		this.memberDTO = memberDTO;
 		this.connection = connection;
+		
+		loginedScreen = new LoginedScreen();
 	}
 	
 	public void showLoginPage(JFrame mainFrame, JPanel mainStartingPanel, JButton loginButton) { // 실제 회원가입 페이지 
@@ -45,7 +49,9 @@ public class LoginAdministrator {
 	
 	private void checkSuccessLogin(JFrame mainFrame, JPanel mainStartingPanel) {
 		if(connection.isSuccessLogin(mainScreen.idField.getText(), convertPasswordToString())) {
-			changeMainToLoginPage(mainFrame, mainStartingPanel);
+			String name = connection.printName(mainScreen.idField.getText());
+			changeMainToLoginPage(mainFrame, mainStartingPanel, name);
+			loginedScreen.showLoginScreen(name);
 		}
 		
 		else {
@@ -54,10 +60,12 @@ public class LoginAdministrator {
 		
 	}
 	
-	private void changeMainToLoginPage(JFrame mainFrame, JPanel mainStartingPanel) {
+	private void changeMainToLoginPage(JFrame mainFrame, JPanel mainStartingPanel, String name) {
 		mainScreen.initializeTextField();
 		mainStartingPanel.setVisible(false);
+		loginedScreen.showLoginScreen(name);
 		
+		mainFrame.add(loginedScreen.loginPagePanel);
 		mainFrame.repaint();
 		mainFrame.revalidate();
 		mainFrame.setVisible(true);
