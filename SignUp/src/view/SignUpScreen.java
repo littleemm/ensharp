@@ -12,10 +12,14 @@ public class SignUpScreen extends BasicScreen {
 	private Image background;
 	public JButton backButton;
 	public JButton signupButton;
+	
 	private JTextField [] informationField;
 	private JPasswordField passwordField;
 	private JPasswordField passwordCheckField;
 	private JLabel emailSign;
+	private Font font;
+	private JButton doubleCheckButton;
+	private JButton addressSearchButton;
 	
 	public SignUpScreen() {
 		signupPanel = new Panel();
@@ -31,10 +35,21 @@ public class SignUpScreen extends BasicScreen {
 		for (int fieldIndex = 0;fieldIndex<11;fieldIndex++) {
 			informationField[fieldIndex] = new JTextField(){public void setBorder(Border border) {}};
 		}
+		
 		passwordField = new JPasswordField(){public void setBorder(Border border) {}};
 		passwordCheckField = new JPasswordField(){public void setBorder(Border border) {}};
 		
 		emailSign = new JLabel("@");
+		font = new Font("맑은 고딕", Font.PLAIN, 18);
+		
+	}
+	
+	public void initializeTextField() {
+		for (int fieldIndex = 0;fieldIndex<11;fieldIndex++) {
+			informationField[fieldIndex] = new JTextField();
+		}
+		passwordField = new JPasswordField();
+		passwordCheckField = new JPasswordField();
 	}
 	
 	public void showSignUpScreen() {
@@ -83,6 +98,18 @@ public class SignUpScreen extends BasicScreen {
 		textPanel.setOpaque(false);
 		textPanel.setLayout(null);
 		
+		setFieldPosition();
+		
+		for (int fieldIndex = 0;fieldIndex<11;fieldIndex++) {
+			textPanel.add(informationField[fieldIndex]);
+		}
+		textPanel.add(passwordField);
+		textPanel.add(passwordCheckField);
+		textPanel.add(emailSign);
+		textPanel.setVisible(true);
+	}
+	
+	private void setFieldPosition() {
 		informationField[0].setSize(150, 30);
 		informationField[0].setLocation(195, 50); // 이름 
 		informationField[1].setSize(150, 30);
@@ -98,8 +125,10 @@ public class SignUpScreen extends BasicScreen {
 		
 		informationField[3].setSize(150, 30);
 		informationField[3].setLocation(195, 370); // 이메일 아이디 
-		emailSign.setLocation(370, 375);
+		emailSign.setLocation(368, 373);
 		emailSign.setSize(20, 20);
+		emailSign.setFont(font);
+		emailSign.setForeground(Color.white);
 		informationField[4].setSize(150, 30);
 		informationField[4].setLocation(400, 370); // 이메일 뒷 주소 
 		
@@ -116,15 +145,6 @@ public class SignUpScreen extends BasicScreen {
 		informationField[9].setLocation(195, 550); // 주소 
 		informationField[10].setSize(150, 30);
 		informationField[10].setLocation(195, 585); // 상세주소 
-		
-		
-		for (int fieldIndex = 0;fieldIndex<11;fieldIndex++) {
-			textPanel.add(informationField[fieldIndex]);
-		}
-		textPanel.add(passwordField);
-		textPanel.add(passwordCheckField);
-		textPanel.add(emailSign);
-		textPanel.setVisible(true);
 	}
 	
 	private class Panel extends JPanel { // 패널에 배경 그려주는 클래스 

@@ -3,11 +3,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import view.SignUpScreen;
-
+import view.MainScreen;
 public class SignUpButtonListener {
 	private SignUpScreen signUpScreen;
+	private MainScreen mainScreen;
 	
-	public SignUpButtonListener() {
+	public SignUpButtonListener(MainScreen mainScreen) {
+		mainScreen = this.mainScreen;
 		signUpScreen = new SignUpScreen();
 	}
 	
@@ -27,8 +29,10 @@ public class SignUpButtonListener {
 	}
 	
 	private void changeMainToSignUpPage(JFrame mainFrame, JPanel mainStartingPanel) {
+		//mainScreen.initializeTextField();
 		mainStartingPanel.setVisible(false);
 		signUpScreen.showSignUpScreen();
+		
 
 		mainFrame.add(signUpScreen.signUpPagePanel);
 		mainFrame.repaint();
@@ -37,7 +41,9 @@ public class SignUpButtonListener {
 	}
 	
 	private void changeSignUpPageToMain(JFrame mainFrame, JPanel mainStartingPanel) {
+		//signUpScreen.initializeTextField();
 		signUpScreen.signUpPagePanel.setVisible(false);
+	
 		
 		mainStartingPanel.setVisible(true);
 		mainFrame.repaint();

@@ -3,11 +3,12 @@ import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 
-
+@SuppressWarnings("serial")
 public class MainScreen extends BasicScreen {
-	public Panel mainPanel;
-	public JPanel buttonPanel;
-	public JPanel loginPanel; 
+	public JPanel mainStartingPanel;
+	private Panel mainPanel;
+	private JPanel buttonPanel;
+	private JPanel loginPanel; 
 	private Image background;
 	public JButton loginButton;
 	public JButton signupButton;
@@ -17,6 +18,7 @@ public class MainScreen extends BasicScreen {
 	public JPasswordField passwordField;
 	
 	public MainScreen() {
+		mainStartingPanel = new JPanel();
 		mainPanel = new Panel();
 		buttonPanel = new JPanel();
 		loginPanel = new JPanel();
@@ -31,13 +33,32 @@ public class MainScreen extends BasicScreen {
 		passwordField = new JPasswordField() {public void setBorder(Border border) {}};
 	}
 	
-	public void showMainScreen() { // 배경 사진만 보여주는 패널 생성 
+	public void initializeTextField() {
+		idField.setText(" ");
+		passwordField.setText(" ");
+	}
+	
+	public void showMainScreen() {
+		mainStartingPanel.setSize(new Dimension(1280, 745));
+		mainStartingPanel.setLayout(null);
+		
+		showMainBackground();
+		showButtonPanel();
+		showLoginTextField();
+		
+		mainStartingPanel.add(buttonPanel);
+		mainStartingPanel.add(loginPanel);
+		mainStartingPanel.add(mainPanel);
+		mainStartingPanel.setVisible(true);
+	}
+	
+	private void showMainBackground() { // 배경 사진만 보여주는 패널 생성 
 		mainPanel.setLayout(null);
 		mainPanel.setSize(1280, 745);
 		mainPanel.setVisible(true);
 	}
 	
-	public void showButtonPanel() { // 버튼 패널 생성 (메인 패널에 버튼을 집어넣으면 안보임) 
+	private void showButtonPanel() { // 버튼 패널 생성 (메인 패널에 버튼을 집어넣으면 안보임) 
 		buttonPanel.setSize(1280, 745); 
 		buttonPanel.setLocation(0,0);
 		buttonPanel.setOpaque(false);
@@ -69,7 +90,7 @@ public class MainScreen extends BasicScreen {
 		buttonPanel.setVisible(true);
 	}
 	
-	public void showLoginTextField() {
+	private void showLoginTextField() {
 		loginPanel.setSize(500, 500);
 		loginPanel.setLocation(213, 313);
 		loginPanel.setOpaque(false);
