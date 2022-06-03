@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 
 public class databaseConnection {
 	private Connection connection;
-	private PreparedStatement pstmt;
-	private ResultSet rs;
+	private PreparedStatement statement;
+	private ResultSet result;
 	
 	public databaseConnection() {
 		try {
@@ -25,11 +25,11 @@ public class databaseConnection {
 	public int login(String userID, String userPassword) {
 		String SQL = "SELECT userPassword FROM USER WHERE userID = ?";
 		try {
-			pstmt = connection.prepareStatement(SQL);
-			pstmt.setString(1, userID);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				if(rs.getString(1).contentEquals(userPassword)) {
+			statement = connection.prepareStatement(SQL);
+			statement.setString(1, userID);
+			result = statement.executeQuery();
+			if(result.next()) {
+				if(result.getString(1).contentEquals(userPassword)) {
 					return 1;
 				}
 				else

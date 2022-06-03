@@ -4,10 +4,10 @@ import javax.swing.border.*;
 import java.awt.*;
 
 
-public class MainScreen {
-	public Panel mainPanel = new Panel();
-	public JPanel buttonPanel = new JPanel();
-	public JPanel loginPanel = new JPanel();
+public class MainScreen extends BasicScreen {
+	public Panel mainPanel;
+	public JPanel buttonPanel;
+	public JPanel loginPanel; 
 	private Image background;
 	public JButton loginButton;
 	public JButton signupButton;
@@ -86,13 +86,6 @@ public class MainScreen {
 		loginPanel.add(idField);
 		loginPanel.add(passwordField);
 		loginPanel.setVisible(true);
-	}
-	
-	private void paintButton(JButton button) {
-		button.setOpaque(false);
-		//loginButton.setContentAreaFilled(false);
-		button.setBorderPainted(false);
-		button.setFocusPainted(false);
 	}
 	
 	private class Panel extends JPanel { // 패널에 배경 그려주는 클래스 
