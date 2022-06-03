@@ -13,15 +13,21 @@ public class SignUpMain extends JFrame {
 	}
 	
 	public void showSignUp() {
-		mainFrame.setBounds(200, 200, 1000, 800);
+		mainFrame.setPreferredSize(new Dimension(1250, 700));
+		mainFrame.setMinimumSize(new Dimension(1250, 700));
 		mainFrame.setLayout(null);
 		mainFrame.setLocationRelativeTo(null);
+		mainFrame.setResizable(false);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		mainScreen.showMainScreen();
+		mainScreen.showButtonPanel();
 		
 		mainFrame.add(mainScreen.mainPanel);
+		mainFrame.add(mainScreen.buttonPanel);
 		
+		mainFrame.repaint();
+		mainFrame.revalidate();
 		mainFrame.setVisible(true);
 	}
 	
