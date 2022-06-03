@@ -43,25 +43,27 @@ public class DatabaseConnection {
 	
 	}
 	
-	public int login(String userID, String userPassword) {
-		String SQL = "SELECT userPassword FROM USER WHERE userID = ?";
+	
+	public Boolean isSuccessLogin(String id, String password) {
+		String query = String.format(Constant.SELECT_PASSWORD_QUERY, id);
+		
 		try {
-			statement = connection.prepareStatement(SQL);
-			//statement.setString(1, userID);
-			//result = statement.executeQuery();
-			if(result.next()) {
-				if(result.getString(1).contentEquals(userPassword)) {
-					return 1;
-				}
-				else
-					return 0;
-			}
-			return -1;
+			result = statement.executeQuery(query);
 			
-		} catch (Exception e) {
-			e.printStackTrace();
+			while(result.next()) {
+				if(password.equals(result.getString("password"))) {
+					return true;
+				}
+				
+				else {
+					return false;
+				}
+			}
+		} catch(Exception e) {
+			return false;
 		}
-		return -2;
+		
+		return false;
 	}
 	
 	

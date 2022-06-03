@@ -7,7 +7,8 @@ public class SignUpMain {
 	private JFrame mainFrame;
 	private MainScreen mainScreen;
 	private DatabaseConnection connection;
-	private SignUpButtonListener signUpButtonListener;
+	private SignUpAdministrator signUpAdministrator;
+	private LoginAdministrator loginAdministrator;
 	private MemberDTO memberDTO;
 	
 	public SignUpMain() {
@@ -16,7 +17,8 @@ public class SignUpMain {
 		connection = new DatabaseConnection(memberDTO);
 		
 		memberDTO = new MemberDTO("", "", "", "", "", "", "", "", "");
-		signUpButtonListener = new SignUpButtonListener(mainScreen, memberDTO, connection);
+		signUpAdministrator = new SignUpAdministrator(mainScreen, memberDTO, connection);
+		loginAdministrator = new LoginAdministrator(mainScreen, memberDTO, connection);
 	}
 	
 	public void showSignUp() { // signup 프로그램 처음 시작 화면 
@@ -39,7 +41,9 @@ public class SignUpMain {
 	}
 	
 	private void moveToOtherPage(JPanel mainStartingPanel) {
-		signUpButtonListener.showSignUpPage(mainFrame, mainStartingPanel, mainScreen.signupButton);
+		signUpAdministrator.showSignUpPage(mainFrame, mainStartingPanel, mainScreen.signupButton);
+		loginAdministrator.showLoginPage(mainFrame, mainStartingPanel, mainScreen.loginButton);
+		
 	}
 	
 }

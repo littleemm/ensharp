@@ -8,13 +8,13 @@ import view.SignUpScreen;
 import view.MainScreen;
 import model.MemberDTO;
 
-public class SignUpButtonListener {
+public class SignUpAdministrator {
 	private SignUpScreen signUpScreen;
 	private MainScreen mainScreen;
 	private MemberDTO memberDTO;
 	private DatabaseConnection connection;
 	
-	public SignUpButtonListener(MainScreen mainScreen, MemberDTO memberDTO, DatabaseConnection connection) {
+	public SignUpAdministrator(MainScreen mainScreen, MemberDTO memberDTO, DatabaseConnection connection) {
 		this.mainScreen = mainScreen;
 		this.memberDTO = memberDTO;
 		this.connection = connection;
@@ -36,7 +36,8 @@ public class SignUpButtonListener {
 		});
 		
 	}
-	private String convertPasswordToString() { // password 값 받아오
+	
+	private String convertPasswordToString() { // password 값 받아오기 
 		String password = "";
 		char[] secret = signUpScreen.passwordField.getPassword(); 
 
@@ -60,27 +61,12 @@ public class SignUpButtonListener {
 		memberDTO.setDetailAddress(signUpScreen.informationField[10].getText());
 	}
 	
-	private Boolean isBlank() {
+	private Boolean isBlank() { // 필수항목이 빈칸인지 체크 
 		if (memberDTO.getName().length() == 0) {
 			signUpScreen.popFrame("아이디를 입력해주세요!");
 			return true;
 		}
 		return false;
-	}
-	
-	private void clickSignUpButton(JFrame mainFrame, JPanel mainStartingPanel) {
-		signUpScreen.signupButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setInformationFromTextField();
-				
-				if(!isBlank()) {
-					System.out.println(memberDTO.getDetailAddress());
-					connection.succeedSignUp(memberDTO);
-					changeSignUpPageToMain(mainFrame, mainStartingPanel);
-					signUpScreen.popFrame("회원가입 성공!");
-				}
-			}
-		});
 	}
 	
 	private void openAddressSite() { // 우편번호 칸 옆 버튼 누르면 주소 찾는 사이트 
@@ -100,7 +86,22 @@ public class SignUpButtonListener {
 		});
 	}
 	
-	private void changeMainToSignUpPage(JFrame mainFrame, JPanel mainStartingPanel) {
+	private void clickSignUpButton(JFrame mainFrame, JPanel mainStartingPanel) { // 회원가입 버튼이 눌리면 일어나는 일 
+		signUpScreen.signupButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setInformationFromTextField();
+				
+				if(!isBlank()) {
+					System.out.println(memberDTO.getDetailAddress());
+					connection.succeedSignUp(memberDTO);
+					changeSignUpPageToMain(mainFrame, mainStartingPanel);
+					signUpScreen.popFrame("회원가입 성공!");
+				}
+			}
+		});
+	}
+	
+	private void changeMainToSignUpPage(JFrame mainFrame, JPanel mainStartingPanel) { // 처음 페이지 -> 회원가입 페이지 
 		mainScreen.initializeTextField();
 		mainStartingPanel.setVisible(false);
 		signUpScreen.showSignUpScreen();
@@ -114,7 +115,7 @@ public class SignUpButtonListener {
 		clickSignUpButton(mainFrame, mainStartingPanel);
 	}
 	
-	private void changeSignUpPageToMain(JFrame mainFrame, JPanel mainStartingPanel) {
+	private void changeSignUpPageToMain(JFrame mainFrame, JPanel mainStartingPanel) { // 회원가입 페이지 -> 처음 페이지 
 		signUpScreen.initializeTextField();
 		signUpScreen.signUpPagePanel.setVisible(false);
 	

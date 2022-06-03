@@ -177,25 +177,7 @@ public class SignUpScreen extends BasicScreen {
 		addressSearchButton.setBackground(Color.WHITE);
 	}
 	
-	public void popFrame(String text) {
-		frame.setSize(200, 100);
-		frame.setLayout(new BorderLayout());
-		frame.setLocationRelativeTo(null);
-		frame.setResizable(false);
-		
-		panel.setPreferredSize(new Dimension(200, 100));
-		panel.setLayout(new BorderLayout());
-		
-		label.setPreferredSize(new Dimension(100, 100));
-		label.setText(text);
-		label.setHorizontalAlignment(JLabel.CENTER);
-
-		
-		panel.add(label, BorderLayout.CENTER);
-		frame.add(panel, BorderLayout.CENTER);
-		frame.setVisible(true);
-	}
-
+	
 	
 	private class Panel extends JPanel { // 패널에 배경 그려주는 클래스 
 		public void paint(Graphics g) { 
