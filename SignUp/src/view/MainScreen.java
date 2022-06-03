@@ -42,20 +42,39 @@ public class MainScreen {
 	public void showButtonPanel() { // 버튼 패널 생성 (메인 패널에 버튼을 집어넣으면 안보임) 
 		buttonPanel.setSize(1250, 700); 
 		buttonPanel.setLocation(0,0);
-		buttonPanel.setOpaque(true); // 투명색 패
+		buttonPanel.setBackground(new Color(255, 0,0,0));
 		buttonPanel.setLayout(null);
 		
 		loginButton.setSize(200, 90);
 		//loginButton.setMinimumSize(new Dimension(400, 150));
 		loginButton.setLocation(597, 338);
 		
-		loginButton.setOpaque(false);
-		//loginButton.setContentAreaFilled(false);
-		loginButton.setBorderPainted(false);
-		loginButton.setFocusPainted(false);
+		signupButton.setSize(200, 53);
+		signupButton.setLocation(597, 476);
+		
+		idFindingButton.setSize(200, 50);
+		idFindingButton.setLocation(596, 541);
+		
+		passwordFindingButton.setSize(200, 50);
+		passwordFindingButton.setLocation(817, 542);
+		
+		paintButton(loginButton);
+		paintButton(signupButton);
+		paintButton(idFindingButton);
+		paintButton(passwordFindingButton);
 		
 		buttonPanel.add(loginButton);
+		buttonPanel.add(signupButton);
+		buttonPanel.add(idFindingButton);
+		buttonPanel.add(passwordFindingButton);
 		buttonPanel.setVisible(true);
+	}
+	
+	private void paintButton(JButton button) {
+		button.setOpaque(false);
+		//loginButton.setContentAreaFilled(false);
+		button.setBorderPainted(false);
+		button.setFocusPainted(false);
 	}
 	
 	private class Panel extends JPanel { // 패널에 배경 그려주는 클래스 
