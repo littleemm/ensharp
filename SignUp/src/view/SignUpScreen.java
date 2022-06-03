@@ -18,8 +18,9 @@ public class SignUpScreen extends BasicScreen {
 	private JPasswordField passwordCheckField;
 	private JLabel emailSign;
 	private Font font;
-	private JButton doubleCheckButton;
-	private JButton addressSearchButton;
+	private Font smallFont;
+	public JButton doubleCheckButton;
+	public JButton addressSearchButton;
 	
 	public SignUpScreen() {
 		signupPanel = new Panel();
@@ -41,6 +42,10 @@ public class SignUpScreen extends BasicScreen {
 		
 		emailSign = new JLabel("@");
 		font = new Font("맑은 고딕", Font.PLAIN, 18);
+		smallFont = new Font("맑은 고딕", Font.PLAIN, 10);
+		
+		doubleCheckButton = new JButton("중복 확인");
+		addressSearchButton = new JButton("검색");
 		
 	}
 	
@@ -99,6 +104,7 @@ public class SignUpScreen extends BasicScreen {
 		textPanel.setLayout(null);
 		
 		setFieldPosition();
+		setAddressSearchButton();
 		
 		for (int fieldIndex = 0;fieldIndex<11;fieldIndex++) {
 			textPanel.add(informationField[fieldIndex]);
@@ -106,14 +112,21 @@ public class SignUpScreen extends BasicScreen {
 		textPanel.add(passwordField);
 		textPanel.add(passwordCheckField);
 		textPanel.add(emailSign);
+		textPanel.add(doubleCheckButton);
+		textPanel.add(addressSearchButton);
 		textPanel.setVisible(true);
 	}
 	
 	private void setFieldPosition() {
 		informationField[0].setSize(150, 30);
 		informationField[0].setLocation(195, 50); // 이름 
+		
 		informationField[1].setSize(150, 30);
 		informationField[1].setLocation(195, 115); // 아이디 
+		doubleCheckButton.setSize(80, 30);
+		doubleCheckButton.setLocation(350, 115);
+		doubleCheckButton.setFont(smallFont);
+		doubleCheckButton.setBackground(Color.WHITE);
 		
 		passwordField.setSize(150, 30); 
 		passwordField.setLocation(195, 180); // 비밀번호 
@@ -141,10 +154,20 @@ public class SignUpScreen extends BasicScreen {
 		
 		informationField[8].setSize(150, 30);
 		informationField[8].setLocation(195, 500); // 우편번호 
+		
 		informationField[9].setSize(350, 30);
 		informationField[9].setLocation(195, 550); // 주소 
 		informationField[10].setSize(150, 30);
 		informationField[10].setLocation(195, 585); // 상세주소 
+	}
+	
+	private void setAddressSearchButton() {
+		addressSearchButton.setSize(80, 30);
+		addressSearchButton.setLocation(350, 500);
+		addressSearchButton.setFont(smallFont);
+		addressSearchButton.setBackground(Color.WHITE);
+		
+		
 	}
 	
 	private class Panel extends JPanel { // 패널에 배경 그려주는 클래스 
@@ -153,4 +176,6 @@ public class SignUpScreen extends BasicScreen {
 			g.drawImage(background, 0, 0, null);		
 		}
 	}
+	
+	
 }
